@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="24시간 안에 검토 가능한 버그 수정, 업무자동화 또는 한국 시장 근거조사 1건을 고정가로 제공합니다.">
+  <meta name="description" content="24시간 안에 검토 가능한 한국어 LLM 번역 QA, 버그 수정, 업무자동화 또는 한국 시장 근거조사 1건을 고정가로 제공합니다.">
   <meta property="og:title" content="24시간 고정범위 유료 파일럿">
   <meta property="og:description" content="공개 증거를 먼저 확인하고, 미리보기 뒤에만 결제하세요.">
   <meta property="og:type" content="website">
@@ -140,7 +140,7 @@
     h2 { margin: 0 0 10px; font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.14; letter-spacing: -.045em; }
     .section-head p, .muted { color: var(--muted); }
 
-    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 
     .card {
       min-height: 250px;
@@ -228,16 +228,21 @@
       <div class="grid">
         <article class="card">
           <span class="number">01</span>
+          <h3>한국어 LLM 번역·현지화 QA</h3>
+          <p>원문 800단어 또는 20개 세그먼트를 검수하고, 오류별 심각도 라벨과 교정된 한국어를 제공합니다.</p>
+        </article>
+        <article class="card">
+          <span class="number">02</span>
           <h3>작은 버그 수정</h3>
           <p>공개 저장소의 버그 하나를 재현하고, 패치와 집중 테스트를 제공합니다. 병합 자체는 보장하지 않습니다.</p>
         </article>
         <article class="card">
-          <span class="number">02</span>
+          <span class="number">03</span>
           <h3>작은 업무자동화</h3>
           <p>Python 또는 TypeScript로 반복 업무 하나를 자동화하고, 실행 명령과 예시 입출력을 문서화합니다.</p>
         </article>
         <article class="card">
-          <span class="number">03</span>
+          <span class="number">04</span>
           <h3>한국 시장 근거조사</h3>
           <p>현재 한국어 공개 출처 15–25개로 경쟁사 최대 5곳을 비교하고, 주장별 근거 링크와 미확인 사항을 분리합니다.</p>
         </article>
@@ -250,6 +255,11 @@
         <h2 id="proof-title">구매 전에 직접 확인하세요</h2>
       </div>
       <div class="proof">
+        <div>
+          <strong>한국어 LLM QA 샘플</strong>
+          <span class="muted">심각도 라벨, 교정문, 판정 근거가 포함된 공개 검수 샘플입니다.</span><br>
+          <a href="https://github.com/HanThing/24h-paid-pilot/tree/main/examples/korean-llm-qa">번역·현지화 QA 샘플 보기</a>
+        </div>
         <div>
           <strong>테스트된 자동화</strong>
           <span class="muted">CSV 정리 코드, 실패 조건, 샘플 출력과 감사 JSON을 공개했습니다.</span><br>
@@ -291,7 +301,7 @@
     <section class="wrap english" lang="en" aria-labelledby="english-title">
       <p class="eyebrow">English</p>
       <h2 id="english-title">One 24-hour fixed-scope paid pilot</h2>
-      <p>Choose one reviewable deliverable: a small public-repository bug fix with focused tests, a documented Python/TypeScript automation, or a source-linked Korea market evidence brief. Fixed fee: USD 90 / KRW 120,000. Payment is requested only after a reviewable proof or preview.</p>
+      <p>Choose one reviewable deliverable: Korean LLM translation/localization QA for up to 800 source words or 20 segments, a small public-repository bug fix with focused tests, a documented Python/TypeScript automation, or a source-linked Korea market evidence brief. Fixed fee: USD 90 / KRW 120,000. Payment is requested only after a reviewable proof or preview.</p>
       <a class="button primary" href="https://github.com/HanThing/24h-paid-pilot/issues/new?template=paid-pilot.md">Open a public intake issue</a>
     </section>
   </main>
