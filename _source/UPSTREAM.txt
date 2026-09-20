@@ -1,0 +1,4 @@
+Quartz 5.0.0
+Source: https://github.com/jackyzha0/quartz
+Commit: 3dff48b5df6d84c9544a5ae19c8f2cbb01dc44e5
+License: MIT (LICENSE.txt)

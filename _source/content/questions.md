@@ -1,0 +1,18 @@
+---
+title: 다음에 확인할 질문
+date: 2026-09-20
+publish: true
+tags: [questions]
+---
+
+아래는 현재 자료에서 이어지는 **복습·탐구 질문**입니다. 이미 해결했거나 학습을 완료했다고 표시한 목록은 아닙니다.
+
+| 질문 | 먼저 꺼내 볼 자료 | 확인할 방법 |
+|---|---|---|
+| 함수를 정의할 때와 호출할 때 별표는 각각 무엇을 하는가? | [[python/index\|Python 개념 지도]] | [학습판](https://hanthing.github.io/learning/python-lab.html)에서 인자의 도착 지점 비교 |
+| 같은 고객이 여러 행에 등장하면 중복일까? | [[data/observation-unit\|관측 단위]], [[data/data-quality\|데이터 품질]] | 주문 ID와 고객 ID를 구분해 설명 |
+| 평균이 같으면 경험도 비슷한가? | [[data/eda-and-causality\|분포와 해석]] | [배송 기록 비교](https://hanthing.github.io/learning/data-science-overview.html#explore) |
+| 고객 정보를 합치고 나서 매출이 늘어난 이유는? | [[data/wrangling\|병합과 집계]] | 키가 중복된 표의 행 수를 먼저 예측 |
+| 깔끔한 그래프의 결론도 틀릴 수 있는가? | [[data/interpretation\|축과 표본의 함정]] | 축 범위와 관찰되지 않은 집단 확인 |
+
+답을 찾으면 어떤 예제로 이해가 바뀌었는지 해당 개념 노트에 남깁니다. [[wiki-workflow|위키의 갱신 기준]]
