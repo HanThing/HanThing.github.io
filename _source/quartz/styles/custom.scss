@@ -13,6 +13,21 @@
   --headerFont: "Outfit", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
   --bodyFont: var(--headerFont);
 }
+:root[saved-theme="light"] { color-scheme: light; }
+
+.theme-toggle {
+  min-height: 44px;
+  padding: .5rem .8rem;
+  border: 1px solid var(--lightgray);
+  border-radius: 24px;
+  background: var(--light);
+  color: var(--dark);
+  font: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.theme-toggle:hover { background: var(--highlight); }
+.theme-toggle:focus-visible { outline: 2px solid var(--secondary); outline-offset: 3px; }
 
 body { -webkit-font-smoothing: antialiased; }
 
@@ -27,7 +42,7 @@ body { -webkit-font-smoothing: antialiased; }
 }
 
 .hanthing-home a:first-child { margin-right: auto; font-size: 1.05rem; }
-.hanthing-home a { font-weight: 400; }
+.hanthing-home a { font-weight: 400; white-space: nowrap; }
 .page { max-width: 780px; padding: 0 24px; }
 .page > #quartz-body {
   display: flex;
@@ -45,8 +60,12 @@ article summary:focus-visible { outline: 2px solid var(--tertiary); outline-offs
 article pre { overflow-x: auto; }
 @media (max-width: 600px) {
   .page { padding: 0 20px; }
-  .hanthing-home { gap: 1rem; letter-spacing: 0; }
+  .hanthing-home { gap: .65rem; letter-spacing: 0; }
   .article-title { font-size: 1.8rem; }
+}
+@media (max-width: 360px) {
+  .hanthing-home { gap: .4rem; font-size: .75rem; }
+  .hanthing-home a:first-child { font-size: 1rem; }
 }
 
 .hanthing-home:hover { color: var(--dark); }

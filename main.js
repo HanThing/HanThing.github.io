@@ -9,7 +9,8 @@
   const hitArea = document.querySelector('#graph-canvas');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const motionButton = document.querySelector('#motion-toggle');
-  const palette = ['#f7fbff', '#a7dbff', '#ffe0aa'];
+  let lightTheme = document.documentElement.getAttribute('saved-theme') === 'light';
+  let palette = lightTheme ? ['#171c19', '#24586a', '#795727'] : ['#f7fbff', '#a7dbff', '#ffe0aa'];
   const tau = Math.PI * 2;
   const clamp = value => Math.max(0, Math.min(1, value));
   const smooth = value => { const t = clamp(value); return t * t * (3 - 2 * t); };
@@ -27,12 +28,12 @@
   const rotation = { x: -.12, y: 0 };
 
   // Cache only the halo. Sharp cores remain separate so light never becomes a blurred slab.
-  const sprites = palette.map(color => {
+  const makeSprites = () => palette.map(color => {
     const sprite = document.createElement('canvas');
     sprite.width = sprite.height = 64;
     const brush = sprite.getContext('2d');
     const gradient = brush.createRadialGradient(32, 32, 0, 32, 32, 32);
-    gradient.addColorStop(0, '#ffffffb0');
+    gradient.addColorStop(0, lightTheme ? `${color}60` : '#ffffffb0');
     gradient.addColorStop(.08, `${color}80`);
     gradient.addColorStop(.24, `${color}24`);
     gradient.addColorStop(.6, `${color}08`);
@@ -41,6 +42,7 @@
     brush.fillRect(0, 0, 64, 64);
     return sprite;
   });
+  let sprites = makeSprites();
 
   function resize() {
     width = innerWidth;
@@ -154,6 +156,13 @@
     listRoot.append(listButton);
     listButtons.push(listButton);
     return button;
+  });
+  document.addEventListener('themechange', () => {
+    lightTheme = document.documentElement.getAttribute('saved-theme') === 'light';
+    palette = lightTheme ? ['#171c19', '#24586a', '#795727'] : ['#f7fbff', '#a7dbff', '#ffe0aa'];
+    sprites = makeSprites();
+    labels.forEach((label, i) => label.style.setProperty('--node-color', palette[nodeColor(topics[i])]));
+    dirty = true;
   });
   function selectTopic(index, trigger) {
     selected = index;
@@ -322,10 +331,10 @@
     }
     stage.dataset.hovered = hovered < 0 ? '' : String(hovered);
 
-    ctx.globalCompositeOperation = 'lighter';
+    ctx.globalCompositeOperation = lightTheme ? 'source-over' : 'lighter';
     if (constellation > .02) {
       ctx.globalAlpha = constellation * .45;
-      ctx.strokeStyle = '#b49a6a';
+      ctx.strokeStyle = lightTheme ? '#795727' : '#b49a6a';
       ctx.lineWidth = 1;
       ctx.setLineDash([3, 5]);
       for (const [a, b] of outline.edges) {
@@ -340,7 +349,7 @@
         const active = (selected >= 0 ? selected : hovered);
         const related = active < 0 || a === active || b === active;
         ctx.globalAlpha = constellation * (related ? active < 0 ? .36 : .6 : .08);
-        ctx.strokeStyle = '#a4cbe2';
+        ctx.strokeStyle = lightTheme ? '#24586a' : '#a4cbe2';
         ctx.lineWidth = .8;
         ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
       }

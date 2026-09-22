@@ -4,6 +4,8 @@ Public learning notes with separate records, questions and quizzes. Markdown in 
 
 The homepage and `learning/` are static HTML, CSS and JavaScript. Particle motion uses native Canvas2D; reduced motion and the pause control are supported. Knowledge stars stay fixed under the pointer and move only with explicit graph rotation. Search and filters do not require a service.
 
+The top theme button shares its saved light/dark preference across the homepage, notes and learning pages. First visits start dark; light mode uses dark stars on a light background. Curriculum names come from each note's `topics`. Questions expand to show context, intent and the answer; quizzes remain a separate collection. Course reference documents stay outside the learning graph and recent records.
+
 ## Maintain the public repository
 
 Read `_source/AGENTS.md`, `_source/INDEX.md` and `_source/CHANGELOG.md`. After editing the public Markdown, run:

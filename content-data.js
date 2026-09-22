@@ -9,7 +9,7 @@ window.HANTHING_CONTENT = {
       "published": "2026-09-22",
       "type": "concept",
       "topics": [
-        "python"
+        "실전 파이썬 준비하기"
       ],
       "url": "/notes/python/loop-exit",
       "links": [
@@ -22,14 +22,135 @@ window.HANTHING_CONTENT = {
       ]
     },
     {
-      "id": "learning/2026-09-18-loop-exit",
-      "title": "break를 썼는데 왜 마지막 문장이 실행될까?",
-      "description": "프로그램을 끝내려던 질문에서, 반복문이 끝나는 이유를 구분하는 for–else로 이어진 기록.",
+      "id": "learning/2026-09-18-collections-and-palindrome",
+      "title": "회문 비교와 중복 제거에서 어떤 값을 써야 할까?",
+      "description": "대소문자 무시 조건, 문자열 반환값, 양끝 인덱스, set과 items의 결과를 확인한 기록.",
       "date": "2026-09-18",
       "published": "2026-09-22",
       "type": "journal",
       "topics": [
-        "python"
+        "실전 파이썬 준비하기"
+      ],
+      "url": "/notes/learning/2026-09-18-collections-and-palindrome",
+      "links": [
+        "python/iterables-and-iterators",
+        "python/loop-exit",
+        "learning/2026-09-18-files-and-strings"
+      ],
+      "sources": [
+        "2026-09-18 개인 Python 학습 대화 — 회문 코드 점검·중복 제거·딕셔너리 items 질문 (공개용 질문 발췌·설명 재구성)"
+      ]
+    },
+    {
+      "id": "learning/2026-09-18-comprehensions",
+      "title": "한 줄에 for가 두 번 나오는 컴프리헨션",
+      "description": "중첩 리스트를 펼치는 문제에서 for의 순서와 맨 앞 x의 역할을 물은 기록.",
+      "date": "2026-09-18",
+      "published": "2026-09-22",
+      "type": "journal",
+      "topics": [
+        "실전 파이썬 준비하기"
+      ],
+      "url": "/notes/learning/2026-09-18-comprehensions",
+      "links": [
+        "python/comprehensions",
+        "learning/2026-09-18-lambda-map-sort"
+      ],
+      "sources": [
+        "2026-09-18 개인 Python 학습 대화 — 중첩 리스트 평탄화·컴프리헨션 질문 (공개용 질문 발췌·설명 재구성)"
+      ]
+    },
+    {
+      "id": "learning/2026-09-18-files-and-strings",
+      "title": "파일에서 읽은 한 줄은 어떤 값을 거쳐 단어가 될까?",
+      "description": "split·strip부터 파일 객체, with, 읽기 위치, 언패킹까지 단어장 예제의 흐름을 풀어 본 기록.",
+      "date": "2026-09-18",
+      "published": "2026-09-22",
+      "type": "journal",
+      "topics": [
+        "실전 파이썬 준비하기"
+      ],
+      "url": "/notes/learning/2026-09-18-files-and-strings",
+      "links": [
+        "learning/2026-09-18-objects-and-self",
+        "learning/2026-09-18-lambda-map-sort",
+        "python/files-and-with",
+        "python/iterables-and-iterators",
+        "python/args-and-kwargs"
+      ],
+      "sources": [
+        "2026-09-18 개인 Python 학습 대화 — 문자열 분리·단어장 파일·with·읽기 위치·언패킹 질문 (공개용 질문 발췌·설명 재구성)"
+      ]
+    },
+    {
+      "id": "learning/2026-09-18-frameworks",
+      "title": "라이브러리와 프레임워크의 차이가 왜 필요할까?",
+      "description": "용어 구분에 그치지 않고, 공통 실행 흐름을 맡기는 이유와 한계를 따져 물은 기록.",
+      "date": "2026-09-18",
+      "published": "2026-09-22",
+      "type": "journal",
+      "topics": [
+        "실전 파이썬 준비하기"
+      ],
+      "url": "/notes/learning/2026-09-18-frameworks",
+      "links": [
+        "python/imports-and-packages",
+        "learning/2026-09-18-imports-and-packages"
+      ],
+      "sources": [
+        "2026-09-18 개인 Python 학습 대화 — 라이브러리·프레임워크·IoC 질문 (공개용 질문 발췌·설명 재구성)"
+      ]
+    },
+    {
+      "id": "learning/2026-09-18-imports-and-packages",
+      "title": "import는 파일을 옮기는 걸까, 이름을 연결하는 걸까?",
+      "description": "모듈·패키지의 구조부터 __init__.py의 실행 주체까지, 설명의 조건이 바뀌며 생긴 혼동을 바로잡은 기록.",
+      "date": "2026-09-18",
+      "published": "2026-09-22",
+      "type": "journal",
+      "topics": [
+        "실전 파이썬 준비하기"
+      ],
+      "url": "/notes/learning/2026-09-18-imports-and-packages",
+      "links": [
+        "learning/2026-09-18-notebook-state",
+        "python/imports-and-packages",
+        "learning/2026-09-18-objects-and-self",
+        "learning/2026-09-18-frameworks"
+      ],
+      "sources": [
+        "2026-09-18 개인 Python 학습 대화 — 모듈·패키지·파일 작성·초기화 질문 (공개용 질문 발췌·설명 재구성)"
+      ]
+    },
+    {
+      "id": "learning/2026-09-18-lambda-map-sort",
+      "title": "lambda, map, sort의 key에서 누가 함수를 호출할까?",
+      "description": "제곱 리스트와 길이순 정렬을 비교하며, 함수 자체와 반환값·고정 매개변수 이름을 구분한 질문들.",
+      "date": "2026-09-18",
+      "published": "2026-09-22",
+      "type": "journal",
+      "topics": [
+        "실전 파이썬 준비하기"
+      ],
+      "url": "/notes/learning/2026-09-18-lambda-map-sort",
+      "links": [
+        "python/sorting-and-callables",
+        "python/iterables-and-iterators",
+        "learning/2026-09-18-notebook-state"
+      ],
+      "sources": [
+        "2026-09-18 개인 Python 학습 대화 — 제곱 리스트·길이순 정렬 질문 (공개용 질문 발췌·설명 재구성)"
+      ]
+    },
+    {
+      "id": "learning/2026-09-18-loop-exit",
+      "title": "정답을 맞혔는데 왜 실패 안내까지 실행될까?",
+      "description": "여섯 번의 숫자 맞히기에서 프로그램 종료를 물었던 실제 의도와 for–else로 분리한 성공·실패 흐름.",
+      "date": "2026-09-18",
+      "published": "2026-09-22",
+      "type": "journal",
+      "topics": [
+        "실전 파이썬 준비하기"
       ],
       "url": "/notes/learning/2026-09-18-loop-exit",
       "links": [
@@ -37,8 +158,47 @@ window.HANTHING_CONTENT = {
         "python/notebook-state"
       ],
       "sources": [
-        "2026-09-18 개인 Python 학습 대화의 반복문 종료 질문 (공개용 발췌·재구성)",
-        "https://docs.python.org/3/tutorial/controlflow.html#else-clauses-on-loops"
+        "2026-09-18 개인 Python 학습 대화 — 7번 숫자 맞히기의 종료 질문·당시 코드 확인 (공개용 질문 발췌·설명 재구성)"
+      ]
+    },
+    {
+      "id": "learning/2026-09-18-notebook-state",
+      "title": "코드를 고쳤는데 list 오류가 계속 나는 이유",
+      "description": "내장 이름을 가린 변수, 노트북의 실행 상태, 누적 변수의 초기값을 실제 오류에서 구분한 기록.",
+      "date": "2026-09-18",
+      "published": "2026-09-22",
+      "type": "journal",
+      "topics": [
+        "실전 파이썬 준비하기"
+      ],
+      "url": "/notes/learning/2026-09-18-notebook-state",
+      "links": [
+        "python/notebook-state",
+        "python/iterables-and-iterators",
+        "learning/2026-09-18-lambda-map-sort"
+      ],
+      "sources": [
+        "2026-09-18 개인 Python 학습 대화 — 노트북 17번 list 오류·16번 홀수 합 질문 (공개용 질문 발췌·설명 재구성)"
+      ]
+    },
+    {
+      "id": "learning/2026-09-18-objects-and-self",
+      "title": "객체·인스턴스·self는 어떤 대상을 가리킬까?",
+      "description": "학생 등급 문제를 바탕으로 이름과 객체, 내장 타입과 클래스, 두 종류의 초기화를 연결한 질문들.",
+      "date": "2026-09-18",
+      "published": "2026-09-22",
+      "type": "journal",
+      "topics": [
+        "실전 파이썬 준비하기"
+      ],
+      "url": "/notes/learning/2026-09-18-objects-and-self",
+      "links": [
+        "learning/2026-09-18-imports-and-packages",
+        "python/self-and-objects",
+        "learning/2026-09-18-files-and-strings"
+      ],
+      "sources": [
+        "2026-09-18 개인 Python 학습 대화 — 객체·인스턴스·학생 등급 문제·self 질문 (공개용 질문 발췌·설명 재구성)"
       ]
     },
     {
@@ -49,7 +209,7 @@ window.HANTHING_CONTENT = {
       "published": "2026-09-20",
       "type": "concept",
       "topics": [
-        "python"
+        "실전 파이썬 준비하기"
       ],
       "url": "/notes/python/args-and-kwargs",
       "links": [
@@ -68,14 +228,16 @@ window.HANTHING_CONTENT = {
       "published": "2026-09-20",
       "type": "concept",
       "topics": [
-        "python"
+        "실전 파이썬 준비하기"
       ],
       "url": "/notes/python/comprehensions",
       "links": [
         "python/iterables-and-iterators",
-        "python/sorting-and-callables"
+        "python/sorting-and-callables",
+        "learning/2026-09-18-comprehensions"
       ],
       "sources": [
+        "2026-09-18 개인 Python 학습 대화 (아래 질문 기록으로 연결, 원문은 비공개 보존)",
         "개인 Python 학습 정리 (2026-09-20 이관)"
       ]
     },
@@ -87,14 +249,16 @@ window.HANTHING_CONTENT = {
       "published": "2026-09-20",
       "type": "concept",
       "topics": [
-        "python"
+        "실전 파이썬 준비하기"
       ],
       "url": "/notes/python/files-and-with",
       "links": [
         "python/imports-and-packages",
-        "python/iterables-and-iterators"
+        "python/iterables-and-iterators",
+        "learning/2026-09-18-files-and-strings"
       ],
       "sources": [
+        "2026-09-18 개인 Python 학습 대화 (아래 질문 기록으로 연결, 원문은 비공개 보존)",
         "개인 Python 학습 정리 (2026-09-20 이관)"
       ]
     },
@@ -106,14 +270,17 @@ window.HANTHING_CONTENT = {
       "published": "2026-09-20",
       "type": "concept",
       "topics": [
-        "python"
+        "실전 파이썬 준비하기"
       ],
       "url": "/notes/python/imports-and-packages",
       "links": [
         "python/self-and-objects",
-        "python/files-and-with"
+        "python/files-and-with",
+        "learning/2026-09-18-imports-and-packages",
+        "learning/2026-09-18-frameworks"
       ],
       "sources": [
+        "2026-09-18 개인 Python 학습 대화 (아래 질문 기록으로 연결, 원문은 비공개 보존)",
         "개인 Python 학습 정리 (2026-09-20 이관)"
       ]
     },
@@ -125,14 +292,16 @@ window.HANTHING_CONTENT = {
       "published": "2026-09-20",
       "type": "concept",
       "topics": [
-        "python"
+        "실전 파이썬 준비하기"
       ],
       "url": "/notes/python/iterables-and-iterators",
       "links": [
         "python/comprehensions",
-        "python/sorting-and-callables"
+        "python/sorting-and-callables",
+        "learning/2026-09-18-lambda-map-sort"
       ],
       "sources": [
+        "2026-09-18 개인 Python 학습 대화 (아래 질문 기록으로 연결, 원문은 비공개 보존)",
         "개인 Python 학습 정리 (2026-09-20 이관)"
       ]
     },
@@ -144,16 +313,18 @@ window.HANTHING_CONTENT = {
       "published": "2026-09-20",
       "type": "concept",
       "topics": [
-        "python"
+        "실전 파이썬 준비하기"
       ],
       "url": "/notes/python/notebook-state",
       "links": [
         "python/imports-and-packages",
         "python/iterables-and-iterators",
         "python/loop-exit",
-        "learning/2026-09-18-loop-exit"
+        "learning/2026-09-18-loop-exit",
+        "learning/2026-09-18-notebook-state"
       ],
       "sources": [
+        "2026-09-18 개인 Python 학습 대화 (아래 질문 기록으로 연결, 원문은 비공개 보존)",
         "개인 Python 학습 정리 (2026-09-20 이관)",
         "https://hanthing.github.io/notes/learning/2026-09-18-loop-exit"
       ]
@@ -166,14 +337,16 @@ window.HANTHING_CONTENT = {
       "published": "2026-09-20",
       "type": "concept",
       "topics": [
-        "python"
+        "실전 파이썬 준비하기"
       ],
       "url": "/notes/python/self-and-objects",
       "links": [
         "python/imports-and-packages",
-        "python/args-and-kwargs"
+        "python/args-and-kwargs",
+        "learning/2026-09-18-objects-and-self"
       ],
       "sources": [
+        "2026-09-18 개인 Python 학습 대화 (아래 질문 기록으로 연결, 원문은 비공개 보존)",
         "개인 Python 학습 정리 (2026-09-20 이관)"
       ]
     },
@@ -185,14 +358,16 @@ window.HANTHING_CONTENT = {
       "published": "2026-09-20",
       "type": "concept",
       "topics": [
-        "python"
+        "실전 파이썬 준비하기"
       ],
       "url": "/notes/python/sorting-and-callables",
       "links": [
         "python/comprehensions",
-        "python/iterables-and-iterators"
+        "python/iterables-and-iterators",
+        "learning/2026-09-18-lambda-map-sort"
       ],
       "sources": [
+        "2026-09-18 개인 Python 학습 대화 (아래 질문 기록으로 연결, 원문은 비공개 보존)",
         "개인 Python 학습 정리 (2026-09-20 이관)"
       ]
     },
@@ -204,7 +379,7 @@ window.HANTHING_CONTENT = {
       "published": "2026-09-17",
       "type": "concept",
       "topics": [
-        "data"
+        "데이터 분석"
       ],
       "url": "/notes/data/data-quality",
       "links": [
@@ -224,8 +399,8 @@ window.HANTHING_CONTENT = {
       "published": "2026-09-17",
       "type": "concept",
       "topics": [
-        "data",
-        "learning"
+        "실전 파이썬 준비하기",
+        "데이터 분석"
       ],
       "url": "/notes/data/data-science-overview",
       "links": [
@@ -249,8 +424,7 @@ window.HANTHING_CONTENT = {
       "published": "2026-09-17",
       "type": "concept",
       "topics": [
-        "data",
-        "statistics"
+        "데이터 분석"
       ],
       "url": "/notes/data/eda-and-causality",
       "links": [
@@ -270,8 +444,7 @@ window.HANTHING_CONTENT = {
       "published": "2026-09-17",
       "type": "concept",
       "topics": [
-        "data",
-        "questions"
+        "데이터 분석"
       ],
       "url": "/notes/data/interpretation",
       "links": [
@@ -291,7 +464,7 @@ window.HANTHING_CONTENT = {
       "published": "2026-09-17",
       "type": "concept",
       "topics": [
-        "data"
+        "데이터 분석"
       ],
       "url": "/notes/data/observation-unit",
       "links": [
@@ -311,8 +484,7 @@ window.HANTHING_CONTENT = {
       "published": "2026-09-17",
       "type": "concept",
       "topics": [
-        "data",
-        "python"
+        "데이터 분석"
       ],
       "url": "/notes/data/wrangling",
       "links": [
@@ -326,29 +498,652 @@ window.HANTHING_CONTENT = {
       ]
     }
   ],
+  "references": [
+    {
+      "id": "bootcamp/guide",
+      "title": "코드잇 AI 스프린트 학습 안내",
+      "description": "AI 스프린트 16기의 전체 과정과 이론·실습·미션·프로젝트의 흐름, HanThing에 학습을 남기는 방법입니다.",
+      "date": "2026-09-22",
+      "published": "2026-09-22",
+      "type": "reference",
+      "topics": [
+        "실전 파이썬 준비하기",
+        "데이터 분석"
+      ],
+      "url": "/notes/bootcamp/guide",
+      "links": [
+        "bootcamp/roadmap",
+        "python/index",
+        "python/self-and-objects",
+        "python/loop-exit",
+        "data/data-science-overview",
+        "data/observation-unit",
+        "data/wrangling"
+      ],
+      "sources": [
+        "https://docs.google.com/spreadsheets/d/1vF_S-DV4Pm0qRnsspfpEmKRvyj0j4Miam4YofqXPM04/edit?gid=624392885",
+        "HanThing 학습 기록 운영 기준"
+      ]
+    },
+    {
+      "id": "bootcamp/roadmap",
+      "title": "부트캠프 학습 지도와 일정",
+      "description": "공식 커리큘럼의 과목 순서와 예정 일정, 미션 제출일을 현재 학습 노트와 연결합니다.",
+      "date": "2026-09-22",
+      "published": "2026-09-22",
+      "type": "reference",
+      "topics": [
+        "실전 파이썬 준비하기",
+        "데이터 분석"
+      ],
+      "url": "/notes/bootcamp/roadmap",
+      "links": [
+        "bootcamp/guide",
+        "python/self-and-objects",
+        "python/imports-and-packages",
+        "python/args-and-kwargs",
+        "data/data-science-overview",
+        "data/eda-and-causality",
+        "data/wrangling",
+        "wiki-workflow",
+        "questions"
+      ],
+      "sources": [
+        "https://docs.google.com/spreadsheets/d/1vF_S-DV4Pm0qRnsspfpEmKRvyj0j4Miam4YofqXPM04/edit?gid=624392885"
+      ]
+    }
+  ],
   "questions": [
     {
-      "id": "learning/2026-09-18-loop-exit#질문-break-대신-프로그램-전체를-종료해야-할까",
-      "title": "break 대신 프로그램 전체를 종료해야 할까?",
-      "url": "/notes/learning/2026-09-18-loop-exit#질문-break-대신-프로그램-전체를-종료해야-할까",
-      "topic": "python",
-      "sourceTitle": "break를 썼는데 왜 마지막 문장이 실행될까?"
+      "id": "learning/2026-09-18-collections-and-palindrome#질문-회문-문제의-대소문자를-무시한다는-조건은-어떻게-충족할까",
+      "title": "회문 문제의 대소문자를 무시한다는 조건은 어떻게 충족할까?",
+      "url": "/notes/learning/2026-09-18-collections-and-palindrome#질문-회문-문제의-대소문자를-무시한다는-조건은-어떻게-충족할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "회문 비교와 중복 제거에서 어떤 값을 써야 할까?",
+      "context": "앞에서 읽어도 뒤에서 읽어도 같은 문자열인지 판단하는 문제에서 “대소문자를 무시”하는 조건을 보고 힌트를 요청했다.",
+      "intent": "완성 정답을 받기보다 비교 전에 해야 할 처리를 찾으려 했다.",
+      "answer": "당시 영문 예에서는 .lower()로 모두 소문자로 바꾼 뒤 비교할 수 있다. .lower()는 원본 문자열을 직접 고치지 않으므로 반환된 문자열을 사용해야 한다."
+    },
+    {
+      "id": "learning/2026-09-18-collections-and-palindrome#질문-lower를-썼는데-회문-판별-코드가-왜-틀릴까",
+      "title": "lower를 썼는데 회문 판별 코드가 왜 틀릴까?",
+      "url": "/notes/learning/2026-09-18-collections-and-palindrome#질문-lower를-썼는데-회문-판별-코드가-왜-틀릴까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "회문 비교와 중복 제거에서 어떤 값을 써야 할까?",
+      "context": "힌트 뒤 사용자는 “뭐가 문제지?”라고 물었다. 당시 코드를 확인한 설명에서는 text.lower()의 결과를 저장하지 않은 점과 text[len(text)-1]로 오른쪽 비교 위치를 고정한 점이 확인됐다.",
+      "intent": "첫 힌트를 적용한 코드에서 여전히 조건이 맞지 않는 위치를 찾으려 했다. 구체적인 제목은 당시 확인된 코드 맥락을 복원한 것이며 사용자의 짧은 질문을 그대로 인용한 문장은 아니다.",
+      "answer": "변환 결과를 text에 다시 저장해야 하고, 왼쪽 인덱스 i가 움직이면 오른쪽도 len(text)-1-i로 움직여야 한다. level에서 두 번째 비교는 e와 마지막 l이 아니라 양쪽의 e여야 한다."
+    },
+    {
+      "id": "learning/2026-09-18-collections-and-palindrome#질문-중복값을-제거하고-정렬된-리스트로-만들려면",
+      "title": "중복값을 제거하고 정렬된 리스트로 만들려면?",
+      "url": "/notes/learning/2026-09-18-collections-and-palindrome#질문-중복값을-제거하고-정렬된-리스트로-만들려면",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "회문 비교와 중복 제거에서 어떤 값을 써야 할까?",
+      "context": "사용자는 “중복값 제거 어떻게 하지?”라고 물었다. 당시 설명은 문제에서 요구한 정렬된 리스트까지 연결했다.",
+      "intent": "같은 값이 여러 번 나온 입력에서 각 값을 한 번만 남기는 방법을 알고 싶었다.",
+      "answer": "set은 중복 원소를 담지 않지만 순서를 보장하지 않는다. 이 문제처럼 정렬된 리스트가 필요하면 sorted(set(numbers))로 중복 제거와 정렬을 이어서 한다."
+    },
+    {
+      "id": "learning/2026-09-18-collections-and-palindrome#질문-dictitems는-키와-값을-담은-튜플-하나를-반환할까",
+      "title": "dict.items()는 키와 값을 담은 튜플 하나를 반환할까?",
+      "url": "/notes/learning/2026-09-18-collections-and-palindrome#질문-dictitems는-키와-값을-담은-튜플-하나를-반환할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "회문 비교와 중복 제거에서 어떤 값을 써야 할까?",
+      "context": "딕셔너리의 items가 키·값 튜플을 반환하는 함수인지 확인했다. 앞서 두 값을 두 변수에 나누어 받는 언패킹을 배운 상태였다.",
+      "intent": "반환 객체 전체와 반복할 때 꺼내는 항목 하나를 구분하려 했다.",
+      "answer": "items()는 딕셔너리 뷰를 반환하고, 그것을 순회할 때 각 항목이 (키, 값) 튜플이다. 뷰 자체를 튜플 하나라고 부르면 반복 구조를 놓친다."
+    },
+    {
+      "id": "learning/2026-09-18-comprehensions#질문-리스트를-펼치는-코드에서-for를-왜-옆으로-두-번-쓸까",
+      "title": "리스트를 펼치는 코드에서 for를 왜 옆으로 두 번 쓸까?",
+      "url": "/notes/learning/2026-09-18-comprehensions#질문-리스트를-펼치는-코드에서-for를-왜-옆으로-두-번-쓸까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "한 줄에 for가 두 번 나오는 컴프리헨션",
+      "context": "13번 설명을 요청한 뒤 “for문 옆에 또 for문을 쓸 수 있는 건 몰랐다”며, 일반 반복문처럼 줄을 내리고 들여쓰지 않는 형태를 짚었다.",
+      "intent": "한 줄에 놓인 두 반복이 순차 실행인지 중첩 실행인지 이해하려 했다.",
+      "answer": "리스트 컴프리헨션 안에서는 for 절을 나란히 쓸 수 있다. 왼쪽이 바깥 반복, 오른쪽이 안쪽 반복이다. row 하나를 꺼낸 뒤 그 안의 x를 모두 처리하고 다음 row로 이동한다."
+    },
+    {
+      "id": "learning/2026-09-18-comprehensions#질문-맨-앞-x는-리스트-요소를-담는-매개변수일까",
+      "title": "맨 앞 x는 리스트 요소를 담는 매개변수일까?",
+      "url": "/notes/learning/2026-09-18-comprehensions#질문-맨-앞-x는-리스트-요소를-담는-매개변수일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "한 줄에 for가 두 번 나오는 컴프리헨션",
+      "context": "flat = [x for row in matrix for x in row]의 첫 x를 보고, 리스트 요소를 담는 매개변수인지 물었다.",
+      "intent": "같은 글자 x가 두 번 나올 때 값을 받는 자리와 결과를 만드는 자리를 구분하려 했다.",
+      "answer": "for x in row의 x가 반복에서 꺼낸 값을 받는 변수다. 맨 앞의 x는 결과 리스트에 넣을 표현식이다. 함수의 매개변수가 아니다."
+    },
+    {
+      "id": "learning/2026-09-18-comprehensions#질문-컴프리헨션과-일반-for-중-어느-코드가-더-나을까",
+      "title": "컴프리헨션과 일반 for 중 어느 코드가 더 나을까?",
+      "url": "/notes/learning/2026-09-18-comprehensions#질문-컴프리헨션과-일반-for-중-어느-코드가-더-나을까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "한 줄에 for가 두 번 나오는 컴프리헨션",
+      "context": "같은 평탄화 작업을 한 줄 표현과 들여쓴 두 반복문으로 설명받은 뒤 어느 쪽이 나은지 물었다.",
+      "intent": "짧은 정답을 외우기보다 읽기 쉬운 코드를 선택하는 기준을 알고 싶었다.",
+      "answer": "단순히 값을 모아 새 리스트를 만드는 이 문제에서는 컴프리헨션이 간결하다. 흐름을 배우거나 중간값을 출력할 때는 일반 for가 편하다. 조건과 부수 작업이 복잡해지면 줄 수보다 읽기 쉬운 쪽을 택한다."
+    },
+    {
+      "id": "learning/2026-09-18-files-and-strings#질문-split은-구분자를-여러-개-지정할-수-있을까-re는-무엇일까",
+      "title": "split은 구분자를 여러 개 지정할 수 있을까? re는 무엇일까?",
+      "url": "/notes/learning/2026-09-18-files-and-strings#질문-split은-구분자를-여러-개-지정할-수-있을까-re는-무엇일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "파일에서 읽은 한 줄은 어떤 값을 거쳐 단어가 될까?",
+      "context": "파일 읽기 설명에 앞서 문자열을 여러 구분자로 나누는 방법을 물었고, 답변의 re.split을 보고 re가 무엇인지 되물었다.",
+      "intent": "쉼표·세미콜론·공백 중 어느 하나에서 나누는 규칙을 표현하려 했다.",
+      "answer": "문자열의 split(\",;\")는 ,;라는 연속 문자열을 구분자로 본다. 여러 종류 중 하나를 쓰려면 정규 표현식을 다루는 표준 모듈 re의 split 등을 사용할 수 있다. 공백류만 나누려면 인자 없는 text.split()으로 충분하다."
+    },
+    {
+      "id": "learning/2026-09-18-files-and-strings#질문-strip에-쉼표를-넣었는데-가운데-쉼표는-왜-남을까",
+      "title": "strip에 쉼표를 넣었는데 가운데 쉼표는 왜 남을까?",
+      "url": "/notes/learning/2026-09-18-files-and-strings#질문-strip에-쉼표를-넣었는데-가운데-쉼표는-왜-남을까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "파일에서 읽은 한 줄은 어떤 값을 거쳐 단어가 될까?",
+      "context": "여러 제거 문자를 지정하는 설명에서 \",사과,바나나;\".strip(\",;\")의 결과를 보고 중간 쉼표가 남는 이유를 물었다.",
+      "intent": "지정한 문자를 문자열 전체에서 지우는 기능인지, 끝에서만 처리하는 기능인지 확인하려 했다.",
+      "answer": "strip은 양 끝에서 지정된 문자들을 제거한다. 왼쪽은 사를 만나면, 오른쪽은 나를 만나면 멈추므로 내부 쉼표는 남는다. 결과는 \"사과,바나나\"다."
+    },
+    {
+      "id": "learning/2026-09-18-files-and-strings#질문-with-a-as-b는-무슨-뜻이고-f는-파일-경로를-담은-포인터일까",
+      "title": "with A as B는 무슨 뜻이고 f는 파일 경로를 담은 포인터일까?",
+      "url": "/notes/learning/2026-09-18-files-and-strings#질문-with-a-as-b는-무슨-뜻이고-f는-파일-경로를-담은-포인터일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "파일에서 읽은 한 줄은 어떤 값을 거쳐 단어가 될까?",
+      "context": "사용자는 with A as B를 말로 어떻게 이해할지, f가 정확히 무엇인지 함께 물었다. 파일 위치를 가리키는 포인터처럼 생각해도 되는지도 확인했다.",
+      "intent": "문법의 이름보다 각 값의 실체를 알고 싶었다. 특히 경로 문자열과 파일 객체를 구분하려는 질문이었다.",
+      "answer": "이 예에서 open은 열린 파일을 다루는 객체를 반환하고 f는 그 객체를 참조하는 이름이다. with 구역에서 이를 사용하고, 구역을 벗어나면 파일을 닫도록 정리한다. f는 파일 경로 문자열 자체가 아니다."
+    },
+    {
+      "id": "learning/2026-09-18-files-and-strings#질문-파일에-쓰기-권한이-없는데-w로-열면-어떻게-될까",
+      "title": "파일에 쓰기 권한이 없는데 w로 열면 어떻게 될까?",
+      "url": "/notes/learning/2026-09-18-files-and-strings#질문-파일에-쓰기-권한이-없는데-w로-열면-어떻게-될까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "파일에서 읽은 한 줄은 어떤 값을 거쳐 단어가 될까?",
+      "context": "사용자는 파일의 접근 권한과 open에 전달하는 읽기·쓰기 모드가 어떤 관계인지 물었다.",
+      "intent": "코드에서 쓰기 모드를 정하는 것만으로 실제 파일을 수정할 수 있게 되는지 확인하려 했다.",
+      "answer": "운영체제가 허용한 접근 권한과 이번 파일 객체의 열기 모드는 별개다. \"w\"가 권한을 새로 주지는 않는다. 쓰기 권한이 없으면 열기가 실패할 수 있고, 권한이 있어도 \"r\"로 연 객체로는 쓸 수 없다."
+    },
+    {
+      "id": "learning/2026-09-18-files-and-strings#질문-close하지-않으면-실행이-파일에-머물러-다음-코드에-영향을-줄까",
+      "title": "close하지 않으면 실행이 파일에 머물러 다음 코드에 영향을 줄까?",
+      "url": "/notes/learning/2026-09-18-files-and-strings#질문-close하지-않으면-실행이-파일에-머물러-다음-코드에-영향을-줄까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "파일에서 읽은 한 줄은 어떤 값을 거쳐 단어가 될까?",
+      "context": "사용자는 닫지 않으면 파일을 편집하는 상태에 실행이 머물러 이후 코드에 영향을 주는 것인지 자신의 이해를 확인했다.",
+      "intent": "파일을 닫아야 하는 이유가 실행 순서 때문인지 자원 관리 때문인지 구분하려 했다.",
+      "answer": "파일이 열려 있어도 다음 코드는 계속 실행된다. 닫는 이유는 열린 자원을 정리하고 남아 있는 쓰기 버퍼를 전달하기 위해서다. 파일이 열려 있다는 상태와 실행 흐름이 그곳에 갇혀 있다는 설명은 다르다."
+    },
+    {
+      "id": "learning/2026-09-18-files-and-strings#질문-read가-반환하는-것은-문자열일까-객체일까",
+      "title": "read가 반환하는 것은 문자열일까, 객체일까?",
+      "url": "/notes/learning/2026-09-18-files-and-strings#질문-read가-반환하는-것은-문자열일까-객체일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "파일에서 읽은 한 줄은 어떤 값을 거쳐 단어가 될까?",
+      "context": "열린 파일 객체 설명 뒤 read()가 반환하는 값의 종류를 물었고, 객체라는 용어 자체도 다시 확인했다.",
+      "intent": "f와 파일 내용이 같은 것인지, 문자열과 객체가 서로 다른 분류인지 알고 싶었다.",
+      "answer": "텍스트 모드의 read()는 문자열 객체를 반환한다. 따라서 “문자열인가, 객체인가”는 양자택일이 아니다. f는 파일 객체이고 읽은 내용은 별도의 문자열이다. 바이너리 모드에서는 바이트 객체를 반환한다."
+    },
+    {
+      "id": "learning/2026-09-18-files-and-strings#질문-readline의-한-줄은-무엇이며-어디까지-읽었는지-누가-기억할까",
+      "title": "readline의 한 줄은 무엇이며 어디까지 읽었는지 누가 기억할까?",
+      "url": "/notes/learning/2026-09-18-files-and-strings#질문-readline의-한-줄은-무엇이며-어디까지-읽었는지-누가-기억할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "파일에서 읽은 한 줄은 어떤 값을 거쳐 단어가 될까?",
+      "context": "readline()의 “한 줄”이 무엇으로 정해지는지, 다음 호출이 어떻게 이어지는 곳에서 읽는지 물었다.",
+      "intent": "화면에서 보이는 줄과 파일의 줄바꿈, 파일 내용과 읽기 상태를 구분하려 했다.",
+      "answer": "텍스트 파일에서 한 줄은 줄바꿈이나 파일 끝으로 구분된다. 화면 너비 때문에 꺾여 보이는 줄과는 다르다. 열린 파일 객체와 입출력 시스템이 현재 읽기 위치를 관리하므로 다음 읽기는 이어지는 위치에서 시작한다."
+    },
+    {
+      "id": "learning/2026-09-18-files-and-strings#질문-for-line-in-f의-line은-정해진-이름일까",
+      "title": "for line in f의 line은 정해진 이름일까?",
+      "url": "/notes/learning/2026-09-18-files-and-strings#질문-for-line-in-f의-line은-정해진-이름일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "파일에서 읽은 한 줄은 어떤 값을 거쳐 단어가 될까?",
+      "context": "한 줄씩 읽는 코드에서 line을 임의로 지어도 되는지 물었다.",
+      "intent": "한 줄씩 읽히는 이유가 변수 이름 때문인지 파일 객체의 동작 때문인지 구분하려 했다.",
+      "answer": "line은 작성자가 정한 변수 이름이다. for row in f로 바꿔도 파일 객체는 다음 줄을 제공한다. 읽은 문자열을 이후 코드에서도 같은 이름으로 사용하면 된다."
+    },
+    {
+      "id": "learning/2026-09-18-files-and-strings#질문-linesplit--1에서-막혀-뒤-코드를-이해할-수-없어요",
+      "title": "line.split(\": \", 1)에서 막혀 뒤 코드를 이해할 수 없어요",
+      "url": "/notes/learning/2026-09-18-files-and-strings#질문-linesplit--1에서-막혀-뒤-코드를-이해할-수-없어요",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "파일에서 읽은 한 줄은 어떤 값을 거쳐 단어가 될까?",
+      "context": "단어장 예제의 eng, kor = line.split(\": \", 1)을 보고, 특히 오른쪽 호출이 이해되지 않아 다음 줄로 넘어갈 수 없다고 말했다.",
+      "intent": "한 줄 문자열이 두 변수로 바뀌는 중간 결과를 먼저 확인하려 했다.",
+      "answer": "\": \"는 콜론과 공백을 합친 구분자이고 1은 최대 분할 횟수다. 첫 번째 값을 선택하는 인덱스가 아니다. \"apple: 사과\"를 한 번 나누면 ['apple', '사과']가 된다."
+    },
+    {
+      "id": "learning/2026-09-18-files-and-strings#질문-오른쪽이-두-값을-가진-튜플이어도-eng-kor로-받을-수-있을까",
+      "title": "오른쪽이 두 값을 가진 튜플이어도 eng, kor로 받을 수 있을까?",
+      "url": "/notes/learning/2026-09-18-files-and-strings#질문-오른쪽이-두-값을-가진-튜플이어도-eng-kor로-받을-수-있을까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "파일에서 읽은 한 줄은 어떤 값을 거쳐 단어가 될까?",
+      "context": "split의 리스트 결과를 두 변수로 받는 설명 뒤, 오른쪽이 튜플이어도 같은 문법을 쓸 수 있는지 물었다.",
+      "intent": "방금 본 문법이 split에만 붙는 특별한 기능인지 더 일반적인 값 배정인지 알고 싶었다.",
+      "answer": "eng, kor = (\"apple\", \"사과\")도 가능하다. 순회 가능한 값들을 왼쪽 변수에 나누어 배정하는 언패킹이다. 이 두 변수 형태에서는 오른쪽도 정확히 두 값이어야 한다."
+    },
+    {
+      "id": "learning/2026-09-18-frameworks#질문-외부-패키지를-라이브러리라고-부르는-걸까",
+      "title": "외부 패키지를 라이브러리라고 부르는 걸까?",
+      "url": "/notes/learning/2026-09-18-frameworks#질문-외부-패키지를-라이브러리라고-부르는-걸까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "라이브러리와 프레임워크의 차이가 왜 필요할까?",
+      "context": "외부에 있는 패키지라서 라이브러리인지, 패키지가 여러 개 모여야 라이브러리인지 물었다.",
+      "intent": "모듈·패키지·라이브러리를 크기순의 고정 계층으로 이해해도 되는지 확인하려 했다.",
+      "answer": "패키지는 모듈을 묶는 구조를, 라이브러리는 가져다 쓰는 기능 모음을 가리킨다. 같은 대상을 두 관점으로 부를 수 있다. 외부 설치 여부나 패키지 개수만으로 라이브러리인지 결정하지 않는다."
+    },
+    {
+      "id": "learning/2026-09-18-frameworks#질문-어차피-내가-실행하는데-제어의-역전은-말장난-아닐까",
+      "title": "어차피 내가 실행하는데 제어의 역전은 말장난 아닐까?",
+      "url": "/notes/learning/2026-09-18-frameworks#질문-어차피-내가-실행하는데-제어의-역전은-말장난-아닐까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "라이브러리와 프레임워크의 차이가 왜 필요할까?",
+      "context": "IoC 설명을 요청한 뒤, 내가 함수를 호출하든 프레임워크를 실행하든 결국 내 코드가 실행되는데 왜 구분하는지 물었다.",
+      "intent": "“누가 호출한다”는 표현의 차이가 실제 구현 부담에 어떤 차이를 만드는지 알고 싶었다.",
+      "answer": "프레임워크를 시작하는 호출과 시작 이후의 실행 흐름을 관리하는 일은 다르다. 예를 들어 웹 프레임워크는 요청을 기다리고 적절한 사용자 함수를 호출한 뒤 응답을 보내는 흐름을 맡는다. 사용자는 그 흐름의 참여 지점에 자기 기능을 연결한다."
+    },
+    {
+      "id": "learning/2026-09-18-frameworks#질문-프로그램마다-흐름이-다른데-무엇이-공통이라는-걸까",
+      "title": "프로그램마다 흐름이 다른데 무엇이 공통이라는 걸까?",
+      "url": "/notes/learning/2026-09-18-frameworks#질문-프로그램마다-흐름이-다른데-무엇이-공통이라는-걸까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "라이브러리와 프레임워크의 차이가 왜 필요할까?",
+      "context": "사용자는 프로그램 종류에 따라 흐름이 달라지는 예외를 지적했다. 이어 반복되는 처리가 이미 구현돼 있어 덜 신경 써도 된다는 이해가 맞는지, 제공 기능을 잘 파악하는 것 외에 어떤 이점이 있는지 물었다.",
+      "intent": "프레임워크가 유용한 범위와 자신이 여전히 맡아야 할 일을 확인하려 했다.",
+      "answer": "공통이란 모든 프로그램에 동일하다는 뜻이 아니라 비슷한 종류의 프로그램에서 반복된다는 뜻이다. 제공되는 흐름이 목적과 맞을 때 재사용하고, 다른 부분은 정해진 확장 지점에 연결한다. 틀에 맞지 않으면 다른 도구나 직접 구현이 더 나을 수 있다."
+    },
+    {
+      "id": "learning/2026-09-18-imports-and-packages#질문-모듈은-py-하나일까-여러-파일을-묶은-것일까",
+      "title": "모듈은 .py 하나일까, 여러 파일을 묶은 것일까?",
+      "url": "/notes/learning/2026-09-18-imports-and-packages#질문-모듈은-py-하나일까-여러-파일을-묶은-것일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "import는 파일을 옮기는 걸까, 이름을 연결하는 걸까?",
+      "context": "수업의 모듈 설명을 보고 파이썬 파일 하나를 뜻하는지, 여러 파일을 모은 것을 뜻하는지 물었다.",
+      "intent": "이후 import 예제를 읽을 때 파일·폴더·기능의 단위를 정확히 잡으려 했다.",
+      "answer": "입문 예에서는 .py 하나를 모듈, 모듈들을 묶은 구조를 패키지로 구분한다. 다만 패키지도 모듈의 한 종류이고 내장 모듈처럼 .py 파일이 아닌 모듈도 있으므로, 단순한 파일 개수 공식이 전부는 아니다."
+    },
+    {
+      "id": "learning/2026-09-18-imports-and-packages#질문-지금-쓰는-ipynb도-모듈로-import할-수-있을까",
+      "title": "지금 쓰는 .ipynb도 모듈로 import할 수 있을까?",
+      "url": "/notes/learning/2026-09-18-imports-and-packages#질문-지금-쓰는-ipynb도-모듈로-import할-수-있을까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "import는 파일을 옮기는 걸까, 이름을 연결하는 걸까?",
+      "context": "Colab에서 공부 중이어서, 파이썬 코드가 들어 있는 노트북 파일도 같은 모듈인지 물었다.",
+      "intent": ".py 예제와 자신이 실제 작성하는 노트북의 관계를 이해하려 했다.",
+      "answer": ".ipynb는 코드·설명·출력 등을 함께 담은 노트북 형식이다. 보통의 import가 .py처럼 직접 읽는 형식은 아니다. 재사용할 코드를 .py로 분리하면 노트북에서 가져다 쓸 수 있다."
+    },
+    {
+      "id": "learning/2026-09-18-imports-and-packages#질문-print와-input은-왜-import하지-않아도-쓸-수-있을까",
+      "title": "print와 input은 왜 import하지 않아도 쓸 수 있을까?",
+      "url": "/notes/learning/2026-09-18-imports-and-packages#질문-print와-input은-왜-import하지-않아도-쓸-수-있을까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "import는 파일을 옮기는 걸까, 이름을 연결하는 걸까?",
+      "context": "함수를 쓰려면 정의된 모듈을 가져와야 한다는 설명과, 항상 바로 사용하던 print()·input()이 맞지 않는다고 느꼈다.",
+      "intent": "함수가 정의된 위치와 이름을 바로 사용할 수 있는 조건을 연결하려 했다.",
+      "answer": "print와 input은 내장 이름으로 제공돼 파이썬이 이름을 찾을 때 자동으로 확인한다. 모든 모듈의 모든 함수가 자동으로 제공되는 것은 아니다."
+    },
+    {
+      "id": "learning/2026-09-18-imports-and-packages#질문-패키지를-import했는데-그-안의-basic도-가져온-것-아닐까",
+      "title": "패키지를 import했는데 그 안의 basic도 가져온 것 아닐까?",
+      "url": "/notes/learning/2026-09-18-imports-and-packages#질문-패키지를-import했는데-그-안의-basic도-가져온-것-아닐까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "import는 파일을 옮기는 걸까, 이름을 연결하는 걸까?",
+      "context": "from calculator import basic 대신 import calculator만 하면 되는지 질문했다. 이어 폴더 안에 basic.py가 있으니 calculator.basic으로 접근할 수 있어야 하는 것 아닌지 여러 차례 확인했다.",
+      "intent": "패키지를 가져온다는 말이 폴더 안 모든 파일을 한꺼번에 사용할 수 있게 한다는 뜻인지 알고 싶었다.",
+      "answer": "디스크에 파일이 존재하는 것과 실행 중 모듈이 로드된 것은 다르다. __init__.py가 비어 있고 basic을 아직 불러오지 않은 새 환경이라면, import calculator만으로 calculator.basic이 생기지는 않는다."
+    },
+    {
+      "id": "learning/2026-09-18-imports-and-packages#질문-initpy는-정확히-무엇이고-초기화는-무엇을-할까",
+      "title": "init.py는 정확히 무엇이고 초기화는 무엇을 할까?",
+      "url": "/notes/learning/2026-09-18-imports-and-packages#질문-initpy는-정확히-무엇이고-초기화는-무엇을-할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "import는 파일을 옮기는 걸까, 이름을 연결하는 걸까?",
+      "context": "패키지 설명에서 계속 등장하는 __init__.py의 이름과 역할을 물었다.",
+      "intent": "낯선 파일 이름의 뜻부터 패키지를 사용할 때 맡는 역할까지 구체적으로 이해하려 했다.",
+      "answer": "여기서는 일반 패키지를 처음 불러올 때 실행되는 파이썬 파일이다. 필요한 초기 준비를 적으며 비워 둘 수도 있다. 초기화가 삭제를 뜻하지는 않는다."
+    },
+    {
+      "id": "learning/2026-09-18-imports-and-packages#질문-import하면-파일이-내-위치로-오는-걸까-init은-어디서-실행될까",
+      "title": "import하면 파일이 내 위치로 오는 걸까? init은 어디서 실행될까?",
+      "url": "/notes/learning/2026-09-18-imports-and-packages#질문-import하면-파일이-내-위치로-오는-걸까-init은-어디서-실행될까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "import는 파일을 옮기는 걸까, 이름을 연결하는 걸까?",
+      "context": "사용자는 패키지가 자신의 위치로 “온다”고 이해해 혼동된다며 더 정확한 용어를 요청했다.",
+      "intent": "파일 이동·현재 폴더·코드 실행 위치가 같은 말처럼 쓰이는 문제를 풀려 했다.",
+      "answer": "import는 파일을 복사하거나 현재 작업 폴더를 바꾸는 명령이 아니다. 실행 중인 파이썬이 패키지 코드를 처리하고, 그 패키지의 이름 공간을 현재 코드에서 접근할 수 있게 연결한다."
+    },
+    {
+      "id": "learning/2026-09-18-imports-and-packages#질문--calculatorinitpy는-주석인데-실제-코드는-어디에-적을까",
+      "title": "# calculator/init.py는 주석인데, 실제 코드는 어디에 적을까?",
+      "url": "/notes/learning/2026-09-18-imports-and-packages#질문--calculatorinitpy는-주석인데-실제-코드는-어디에-적을까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "import는 파일을 옮기는 걸까, 이름을 연결하는 걸까?",
+      "context": "설명 코드의 # calculator/__init__.py가 주석인지 확인했고, 이어 Colab에서 실제 파일을 어디에 작성·저장하는지 물었다. 셀에 쓰는 예와 파일 편집기로 쓰는 예의 경계가 불분명했다.",
+      "intent": "설명용 파일명 표시를 실제 파일 생성 동작으로 오해하지 않고 수업의 작성 방식을 따르려 했다.",
+      "answer": "#부터 줄 끝까지는 실행되지 않는 주석이다. 파일 위치를 설명한 줄을 복사해도 파일이 생기지 않는다. 그 경로에 실제 .py 파일을 만들어 코드를 저장하는 작업은 별도로 필요하다."
+    },
+    {
+      "id": "learning/2026-09-18-imports-and-packages#질문-명령어-말고-수업처럼-파일을-만들고-열어서-붙여넣으려면",
+      "title": "명령어 말고 수업처럼 파일을 만들고 열어서 붙여넣으려면?",
+      "url": "/notes/learning/2026-09-18-imports-and-packages#질문-명령어-말고-수업처럼-파일을-만들고-열어서-붙여넣으려면",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "import는 파일을 옮기는 걸까, 이름을 연결하는 걸까?",
+      "context": "사용자는 calculator.py를 어디에 작성하고 저장하는지 반복해 물었다. 답변은 계속 %%writefile을 제시했지만, 사용자가 원한 것은 수업에서 본 파일 목록의 새 파일 생성·편집 방식이었다.",
+      "intent": "파일을 만드는 결과만이 아니라 자신이 본 작업 방식과 저장 위치를 연결하려 했다. 사용자는 “파일을 만든 후에 그걸 열어가지고 거기다가 복사 붙여넣기”하고 싶다고 명시했다.",
+      "answer": "노트북 셀의 %%writefile은 셀 내용을 별도 파일로 저장하는 방식이고, 파일 목록에서 생성한 .py를 편집하는 방식은 그 파일에 직접 코드를 적는 방식이다. 후자의 파일 본문에는 %%writefile 줄을 넣지 않는다."
+    },
+    {
+      "id": "learning/2026-09-18-imports-and-packages#질문-initpy는-main이-실행할까-import문이-실행할까",
+      "title": "init.py는 main이 실행할까, import문이 실행할까?",
+      "url": "/notes/learning/2026-09-18-imports-and-packages#질문-initpy는-main이-실행할까-import문이-실행할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "import는 파일을 옮기는 걸까, 이름을 연결하는 걸까?",
+      "context": "클래스 초기화와 비교하던 중, 패키지 초기화 파일을 “누가, 어느 순간” 실행하는지 다시 물었다.",
+      "intent": "파일 이름과 실행 주체, 실행을 시작하는 계기를 구분하려 했다.",
+      "answer": "실제 실행 주체는 파이썬 인터프리터이고, import가 계기다. 처음 패키지를 준비할 때 초기화 코드를 실행한 뒤 import 다음 줄로 돌아온다. main.py라는 파일 이름 자체에 초기화를 맡기는 특별한 역할이 있는 것은 아니다."
+    },
+    {
+      "id": "learning/2026-09-18-imports-and-packages#질문-제작자가-init에-모듈을-미리-정하면-사용하는-쪽은-어떻게-선택할까",
+      "title": "제작자가 init에 모듈을 미리 정하면 사용하는 쪽은 어떻게 선택할까?",
+      "url": "/notes/learning/2026-09-18-imports-and-packages#질문-제작자가-init에-모듈을-미리-정하면-사용하는-쪽은-어떻게-선택할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "import는 파일을 옮기는 걸까, 이름을 연결하는 걸까?",
+      "context": "사용자는 “__init__.py가 어떤 모듈을 연결할지 선택한다”는 설명에 모순을 지적했다. 파일 내용은 제작자가 이미 정했는데 호출하는 사람이 원하는 모듈을 고른다는 설명과 어떻게 함께 성립하는지 물었다.",
+      "intent": "패키지의 기본 준비와 사용자의 구체적인 import 요청이 충돌하는지 확인하려 했다.",
+      "answer": "__init__.py는 허용할 모듈을 선택하는 함수나 허용 목록이 아니다. 제작자가 적은 초기화 코드와 사용자가 요청한 하위 모듈 로딩은 각각 진행할 수 있다."
+    },
+    {
+      "id": "learning/2026-09-18-lambda-map-sort#질문-lambda는-무엇이고-왜-쓰는-걸까",
+      "title": "lambda는 무엇이고 왜 쓰는 걸까?",
+      "url": "/notes/learning/2026-09-18-lambda-map-sort#질문-lambda는-무엇이고-왜-쓰는-걸까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "lambda, map, sort의 key에서 누가 함수를 호출할까?",
+      "context": "squares = list(map(lambda x: x**2, nums))를 문법 요소별로 설명받은 뒤, “람다의 본질”과 사용하는 이유를 다시 물었다.",
+      "intent": "코드 한 줄을 외우기보다, lambda가 어떤 기능을 대신하는지 이해하려는 질문이었다.",
+      "answer": "lambda x: x**2는 값 하나를 받아 제곱한 결과를 반환하는 함수다. 리스트를 순회하는 기능은 없다. 짧은 식으로 표현할 함수를 다른 함수에 바로 전달할 때 쓴다."
+    },
+    {
+      "id": "learning/2026-09-18-lambda-map-sort#질문-map은-결국-함수를-호출하기-위해-있는-걸까",
+      "title": "map은 결국 함수를 호출하기 위해 있는 걸까?",
+      "url": "/notes/learning/2026-09-18-lambda-map-sort#질문-map은-결국-함수를-호출하기-위해-있는-걸까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "lambda, map, sort의 key에서 누가 함수를 호출할까?",
+      "context": "lambda 설명 뒤 map의 역할을 물었고, “결국 함수 호출의 역할을 위해 map이 있는 거네?”라고 확인했다.",
+      "intent": "함수를 만드는 역할과 여러 값에 적용하는 역할을 분리하려 했다.",
+      "answer": "함수 한 번은 square(3)으로도 호출한다. map(square, nums)는 여러 입력에 같은 함수를 적용하는 반복을 맡는다. 결과는 필요할 때 꺼내는 이터레이터이며, list(...)가 결과를 소비해 새 리스트를 만든다."
+    },
+    {
+      "id": "learning/2026-09-18-lambda-map-sort#질문-map을-쓰지-않았는데-sort가-각-단어에-함수를-적용하는-이유는",
+      "title": "map을 쓰지 않았는데 sort가 각 단어에 함수를 적용하는 이유는?",
+      "url": "/notes/learning/2026-09-18-lambda-map-sort#질문-map을-쓰지-않았는데-sort가-각-단어에-함수를-적용하는-이유는",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "lambda, map, sort의 key에서 누가 함수를 호출할까?",
+      "context": "15번의 words.sort(key=lambda x: len(x))를 보고, 앞선 제곱 문제처럼 map으로 요소를 전달하지 않았는데 왜 가능한지 물었다.",
+      "intent": "람다가 단어 하나를 받는 순간과 그 호출을 담당하는 코드를 찾으려 했다.",
+      "answer": "이 경우에는 sort가 각 단어에 기준 함수를 적용한다. map은 반환값을 새 결과로 제공하고, sort는 반환값을 비교 기준으로 삼아 원래 요소의 순서를 바꾼다."
+    },
+    {
+      "id": "learning/2026-09-18-lambda-map-sort#질문-key에-5가-들어간다면-sortkey5는-무슨-뜻일까",
+      "title": "key에 5가 들어간다면 sort(key=5)는 무슨 뜻일까?",
+      "url": "/notes/learning/2026-09-18-lambda-map-sort#질문-key에-5가-들어간다면-sortkey5는-무슨-뜻일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "lambda, map, sort의 key에서 누가 함수를 호출할까?",
+      "context": "“key에 5, 4, 6, 6이 저장된다”는 해석을 말한 뒤, sort(key=5)가 되는 것인지 물었다. 앞선 설명에서 함수와 결과가 명확히 구분되지 않은 지점이었다.",
+      "intent": "len(\"apple\")의 결과 5가 정렬 호출의 어느 자리에 들어가는지 확인하려 했다.",
+      "answer": "key에 전달하는 것은 len 같은 함수 자체다. 5는 sort가 그 함수를 호출해 얻은 기준값이다. 실제로 key=5를 전달하면 숫자를 함수처럼 호출할 수 없어 오류가 난다."
+    },
+    {
+      "id": "learning/2026-09-18-lambda-map-sort#질문-반환값으로-정렬한다면-key라는-이름은-왜-필요할까",
+      "title": "반환값으로 정렬한다면 key라는 이름은 왜 필요할까?",
+      "url": "/notes/learning/2026-09-18-lambda-map-sort#질문-반환값으로-정렬한다면-key라는-이름은-왜-필요할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "lambda, map, sort의 key에서 누가 함수를 호출할까?",
+      "context": "“결국 함수의 반환을 사용하는 거잖아. key가 왜 필요해?”라고 물었다. 이어 매개변수는 람다의 x가 아닌지 확인했다.",
+      "intent": "서로 다른 함수의 매개변수를 한 자리처럼 읽던 혼동을 해소하려 했다.",
+      "answer": "key는 sort가 기준 함수를 받는 매개변수 이름이고, x는 전달한 람다가 단어 하나를 받는 매개변수다. 함수를 받는 자리와 단어를 받는 자리가 다르다."
+    },
+    {
+      "id": "learning/2026-09-18-lambda-map-sort#질문-dict도-아닌데-왜-key가-나오고-sortx1은-왜-안-될까",
+      "title": "dict도 아닌데 왜 key가 나오고, sort(x=1)은 왜 안 될까?",
+      "url": "/notes/learning/2026-09-18-lambda-map-sort#질문-dict도-아닌데-왜-key가-나오고-sortx1은-왜-안-될까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "lambda, map, sort의 key에서 누가 함수를 호출할까?",
+      "context": "사용자는 key를 보고 딕셔너리의 키를 떠올렸으며, sort(x=1)은 무엇을 뜻하는지도 물었다.",
+      "intent": "key가 임의로 지은 이름인지, 함수가 정해 둔 이름인지 구분하려 했다.",
+      "answer": "여기서 정렬은 sort가 하는 일이다. key는 sort가 미리 정한 매개변수 이름이라 마음대로 바꿀 수 없다. 람다의 x는 직접 정의한 매개변수이므로 word로 바꿔도 된다."
+    },
+    {
+      "id": "learning/2026-09-18-lambda-map-sort#질문-sort는-인자를-안-줘도-요소를-하나씩-살펴보는-거였지",
+      "title": "sort()는 인자를 안 줘도 요소를 하나씩 살펴보는 거였지?",
+      "url": "/notes/learning/2026-09-18-lambda-map-sort#질문-sort는-인자를-안-줘도-요소를-하나씩-살펴보는-거였지",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "lambda, map, sort의 key에서 누가 함수를 호출할까?",
+      "context": "key를 구분한 뒤에도 17번에는 map이 필요하고 15번에는 필요 없는 이유를 다시 물었다. 이어 sort() 자체가 요소를 처리한다는 점을 확인했다.",
+      "intent": "고정된 한 문법의 암기에서, 각 함수가 맡는 실행 역할로 이해를 연결하려 했다.",
+      "answer": "words.sort()는 words 자체가 정렬 대상이므로 별도의 리스트 인자가 필요 없다. key를 생략하면 단어 자체로 비교하고, key=len을 주면 길이를 비교한다. 요소를 처리하는 쪽은 여전히 sort다."
+    },
+    {
+      "id": "learning/2026-09-18-loop-exit#질문-정답을-맞혔으니-break-대신-프로그램-실행을-끝내려면",
+      "title": "정답을 맞혔으니 break 대신 프로그램 실행을 끝내려면?",
+      "url": "/notes/learning/2026-09-18-loop-exit#질문-정답을-맞혔으니-break-대신-프로그램-실행을-끝내려면",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "정답을 맞혔는데 왜 실패 안내까지 실행될까?",
+      "context": "사용자는 “7번 문제 9번 라인 break 대신에, 정답을 했으니까 그냥 이제 실행을 끝내고 싶은 상황”이라고 특정 위치와 원하는 동작을 말했다. 당시 코드를 확인한 답변에서는 마지막 \"아쉽습니다...\" 출력이 반복문 밖에 있었다고 설명했다.",
+      "intent": "사용자가 직접 말한 요구는 정답을 맞힌 뒤 실행을 끝내는 것이었다. 답변은 이를 현재 코드에서 성공 뒤 실패 안내가 나오지 않게 하려는 요구로 해석했다. 프로그램 전체 종료가 반드시 필요한 별도 요구로 확인된 것은 아니다.",
+      "answer": "break는 가장 가까운 반복문만 끝내므로 그 다음 문장은 실행된다. 이 문제에서는 정답이면 break하고, 여섯 번 모두 실패한 경우의 안내를 for에 붙은 else로 옮기면 성공·실패 흐름을 구분할 수 있다."
+    },
+    {
+      "id": "learning/2026-09-18-notebook-state#질문-17번에서-list-object-is-not-callable은-왜-나올까",
+      "title": "17번에서 list object is not callable은 왜 나올까?",
+      "url": "/notes/learning/2026-09-18-notebook-state#질문-17번에서-list-object-is-not-callable은-왜-나올까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "코드를 고쳤는데 list 오류가 계속 나는 이유",
+      "context": "숫자 리스트에 list라는 이름을 붙인 뒤 list(map(...))를 실행했다. 기대한 것은 제곱한 숫자 리스트였지만, 리스트를 호출할 수 없다는 오류가 났다.",
+      "intent": "제곱 계산식이 틀렸는지, 오류 메시지의 list가 무엇을 가리키는지 확인하려 했다.",
+      "answer": "list = [1, 2, 3, 4, 5]를 실행해 내장 list 이름을 가렸다. 이후 list(...)는 리스트 생성 기능이 아니라 그 숫자 리스트를 호출하려 하므로 실패한다."
+    },
+    {
+      "id": "learning/2026-09-18-notebook-state#질문-이름을-nums로-고쳤는데-왜-같은-오류가-남을까",
+      "title": "이름을 nums로 고쳤는데 왜 같은 오류가 남을까?",
+      "url": "/notes/learning/2026-09-18-notebook-state#질문-이름을-nums로-고쳤는데-왜-같은-오류가-남을까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "코드를 고쳤는데 list 오류가 계속 나는 이유",
+      "context": "사용자가 “지금은 또 왜 안 되지?”라고 물었다. 당시 화면 확인에서는 편집한 이름은 올바르게 바뀌어 있었고, 앞서 실행한 list 이름이 남은 상태로 설명됐다.",
+      "intent": "코드의 글자를 수정하면 실행 환경도 함께 이전 상태를 잊을 것이라는 기대와 실제 동작의 차이를 이해하려 했다. 이 기대는 질문 흐름에서 추론한 것이다.",
+      "answer": "셀의 텍스트와 실행 중인 파이썬의 이름 공간은 다르다. nums = ...를 실행하면 nums가 생기지만 예전 list가 자동 삭제되지는 않는다. 노트북 셀들은 같은 실행 상태를 공유한다."
+    },
+    {
+      "id": "learning/2026-09-18-notebook-state#질문-del-list로-해결됐는데-정확히-무엇을-지운-걸까",
+      "title": "del list로 해결됐는데, 정확히 무엇을 지운 걸까?",
+      "url": "/notes/learning/2026-09-18-notebook-state#질문-del-list로-해결됐는데-정확히-무엇을-지운-걸까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "코드를 고쳤는데 list 오류가 계속 나는 이유",
+      "context": "사용자는 del list 뒤 문제가 해결됐다고 직접 말하며 “이런 현상이 왜 발생하는지 정확히 이해하고 가고 싶다”고 요청했다.",
+      "intent": "일회성 해결 명령만 기억하지 않고, 이름과 객체·내장 기능의 관계를 이해하려는 요청이었다.",
+      "answer": "여기서 del list는 사용자가 만든 list라는 이름 연결을 제거했다. 코드 셀이나 파일을 지우는 것이 아니다. 그러면 이름을 찾을 때 내장 list를 다시 사용할 수 있다."
+    },
+    {
+      "id": "learning/2026-09-18-notebook-state#질문-홀수-합을-for-없이-구할-수-있을까-내-for-코드는-문법이-틀렸을까",
+      "title": "홀수 합을 for 없이 구할 수 있을까? 내 for 코드는 문법이 틀렸을까?",
+      "url": "/notes/learning/2026-09-18-notebook-state#질문-홀수-합을-for-없이-구할-수-있을까-내-for-코드는-문법이-틀렸을까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "코드를 고쳤는데 list 오류가 계속 나는 이유",
+      "context": "16번은 1부터 100까지 홀수의 합을 구하는 문제였다. 사용자는 반복문 없는 방법을 물은 뒤, 작성한 반복문이 왜 틀렸는지 질문했다. 당시 설명에 따르면 이전 오류 결과에는 초기값 없이 sum += num을 실행한 흔적이 있었고, 화면의 수정 코드에는 sum = 0이 추가돼 있었다.",
+      "intent": "반복 방법의 선택과 실제 오류 원인을 구분하려 했다. “문법이 틀렸다”는 질문을 실행 상태와 자료형 문제로 바로잡는 과정이었다.",
+      "answer": "반복문을 직접 쓰지 않아도 sum(range(1, 101, 2))로 합을 구할 수 있다. 직접 누적하려면 숫자 초기값이 필요하다. 초기값 없이 내장 sum에 숫자를 더하면 오류가 난다. 수정 전 출력이 남아 있다면 현재 코드와 실행 결과도 구분해야 한다."
+    },
+    {
+      "id": "learning/2026-09-18-objects-and-self#질문-객체가-도대체-무엇일까-변수와-다른-것일까",
+      "title": "객체가 도대체 무엇일까? 변수와 다른 것일까?",
+      "url": "/notes/learning/2026-09-18-objects-and-self#질문-객체가-도대체-무엇일까-변수와-다른-것일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "객체·인스턴스·self는 어떤 대상을 가리킬까?",
+      "context": "클래스 설명을 요청한 뒤에도 객체라는 말이 이해되지 않는다고 했다. 파일 객체, 문자열, 학생 객체가 한 용어로 불리고 있었다.",
+      "intent": "추상적인 “데이터와 기능의 묶음” 대신 코드에서 실제로 가리키는 대상을 찾으려 했다.",
+      "answer": "score = 85에서 85는 정수 객체이고 score는 그것을 참조하는 이름이다. 학생을 표현하는 객체도 같은 관계로 이름을 붙여 접근한다. 변수를 두 개 만든다고 항상 객체가 두 개 생기지는 않는다."
+    },
+    {
+      "id": "learning/2026-09-18-objects-and-self#질문-내가-만든-클래스의-객체만-인스턴스라고-부르는-걸까",
+      "title": "내가 만든 클래스의 객체만 인스턴스라고 부르는 걸까?",
+      "url": "/notes/learning/2026-09-18-objects-and-self#질문-내가-만든-클래스의-객체만-인스턴스라고-부르는-걸까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "객체·인스턴스·self는 어떤 대상을 가리킬까?",
+      "context": "사용자는 객체가 더 큰 개념이고 인스턴스는 직접 정의한 클래스로 만든 객체라고 자신의 이해를 설명했다. student1은 객체 자체보다 주소를 담는 이름 같다는 생각도 말했다.",
+      "intent": "객체·인스턴스·변수를 서로 다른 단계로 분류하려 했다.",
+      "answer": "객체는 구체적인 대상, 인스턴스는 그 대상이 특정 클래스에 속한다는 관계를 강조하는 말이다. 85도 int의 인스턴스다. 사용자 정의 클래스만 해당하는 것은 아니다. 변수는 주소를 직접 조작하는 포인터라기보다 객체를 참조하는 이름으로 이해한다."
+    },
+    {
+      "id": "learning/2026-09-18-objects-and-self#질문-일반-값도-타입의-인스턴스라면-int-같은-타입도-클래스일까",
+      "title": "일반 값도 타입의 인스턴스라면 int 같은 타입도 클래스일까?",
+      "url": "/notes/learning/2026-09-18-objects-and-self#질문-일반-값도-타입의-인스턴스라면-int-같은-타입도-클래스일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "객체·인스턴스·self는 어떤 대상을 가리킬까?",
+      "context": "숫자도 인스턴스라는 설명 뒤, 그렇다면 타입도 클래스인지 되물었다. 새로 정의하는 class와 기존의 int, str, list가 연결되지 않은 지점이었다.",
+      "intent": "사용자 정의 타입과 파이썬이 제공하는 타입을 하나의 관계로 이해하려 했다.",
+      "answer": "파이썬의 int, str, list도 클래스다. class Student:는 필요한 타입을 직접 정의하는 문법이고, 이미 있는 클래스는 따로 정의하지 않고 사용한다."
+    },
+    {
+      "id": "learning/2026-09-18-objects-and-self#질문-클래스의-__init__과-패키지의-initpy는-같은-초기화일까",
+      "title": "클래스의 __init__과 패키지의 init.py는 같은 초기화일까?",
+      "url": "/notes/learning/2026-09-18-objects-and-self#질문-클래스의-__init__과-패키지의-initpy는-같은-초기화일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "객체·인스턴스·self는 어떤 대상을 가리킬까?",
+      "context": "학생 클래스 문제에서 __init__을 보고, 앞서 배운 패키지의 초기화 파일과 비교해 달라고 요청했다.",
+      "intent": "비슷한 이름 때문에 같은 실행 장치로 이해해도 되는지 확인하려 했다.",
+      "answer": "__init__.py는 일반 패키지를 처음 불러올 때 실행하는 파일이고, __init__ 메서드는 새 인스턴스의 초기 상태를 설정한다. 사용하는 계기와 대상이 다르다."
+    },
+    {
+      "id": "learning/2026-09-18-objects-and-self#질문-6번-학생-등급-문제에서-self는-왜-필요할까",
+      "title": "6번 학생 등급 문제에서 self는 왜 필요할까?",
+      "url": "/notes/learning/2026-09-18-objects-and-self#질문-6번-학생-등급-문제에서-self는-왜-필요할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "객체·인스턴스·self는 어떤 대상을 가리킬까?",
+      "context": "6번 문제의 설명을 요청한 뒤, 작성 중이던 Student 초기화 코드에서 self를 더 깊게 설명해 달라고 했다. 당시 확인된 부분은 self.name = name, self.score = score였다.",
+      "intent": "같은 클래스의 메서드가 학생마다 다른 이름·점수를 어떻게 사용하는지 알고 싶었다. 이 구체화는 질문과 당시 코드에 근거한 해석이다.",
+      "answer": "일반 인스턴스 메서드의 self는 이번 호출이 다루는 객체를 받는다. student1.get_grade()를 호출하면 self는 그 학생을 가리킨다. self.score는 그 학생의 점수다."
     }
   ],
   "quizzes": [
     {
-      "id": "python/loop-exit#퀴즈-break-뒤의-코드는-실행될까",
-      "title": "break 뒤의 코드는 실행될까?",
-      "url": "/notes/python/loop-exit#퀴즈-break-뒤의-코드는-실행될까",
-      "topic": "python",
+      "id": "python/loop-exit#퀴즈-끝까지-찾지-못하면-무엇이-출력될까",
+      "title": "끝까지 찾지 못하면 무엇이 출력될까?",
+      "url": "/notes/python/loop-exit#퀴즈-끝까지-찾지-못하면-무엇이-출력될까",
+      "topic": "실전 파이썬 준비하기",
       "sourceTitle": "반복문 종료와 for–else"
     },
     {
       "id": "python/loop-exit#퀴즈-반복할-항목이-없으면-else는-실행될까",
       "title": "반복할 항목이 없으면 else는 실행될까?",
       "url": "/notes/python/loop-exit#퀴즈-반복할-항목이-없으면-else는-실행될까",
-      "topic": "python",
+      "topic": "실전 파이썬 준비하기",
       "sourceTitle": "반복문 종료와 for–else"
+    },
+    {
+      "id": "python/loop-exit#퀴즈-정답을-찾았는데-실패-안내도-나온다면-어디를-고칠까",
+      "title": "정답을 찾았는데 실패 안내도 나온다면 어디를 고칠까?",
+      "url": "/notes/python/loop-exit#퀴즈-정답을-찾았는데-실패-안내도-나온다면-어디를-고칠까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "반복문 종료와 for–else"
+    },
+    {
+      "id": "python/args-and-kwargs#퀴즈-모아서-받은-인자를-다시-풀어-전달하면",
+      "title": "모아서 받은 인자를 다시 풀어 전달하면?",
+      "url": "/notes/python/args-and-kwargs#퀴즈-모아서-받은-인자를-다시-풀어-전달하면",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "args와 kwargs의 두 방향"
+    },
+    {
+      "id": "python/comprehensions#퀴즈-중첩된-반복을-펼치면-어떤-순서일까",
+      "title": "중첩된 반복을 펼치면 어떤 순서일까?",
+      "url": "/notes/python/comprehensions#퀴즈-중첩된-반복을-펼치면-어떤-순서일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "리스트 컴프리헨션 읽기"
+    },
+    {
+      "id": "python/files-and-with#퀴즈-두-번째-read와-블록-밖의-파일-상태는",
+      "title": "두 번째 read와 블록 밖의 파일 상태는?",
+      "url": "/notes/python/files-and-with#퀴즈-두-번째-read와-블록-밖의-파일-상태는",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "파일 객체와 with"
+    },
+    {
+      "id": "python/imports-and-packages#퀴즈-같은-모듈을-두-번-import하면",
+      "title": "같은 모듈을 두 번 import하면?",
+      "url": "/notes/python/imports-and-packages#퀴즈-같은-모듈을-두-번-import하면",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "import와 패키지"
+    },
+    {
+      "id": "python/iterables-and-iterators#퀴즈-하나를-꺼낸-뒤-list로-모으면",
+      "title": "하나를 꺼낸 뒤 list로 모으면?",
+      "url": "/notes/python/iterables-and-iterators#퀴즈-하나를-꺼낸-뒤-list로-모으면",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "이터러블과 이터레이터"
+    },
+    {
+      "id": "python/notebook-state#퀴즈-셀을-고쳤는데도-list-호출이-실패하는-이유는",
+      "title": "셀을 고쳤는데도 list 호출이 실패하는 이유는?",
+      "url": "/notes/python/notebook-state#퀴즈-셀을-고쳤는데도-list-호출이-실패하는-이유는",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "노트북 이름 공간과 내장 이름"
+    },
+    {
+      "id": "python/self-and-objects#퀴즈-두-객체에서-self는-누구일까",
+      "title": "두 객체에서 self는 누구일까?",
+      "url": "/notes/python/self-and-objects#퀴즈-두-객체에서-self는-누구일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self와 객체 호출"
+    },
+    {
+      "id": "python/sorting-and-callables#퀴즈-정렬된-리스트와-sort의-반환값은",
+      "title": "정렬된 리스트와 sort의 반환값은?",
+      "url": "/notes/python/sorting-and-callables#퀴즈-정렬된-리스트와-sort의-반환값은",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "정렬 key와 호출 가능한 객체"
+    },
+    {
+      "id": "data/data-quality#퀴즈-평균을-크게-바꾸는-값은-지워야-할까",
+      "title": "평균을 크게 바꾸는 값은 지워야 할까?",
+      "url": "/notes/data/data-quality#퀴즈-평균을-크게-바꾸는-값은-지워야-할까",
+      "topic": "데이터 분석",
+      "sourceTitle": "데이터 품질 — 고치기 전에 원인을 찾기"
+    },
+    {
+      "id": "data/data-science-overview#퀴즈-매출-분석을-시작하기-전에-무엇을-정할까",
+      "title": "매출 분석을 시작하기 전에 무엇을 정할까?",
+      "url": "/notes/data/data-science-overview#퀴즈-매출-분석을-시작하기-전에-무엇을-정할까",
+      "topic": "실전 파이썬 준비하기 · 데이터 분석",
+      "sourceTitle": "데이터 사이언스 — 질문에서 판단까지"
+    },
+    {
+      "id": "data/eda-and-causality#퀴즈-평균-배송일이-같으면-경험도-같을까",
+      "title": "평균 배송일이 같으면 경험도 같을까?",
+      "url": "/notes/data/eda-and-causality#퀴즈-평균-배송일이-같으면-경험도-같을까",
+      "topic": "데이터 분석",
+      "sourceTitle": "EDA와 해석 — 평균 뒤의 분포 보기"
+    },
+    {
+      "id": "data/interpretation#퀴즈-막대-길이가-두-배면-매출도-두-배일까",
+      "title": "막대 길이가 두 배면 매출도 두 배일까?",
+      "url": "/notes/data/interpretation#퀴즈-막대-길이가-두-배면-매출도-두-배일까",
+      "topic": "데이터 분석",
+      "sourceTitle": "결과 해석 — 보이는 차이를 믿기 전에"
+    },
+    {
+      "id": "data/observation-unit#퀴즈-고객이-두-번-등장하면-중복일까",
+      "title": "고객이 두 번 등장하면 중복일까?",
+      "url": "/notes/data/observation-unit#퀴즈-고객이-두-번-등장하면-중복일까",
+      "topic": "데이터 분석",
+      "sourceTitle": "관측 단위 — 한 행은 무엇인가"
+    },
+    {
+      "id": "data/wrangling#퀴즈-병합-뒤-매출이-두-배가-된-이유는",
+      "title": "병합 뒤 매출이 두 배가 된 이유는?",
+      "url": "/notes/data/wrangling#퀴즈-병합-뒤-매출이-두-배가-된-이유는",
+      "topic": "데이터 분석",
+      "sourceTitle": "변형·집계·병합 — 표의 단위가 바뀌는 순간"
     }
   ]
 };

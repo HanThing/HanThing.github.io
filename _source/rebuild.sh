@@ -30,6 +30,8 @@ done
 rm -rf "$work/engine/content"
 mkdir "$work/engine/content"
 cp -R "$source_dir/content/." "$work/engine/content/"
+mkdir "$work/blog-preview"
+cp "$repo_root/theme.js" "$work/blog-preview/theme.js"
 
 cd "$work/engine"
 npm ci

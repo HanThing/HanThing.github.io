@@ -86,24 +86,54 @@
     const root = document.querySelector(`#${kind}-list`);
     const input = document.querySelector(`#${kind}-search`);
     const blank = document.querySelector(`#${kind}-empty`);
+    let showAll = false;
+    const moreItems = element('button', 'more-records');
+    moreItems.type = 'button';
+    moreItems.setAttribute('aria-controls', `${kind}-list`);
+    root.after(moreItems);
     const entries = items.map(item => {
-      const link = element('a', 'collection-row');
-      link.href = item.url;
+      const link = element(kind === 'question' ? 'details' : 'a', 'collection-row');
       link.dataset.itemId = item.id;
-      link.append(element('p', 'collection-meta', item.topic), element('h3', '', item.title), element('p', 'collection-source', `${item.sourceTitle} ↗`));
+      if (kind === 'question') {
+        const summary = element('summary', 'question-summary');
+        summary.append(element('span', 'collection-meta', item.topic), element('span', 'question-title', item.title));
+        link.append(summary);
+        for (const [field, title] of [['context', '상황'], ['intent', '질문의 의도'], ['answer', '핵심 답변']]) {
+          if (!item[field]) continue;
+          const paragraph = element('p', 'question-excerpt');
+          paragraph.append(element('strong', '', `${title} `), document.createTextNode(item[field]));
+          link.append(paragraph);
+        }
+        const source = element('a', 'collection-source', '코드와 질문 흐름 이어 읽기 ↗');
+        source.href = item.url;
+        link.append(source);
+      } else {
+        link.href = item.url;
+        link.append(element('p', 'collection-meta', item.topic), element('h3', '', item.title), element('p', 'collection-source', `${item.sourceTitle} ↗`));
+      }
       root.append(link);
       return { item, link };
     });
     const filter = () => {
       let count = 0;
       for (const { item, link } of entries) {
-        link.hidden = !matches([item.title, item.topic, item.sourceTitle], input.value);
-        if (!link.hidden) count++;
+        link.hidden = !matches([item.title, item.topic, item.sourceTitle, item.context ?? '', item.intent ?? '', item.answer ?? ''], input.value);
+        if (!link.hidden) {
+          count++;
+          link.hidden = !showAll && !input.value.trim() && count > initialCount;
+        }
       }
       document.querySelector(`#${kind}-count`).textContent = `${count}개의 ${label}`;
+      moreItems.hidden = showAll || Boolean(input.value.trim()) || count <= initialCount;
+      moreItems.textContent = `${label} ${count - initialCount}개 더 보기 ↓`;
       blank.hidden = count !== 0;
       blank.textContent = items.length ? '검색 결과가 없습니다. 다른 말로 찾아보세요.' : `아직 모아 둔 ${label}${kind === 'question' ? '이' : '가'} 없습니다.`;
     };
+    moreItems.addEventListener('click', () => {
+      showAll = true;
+      filter();
+      (entries[initialCount].link.querySelector('summary') ?? entries[initialCount].link).focus({ preventScroll: true });
+    });
     input.addEventListener('input', filter);
     filter();
   }
