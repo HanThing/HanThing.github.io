@@ -2,6 +2,9 @@
 title: EDA와 해석 — 평균 뒤의 분포 보기
 date: 2026-09-17
 publish: true
+type: concept
+sources:
+  - 데이터 사이언스 오버뷰 강의 자료 (2026-09-17 정리, 본문 쪽수 참조)
 tags: [data, statistics]
 ---
 

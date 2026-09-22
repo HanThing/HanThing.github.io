@@ -2,6 +2,9 @@
 title: 리스트 컴프리헨션 읽기
 date: 2026-09-20
 publish: true
+type: concept
+sources:
+  - 개인 Python 학습 정리 (2026-09-20 이관)
 tags: [python]
 ---
 

@@ -2,6 +2,9 @@
 title: args와 kwargs의 두 방향
 date: 2026-09-20
 publish: true
+type: concept
+sources:
+  - 개인 Python 학습 정리 (2026-09-20 이관)
 tags: [python]
 ---
 

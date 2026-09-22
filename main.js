@@ -67,6 +67,9 @@
   }
 
   const topics = window.HanThingConstellation.nodes;
+  const outline = window.HanThingConstellation.outline;
+  const nodes = topics.map(topic => ({ id: topic.id, x: 0, y: 0 }));
+  const nodeColor = topic => ({ concept: 1, journal: 0, weekly: 2, project: 2 })[topic.type] ?? 0;
 
   // Candidate 02: the horse profile and detached top stroke form a personal ㅎ.
   const logoPath = new Path2D(`M 350 308 L 342 247 Q 340 238 349 242
@@ -92,8 +95,8 @@
       x = 220 + random() * 430;
       y = 238 + random() * 480;
     } while (!logoMask.isPointInPath(logoPath, x, y, 'evenodd'));
-    const group = id % topics.length;
-    const topic = topics[group].position;
+    const group = id % outline.positions.length;
+    const topic = outline.positions[group];
     const theta = random() * tau;
     const cluster = Math.pow(random(), .9) * .085;
     const fx = random();
@@ -104,9 +107,9 @@
       lz: (random() - .5) * .035,
       fx: id % 5 === 0 ? fx : id % 2 ? .015 + fx * .27 : .715 + fx * .27,
       fy: random(), depth: .2 + random() * .8,
-      gx: topic[0] + (id < topics.length ? 0 : Math.cos(theta) * cluster),
-      gy: topic[1] + (id < topics.length ? 0 : Math.sin(theta) * cluster * .8),
-      gz: topic[2] + (id < topics.length ? 0 : (random() - .5) * .04),
+      gx: topic[0] + Math.cos(theta) * cluster,
+      gy: topic[1] + Math.sin(theta) * cluster * .8,
+      gz: topic[2] + (random() - .5) * .04,
       dx: 0, dy: 0, vx: 0, vy: 0, x: 0, y: 0, anchorX: 0, anchorY: 0,
       size: .45 + random() ** 3 * 1.1,
       brightness: .3 + random() * .7,
@@ -120,25 +123,36 @@
   const labelRoot = document.querySelector('#graph-labels');
   const listRoot = document.querySelector('#topic-list');
   const detail = document.querySelector('#node-detail');
+  const count = document.querySelector('#graph-count');
+  if (count) count.textContent = `${topics.length}개의 기록`;
   let selected = -1;
   let activeTrigger = null;
+  const listButtons = [];
   const labels = topics.map((topic, group) => {
     const button = document.createElement('button');
     button.className = 'graph-label';
-    button.textContent = topic.title;
-    button.style.setProperty('--node-color', palette[particles[group].color]);
+    const text = document.createElement('span');
+    text.className = 'graph-label-text';
+    text.textContent = topic.title;
+    button.append(text);
+    button.title = topic.title;
+    button.setAttribute('aria-label', `${topic.title} 기록 선택`);
+    button.style.setProperty('--node-color', palette[nodeColor(topic)]);
     button.setAttribute('aria-controls', 'node-detail');
     button.setAttribute('aria-pressed', 'false');
     button.addEventListener('click', () => selectTopic(group, button));
     labelRoot.append(button);
     const listButton = document.createElement('button');
     listButton.textContent = topic.title;
+    listButton.setAttribute('aria-controls', 'node-detail');
+    listButton.setAttribute('aria-pressed', 'false');
     listButton.addEventListener('click', () => {
       selectTopic(group, listButton);
       detail.scrollIntoView({ behavior: paused ? 'instant' : 'smooth', block: 'center' });
       document.querySelector('#node-close').focus({ preventScroll: true });
     });
     listRoot.append(listButton);
+    listButtons.push(listButton);
     return button;
   });
   function selectTopic(index, trigger) {
@@ -146,21 +160,27 @@
     activeTrigger = trigger;
     const topic = topics[index];
     document.querySelector('#node-title').textContent = topic.title;
-    document.querySelector('#node-description').textContent = `${topic.star} · 사자자리의 별에서 이어지는 배움`;
-    const article = document.createElement('a');
-    article.href = `${topic.slug.replace(/\/index$/, '/')}`;
-    article.textContent = `${topic.title} 읽기 ↗`;
-    const item = document.createElement('li');
-    item.append(article);
-    document.querySelector('#node-notes').replaceChildren(item);
+    document.querySelector('#node-description').textContent = topic.description || '';
+    const related = edges.filter(pair => pair.includes(index)).map(([a, b]) => topics[a === index ? b : a]);
+    const items = [topic, ...related].map((note, i) => {
+      const article = document.createElement('a');
+      article.href = note.url;
+      article.textContent = `${i === 0 ? '기록 읽기' : '연결된 기록'} · ${note.title} ↗`;
+      const item = document.createElement('li');
+      item.append(article);
+      return item;
+    });
+    document.querySelector('#node-notes').replaceChildren(...items);
     detail.hidden = false;
     labels.forEach((label, i) => label.setAttribute('aria-pressed', String(index === i)));
+    listButtons.forEach((button, i) => button.setAttribute('aria-pressed', String(index === i)));
     dirty = true;
   }
   function closeTopic() {
     detail.hidden = true;
     selected = -1;
     labels.forEach(label => label.setAttribute('aria-pressed', 'false'));
+    listButtons.forEach(button => button.setAttribute('aria-pressed', 'false'));
     activeTrigger?.focus({ preventScroll: true });
     dirty = true;
   }
@@ -218,9 +238,9 @@
       let nearest = -1;
       let distance = 40;
       for (let i = 0; i < topics.length; i++) {
-        const p = particles[i];
+        const p = nodes[i];
         const d = Math.hypot(p.x - event.clientX, p.y - event.clientY);
-        if (d < distance) { distance = d; nearest = p.group; }
+        if (d < distance) { distance = d; nearest = i; }
       }
       if (nearest >= 0) selectTopic(nearest, labels[nearest]);
       else if (!detail.hidden) closeTopic();
@@ -234,26 +254,36 @@
     const w = width;
     const h = height;
     const rect = stage.getBoundingClientRect();
+    const heroRect = hero.getBoundingClientRect();
     const scroll = Math.max(0, scrollY);
-    const spread = smooth((scroll / h - .06) / .84);
+    const spread = smooth(scroll / Math.max(1, heroRect.height * .85));
     const gather = smooth((h * .95 - rect.top) / (h * .60));
     const release = smooth((h * .25 - rect.bottom) / (h * .65));
     const constellation = gather * (1 - release);
     phase = spread + constellation;
-    heroFrame.style.setProperty('--hero-opacity', String(1 - smooth(scroll / (h * .62))));
-    const logoScale = Math.min(w * .29, h * .23);
+    heroFrame.style.setProperty('--hero-opacity', String(1 - smooth(scroll / Math.max(1, heroRect.height))));
+    const mobile = w <= 640;
+    const logoScale = Math.min(w * (mobile ? .16 : .15), heroRect.height * (mobile ? .22 : .29));
     const graphScale = Math.min(rect.width * .30, rect.height * .39);
     const idle = Math.exp(-Math.max(0, now - pointer.at) / 350);
     const influence = Math.min(145, Math.max(95, w * .105));
     const damping = Math.exp(-7.5 * dt);
-    const rx = rotation.x + Math.sin(time * .12) * .025;
-    const ry = rotation.y + Math.sin(time * .10) * .075;
     const logoAngle = orientation(-.025, Math.sin(time * .08) * .06);
-    const graphAngle = orientation(rx, ry);
+    const graphAngle = orientation(rotation.x, rotation.y);
     const readingDim = mix(1, .55, smooth((scroll - hero.offsetHeight) / h));
     ctx.clearRect(0, 0, w, h);
     let hovered = -1;
     let hoverDistance = 90;
+    const graphPoint = position => project(...position, graphAngle, graphScale, rect.left + rect.width * .5, rect.top + rect.height * .46);
+    const outlinePoints = outline.positions.map(graphPoint);
+    nodes.forEach((node, i) => {
+      Object.assign(node, graphPoint(topics[i].position));
+      const distance = Math.hypot(node.x - pointer.x, node.y - pointer.y);
+      if (constellation > .6 && distance < hoverDistance && now - pointer.at < 1400) {
+        hoverDistance = distance;
+        hovered = i;
+      }
+    });
 
     for (const p of particles) {
       const fieldX = p.fx * w + Math.sin(time * .055 + p.phase) * 3;
@@ -263,7 +293,7 @@
       if (spread < 1) {
         const logo = project(p.lx + Math.sin(time * .35 + p.phase) * .007,
           p.ly + Math.sin(time * .5 + p.phase) * .007, p.lz, logoAngle,
-          logoScale, w * .5, h * .44);
+          logoScale, w * (mobile ? .78 : .76), heroRect.top + heroRect.height * (mobile ? .57 : .49));
         tx = mix(logo.x, fieldX, spread);
         ty = mix(logo.y, fieldY, spread);
       }
@@ -289,20 +319,26 @@
       }
       p.x = tx + p.dx;
       p.y = ty + p.dy;
-      if (p.id < topics.length && constellation > .6) {
-        const distance = Math.hypot(p.x - pointer.x, p.y - pointer.y);
-        if (distance < hoverDistance && now - pointer.at < 1400) { hoverDistance = distance; hovered = p.group; }
-      }
     }
     stage.dataset.hovered = hovered < 0 ? '' : String(hovered);
 
     ctx.globalCompositeOperation = 'lighter';
     if (constellation > .02) {
+      ctx.globalAlpha = constellation * .45;
+      ctx.strokeStyle = '#b49a6a';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([3, 5]);
+      for (const [a, b] of outline.edges) {
+        const p = outlinePoints[a];
+        const q = outlinePoints[b];
+        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.stroke();
+      }
+      ctx.setLineDash([]);
       for (const [a, b] of edges) {
-        const p = particles[a];
-        const q = particles[b];
+        const p = nodes[a];
+        const q = nodes[b];
         const active = (selected >= 0 ? selected : hovered);
-        const related = active < 0 || p.group === active || q.group === active;
+        const related = active < 0 || a === active || b === active;
         ctx.globalAlpha = constellation * (related ? active < 0 ? .36 : .6 : .08);
         ctx.strokeStyle = '#a4cbe2';
         ctx.lineWidth = .8;
@@ -311,48 +347,45 @@
     }
     for (const p of particles) {
       if (p.x < -30 || p.x > w + 30 || p.y < -30 || p.y > h + 30) continue;
-      const core = p.id < topics.length;
-      const node = p.id < topics.length;
       const edge = Math.abs(p.fx - .5) * 2;
       let alpha = p.brightness * mix(1, (.36 + edge * .56) * readingDim, spread);
-      if (p.id < 1500) alpha = mix(alpha, core ? 1 : node ? .85 : .16 + p.brightness * .29, constellation);
-      if (selected >= 0 && p.id < 1500 && p.group !== selected) alpha *= mix(1, .25, constellation);
+      if (p.id < 1500) alpha = mix(alpha, .12 + p.brightness * .2, constellation);
       alpha *= .92 + Math.sin(time * .8 + p.phase) * .08;
-      const size = p.size * mix(1, .85, spread) + (core ? constellation * 1.65 : node ? constellation * .35 : 0);
+      const size = p.size * mix(1, .85, spread);
       ctx.globalAlpha = alpha;
-      if (p.glow || (node && constellation > .1)) {
-        const diameter = size * (core ? 20 : 12);
+      if (p.glow) {
+        const diameter = size * 12;
         ctx.drawImage(sprites[p.color], p.x - diameter / 2, p.y - diameter / 2, diameter, diameter);
       }
       ctx.fillStyle = palette[p.color];
       ctx.beginPath(); ctx.arc(p.x, p.y, size * .58, 0, tau); ctx.fill();
-      if ((p.id % 307 === 0 && spread < .95) || (core && constellation > .4)) {
-        const ray = size * (core ? 4 : 3);
+      if (p.id % 307 === 0 && spread < .95) {
+        const ray = size * 3;
         ctx.globalAlpha = alpha * .45;
         ctx.fillRect(p.x - ray, p.y - .25, ray * 2, .5);
         ctx.fillRect(p.x - .25, p.y - ray, .5, ray * 2);
       }
     }
+    nodes.forEach((node, i) => {
+      const color = nodeColor(topics[i]);
+      const active = selected === i || hovered === i;
+      ctx.globalAlpha = constellation;
+      const diameter = active ? 56 : 40;
+      ctx.drawImage(sprites[color], node.x - diameter / 2, node.y - diameter / 2, diameter, diameter);
+      ctx.fillStyle = palette[color];
+      ctx.beginPath(); ctx.arc(node.x, node.y, active ? 3.5 : 2.4, 0, tau); ctx.fill();
+    });
     ctx.globalCompositeOperation = 'source-over';
     ctx.globalAlpha = 1;
-    const labelSizes = labels.map(label => [label.offsetWidth, label.offsetHeight]);
-    const placedLabels = [];
     labels.forEach((label, i) => {
-      const p = particles[i];
-      const [lw, lh] = labelSizes[i];
-      let box;
-      for (const [ox, oy] of [[0, -32], [0, 34], [-lw / 2 - 18, 0], [lw / 2 + 18, 0], [0, -84], [0, 86], [0, -138], [0, 140], [-lw - 24, -84], [lw + 24, -84], [-lw - 24, 86], [lw + 24, 86], [0, -190], [0, 192]]) {
-        const x = Math.max(lw / 2 + 12, Math.min(rect.width - lw / 2 - 12, p.x - rect.left + ox));
-        const y = Math.max(lh / 2 + 12, Math.min(rect.height - 64, p.y - rect.top + oy));
-        box = { x, y, left: x - lw / 2, right: x + lw / 2, top: y - lh / 2, bottom: y + lh / 2 };
-        if (!placedLabels.some(b => box.left < b.right + 8 && box.right > b.left - 8 && box.top < b.bottom + 8 && box.bottom > b.top - 8)) break;
-      }
-      placedLabels.push(box);
-      label.style.left = `${box.x}px`;
-      label.style.top = `${box.y}px`;
+      const p = nodes[i];
+      label.style.left = `${p.x - rect.left}px`;
+      label.style.top = `${p.y - rect.top}px`;
       label.style.opacity = String(constellation);
       label.style.visibility = constellation > .4 ? 'visible' : 'hidden';
       label.classList.toggle('is-hovered', hovered === i);
+      label.classList.toggle('label-near-left', p.x - rect.left < 142);
+      label.classList.toggle('label-near-right', p.x - rect.left > rect.width - 142);
     });
     canvas.dataset.rendered = 'true';
   }
@@ -375,6 +408,7 @@
   // Read-only measurements used by the local interaction check; no animation controls.
   window.__particleScene = Object.freeze({ snapshot: () => ({
     count: particles.length, phase, rotation: { ...rotation }, paused, time,
+    nodes: nodes.map(node => ({ ...node })),
     particles: particles.map(({ id, x, y, dx, dy, anchorX, anchorY, group }) => ({ id, x, y, dx, dy, anchorX, anchorY, group })),
   }) });
 

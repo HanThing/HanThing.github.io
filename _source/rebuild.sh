@@ -20,7 +20,7 @@ git -C "$work/engine" remote add origin https://github.com/jackyzha0/quartz.git
 git -C "$work/engine" fetch -q --depth 1 origin "$upstream"
 git -C "$work/engine" checkout -q --detach FETCH_HEAD
 
-for file in quartz.config.yaml quartz.ts package.json package-lock.json \
+for file in quartz.config.yaml quartz.ts package.json package-lock.json generate-catalog.mjs \
   quartz/components/HanThingHome.tsx quartz/styles/custom.scss quartz/static/outfit.woff2 \
   quartz/static/icon.png quartz/static/og-image.png
 do
@@ -33,6 +33,8 @@ cp -R "$source_dir/content/." "$work/engine/content/"
 
 cd "$work/engine"
 npm ci
+node generate-catalog.mjs --check
+node generate-catalog.mjs "$stage/content-data.js"
 # All configured plugins are already pinned in package-lock.json.
 npx quartz build --output "$stage/notes" --concurrency 2
 test -f "$stage/notes/index.html"
@@ -48,4 +50,6 @@ if ! mv "$stage/notes" "$repo_root/notes"; then
   fi
   exit 1
 fi
+mv "$stage/content-data.js" "$repo_root/content-data.js"
+cp "$work/engine/INDEX.md" "$source_dir/INDEX.md"
 printf 'Built %s/notes from Quartz %s\n' "$repo_root" "$upstream"

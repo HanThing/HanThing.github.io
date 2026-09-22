@@ -2,6 +2,9 @@
 title: 정렬 key와 호출 가능한 객체
 date: 2026-09-20
 publish: true
+type: concept
+sources:
+  - 개인 Python 학습 정리 (2026-09-20 이관)
 tags: [python]
 ---
 

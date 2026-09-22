@@ -2,6 +2,11 @@
 title: 노트북 이름 공간과 내장 이름
 date: 2026-09-20
 publish: true
+type: concept
+updated: 2026-09-22
+sources:
+  - 개인 Python 학습 정리 (2026-09-20 이관)
+  - https://hanthing.github.io/notes/learning/2026-09-18-loop-exit
 tags: [python]
 ---
 
@@ -12,3 +17,9 @@ tags: [python]
 이어 보기: [[python/imports-and-packages]], [[python/iterables-and-iterators]]
 
 [이름 공간 실험](https://hanthing.github.io/learning/python-lab.html#notebook-state)
+
+## 실행을 멈추는 것과 상태를 지우는 것
+
+`break`는 현재 반복문을 끝낼 뿐 이미 만들어진 이름을 지우지 않는다. 커널 재시작은 실행 중인 이름 공간을 새로 시작하는 작업이다. “실패 문장만 건너뛰고 싶다”면 [[python/loop-exit|반복문의 종료 조건]]을 바꿀 문제이지 커널을 재시작할 문제가 아니다.
+
+2026-09-22: [[learning/2026-09-18-loop-exit|반복문 종료를 물었던 학습 기록]]을 반영해 실행 흐름과 노트북 상태의 차이를 보완했다.

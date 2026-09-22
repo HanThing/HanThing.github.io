@@ -2,6 +2,9 @@
 title: 변형·집계·병합 — 표의 단위가 바뀌는 순간
 date: 2026-09-17
 publish: true
+type: concept
+sources:
+  - 데이터 사이언스 오버뷰 강의 자료 (2026-09-17 정리, 본문 쪽수 참조)
 tags: [data, python]
 ---
 

@@ -2,6 +2,9 @@
 title: 데이터 품질 — 고치기 전에 원인을 찾기
 date: 2026-09-17
 publish: true
+type: concept
+sources:
+  - 데이터 사이언스 오버뷰 강의 자료 (2026-09-17 정리, 본문 쪽수 참조)
 tags: [data]
 ---
 

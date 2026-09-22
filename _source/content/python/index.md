@@ -18,6 +18,7 @@ tags: [python, index]
 | 별표는 언제 모으고 언제 풀까? | [[python/args-and-kwargs\|인자 묶기와 풀기]] |
 | 중첩된 for는 어떤 순서로 돌까? | [[python/comprehensions\|컴프리헨션]] |
 | list가 함수처럼 호출되지 않는 이유는? | [[python/notebook-state\|이름과 노트북 실행 상태]] |
+| break를 썼는데 왜 다음 문장이 실행될까? | [[python/loop-exit\|반복문 종료와 for–else]] |
 | key 함수는 누가 호출할까? | [[python/sorting-and-callables\|정렬과 함수 전달]] |
 
 이 실행 관계는 [[data/wrangling|데이터 다듬기]]에서도 반복됩니다. 아직 헷갈리는 점은 [[questions|남은 질문]]에서 이어갑니다.
