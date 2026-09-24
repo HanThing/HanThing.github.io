@@ -2,6 +2,24 @@
 
 Generated from public Markdown. Read AGENTS.md for ingest/query/lint; CHANGELOG.md for changes. Course references support briefing and stay outside the learning graph. Course/lesson identify the curriculum placement; topics identify related subjects.
 
+- [NumPy 배열 — shape과 axis를 주소로 읽기](content/data/numpy-array-axes.md) — concept · 2026-09-23 · 리스트와 ndarray의 차이부터 다차원 인덱싱, 불리언 선택과 축별 평균까지.
+  Course: 데이터 분석 → 데이터 사이언스 Toolkit. Related topics: 데이터 분석
+  Sources: Explain NumPy and tensors 학습 대화 (2026-09-23); https://numpy.org/doc/stable/user/absolute_beginners.html; https://numpy.org/doc/stable/user/basics.indexing.html
+- [브로드캐스팅 — 어떤 값을 어디에 재사용하는가](content/data/numpy-broadcasting.md) — concept · 2026-09-23 · 오른쪽 축 정렬, None과 keepdims, 정규분포 난수와 feature별 표준화를 연결한다.
+  Course: 데이터 분석 → 데이터 사이언스 Toolkit. Related topics: 데이터 분석
+  Sources: Explain NumPy and tensors 학습 대화 (2026-09-23); https://numpy.org/doc/stable/user/basics.broadcasting.html; https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.normal.html
+- [선형층 — 샘플은 유지하고 feature를 바꾸는 계산](content/data/numpy-linear-layers.md) — concept · 2026-09-23 · X @ W + b의 축, 가중치와 편향의 역할, 두 선형층과 학습의 차이를 설명한다.
+  Course: 데이터 분석 → 데이터 사이언스 Toolkit. Related topics: 데이터 분석
+  Sources: Explain NumPy and tensors 학습 대화 (2026-09-23); https://numpy.org/doc/stable/reference/generated/numpy.matmul.html; https://numpy.org/doc/stable/user/basics.broadcasting.html
+- [NumPy 모양 변경 — 새 축, 뷰, reshape와 stack](content/data/numpy-shape-views.md) — concept · 2026-09-23 · 배열 객체와 데이터 공유를 구분하고 실제 값으로 모양 변경을 확인한다.
+  Course: 데이터 분석 → 데이터 사이언스 Toolkit. Related topics: 데이터 분석
+  Sources: Explain NumPy and tensors 학습 대화 (2026-09-23); https://numpy.org/doc/stable/user/basics.copies.html; https://numpy.org/doc/stable/reference/generated/numpy.stack.html; https://numpy.org/doc/stable/reference/generated/numpy.concatenate.html
+- [벡터의 길이에서 행렬곱과 코사인 유사도까지](content/data/numpy-vectors-matmul.md) — concept · 2026-09-23 · 원소별 곱과 내적, norm과 표준편차, 배치 벡터의 정규화와 검색을 구분한다.
+  Course: 데이터 분석 → 데이터 사이언스 Toolkit. Related topics: 데이터 분석
+  Sources: Explain NumPy and tensors 학습 대화 (2026-09-23); https://numpy.org/doc/stable/reference/generated/numpy.matmul.html; https://numpy.org/doc/stable/reference/generated/numpy.linalg.norm.html
+- [NumPy와 텐서 — shape을 읽는 법에서 벡터 검색까지](content/learning/2026-09-23-numpy-and-tensors.md) — journal · 2026-09-23 · 실제 질문, 브로드캐스팅 풀이, 마지막 자기 설명의 교정을 모은 9월 23일 학습 기록.
+  Course: 데이터 분석 → 데이터 사이언스 Toolkit. Related topics: 데이터 분석
+  Sources: Explain NumPy and tensors 학습 대화 (2026-09-23); https://numpy.org/doc/stable/user/absolute_beginners.html
 - [부트캠프 학습 지도와 일정](content/bootcamp/roadmap.md) — reference · 2026-09-22 · 공식 커리큘럼의 과목 순서와 예정 일정, 미션 제출일을 현재 학습 노트와 연결합니다.
   Sources: https://docs.google.com/spreadsheets/d/1vF_S-DV4Pm0qRnsspfpEmKRvyj0j4Miam4YofqXPM04/edit?gid=624392885
 - [반복문 종료와 for–else](content/python/loop-exit.md) — concept · 2026-09-22 · break는 반복문을 끝낸다. for의 else는 항목을 모두 소진했을 때 실행한다.

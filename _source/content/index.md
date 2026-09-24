@@ -1,7 +1,7 @@
 ---
 title: HanThing Notes
 description: 학습 기록을 읽고, 실제 질문을 다시 찾고, 퀴즈로 복습합니다.
-date: 2026-09-22
+date: 2026-09-24
 publish: true
 tags: [index]
 ---
@@ -10,7 +10,9 @@ tags: [index]
 
 ## 최근 학습 기록
 
-9월 18일 학습 대화에서 질문의 흐름을 주제별로 묶었습니다.
+실제 학습 대화에서 질문의 흐름을 주제별로 묶었습니다.
+
+- [[learning/2026-09-23-numpy-and-tensors|9월 23일 — NumPy와 텐서: shape에서 벡터 검색까지]]
 
 - [[learning/2026-09-18-loop-exit|정답을 맞혔는데 실패 문장도 나오는 이유]]
 - [[learning/2026-09-18-lambda-map-sort|lambda·map·정렬: 무엇을 전달하고 언제 호출할까?]]
@@ -29,7 +31,9 @@ tags: [index]
   - 파이썬 응용하기(모듈, 라이브러리): [[python/imports-and-packages|import와 패키지]]
   - 객체와 클래스: [[python/self-and-objects|self와 객체 호출]]
   - 보충: [[python/index|파이썬 기초 복습]] — 호출, 값의 흐름, 반복과 실행 상태
-- **데이터 분석** — Toolkit·기초 통계와 데이터 시각화·DataFrame 수업의 공개 노트는 아직 없습니다. 오버뷰 개념은 이 과목과도 관련 있지만, 원래 수업은 위의 실전 파이썬 준비하기입니다.
+- **데이터 분석**
+  - 데이터 사이언스 툴킷: [[data/numpy-array-axes|배열과 축]] · [[data/numpy-shape-views|shape과 뷰]] · [[data/numpy-broadcasting|브로드캐스팅과 표준화]]
+  - 이어서: [[data/numpy-vectors-matmul|벡터·행렬곱·유사도]] · [[data/numpy-linear-layers|선형층]]
 - [코드잇 학습 채널](https://discord.com/channels/1542383524290494535/1542383525930729546) · [공식 커리큘럼](https://docs.google.com/spreadsheets/d/1vF_S-DV4Pm0qRnsspfpEmKRvyj0j4Miam4YofqXPM04/edit?gid=624392885)
 
 ## 퀴즈와 플래시카드

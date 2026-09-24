@@ -4947,6 +4947,1219 @@
         "cardsArtifactId": "6ad9c22e-aab7-4f45-ae1b-f70422f62f3c",
         "exportedAt": "2026-09-24"
       }
+    },
+    {
+      "id": "numpy-array-axes",
+      "title": "배열·축·인덱싱",
+      "version": "23deb7281693",
+      "noteIds": [
+        "data/numpy-array-axes",
+        "learning/2026-09-23-numpy-and-tensors"
+      ],
+      "goals": [
+        {
+          "id": "numpy-array-model",
+          "title": "ndarray의 dtype·shape·ndim·size를 구분한다",
+          "version": "1"
+        },
+        {
+          "id": "numpy-axis-selection",
+          "title": "축별 축소와 인덱싱 결과를 추적한다",
+          "version": "1"
+        }
+      ],
+      "questions": [
+        {
+          "id": "e1b63b0c-fa57-4a10-90bd-01e3ab5aec1d:1",
+          "goalId": "numpy-array-model",
+          "pool": "practice",
+          "question": "다음 중 1차원 배열(vector)을 나타내는 shape 표기는 무엇입니까?",
+          "options": [
+            {
+              "text": "$(5,)$",
+              "isCorrect": true,
+              "rationale": "쉼표 뒤가 비어있는 튜플 표기는 축이 하나뿐인 1차원 배열을 의미합니다."
+            },
+            {
+              "text": "$(1, 5)$",
+              "isCorrect": false,
+              "rationale": "이는 축이 2개인 2차원 배열로, 행이 1개이고 열이 5개인 행렬 구조입니다."
+            },
+            {
+              "text": "$(5, 1)$",
+              "isCorrect": false,
+              "rationale": "이는 축이 2개인 2차원 배열로, 행이 5개이고 열이 1개인 행렬 구조입니다."
+            },
+            {
+              "text": "$(5, 5)$",
+              "isCorrect": false,
+              "rationale": "행과 열의 길이가 각각 5인 2차원 정사각 행렬을 의미합니다."
+            }
+          ],
+          "hint": "축의 개수(ndim)가 1인 경우를 찾으세요."
+        },
+        {
+          "id": "e1b63b0c-fa57-4a10-90bd-01e3ab5aec1d:2",
+          "goalId": "numpy-array-model",
+          "pool": "check",
+          "question": "NumPy 배열의 $dtype$에 대한 설명 중 틀린 것은 무엇입니까?",
+          "options": [
+            {
+              "text": "$dtype$이 $object$인 배열은 일반적인 숫자 배열과 동일한 연산 성능을 보장한다.",
+              "isCorrect": true,
+              "rationale": "object 타입은 서로 다른 파이썬 객체를 참조하므로 NumPy 내부 루프를 통한 수치 연산의 성능 이점을 누리기 어렵습니다."
+            },
+            {
+              "text": "$dtype$에는 정수, 부동소수점 외에도 불리언(bool)이나 문자열도 포함될 수 있다.",
+              "isCorrect": false,
+              "rationale": "NumPy는 숫자 외에도 다양한 데이터 타입을 지원합니다."
+            },
+            {
+              "text": "배열은 하나의 $dtype$으로 해석되는 데이터 버퍼를 갖는다.",
+              "isCorrect": false,
+              "rationale": "ndarray는 연속되거나 일정한 간격의 메모리 버퍼를 단일 타입으로 해석하여 효율적으로 관리합니다."
+            },
+            {
+              "text": "비트 수(예: int8, int64)는 데이터를 저장하는 크기와 표현 범위에 영향을 준다.",
+              "isCorrect": false,
+              "rationale": "비트 수가 커질수록 더 넓은 범위의 숫자나 정밀한 소수를 표현할 수 있지만 메모리를 더 많이 사용합니다."
+            }
+          ],
+          "hint": "객체(object) 타입을 사용할 때의 성능적 한계를 생각해보세요."
+        },
+        {
+          "id": "e1b63b0c-fa57-4a10-90bd-01e3ab5aec1d:3",
+          "goalId": "numpy-array-model",
+          "pool": "practice",
+          "question": "$np.zeros((3, 4, 5))$로 만든 배열의 전체 원소 개수($size$)는 얼마입니까?",
+          "options": [
+            {
+              "text": "60",
+              "isCorrect": true,
+              "rationale": "전체 원소 수인 size는 shape의 모든 구성 요소를 곱한 값($3 \\times 4 \\times 5 = 60$)입니다."
+            },
+            {
+              "text": "12",
+              "isCorrect": false,
+              "rationale": "이는 $3 \\times 4$의 결과로, 마지막 축의 길이를 누락한 계산입니다."
+            },
+            {
+              "text": "3",
+              "isCorrect": false,
+              "rationale": "3은 ndim(축의 개수)을 의미합니다."
+            },
+            {
+              "text": "120",
+              "isCorrect": false,
+              "rationale": "계산 과정에서 곱셈 오류가 발생한 것으로 보입니다."
+            }
+          ],
+          "hint": "shape 튜플에 들어있는 모든 숫자를 곱해보세요."
+        },
+        {
+          "id": "e1b63b0c-fa57-4a10-90bd-01e3ab5aec1d:4",
+          "goalId": "numpy-axis-selection",
+          "pool": "practice",
+          "question": "$shape$이 $(2, 3, 4)$인 배열 $x$에 대해 인덱싱 $x[:, 0]$을 수행했을 때 결과 배열의 $shape$은?",
+          "options": [
+            {
+              "text": "$(2, 4)$",
+              "isCorrect": true,
+              "rationale": "첫 번째 축(:)은 유지되고, 두 번째 축(0)은 특정 위치를 선택하며 제거되므로 $(2, 4)$가 남습니다."
+            },
+            {
+              "text": "$(3, 4)$",
+              "isCorrect": false,
+              "rationale": "이는 $x[0]$과 같이 첫 번째 축에서 하나를 골랐을 때의 결과입니다."
+            },
+            {
+              "text": "$(2, 3)$",
+              "isCorrect": false,
+              "rationale": "이는 $x[:, :, 0]$과 같이 마지막 축에서 하나를 골랐을 때의 결과입니다."
+            },
+            {
+              "text": "$(2,)$",
+              "isCorrect": false,
+              "rationale": "슬라이싱(:)이 포함되면 해당 축은 사라지지 않고 유지되어야 합니다."
+            }
+          ],
+          "hint": "정수 인덱스는 해당 축을 없애고, 슬라이스(:)는 축을 유지합니다."
+        },
+        {
+          "id": "e1b63b0c-fa57-4a10-90bd-01e3ab5aec1d:5",
+          "goalId": "numpy-axis-selection",
+          "pool": "check",
+          "question": "$(100, 5)$ 모양의 데이터(100개 샘플, 5개 특성)에서 특성별(feature-wise) 평균을 구하려고 합니다. 적절한 $axis$ 설정은?",
+          "options": [
+            {
+              "text": "$axis=0$",
+              "isCorrect": true,
+              "rationale": "샘플 축(0번 축)을 따라 움직이며 값을 모아 평균을 내면, 결과적으로 특성의 개수인 5개가 남습니다."
+            },
+            {
+              "text": "$axis=1$",
+              "isCorrect": false,
+              "rationale": "이 경우 각 샘플 내부의 특성들을 평균 내어 샘플별 평균(100개)이 남게 됩니다."
+            },
+            {
+              "text": "$axis=(0, 1)$",
+              "isCorrect": false,
+              "rationale": "모든 축을 축소하면 배열 전체의 평균인 스칼라 값 하나만 남습니다."
+            },
+            {
+              "text": "$axis=-1$",
+              "isCorrect": false,
+              "rationale": "마지막 축인 특성 축을 축소하므로 샘플별 평균이 구해집니다."
+            }
+          ],
+          "hint": "평균을 내기 위해 '어떤 번호의 위치를 바꿔가며 값을 모을지' 생각해보세요."
+        },
+        {
+          "id": "e1b63b0c-fa57-4a10-90bd-01e3ab5aec1d:7",
+          "goalId": "numpy-axis-selection",
+          "pool": "practice",
+          "question": "$shape$이 $(2, 3)$인 배열 $X$에 대해 $X.mean(axis=1, keepdims=True)$를 실행한 결과의 $shape$은?",
+          "options": [
+            {
+              "text": "$(2, 1)$",
+              "isCorrect": true,
+              "rationale": "1번 축을 따라 평균을 내어 축소하되, keepdims=True 옵션으로 인해 해당 자리가 길이 1로 남습니다."
+            },
+            {
+              "text": "$(2,)$",
+              "isCorrect": false,
+              "rationale": "keepdims를 사용하지 않았을 때 축이 완전히 사라지는 결과입니다."
+            },
+            {
+              "text": "$(1, 3)$",
+              "isCorrect": false,
+              "rationale": "이는 axis=0으로 설정하고 keepdims=True를 사용했을 때의 결과입니다."
+            },
+            {
+              "text": "$(2, 3)$",
+              "isCorrect": false,
+              "rationale": "평균 연산은 axis가 지정되면 어떤 방식으로든 해당 축의 정보가 축약됩니다."
+            }
+          ],
+          "hint": "keepdims 옵션은 줄어든 축의 자리를 어떻게 처리하는지 생각해보세요."
+        }
+      ],
+      "cards": [
+        {
+          "id": "5dfd0771-dee1-4480-84d3-86965c8c33af:0",
+          "goalId": "numpy-array-model",
+          "front": "NumPy $ndarray$에서 축(axis)의 개수를 나타내는 속성은 무엇이며, $shape$이 $(2, 3, 4)$인 배열에서 이 값은 얼마인가?",
+          "back": "$ndim$, 값은 3. (이유: $shape$ 튜플에 포함된 요소의 개수가 곧 배열의 차원 수인 $ndim$을 의미하기 때문)"
+        },
+        {
+          "id": "5dfd0771-dee1-4480-84d3-86965c8c33af:1",
+          "goalId": "numpy-array-model",
+          "front": "$shape$이 $(5, 4)$인 2차원 배열에서 전체 원소의 개수를 나타내는 속성과 그 결과값은?",
+          "back": "$size$, 값은 20. (이유: $size$는 $shape$의 모든 축별 길이를 곱한 총 원소 수를 나타내기 때문)"
+        },
+        {
+          "id": "5dfd0771-dee1-4480-84d3-86965c8c33af:2",
+          "goalId": "numpy-array-model",
+          "front": "배열의 각 원소가 메모리에서 해석되는 방식(예: $int32$, $float64$)을 정의하며, 리스트와 달리 배열 내 모든 원소에 동일하게 적용되는 속성은?",
+          "back": "$dtype$. (이유: NumPy는 하나의 $dtype$으로 고정된 데이터 버퍼를 사용하여 수치 연산 효율을 높이기 때문)"
+        },
+        {
+          "id": "5dfd0771-dee1-4480-84d3-86965c8c33af:3",
+          "goalId": "numpy-axis-selection",
+          "front": "$shape$이 $(100, 5)$인 배열에서 각 특성(feature)별 평균을 구하기 위해 $axis=0$을 지정했을 때, 결과의 $shape$은?",
+          "back": "$(5,)$. (이유: $axis=0$은 샘플 축의 번호를 움직이며 값을 모으는 연산이므로, 해당 축이 사라지고 특성 수만 남기 때문)"
+        },
+        {
+          "id": "5dfd0771-dee1-4480-84d3-86965c8c33af:4",
+          "goalId": "numpy-axis-selection",
+          "front": "2차원 배열 $X$에서 $X[:, 0]$ 인덱싱이 반환하는 데이터의 범위는 무엇인가?",
+          "back": "첫 번째 열의 모든 원소. (이유: 첫 번째 자리에 $:$를 쓰면 행 축을 모두 유지하고, 두 번째 자리에 $0$을 쓰면 열 축의 첫 번째 위치만 선택하기 때문)"
+        },
+        {
+          "id": "5dfd0771-dee1-4480-84d3-86965c8c33af:5",
+          "goalId": "numpy-axis-selection",
+          "front": "$shape$이 $(2, 3, 4)$인 3차원 배열 $x$에서 $x[0]$을 인덱싱했을 때 생성되는 결과 배열의 $shape$은?",
+          "back": "$(3, 4)$. (이유: 가장 바깥쪽 축의 첫 번째 묶음을 선택하면 해당 축이 사라지면서 그 안의 2차원 배열 구조가 남기 때문)"
+        }
+      ],
+      "provenance": {
+        "provider": "NotebookLM",
+        "notebookId": "3ff8b922-5e38-4290-8c27-7e52d62ff470",
+        "sourceIds": [
+          "8e2d0a8b-5b0a-40e6-8e9e-cacc1480fd55"
+        ],
+        "quizArtifactId": "e1b63b0c-fa57-4a10-90bd-01e3ab5aec1d",
+        "cardsArtifactId": "5dfd0771-dee1-4480-84d3-86965c8c33af",
+        "exportedAt": "2026-09-24",
+        "sourceHashes": {
+          "data/numpy-array-axes": "ada8b629229508c61de24fea8ab5d05dca46ba95fd7143f7eb266e7a96461119",
+          "learning/2026-09-23-numpy-and-tensors": "beaa217c4a0f4f568b0c2627d952cdff055e626dc9f06b2cd84d7a2c1cc68f59"
+        }
+      }
+    },
+    {
+      "id": "numpy-shape-views",
+      "title": "뷰와 모양 변경",
+      "version": "5660cfeaee44",
+      "noteIds": [
+        "data/numpy-shape-views"
+      ],
+      "goals": [
+        {
+          "id": "numpy-view-copy",
+          "title": "객체·뷰·복사의 변경 영향을 구분한다",
+          "version": "1"
+        },
+        {
+          "id": "numpy-stack-concat",
+          "title": "reshape·전치·stack·concatenate의 값 배치를 추적한다",
+          "version": "1"
+        }
+      ],
+      "questions": [
+        {
+          "id": "cbf64d92-c256-46fe-a0b5-2631bbf8bd57:0",
+          "goalId": "numpy-view-copy",
+          "pool": "practice",
+          "question": "다음 코드 실행 후 $x$의 출력 결과로 올바른 것은 무엇입니까?\n\n```python\nimport numpy as np\nx = np.array([5, 10, 15])\ny = x[None, :]\ny[0, 1] = 77\n```",
+          "options": [
+            {
+              "text": "array([5, 77, 15])",
+              "isCorrect": true,
+              "rationale": "None을 사용하여 축을 추가하면 원본 데이터의 메모리를 공유하는 '뷰(view)'가 생성되므로, 뷰의 값을 수정하면 원본 배열의 값도 함께 변경됩니다."
+            },
+            {
+              "text": "array([5, 10, 15])",
+              "isCorrect": false,
+              "rationale": "슬라이싱이나 None을 통한 축 추가는 데이터를 복사하지 않고 공유하기 때문에 원본 데이터가 보존되지 않고 함께 바뀝니다."
+            },
+            {
+              "text": "array([[5, 77, 15]])",
+              "isCorrect": false,
+              "rationale": "y의 shape은 (1, 3)으로 변했지만, 원본 객체인 x의 shape은 여전히 (3,)인 1차원 상태를 유지합니다."
+            },
+            {
+              "text": "오류(Error) 발생",
+              "isCorrect": false,
+              "rationale": "NumPy에서 None(또는 np.newaxis)을 사용한 인덱싱은 유효한 문법이며, 새로운 축을 가진 뷰를 정상적으로 생성합니다."
+            }
+          ],
+          "hint": "None을 사용한 인덱싱이 '새로운 데이터 복사본'을 만드는지 아니면 '데이터를 공유하는 뷰'를 만드는지 생각해보세요."
+        },
+        {
+          "id": "cbf64d92-c256-46fe-a0b5-2631bbf8bd57:1",
+          "goalId": "numpy-view-copy",
+          "pool": "check",
+          "question": "NumPy 배열 $a$에 대해 $b = a[:] $, $c = a.copy()$, $d = a$를 실행했을 때, 메모리 공유 관계에 대한 설명으로 옳은 것은?",
+          "options": [
+            {
+              "text": "a와 b는 서로 다른 객체이지만 같은 데이터를 공유한다.",
+              "isCorrect": true,
+              "rationale": "기본 슬라이싱([:])은 원본 데이터의 메모리 주소를 가리키는 새로운 배열 객체(뷰)를 생성합니다."
+            },
+            {
+              "text": "a와 d는 서로 다른 객체이며 데이터를 공유하지 않는다.",
+              "isCorrect": false,
+              "rationale": "d = a는 객체 자체에 새로운 이름을 붙이는 할당(Assignment)이므로, a와 d는 동일한 객체를 가리킵니다."
+            },
+            {
+              "text": "a와 c는 메모리를 공유하므로 c를 수정하면 a도 바뀐다.",
+              "isCorrect": false,
+              "rationale": ".copy() 메서드는 데이터 전체를 새로운 메모리 공간에 복제하므로 두 배열은 완전히 독립적입니다."
+            },
+            {
+              "text": "b와 c는 모두 뷰(view)이므로 a와 데이터를 공유한다.",
+              "isCorrect": false,
+              "rationale": "b는 뷰가 맞지만, c는 데이터를 물리적으로 복사한 복사본(copy)입니다."
+            }
+          ],
+          "hint": "단순 할당, 슬라이싱, 그리고 copy() 메서드가 각각 객체와 데이터에 어떤 영향을 주는지 구분해야 합니다."
+        },
+        {
+          "id": "cbf64d92-c256-46fe-a0b5-2631bbf8bd57:4",
+          "goalId": "numpy-view-copy",
+          "pool": "practice",
+          "question": "Shape이 $(5,)$인 1차원 배열 $v$를 $(5, 1)$ 형태의 열 벡터로 만들려고 할 때, 가장 적절하지 않은 방법은?",
+          "options": [
+            {
+              "text": "v.T",
+              "isCorrect": true,
+              "rationale": "1차원 배열의 전치(.T)는 축이 하나뿐이어서 순서를 바꿀 대상이 없으므로 아무런 변화 없이 그대로 (5,)를 반환합니다."
+            },
+            {
+              "text": "v[:, None]",
+              "isCorrect": false,
+              "rationale": "이 방법은 명시적으로 두 번째 축을 추가하여 (5, 1) 형태의 뷰를 생성하는 올바른 방법입니다."
+            },
+            {
+              "text": "v.reshape(5, 1)",
+              "isCorrect": false,
+              "rationale": "reshape은 원소 개수만 맞다면 명시적으로 차원의 모양을 고정할 수 있는 유효한 방법입니다."
+            },
+            {
+              "text": "v.reshape(-1, 1)",
+              "isCorrect": false,
+              "rationale": "-1을 사용하면 나머지 차원에 맞춰 크기가 자동으로 계산되므로 (5, 1)을 만드는 올바른 문법입니다."
+            }
+          ],
+          "hint": "차원이 하나뿐인 배열에서 '축의 순서를 바꾸는 연산'이 어떻게 작동할지 고려해보세요."
+        },
+        {
+          "id": "cbf64d92-c256-46fe-a0b5-2631bbf8bd57:5",
+          "goalId": "numpy-stack-concat",
+          "pool": "practice",
+          "question": "두 배열 $P.shape = (2, 3)$, $Q.shape = (2, 3)$를 $np.concatenate([P, Q], axis=1)$ 했을 때 결과의 shape은?",
+          "options": [
+            {
+              "text": "$(2, 6)$",
+              "isCorrect": true,
+              "rationale": "concatenate는 기존에 존재하는 축(axis 1)을 따라 두 배열을 이어 붙이므로 해당 차원의 길이가 합쳐집니다."
+            },
+            {
+              "text": "$(4, 3)$",
+              "isCorrect": false,
+              "rationale": "이는 axis=0을 기준으로 연결했을 때의 결과입니다."
+            },
+            {
+              "text": "$(2, 2, 3)$",
+              "isCorrect": false,
+              "rationale": "차원이 하나 늘어나는 결과는 concatenate가 아닌 stack 연산을 사용했을 때 나타납니다."
+            },
+            {
+              "text": "$(2, 3, 2)$",
+              "isCorrect": false,
+              "rationale": "기존 축을 연결하는 concatenate로는 차원 순서가 바뀌거나 새로운 차원이 중간에 생기지 않습니다."
+            }
+          ],
+          "hint": "concatenate는 '기존의 축'을 늘리는 연산임을 기억하세요."
+        },
+        {
+          "id": "cbf64d92-c256-46fe-a0b5-2631bbf8bd57:6",
+          "goalId": "numpy-stack-concat",
+          "pool": "check",
+          "question": "동일한 shape $(10, 20)$을 가진 두 배열 $A, B$에 대해 $S = np.stack([A, B], axis=1)$을 수행했을 때, $S$의 shape은?",
+          "options": [
+            {
+              "text": "$(10, 2, 20)$",
+              "isCorrect": true,
+              "rationale": "stack은 지정한 axis 위치에 새로운 축을 삽입하며, 두 개의 배열을 쌓았으므로 해당 위치의 길이는 2가 됩니다."
+            },
+            {
+              "text": "$(2, 10, 20)$",
+              "isCorrect": false,
+              "rationale": "이는 axis=0으로 설정했을 때의 결과로, 가장 앞에 새로운 축이 추가된 형태입니다."
+            },
+            {
+              "text": "$(10, 20, 2)$",
+              "isCorrect": false,
+              "rationale": "이는 axis=2(또는 -1)로 설정했을 때의 결과입니다."
+            },
+            {
+              "text": "$(20, 20)$",
+              "isCorrect": false,
+              "rationale": "stack은 차원을 늘리는 연산이지 기존 차원의 길이를 합치는 연산이 아닙니다."
+            }
+          ],
+          "hint": "stack 연산은 새로운 축(new axis)을 생성하며, axis 파라미터는 그 축이 위치할 인덱스를 결정합니다."
+        },
+        {
+          "id": "cbf64d92-c256-46fe-a0b5-2631bbf8bd57:7",
+          "goalId": "numpy-stack-concat",
+          "pool": "practice",
+          "question": "$A = np.array([[1, 2], [3, 4]])$, $B = np.array([[5, 6], [7, 8]])$ 일 때, $S = np.stack([A, B], axis=0)$의 원소 $S[1, 0, 1]$의 값은?",
+          "options": [
+            {
+              "text": "$6$",
+              "isCorrect": true,
+              "rationale": "axis=0에 쌓으면 S[0, :, :]는 A가 되고 S[1, :, :]는 B가 됩니다. 따라서 S[1, 0, 1]은 B[0, 1]인 6입니다."
+            },
+            {
+              "text": "$2$",
+              "isCorrect": false,
+              "rationale": "2는 A[0, 1]의 값으로, S[0, 0, 1] 위치에 해당합니다."
+            },
+            {
+              "text": "$5$",
+              "isCorrect": false,
+              "rationale": "5는 B[0, 0]의 값으로, S[1, 0, 0] 위치에 해당합니다."
+            },
+            {
+              "text": "$7$",
+              "isCorrect": false,
+              "rationale": "7은 B[1, 0]의 값으로, S[1, 1, 0] 위치에 해당합니다."
+            }
+          ],
+          "hint": "stack에서 첫 번째 축(axis=0)의 인덱스는 어떤 배열(A 또는 B)을 선택할지 결정합니다."
+        }
+      ],
+      "cards": [
+        {
+          "id": "465aee0d-ebe5-49e7-90c4-f31e6f680b75:0",
+          "goalId": "numpy-view-copy",
+          "front": "NumPy에서 `x[:, None]`을 실행하여 생성된 배열과 원본 배열 `x` 사이의 데이터 공유 관계는?",
+          "back": "생성된 배열은 원본과 데이터를 공유하는 뷰(view)이며 `np.shares_memory()` 결과가 True이다."
+        },
+        {
+          "id": "465aee0d-ebe5-49e7-90c4-f31e6f680b75:1",
+          "goalId": "numpy-view-copy",
+          "front": "`y = x[:, None]`을 통해 생성된 뷰 `y`의 특정 값을 수정했을 때 원본 배열 `x`에 미치는 영향은?",
+          "back": "뷰와 원본은 같은 데이터를 공유하므로 `y`의 수정사항이 원본 `x`에도 그대로 반영된다."
+        },
+        {
+          "id": "465aee0d-ebe5-49e7-90c4-f31e6f680b75:3",
+          "goalId": "numpy-stack-concat",
+          "front": "`np.concatenate` 연산을 수행할 때 연결하려는 축을 제외한 나머지 축들이 갖추어야 할 조건은?",
+          "back": "연결 축을 제외한 나머지 모든 축의 길이는 입력 배열들 간에 서로 일치해야 한다."
+        },
+        {
+          "id": "465aee0d-ebe5-49e7-90c4-f31e6f680b75:5",
+          "goalId": "numpy-stack-concat",
+          "front": "배열 $A, B$를 `axis=1`로 `stack`하여 $S$를 만들 때, $A$의 원소 $A[i, j]$가 이동하는 새로운 좌표는?",
+          "back": "새로운 축이 1번 인덱스에 삽입되므로 $A[i, j]$는 $S[i, 0, j]$ 위치에 배치된다."
+        }
+      ],
+      "provenance": {
+        "provider": "NotebookLM",
+        "notebookId": "3ff8b922-5e38-4290-8c27-7e52d62ff470",
+        "sourceIds": [
+          "0dde734e-8d87-44ea-b05e-37381d354d5d"
+        ],
+        "quizArtifactId": "cbf64d92-c256-46fe-a0b5-2631bbf8bd57",
+        "cardsArtifactId": "465aee0d-ebe5-49e7-90c4-f31e6f680b75",
+        "exportedAt": "2026-09-24",
+        "sourceHashes": {
+          "data/numpy-shape-views": "2679a0b5b1ad9527700eca0d759e897be7ca78e6d1f4e0176e292c5eeb2774ce"
+        }
+      }
+    },
+    {
+      "id": "numpy-broadcasting",
+      "title": "브로드캐스팅과 표준화",
+      "version": "67b0d18eb43c",
+      "noteIds": [
+        "data/numpy-broadcasting"
+      ],
+      "goals": [
+        {
+          "id": "numpy-broadcast-shape",
+          "title": "브로드캐스팅의 가능 여부와 값의 재사용 방향을 판단한다",
+          "version": "1"
+        },
+        {
+          "id": "numpy-feature-standardize",
+          "title": "feature별 표준화와 keepdims의 역할을 설명한다",
+          "version": "1"
+        }
+      ],
+      "questions": [
+        {
+          "id": "d58549b6-f3ef-49df-a667-7d8436957ea3:0",
+          "goalId": "numpy-broadcast-shape",
+          "pool": "practice",
+          "question": "Shape이 $(4, 3)$인 배열 $A$와 shape이 $(3,)$인 배열 $b$를 더할 때 ($A + b$), NumPy가 브로드캐스팅을 위해 $b$를 어떤 가상의 shape으로 간주하여 계산을 수행합니까?",
+          "options": [
+            {
+              "text": "$(1, 3)$",
+              "isCorrect": true,
+              "rationale": "NumPy는 오른쪽 축부터 맞추며, 부족한 앞쪽 축은 길이가 $1$인 축으로 간주하여 비교합니다."
+            },
+            {
+              "text": "$(4, 1)$",
+              "isCorrect": false,
+              "rationale": "NumPy는 왼쪽이 아닌 오른쪽 축부터 정렬하여 비교하므로, $(3,)$은 앞쪽에 축이 추가된 것으로 봅니다."
+            },
+            {
+              "text": "$(4, 3)$",
+              "isCorrect": false,
+              "rationale": "$(4, 3)$은 최종 계산 시 확장된 결과의 shape이지, 비교를 위해 처음 간주되는 shape은 아닙니다."
+            },
+            {
+              "text": "$(3, 1)$",
+              "isCorrect": false,
+              "rationale": "기존 축의 순서를 바꾸는 것이 아니라, 없는 축을 앞에 생성하여 길이를 맞춥니다."
+            }
+          ],
+          "hint": "NumPy가 두 배열의 shape을 비교할 때 어느 쪽 방향부터 정렬하는지 떠올려 보세요."
+        },
+        {
+          "id": "d58549b6-f3ef-49df-a667-7d8436957ea3:2",
+          "goalId": "numpy-broadcast-shape",
+          "pool": "check",
+          "question": "배열 $a$의 shape은 $(5, 1)$이고, 배열 $b$의 shape은 $(1, 3)$일 때, $a + b$의 결과 shape은 무엇입니까?",
+          "options": [
+            {
+              "text": "$(5, 3)$",
+              "isCorrect": true,
+              "rationale": "양쪽 배열이 각각 서로 다른 축에서 길이가 $1$이므로, 두 축 모두 상대방의 길이에 맞춰 재사용되어 결과가 커집니다."
+            },
+            {
+              "text": "$(5, 1)$",
+              "isCorrect": false,
+              "rationale": "두 번째 축의 길이가 $1$과 $3$이므로, 브로드캐스팅 규칙에 의해 $3$으로 확장되어야 합니다."
+            },
+            {
+              "text": "$(1, 3)$",
+              "isCorrect": false,
+              "rationale": "첫 번째 축의 길이가 $5$와 $1$이므로, 브로드캐스팅 규칙에 의해 $5$로 확장되어야 합니다."
+            },
+            {
+              "text": "$(5, 5)$",
+              "isCorrect": false,
+              "rationale": "브로드캐스팅은 존재하는 축의 최대 길이를 따르며, 없는 숫자를 임의로 만들어내지 않습니다."
+            }
+          ],
+          "hint": "두 입력 배열의 각 축 중 $1$이 아닌 더 큰 값들을 모아 결과 shape이 결정됩니다."
+        },
+        {
+          "id": "d58549b6-f3ef-49df-a667-7d8436957ea3:4",
+          "goalId": "numpy-feature-standardize",
+          "pool": "practice",
+          "question": "데이터 $X$의 shape이 $(200, 6)$일 때, 각 feature(열)별로 표준화를 수행하려고 합니다. 평균(`mean`)과 표준편차(`std`)를 계산했을 때의 적절한 shape과 그 의미는?",
+          "options": [
+            {
+              "text": "shape은 $(6,)$이며, 6개의 feature 각각에 대해 공통으로 적용될 통계량을 의미한다.",
+              "isCorrect": true,
+              "rationale": "200개의 샘플에 대해 각 feature별로 하나의 평균값이 나오므로 결과는 feature 수인 6이 됩니다."
+            },
+            {
+              "text": "shape은 $(200,)$이며, 각 샘플이 가진 6개 값의 평균을 의미한다.",
+              "isCorrect": false,
+              "rationale": "feature별 표준화는 열(column) 단위의 통계를 구하는 것이므로 샘플 수가 아닌 feature 수에 맞춰져야 합니다."
+            },
+            {
+              "text": "shape은 $(200, 6)$이며, 모든 원소에서 각자의 위치에 맞는 평균을 미리 복제해둔 것이다.",
+              "isCorrect": false,
+              "rationale": "브로드캐스팅의 장점은 메모리를 낭비하며 값을 미리 복제할 필요가 없다는 점입니다."
+            },
+            {
+              "text": "shape은 $(1,)$이며, 전체 행렬의 모든 원소를 하나로 뭉뚱그린 평균을 의미한다.",
+              "isCorrect": false,
+              "rationale": "feature별 표준화는 각 변수의 스케일을 맞추는 것이 목적이므로 각 열마다 별도의 통계량이 필요합니다."
+            }
+          ],
+          "hint": "세로로 긴 데이터에서 각 열(column)이 가진 의미가 무엇인지 생각해 보세요."
+        },
+        {
+          "id": "d58549b6-f3ef-49df-a667-7d8436957ea3:5",
+          "goalId": "numpy-feature-standardize",
+          "pool": "check",
+          "question": "표준화된 데이터 $X_{scaled}$의 특정 feature 값이 $1.5$라고 할 때, 이에 대한 올바른 해석은 무엇입니까?",
+          "options": [
+            {
+              "text": "해당 샘플의 원래 값이 그 feature의 평균보다 크다.",
+              "isCorrect": true,
+              "rationale": "표준화 공식 $(X - \\mu) / \\sigma$에서 양수가 나왔다는 것은 원래 값 $X$가 평균 $\\mu$보다 큼을 의미합니다."
+            },
+            {
+              "text": "해당 feature의 모든 값 중 최댓값이 $1.5$라는 뜻이다.",
+              "isCorrect": false,
+              "rationale": "표준화는 평균과의 거리를 표준편차 단위로 나타낸 것일 뿐, 데이터의 범위를 특정 값으로 제한하지 않습니다."
+            },
+            {
+              "text": "해당 샘플은 반드시 정규분포의 평균 근처에 위치한다.",
+              "isCorrect": false,
+              "rationale": "$1.5$는 평균(0)에서 표준편차의 1.5배만큼 떨어진 위치이므로 '근처'라고 단정하기 어렵습니다."
+            },
+            {
+              "text": "해당 feature의 표준편차가 $1.5$로 변경되었다는 뜻이다.",
+              "isCorrect": false,
+              "rationale": "표준화 후의 전체 데이터 표준편차는 약 $1$이 되며, $1.5$는 개별 데이터 포인트의 값입니다."
+            }
+          ],
+          "hint": "표준화 공식 $z = \\frac{x - \\mu}{\\sigma}$에서 분자의 부호를 고려해 보세요."
+        },
+        {
+          "id": "d58549b6-f3ef-49df-a667-7d8436957ea3:6",
+          "goalId": "numpy-broadcast-shape",
+          "pool": "practice",
+          "question": "NumPy의 `rng.normal(loc=[10, 20], scale=[1, 5], size=(100, 2))` 코드를 실행했을 때 생성되는 데이터에 대한 설명으로 옳은 것은?",
+          "options": [
+            {
+              "text": "첫 번째 열은 평균 $10$·표준편차 $1$, 두 번째 열은 평균 $20$·표준편차 $5$인 분포에서 생성된다.",
+              "isCorrect": true,
+              "rationale": "`loc`과 `scale`에 리스트를 전달하면 각 위치(열)에 대응하는 서로 다른 정규분포 파라미터가 적용됩니다."
+            },
+            {
+              "text": "모든 숫자가 평균 $15$($10$과 $20$의 평균)인 하나의 분포에서 무작위로 생성된다.",
+              "isCorrect": false,
+              "rationale": "`loc`에 배열을 전달하면 브로드캐스팅 규칙에 따라 각 축별로 서로 다른 평균이 적용됩니다."
+            },
+            {
+              "text": "한 행의 두 숫자를 더했을 때 항상 평균이 $15$가 되도록 숫자가 생성된다.",
+              "isCorrect": false,
+              "rationale": "난수 생성은 각 위치의 모집단 분포를 따를 뿐, 샘플링된 값들의 합을 특정 상수로 고정하지 않습니다."
+            },
+            {
+              "text": "생성된 데이터 $X$의 전체 평균 `X.mean()`은 항상 정확히 $15.0$이다.",
+              "isCorrect": false,
+              "rationale": "표본 통계량은 생성 기준(모집단 파라미터)에 가깝게 나타날 뿐, 무작위성으로 인해 정확히 일치할 필요는 없습니다."
+            }
+          ],
+          "hint": "매개변수 `loc`과 `scale`이 리스트 형태로 주어졌을 때 각 열에 어떻게 매칭될지 생각해 보세요."
+        },
+        {
+          "id": "d58549b6-f3ef-49df-a667-7d8436957ea3:7",
+          "goalId": "numpy-broadcast-shape",
+          "pool": "check",
+          "question": "shape이 $(5, 5)$인 정사각 행렬 $A$에 대하여 `A + b`를 수행했을 때, 행(row) 방향이 아닌 열(column) 방향으로 $b$의 값들을 더하고 싶다면 $b$의 shape을 어떻게 설정해야 합니까? (예: $A[i, j] + b[i]$ 가 되도록 설정)",
+          "options": [
+            {
+              "text": "$(5, 1)$",
+              "isCorrect": true,
+              "rationale": "$(5, 1)$은 $(5, 5)$와 비교할 때 첫 번째 축의 길이는 $5$로 같고 두 번째 축이 $1$이므로, 각 행의 첫 번째 차원 값을 유지하며 옆으로 재사용됩니다."
+            },
+            {
+              "text": "$(5,)$",
+              "isCorrect": false,
+              "rationale": "$(5,)$는 오른쪽 정렬 규칙에 의해 $(1, 5)$로 간주되어 각 열(column)에 같은 값을 더하게 됩니다."
+            },
+            {
+              "text": "$(1, 5)$",
+              "isCorrect": false,
+              "rationale": "$(1, 5)$는 행 방향으로 값을 재사용하여 결과적으로 모든 행에 동일한 $b$ 벡터를 더하게 됩니다."
+            },
+            {
+              "text": "$(5, 5)$",
+              "isCorrect": false,
+              "rationale": "이는 $b$가 $A$와 똑같은 크기의 행렬이어야 함을 의미하며, 값을 '재사용'하는 브로드캐스팅의 의도와는 다릅니다."
+            }
+          ],
+          "hint": "$A[i, j]$에 $b[i]$를 더하려면, $b$의 shape에서 두 번째 축(열 축)의 길이가 $1$이어야 합니다."
+        }
+      ],
+      "cards": [
+        {
+          "id": "6ec74ae0-185f-4c0b-8343-71d04ea1e93d:0",
+          "goalId": "numpy-broadcast-shape",
+          "front": "NumPy 브로드캐스팅에서 두 배열의 $shape$을 비교하여 규칙을 적용하는 기준 방향은?",
+          "back": "오른쪽(마지막 축)부터 비교함. (이유: 없는 앞쪽 축은 길이가 $1$인 것으로 간주하여 대응시키기 때문)"
+        },
+        {
+          "id": "6ec74ae0-185f-4c0b-8343-71d04ea1e93d:1",
+          "goalId": "numpy-broadcast-shape",
+          "front": "$shape$이 $(10, 1)$인 배열과 $(5,)$인 배열을 더할 때 생성되는 결과 배열의 $shape$은?",
+          "back": "$(10, 5)$. (이유: $(5,)$가 $(1, 5)$로 취급되어 각 축의 크기가 서로의 최대치로 확장되기 때문)"
+        },
+        {
+          "id": "6ec74ae0-185f-4c0b-8343-71d04ea1e93d:2",
+          "goalId": "numpy-broadcast-shape",
+          "front": "$(10, 5)$ 배열과 $(10,)$ 배열의 덧셈 연산 시 브로드캐스팅 오류가 발생하는 이유는?",
+          "back": "오른쪽 끝 축의 크기($5$와 $10$)가 서로 다르고 어느 한쪽도 $1$이 아니기 때문. (이유: 대응하는 축의 길이가 같거나 한쪽이 $1$이어야 계산 가능함)"
+        },
+        {
+          "id": "6ec74ae0-185f-4c0b-8343-71d04ea1e93d:3",
+          "goalId": "numpy-feature-standardize",
+          "front": "$(N, D)$ 크기의 데이터 $X$에서 feature별 평균을 구하는 `X.mean(axis=0)`의 결과 $shape$은?",
+          "back": "$(D,)$. (이유: 첫 번째 축인 행($N$)을 따라 압축하여 각 열(feature)마다 하나의 평균값이 남기 때문)"
+        },
+        {
+          "id": "6ec74ae0-185f-4c0b-8343-71d04ea1e93d:4",
+          "goalId": "numpy-feature-standardize",
+          "front": "$(2, 3)$ 배열에서 행(row)별 평균을 뺀 결과를 얻기 위해 `mean` 계산 시 `keepdims=True`를 쓰는 이유는?",
+          "back": "평균의 $shape$을 $(2, 1)$로 유지해 원본 배열과 오른쪽 축 충돌 없이 브로드캐스팅하기 위함. (이유: `False`일 경우 $(2,)$가 되어 $(2, 3)$과 연산 불가)"
+        },
+        {
+          "id": "6ec74ae0-185f-4c0b-8343-71d04ea1e93d:5",
+          "goalId": "numpy-feature-standardize",
+          "front": "표준화 공식 $(X - \\text{mean}) / \\text{std}$를 통해 모든 데이터가 한 번에 계산되는 핵심 원리는?",
+          "back": "브로드캐스팅. (이유: feature별로 계산된 통계량 값을 모든 행의 정해진 위치에서 재사용하여 계산하기 때문)"
+        }
+      ],
+      "provenance": {
+        "provider": "NotebookLM",
+        "notebookId": "3ff8b922-5e38-4290-8c27-7e52d62ff470",
+        "sourceIds": [
+          "c98aa210-5e53-44c1-8b5a-3419a90ee33f"
+        ],
+        "quizArtifactId": "d58549b6-f3ef-49df-a667-7d8436957ea3",
+        "cardsArtifactId": "6ec74ae0-185f-4c0b-8343-71d04ea1e93d",
+        "exportedAt": "2026-09-24",
+        "sourceHashes": {
+          "data/numpy-broadcasting": "7940458104419b9a00815e482cabb2f6b0f35fd6b17f9d2324c97146fdbc4f3c"
+        }
+      }
+    },
+    {
+      "id": "numpy-vectors-matmul",
+      "title": "벡터 연산과 유사도",
+      "version": "e867413ac157",
+      "noteIds": [
+        "data/numpy-vectors-matmul"
+      ],
+      "goals": [
+        {
+          "id": "numpy-vector-products",
+          "title": "norm·원소곱·내적·행렬곱을 구분한다",
+          "version": "1"
+        },
+        {
+          "id": "numpy-cosine-search",
+          "title": "행별 L2 정규화와 배치 코사인 검색을 계산한다",
+          "version": "1"
+        }
+      ],
+      "questions": [
+        {
+          "id": "dffffdc1-b5cb-4c1f-9f74-1de7f3423357:0",
+          "goalId": "numpy-vector-products",
+          "pool": "practice",
+          "question": "두 벡터 $a = [1, 2]$와 $b = [4, 6]$ 사이의 거리를 구하려고 합니다. 다음 중 NumPy를 사용하여 두 점 사이의 거리를 가장 올바르게 계산한 코드는 무엇입니까?",
+          "options": [
+            {
+              "text": "np.linalg.norm(b - a)",
+              "isCorrect": true,
+              "rationale": "두 벡터의 차는 한 끝점에서 다른 끝점으로 향하는 이동 벡터를 의미하며, 이 벡터의 $L2$ 노름(길이)이 곧 두 점 사이의 거리가 됩니다."
+            },
+            {
+              "text": "np.sum(b * a)",
+              "isCorrect": false,
+              "rationale": "이 연산은 원소별 곱의 합으로, 거리 계산이 아닌 내적(dot product)에 해당합니다."
+            },
+            {
+              "text": "np.linalg.norm(b) - np.linalg.norm(a)",
+              "isCorrect": false,
+              "rationale": "각 벡터의 원점으로부터의 길이 차이를 구하는 것으로, 두 점 사이의 직선 거리와는 다릅니다."
+            },
+            {
+              "text": "np.sqrt(np.sum(b - a))",
+              "isCorrect": false,
+              "rationale": "차이 벡터의 원소 합에 루트를 씌우는 것은 거리 공식($\\sqrt{\\sum (b_i - a_i)^2}$)과 다릅니다."
+            }
+          ],
+          "hint": "두 점 사이의 거리는 한 점에서 다른 점으로 가는 벡터의 '길이'와 같습니다."
+        },
+        {
+          "id": "dffffdc1-b5cb-4c1f-9f74-1de7f3423357:1",
+          "goalId": "numpy-vector-products",
+          "pool": "check",
+          "question": "$A = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix}$, $B = \\begin{bmatrix} 5 & 6 \\\\ 7 & 8 \\end{bmatrix}$일 때, NumPy 연산 `A @ B`의 결과에서 $1$행 $1$열(인덱스 $[0, 0]$)에 들어갈 값은 얼마입니까?",
+          "options": [
+            {
+              "text": "19",
+              "isCorrect": true,
+              "rationale": "행렬곱(@)에서 결과의 $[0, 0]$ 원소는 왼쪽 행렬의 $1$행($[1, 2]$)과 오른쪽 행렬의 $1$열($[5, 7]$)의 내적($1 \\times 5 + 2 \\times 7$)으로 계산됩니다."
+            },
+            {
+              "text": "5",
+              "isCorrect": false,
+              "rationale": "이는 대응하는 위치의 원소를 단순히 곱하는 원소별 곱(*) 연산의 결과입니다."
+            },
+            {
+              "text": "23",
+              "isCorrect": false,
+              "rationale": "왼쪽 행렬의 행과 오른쪽 행렬의 행을 잘못 조합하거나 계산 실수 시 나올 수 있는 값입니다."
+            },
+            {
+              "text": "11",
+              "isCorrect": false,
+              "rationale": "단순히 첫 행의 원소들을 더하거나 잘못된 행/열 조합을 선택했을 때 나타날 수 있는 수치입니다."
+            }
+          ],
+          "hint": "행렬곱은 왼쪽 행렬의 행과 오른쪽 행렬의 열을 내적하여 결합합니다."
+        },
+        {
+          "id": "dffffdc1-b5cb-4c1f-9f74-1de7f3423357:2",
+          "goalId": "numpy-vector-products",
+          "pool": "practice",
+          "question": "행렬곱 $(N, D) @ (D, H) \\rightarrow (N, H)$ 연산에서 차원 $D$의 역할에 대한 설명으로 옳은 것은 무엇입니까?",
+          "options": [
+            {
+              "text": "내적의 성분 수이며, 곱한 뒤 합해지면서 결과 행렬에서는 사라진다.",
+              "isCorrect": true,
+              "rationale": "행렬곱의 정의에 따라 두 행렬이 만나는 차원 $D$는 각 원소를 곱해 더하는 과정에서 축소되어 결과 차원에서 제외됩니다."
+            },
+            {
+              "text": "결과 행렬의 새로운 특징(feature) 수가 된다.",
+              "isCorrect": false,
+              "rationale": "새로운 특징 수는 오른쪽 행렬의 열 수인 $H$가 결정합니다."
+            },
+            {
+              "text": "브로드캐스팅 규칙에 의해 두 값이 달라도 $1$이면 연산이 가능하다.",
+              "isCorrect": false,
+              "rationale": "행렬곱(@)에서는 내적을 수행해야 하므로 해당 차원의 크기가 반드시 정확히 일치해야 하며 브로드캐스팅이 적용되지 않습니다."
+            },
+            {
+              "text": "데이터의 샘플 수를 나타내며 결과 행렬에 그대로 유지된다.",
+              "isCorrect": false,
+              "rationale": "일반적으로 데이터 샘플 수는 행렬의 첫 번째 차원인 $N$이 담당합니다."
+            }
+          ],
+          "hint": "행렬곱 수식 $Y[i,j] = \\sum_{k=1}^{D} (X[i,k] \\times W[k,j])$에서 $k$가 어떻게 처리되는지 생각해보세요."
+        },
+        {
+          "id": "dffffdc1-b5cb-4c1f-9f74-1de7f3423357:3",
+          "goalId": "numpy-vector-products",
+          "pool": "check",
+          "question": "$100$개의 샘플이 있고 각 샘플이 $64$차원의 벡터인 행렬 $E$ (shape: $(100, 64)$)가 있습니다. 각 샘플별로 벡터의 길이를 계산하여 $100$개의 길이를 얻으려고 할 때, `np.linalg.norm`에 지정해야 할 `axis` 값은?",
+          "options": [
+            {
+              "text": "axis=1",
+              "isCorrect": true,
+              "rationale": "각 행이 하나의 벡터이므로, $64$개의 성분이 들어있는 마지막 축(axis 1)을 따라 제곱합을 구해야 샘플별 길이를 얻을 수 있습니다."
+            },
+            {
+              "text": "axis=0",
+              "isCorrect": false,
+              "rationale": "이는 샘플들을 가로질러 각 특징(feature)별 길이를 구하게 되므로 목적에 맞지 않습니다."
+            },
+            {
+              "text": "axis=None (기본값)",
+              "isCorrect": false,
+              "rationale": "축을 지정하지 않으면 행렬의 모든 원소($6400$개)를 대상으로 하나의 스칼라 길이를 계산합니다."
+            },
+            {
+              "text": "axis=-2",
+              "isCorrect": false,
+              "rationale": "2차원 행렬에서 $-2$번 축은 $0$번 축(행 방향)과 같으므로 특징별 길이를 계산하게 됩니다."
+            }
+          ],
+          "hint": "어떤 축의 성분들을 합쳐서 하나의 '길이'로 만들 것인지 결정해야 합니다."
+        },
+        {
+          "id": "dffffdc1-b5cb-4c1f-9f74-1de7f3423357:4",
+          "goalId": "numpy-cosine-search",
+          "pool": "practice",
+          "question": "행렬 $Q$ (shape: $(10, 64)$)의 각 행을 자신의 $L2$ 노름으로 나누어 정규화하려고 합니다. 이때 `Q / np.linalg.norm(Q, axis=1, keepdims=True)`와 같이 `keepdims=True`를 사용하는 주된 이유는 무엇입니까?",
+          "options": [
+            {
+              "text": "계산된 노름의 shape을 (10, 1)로 유지하여 행렬 Q와 브로드캐스팅이 가능하게 하기 위해서이다.",
+              "isCorrect": true,
+              "rationale": "노름 결과가 $(10,)$이면 $(10, 64)$와 연산 시 축이 맞지 않지만, $(10, 1)$이면 각 행의 $64$개 원소에 동일한 노름값이 올바르게 적용됩니다."
+            },
+            {
+              "text": "행렬의 전치(transpose) 연산을 대신하기 위해서이다.",
+              "isCorrect": false,
+              "rationale": "차원 유지와 전치는 서로 다른 개념이며, $1$차원 배열은 전치해도 shape이 변하지 않습니다."
+            },
+            {
+              "text": "벡터의 방향을 바꾸지 않고 길이만 $1$로 고정하기 위해서이다.",
+              "isCorrect": false,
+              "rationale": "이는 정규화 자체의 목적이지, `keepdims` 옵션이 수식 내에서 수행하는 차원 정합 역할은 아닙니다."
+            },
+            {
+              "text": "데이터의 평균을 $0$, 표준편차를 $1$로 맞추기 위해서이다.",
+              "isCorrect": false,
+              "rationale": "이는 표준화(Standardization)의 목적이며, 노름으로 나누는 것과는 다른 연산입니다."
+            }
+          ],
+          "hint": "나눗셈 연산에서 행렬의 각 행에 대응하는 값이 하나씩 매칭되려면 차원의 형태가 어떠해야 할까요?"
+        },
+        {
+          "id": "dffffdc1-b5cb-4c1f-9f74-1de7f3423357:7",
+          "goalId": "numpy-cosine-search",
+          "pool": "check",
+          "question": "검색 시스템에서 코사인 유사도 배열 `similarities`에 대해 `np.argmax(similarities)`를 수행하여 얻은 결과값의 의미는 무엇입니까?",
+          "options": [
+            {
+              "text": "가장 유사도가 높은 데이터(벡터)가 위치한 인덱스 번호",
+              "isCorrect": true,
+              "rationale": "argmax는 배열 내에서 최대값을 가진 원소의 위치(인덱스)를 반환하므로, 이를 통해 가장 유사한 항목을 찾아낼 수 있습니다."
+            },
+            {
+              "text": "계산된 유사도 중 가장 높은 점수(실수값)",
+              "isCorrect": false,
+              "rationale": "최대 점수 자체를 얻으려면 argmax가 아닌 max 함수를 사용해야 합니다."
+            },
+            {
+              "text": "쿼리 벡터와 가장 가까운 벡터의 실제 좌표 값",
+              "isCorrect": false,
+              "rationale": "좌표 값을 얻으려면 argmax로 구한 인덱스를 다시 원본 행렬에 슬라이싱해야 합니다."
+            },
+            {
+              "text": "유사도가 1에 가장 가까운 쿼리 자체의 변화량",
+              "isCorrect": false,
+              "rationale": "argmax는 데이터의 위치 정보만을 알려줄 뿐, 쿼리 벡터의 정보를 직접 수정하지 않습니다."
+            }
+          ],
+          "hint": "argmax 함수의 'arg'가 무엇의 약자인지, 그리고 반환하는 자료형이 무엇인지 떠올려보세요."
+        }
+      ],
+      "cards": [
+        {
+          "id": "7919abab-5ab3-4b1f-af26-60cf1741ea31:0",
+          "goalId": "numpy-vector-products",
+          "front": "NumPy에서 벡터 $b - a$가 갖는 기하학적 의미는 무엇인가?",
+          "back": "$a$의 끝점에서 $b$의 끝점으로 이동하는 벡터를 의미하며 이 벡터의 길이가 곧 두 점 사이의 거리이다."
+        },
+        {
+          "id": "7919abab-5ab3-4b1f-af26-60cf1741ea31:1",
+          "goalId": "numpy-vector-products",
+          "front": "NumPy의 배열 연산자 중 원소별 곱을 수행하는 것과 행렬곱을 수행하는 것은 각각 무엇인가?",
+          "back": "원소별 곱은 `*`를 사용하고 행렬곱은 `@`를 사용하여 원소 결합 방식을 구분한다."
+        },
+        {
+          "id": "7919abab-5ab3-4b1f-af26-60cf1741ea31:3",
+          "goalId": "numpy-cosine-search",
+          "front": "벡터를 자기 자신의 길이($norm$)로 나누는 $L2$ 정규화를 거치면 벡터의 정보 중 무엇이 $1$로 변하는가?",
+          "back": "벡터의 방향은 그대로 유지되지만 벡터의 전체 길이는 $1$로 고정된다."
+        },
+        {
+          "id": "7919abab-5ab3-4b1f-af26-60cf1741ea31:4",
+          "goalId": "numpy-cosine-search",
+          "front": "$Q(10, 64)$와 $E(1000, 64)$ 사이의 모든 행 조합에 대한 내적을 계산하기 위한 행렬곱 식은?",
+          "back": "$Q @ E.T$를 통해 $Q$의 각 행과 $E$의 모든 행이 내적되도록 차원을 맞추어 계산한다."
+        }
+      ],
+      "provenance": {
+        "provider": "NotebookLM",
+        "notebookId": "3ff8b922-5e38-4290-8c27-7e52d62ff470",
+        "sourceIds": [
+          "b08ca724-f0bd-486c-b2a5-0ebfc2dcc090"
+        ],
+        "quizArtifactId": "dffffdc1-b5cb-4c1f-9f74-1de7f3423357",
+        "cardsArtifactId": "7919abab-5ab3-4b1f-af26-60cf1741ea31",
+        "exportedAt": "2026-09-24",
+        "sourceHashes": {
+          "data/numpy-vectors-matmul": "5cff897efcf349207b64533fe681ba232207de498d5a449b40f3364935ff5a7f"
+        }
+      }
+    },
+    {
+      "id": "numpy-linear-layers",
+      "title": "선형층의 계산과 목적",
+      "version": "3b4612d99103",
+      "noteIds": [
+        "data/numpy-linear-layers"
+      ],
+      "goals": [
+        {
+          "id": "numpy-linear-shapes",
+          "title": "선형층의 shape·편향·파라미터 수를 계산한다",
+          "version": "1"
+        },
+        {
+          "id": "numpy-linear-purpose",
+          "title": "feature 변환·순전파·학습의 차이를 설명한다",
+          "version": "1"
+        }
+      ],
+      "questions": [
+        {
+          "id": "e9d56d44-5869-41b7-a086-aaf834d040d5:0",
+          "goalId": "numpy-linear-shapes",
+          "pool": "practice",
+          "question": "입력 데이터 $X$의 크기가 $(25, 6)$이고 가중치 행렬 $W$의 크기가 $(6, 4)$일 때, 편향 $b$를 더하기 전 단계인 $X @ W$ 결과값의 shape은 무엇입니까?",
+          "options": [
+            {
+              "text": "$(25, 4)$",
+              "isCorrect": true,
+              "rationale": "행렬곱 연산 $X @ W$에서 결과의 행은 $X$의 행 개수(샘플 수)를 따르고, 열은 $W$의 열 개수(출력 특성 수)를 따릅니다."
+            },
+            {
+              "text": "$(6, 6)$",
+              "isCorrect": false,
+              "rationale": "행렬곱의 결과 shape은 입력의 행과 가중치의 열에 의해 결정되며, 내부 차원인 6은 연산 과정에서 축소됩니다."
+            },
+            {
+              "text": "$(25, 6)$",
+              "isCorrect": false,
+              "rationale": "이것은 입력 데이터의 shape과 동일하며, 가중치 행렬 $W$의 열 크기에 따른 특성 변환이 반영되지 않은 결과입니다."
+            },
+            {
+              "text": "$(4, 25)$",
+              "isCorrect": false,
+              "rationale": "행렬곱의 결과에서 행과 열의 순서가 뒤바뀌었으며, 일반적으로 첫 번째 축은 샘플 수를 유지해야 합니다."
+            }
+          ],
+          "hint": "행렬곱 $(N, d_{in}) @ (d_{in}, d_{out})$의 결과 차원을 생각해보세요."
+        },
+        {
+          "id": "e9d56d44-5869-41b7-a086-aaf834d040d5:2",
+          "goalId": "numpy-linear-shapes",
+          "pool": "check",
+          "question": "데이터 배열 $X$의 shape이 $(50, 12)$일 때, `X.mean(axis=1)`을 계산하여 얻은 결과값의 의미로 가장 적절한 것은 무엇입니까?",
+          "options": [
+            {
+              "text": "각 샘플별로 12개 특성(feature)의 평균을 구한 것",
+              "isCorrect": true,
+              "rationale": "두 번째 축(`axis=1`)은 특성들을 나타내며, 이 축을 따라 평균을 내면 각 행(샘플)에 대한 하나의 평균값이 남게 됩니다."
+            },
+            {
+              "text": "각 특성(feature)별로 50개 샘플의 평균을 구한 것",
+              "isCorrect": false,
+              "rationale": "이는 첫 번째 축(`axis=0`)인 샘플 방향을 따라 계산했을 때의 결과입니다."
+            },
+            {
+              "text": "전체 데이터 600개 원소의 통합 평균을 구한 것",
+              "isCorrect": false,
+              "rationale": "특정 축을 지정하지 않고 전체 배열에 대해 평균을 구했을 때의 설명입니다."
+            },
+            {
+              "text": "가중치와 입력값을 곱한 뒤 얻은 가중합의 평균",
+              "isCorrect": false,
+              "rationale": "이는 선형층의 연산 과정 중 일부를 설명하는 것으로, 단순 배열의 축별 평균 연산의 정의와는 거리가 있습니다."
+            }
+          ],
+          "hint": "축(axis)은 연산을 수행하며 '줄어드는 방향' 또는 '합쳐지는 방향'임을 떠올려 보세요."
+        },
+        {
+          "id": "e9d56d44-5869-41b7-a086-aaf834d040d5:4",
+          "goalId": "numpy-linear-shapes",
+          "pool": "practice",
+          "question": "행렬곱 결과 $X @ W$의 크기가 $(32, 10)$일 때, 편향 $b$를 더하는 과정에서 발생하는 '브로드캐스팅(Broadcasting)'의 특징은 무엇입니까?",
+          "options": [
+            {
+              "text": "크기가 $(10,)$인 $b$의 각 원소가 모든 샘플에 동일하게 반복되어 더해진다.",
+              "isCorrect": true,
+              "rationale": "브로드캐스팅을 통해 하나의 편향 벡터가 모든 행(샘플)에 재사용되어 각 출력 특성 위치에 맞게 더해집니다."
+            },
+            {
+              "text": "샘플 32개마다 서로 다른 32개의 편향 값이 각각 더해진다.",
+              "isCorrect": false,
+              "rationale": "이는 $(32, 1)$ 형태의 배열을 더할 때의 동작이며, 일반적인 선형층의 편향은 출력 특성에 대응하므로 샘플마다 같은 값을 공유합니다."
+            },
+            {
+              "text": "입력 데이터 $X$의 원본 값을 보존하기 위해 가중치를 조절한다.",
+              "isCorrect": false,
+              "rationale": "브로드캐스팅은 배열의 형상을 맞추어 연산을 수행하는 규칙일 뿐, 학습을 통해 가중치를 조절하는 과정이 아닙니다."
+            },
+            {
+              "text": "행렬곱 결과를 다시 입력 차원인 10차원으로 되돌린다.",
+              "isCorrect": false,
+              "rationale": "편향 덧셈은 값의 변화를 줄 뿐 배열의 shape을 다른 차원으로 되돌리는 역할을 하지 않습니다."
+            }
+          ],
+          "hint": "편향 $b$의 각 값이 어느 위치(샘플 vs 특성)에 대응되어 재사용되는지 고려하세요."
+        },
+        {
+          "id": "e9d56d44-5869-41b7-a086-aaf834d040d5:5",
+          "goalId": "numpy-linear-purpose",
+          "pool": "practice",
+          "question": "입력 특성 10개를 8개의 출력 특성으로 변환하는 선형층에서, 숫자 '8'이 의미하는 바를 가장 잘 설명한 것은 무엇입니까?",
+          "options": [
+            {
+              "text": "입력 특성들을 가중 조합하여 만든 새로운 표현의 폭",
+              "isCorrect": true,
+              "rationale": "출력 크기는 고정된 규칙이 아니라, 사용자가 데이터를 어떻게 요약하거나 변환하여 다음 층에 전달할지 결정한 설계 수치입니다."
+            },
+            {
+              "text": "정보 손실을 막기 위해 반드시 지켜야 하는 최소한의 차원 수",
+              "isCorrect": false,
+              "rationale": "10차원을 8차원으로 줄이면 일반적으로 정보 손실이 발생할 수 있으며, 이는 최소 차원이라는 절대적 기준이 아닙니다."
+            },
+            {
+              "text": "학습을 반복할수록 자동으로 늘어나는 가변적인 숫자",
+              "isCorrect": false,
+              "rationale": "출력 특성의 수는 모델 구조 설계 시 정해지는 하이퍼파라미터이며, 학습 과정에서 자동으로 변하지 않습니다."
+            },
+            {
+              "text": "입력 샘플 10개 중 유의미한 8개만 선택했다는 의미",
+              "isCorrect": false,
+              "rationale": "선형층의 출력 폭은 샘플(행)의 개수가 아니라 특성(열)의 개수를 의미합니다."
+            }
+          ],
+          "hint": "출력 특성의 개수가 반드시 입력보다 작아야 하는지, 혹은 어떤 의도로 정해지는지 생각해보세요."
+        },
+        {
+          "id": "e9d56d44-5869-41b7-a086-aaf834d040d5:6",
+          "goalId": "numpy-linear-purpose",
+          "pool": "check",
+          "question": "활성화 함수(예: ReLU)를 사용하지 않고 두 개의 선형층을 연속으로 연결($Y = (X @ W_1 + b_1) @ W_2 + b_2$)했을 때의 문제점은 무엇입니까?",
+          "options": [
+            {
+              "text": "여러 개의 층을 쌓아도 결국 하나의 선형 변환으로 합쳐져 복잡한 관계를 표현하지 못한다.",
+              "isCorrect": true,
+              "rationale": "선형 변환의 연속은 수학적으로 하나의 아핀 변환으로 통합될 수 있으므로, 비선형 요소 없이는 층을 늘리는 효과가 없습니다."
+            },
+            {
+              "text": "행렬의 크기가 서로 맞지 않아 계산 자체가 불가능해진다.",
+              "isCorrect": false,
+              "rationale": "앞 층의 출력 크기와 뒷 층의 입력 크기를 맞추면 계산은 문제없이 수행됩니다."
+            },
+            {
+              "text": "가중치 $W$와 편향 $b$를 업데이트하는 학습 과정이 생략된다.",
+              "isCorrect": false,
+              "rationale": "학습 과정은 오차를 구하고 갱신하는 별도의 단계에 달려 있으며, 활성화 함수의 유무가 학습 단계의 존재 여부를 결정하지는 않습니다."
+            },
+            {
+              "text": "입력 데이터 $X$가 반드시 양수여야만 결과값이 산출된다.",
+              "isCorrect": false,
+              "rationale": "선형층은 입력값의 부호와 상관없이 행렬 연산을 수행할 수 있습니다."
+            }
+          ],
+          "hint": "수학적으로 $X @ (W_1 @ W_2)$와 같은 형태로 묶일 수 있는지 생각해보세요."
+        },
+        {
+          "id": "e9d56d44-5869-41b7-a086-aaf834d040d5:7",
+          "goalId": "numpy-linear-purpose",
+          "pool": "practice",
+          "question": "선형층의 '순전파(Forward propagation)'와 '학습(Training)'의 차이점에 대한 설명으로 옳은 것은 무엇입니까?",
+          "options": [
+            {
+              "text": "순전파는 주어진 파라미터로 결과를 계산하는 과정이고, 학습은 오차를 바탕으로 파라미터를 갱신하는 과정이다.",
+              "isCorrect": true,
+              "rationale": "순전파는 고정된 $W, b$를 사용하여 입력을 출력으로 바꾸는 실행 단계이며, 학습은 더 나은 결과를 위해 $W, b$를 수정하는 단계를 포함합니다."
+            },
+            {
+              "text": "순전파는 가중치를 곱하는 과정이고, 학습은 편향을 더하는 과정이다.",
+              "isCorrect": false,
+              "rationale": "가중치 곱셈과 편향 덧셈은 모두 순전파 계산의 구성 요소이며, 학습은 이 요소들을 최적화하는 전체 과정을 말합니다."
+            },
+            {
+              "text": "순전파는 행렬곱을 사용하고, 학습은 브로드캐스팅만 사용한다.",
+              "isCorrect": false,
+              "rationale": "순전파 과정에서 행렬곱과 브로드캐스팅이 모두 사용되며, 학습은 이와는 별도의 최적화 알고리즘을 필요로 합니다."
+            },
+            {
+              "text": "순전파는 데이터 분석가만 수행하며, 학습은 컴퓨터만 수행한다.",
+              "isCorrect": false,
+              "rationale": "둘 다 컴퓨터가 수행하는 계산 과정이며, 분석가는 이 구조를 설계하고 학습 과정을 제어합니다."
+            }
+          ],
+          "hint": "파라미터($W, b$)가 변하는 시점이 언제인지 구분해보세요."
+        }
+      ],
+      "cards": [
+        {
+          "id": "1ecc0a16-eff5-4f74-b290-0b01335470db:0",
+          "goalId": "numpy-linear-shapes",
+          "front": "데이터 배열 $X.shape$이 $(32, 10)$일 때, 각 숫자가 의미하는 데이터의 구성 요소는?",
+          "back": "32는 샘플(데이터 행)의 개수이고, 10은 각 샘플을 설명하는 입력 feature(특성)의 개수이다."
+        },
+        {
+          "id": "1ecc0a16-eff5-4f74-b290-0b01335470db:1",
+          "goalId": "numpy-linear-shapes",
+          "front": "$X \\cdot W$의 결과 shape이 $(32, 5)$일 때, 브로드캐스팅되는 편향 $b$의 shape과 그 의미는?",
+          "back": "편향 $b$의 shape은 $(5,)$이며, 이는 출력 feature 각각에 대응하는 고유한 편향값을 의미한다."
+        },
+        {
+          "id": "1ecc0a16-eff5-4f74-b290-0b01335470db:2",
+          "goalId": "numpy-linear-shapes",
+          "front": "입력 feature가 10개, 출력 feature가 8개인 선형층(편향 포함)에서 학습해야 할 총 파라미터 수는?",
+          "back": "총 88개로, 가중치 $W$($10 \\times 8 = 80$개)와 편향 $b$(8개)를 더한 값이다."
+        },
+        {
+          "id": "1ecc0a16-eff5-4f74-b290-0b01335470db:3",
+          "goalId": "numpy-linear-purpose",
+          "front": "선형층을 통해 feature의 차원(예: 10개에서 8개로)을 변환함으로써 얻는 주된 효과는?",
+          "back": "입력 특성들을 가중치로 조합하여 다음 계산에 사용할 새로운 중간 표현(feature)을 생성하는 것이다."
+        },
+        {
+          "id": "1ecc0a16-eff5-4f74-b290-0b01335470db:4",
+          "goalId": "numpy-linear-purpose",
+          "front": "단순히 출력값 $Y$를 계산하는 '순전파(Forward Propagation)'와 '학습'을 구분하는 결정적인 단계는?",
+          "back": "목표값과의 오차를 평가하고 그에 따라 가중치($W$)와 편향($b$)을 갱신하는 과정이다."
+        },
+        {
+          "id": "1ecc0a16-eff5-4f74-b290-0b01335470db:5",
+          "goalId": "numpy-linear-purpose",
+          "front": "활성화 함수 없이 두 개의 선형층을 연속으로 연결했을 때 수학적으로 발생하는 현상은?",
+          "back": "두 층의 계산이 하나의 아핀 변환으로 합쳐지므로, 층을 여러 개 쌓아서 비선형 관계를 표현하는 효과를 얻을 수 없다."
+        }
+      ],
+      "provenance": {
+        "provider": "NotebookLM",
+        "notebookId": "3ff8b922-5e38-4290-8c27-7e52d62ff470",
+        "sourceIds": [
+          "2d74f196-6d53-4f8e-b9e4-fa4c7e298c3b"
+        ],
+        "quizArtifactId": "e9d56d44-5869-41b7-a086-aaf834d040d5",
+        "cardsArtifactId": "1ecc0a16-eff5-4f74-b290-0b01335470db",
+        "exportedAt": "2026-09-24",
+        "sourceHashes": {
+          "data/numpy-linear-layers": "f70992641223254fa361b39e2151dae4e757fc1437a01e09eb5784534461340a"
+        }
+      }
     }
   ]
 }

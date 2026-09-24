@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr"><head><title>NumPy와 텐서 — shape을 읽는 법에서 벡터 검색까지 · HanThing</title><meta charset="utf-8"/><link rel="preload" href="../index-2271dace.css" as="style"/><link rel="preload" href="../prescript-feb9b791.js" as="script"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="HanThing Notes"/><meta property="og:title" content="NumPy와 텐서 — shape을 읽는 법에서 벡터 검색까지 · HanThing"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="NumPy와 텐서 — shape을 읽는 법에서 벡터 검색까지 · HanThing"/><meta name="twitter:description" content="실제 질문, 브로드캐스팅 풀이, 마지막 자기 설명의 교정을 모은 9월 23일 학습 기록."/><meta property="og:description" content="실제 질문, 브로드캐스팅 풀이, 마지막 자기 설명의 교정을 모은 9월 23일 학습 기록."/><meta property="og:image:alt" content="실제 질문, 브로드캐스팅 풀이, 마지막 자기 설명의 교정을 모은 9월 23일 학습 기록."/><meta property="og:image" content="https://hanthing.github.io/notes/static/og-image.png"/><meta property="og:image:url" content="https://hanthing.github.io/notes/static/og-image.png"/><meta name="twitter:image" content="https://hanthing.github.io/notes/static/og-image.png"/><meta property="og:image:type" content="image/.png"/><meta property="twitter:domain" content="hanthing.github.io/notes"/><meta property="og:url" content="https://hanthing.github.io/notes/learning/2026-09-23-numpy-and-tensors"/><meta property="twitter:url" content="https://hanthing.github.io/notes/learning/2026-09-23-numpy-and-tensors"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="실제 질문, 브로드캐스팅 풀이, 마지막 자기 설명의 교정을 모은 9월 23일 학습 기록."/><meta name="generator" content="Quartz"/><link href="../index-2271dace.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../prescript-feb9b791.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script></head><body data-slug="learning/2026-09-23-numpy-and-tensors" data-basepath="/notes"><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="검색" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>검색</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="검색어를 입력하세요" placeholder="검색어를 입력하세요"/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div></div></div><div class="center"><div class="page-header"><header><nav class="hanthing-home" aria-label="한띵 노트"><a href="/" data-no-popover="true" data-router-ignore="true">HanThing <span>Notes</span></a><a href="/#journal" data-no-popover="true" data-router-ignore="true">기록</a><a href="/#questions" data-no-popover="true" data-router-ignore="true">질문</a><a href="/#quizzes" data-no-popover="true" data-router-ignore="true">퀴즈</a><button class="theme-toggle" type="button" data-theme-toggle="true" aria-label="밝은 화면으로 전환">밝게</button></nav></header><div class="popover-hint"><h1 class="article-title">NumPy와 텐서 — shape을 읽는 법에서 벡터 검색까지</h1><p show-comma="true" class="content-meta"><time datetime="2026-09-22T15:00:00.000Z">2026년 9월 23일</time><span>12 min read</span></p></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><p>학습일은 <strong>2026년 9월 23일</strong>, 정리일은 9월 24일이다. NumPy와 텐서가 처음이라는 질문에서 시작해, 배열의 축·shape 조작·브로드캐스팅·벡터·행렬곱·선형층까지 이어졌다. 설명을 제공한 기록과 직접 답을 낸 기록을 구분했다. 아래 의도는 대화 맥락에서 해석한 것이다.</p>
+<h2 id="질문-numpy의-본질은-무엇이고-처음-보는-텐서는-어떻게-이해해야-하는가">질문: NumPy의 본질은 무엇이고, 처음 보는 텐서는 어떻게 이해해야 하는가?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#질문-numpy의-본질은-무엇이고-처음-보는-텐서는-어떻게-이해해야-하는가" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>상황:</strong> 텐서를 처음 접한 상태에서 NumPy를 기능 목록보다 본질부터 설명해 달라고 요청했다. 이후 “축·인덱싱이 특별한가”, “숫자만 다루는가”, “dtype 때문에 빠른가”라는 질문으로 이어졌다.</p>
+<p><strong>의도:</strong> 새로운 용어를 기존 파이썬 리스트·객체 개념과 연결해 이해하려는 질문이다.</p>
+<p><strong>핵심 답변:</strong> 이 실습의 텐서는 여러 축을 가진 수치 배열로 출발하면 된다. NumPy의 ndarray는 데이터와 dtype·shape·strides 같은 정보를 함께 다룬다. 배열 연산을 한꺼번에 표현할 수 있지만, 문자열·object dtype도 있어 모든 배열이 숫자만 담거나 같은 성능을 내는 것은 아니다.</p>
+<p>자세한 설명은 <a href="../data/numpy-array-axes" class="internal internal-link alias" data-slug="data/numpy-array-axes">배열·dtype·축</a>에 모았다. “수학적 3차원 벡터”와 “축이 3개인 배열”도 서로 다른 뜻이다.</p>
+<h2 id="질문-아까는-x0이-행이라더니-수업에서는-왜-열인가">질문: 아까는 x[:,0]이 행이라더니, 수업에서는 왜 열인가?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#질문-아까는-x0이-행이라더니-수업에서는-왜-열인가" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>상황:</strong> 3차원 예의 <code>x[:,0]</code> 설명과 수업의 2차원 배열 설명을 비교하며 모순을 지적했다.</p>
+<p><strong>의도:</strong> 앞 설명의 전제가 달라졌는지, 같은 문법의 의미가 달라진 것인지 확인하려는 질문이다.</p>
+<p><strong>핵심 답변:</strong> 인덱스는 항상 앞축부터 대응한다. <code>(2,3,4)</code>의 <code>x[:,0]</code>은 두 묶음에서 두 번째 축의 첫 항목을 골라 <code>(2,4)</code>가 된다. <code>(3,4)</code>의 <code>x[:,0]</code>은 각 행에서 첫 성분을 골라 <code>(3,)</code>가 된다. shape을 생략한 채 행·열 이름만 붙였던 설명이 혼동을 만들었다.</p>
+<p>이 질문 이후 “바깥 묶음부터 축 번호를 붙인다”는 방식으로 정리했다. 상세 예와 <code>axis=0/1</code>, <code>keepdims</code>는 <a href="../data/numpy-array-axes" class="internal internal-link alias" data-slug="data/numpy-array-axes">같은 노트</a>에서 연결한다.</p>
+<h2 id="질문-축을-추가하면-새-배열인가-값을-바꾸면-원본도-달라지는가">질문: 축을 추가하면 새 배열인가? 값을 바꾸면 원본도 달라지는가?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#질문-축을-추가하면-새-배열인가-값을-바꾸면-원본도-달라지는가" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>상황:</strong> <code>None</code>, reshape, concatenate, stack을 배우면서 새 배열이라는 말이 복사라는 뜻인지 물었다. 고차원 배열의 shape을 개발자가 어떻게 추적하는지도 질문했다.</p>
+<p><strong>의도:</strong> 객체가 새로 생기는 것과 데이터가 복제되는 것을 구분하고, 실제 값이 어디로 가는지 확인하려는 질문이다.</p>
+<p><strong>핵심 답변:</strong> <code>x[:,None]</code>은 별도 ndarray 객체지만 원본 데이터를 공유하는 뷰다. <code>.copy()</code>와 다르다. concatenate는 기존 축을 이어 붙이고 stack은 새 축을 만든다. shape만 같아도 원소 배치는 다를 수 있으므로 작은 배열에서 인덱스를 대응시켜 본다.</p>
+<p><a href="../data/numpy-shape-views" class="internal internal-link alias" data-slug="data/numpy-shape-views">뷰·reshape·concatenate·stack</a>에 값 변경 예와 축별 대응을 남겼다.</p>
+<h2 id="질문-브로드캐스팅은-왜-필요하며-설명이-왜-아직-추상적인가">질문: 브로드캐스팅은 왜 필요하며, 설명이 왜 아직 추상적인가?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#질문-브로드캐스팅은-왜-필요하며-설명이-왜-아직-추상적인가" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>상황:</strong> 같은 크기의 행렬끼리 더한다는 수학 규칙과 브로드캐스팅의 차이, <code>(10,5)+(5,)</code>, <code>(10,1)+(5,)</code>, <code>(5,5)+(5,)</code>의 계산 방향을 연달아 물었다. 설명이 추상적이라고 말했고, 학습 깊이를 임의로 제한하지 말라고 요청했다.</p>
+<p><strong>의도:</strong> 규칙만 암기하는 대신 각 값이 어느 위치에 재사용되는지 납득하려는 질문이다.</p>
+<p><strong>핵심 답변:</strong> 오른쪽부터 축을 맞추고 길이가 같거나 한쪽이 1이면 확장한다. “모든 학생에게 과목별 보정 점수를 더한다”처럼 목적을 잡고, <code>result[i,j]</code>에 들어가는 값을 직접 계산하면 재사용 방향이 드러난다.</p>
+<p><a href="../data/numpy-broadcasting" class="internal internal-link alias" data-slug="data/numpy-broadcasting">브로드캐스팅 노트</a>는 이 요청에 맞춰 계산식·작은 배열·shape 표를 함께 썼다. 난수의 평균·표준편차와 feature별 표준화도 같은 규칙으로 연결했다.</p>
+<h2 id="퀴즈-실제로-답한-세-가지-브로드캐스팅-문제">퀴즈: 실제로 답한 세 가지 브로드캐스팅 문제<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#퀴즈-실제로-답한-세-가지-브로드캐스팅-문제" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>당시 제시된 배열은 다음과 같다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">a </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> np.array([[</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">10</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">20</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">30</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">], [</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">40</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">50</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">60</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">]])</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">b </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> np.array([</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">3</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">])</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">c </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> np.array([</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">100</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">200</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">])</span></span></code></pre></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>문제</th><th>실제 사용자 답</th><th>피드백</th></tr></thead><tbody><tr><td><code>a+b</code></td><td><code>(2,3)</code>, <code>[[11,22,33],[41,52,63]]</code>; b의 2가 두 행의 두 번째 값에 더해짐</td><td>결과와 대응 위치가 맞음</td></tr><tr><td><code>a+c</code></td><td>마지막 축 3과 2가 맞지 않아 오류</td><td>이유가 맞음</td></tr><tr><td><code>d=c[:,None]</code> 뒤 <code>a+d</code></td><td>d는 <code>(2,1)</code>, 결과 <code>[[101,120,130],[240,250,260]]</code></td><td>확장 방향은 맞고 첫 원소 산술만 수정 필요</td></tr></tbody></table></div>
+<details>
+<summary>세 번째 문제의 교정</summary>
+<p>첫 원소는 <code>10+100=110</code>이다. 올바른 결과는 <code>[[110,120,130],[240,250,260]]</code>다. 규칙을 잘못 적용한 것과 덧셈 하나를 잘못 적은 것을 구분한다.</p>
+</details>
+<p>이 답은 해당 세 문제에서 확인된 근거다. 브로드캐스팅 전체를 숙달했다는 증거로 확대하지 않는다.</p>
+<h2 id="질문-벡터의-길이와-표준편차는-어떻게-다르며-정규화하면-무엇을-잃는가">질문: 벡터의 길이와 표준편차는 어떻게 다르며, 정규화하면 무엇을 잃는가?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#질문-벡터의-길이와-표준편차는-어떻게-다르며-정규화하면-무엇을-잃는가" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>상황:</strong> 벡터 차이가 끝점 사이의 이동이라는 설명을 직접 제시한 뒤, 코사인 유사도와 배치 검색 실습으로 넘어갔다. norm의 axis, 분모 괄호, query의 1차원 shape, 길이 1의 의미를 차례로 물었다.</p>
+<p><strong>의도:</strong> 공식과 실제 배열 계산을 연결하고, 표준화와 L2 정규화가 보존하는 정보를 구분하려는 질문이다.</p>
+<p><strong>핵심 답변:</strong> 표준편차는 평균 주변의 퍼짐이고 벡터 norm은 원점에서의 길이다. L2 정규화는 방향을 유지하고 크기를 1로 만든다. 각 행을 벡터로 볼 때 <code>axis=1, keepdims=True</code>로 자기 길이를 나누고, 정규화된 벡터들의 행렬곱으로 코사인 유사도를 구한다.</p>
+<p><a href="../data/numpy-vectors-matmul" class="internal internal-link alias" data-slug="data/numpy-vectors-matmul">벡터·행렬곱·코사인 유사도</a>에 <code>a/b*c</code>와 <code>a/(b*c)</code>, <code>nplinalg</code> 이름 오류, <code>argmax</code>의 인덱스 의미도 함께 남겼다.</p>
+<h2 id="질문-feature를-10개에서-8개로-바꾸고-bias를-더하는-목적은-무엇인가">질문: feature를 10개에서 8개로 바꾸고 bias를 더하는 목적은 무엇인가?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#질문-feature를-10개에서-8개로-바꾸고-bias를-더하는-목적은-무엇인가" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>상황:</strong> 두 선형층에서 H와 Y를 계산한 뒤 shape 변화의 목적, feature의 의미, 편향의 필요성을 물었다.</p>
+<p><strong>의도:</strong> 실행되는 코드에서 한 걸음 더 나아가 무엇을 표현하고 학습하는지 확인하려는 질문이다.</p>
+<p><strong>핵심 답변:</strong> 가중치는 입력 특성의 조합을 만들고 편향은 입력이 0이어도 남는 출력을 표현한다. 중간 폭 8은 예제의 선택이다. 무작위 가중치로 순전파를 실행하는 것만으로 학습이 이루어지지는 않는다.</p>
+<p><a href="../data/numpy-linear-layers" class="internal internal-link alias" data-slug="data/numpy-linear-layers">선형층 노트</a>에서 샘플·feature·파라미터·중간값을 나눴다. 당시 답변에는 H <code>(32,8)</code>, Y <code>(32,3)</code>이 화면에 보였다는 진술이 있다. 이는 당시 관찰 보고이며, 이번 정리에서 원래 Colab 실행을 다시 확인한 것은 아니다.</p>
+<h2 id="마지막-자기-설명에서-남은-교정">마지막 자기 설명에서 남은 교정<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#마지막-자기-설명에서-남은-교정" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>대화 말미에는 학습 항목을 직접 설명한 긴 답이 있었다. 그 답과 이어진 피드백을 기준으로 다음을 다시 점검할 수 있다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>다시 구분할 내용</th><th>교정 기준</th></tr></thead><tbody><tr><td>shape·ndim·size</td><td>축별 길이 / 축 수 / 전체 원소 수를 구분한다. size에는 확신하지 못한 표현이 있었음</td></tr><tr><td>축의 뜻</td><td>axis=0이 본래 “행”이라는 뜻은 아니다. 해당 축의 값들을 줄이는 연산으로 읽는다</td></tr><tr><td>브로드캐스팅</td><td>같은 길이뿐 아니라 한쪽 길이가 1인 경우도 가능하다</td></tr><tr><td><code>+</code>와 <code>@</code></td><td><code>(N,D)+(D,)</code>의 재사용과 <code>(N,D)@(D,H)</code>의 가중합을 분리한다</td></tr><tr><td>norm과 표준편차</td><td>길이와 평균 주변 퍼짐은 다른 값이다</td></tr><tr><td>코사인 유사도</td><td>원소별 유사도를 나열하는 것이 아니라 벡터 한 쌍의 방향을 하나의 값으로 비교한다</td></tr><tr><td>argmax</td><td>최댓값의 위치를 받아 해당 후보를 조회한다</td></tr></tbody></table></div>
+<p>후속 독립 풀이 없이 위 항목이 모두 해결됐다고 기록하지 않는다. 복습에서는 숫자를 바꾼 문제로 shape과 값의 대응을 다시 설명하는 것이 확인 방법이다.</p>
+<h2 id="이어서-읽기와-복습">이어서 읽기와 복습<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#이어서-읽기와-복습" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="../data/numpy-array-axes" class="internal internal-link alias" data-slug="data/numpy-array-axes">배열과 축</a> → <a href="../data/numpy-shape-views" class="internal internal-link alias" data-slug="data/numpy-shape-views">shape과 뷰</a> → <a href="../data/numpy-broadcasting" class="internal internal-link alias" data-slug="data/numpy-broadcasting">브로드캐스팅</a></li>
+<li><a href="../data/numpy-vectors-matmul" class="internal internal-link alias" data-slug="data/numpy-vectors-matmul">벡터와 행렬곱</a> → <a href="../data/numpy-linear-layers" class="internal internal-link alias" data-slug="data/numpy-linear-layers">선형층</a></li>
+<li><a href="https://numpy.org/doc/stable/user/absolute_beginners.html" class="external external-link">NumPy 입문 문서<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ul>
+<p>개념 노트의 접힌 보충 퀴즈와 NotebookLM 복습 세트는 정리 후 추가하는 학습 자료다. 위 표의 실제 응답 기록과는 별개이며, 카드를 보거나 해설을 읽었다는 사실만으로 학습 완료를 판단하지 않는다.</p></div></article><hr/><div class="page-footer"><div class="backlinks"><h3>백링크</h3><ul id="list-0" class="overflow"><li><a href="../data/numpy-array-axes" class="internal">NumPy 배열 — shape과 axis를 주소로 읽기</a></li><li><a href="../data/numpy-broadcasting" class="internal">브로드캐스팅 — 어떤 값을 어디에 재사용하는가</a></li><li><a href="../data/numpy-linear-layers" class="internal">선형층 — 샘플은 유지하고 feature를 바꾸는 계산</a></li><li><a href="../data/numpy-shape-views" class="internal">NumPy 모양 변경 — 새 축, 뷰, reshape와 stack</a></li><li><a href="../data/numpy-vectors-matmul" class="internal">벡터의 길이에서 행렬곱과 코사인 유사도까지</a></li><li><a href="../" class="internal">HanThing Notes</a></li><li class="overflow-end"></li></ul></div></div></div><div class="right sidebar"></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="/">Home</a></li><li><a href="https://github.com/HanThing">GitHub</a></li></ul></footer></div></div></body><script src="../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../postscript-7ab7a94d.js" type="module" data-persist="true"></script></html>

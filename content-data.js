@@ -117,6 +117,159 @@ window.HANTHING_CONTENT = {
   ],
   "notes": [
     {
+      "id": "data/numpy-array-axes",
+      "title": "NumPy 배열 — shape과 axis를 주소로 읽기",
+      "description": "리스트와 ndarray의 차이부터 다차원 인덱싱, 불리언 선택과 축별 평균까지.",
+      "date": "2026-09-23",
+      "published": "2026-09-24",
+      "type": "concept",
+      "topics": [
+        "데이터 분석"
+      ],
+      "courseId": "data-analysis",
+      "lessonId": "data-toolkit",
+      "url": "/notes/data/numpy-array-axes",
+      "links": [
+        "learning/2026-09-23-numpy-and-tensors",
+        "data/observation-unit",
+        "data/numpy-vectors-matmul",
+        "data/numpy-shape-views",
+        "data/numpy-broadcasting"
+      ],
+      "sources": [
+        "Explain NumPy and tensors 학습 대화 (2026-09-23)",
+        "https://numpy.org/doc/stable/user/absolute_beginners.html",
+        "https://numpy.org/doc/stable/user/basics.indexing.html"
+      ]
+    },
+    {
+      "id": "data/numpy-broadcasting",
+      "title": "브로드캐스팅 — 어떤 값을 어디에 재사용하는가",
+      "description": "오른쪽 축 정렬, None과 keepdims, 정규분포 난수와 feature별 표준화를 연결한다.",
+      "date": "2026-09-23",
+      "published": "2026-09-24",
+      "type": "concept",
+      "topics": [
+        "데이터 분석"
+      ],
+      "courseId": "data-analysis",
+      "lessonId": "data-toolkit",
+      "url": "/notes/data/numpy-broadcasting",
+      "links": [
+        "learning/2026-09-23-numpy-and-tensors",
+        "data/numpy-array-axes",
+        "data/numpy-linear-layers",
+        "data/numpy-shape-views",
+        "data/numpy-vectors-matmul"
+      ],
+      "sources": [
+        "Explain NumPy and tensors 학습 대화 (2026-09-23)",
+        "https://numpy.org/doc/stable/user/basics.broadcasting.html",
+        "https://numpy.org/doc/stable/reference/random/generated/numpy.random.Generator.normal.html"
+      ]
+    },
+    {
+      "id": "data/numpy-linear-layers",
+      "title": "선형층 — 샘플은 유지하고 feature를 바꾸는 계산",
+      "description": "X @ W + b의 축, 가중치와 편향의 역할, 두 선형층과 학습의 차이를 설명한다.",
+      "date": "2026-09-23",
+      "published": "2026-09-24",
+      "type": "concept",
+      "topics": [
+        "데이터 분석"
+      ],
+      "courseId": "data-analysis",
+      "lessonId": "data-toolkit",
+      "url": "/notes/data/numpy-linear-layers",
+      "links": [
+        "data/numpy-array-axes",
+        "data/numpy-vectors-matmul",
+        "data/numpy-broadcasting",
+        "learning/2026-09-23-numpy-and-tensors"
+      ],
+      "sources": [
+        "Explain NumPy and tensors 학습 대화 (2026-09-23)",
+        "https://numpy.org/doc/stable/reference/generated/numpy.matmul.html",
+        "https://numpy.org/doc/stable/user/basics.broadcasting.html"
+      ]
+    },
+    {
+      "id": "data/numpy-shape-views",
+      "title": "NumPy 모양 변경 — 새 축, 뷰, reshape와 stack",
+      "description": "배열 객체와 데이터 공유를 구분하고 실제 값으로 모양 변경을 확인한다.",
+      "date": "2026-09-23",
+      "published": "2026-09-24",
+      "type": "concept",
+      "topics": [
+        "데이터 분석"
+      ],
+      "courseId": "data-analysis",
+      "lessonId": "data-toolkit",
+      "url": "/notes/data/numpy-shape-views",
+      "links": [
+        "learning/2026-09-23-numpy-and-tensors",
+        "data/numpy-array-axes",
+        "data/numpy-broadcasting"
+      ],
+      "sources": [
+        "Explain NumPy and tensors 학습 대화 (2026-09-23)",
+        "https://numpy.org/doc/stable/user/basics.copies.html",
+        "https://numpy.org/doc/stable/reference/generated/numpy.stack.html",
+        "https://numpy.org/doc/stable/reference/generated/numpy.concatenate.html"
+      ]
+    },
+    {
+      "id": "data/numpy-vectors-matmul",
+      "title": "벡터의 길이에서 행렬곱과 코사인 유사도까지",
+      "description": "원소별 곱과 내적, norm과 표준편차, 배치 벡터의 정규화와 검색을 구분한다.",
+      "date": "2026-09-23",
+      "published": "2026-09-24",
+      "type": "concept",
+      "topics": [
+        "데이터 분석"
+      ],
+      "courseId": "data-analysis",
+      "lessonId": "data-toolkit",
+      "url": "/notes/data/numpy-vectors-matmul",
+      "links": [
+        "learning/2026-09-23-numpy-and-tensors",
+        "data/numpy-array-axes",
+        "data/numpy-broadcasting",
+        "data/numpy-linear-layers",
+        "data/numpy-shape-views"
+      ],
+      "sources": [
+        "Explain NumPy and tensors 학습 대화 (2026-09-23)",
+        "https://numpy.org/doc/stable/reference/generated/numpy.matmul.html",
+        "https://numpy.org/doc/stable/reference/generated/numpy.linalg.norm.html"
+      ]
+    },
+    {
+      "id": "learning/2026-09-23-numpy-and-tensors",
+      "title": "NumPy와 텐서 — shape을 읽는 법에서 벡터 검색까지",
+      "description": "실제 질문, 브로드캐스팅 풀이, 마지막 자기 설명의 교정을 모은 9월 23일 학습 기록.",
+      "date": "2026-09-23",
+      "published": "2026-09-24",
+      "type": "journal",
+      "topics": [
+        "데이터 분석"
+      ],
+      "courseId": "data-analysis",
+      "lessonId": "data-toolkit",
+      "url": "/notes/learning/2026-09-23-numpy-and-tensors",
+      "links": [
+        "data/numpy-array-axes",
+        "data/numpy-shape-views",
+        "data/numpy-broadcasting",
+        "data/numpy-vectors-matmul",
+        "data/numpy-linear-layers"
+      ],
+      "sources": [
+        "Explain NumPy and tensors 학습 대화 (2026-09-23)",
+        "https://numpy.org/doc/stable/user/absolute_beginners.html"
+      ]
+    },
+    {
       "id": "python/loop-exit",
       "title": "반복문 종료와 for–else",
       "description": "break는 반복문을 끝낸다. for의 else는 항목을 모두 소진했을 때 실행한다.",
@@ -691,6 +844,306 @@ window.HANTHING_CONTENT = {
   ],
   "questions": [
     {
+      "id": "data/numpy-array-axes#질문-numpy는-그냥-같은-타입만-담는-리스트인가-텐서는-무엇인가",
+      "title": "NumPy는 그냥 같은 타입만 담는 리스트인가? 텐서는 무엇인가?",
+      "url": "/notes/data/numpy-array-axes#질문-numpy는-그냥-같은-타입만-담는-리스트인가-텐서는-무엇인가",
+      "topic": "데이터 분석",
+      "sourceTitle": "NumPy 배열 — shape과 axis를 주소로 읽기",
+      "context": "NumPy와 텐서를 처음 접하며, 배열을 리스트와 구분해야 하는 이유와 dtype이 제한하는 범위를 물었다.",
+      "intent": "문법보다 데이터 구조와 계산 방식의 차이를 이해하려는 질문이다.",
+      "answer": "ndarray는 N차원 배열이다. 숫자 배열은 하나의 dtype으로 해석하는 데이터 버퍼와 shape, strides 등의 정보를 함께 갖는다. 리스트처럼 각 항목의 파이썬 객체를 하나씩 다루는 방식과 달리, 많은 수치 연산을 NumPy 내부 루프로 처리할 수 있다. 배열이 항상 연속된 메모리를 차지하는 것은 아니다. 슬라이스나 전치로 만든 뷰는 다른 간격으로 같은 데이터를 읽을 수 있다."
+    },
+    {
+      "id": "data/numpy-array-axes#질문-shape-ndim-size와-벡터의-차원은-어떻게-다른가",
+      "title": "shape, ndim, size와 벡터의 차원은 어떻게 다른가?",
+      "url": "/notes/data/numpy-array-axes#질문-shape-ndim-size와-벡터의-차원은-어떻게-다른가",
+      "topic": "데이터 분석",
+      "sourceTitle": "NumPy 배열 — shape과 axis를 주소로 읽기",
+      "context": "ndarray의 N, 수학에서 배운 벡터의 차원, (5,)와 (1, 5)의 차이를 함께 질문했다.",
+      "intent": "같은 “차원”이라는 말이 서로 다른 대상을 세는 혼동을 풀려는 질문이다.",
+      "answer": "ndim은 축 개수, shape은 축별 길이, size는 전체 원소 수다. 수학의 벡터 차원은 여기서는 성분 개수다. [3, 4]는 2차원 벡터를 담은 1차원 배열이다."
+    },
+    {
+      "id": "data/numpy-array-axes#질문-arange는-무엇이고-배열은-어떻게-만드는가",
+      "title": "arange는 무엇이고, 배열은 어떻게 만드는가?",
+      "url": "/notes/data/numpy-array-axes#질문-arange는-무엇이고-배열은-어떻게-만드는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "NumPy 배열 — shape과 axis를 주소로 읽기",
+      "context": "np.arange(24).reshape(2, 3, 4)를 읽기 전에 arange부터 설명해 달라고 했고, 이후 linspace, zeros, ones도 물었다.",
+      "intent": "한 줄에 묶인 호출을 생성과 모양 변경으로 나누어 읽으려는 질문이다.",
+      "answer": "arange는 일정 간격으로 값을 만들고 끝값을 제외한다. linspace는 기본적으로 양 끝을 포함하여 지정한 개수만큼 만든다. zeros와 ones에는 원하는 shape을 준다."
+    },
+    {
+      "id": "data/numpy-array-axes#질문-x-0을-왜-아까는-행-지금은-열이라고-하나",
+      "title": "x[:, 0]을 왜 아까는 행, 지금은 열이라고 하나?",
+      "url": "/notes/data/numpy-array-axes#질문-x-0을-왜-아까는-행-지금은-열이라고-하나",
+      "topic": "데이터 분석",
+      "sourceTitle": "NumPy 배열 — shape과 axis를 주소로 읽기",
+      "context": "앞 설명의 배열은 3차원인데, 강사의 화면에는 2차원 점수표가 있었다. 같은 [:, 0]을 두고 설명이 달라져 질문했다.",
+      "intent": "표현이 달라진 이유가 인덱싱 규칙의 변화인지, 대상 배열의 변화인지 확인하려는 질문이다.",
+      "answer": "규칙은 같다. :는 그 축을 모두 유지하고, 정수 0은 해당 축의 첫 위치를 선택해 그 축을 없앤다. 당시 설명이 현재 화면의 shape을 먼저 확인하지 않아 혼동을 만들었다. 고차원에서 “행·열”만 외우면 이 차이를 놓친다."
+    },
+    {
+      "id": "data/numpy-array-axes#질문-axis0인데-왜-열-평균이고-axis1이면-샘플-평균인가",
+      "title": "axis=0인데 왜 열 평균이고, axis=1이면 샘플 평균인가?",
+      "url": "/notes/data/numpy-array-axes#질문-axis0인데-왜-열-평균이고-axis1이면-샘플-평균인가",
+      "topic": "데이터 분석",
+      "sourceTitle": "NumPy 배열 — shape과 axis를 주소로 읽기",
+      "context": "(100, 5) 배열에서 feature별 평균과 sample별 평균을 구하며 어떤 축을 지정할지 반복해서 확인했다.",
+      "intent": "남길 결과와 계산에 모을 축을 구분하려는 질문이다.",
+      "answer": "축약 연산의 axis에는 어느 번호를 움직이며 값들을 모을지를 적는다. (샘플, 특성) 배열에서 샘플 번호를 움직여 평균 내면 특성별 평균이 남는다."
+    },
+    {
+      "id": "data/numpy-array-axes#질문-조건에-맞는-값만-고르는-것과-행-전체를-고르는-것은-어떻게-다른가",
+      "title": "조건에 맞는 값만 고르는 것과 행 전체를 고르는 것은 어떻게 다른가?",
+      "url": "/notes/data/numpy-array-axes#질문-조건에-맞는-값만-고르는-것과-행-전체를-고르는-것은-어떻게-다른가",
+      "topic": "데이터 분석",
+      "sourceTitle": "NumPy 배열 — shape과 axis를 주소로 읽기",
+      "context": "점수 실습에서 불리언 인덱싱의 결과 shape을 물었고, 이후 X[X[:, 0] > 0]가 첫 feature가 양수인 행을 고르는지 확인했다.",
+      "intent": "조건 배열이 무엇을 선택하는지 안쪽부터 읽으려는 질문이다.",
+      "answer": "원본과 같은 shape의 불리언 마스크는 조건을 만족하는 원소들을 1차원으로 모은다. 첫 축 길이의 1차원 마스크는 행을 선택한다."
+    },
+    {
+      "id": "data/numpy-broadcasting#질문-수학에-없던-브로드캐스팅을-왜-쓰는가",
+      "title": "수학에 없던 브로드캐스팅을 왜 쓰는가?",
+      "url": "/notes/data/numpy-broadcasting#질문-수학에-없던-브로드캐스팅을-왜-쓰는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "브로드캐스팅 — 어떤 값을 어디에 재사용하는가",
+      "context": "행렬 덧셈은 같은 크기끼리 한다고 배웠는데 다른 shape을 더하는 기능이 등장해 필요성을 물었다.",
+      "intent": "규칙을 외우기 전에 해결하려는 문제를 이해하려는 질문이다.",
+      "answer": "모든 학생의 국어에 5점, 영어에 10점을 더하려면 보정값 [5, 10]을 학생마다 재사용하면 된다. 같은 보정 배열을 학생 수만큼 미리 복제할 필요가 없다. 계산은 여전히 각 원소에서 일어난다."
+    },
+    {
+      "id": "data/numpy-broadcasting#질문-5-5에-5를-더하면-어느-5에-맞추는가",
+      "title": "(5, 5)에 (5,)를 더하면 어느 5에 맞추는가?",
+      "url": "/notes/data/numpy-broadcasting#질문-5-5에-5를-더하면-어느-5에-맞추는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "브로드캐스팅 — 어떤 값을 어디에 재사용하는가",
+      "context": "앞뒤 축 길이가 모두 5라서 어느 방향으로 더하려는지 shape만으로 알 수 없다고 지적했다.",
+      "intent": "계산 방향이 수학적으로 필연적인지, 라이브러리의 약속인지 구분하려는 질문이다.",
+      "answer": "NumPy는 의도를 추측하지 않고 오른쪽부터 축을 맞춘다. 없는 앞축은 길이 1로 간주한다. 대응하는 길이가 같거나 한쪽이 1이면 계산할 수 있다. 어느 방향을 기본값으로 삼을지는 정해진 규칙이며, 다른 방향은 shape으로 표현한다."
+    },
+    {
+      "id": "data/numpy-broadcasting#질문-10-1과-5에서도-왜-10-5가-나오는가",
+      "title": "(10, 1)과 (5,)에서도 왜 (10, 5)가 나오는가?",
+      "url": "/notes/data/numpy-broadcasting#질문-10-1과-5에서도-왜-10-5가-나오는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "브로드캐스팅 — 어떤 값을 어디에 재사용하는가",
+      "context": "(10, 5) + (5,)와 (10, 1) + (5,)가 같은 결과 shape이라는 점을 질문했다.",
+      "intent": "큰 입력 하나에 맞추는 것으로만 이해한 규칙을 확장하려는 질문이다.",
+      "answer": "두 번째 식은 양쪽이 서로 다른 축에서 재사용된다. (10, 1)은 마지막 축에서, (1, 5)로 비교되는 다른 입력은 앞축에서 재사용된다. 결과가 어느 입력보다도 클 수 있다. shape이 같다고 값까지 같다는 뜻은 아니다."
+    },
+    {
+      "id": "data/numpy-broadcasting#질문-normal의-평균과-표준편차는-한-묶음-안의-숫자에-적용되는가",
+      "title": "normal의 평균과 표준편차는 한 묶음 안의 숫자에 적용되는가?",
+      "url": "/notes/data/numpy-broadcasting#질문-normal의-평균과-표준편차는-한-묶음-안의-숫자에-적용되는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "브로드캐스팅 — 어떤 값을 어디에 재사용하는가",
+      "context": "loc=[100, 50, 10], scale=[20, 5, 2], size=(1000, 3)으로 만든 데이터의 분포를 물었다.",
+      "intent": "샘플 안의 위치와 축, 모집단의 생성 기준과 실제 표본 통계를 구분하려는 질문이다.",
+      "answer": "각 열은 서로 다른 정규분포에서 생성된다. 첫 위치는 평균 100·표준편차 20인 분포, 두 번째는 50·5, 세 번째는 10·2다. 한 행의 세 숫자를 평균 내서 100, 50, 10을 얻는다는 뜻이 아니다."
+    },
+    {
+      "id": "data/numpy-broadcasting#질문-feature별-평균을-빼고-표준편차로-나누는-것도-브로드캐스팅인가",
+      "title": "feature별 평균을 빼고 표준편차로 나누는 것도 브로드캐스팅인가?",
+      "url": "/notes/data/numpy-broadcasting#질문-feature별-평균을-빼고-표준편차로-나누는-것도-브로드캐스팅인가",
+      "topic": "데이터 분석",
+      "sourceTitle": "브로드캐스팅 — 어떤 값을 어디에 재사용하는가",
+      "context": "표준화 실습에서 mean의 shape과 X - mean을 물었고, 당시 사용 코드에서는 std 계산이 사용보다 뒤에 있었다.",
+      "intent": "통계 공식과 배열의 실제 실행 순서를 연결하려는 질문이다.",
+      "answer": "(N, D) 데이터의 feature별 통계는 (D,)이다. j번째 feature의 평균과 표준편차를 모든 샘플에서 공통으로 쓴다. 정의하는 줄이 사용하는 줄보다 앞에 있어야 현재 X의 통계로 계산한다."
+    },
+    {
+      "id": "data/numpy-linear-layers#질문-feature란-무엇이며-이-배열에는-몇-개인가",
+      "title": "feature란 무엇이며, 이 배열에는 몇 개인가?",
+      "url": "/notes/data/numpy-linear-layers#질문-feature란-무엇이며-이-배열에는-몇-개인가",
+      "topic": "데이터 분석",
+      "sourceTitle": "선형층 — 샘플은 유지하고 feature를 바꾸는 계산",
+      "context": "선형층 단원을 읽다가 feature의 뜻과 개수를 물었다. 이어서 샘플별 평균과 feature별 평균을 구분하려 했다.",
+      "intent": "shape의 숫자가 실제 데이터에서 무엇을 세는지 알고 계산하려는 질문이다.",
+      "answer": "이 실습에서는 한 행이 샘플 하나, 한 열이 샘플을 설명하는 특성 하나다. X.shape=(32,10)이면 샘플 32개와 입력 feature 10개다. 이 배치는 문제에서 정한 약속이며 모든 배열의 첫 축이 항상 샘플인 것은 아니다."
+    },
+    {
+      "id": "data/numpy-linear-layers#질문-x--w-뒤에-b를-더할-때도-브로드캐스팅하는가",
+      "title": "X @ W 뒤에 b를 더할 때도 브로드캐스팅하는가?",
+      "url": "/notes/data/numpy-linear-layers#질문-x--w-뒤에-b를-더할-때도-브로드캐스팅하는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "선형층 — 샘플은 유지하고 feature를 바꾸는 계산",
+      "context": "행렬곱 결과에 1차원 편향을 더하는 코드와 결과 shape을 확인했다.",
+      "intent": "feature 변환과 반복 덧셈을 분리해 이해하려는 질문이다.",
+      "answer": "그렇다. X:(32,10), W:(10,5)이면 X@W:(32,5)다. b:(5,)를 더하면 같은 편향 5개가 모든 샘플에 재사용된다. b의 각 값은 샘플이 아니라 출력 feature에 대응한다."
+    },
+    {
+      "id": "data/numpy-linear-layers#질문-feature-10개를-8개로-왜-바꾸는가-무엇을-얻는가",
+      "title": "feature 10개를 8개로 왜 바꾸는가? 무엇을 얻는가?",
+      "url": "/notes/data/numpy-linear-layers#질문-feature-10개를-8개로-왜-바꾸는가-무엇을-얻는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "선형층 — 샘플은 유지하고 feature를 바꾸는 계산",
+      "context": "두 층을 연결하는 실습에서 (32,10) → (32,8) → (32,3)으로 바뀌는 shape을 보고 목적을 물었다.",
+      "intent": "곱셈이 가능하다는 사실을 넘어, 변환된 숫자를 만드는 이유를 알고 싶다는 질문이다.",
+      "answer": "입력 특성들을 다른 가중치로 조합해 다음 계산에 쓸 표현을 만든다. 8은 이 실습에서 선택한 출력 폭이지, 입력이 10이면 반드시 8로 줄여야 한다는 규칙이 아니다. 좋은 조합인지 여부는 과제와 학습 결과로 판단한다."
+    },
+    {
+      "id": "data/numpy-linear-layers#질문-bias는-왜-필요하며-b를-101로-바꾸면-되는가",
+      "title": "bias는 왜 필요하며, b를 (10,1)로 바꾸면 되는가?",
+      "url": "/notes/data/numpy-linear-layers#질문-bias는-왜-필요하며-b를-101로-바꾸면-되는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "선형층 — 샘플은 유지하고 feature를 바꾸는 계산",
+      "context": "가중치만으로 충분하지 않은 이유를 묻고, 브로드캐스팅을 위해 편향을 열 모양으로 바꾸는 방안을 제시했다.",
+      "intent": "편향의 역할과 shape 조작의 목적을 연결하려는 질문이다.",
+      "answer": "편향은 입력이 0이어도 남는 출력을 표현한다. 예를 들어 이익=.3*매출-50에서 고정비 -50이다. W만 쓰면 입력이 0일 때 출력도 0이다. 편향 shape은 출력 feature에 맞춰야 하며 무조건 (10,1)로 바꾸지 않는다."
+    },
+    {
+      "id": "data/numpy-linear-layers#질문-두-선형층에서-h와-y는-무엇이고-이것만으로-학습이-되는가",
+      "title": "두 선형층에서 H와 Y는 무엇이고, 이것만으로 학습이 되는가?",
+      "url": "/notes/data/numpy-linear-layers#질문-두-선형층에서-h와-y는-무엇이고-이것만으로-학습이-되는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "선형층 — 샘플은 유지하고 feature를 바꾸는 계산",
+      "context": "H=X@W1+b1, Y=H@W2+b2인 도전 문제를 다루며 두 결과의 역할과 전체 계산 목적을 물었다.",
+      "intent": "중간값과 파라미터, 계산 실행과 학습을 구분하려는 질문이다.",
+      "answer": "H는 첫 층이 계산한 중간 표현이고 Y는 두 번째 층의 출력이다. W와 b가 바뀌지 않는다면 같은 식으로 출력만 계산하는 순전파다. 학습에는 목표와의 오차를 평가하고 W와 b를 갱신하는 과정이 추가로 필요하다."
+    },
+    {
+      "id": "data/numpy-shape-views#질문-none으로-축을-추가하면-새-배열인가-원래-배열을-바꾸는가",
+      "title": "None으로 축을 추가하면 새 배열인가, 원래 배열을 바꾸는가?",
+      "url": "/notes/data/numpy-shape-views#질문-none으로-축을-추가하면-새-배열인가-원래-배열을-바꾸는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "NumPy 모양 변경 — 새 축, 뷰, reshape와 stack",
+      "context": "x[:, None]을 본 뒤 원본 shape도 바뀌는지, 새 배열이라면 데이터도 복사하는지 물었다.",
+      "intent": "“새 ndarray”와 “새 데이터”를 분리해서 이해하려는 질문이다.",
+      "answer": "이 기본 인덱싱은 같은 데이터를 공유하는 새 배열 객체인 뷰를 만든다. 원본 객체의 shape은 그대로지만 공유 데이터의 값을 바꾸면 양쪽에서 보인다. None은 이 자리에서 새 축을 넣는 인덱스이며 함수가 아니다. np.newaxis와 같다."
+    },
+    {
+      "id": "data/numpy-shape-views#질문-concatenate와-stack은-고차원에서-실제로-무엇이-달라지는가",
+      "title": "concatenate와 stack은 고차원에서 실제로 무엇이 달라지는가?",
+      "url": "/notes/data/numpy-shape-views#질문-concatenate와-stack은-고차원에서-실제로-무엇이-달라지는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "NumPy 모양 변경 — 새 축, 뷰, reshape와 stack",
+      "context": "추상적인 shape 설명 대신 실제 숫자가 있는 예를 요청했고, stack(axis=1)이 원래 배열을 전치하는 것처럼 보인다고 물었다.",
+      "intent": "축 번호만 외우지 않고 어느 값이 어느 주소로 가는지 확인하려는 질문이다.",
+      "answer": "concatenate는 기존 축을 늘린다. 연결 축을 제외한 shape이 같아야 한다. stack은 같은 shape의 배열들에 새 축을 넣고, 그 새 축의 번호로 원본 배열을 고른다. 두 연산 모두 여기서 입력을 브로드캐스팅해 맞춰 주지 않는다."
+    },
+    {
+      "id": "data/numpy-vectors-matmul#질문-두-벡터를-빼는-것이-왜-거리와-연결되는가",
+      "title": "두 벡터를 빼는 것이 왜 거리와 연결되는가?",
+      "url": "/notes/data/numpy-vectors-matmul#질문-두-벡터를-빼는-것이-왜-거리와-연결되는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "벡터의 길이에서 행렬곱과 코사인 유사도까지",
+      "context": "벡터 단원에서 두 끝점 사이의 거리를 읽고, 두 벡터의 차이가 한 끝점에서 다른 끝점으로 이동하는 벡터라는 설명을 직접 제시했다.",
+      "intent": "거리 공식을 외우기보다 빼기와 길이의 관계를 확인하려는 질문이다.",
+      "answer": "a=[1,2], b=[4,6]이면 b-a=[3,4]는 a에서 b로 가는 이동이다. 그 길이 sqrt(3²+4²)=5가 두 점 사이 거리다. 반대로 빼면 방향은 반대지만 길이는 같다."
+    },
+    {
+      "id": "data/numpy-vectors-matmul#질문-행렬의--연산도-행렬곱이라고-생각했는데-무엇이-다른가",
+      "title": "행렬의 * 연산도 행렬곱이라고 생각했는데, 무엇이 다른가?",
+      "url": "/notes/data/numpy-vectors-matmul#질문-행렬의--연산도-행렬곱이라고-생각했는데-무엇이-다른가",
+      "topic": "데이터 분석",
+      "sourceTitle": "벡터의 길이에서 행렬곱과 코사인 유사도까지",
+      "context": "행렬곱 단원으로 넘어가며 *를 행렬곱이라고 생각했다고 밝혔다.",
+      "intent": "연산 기호가 바뀌면 원소를 결합하는 방식이 어떻게 달라지는지 확인하려는 질문이다.",
+      "answer": "*는 대응하는 원소끼리 곱한다. @는 1차원 배열끼리면 내적, 2차원 배열끼리면 행렬곱이다. 행렬곱에서는 왼쪽의 한 행과 오른쪽의 한 열을 곱해 더한다."
+    },
+    {
+      "id": "data/numpy-vectors-matmul#질문-코사인-유사도에서-norm은-왜-axis1인가-query에도-axis1을-쓰는가",
+      "title": "코사인 유사도에서 norm은 왜 axis=1인가? query에도 axis=1을 쓰는가?",
+      "url": "/notes/data/numpy-vectors-matmul#질문-코사인-유사도에서-norm은-왜-axis1인가-query에도-axis1을-쓰는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "벡터의 길이에서 행렬곱과 코사인 유사도까지",
+      "context": "E.shape=(100,64), query.shape=(64,)인 검색 문제에서 행별 norm과 query의 norm을 계산하려 했다. 샘플 100개가 있는 축과 길이를 계산할 축을 혼동하기 쉬운 지점이었다.",
+      "intent": "축 이름 대신 실제로 합쳐지는 성분을 기준으로 계산하려는 질문이다.",
+      "answer": "E의 각 행이 벡터 하나라면 64개 성분을 제곱해 더해야 한다. 따라서 마지막 축인 axis=1을 줄여 길이 100개를 얻는다. query는 1차원이므로 axis=1 자체가 없다."
+    },
+    {
+      "id": "data/numpy-vectors-matmul#질문-a--b--c는-a--b--c와-같은가",
+      "title": "a / b * c는 a / (b * c)와 같은가?",
+      "url": "/notes/data/numpy-vectors-matmul#질문-a--b--c는-a--b--c와-같은가",
+      "topic": "데이터 분석",
+      "sourceTitle": "벡터의 길이에서 행렬곱과 코사인 유사도까지",
+      "context": "코사인 유사도의 분모에 두 norm을 넣는 코드를 작성하다 연산 순서를 물었다. 이후 nplinalg.norm(query)라는 이름 오류도 나타났다.",
+      "intent": "수식의 분모 전체를 파이썬으로 옮기는 방법과 코드 오류 위치를 구분하려는 질문이다.",
+      "answer": "*와 /는 우선순위가 같고 왼쪽부터 계산한다. a/b*c는 (a/b)*c다. 분모가 b*c이면 괄호가 필요하다. 라이브러리 호출은 점을 포함한 np.linalg.norm(query)다."
+    },
+    {
+      "id": "data/numpy-vectors-matmul#질문-표준화와-norm으로-나누기는-무엇이-다른가-길이가-1이면-원래-정보는-사라지는가",
+      "title": "표준화와 norm으로 나누기는 무엇이 다른가? 길이가 1이면 원래 정보는 사라지는가?",
+      "url": "/notes/data/numpy-vectors-matmul#질문-표준화와-norm으로-나누기는-무엇이-다른가-길이가-1이면-원래-정보는-사라지는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "벡터의 길이에서 행렬곱과 코사인 유사도까지",
+      "context": "표준편차로 나눈 앞 실습과 벡터 길이로 나누는 검색 실습을 비교했다. 정규화한 벡터가 기저인지, 길이가 없어지는 것인지, 원래 정보가 어떻게 되는지도 물었다.",
+      "intent": "비슷하게 보이는 나눗셈이 서로 다른 정보를 보존한다는 점을 이해하려는 질문이다.",
+      "answer": "feature별 표준화는 (X-평균)/표준편차로 각 특성의 기준과 척도를 맞춘다. L2 정규화는 각 벡터를 자기 길이로 나눠 방향은 유지하고 길이를 1로 만든다. 길이가 없어지는 것은 아니며, 정규화 결과만 남기면 원래 크기를 복원할 수 없다."
+    },
+    {
+      "id": "data/numpy-vectors-matmul#질문-keepdims가-없으면-왜-안-되는가-axis0으로-나누거나-전치하면-되는가",
+      "title": "keepdims가 없으면 왜 안 되는가? axis=0으로 나누거나 전치하면 되는가?",
+      "url": "/notes/data/numpy-vectors-matmul#질문-keepdims가-없으면-왜-안-되는가-axis0으로-나누거나-전치하면-되는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "벡터의 길이에서 행렬곱과 코사인 유사도까지",
+      "context": "query 10개와 임베딩 1,000개를 한꺼번에 비교하는 문제에서 행별 norm의 (10,)과 (10,1) 차이, 전치를 통한 해결 가능성을 물었다.",
+      "intent": "각 벡터에 자기 길이가 적용되도록 shape을 맞추려는 질문이다.",
+      "answer": "(10,64)를 행별 길이 (10,1)로 나누면 각 행의 64개 성분에 같은 길이가 적용된다. (10,)은 오른쪽 정렬에서 64와 충돌한다. 1차원 배열의 .T는 shape을 바꾸지 않는다. axis=0은 계산 대상 자체를 바꾼다."
+    },
+    {
+      "id": "learning/2026-09-23-numpy-and-tensors#질문-numpy의-본질은-무엇이고-처음-보는-텐서는-어떻게-이해해야-하는가",
+      "title": "NumPy의 본질은 무엇이고, 처음 보는 텐서는 어떻게 이해해야 하는가?",
+      "url": "/notes/learning/2026-09-23-numpy-and-tensors#질문-numpy의-본질은-무엇이고-처음-보는-텐서는-어떻게-이해해야-하는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "NumPy와 텐서 — shape을 읽는 법에서 벡터 검색까지",
+      "context": "텐서를 처음 접한 상태에서 NumPy를 기능 목록보다 본질부터 설명해 달라고 요청했다. 이후 “축·인덱싱이 특별한가”, “숫자만 다루는가”, “dtype 때문에 빠른가”라는 질문으로 이어졌다.",
+      "intent": "새로운 용어를 기존 파이썬 리스트·객체 개념과 연결해 이해하려는 질문이다.",
+      "answer": "이 실습의 텐서는 여러 축을 가진 수치 배열로 출발하면 된다. NumPy의 ndarray는 데이터와 dtype·shape·strides 같은 정보를 함께 다룬다. 배열 연산을 한꺼번에 표현할 수 있지만, 문자열·object dtype도 있어 모든 배열이 숫자만 담거나 같은 성능을 내는 것은 아니다."
+    },
+    {
+      "id": "learning/2026-09-23-numpy-and-tensors#질문-아까는-x0이-행이라더니-수업에서는-왜-열인가",
+      "title": "아까는 x[:,0]이 행이라더니, 수업에서는 왜 열인가?",
+      "url": "/notes/learning/2026-09-23-numpy-and-tensors#질문-아까는-x0이-행이라더니-수업에서는-왜-열인가",
+      "topic": "데이터 분석",
+      "sourceTitle": "NumPy와 텐서 — shape을 읽는 법에서 벡터 검색까지",
+      "context": "3차원 예의 x[:,0] 설명과 수업의 2차원 배열 설명을 비교하며 모순을 지적했다.",
+      "intent": "앞 설명의 전제가 달라졌는지, 같은 문법의 의미가 달라진 것인지 확인하려는 질문이다.",
+      "answer": "인덱스는 항상 앞축부터 대응한다. (2,3,4)의 x[:,0]은 두 묶음에서 두 번째 축의 첫 항목을 골라 (2,4)가 된다. (3,4)의 x[:,0]은 각 행에서 첫 성분을 골라 (3,)가 된다. shape을 생략한 채 행·열 이름만 붙였던 설명이 혼동을 만들었다."
+    },
+    {
+      "id": "learning/2026-09-23-numpy-and-tensors#질문-축을-추가하면-새-배열인가-값을-바꾸면-원본도-달라지는가",
+      "title": "축을 추가하면 새 배열인가? 값을 바꾸면 원본도 달라지는가?",
+      "url": "/notes/learning/2026-09-23-numpy-and-tensors#질문-축을-추가하면-새-배열인가-값을-바꾸면-원본도-달라지는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "NumPy와 텐서 — shape을 읽는 법에서 벡터 검색까지",
+      "context": "None, reshape, concatenate, stack을 배우면서 새 배열이라는 말이 복사라는 뜻인지 물었다. 고차원 배열의 shape을 개발자가 어떻게 추적하는지도 질문했다.",
+      "intent": "객체가 새로 생기는 것과 데이터가 복제되는 것을 구분하고, 실제 값이 어디로 가는지 확인하려는 질문이다.",
+      "answer": "x[:,None]은 별도 ndarray 객체지만 원본 데이터를 공유하는 뷰다. .copy()와 다르다. concatenate는 기존 축을 이어 붙이고 stack은 새 축을 만든다. shape만 같아도 원소 배치는 다를 수 있으므로 작은 배열에서 인덱스를 대응시켜 본다."
+    },
+    {
+      "id": "learning/2026-09-23-numpy-and-tensors#질문-브로드캐스팅은-왜-필요하며-설명이-왜-아직-추상적인가",
+      "title": "브로드캐스팅은 왜 필요하며, 설명이 왜 아직 추상적인가?",
+      "url": "/notes/learning/2026-09-23-numpy-and-tensors#질문-브로드캐스팅은-왜-필요하며-설명이-왜-아직-추상적인가",
+      "topic": "데이터 분석",
+      "sourceTitle": "NumPy와 텐서 — shape을 읽는 법에서 벡터 검색까지",
+      "context": "같은 크기의 행렬끼리 더한다는 수학 규칙과 브로드캐스팅의 차이, (10,5)+(5,), (10,1)+(5,), (5,5)+(5,)의 계산 방향을 연달아 물었다. 설명이 추상적이라고 말했고, 학습 깊이를 임의로 제한하지 말라고 요청했다.",
+      "intent": "규칙만 암기하는 대신 각 값이 어느 위치에 재사용되는지 납득하려는 질문이다.",
+      "answer": "오른쪽부터 축을 맞추고 길이가 같거나 한쪽이 1이면 확장한다. “모든 학생에게 과목별 보정 점수를 더한다”처럼 목적을 잡고, result[i,j]에 들어가는 값을 직접 계산하면 재사용 방향이 드러난다."
+    },
+    {
+      "id": "learning/2026-09-23-numpy-and-tensors#질문-벡터의-길이와-표준편차는-어떻게-다르며-정규화하면-무엇을-잃는가",
+      "title": "벡터의 길이와 표준편차는 어떻게 다르며, 정규화하면 무엇을 잃는가?",
+      "url": "/notes/learning/2026-09-23-numpy-and-tensors#질문-벡터의-길이와-표준편차는-어떻게-다르며-정규화하면-무엇을-잃는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "NumPy와 텐서 — shape을 읽는 법에서 벡터 검색까지",
+      "context": "벡터 차이가 끝점 사이의 이동이라는 설명을 직접 제시한 뒤, 코사인 유사도와 배치 검색 실습으로 넘어갔다. norm의 axis, 분모 괄호, query의 1차원 shape, 길이 1의 의미를 차례로 물었다.",
+      "intent": "공식과 실제 배열 계산을 연결하고, 표준화와 L2 정규화가 보존하는 정보를 구분하려는 질문이다.",
+      "answer": "표준편차는 평균 주변의 퍼짐이고 벡터 norm은 원점에서의 길이다. L2 정규화는 방향을 유지하고 크기를 1로 만든다. 각 행을 벡터로 볼 때 axis=1, keepdims=True로 자기 길이를 나누고, 정규화된 벡터들의 행렬곱으로 코사인 유사도를 구한다."
+    },
+    {
+      "id": "learning/2026-09-23-numpy-and-tensors#질문-feature를-10개에서-8개로-바꾸고-bias를-더하는-목적은-무엇인가",
+      "title": "feature를 10개에서 8개로 바꾸고 bias를 더하는 목적은 무엇인가?",
+      "url": "/notes/learning/2026-09-23-numpy-and-tensors#질문-feature를-10개에서-8개로-바꾸고-bias를-더하는-목적은-무엇인가",
+      "topic": "데이터 분석",
+      "sourceTitle": "NumPy와 텐서 — shape을 읽는 법에서 벡터 검색까지",
+      "context": "두 선형층에서 H와 Y를 계산한 뒤 shape 변화의 목적, feature의 의미, 편향의 필요성을 물었다.",
+      "intent": "실행되는 코드에서 한 걸음 더 나아가 무엇을 표현하고 학습하는지 확인하려는 질문이다.",
+      "answer": "가중치는 입력 특성의 조합을 만들고 편향은 입력이 0이어도 남는 출력을 표현한다. 중간 폭 8은 예제의 선택이다. 무작위 가중치로 순전파를 실행하는 것만으로 학습이 이루어지지는 않는다."
+    },
+    {
       "id": "learning/2026-09-18-collections-and-palindrome#질문-회문-문제의-대소문자를-무시한다는-조건은-어떻게-충족할까",
       "title": "회문 문제의 대소문자를 무시한다는 조건은 어떻게 충족할까?",
       "url": "/notes/learning/2026-09-18-collections-and-palindrome#질문-회문-문제의-대소문자를-무시한다는-조건은-어떻게-충족할까",
@@ -1162,6 +1615,48 @@ window.HANTHING_CONTENT = {
     }
   ],
   "quizzes": [
+    {
+      "id": "data/numpy-array-axes#퀴즈-무엇을-모으고-무엇을-남길까",
+      "title": "무엇을 모으고 무엇을 남길까?",
+      "url": "/notes/data/numpy-array-axes#퀴즈-무엇을-모으고-무엇을-남길까",
+      "topic": "데이터 분석",
+      "sourceTitle": "NumPy 배열 — shape과 axis를 주소로 읽기"
+    },
+    {
+      "id": "data/numpy-broadcasting#퀴즈-행마다-자기-평균을-빼려면",
+      "title": "행마다 자기 평균을 빼려면?",
+      "url": "/notes/data/numpy-broadcasting#퀴즈-행마다-자기-평균을-빼려면",
+      "topic": "데이터 분석",
+      "sourceTitle": "브로드캐스팅 — 어떤 값을 어디에 재사용하는가"
+    },
+    {
+      "id": "data/numpy-linear-layers#퀴즈-배치-크기를-바꾸면-가중치-수가-달라지는가",
+      "title": "배치 크기를 바꾸면 가중치 수가 달라지는가?",
+      "url": "/notes/data/numpy-linear-layers#퀴즈-배치-크기를-바꾸면-가중치-수가-달라지는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "선형층 — 샘플은 유지하고 feature를 바꾸는 계산"
+    },
+    {
+      "id": "data/numpy-shape-views#퀴즈-객체와-데이터는-각각-몇-개인가",
+      "title": "객체와 데이터는 각각 몇 개인가?",
+      "url": "/notes/data/numpy-shape-views#퀴즈-객체와-데이터는-각각-몇-개인가",
+      "topic": "데이터 분석",
+      "sourceTitle": "NumPy 모양 변경 — 새 축, 뷰, reshape와 stack"
+    },
+    {
+      "id": "data/numpy-vectors-matmul#퀴즈-행별-단위-벡터의-유사도-표는-어떤-shape인가",
+      "title": "행별 단위 벡터의 유사도 표는 어떤 shape인가?",
+      "url": "/notes/data/numpy-vectors-matmul#퀴즈-행별-단위-벡터의-유사도-표는-어떤-shape인가",
+      "topic": "데이터 분석",
+      "sourceTitle": "벡터의 길이에서 행렬곱과 코사인 유사도까지"
+    },
+    {
+      "id": "learning/2026-09-23-numpy-and-tensors#퀴즈-실제로-답한-세-가지-브로드캐스팅-문제",
+      "title": "실제로 답한 세 가지 브로드캐스팅 문제",
+      "url": "/notes/learning/2026-09-23-numpy-and-tensors#퀴즈-실제로-답한-세-가지-브로드캐스팅-문제",
+      "topic": "데이터 분석",
+      "sourceTitle": "NumPy와 텐서 — shape을 읽는 법에서 벡터 검색까지"
+    },
     {
       "id": "python/loop-exit#퀴즈-끝까지-찾지-못하면-무엇이-출력될까",
       "title": "끝까지 찾지 못하면 무엇이 출력될까?",
