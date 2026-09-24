@@ -6,53 +6,83 @@
   <meta name="theme-color" content="#050505">
   <script src="theme.js"></script>
   <meta name="description" content="배운 날의 기록, 남겨 둔 질문, 다시 풀어 볼 퀴즈. HanThing의 연결된 학습 노트.">
-  <title>HanThing — Learning, connected.</title>
+  <title>HanThing — 지식 지도</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2306080c'/%3E%3Cpath d='M32 9l5 18 18 5-18 5-5 18-5-18-18-5 18-5z' fill='%23e5edff'/%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20260924-motion">
   <link rel="canonical" href="https://hanthing.github.io/">
-  <meta property="og:title" content="HanThing — Learning, connected.">
+  <meta property="og:title" content="HanThing — 지식 지도">
   <meta property="og:description" content="학습 기록과 질문, 퀴즈를 다시 펼치며 배움을 연결합니다.">
   <meta property="og:url" content="https://hanthing.github.io/">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://hanthing.github.io/notes/static/og-image.png">
-  <meta property="og:image:alt" content="HanThing의 별 입자 로고와 Learning, connected. 문구">
+  <meta property="og:image:alt" content="HanThing — 배운 내용을 연결하는 지식 지도">
   <script src="content-data.js" defer></script>
   <script src="leo-constellation.js" defer></script>
-  <script src="main.js" defer></script>
+  <script src="main.js?v=20260924-motion" defer></script>
   <script src="catalog.js" defer></script>
 </head>
-<body>
+<body data-node-transition="on">
   <canvas id="starfield-canvas" aria-hidden="true"></canvas>
   <a class="skip-link" href="#journal">본문으로 건너뛰기</a>
   <header class="site-header">
+    <button id="map-toggle" class="map-toggle" type="button" aria-label="노트 탐색 열기" aria-controls="map-sidebar" aria-expanded="false">☰</button>
     <a class="wordmark" href="#home" aria-label="HanThing 처음으로">HanThing<span class="brand-star" aria-hidden="true">✳</span></a>
-    <nav aria-label="주 메뉴">
-      <a href="#journal">기록</a>
-      <a href="#questions">질문</a>
-      <a href="#quizzes">퀴즈</a>
-      <a href="#brain">지식 지도</a>
-    </nav>
+    <nav aria-label="주 메뉴"><a href="review.html">복습하기 ↗</a></nav>
     <button class="theme-toggle" type="button" data-theme-toggle aria-label="밝은 화면으로 전환">밝게</button>
   </header>
 
   <main>
     <section class="hero" id="home" aria-labelledby="hero-title">
-      <div class="hero-frame">
-        <div class="hero-intro"><span class="small-star" aria-hidden="true"></span> A LEARNING UNIVERSE</div>
-        <h1 id="hero-title"><span>Learning,</span><span>connected.</span></h1>
-        <div class="hero-bottom"><p>배운 것을 남기고,<br>다음 질문으로 이어갑니다.</p></div>
+      <div class="hero-heading"><p class="eyebrow">HANTHING / SECOND BRAIN</p><h1 id="hero-title">배움의 연결</h1></div>
+      <div id="brain" class="map-workspace">
+        <aside class="map-sidebar" id="map-sidebar" aria-label="노트 탐색" hidden>
+          <div class="drawer-heading"><h2>노트 탐색</h2><button id="map-close" class="icon-close" type="button" aria-label="노트 탐색 닫기">×</button></div>
+          <div class="map-filters">
+            <section class="today-review" aria-labelledby="today-review-title"><h3 id="today-review-title">오늘 다시 볼 것</h3><div id="today-review-list"><p>복습 기록을 불러오는 중입니다.</p></div></section>
+            <label for="graph-search">노트 찾기<input id="graph-search" type="search" placeholder="제목이나 내용 검색" autocomplete="off"></label>
+            <div class="map-selects">
+              <label for="graph-course">학습 과정<select id="graph-course"><option value="">모든 과정</option></select></label>
+              <label for="graph-lesson">수업<select id="graph-lesson"><option value="">모든 수업</option></select></label>
+            </div>
+            <details class="extra-filters"><summary>노트 종류</summary><label for="graph-type" class="visually-hidden">종류</label><select id="graph-type"><option value="">모든 노트</option><option value="concept">개념</option><option value="journal">날짜별 기록</option><option value="weekly">위클리 페이퍼</option><option value="project">프로젝트</option></select></details>
+            <p id="graph-count" class="result-count" role="status" aria-live="polite"></p>
+            <div id="topic-list" class="topic-list" aria-label="검색 결과"></div>
+          </div>
+        </aside>
+        <div class="graph-stage" id="graph-stage">
+          <div id="graph-canvas" tabindex="0" role="group" aria-label="3차원 지식 지도. 방향키로 회전, 더하기와 빼기 키로 확대와 축소" aria-describedby="graph-instruction"></div>
+          <div id="graph-labels" class="graph-labels" aria-label="지도에서 노트 선택"></div>
+          <details class="graph-settings"><summary aria-label="지도 보기 설정">···</summary><div class="graph-controls" aria-label="지도 보기 조절">
+            <button id="graph-zoom-out" type="button" aria-label="지도 축소">−</button><button id="graph-zoom-in" type="button" aria-label="지도 확대">+</button><button id="graph-reset" type="button">처음 보기</button>
+            <button class="motion-toggle" id="motion-toggle" aria-label="애니메이션 일시정지" aria-pressed="false">Ⅱ</button>
+            <p>점은 노트, 선은 노트 사이의 연결입니다.</p>
+          </div></details>
+          <p class="graph-instruction" id="graph-instruction">드래그하여 회전 · 점을 눌러 노트 열기</p>
+          <p class="graph-empty" id="graph-empty" hidden>조건에 맞는 노트가 없습니다.<br>검색어나 필터를 바꿔보세요.</p>
+        </div>
+        <aside class="node-detail" id="node-detail" aria-labelledby="node-title" hidden>
+          <button class="icon-close" id="node-close" type="button" aria-label="노트 설명 닫기">×</button>
+          <p class="eyebrow" id="node-type">LEARNING NOTE</p>
+          <h2 id="node-title" tabindex="-1"></h2>
+          <p id="node-description"></p>
+          <a id="node-read" class="node-read" href="notes/">노트 읽기 <span aria-hidden="true">↗</span></a>
+          <div id="node-review-links" class="node-review-links"></div>
+          <details id="node-related" hidden><summary class="detail-label">연결된 노트</summary><ul id="node-notes"></ul></details>
+        </aside>
       </div>
+      <div class="hero-bottom"><span id="map-total"></span><a href="#journal">학습 노트 ↓</a></div>
+      <noscript><p class="empty-state">지도를 사용하려면 JavaScript를 켜 주세요. <a href="notes/">위키에서 모든 노트 읽기 ↗</a></p></noscript>
     </section>
 
     <section id="journal" class="journal-section content-section" aria-labelledby="journal-title">
       <div class="section-heading">
-        <div><p class="eyebrow">LEARNING NOTES</p><h2 id="journal-title">최근 기록부터.</h2></div>
-        <a class="text-link" href="notes/bootcamp/guide">코드잇 학습 안내 <span aria-hidden="true">↗</span></a>
+        <div><p class="eyebrow">LEARNING NOTES</p><h2 id="journal-title">학습 노트</h2></div>
+        <div class="course-links" aria-label="코드잇 공식 안내"><a class="text-link" href="https://discord.com/channels/1542383524290494535/1542383525930729546" target="_blank" rel="noopener noreferrer">공식 Discord ↗</a><a class="text-link" href="https://docs.google.com/spreadsheets/d/1vF_S-DV4Pm0qRnsspfpEmKRvyj0j4Miam4YofqXPM04/edit?gid=624392885" target="_blank" rel="noopener noreferrer">전체 커리큘럼 ↗</a></div>
       </div>
       <div class="record-filters">
         <label class="search-field" for="record-search"><span>기록 검색</span><input id="record-search" type="search" placeholder="제목, 내용, 주제" autocomplete="off"></label>
-        <label for="record-type"><span>종류</span><select id="record-type"><option value="">모든 기록</option value="journal">학습 기록</option><option value="concept">개념 노트</option><option value="weekly">위클리 페이퍼</option><option value="project">프로젝트</option></select></label>
-        <label for="record-topic"><span>학습 과정</span><select id="record-topic"><option value="">모든 과정</option></select></label>
+        <label for="record-course"><span>학습 과정</span><select id="record-course"><option value="">모든 과정</option></select></label>
+        <label for="record-lesson"><span>수업</span><select id="record-lesson"><option value="">모든 수업</option></select></label>
       </div>
       <p id="record-count" class="result-count" role="status" aria-live="polite"></p>
       <div id="record-list" class="record-list"></div>
@@ -63,7 +93,7 @@
 
     <section id="questions" class="content-section collection-section" aria-labelledby="questions-title">
       <div class="section-heading">
-        <div><p class="eyebrow">QUESTIONS</p><h2 id="questions-title">질문을 다시 펼치면.</h2></div>
+        <div><p class="eyebrow">QUESTIONS</p><h2 id="questions-title">공부하며 남긴 질문</h2></div>
         <p class="section-description">질문을 펼쳐 맥락과 답변을 확인합니다.<br>의도는 대화 맥락을 바탕으로 정리했습니다.</p>
       </div>
       <div class="collection-tools"><label for="question-search"><span class="visually-hidden">질문 검색</span><input id="question-search" type="search" placeholder="질문이나 주제 찾기" autocomplete="off"></label><p id="question-count" class="result-count" role="status" aria-live="polite"></p></div>
@@ -73,45 +103,12 @@
 
     <section id="quizzes" class="content-section collection-section" aria-labelledby="quizzes-title">
       <div class="section-heading">
-        <div><p class="eyebrow">TRY IT AGAIN</p><h2 id="quizzes-title">생각하고, 확인하고.</h2></div>
+        <div><p class="eyebrow">TRY IT AGAIN</p><h2 id="quizzes-title">퀴즈와 플래시카드</h2></div>
         <p class="section-description">답을 보기 전에 한 번 생각해 보고,<br>해설과 나의 이유를 비교해 봅니다.</p>
       </div>
       <div class="collection-tools"><label for="quiz-search"><span class="visually-hidden">퀴즈 검색</span><input id="quiz-search" type="search" placeholder="퀴즈나 주제 찾기" autocomplete="off"></label><p id="quiz-count" class="result-count" role="status" aria-live="polite"></p></div>
       <div id="quiz-list" class="collection-list"></div>
       <p id="quiz-empty" class="empty-state" hidden></p>
-      <div id="projects" class="review-labs" aria-labelledby="labs-title">
-        <h3 id="labs-title">직접 바꾸며 살펴보기</h3>
-        <div class="lab-grid">
-          <a class="lab-link project-card" href="learning/python-lab.html"><span class="lab-symbol" aria-hidden="true">{ }</span><div><span class="eyebrow">PYTHON</span><h4>코드가 움직이는 방식</h4><p>import부터 정렬까지, 값의 흐름을 따라가는 8개 실험</p></div><span aria-hidden="true">↗</span></a>
-          <a class="lab-link project-card" href="learning/data-science-overview.html"><span class="lab-symbol" aria-hidden="true">∿</span><div><span class="eyebrow">DATA SCIENCE</span><h4>데이터를 읽는 눈</h4><p>표와 그래프를 바꾸며 해석을 살펴보는 6개 단원</p></div><span aria-hidden="true">↗</span></a>
-        </div>
-      </div>
-    </section>
-
-    <section id="brain" class="brain-section content-section" aria-labelledby="brain-title">
-      <div class="section-heading brain-heading">
-        <div><p class="eyebrow">CONNECTED KNOWLEDGE</p><h2 id="brain-title">기록 사이의 연결.</h2></div>
-        <p class="section-description">사자자리에서 시작한 배움 지도.<br><span id="graph-count">기록을 선택해 연결된 내용을 살펴보세요.</span></p>
-      </div>
-      <div class="graph-stage" id="graph-stage">
-        <div id="graph-canvas" aria-hidden="true"></div>
-        <div id="graph-labels" class="graph-labels" aria-label="기록 선택"></div>
-        <span class="graph-note">LEO · 나의 배움 지도</span>
-        <p class="graph-instruction"><span class="drag-icon" aria-hidden="true">↔</span> 드래그하여 회전 · 점을 눌러 읽기</p>
-        <aside class="node-detail" id="node-detail" aria-labelledby="node-title" hidden>
-          <button class="icon-close" id="node-close" aria-label="기록 설명 닫기">×</button>
-          <p class="eyebrow">CONNECTED NOTES</p>
-          <h3 id="node-title"></h3>
-          <p id="node-description"></p>
-          <p class="detail-label">이어서 읽기</p>
-          <ul id="node-notes"></ul>
-          <span class="detail-footnote">기록 안에서 관련 개념과 연결된 글을 더 살펴볼 수 있습니다.</span>
-        </aside>
-      </div>
-      <details class="graph-list">
-        <summary>모든 기록을 목록으로 보기 <span aria-hidden="true">+</span></summary>
-        <div id="topic-list" class="topic-list"></div>
-      </details>
     </section>
   </main>
 
@@ -119,6 +116,5 @@
     <div class="footer-top"><p>Still learning.<br><span>Always connecting.</span></p><a href="#home" aria-label="맨 위로">↑</a></div>
     <div class="footer-bottom"><span>HanThing</span><span>질문을 기록하고, 이해를 연결합니다.</span><a href="https://github.com/HanThing" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
   </footer>
-  <button class="motion-toggle" id="motion-toggle" aria-label="애니메이션 일시정지" aria-pressed="false"><span aria-hidden="true">Ⅱ</span></button>
 </body>
 </html>

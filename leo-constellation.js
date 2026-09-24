@@ -1,26 +1,18 @@
 (() => {
   'use strict';
 
-  // A simplified Leo outline, normalized from NOIRLab's constellation diagram.
-  // This decorative outline is independent of the growing document graph.
-  const outline = {
-    positions: [
-      [.769, .558, 0], [.7782, .1776, 0], [.5358, -.0552, 0],
-      [.5894, -.3372, 0], [1.015, -.558, 0], [1.1466, -.3916, 0],
-      [-.4658, -.1184, 0], [-1.1466, .3108, 0], [-.4866, .2824, 0],
-    ],
-    edges: [
-      [0, 1], [1, 2], [2, 3], [3, 4], [4, 5],
-      [2, 6], [1, 8],
-      [6, 7], [7, 8], [8, 6],
-    ],
-  };
   const notes = window.HANTHING_CONTENT?.notes || [];
-  const nodes = notes.map((note, index) => {
-    const angle = index * Math.PI * (3 - Math.sqrt(5));
-    const radius = Math.sqrt((index + .5) / notes.length);
-    return { ...note, position: [Math.cos(angle) * radius * 1.45, Math.sin(angle) * radius * .88, 0] };
-  });
+  const topics = [...new Set(notes.flatMap(note => note.topics || []))].sort();
+  const hash = text => {
+    let value = 2166136261;
+    for (const char of text) value = Math.imul(value ^ char.charCodeAt(0), 16777619);
+    return (value >>> 0) / 4294967296;
+  };
+  const nodes = notes.map(note => ({
+    ...note, topic: note.topics?.[0] || '기타',
+    position: ['x', 'y', 'z'].map(axis => (hash(note.id + axis) - .5) * 2),
+    degree: 0,
+  }));
   const indices = new Map(nodes.map((node, index) => [node.id, index]));
   const pairs = new Set();
   const edges = [];
@@ -31,5 +23,40 @@
     const key = pair.join(':');
     if (!pairs.has(key)) { pairs.add(key); edges.push(pair); }
   }));
-  window.HanThingConstellation = { name: 'Leo', outline, nodes, edges };
+  edges.forEach(([a, b]) => { nodes[a].degree++; nodes[b].degree++; });
+  // ponytail: static O(n²) layout; use a spatial force index when notes reach thousands.
+  for (let step = 0; step < 160; step++) {
+    const forces = nodes.map(node => node.position.map(value => -value * .012));
+    nodes.forEach((node, a) => {
+      for (let b = a + 1; b < nodes.length; b++) {
+        const delta = node.position.map((value, axis) => value - nodes[b].position[axis]);
+        const distance = Math.max(.08, Math.hypot(...delta));
+        delta.forEach((value, axis) => {
+          const force = value / distance * .055 / (distance * distance);
+          forces[a][axis] += force; forces[b][axis] -= force;
+        });
+      }
+    });
+    edges.forEach(([a, b]) => {
+      const delta = nodes[b].position.map((value, axis) => value - nodes[a].position[axis]);
+      const distance = Math.max(.08, Math.hypot(...delta));
+      delta.forEach((value, axis) => {
+        const force = value / distance * (distance - .85) * .08;
+        forces[a][axis] += force; forces[b][axis] -= force;
+      });
+    });
+    nodes.forEach((node, i) => node.position = node.position.map((value, axis) => value + Math.max(-.08, Math.min(.08, forces[i][axis])) * (1 - step / 220)));
+  }
+  const extent = Math.max(1, ...nodes.map(node => Math.hypot(...node.position)));
+  nodes.forEach(node => node.position = node.position.map((value, axis) => value / extent * [1.65, 1.3, 1.15][axis]));
+  function filter({ query = '', type = '', topic = '', courseId = '', lessonId = '' }) {
+    const words = query.trim().toLocaleLowerCase('ko').split(/\s+/).filter(Boolean);
+    const visible = nodes.flatMap((node, i) => {
+      const text = `${node.title} ${node.description || ''}`.toLocaleLowerCase('ko');
+      return (!courseId || node.courseId === courseId) && (!lessonId || node.lessonId === lessonId) && (!type || node.type === type) && (!topic || node.topics?.includes(topic)) && words.every(word => text.includes(word)) ? [i] : [];
+    });
+    const included = new Set(visible);
+    return { indices: visible, edges: edges.filter(([a, b]) => included.has(a) && included.has(b)) };
+  }
+  window.HanThingConstellation = { nodes, edges, topics, filter };
 })();

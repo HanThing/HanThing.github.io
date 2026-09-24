@@ -9,9 +9,9 @@ tags: [questions]
 
 | 질문 | 먼저 꺼내 볼 자료 | 확인할 방법 |
 |---|---|---|
-| 함수를 정의할 때와 호출할 때 별표는 각각 무엇을 하는가? | [[python/index\|Python 개념 지도]] | [학습판](https://hanthing.github.io/learning/python-lab.html)에서 인자의 도착 지점 비교 |
+| 함수를 정의할 때와 호출할 때 별표는 각각 무엇을 하는가? | [[python/args-and-kwargs\|인자 묶기와 풀기]] | 정의와 호출에서 인자의 도착 지점 비교 |
 | 같은 고객이 여러 행에 등장하면 중복일까? | [[data/observation-unit\|관측 단위]], [[data/data-quality\|데이터 품질]] | 주문 ID와 고객 ID를 구분해 설명 |
-| 평균이 같으면 경험도 비슷한가? | [[data/eda-and-causality\|분포와 해석]] | [배송 기록 비교](https://hanthing.github.io/learning/data-science-overview.html#explore) |
+| 평균이 같으면 경험도 비슷한가? | [[data/eda-and-causality\|분포와 해석]] | 평균이 같은 두 분포의 퍼짐과 꼬리 비교 |
 | 고객 정보를 합치고 나서 매출이 늘어난 이유는? | [[data/wrangling\|병합과 집계]] | 키가 중복된 표의 행 수를 먼저 예측 |
 | 깔끔한 그래프의 결론도 틀릴 수 있는가? | [[data/interpretation\|축과 표본의 함정]] | 축 범위와 관찰되지 않은 집단 확인 |
 

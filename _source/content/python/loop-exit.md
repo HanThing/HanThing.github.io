@@ -3,6 +3,8 @@ title: 반복문 종료와 for–else
 description: break는 반복문을 끝낸다. for의 else는 항목을 모두 소진했을 때 실행한다.
 date: 2026-09-22
 publish: true
+courseId: python
+lessonId: python-basics
 type: concept
 tags: [python]
 topics: [실전 파이썬 준비하기]

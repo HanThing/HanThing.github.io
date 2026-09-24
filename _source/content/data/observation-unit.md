@@ -2,6 +2,8 @@
 title: 관측 단위 — 한 행은 무엇인가
 date: 2026-09-17
 publish: true
+courseId: python
+lessonId: data-overview
 topics: [데이터 분석]
 type: concept
 sources:
@@ -27,8 +29,6 @@ tags: [data]
 - 만족도 같은 **서열 척도**는 순서가 있어도 간격이 같다고 보장되지 않습니다.
 - 섭씨 온도 같은 **등간 척도**라도 20°C가 10°C의 두 배로 뜨겁다고 해석하지 않습니다.
 - 무게·금액처럼 의미 있는 0을 갖는 **비율 척도**에서는 비율 비교가 가능합니다.
-
-[가상 주문 표로 복습하기](https://hanthing.github.io/learning/data-science-overview.html#data)
 
 **연결:** [[data/wrangling|집계하면 행의 단위도 바뀐다]] · [[data/data-science-overview|데이터 사이언스 지도]]
 

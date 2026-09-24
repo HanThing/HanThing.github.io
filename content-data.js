@@ -1,5 +1,120 @@
 // Generated from public Markdown by _source/generate-catalog.mjs.
 window.HANTHING_CONTENT = {
+  "curriculumSource": "https://docs.google.com/spreadsheets/d/1vF_S-DV4Pm0qRnsspfpEmKRvyj0j4Miam4YofqXPM04/edit?gid=624392885",
+  "courses": [
+    {
+      "id": "python",
+      "title": "실전 파이썬 준비하기",
+      "lessons": [
+        {
+          "id": "python-basics",
+          "title": "파이썬 기초 복습",
+          "kind": "supplemental"
+        },
+        {
+          "id": "data-overview",
+          "title": "데이터 활용 오버뷰",
+          "kind": "official"
+        },
+        {
+          "id": "python-modules",
+          "title": "파이썬 응용하기(모듈, 라이브러리)",
+          "kind": "official"
+        },
+        {
+          "id": "objects-and-classes",
+          "title": "객체와 클래스",
+          "kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "data-analysis",
+      "title": "데이터 분석",
+      "lessons": [
+        {
+          "id": "data-toolkit",
+          "title": "데이터 사이언스 Toolkit",
+          "kind": "official"
+        },
+        {
+          "id": "statistics-and-visualization",
+          "title": "기초 통계와 데이터 시각화",
+          "kind": "official"
+        },
+        {
+          "id": "dataframe",
+          "title": "DataFrame 마스터하기",
+          "kind": "official"
+        }
+      ]
+    },
+    {
+      "id": "machine-learning",
+      "title": "머신러닝",
+      "lessons": []
+    },
+    {
+      "id": "pytorch",
+      "title": "PyTorch",
+      "lessons": []
+    },
+    {
+      "id": "deep-learning",
+      "title": "딥러닝",
+      "lessons": []
+    },
+    {
+      "id": "computer-vision",
+      "title": "컴퓨터 비전",
+      "lessons": []
+    },
+    {
+      "id": "version-control",
+      "title": "버전관리 및 협업하기",
+      "lessons": []
+    },
+    {
+      "id": "beginner-project",
+      "title": "AI 엔지니어 초급 프로젝트",
+      "lessons": []
+    },
+    {
+      "id": "nlp",
+      "title": "자연어 처리",
+      "lessons": []
+    },
+    {
+      "id": "llm",
+      "title": "대규모 언어 모델(LLM)",
+      "lessons": []
+    },
+    {
+      "id": "intermediate-project",
+      "title": "AI 엔지니어 중급 프로젝트",
+      "lessons": []
+    },
+    {
+      "id": "docker",
+      "title": "Docker",
+      "lessons": []
+    },
+    {
+      "id": "model-deployment",
+      "title": "모델 배포하기",
+      "lessons": []
+    },
+    {
+      "id": "inference-optimization",
+      "title": "추론 최적화",
+      "lessons": []
+    },
+    {
+      "id": "advanced-project",
+      "title": "AI 엔지니어 고급 프로젝트",
+      "lessons": []
+    }
+  ],
   "notes": [
     {
       "id": "python/loop-exit",
@@ -11,6 +126,8 @@ window.HANTHING_CONTENT = {
       "topics": [
         "실전 파이썬 준비하기"
       ],
+      "courseId": "python",
+      "lessonId": "python-basics",
       "url": "/notes/python/loop-exit",
       "links": [
         "learning/2026-09-18-loop-exit",
@@ -31,6 +148,8 @@ window.HANTHING_CONTENT = {
       "topics": [
         "실전 파이썬 준비하기"
       ],
+      "courseId": "python",
+      "lessonId": "python-basics",
       "url": "/notes/learning/2026-09-18-collections-and-palindrome",
       "links": [
         "python/iterables-and-iterators",
@@ -51,6 +170,8 @@ window.HANTHING_CONTENT = {
       "topics": [
         "실전 파이썬 준비하기"
       ],
+      "courseId": "python",
+      "lessonId": "python-basics",
       "url": "/notes/learning/2026-09-18-comprehensions",
       "links": [
         "python/comprehensions",
@@ -70,6 +191,8 @@ window.HANTHING_CONTENT = {
       "topics": [
         "실전 파이썬 준비하기"
       ],
+      "courseId": "python",
+      "lessonId": "python-basics",
       "url": "/notes/learning/2026-09-18-files-and-strings",
       "links": [
         "learning/2026-09-18-objects-and-self",
@@ -92,6 +215,8 @@ window.HANTHING_CONTENT = {
       "topics": [
         "실전 파이썬 준비하기"
       ],
+      "courseId": "python",
+      "lessonId": "python-modules",
       "url": "/notes/learning/2026-09-18-frameworks",
       "links": [
         "python/imports-and-packages",
@@ -111,6 +236,8 @@ window.HANTHING_CONTENT = {
       "topics": [
         "실전 파이썬 준비하기"
       ],
+      "courseId": "python",
+      "lessonId": "python-modules",
       "url": "/notes/learning/2026-09-18-imports-and-packages",
       "links": [
         "learning/2026-09-18-notebook-state",
@@ -132,6 +259,8 @@ window.HANTHING_CONTENT = {
       "topics": [
         "실전 파이썬 준비하기"
       ],
+      "courseId": "python",
+      "lessonId": "python-basics",
       "url": "/notes/learning/2026-09-18-lambda-map-sort",
       "links": [
         "python/sorting-and-callables",
@@ -152,6 +281,8 @@ window.HANTHING_CONTENT = {
       "topics": [
         "실전 파이썬 준비하기"
       ],
+      "courseId": "python",
+      "lessonId": "python-basics",
       "url": "/notes/learning/2026-09-18-loop-exit",
       "links": [
         "python/loop-exit",
@@ -171,6 +302,8 @@ window.HANTHING_CONTENT = {
       "topics": [
         "실전 파이썬 준비하기"
       ],
+      "courseId": "python",
+      "lessonId": "python-basics",
       "url": "/notes/learning/2026-09-18-notebook-state",
       "links": [
         "python/notebook-state",
@@ -191,6 +324,8 @@ window.HANTHING_CONTENT = {
       "topics": [
         "실전 파이썬 준비하기"
       ],
+      "courseId": "python",
+      "lessonId": "objects-and-classes",
       "url": "/notes/learning/2026-09-18-objects-and-self",
       "links": [
         "learning/2026-09-18-imports-and-packages",
@@ -211,6 +346,8 @@ window.HANTHING_CONTENT = {
       "topics": [
         "실전 파이썬 준비하기"
       ],
+      "courseId": "python",
+      "lessonId": "python-basics",
       "url": "/notes/python/args-and-kwargs",
       "links": [
         "python/self-and-objects",
@@ -230,6 +367,8 @@ window.HANTHING_CONTENT = {
       "topics": [
         "실전 파이썬 준비하기"
       ],
+      "courseId": "python",
+      "lessonId": "python-basics",
       "url": "/notes/python/comprehensions",
       "links": [
         "python/iterables-and-iterators",
@@ -251,6 +390,8 @@ window.HANTHING_CONTENT = {
       "topics": [
         "실전 파이썬 준비하기"
       ],
+      "courseId": "python",
+      "lessonId": "python-basics",
       "url": "/notes/python/files-and-with",
       "links": [
         "python/imports-and-packages",
@@ -272,6 +413,8 @@ window.HANTHING_CONTENT = {
       "topics": [
         "실전 파이썬 준비하기"
       ],
+      "courseId": "python",
+      "lessonId": "python-modules",
       "url": "/notes/python/imports-and-packages",
       "links": [
         "python/self-and-objects",
@@ -294,6 +437,8 @@ window.HANTHING_CONTENT = {
       "topics": [
         "실전 파이썬 준비하기"
       ],
+      "courseId": "python",
+      "lessonId": "python-basics",
       "url": "/notes/python/iterables-and-iterators",
       "links": [
         "python/comprehensions",
@@ -315,6 +460,8 @@ window.HANTHING_CONTENT = {
       "topics": [
         "실전 파이썬 준비하기"
       ],
+      "courseId": "python",
+      "lessonId": "python-basics",
       "url": "/notes/python/notebook-state",
       "links": [
         "python/imports-and-packages",
@@ -339,6 +486,8 @@ window.HANTHING_CONTENT = {
       "topics": [
         "실전 파이썬 준비하기"
       ],
+      "courseId": "python",
+      "lessonId": "objects-and-classes",
       "url": "/notes/python/self-and-objects",
       "links": [
         "python/imports-and-packages",
@@ -360,6 +509,8 @@ window.HANTHING_CONTENT = {
       "topics": [
         "실전 파이썬 준비하기"
       ],
+      "courseId": "python",
+      "lessonId": "python-basics",
       "url": "/notes/python/sorting-and-callables",
       "links": [
         "python/comprehensions",
@@ -381,6 +532,8 @@ window.HANTHING_CONTENT = {
       "topics": [
         "데이터 분석"
       ],
+      "courseId": "python",
+      "lessonId": "data-overview",
       "url": "/notes/data/data-quality",
       "links": [
         "data/observation-unit",
@@ -402,6 +555,8 @@ window.HANTHING_CONTENT = {
         "실전 파이썬 준비하기",
         "데이터 분석"
       ],
+      "courseId": "python",
+      "lessonId": "data-overview",
       "url": "/notes/data/data-science-overview",
       "links": [
         "data/observation-unit",
@@ -426,6 +581,8 @@ window.HANTHING_CONTENT = {
       "topics": [
         "데이터 분석"
       ],
+      "courseId": "python",
+      "lessonId": "data-overview",
       "url": "/notes/data/eda-and-causality",
       "links": [
         "data/data-quality",
@@ -446,6 +603,8 @@ window.HANTHING_CONTENT = {
       "topics": [
         "데이터 분석"
       ],
+      "courseId": "python",
+      "lessonId": "data-overview",
       "url": "/notes/data/interpretation",
       "links": [
         "data/eda-and-causality",
@@ -466,6 +625,8 @@ window.HANTHING_CONTENT = {
       "topics": [
         "데이터 분석"
       ],
+      "courseId": "python",
+      "lessonId": "data-overview",
       "url": "/notes/data/observation-unit",
       "links": [
         "data/data-quality",
@@ -486,6 +647,8 @@ window.HANTHING_CONTENT = {
       "topics": [
         "데이터 분석"
       ],
+      "courseId": "python",
+      "lessonId": "data-overview",
       "url": "/notes/data/wrangling",
       "links": [
         "data/observation-unit",
@@ -500,32 +663,6 @@ window.HANTHING_CONTENT = {
   ],
   "references": [
     {
-      "id": "bootcamp/guide",
-      "title": "코드잇 AI 스프린트 학습 안내",
-      "description": "AI 스프린트 16기의 전체 과정과 이론·실습·미션·프로젝트의 흐름, HanThing에 학습을 남기는 방법입니다.",
-      "date": "2026-09-22",
-      "published": "2026-09-22",
-      "type": "reference",
-      "topics": [
-        "실전 파이썬 준비하기",
-        "데이터 분석"
-      ],
-      "url": "/notes/bootcamp/guide",
-      "links": [
-        "bootcamp/roadmap",
-        "python/index",
-        "python/self-and-objects",
-        "python/loop-exit",
-        "data/data-science-overview",
-        "data/observation-unit",
-        "data/wrangling"
-      ],
-      "sources": [
-        "https://docs.google.com/spreadsheets/d/1vF_S-DV4Pm0qRnsspfpEmKRvyj0j4Miam4YofqXPM04/edit?gid=624392885",
-        "HanThing 학습 기록 운영 기준"
-      ]
-    },
-    {
       "id": "bootcamp/roadmap",
       "title": "부트캠프 학습 지도와 일정",
       "description": "공식 커리큘럼의 과목 순서와 예정 일정, 미션 제출일을 현재 학습 노트와 연결합니다.",
@@ -538,7 +675,6 @@ window.HANTHING_CONTENT = {
       ],
       "url": "/notes/bootcamp/roadmap",
       "links": [
-        "bootcamp/guide",
         "python/self-and-objects",
         "python/imports-and-packages",
         "python/args-and-kwargs",

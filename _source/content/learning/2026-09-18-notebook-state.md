@@ -4,6 +4,8 @@ description: 내장 이름을 가린 변수, 노트북의 실행 상태, 누적 
 date: 2026-09-18
 published: 2026-09-22
 publish: true
+courseId: python
+lessonId: python-basics
 type: journal
 tags: [python]
 topics: [실전 파이썬 준비하기]

@@ -1,21 +1,35 @@
-# HanThing Notes
+# HanThing — 지식 지도와 복습
 
-Public learning notes with separate records, questions and quizzes. Markdown in `_source/content/` is canonical; `content-data.js` is generated from it. The Leo outline stays as a landmark while every published knowledge document adds a selectable star. Administrative pages do not count as knowledge stars.
+첫 화면의 3차원 지도는 공개 지식 문서마다 노드 하나를 표시합니다. 헤더 버튼으로 탐색 패널을 열고 제목·요약 검색과 과목·수업·종류 필터로 노트를 찾습니다. 요약 패널에서 원문과 퀴즈·플래시카드로 이동합니다. 실제 노트 24개와 연결 46개만 표시하며 장식용 노드·선은 없습니다. 과정 참고 문서는 지식 노드에 포함하지 않습니다. 한 번의 학습 정리에서 주제별 문서 여러 개를 만들거나 기존 문서를 갱신할 수 있습니다.
 
-The homepage and `learning/` are static HTML, CSS and JavaScript. Particle motion uses native Canvas2D; reduced motion and the pause control are supported. Knowledge stars stay fixed under the pointer and move only with explicit graph rotation. Search and filters do not require a service.
+스크롤할 때만 입자들이 실제 노드에서 퍼지고 돌아옵니다. 같은 노드의 투영 좌표를 공유하고, 산개 전 입자 그리기와 전체 화면 블러 합성을 생략합니다. 퍼짐 정도는 스크롤을 부드럽게 따라갑니다. 드래그로 회전하고 버튼으로 확대합니다. 휠·세로 터치는 페이지를 스크롤합니다. 밝게/어둡게 설정을 본문·복습 화면과 공유하며, 움직임 줄이기 설정과 일시정지를 지원합니다. 하단의 기록·질문·학습 세트는 더 보기와 접기로 조절합니다.
 
-The top theme button shares its saved light/dark preference across the homepage, notes and learning pages. First visits start dark; light mode uses dark stars on a light background. Curriculum names come from each note's `topics`. Questions expand to show context, intent and the answer; quizzes remain a separate collection. Course reference documents stay outside the learning graph and recent records.
+노트 목록은 과목 → 수업 → 개념 순이며 날짜별 질문 기록은 관련 개념 아래에 연결합니다. `courseId`·`lessonId`는 원래 배운 수업이고 `topics`는 관련 주제입니다. 공식 15개 과목은 자료가 없는 경우에도 선택할 수 있으며 빈 결과를 표시합니다.
 
-## Maintain the public repository
+## 복습 자료와 진도
 
-Read `_source/AGENTS.md`, `_source/INDEX.md` and `_source/CHANGELOG.md`. After editing the public Markdown, run:
+`review-data.json`에는 공개 노트를 바탕으로 NotebookLM에서 생성하고 검토한 퀴즈·플래시카드가 들어갑니다. 방문자는 로그인 없이 `review.html`에서 풀 수 있습니다. 사이트는 문제를 풀 때 AI를 호출하지 않습니다.
+
+- 관련 개념 노트와 날짜별 기록은 같은 주제별 학습 세트를 공유합니다. 복습은 문서 수 대신 학습 목표 단위로 고릅니다.
+- 기본 화면은 복습 시작 → 한 문제 → 답·해설 확인 → 다음 문제입니다. 주제·방식·전체 범위·통계·다시 복습 설정은 접힌 상세에서 엽니다.
+- 최근 오답·카드의 어려움 표시, 기한이 된 개념, 아직 확인하지 않은 개념 순서로 한 번에 최대 5개 목표를 고릅니다. 익힌 개념은 기한 전에는 기본 목록에서 제외합니다.
+- 연습 정답 후 최소 24시간이 지나 별도 점검문항을 도움 없이 맞히면 익힘으로 기록합니다. 이후 점검을 통과할 때마다 3일 → 7일 → 21일로 간격을 늘리고, 그 뒤에는 21일마다 확인합니다. 이는 사이트의 단순 운영 기준이며 연구에서 정해 준 최적 공식은 아닙니다. 새 회차를 즉시 열어도 시간 조건을 건너뛸 수 없습니다.
+- 오답·카드의 ‘다시 볼래요’는 다음 복습의 우선순위에 반영합니다. 힌트·정답 확인과 카드의 ‘알겠어요’만으로 익힘이 되지는 않습니다.
+- 진도는 현재 기기·브라우저의 로컬 저장소에만 남습니다. 기존 `hanthing-review-v1` 키의 기록·회차·목표 상태는 유지하며 스키마 2로 읽습니다. 날짜가 없는 과거 점검 대기에는 이관 시점부터 1일, 과거 익힘에는 3일의 간격을 부여합니다. 저장을 사용할 수 없어도 풀이는 가능합니다.
+- 목표 버전과 생성본 버전을 구분합니다. 새 문제를 가져와도 관련 없는 목표의 진도를 초기화하지 않습니다.
+- 홈과 복습 화면은 `getReviewQueue(sets, state, { limit: 5, now: Date.now() })`를 공유합니다. 결과는 순위가 반영된 `{ set, goal, question, reason, reasonLabel, dueAt }[]`이며 상태를 수정하지 않습니다. `goal.title`을 표시하고 `review.html?set=…&goal=…`로 이동하면 해당 목표를 먼저 풉니다.
+- 상태 회귀 확인: `node --test blog-preview/review-state-check.mjs`.
+
+## 공개 원본 유지
+
+Markdown 원본은 `_source/content/`입니다. `content-data.js`는 여기에서 생성됩니다. `_source/AGENTS.md`, `_source/INDEX.md`, `_source/CHANGELOG.md`를 읽고 공개 글을 수정한 뒤 실행합니다.
 
 ```sh
 sh _source/rebuild.sh
 ```
 
-This rebuilds `/notes/` and the shared homepage catalog. It neither commits nor publishes. Check changed pages, questions, quiz answers, source links and document counts before deployment. Private source material and operational instructions do not belong in this repository.
+이 명령은 글과 카탈로그를 재빌드합니다. NotebookLM 문제 재생성·커밋·배포는 하지 않습니다. 학습 내용이 바뀌면 영향받은 목표의 퀴즈·카드만 별도로 생성하고, 지정한 생성물 ID의 내보내기를 검토한 후 연결합니다. 기존 검증본은 새 생성본 검토가 끝날 때까지 보존합니다.
 
-Notion is temporary staging. An agent reads the selected sources, updates dated records and existing concepts, records evidence and unresolved issues, and updates the index and log. This site does not run an LLM or automatic ingestion job. The approach adapts [Karpathy’s LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f).
+원자료·비공개 과정 안내·개인 대화는 공개 저장소에 넣지 않습니다. 코드잇 과정은 홈페이지의 공식 Discord와 커리큘럼 링크로 접근합니다. 별도 실습 HTML 두 개는 공개 사이트에서 제외했습니다.
 
-The original particle geometry is inspired by [Astra](https://openai.com/ko-KR/index/gpt-6-astra/) and [Memory](https://www.careerhackeralex.com/memory). Local font attribution is in `vendor/NOTICE.txt`.
+이 위키는 [Karpathy의 LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) 방식을 참고합니다. 원자료 자동 수집이나 예약 실행은 하지 않습니다. 지도 디자인 참고: [Memory](https://www.careerhackeralex.com/memory). 글꼴 출처는 `vendor/NOTICE.txt`에 있습니다.

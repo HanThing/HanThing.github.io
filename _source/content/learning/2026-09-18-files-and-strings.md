@@ -4,6 +4,8 @@ description: split·strip부터 파일 객체, with, 읽기 위치, 언패킹까
 date: 2026-09-18
 published: 2026-09-22
 publish: true
+courseId: python
+lessonId: python-basics
 type: journal
 tags: [python]
 topics: [실전 파이썬 준비하기]

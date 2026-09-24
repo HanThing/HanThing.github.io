@@ -4,6 +4,8 @@ description: 모듈·패키지의 구조부터 __init__.py의 실행 주체까�
 date: 2026-09-18
 published: 2026-09-22
 publish: true
+courseId: python
+lessonId: python-modules
 type: journal
 tags: [python]
 topics: [실전 파이썬 준비하기]

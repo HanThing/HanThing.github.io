@@ -4,6 +4,8 @@ description: 대소문자 무시 조건, 문자열 반환값, 양끝 인덱스, 
 date: 2026-09-18
 published: 2026-09-22
 publish: true
+courseId: python
+lessonId: python-basics
 type: journal
 tags: [python]
 topics: [실전 파이썬 준비하기]

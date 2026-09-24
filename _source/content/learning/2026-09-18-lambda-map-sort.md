@@ -4,6 +4,8 @@ description: 제곱 리스트와 길이순 정렬을 비교하며, 함수 자체
 date: 2026-09-18
 published: 2026-09-22
 publish: true
+courseId: python
+lessonId: python-basics
 type: journal
 tags: [python]
 topics: [실전 파이썬 준비하기]

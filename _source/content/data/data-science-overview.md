@@ -2,6 +2,8 @@
 title: 데이터 사이언스 — 질문에서 판단까지
 date: 2026-09-17
 publish: true
+courseId: python
+lessonId: data-overview
 topics: [실전 파이썬 준비하기, 데이터 분석]
 type: concept
 sources:
@@ -10,8 +12,6 @@ tags: [data, learning]
 ---
 
 “매출을 분석해 주세요”라는 요청만으로는 필요한 작업을 정할 수 없습니다. 비교할 기간과 취소 주문의 처리 기준, 결과로 내릴 결정을 먼저 정해야 합니다.
-
-[6개 챕터 학습판 열기](https://hanthing.github.io/learning/data-science-overview.html)
 
 ## 개념 지도
 

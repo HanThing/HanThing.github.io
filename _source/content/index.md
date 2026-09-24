@@ -24,13 +24,16 @@ tags: [index]
 
 ## 학습 과정으로 찾아보기
 
-- [[python/index|실전 파이썬 준비하기]] — 호출, 값의 흐름, 반복과 실행 상태
-- [[data/data-science-overview|데이터 분석]] — 데이터의 단위, 품질과 해석
-- [[bootcamp/guide|코드잇 학습 안내]] · [[bootcamp/roadmap|전체 커리큘럼과 예정 일정]]
+- **실전 파이썬 준비하기**
+  - 데이터 활용 오버뷰: [[data/data-science-overview|질문에서 판단까지]] — 데이터의 단위, 품질과 해석
+  - 파이썬 응용하기(모듈, 라이브러리): [[python/imports-and-packages|import와 패키지]]
+  - 객체와 클래스: [[python/self-and-objects|self와 객체 호출]]
+  - 보충: [[python/index|파이썬 기초 복습]] — 호출, 값의 흐름, 반복과 실행 상태
+- **데이터 분석** — Toolkit·기초 통계와 데이터 시각화·DataFrame 수업의 공개 노트는 아직 없습니다. 오버뷰 개념은 이 과목과도 관련 있지만, 원래 수업은 위의 실전 파이썬 준비하기입니다.
+- [코드잇 학습 채널](https://discord.com/channels/1542383524290494535/1542383525930729546) · [공식 커리큘럼](https://docs.google.com/spreadsheets/d/1vF_S-DV4Pm0qRnsspfpEmKRvyj0j4Miam4YofqXPM04/edit?gid=624392885)
 
-## 직접 조작하며 복습하기
+## 퀴즈와 플래시카드
 
-- [Python 학습판](https://hanthing.github.io/learning/python-lab.html)
-- [데이터 사이언스 학습판](https://hanthing.github.io/learning/data-science-overview.html)
+- [주제별 복습 도구](https://hanthing.github.io/#quizzes)에서 다시 확인할 내용을 골라 봅니다.
 
 [[wiki-workflow|기록과 출처를 관리하는 방식]] · [[bootcamp/roadmap|부트캠프 자료와 예정 일정]]

@@ -10,13 +10,13 @@ sources:
   - https://docs.google.com/spreadsheets/d/1vF_S-DV4Pm0qRnsspfpEmKRvyj0j4Miam4YofqXPM04/edit?gid=624392885
 ---
 
-코드잇 AI 스프린트 16기의 공개 커리큘럼을 바탕으로 정리한 학습 계획입니다. **2026-09-22 원문 확인 기준**이며 예정 진도와 실제 학습 완료는 구별합니다. 변경 공지가 우선하고 이 페이지는 자동 갱신되지 않습니다. 과정의 구성과 기록 방법은 [[bootcamp/guide|코드잇 AI 스프린트 학습 안내]]에서 볼 수 있습니다.
+코드잇 AI 스프린트 16기의 공개 커리큘럼을 바탕으로 정리한 학습 계획입니다. **2026-09-22 원문 확인 기준**이며 예정 진도와 실제 학습 완료는 구별합니다. 변경 공지가 우선하고 이 페이지는 자동 갱신되지 않습니다. 최신 과정 안내는 [공식 커리큘럼 시트](https://docs.google.com/spreadsheets/d/1vF_S-DV4Pm0qRnsspfpEmKRvyj0j4Miam4YofqXPM04/edit?gid=624392885)와 [학습 채널](https://discord.com/channels/1542383524290494535/1542383525930729546)에서 확인합니다.
 
 ## 지금 꺼내 볼 자료
 
-- 객체·클래스: [[python/self-and-objects|self와 객체]] · [실행 관계 학습판](https://hanthing.github.io/learning/python-lab.html#self)
+- 객체·클래스: [[python/self-and-objects|self와 객체]]
 - Python 응용: [[python/imports-and-packages|모듈·패키지]] · [[python/args-and-kwargs|인자 모으기와 풀기]]
-- 데이터 분석 준비: [[data/data-science-overview|데이터 사이언스 지도]] · [6개 챕터 학습판](https://hanthing.github.io/learning/data-science-overview.html)
+- 데이터 분석 준비: [[data/data-science-overview|데이터 사이언스 지도]]
 - 통계·DataFrame: [[data/eda-and-causality|분포와 해석]] · [[data/wrangling|집계와 병합]]
 
 ## 가까운 예정 일정

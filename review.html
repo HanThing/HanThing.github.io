@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#080b09">
+  <meta name="description" content="어려웠던 개념부터 하나씩. NotebookLM 퀴즈와 카드로 필요한 만큼 복습합니다.">
+  <title>복습 · HanThing</title>
+  <script src="theme.js"></script>
+  <link rel="stylesheet" href="review.css">
+  <script src="content-data.js" defer></script>
+  <script type="module" src="review.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#review-main">본문으로 건너뛰기</a>
+  <header class="review-header">
+    <a class="wordmark" href="./" aria-label="HanThing 지식 지도로">HanThing<span aria-hidden="true">✳</span></a>
+    <div class="header-actions"><a href="./#brain">지식 지도 ↗</a><button type="button" data-theme-toggle>밝게</button></div>
+  </header>
+  <main id="review-main">
+    <div class="intro">
+      <p class="eyebrow">조금씩, 오래 기억하기</p>
+      <h1>지금 필요한 복습.</h1>
+    </div>
+    <section class="workspace" aria-label="복습">
+      <div id="player" class="player" aria-busy="true"><p class="muted">복습 자료를 불러오고 있습니다.</p></div>
+    </section>
+    <details id="review-details" class="review-details">
+      <summary>주제·복습 방식·내 기록</summary>
+      <div class="details-content">
+        <nav class="mode-tabs" aria-label="복습 방식">
+          <a data-mode="quiz" href="review.html?mode=quiz">맞춤 복습</a>
+          <a data-mode="cards" href="review.html?mode=cards">플래시카드</a>
+          <a data-mode="check" href="review.html?mode=check">중간 점검</a>
+        </nav>
+        <div class="review-controls">
+          <label for="set-select">복습할 주제<select id="set-select" disabled><option>자료를 불러오는 중…</option></select></label>
+          <label class="scope-control"><input id="all-goals" type="checkbox">복습 시점과 관계없이 살펴보기</label>
+        </div>
+        <div class="set-heading"><h2 id="set-title">복습 자료</h2><p id="mode-description"></p></div>
+        <div id="related-notes" class="related-notes" hidden></div>
+        <section class="progress-panel" aria-labelledby="progress-title">
+          <h2 id="progress-title">내 학습 기록</h2>
+          <div id="progress-counts" class="progress-counts" aria-live="polite"></div>
+          <details class="goal-details"><summary>개념별 기록 · 다시 복습하기</summary><div id="goal-list" class="goal-list"></div></details>
+          <p class="progress-help">연습 정답 뒤 최소 24시간이 지나면 다른 문항으로 점검합니다. 도움 없이 맞히면 익힘으로 기록하고 3일 → 7일 → 21일 간격으로 다시 확인합니다. 틀리거나 카드에서 어려움을 표시하면 먼저 복습합니다. 이 간격은 사이트의 운영 기준이며 개인에게 최적화된 공식은 아닙니다.</p>
+        </section>
+      </div>
+    </details>
+    <p id="storage-notice" class="storage-notice" role="status" hidden></p>
+    <noscript><p class="notice">퀴즈와 카드 풀이에는 JavaScript가 필요합니다. <a href="notes/">학습 노트 읽기 ↗</a></p></noscript>
+  </main>
+  <footer>NotebookLM이 만든 문제 · 기록은 이 브라우저에</footer>
+</body>
+</html>

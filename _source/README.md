@@ -66,7 +66,7 @@ Use `## 질문: ...` for an actual question and `## 퀴즈: ...` for a review pr
 
 Inside a Markdown table, escape a wikilink's alias separator: `[[python/self-and-objects\|객체와 self]]`. An unescaped `|` creates a new table cell and can hide the rest of that row.
 
-Use full URLs for links outside the wiki, such as `https://hanthing.github.io/learning/python-lab.html#self` and `https://hanthing.github.io/#brain`. Root-relative Markdown links are interpreted as wiki paths by Quartz. SPA navigation is disabled so linked pages load normally and their scripts initialize. Local previews of these full links will open the published site.
+Use full URLs for links outside the wiki, such as `https://hanthing.github.io/#quizzes` and `https://hanthing.github.io/#brain`. Root-relative Markdown links are interpreted as wiki paths by Quartz. SPA navigation is disabled so linked pages load normally and their scripts initialize. Local previews of these full links will open the published site.
 
 Both publishing filters are enabled: a page must have `publish: true` and must not have `draft: true`. `private`, `drafts`, `raw-sources`, and `.obsidian` folders are excluded at any depth. The built JSON index and XML feeds must be checked along with the rendered pages when reviewing a release.
 

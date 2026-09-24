@@ -2,6 +2,8 @@
 title: 데이터 품질 — 고치기 전에 원인을 찾기
 date: 2026-09-17
 publish: true
+courseId: python
+lessonId: data-overview
 topics: [데이터 분석]
 type: concept
 sources:
@@ -21,8 +23,6 @@ tags: [data]
 평균·중앙값 대치는 분포와 관계를 바꿀 수 있습니다. 가까운 관측치를 참고하는 KNN 대치도 거리의 기준과 변수의 척도에 영향을 받습니다. 처리 전후 행 수·합계·집단 비중을 비교하고 선택 이유를 남깁니다.
 
 `[10, 12, 14, 16, 18]`에서 마지막 값만 100으로 바꾸면 평균은 14에서 30.4로 움직이지만 중앙값은 14입니다. 이것만으로 100이 오류라는 결론을 내릴 수는 없습니다.
-
-[큰 주문과 잡음을 직접 바꾸기](https://hanthing.github.io/learning/data-science-overview.html#quality)
 
 **연결:** [[data/eda-and-causality|분포를 함께 보는 이유]] · [[data/interpretation|자료가 빠진 경우의 편향]]
 

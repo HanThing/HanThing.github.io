@@ -2,6 +2,8 @@
 title: 노트북 이름 공간과 내장 이름
 date: 2026-09-20
 publish: true
+courseId: python
+lessonId: python-basics
 topics: [실전 파이썬 준비하기]
 type: concept
 updated: 2026-09-22
@@ -17,8 +19,6 @@ tags: [python]
 `f(...)`는 호출, `nums[0]`은 인덱싱, `(1 + 2)`는 계산 묶음이다. `list(map(lambda x: x**2, [1,2,3,4,5]))`의 결과는 `[1,4,9,16,25]`다. `range(1,101,2)`는 끝값 101을 포함하지 않으므로 `sum(...)`은 1부터 99까지 홀수의 합인 `2500`이다.
 
 이어 보기: [[python/imports-and-packages]], [[python/iterables-and-iterators]]
-
-[이름 공간 실험](https://hanthing.github.io/learning/python-lab.html#notebook-state)
 
 ## 실행을 멈추는 것과 상태를 지우는 것
 

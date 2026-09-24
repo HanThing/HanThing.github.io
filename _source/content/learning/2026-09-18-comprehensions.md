@@ -4,6 +4,8 @@ description: 중첩 리스트를 펼치는 문제에서 for의 순서와 맨 앞
 date: 2026-09-18
 published: 2026-09-22
 publish: true
+courseId: python
+lessonId: python-basics
 type: journal
 tags: [python]
 topics: [실전 파이썬 준비하기]

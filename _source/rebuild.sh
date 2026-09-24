@@ -54,4 +54,5 @@ if ! mv "$stage/notes" "$repo_root/notes"; then
 fi
 mv "$stage/content-data.js" "$repo_root/content-data.js"
 cp "$work/engine/INDEX.md" "$source_dir/INDEX.md"
+rm -f "$repo_root/learning/python-lab.html" "$repo_root/learning/data-science-overview.html"
 printf 'Built %s/notes from Quartz %s\n' "$repo_root" "$upstream"

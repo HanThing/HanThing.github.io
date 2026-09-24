@@ -2,6 +2,8 @@
 title: EDA와 해석 — 평균 뒤의 분포 보기
 date: 2026-09-17
 publish: true
+courseId: python
+lessonId: data-overview
 topics: [데이터 분석]
 type: concept
 sources:
@@ -10,8 +12,6 @@ tags: [data, statistics]
 ---
 
 배송 시간 A가 `[4, 5, 5, 5, 5, 6]`일, B가 `[1, 1, 1, 9, 9, 9]`일이면 둘 다 평균은 5일입니다. 그러나 고객이 겪는 경험은 다릅니다. 요약 통계만으로 전체 모양을 알 수는 없습니다.
-
-[두 배송 분포 비교하기](https://hanthing.github.io/learning/data-science-overview.html#explore)
 
 **EDA(탐색적 데이터 분석)**에서는 분포·관계·이상한 부분을 통계와 그림으로 살펴 다음 가설을 만듭니다. **CDA(확증적 데이터 분석)**에서는 가설과 분석 기준을 미리 정하고 자료가 이를 지지하는지 평가합니다. 같은 자료에서 발견하고 확인하기만 하면 우연한 패턴을 과신할 수 있습니다.
 

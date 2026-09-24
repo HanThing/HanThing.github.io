@@ -2,6 +2,8 @@
 title: 결과 해석 — 보이는 차이를 믿기 전에
 date: 2026-09-17
 publish: true
+courseId: python
+lessonId: data-overview
 topics: [데이터 분석]
 type: concept
 sources:
@@ -10,8 +12,6 @@ tags: [data, questions]
 ---
 
 매출이 100에서 110만 원으로 늘면 증가율은 **10%**입니다. 축을 90에서 시작하는 막대그래프에서는 길이가 10과 20이 되어 두 배처럼 보입니다. 값의 비율과 표시된 길이의 비율은 다릅니다.
-
-[축을 직접 바꿔 보기](https://hanthing.github.io/learning/data-science-overview.html#decision)
 
 영업 중인 상점만 조사해 성공 전략을 찾으면 폐업한 상점이 빠집니다. **생존자 편향**은 남아 있는 기록만으로 전체를 판단하는 문제입니다. 수집 단계의 누락은 그래프를 예쁘게 그리는 것으로 해결되지 않습니다.
 

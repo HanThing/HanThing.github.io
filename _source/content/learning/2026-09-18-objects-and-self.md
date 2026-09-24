@@ -4,6 +4,8 @@ description: 학생 등급 문제를 바탕으로 이름과 객체, 내장 타�
 date: 2026-09-18
 published: 2026-09-22
 publish: true
+courseId: python
+lessonId: objects-and-classes
 type: journal
 tags: [python]
 topics: [실전 파이썬 준비하기]

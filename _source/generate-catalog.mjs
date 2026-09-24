@@ -11,6 +11,34 @@ const root = dirname(fileURLToPath(import.meta.url));
 const kinds = new Set(['concept', 'journal', 'weekly', 'project', 'reference']);
 const ignored = new Set(['private', 'drafts', 'raw-sources', '.obsidian', 'templates']);
 const textOf = node => node.value ?? (node.children ?? []).map(textOf).join('');
+// Official course order and verified lesson names; supplemental study is marked separately.
+const curriculumSource = 'https://docs.google.com/spreadsheets/d/1vF_S-DV4Pm0qRnsspfpEmKRvyj0j4Miam4YofqXPM04/edit?gid=624392885';
+const courses = [
+  { id: 'python', title: '실전 파이썬 준비하기', lessons: [
+    { id: 'python-basics', title: '파이썬 기초 복습', kind: 'supplemental' },
+    { id: 'data-overview', title: '데이터 활용 오버뷰', kind: 'official' },
+    { id: 'python-modules', title: '파이썬 응용하기(모듈, 라이브러리)', kind: 'official' },
+    { id: 'objects-and-classes', title: '객체와 클래스', kind: 'official' },
+  ] },
+  { id: 'data-analysis', title: '데이터 분석', lessons: [
+    { id: 'data-toolkit', title: '데이터 사이언스 Toolkit', kind: 'official' },
+    { id: 'statistics-and-visualization', title: '기초 통계와 데이터 시각화', kind: 'official' },
+    { id: 'dataframe', title: 'DataFrame 마스터하기', kind: 'official' },
+  ] },
+  { id: 'machine-learning', title: '머신러닝', lessons: [] },
+  { id: 'pytorch', title: 'PyTorch', lessons: [] },
+  { id: 'deep-learning', title: '딥러닝', lessons: [] },
+  { id: 'computer-vision', title: '컴퓨터 비전', lessons: [] },
+  { id: 'version-control', title: '버전관리 및 협업하기', lessons: [] },
+  { id: 'beginner-project', title: 'AI 엔지니어 초급 프로젝트', lessons: [] },
+  { id: 'nlp', title: '자연어 처리', lessons: [] },
+  { id: 'llm', title: '대규모 언어 모델(LLM)', lessons: [] },
+  { id: 'intermediate-project', title: 'AI 엔지니어 중급 프로젝트', lessons: [] },
+  { id: 'docker', title: 'Docker', lessons: [] },
+  { id: 'model-deployment', title: '모델 배포하기', lessons: [] },
+  { id: 'inference-optimization', title: '추론 최적화', lessons: [] },
+  { id: 'advanced-project', title: 'AI 엔지니어 고급 프로젝트', lessons: [] },
+];
 
 function parseNote(id, text) {
   const match = text.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
@@ -20,6 +48,11 @@ function parseNote(id, text) {
   assert(typeof meta.title === 'string' && meta.title.trim(), `${id}: title required`);
   assert(/^\d{4}-\d{2}-\d{2}$/.test(meta.date), `${id}: date required`);
   assert(Array.isArray(meta.sources) && meta.sources.length, `${id}: sources required`);
+  if (meta.type !== 'reference') {
+    const course = courses.find(course => course.id === meta.courseId);
+    assert(course, `${id}: known courseId required`);
+    assert(course.lessons.some(lesson => lesson.id === meta.lessonId), `${id}: lessonId must belong to courseId`);
+  }
   const tree = unified().use(remarkParse).parse(match[2]);
   const slugger = new GithubSlugger();
   const questions = [], quizzes = [], links = new Set();
@@ -56,6 +89,7 @@ function parseNote(id, text) {
   const firstParagraph = tree.children.find(n => n.type === 'paragraph');
   return { note: { id, title: meta.title, description: (meta.description ?? textOf(firstParagraph ?? {}).slice(0, 150)).trim(),
     date: meta.date, published: meta.published ?? meta.date, type: meta.type, topics: meta.topics ?? [],
+    ...(meta.type === 'reference' ? {} : { courseId: meta.courseId, lessonId: meta.lessonId }),
     url, links: [...links].filter(link => link !== id), sources: meta.sources }, questions, quizzes };
 }
 
@@ -68,7 +102,7 @@ function files(dir) {
 }
 
 if (process.argv.includes('--check')) {
-  const sample = '---\ntitle: 실제 기록\ndate: 2026-09-18\npublish: true\ntype: journal\ntags: [python]\nsources: [학습 대화]\n---\n설명\n\n## 질문: 왜 멈출까?\n[[python/loops|반복문]]\n\n## 퀴즈: 결과를 예측해 보자\n';
+  const sample = '---\ntitle: 실제 기록\ndate: 2026-09-18\npublish: true\ntype: journal\ncourseId: python\nlessonId: python-basics\ntags: [python]\nsources: [학습 대화]\n---\n설명\n\n## 질문: 왜 멈출까?\n[[python/loops|반복문]]\n\n## 퀴즈: 결과를 예측해 보자\n';
   const parsed = parseNote('learning/sample', sample);
   assert.equal(parsed.questions.length, 1);
   assert.equal(parsed.quizzes.length, 1);
@@ -84,17 +118,26 @@ if (process.argv.includes('--check')) {
   assert.equal(parseNote('draft', sample.replace('publish: true', 'publish: true\ndraft: true')), null);
   assert.equal(parseNote('admin', sample.replace('type: journal', 'type: index')), null);
   assert.throws(() => parseNote('missing-source', sample.replace('sources: [학습 대화]', '')));
-  console.log('Catalog checks passed: separate questions/quizzes, links, publication filters, provenance.');
+  assert.throws(() => parseNote('missing-course', sample.replace('courseId: python', '')));
+  assert.throws(() => parseNote('wrong-lesson', sample.replace('lessonId: python-basics', 'lessonId: data-toolkit')));
+  assert.equal(parsed.note.courseId, 'python');
+  assert.equal(parsed.note.lessonId, 'python-basics');
+  console.log('Catalog checks passed: separate questions/quizzes, links, publication filters, provenance, course/lesson validation.');
 } else {
   const contentDir = join(root, 'content');
   const pages = files(contentDir).sort().map(path => parseNote(relative(contentDir, path).replace(/\.md$/, ''), readFileSync(path, 'utf8'))).filter(Boolean);
   pages.sort((a, b) => b.note.published.localeCompare(a.note.published) || b.note.date.localeCompare(a.note.date) || a.note.id.localeCompare(b.note.id));
-  const data = { notes: pages.filter(p => p.note.type !== 'reference').map(p => p.note),
+  const data = { curriculumSource, courses, notes: pages.filter(p => p.note.type !== 'reference').map(p => p.note),
     references: pages.filter(p => p.note.type === 'reference').map(p => p.note),
     questions: pages.flatMap(p => p.questions), quizzes: pages.flatMap(p => p.quizzes) };
   const defaultOutput = join(root, basename(root) === '_source' ? '../content-data.js' : '../blog-preview/content-data.js');
   writeFileSync(resolve(process.argv[2] ?? defaultOutput), `// Generated from public Markdown by _source/generate-catalog.mjs.\nwindow.HANTHING_CONTENT = ${JSON.stringify(data, null, 2)};\n`);
-  const index = '# HanThing knowledge index\n\nGenerated from public Markdown. Read AGENTS.md for ingest/query/lint; CHANGELOG.md for changes. Course references support briefing and stay outside the learning graph.\n\n' + pages.map(({ note: n }) => `- [${n.title}](content/${n.id}.md) — ${n.type} · ${n.date} · ${n.description.replace(/\s+/g, ' ')}\n  Sources: ${n.sources.join('; ')}`).join('\n');
+  const index = '# HanThing knowledge index\n\nGenerated from public Markdown. Read AGENTS.md for ingest/query/lint; CHANGELOG.md for changes. Course references support briefing and stay outside the learning graph. Course/lesson identify the curriculum placement; topics identify related subjects.\n\n' + pages.map(({ note: n }) => {
+    const course = courses.find(course => course.id === n.courseId);
+    const lesson = course?.lessons.find(lesson => lesson.id === n.lessonId);
+    const placement = course ? `\n  Course: ${course.title} → ${lesson.title}${lesson.kind === 'supplemental' ? ' (보충)' : ''}. Related topics: ${n.topics.join('; ')}` : '';
+    return `- [${n.title}](content/${n.id}.md) — ${n.type} · ${n.date} · ${n.description.replace(/\s+/g, ' ')}${placement}\n  Sources: ${n.sources.join('; ')}`;
+  }).join('\n');
   writeFileSync(join(root, 'INDEX.md'), index + '\n');
   console.log(`Generated ${data.notes.length} notes, ${data.questions.length} questions, ${data.quizzes.length} quizzes.`);
 }

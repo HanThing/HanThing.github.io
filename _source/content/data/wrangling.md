@@ -2,6 +2,8 @@
 title: 변형·집계·병합 — 표의 단위가 바뀌는 순간
 date: 2026-09-17
 publish: true
+courseId: python
+lessonId: data-overview
 topics: [데이터 분석]
 type: concept
 sources:
@@ -23,8 +25,6 @@ df["매출"] = df["가격"] * df["수량"]
 주문 표에 C01 주문이 2건 있고 고객 표에도 C01이 2행 있다면 ID로 병합한 결과는 **2 × 2 = 4행**입니다. 매출을 바로 더하면 두 배가 될 수 있습니다. 고객 표의 중복·버전과 연결 기준을 먼저 확인합니다.
 
 날짜는 날짜 자료형으로 읽고, 지역 표기는 기준에 맞게 통일할 수 있습니다. 전화번호는 앞의 0을 보존하도록 문자열로 다룹니다. 이미 잘린 번호는 형식 변경만으로 복원할 수 없습니다.
-
-[입력 표와 결과를 함께 보기](https://hanthing.github.io/learning/data-science-overview.html#transform)
 
 **연결:** [[data/data-quality|변형 전 품질 점검]] · [[data/eda-and-causality|변형 후 분포 확인]] · [[python/index|Python 기록]]
 
