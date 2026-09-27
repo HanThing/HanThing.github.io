@@ -32,6 +32,7 @@
   let paused = reducedMotion.matches;
   let scatter = 0, zoom = 1;
   let selectedId = null;
+  let focusedId = null;
   let visible = new Set();
   let visibleEdges = [];
   let sets = [];
@@ -76,14 +77,14 @@
   function toggleSidebar(open) {
     sidebar.hidden = !open;
     $('#map-toggle').setAttribute('aria-expanded', String(open));
-    $('#map-toggle').setAttribute('aria-label', open ? '노트 탐색 닫기' : '노트 탐색 열기');
-    if (open) search.focus({ preventScroll: true });
+    $('#map-toggle').setAttribute('aria-label', open ? '노트 찾기 닫기' : '노트 찾기 열기');
+    if (open) course.focus({ preventScroll: true });
   }
   $('#map-toggle').addEventListener('click', () => toggleSidebar(sidebar.hidden));
   $('#map-close').addEventListener('click', () => { toggleSidebar(false); $('#map-toggle').focus(); });
   function filterState() { return { query: search.value, type: type.value, courseId: course.value, lessonId: lesson.value }; }
   function save() {
-    try { sessionStorage.setItem(stateKey, JSON.stringify({ ...filterState(), selectedId, rotation, zoom })); } catch {}
+    try { sessionStorage.setItem(stateKey, JSON.stringify({ ...filterState(), selectedId, focusedId, rotation, zoom })); } catch {}
   }
   function requestPaint() {
     dirty = true;
@@ -114,6 +115,7 @@
     selectedId = null;
     detail.hidden = true;
     workspace.classList.remove('has-selection');
+    if (focusedId) { setGraphFocus(null); applyFilters(); }
     syncSelection(); save(); requestPaint();
     if (focus) (labels[graph.nodes.findIndex(node => node.id === previous)] || hitArea).focus({ preventScroll: true });
   }
@@ -140,23 +142,36 @@
       container.append(section);
     });
   }
-  function selectNode(id, focusNode = true) {
+  function neighborIndices(index) {
+    return new Set([index, ...graph.edges.filter(edge => edge.includes(index)).flat()]);
+  }
+  function setGraphFocus(id) {
+    focusedId = id;
+    const url = new URL(location.href);
+    if (id) url.searchParams.set('note', id); else url.searchParams.delete('note');
+    history.replaceState(history.state, '', url);
+  }
+  function selectNode(id, focusNode = true, focusNeighbors = false) {
     const index = graph.nodes.findIndex(node => node.id === id);
     if (index === -1) return false;
+    const focusMap = focusNeighbors || !!focusedId;
     if (!visible.has(index)) {
+      setGraphFocus(null);
       search.value = ''; type.value = ''; course.value = ''; lesson.value = ''; fillLessons();
       applyFilters();
     }
     const node = graph.nodes[index];
     selectedId = id;
+    if (focusMap) { setGraphFocus(id); applyFilters(); }
     detail.hidden = false;
     workspace.classList.add('has-selection');
     $('#node-title').textContent = node.title;
     $('#node-type').textContent = `${types[node.type] || '노트'} · ${courses.find(item => item.id === node.courseId)?.lessons.find(part => part.id === node.lessonId)?.title || node.topic}`;
     $('#node-description').textContent = node.description || '연결된 노트를 열어 내용을 살펴보세요.';
     $('#node-read').href = node.url;
-    const related = (node.links || []).map(link => graph.nodes.find(n => n.id === link)).filter(Boolean);
+    const related = [...neighborIndices(index)].filter(i => i !== index).map(i => graph.nodes[i]);
     $('#node-related').hidden = !related.length;
+    $('#node-related').open = true;
     $('#node-notes').replaceChildren(...related.map(note => {
       const item = document.createElement('li'); const link = document.createElement('a');
       link.href = note.url; link.textContent = note.title; item.append(link); return item;
@@ -179,6 +194,11 @@
   }
   function applyFilters() {
     const filtered = graph.filter(filterState());
+    if (focusedId) {
+      const neighbors = neighborIndices(graph.nodes.findIndex(node => node.id === focusedId));
+      filtered.indices = filtered.indices.filter(i => neighbors.has(i));
+      filtered.edges = filtered.edges.filter(([a, b]) => neighbors.has(a) && neighbors.has(b));
+    }
     visible = new Set(filtered.indices); visibleEdges = filtered.edges;
     if (selectedId && !filtered.indices.some(i => graph.nodes[i].id === selectedId)) clearSelection();
     resultButtons.clear(); list.replaceChildren();
@@ -193,7 +213,8 @@
       button.addEventListener('click', () => selectNode(node.id));
       list.append(button); resultButtons.set(node.id, button);
     });
-    $('#graph-count').textContent = `${visible.size} / ${graph.nodes.length}개 노트 · ${visibleEdges.length}개 연결`;
+    $('#graph-count').textContent = `${focusedId ? '연결 지도 · ' : ''}${visible.size} / ${graph.nodes.length}개 노트 · ${visibleEdges.length}개 연결`;
+    $('#graph-show-all').hidden = !focusedId && !Object.values(filterState()).some(Boolean);
     $('#graph-empty').hidden = visible.size > 0;
     $('#map-total').textContent = `${graph.nodes.length}개의 노트 · ${graph.edges.length}개의 연결`;
     syncSelection(); updateTheme(); save(); requestPaint();
@@ -207,10 +228,16 @@
     button.addEventListener('click', () => selectNode(node.id));
     labels[i] = button; $('#graph-labels').append(button);
   });
-  search.addEventListener('input', applyFilters);
-  type.addEventListener('change', applyFilters);
-  course.addEventListener('change', () => { lesson.value = ''; fillLessons(); applyFilters(); });
-  lesson.addEventListener('change', applyFilters);
+  function filterChanged() { if (focusedId) setGraphFocus(null); applyFilters(); }
+  search.addEventListener('input', filterChanged);
+  type.addEventListener('change', filterChanged);
+  course.addEventListener('change', () => { lesson.value = ''; fillLessons(); filterChanged(); });
+  lesson.addEventListener('change', filterChanged);
+  $('#graph-show-all').addEventListener('click', () => {
+    setGraphFocus(null);
+    search.value = ''; type.value = ''; course.value = ''; lesson.value = ''; fillLessons();
+    clearSelection(); applyFilters(); hitArea.focus({ preventScroll: true });
+  });
   $('#node-close').addEventListener('click', () => clearSelection(true));
   document.addEventListener('keydown', event => {
     if (event.key === 'Escape') { if (!sidebar.hidden) { toggleSidebar(false); $('#map-toggle').focus(); } else if (selectedId) clearSelection(true); }
@@ -439,11 +466,17 @@
   window.__particleScene = { snapshot: () => ({
     nodes: projected.map(node => ({ ...node })), particles: particles.map(({id, x, y, anchorX, anchorY}) => ({id, x, y, anchorX, anchorY})),
     decoration: { points: 0, edges: 0 }, rotation: { ...rotation }, zoom, paused, time, scatter, graphMix: 1 - scatter,
-    visibleIds: [...visible].map(i => graph.nodes[i].id), selectedId, filter: filterState(),
+    visibleIds: [...visible].map(i => graph.nodes[i].id), selectedId, focusedId, filter: filterState(),
     edges: visibleEdges.map(([a, b]) => [graph.nodes[a].id, graph.nodes[b].id]),
   }) };
   applyFilters();
-  if (restored?.selectedId && graph.nodes.some((node, i) => node.id === restored.selectedId && visible.has(i))) selectNode(restored.selectedId, false);
+  const linkedId = new URLSearchParams(location.search).get('note');
+  if (linkedId && graph.nodes.some(node => node.id === linkedId)) {
+    search.value = ''; type.value = ''; course.value = ''; lesson.value = ''; fillLessons(); applyFilters();
+    selectNode(linkedId, true, true);
+  } else if (restored?.selectedId && graph.nodes.some((node, i) => node.id === restored.selectedId && visible.has(i))) {
+    selectNode(restored.selectedId, false, restored.focusedId === restored.selectedId);
+  }
   resize(); updateMotion();
   async function renderTodayReview() {
     const { loadSyncedProgress, getReviewQueue } = await import('./review-state.mjs');

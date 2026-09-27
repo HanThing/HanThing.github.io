@@ -21,7 +21,7 @@ git -C "$work/engine" fetch -q --depth 1 origin "$upstream"
 git -C "$work/engine" checkout -q --detach FETCH_HEAD
 
 for file in quartz.config.yaml quartz.ts package.json package-lock.json generate-catalog.mjs \
-  quartz/components/HanThingHome.tsx quartz/styles/custom.scss quartz/static/outfit.woff2 \
+  quartz/components/HanThingHome.tsx quartz/components/HanThingLearning.tsx quartz/styles/custom.scss quartz/static/outfit.woff2 \
   quartz/static/icon.png quartz/static/og-image.png
 do
   mkdir -p "$work/engine/$(dirname "$file")"
@@ -32,11 +32,13 @@ mkdir "$work/engine/content"
 cp -R "$source_dir/content/." "$work/engine/content/"
 mkdir "$work/blog-preview"
 cp "$repo_root/theme.js" "$work/blog-preview/theme.js"
+cp "$repo_root/review-data.json" "$work/blog-preview/review-data.json"
 
 cd "$work/engine"
 npm ci
 node generate-catalog.mjs --check
 node generate-catalog.mjs "$stage/content-data.js"
+cp "$stage/content-data.js" "$work/blog-preview/content-data.js"
 # All configured plugins are already pinned in package-lock.json.
 npx quartz build --output "$stage/notes" --concurrency 2
 test -f "$stage/notes/index.html"

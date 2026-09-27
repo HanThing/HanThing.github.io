@@ -12,6 +12,7 @@
     return lessons.findIndex(lesson => lesson.id === a.lessonId) - lessons.findIndex(lesson => lesson.id === b.lessonId) || a.title.localeCompare(b.title, 'ko');
   });
   const search = document.querySelector('#record-search');
+  const typeFilter = document.querySelector('#record-type');
   const courseFilter = document.querySelector('#record-course');
   const lessonFilter = document.querySelector('#record-lesson');
   const list = document.querySelector('#record-list');
@@ -45,6 +46,19 @@
     return node;
   }
 
+  const recent = [...notes].sort((a, b) => (b.published || b.date).localeCompare(a.published || a.date) || b.date.localeCompare(a.date) || a.title.localeCompare(b.title, 'ko')).slice(0, initialCount);
+  for (const note of recent) {
+    const item = element('li', '');
+    const link = element('a', 'recent-note');
+    link.href = note.url;
+    link.dataset.noteId = note.id;
+    const date = element('time', 'recent-meta', `${types[note.type]} · ${note.published || note.date}`);
+    date.dateTime = note.published || note.date;
+    link.append(date, element('span', 'recent-title', note.title));
+    item.append(link);
+    document.querySelector('#recent-notes').append(item);
+  }
+
   const groups = [];
   const rows = [];
   for (const course of courses) {
@@ -57,7 +71,7 @@
       lessonSection.dataset.lessonId = lesson.id;
       lessonSection.append(element('h4', 'record-lesson-title', lesson.title + (lesson.kind === 'supplemental' ? ' · 보충' : '')));
       const lessonRows = [];
-      for (const note of primaryNotes.filter(note => note.courseId === course.id && note.lessonId === lesson.id)) {
+      for (const note of notes.filter(note => note.courseId === course.id && note.lessonId === lesson.id)) {
         const container = element('article', 'record-group');
         container.dataset.recordId = note.id;
         const link = element('a', 'record-row');
@@ -116,6 +130,7 @@
 
   function filterNotes() {
     const matched = rows.filter(({ note, relatedJournals, course, lesson }) =>
+      (typeFilter.value ? note.type === typeFilter.value : primaryNotes.includes(note)) &&
       (!courseFilter.value || note.courseId === courseFilter.value) &&
       (!lessonFilter.value || note.lessonId === lessonFilter.value) &&
       matches([note.title, note.description, ...note.topics, course.title, lesson.title,
@@ -130,9 +145,8 @@
     more.textContent = expanded ? '목록 접기 ↑' : `${matched.length - initialCount}개 더 보기 ↓`;
     more.setAttribute('aria-expanded', String(expanded));
     const journalCount = new Set(matched.flatMap(row => row.relatedJournals.map(journal => journal.id))).size;
-    const conceptCount = matched.filter(row => row.note.type === 'concept').length;
-    const otherCount = matched.length - conceptCount;
-    document.querySelector('#record-count').textContent = `개념 ${conceptCount}개${otherCount ? ` · 기록 ${otherCount}개` : ''} · 관련 학습 기록 ${journalCount}개`;
+    const counts = Object.entries(types).map(([type, label]) => [label, matched.filter(row => row.note.type === type).length]).filter(([, count]) => count);
+    document.querySelector('#record-count').textContent = (counts.map(([label, count]) => `${label} ${count}개`).join(' · ') || '노트 0개') + (journalCount ? ` · 관련 학습 기록 ${journalCount}개` : '');
     empty.hidden = matched.length !== 0;
     const selectedCourse = courses.find(course => course.id === courseFilter.value);
     const selectedLesson = selectedCourse?.lessons.find(lesson => lesson.id === lessonFilter.value);
@@ -143,6 +157,7 @@
   }
   const resetFilter = () => { expanded = false; filterNotes(); };
   search.addEventListener('input', resetFilter);
+  typeFilter.addEventListener('change', resetFilter);
   courseFilter.addEventListener('change', () => { fillLessons(); resetFilter(); });
   lessonFilter.addEventListener('change', resetFilter);
   more.addEventListener('click', () => {

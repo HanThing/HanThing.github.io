@@ -86,11 +86,16 @@ function parseNote(id, text) {
     for (const child of node.children ?? []) visit(child);
   }
   visit(tree);
+  const relatedReasons = meta.relatedReasons ?? {};
+  assert(relatedReasons && typeof relatedReasons === 'object' && !Array.isArray(relatedReasons), `${id}: relatedReasons must map linked note IDs to reasons`);
+  for (const [target, reason] of Object.entries(relatedReasons)) {
+    assert(links.has(target) && target !== id && typeof reason === 'string' && reason.trim(), `${id}: related reason needs an existing link and nonempty text: ${target}`);
+  }
   const firstParagraph = tree.children.find(n => n.type === 'paragraph');
   return { note: { id, title: meta.title, description: (meta.description ?? textOf(firstParagraph ?? {}).slice(0, 150)).trim(),
     date: meta.date, published: meta.published ?? meta.date, type: meta.type, topics: meta.topics ?? [],
     ...(meta.type === 'reference' ? {} : { courseId: meta.courseId, lessonId: meta.lessonId }),
-    url, links: [...links].filter(link => link !== id), sources: meta.sources }, questions, quizzes };
+    url, links: [...links].filter(link => link !== id), ...(Object.keys(relatedReasons).length ? { relatedReasons } : {}), sources: meta.sources }, questions, quizzes };
 }
 
 function files(dir) {
@@ -122,6 +127,9 @@ if (process.argv.includes('--check')) {
   assert.throws(() => parseNote('wrong-lesson', sample.replace('lessonId: python-basics', 'lessonId: data-toolkit')));
   assert.equal(parsed.note.courseId, 'python');
   assert.equal(parsed.note.lessonId, 'python-basics');
+  assert.equal(parseNote('learning/reasons', sample.replace('tags: [python]', 'relatedReasons:\n  python/loops: 반복문 종료 조건을 비교한다.')).note.relatedReasons['python/loops'], '반복문 종료 조건을 비교한다.');
+  assert.throws(() => parseNote('learning/reasons', sample.replace('tags: [python]', 'relatedReasons:\n  unknown: 없는 연결')));
+  assert.throws(() => parseNote('learning/reasons', sample.replace('tags: [python]', 'relatedReasons: []')));
   console.log('Catalog checks passed: separate questions/quizzes, links, publication filters, provenance, course/lesson validation.');
 } else {
   const contentDir = join(root, 'content');

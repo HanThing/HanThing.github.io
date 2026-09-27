@@ -77,3 +77,21 @@ article h2 { margin-top: 2.5rem; letter-spacing: -.025em; }
 article code { word-break: normal; }
 article a { text-underline-offset: .2em; }
 ::selection { background: rgba(197, 216, 221, .28); }
+
+.learning-actions { margin: 1.5rem 0; padding: 1.2rem; border: 1px solid var(--lightgray); border-radius: 8px; }
+.learning-actions > strong { font-size: 1rem; color: var(--dark); }
+.learning-set { margin-top: .7rem; }
+.learning-set p { margin: 0 0 .3rem; color: var(--gray); font-size: .8rem; line-height: 1.6; }
+.learning-links { display: flex; gap: .5rem 1.2rem; flex-wrap: wrap; }
+.learning-links a { display: inline-flex; align-items: center; gap: .4rem; min-height: 44px; font-size: .95rem; }
+.learning-links span { font-size: .8rem; font-weight: 400; }
+.learning-related-jump, .learning-map-link { display: inline-flex; align-items: center; min-height: 44px; font-size: .9rem; }
+.learning-related { margin-top: 2.5rem; border-top: 1px solid var(--lightgray); padding-top: .5rem; scroll-margin-top: 1rem; }
+.learning-related h2 { font-size: 1.2rem; line-height: 1.5; margin: .5rem 0 1rem; }
+.learning-related-list { list-style: none; padding: 0; margin: 0; }
+.learning-related-list li { margin: 0; border-bottom: 1px solid var(--lightgray); }
+.learning-related-list a { display: grid; gap: .4rem; padding: 1rem 0; background: transparent; line-height: 1.7; }
+.learning-related-list small, .learning-related-list span { color: var(--gray); font-size: .8rem; font-weight: 400; }
+.learning-related-list strong { font-size: 1rem; }
+.learning-actions, .learning-related { word-break: keep-all; overflow-wrap: anywhere; }
+.learning-actions a:focus-visible, .learning-related a:focus-visible { outline: 2px solid var(--secondary); outline-offset: 3px; }

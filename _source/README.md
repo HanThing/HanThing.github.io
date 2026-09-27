@@ -26,7 +26,7 @@ sh _source/rebuild.sh
 
 The script fetches official Quartz commit `3dff48b5df6d84c9544a5ae19c8f2cbb01dc44e5`, installs the locked dependencies with `npm ci`, and builds in a temporary directory. All configured plugins are already in the lockfile. A successful build replaces `notes/`, regenerates the homepage `content-data.js` and updates `_source/INDEX.md`; the custom homepage and learning pages are separate source files and remain intact. The script neither commits nor publishes. Review the generated changes before deploying.
 
-Preserve these paths relative to `_source/`: `content/`, `quartz.config.yaml`, `quartz.ts`, `quartz/components/HanThingHome.tsx`, `quartz/styles/custom.scss`, `quartz/static/outfit.woff2`, `quartz/static/icon.png`, `quartz/static/og-image.png`, `package.json`, `package-lock.json`, `README.md`, `rebuild.sh`, `generate-catalog.mjs`, `AGENTS.md`, `INDEX.md`, and `CHANGELOG.md`. Keep the shared `theme.js` in the public repository root. The source bundle is public, so include only approved public content. Keep `UPSTREAM.txt` and `LICENSE.txt` with it for provenance.
+Preserve these paths relative to `_source/`: `content/`, `quartz.config.yaml`, `quartz.ts`, `quartz/components/HanThingHome.tsx`, `quartz/components/HanThingLearning.tsx`, `quartz/styles/custom.scss`, `quartz/static/outfit.woff2`, `quartz/static/icon.png`, `quartz/static/og-image.png`, `package.json`, `package-lock.json`, `README.md`, `rebuild.sh`, `generate-catalog.mjs`, `AGENTS.md`, `INDEX.md`, and `CHANGELOG.md`. Keep the shared `theme.js` and reviewed `review-data.json` in the public repository root; both are build inputs for the common article layout. The source bundle is public, so include only approved public content. Keep `UPSTREAM.txt` and `LICENSE.txt` with it for provenance.
 
 ## Local preview
 
@@ -50,6 +50,8 @@ description: 메서드가 어떤 객체를 받는지 따라갑니다.
 type: concept
 sources:
   - 공개 가능한 원문 URL 또는 자료명
+courseId: python
+lessonId: python-basics
 publish: true
 draft: false
 date: 2026-09-20
@@ -62,6 +64,12 @@ tags:
 
 Use links relative to the content root, for example `[[python/self-and-objects]]`. Quartz provides full-text search, backlinks, RSS, and a sitemap. The homepage generates its document stars and relationships from the same Markdown. Use `type: journal` for dated learning, `concept` for evolving explanations, `weekly` for a verified assignment and `project` for actual project records. Public course guides use `reference`: they appear in the agent index, but do not become learning stars or recent records. Untyped navigation pages stay outside the homepage catalog. Use `published` when the study date differs from publication. `topics` uses official curriculum names for the visible filter; `tags` remain optional metadata.
 
+Use existing `courseId` and `lessonId` values that match the actual source lesson; do not copy the example classification indiscriminately. The note ID is its extensionless path relative to `content/`. Its ID must appear in the `noteIds` of a reviewed set in `blog-preview/review-data.json`. Several notes may share a set when its learning goals apply; do not duplicate questions or require one set per note.
+
+The common article layout generates `learning-actions` near the title and `learning-review` and `learning-related` below the article. Quiz and card links use the mapped set's actual counts, `set`, `mode` and `from=<note ID>`; the map link uses `/?note=<note ID>`. Review mode changes preserve the validated origin and the visible return link. Do not paste this generated navigation into each Markdown note. Missing reviewed material or a missing mapping fails publication checks; keep the note unpublished and report the missing material instead of inventing links or counts.
+
+Related cards come from existing note links. An optional `relatedReasons` mapping can provide a nonempty, evidence-based reason keyed by an outgoing wikilink's note ID. Write these reasons before recording the reviewed NotebookLM source; later source edits require provenance revalidation. Without a reason, the card labels its description as a note summary. Read the linked material before claiming a prerequisite or learning sequence; a shared topic alone does not establish either.
+
 Use `## 질문: ...` for an actual question and `## 퀴즈: ...` for a review problem. Under each question, include separate paragraphs beginning `**상황:**`, `**의도:**` and `**핵심 답변:**`; the homepage displays them in an expandable question card. Preserve the source question and explain any problem or code needed to understand it. Mark inferred intent as interpretation. Every concept needs at least one self-contained quiz with its answer inside native `<details>`. The generator links questions and quizzes into separate collections. Do not claim mastery or invent user attempts. Each knowledge note needs a nonempty `sources` list; include specific evidence beside claims where needed.
 
 Inside a Markdown table, escape a wikilink's alias separator: `[[python/self-and-objects\|객체와 self]]`. An unescaped `|` creates a new table cell and can hide the rest of that row.
@@ -70,13 +78,15 @@ Use full URLs for links outside the wiki, such as `https://hanthing.github.io/#q
 
 Both publishing filters are enabled: a page must have `publish: true` and must not have `draft: true`. `private`, `drafts`, `raw-sources`, and `.obsidian` folders are excluded at any depth. The built JSON index and XML feeds must be checked along with the rendered pages when reviewing a release.
 
+Before release, run the catalog, NotebookLM provenance/mapping and public-site checks, then use the rendered combined site to follow home search/type filter → article → quiz/cards → article return → related note → focused map. Check title/footer counts, correct set and mode, mode-switch return links, visible weekly/journal discovery, keyboard access and a 390px viewport. After an authorized deployment, verify the same flow on the public site and open the result in Orca. Report the article, quiz and card URLs and any unverified step; a successful build or existing JSON alone is not a completed reading-and-review flow. Draft-only requests do not authorize deployment, and unpublished notes must stay out of public pages, catalog, index and feeds.
+
 Keep original PDFs, imported source material, private schedules, and unpublished attachments outside `content/` and outside the public repository. Quartz's Markdown filters do not prevent arbitrary attachments from being copied. Add only attachments that may be public. Ignore rules do not remove files already tracked by Git.
 
 Quartz renders the prepared wiki; it does not run an LLM or ingest external sources. The original sources and the process used to derive a note should be recorded separately from the public article.
 
 ## Project files
 
-- `quartz/`: official engine plus `components/HanThingHome.tsx`, `styles/custom.scss`, the local Outfit font, and HanThing's static icon and social preview image.
+- `quartz/`: official engine plus `components/HanThingHome.tsx`, `components/HanThingLearning.tsx`, `styles/custom.scss`, the local Outfit font, and HanThing's static icon and social preview image.
 - `quartz.config.yaml`: HanThing settings, Korean UI, the `/notes` canonical URL, publication filters, and plugin layout.
 - `quartz.ts`: loads the config and adds the Home link using a normal page navigation.
 - `content/`: public-ready Markdown notes and explicitly public attachments.

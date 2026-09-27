@@ -4,6 +4,13 @@ import { loadProgress, loadSyncedProgress, changeProgress, beginSession, getAtte
 const $ = selector => document.querySelector(selector);
 const labels = { review: '복습 중', pending: '점검 대기', mastered: '익힘' };
 const query = new URLSearchParams(location.search);
+const sourceNote = window.HANTHING_CONTENT?.notes.find(note => note.id === query.get('from'));
+if (sourceNote) {
+  const back = $('#return-to-note');
+  back.href = sourceNote.url;
+  back.textContent = `← 읽던 글로 돌아가기 · ${sourceNote.title}`;
+  back.hidden = false;
+}
 const mode = ['quiz', 'cards', 'check'].includes(query.get('mode')) ? query.get('mode') : 'quiz';
 const player = $('#player');
 const setSelect = $('#set-select');
@@ -111,6 +118,7 @@ function updateContext() {
   for (const link of document.querySelectorAll('[data-mode]')) {
     const params = new URLSearchParams({ mode: link.dataset.mode });
     if (setSelect.value) params.set('set', setSelect.value);
+    if (sourceNote) params.set('from', sourceNote.id);
     link.href = `review.html?${params}`;
     if (link.dataset.mode === mode) link.setAttribute('aria-current', 'page');
     else link.removeAttribute('aria-current');
