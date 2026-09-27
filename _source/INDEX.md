@@ -2,6 +2,9 @@
 
 Generated from public Markdown. Read AGENTS.md for ingest/query/lint; CHANGELOG.md for changes. Course references support briefing and stay outside the learning graph. Course/lesson identify the curriculum placement; topics identify related subjects.
 
+- [위클리 페이퍼 — 문제를 정의하고, 도구를 선택하는 기준](content/weekly/2026-09-28-four-questions.md) — weekly · 2026-09-28 · AI 엔지니어의 역량, 회사의 날짜 표현, 모델을 클래스로 만드는 이유, NumPy 성능 개선에 대한 나의 답변.
+  Course: 실전 파이썬 준비하기 → 파이썬 기초 복습 (보충). Related topics: 실전 파이썬 준비하기; 데이터 분석
+  Sources: 코드잇 AI 스프린트 위클리 페이퍼 공식 네 문항 (2026-09-24 확인); 위클리 페이퍼 발표 준비 대화 (2026-09-28 정리); https://docs.python.org/3/library/datetime.html; https://docs.python.org/3/tutorial/classes.html; https://docs.pytorch.org/tutorials/beginner/basics/buildmodel_tutorial.html; https://numpy.org/doc/stable/user/whatisnumpy.html; https://docs.python.org/3/faq/design.html#how-are-lists-implemented-in-cpython; https://docs.python.org/3/library/threading.html#gil-and-performance-considerations
 - [NumPy 배열 — shape과 axis를 주소로 읽기](content/data/numpy-array-axes.md) — concept · 2026-09-23 · 리스트와 ndarray의 차이부터 다차원 인덱싱, 불리언 선택과 축별 평균까지.
   Course: 데이터 분석 → 데이터 사이언스 Toolkit. Related topics: 데이터 분석
   Sources: Explain NumPy and tensors 학습 대화 (2026-09-23); https://numpy.org/doc/stable/user/absolute_beginners.html; https://numpy.org/doc/stable/user/basics.indexing.html

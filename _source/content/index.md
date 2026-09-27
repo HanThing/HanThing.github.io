@@ -8,6 +8,10 @@ tags: [index]
 
 [최근 기록](https://hanthing.github.io/#journal) · [질문 모음](https://hanthing.github.io/#questions) · [퀴즈 모음](https://hanthing.github.io/#quizzes)
 
+## 위클리 페이퍼
+
+- [[weekly/2026-09-28-four-questions|문제를 정의하고, 도구를 선택하는 기준 — 네 질문에 대한 나의 답변]]
+
 ## 최근 학습 기록
 
 실제 학습 대화에서 질문의 흐름을 주제별로 묶었습니다.
