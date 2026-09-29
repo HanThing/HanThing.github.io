@@ -32,6 +32,24 @@
     <loc>https://hanthing.github.io/notes/data/observation-unit</loc>
     <lastmod>2026-09-16T15:00:00.000Z</lastmod>
   </url><url>
+    <loc>https://hanthing.github.io/notes/data/pandas-cleaning-validation</loc>
+    <lastmod>2026-09-27T15:00:00.000Z</lastmod>
+  </url><url>
+    <loc>https://hanthing.github.io/notes/data/pandas-dataframe-selection</loc>
+    <lastmod>2026-09-27T15:00:00.000Z</lastmod>
+  </url><url>
+    <loc>https://hanthing.github.io/notes/data/pandas-groupby-merge-reshape</loc>
+    <lastmod>2026-09-27T15:00:00.000Z</lastmod>
+  </url><url>
+    <loc>https://hanthing.github.io/notes/data/statistics-data-and-groups</loc>
+    <lastmod>2026-09-28T15:00:00.000Z</lastmod>
+  </url><url>
+    <loc>https://hanthing.github.io/notes/data/statistics-distributions-and-plots</loc>
+    <lastmod>2026-09-28T15:00:00.000Z</lastmod>
+  </url><url>
+    <loc>https://hanthing.github.io/notes/data/statistics-relations-and-interpretation</loc>
+    <lastmod>2026-09-28T15:00:00.000Z</lastmod>
+  </url><url>
     <loc>https://hanthing.github.io/notes/data/wrangling</loc>
     <lastmod>2026-09-16T15:00:00.000Z</lastmod>
   </url><url>
@@ -67,6 +85,12 @@
   </url><url>
     <loc>https://hanthing.github.io/notes/learning/2026-09-23-numpy-and-tensors</loc>
     <lastmod>2026-09-22T15:00:00.000Z</lastmod>
+  </url><url>
+    <loc>https://hanthing.github.io/notes/learning/2026-09-29-dataframe</loc>
+    <lastmod>2026-09-27T15:00:00.000Z</lastmod>
+  </url><url>
+    <loc>https://hanthing.github.io/notes/learning/2026-09-29-statistics</loc>
+    <lastmod>2026-09-28T15:00:00.000Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/python/args-and-kwargs</loc>
     <lastmod>2026-09-19T15:00:00.000Z</lastmod>
@@ -108,89 +132,140 @@
     <lastmod>2026-09-21T15:00:00.000Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/bootcamp/</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/data/</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/learning/</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/weekly/</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/tags/bootcamp</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/tags/roadmap</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/tags/data</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/tags/learning</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/tags/statistics</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/tags/questions</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/tags/numpy</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/tags/array</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/tags/axis</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/tags/broadcasting</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/tags/standardization</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/tags/linear-layer</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/tags/feature</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/tags/shape</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/tags/view</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/tags/vector</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/tags/matmul</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/tags/cosine-similarity</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
+  </url><url>
+    <loc>https://hanthing.github.io/notes/tags/pandas</loc>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
+  </url><url>
+    <loc>https://hanthing.github.io/notes/tags/preprocessing</loc>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
+  </url><url>
+    <loc>https://hanthing.github.io/notes/tags/missing-data</loc>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
+  </url><url>
+    <loc>https://hanthing.github.io/notes/tags/validation</loc>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
+  </url><url>
+    <loc>https://hanthing.github.io/notes/tags/dataframe</loc>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
+  </url><url>
+    <loc>https://hanthing.github.io/notes/tags/series</loc>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
+  </url><url>
+    <loc>https://hanthing.github.io/notes/tags/indexing</loc>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
+  </url><url>
+    <loc>https://hanthing.github.io/notes/tags/groupby</loc>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
+  </url><url>
+    <loc>https://hanthing.github.io/notes/tags/merge</loc>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
+  </url><url>
+    <loc>https://hanthing.github.io/notes/tags/reshape</loc>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
+  </url><url>
+    <loc>https://hanthing.github.io/notes/tags/pipeline</loc>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
+  </url><url>
+    <loc>https://hanthing.github.io/notes/tags/missing-values</loc>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
+  </url><url>
+    <loc>https://hanthing.github.io/notes/tags/visualization</loc>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
+  </url><url>
+    <loc>https://hanthing.github.io/notes/tags/matplotlib</loc>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
+  </url><url>
+    <loc>https://hanthing.github.io/notes/tags/seaborn</loc>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
+  </url><url>
+    <loc>https://hanthing.github.io/notes/tags/correlation</loc>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
+  </url><url>
+    <loc>https://hanthing.github.io/notes/tags/interpretation</loc>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/tags/python</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/tags/</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/tags/tensor</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/tags/learning-log</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/tags/weekly-paper</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/tags/oop</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url><url>
     <loc>https://hanthing.github.io/notes/tags/wiki</loc>
-    <lastmod>2026-09-27T16:39:50.010Z</lastmod>
+    <lastmod>2026-09-29T10:25:07.912Z</lastmod>
   </url></urlset>

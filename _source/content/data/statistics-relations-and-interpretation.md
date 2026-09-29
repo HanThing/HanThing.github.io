@@ -1,0 +1,159 @@
+---
+title: 변수 사이의 관계 — 상관행렬과 그룹별 그래프를 읽는 법
+description: corr의 표 구조, 선형 상관의 한계, 생존율과 박스플롯, 등급을 고정한 비교의 범위를 정리한다.
+date: 2026-09-29
+publish: true
+draft: false
+type: concept
+courseId: data-analysis
+lessonId: statistics-and-visualization
+topics: [데이터 분석]
+tags: [statistics, correlation, visualization, interpretation]
+sources:
+  - 통계시각화 실습 환경 설명 학습 대화 (2026-09-29)
+  - https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html
+  - https://seaborn.pydata.org/generated/seaborn.barplot.html
+  - https://seaborn.pydata.org/generated/seaborn.heatmap.html
+relatedReasons:
+  learning/2026-09-29-statistics: 실제 생존율 방향 오류와 등급을 고정한 후속 해석을 구분해 기록했다.
+  data/statistics-data-and-groups: 이진 변수의 평균이 비율이 되는 이유와 요약표의 인덱스를 먼저 익힌다.
+  data/statistics-distributions-and-plots: 박스·중앙값·수염을 알아야 두 집단의 분포를 비교할 수 있다.
+  data/eda-and-causality: 관찰한 관계를 인과나 일반 법칙으로 확대하지 않는 기준이다.
+---
+
+두 변수의 관계는 숫자 하나로 끝내지 않는다. 상관계수는 특정한 형태의 관계를 요약하고, 그룹별 그래프는 분포와 구성 차이를 보여 준다. **전체에서 본 차이와 특정 집단 안에서 본 차이의 범위가 다르다**는 점까지 함께 읽는다.
+
+아래 질문의 의도는 실제 대화 맥락에서 해석했다. 사용자 응답과 당시 제시된 수치의 범위는 [[learning/2026-09-29-statistics|당일 학습 기록]]에 남겼다.
+
+## 질문: corr() 결과는 Series인가? 행 이름과 열 이름도 값인가?
+
+**상황:** `numeric_df.corr()` 결과의 행·열 이름과 내부 숫자를 보고 Series인지 DataFrame인지 물었다. U자 데이터와 노이즈를 만든 코드가 상관계수 설명에 왜 필요한지도 함께 질문했다.
+
+**의도:** 결과 표의 구조를 이해한 뒤, 상관계수라는 요약값이 무엇을 설명하고 놓치는지 확인하려는 질문이다.
+
+**핵심 답변:** DataFrame의 `.corr()`는 변수 쌍마다 상관계수를 계산한 DataFrame을 돌려준다. 행·열 라벨은 변수 이름이고 내부 값이 계수다. 기본 Pearson 상관계수는 선형 관계를 요약한다. [pandas corr 문서](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html)
+
+```python
+numeric_df = df.select_dtypes(include="number")
+corr = numeric_df.corr()
+```
+
+이 실습의 숫자 dtype 열 네 개를 골랐다면 결과는 `(4, 4)`다.
+
+```text
+             survived  pclass   age  fare   ← 열 라벨
+survived         ...     ...   ...   ...
+pclass           ...     ...   ...   ...
+age              ...     ...   ...   ...
+fare             ...     ...   ...   ...
+↑ 행 인덱스       내부에 있는 16개 값이 상관계수
+```
+
+`corr.loc["age", "fare"]`는 나이와 요금의 상관계수다. 반대 위치의 값도 같다. 유효하게 계산되는 변수의 자기 상관은 1이므로 대각선은 서로 다른 변수의 관계를 고를 때 제외한다. 상수 열처럼 변동이 없거나 유효한 관측이 부족하면 계산되지 않아 `NaN`이 될 수 있다.
+
+결측치는 **각 변수 쌍에서 둘 다 값이 있는 행**을 기준으로 처리한다. 따라서 모든 칸이 반드시 같은 승객 수를 사용한 것은 아니다. 또한 숫자로 저장된 `pclass`를 골랐다고 객실 등급이 일반적인 연속 수치가 되는 것은 아니다. [[data/statistics-data-and-groups|dtype과 변수의 의미]]를 함께 확인한다.
+
+히트맵은 이 표를 색으로 표현한다. 상관계수를 계산하는 함수가 아니다.
+
+```python
+fig, ax = plt.subplots(figsize=(6, 5))
+sns.heatmap(corr, annot=True, fmt=".2f", cmap="coolwarm",
+            vmin=-1, vmax=1, center=0, ax=ax)
+ax.set_title("Correlation matrix")
+plt.show()
+```
+
+`annot=True`는 셀에 숫자를 적고, `fmt=".2f"`는 표시를 소수 둘째 자리로 맞춘다. `vmin`, `vmax`, `center`는 색의 기준을 정한다. 원래 `corr`의 값을 반올림해 바꾸는 설정은 아니다. 행·열 라벨은 전달한 DataFrame에서 가져온다. [Seaborn heatmap 문서](https://seaborn.pydata.org/generated/seaborn.heatmap.html)
+
+상관의 **방향은 부호**, 선형 관계의 **강도는 절댓값**으로 비교한다. 따라서 `-0.8`은 `+0.3`보다 강한 선형 관계다. 음수라는 것은 x가 큰 관측에서 y가 작게 나타나는 경향이지, 모든 관측에서 반드시 작아진다는 보장은 아니다.
+
+선형 상관이 0이어도 관계는 있을 수 있다.
+
+```python
+x = np.array([-2, -1, 0, 1, 2])
+y = x ** 2
+np.corrcoef(x, y)[0, 1]  # 0.0
+```
+
+이 보충 예는 x를 알면 y를 정확히 구할 수 있지만 모양은 U자다. 한쪽에서는 감소하고 다른 쪽에서는 증가하여 선형 상관으로는 관계가 드러나지 않는다. 원래 설명의 `y = x**2 + noise`는 U자 주변에 흩어진 관측을 만드는 예다. **노이즈는 이 원리를 보이는 데 필수는 아니며**, `corr()`에 넣어야 하는 인수도 아니다. 실제 관계는 산점도와 함께 확인한다.
+
+## 질문: groupby로 구한 평균은 무엇인가? barplot은 어떻게 생존율인 줄 아나?
+
+**상황:** 성별로 생존 열을 묶어 평균을 낸다는 설명은 직접 했지만, 요금을 이진 변수라고 표현하고 `observed=False`의 역할을 물었다.
+
+**의도:** 그룹을 나누는 열, 요약할 열, 집계 함수의 역할을 분리하려는 질문이다.
+
+**핵심 답변:** `groupby()`가 그룹을 나누고 선택한 열의 `.mean()`이 평균을 구한다. Seaborn의 `barplot()`도 기본 집계가 평균이다. 생존율이라는 의미는 그래프 함수가 알아내는 것이 아니라 `survived`가 0·1로 코딩되어 있기 때문에 생긴다.
+
+```python
+df.groupby("sex")["survived"].mean()
+
+fig, ax = plt.subplots()
+sns.barplot(data=df, x="sex", y="survived", errorbar=None, ax=ax)
+ax.set_ylabel("Survival rate")
+```
+
+성별 막대의 높이는 해당 성별에서 생존한 사람의 비율이다. 반면 `y="fare"`를 주면 평균 요금이다. **요금은 이진 변수가 아니다.** 인원수를 보고 싶다면 `countplot()`처럼 행을 세는 표현을 고른다. `barplot()`에 나타나는 오차 막대도 박스플롯의 수염과 다른 요소다. 위 코드는 평균 비교에 집중하도록 `errorbar=None`으로 생략했다. [Seaborn barplot 문서](https://seaborn.pydata.org/generated/seaborn.barplot.html)
+
+`observed=False`는 범주형 dtype으로 정해 둔 범주 중 실제 데이터에 등장하지 않은 범주도 그룹 결과에 포함할지와 관련된다. 계산을 생존율로 바꾸는 옵션이 아니며, 문자열 열을 자동으로 범주형 dtype으로 바꾸지도 않는다.
+
+## 질문: 남성의 생존율과 pclass가 높은 사람의 생존율이 더 높은가? 박스플롯은 어떻게 읽나?
+
+**상황:** 처음 해석에서 남성의 생존율이 더 높고 `pclass`가 높을수록 생존율이 높다고 말했다. 이어 생존 여부별 나이·요금 박스플롯의 읽는 법을 물었다.
+
+**의도:** 그래프의 그룹 이름과 숫자를 실제 의미에 연결하고, 평균 막대에서 분포 비교로 넘어가려는 질문이다.
+
+**핵심 답변:** 당시 대화에 제시된 집계에서는 여성 생존율이 약 74.2%, 남성은 약 18.9%였다. 등급별로는 1등급 약 63.0%, 2등급 약 47.3%, 3등급 약 24.2%였다. 두 방향을 모두 고쳐 읽어야 한다. `pclass` 숫자가 작을수록 상위 객실 등급이다. 이 수치는 해당 표본의 관측 비율이지 성별·등급이 생존을 결정한다는 법칙이 아니다.
+
+박스플롯은 [[data/statistics-distributions-and-plots|사분위수와 수염]]을 그룹별로 나란히 보여 준다.
+
+| 볼 것 | 읽는 내용 | 바로 단정할 수 없는 것 |
+| --- | --- | --- |
+| 박스 안 중앙선 | 각 그룹의 중앙값 | 평균이 얼마인지 |
+| 박스 높이 | 가운데 50%의 퍼짐, IQR | 전체 범위나 사람 수 |
+| 두 박스의 위치 | 중심 구간의 차이와 겹침 | 통계적 유의성·인과관계 |
+| 수염 밖 점 | IQR 규칙 바깥의 관측 | 잘못 입력되어 지워야 하는 값 |
+
+요금 박스가 더 높다는 말도 구분해야 한다. **박스 전체가 위쪽에 있다**면 요금의 중심 구간이 높다는 뜻이고, **박스 자체의 세로 길이가 길다**면 가운데 50%가 더 넓게 퍼져 있다는 뜻이다. 후자의 뜻은 사용자가 직접 설명했다.
+
+나이 박스가 많이 겹쳐 보인다면 “두 그룹의 중앙 구간에 겹침이 크다”까지는 읽을 수 있다. 그것만으로 **상관관계가 없거나 나이가 쓸모없는 변수라고 증명되지는 않는다.** 특정 연령대의 차이, 다른 변수와 함께 나타나는 패턴, 표본 수는 별도로 살펴야 한다.
+
+## 질문: 1등급 안에서 요금 분포가 비슷하다면, 요금과 생존의 관계가 작다는 뜻인가?
+
+**상황:** “1등급 승객만 남겼을 때 생존 여부에 따른 요금 분포가 거의 비슷하다”는 가정에 대해, 요금과 생존의 관계가 크지 않아 보이며 먼저 등급과 요금의 관계를 확인하겠다고 답했다.
+
+**의도:** 전체 집단에서 본 요금 차이가 객실 등급의 구성 차이와 연결되는지 점검하려는 응답이다.
+
+**핵심 답변:** 후속 확인 방향은 타당하지만 해석에는 **1등급 안에서**라는 조건을 붙여야 한다. 이 가정만으로 2·3등급이나 전체 승객의 관계까지 결론 내릴 수 없다. 비슷해 보이는 박스만으로 관계의 크기를 정량화한 것도 아니다.
+
+전체 생존자 집단에 상위 등급 승객이 많이 포함되고 상위 등급 요금도 높다면, 전체 요금 차이에는 집단 구성의 영향이 섞일 수 있다. 이는 확인할 가설이지, 이 대화에서 인과적으로 검증한 결과가 아니다.
+
+```python
+fig, axes = plt.subplots(1, 2, figsize=(12, 4), sharey=True)
+# 등급에 따라 요금 분포가 어떻게 다른가?
+sns.boxplot(data=df, x="pclass", y="fare", ax=axes[0])
+
+# 같은 등급 안에서 생존 여부별 요금 분포는 어떤가?
+sns.boxplot(data=df, x="pclass", y="fare", hue="survived", ax=axes[1])
+plt.show()
+```
+
+두 번째 그림을 실제로 그릴 때는 그룹별 관측 수도 함께 확인한다. 전체 비교 → 같은 등급 안의 비교 → 남은 차이에 대한 가설 순서로 범위를 좁히면, 관찰보다 결론이 커지는 일을 줄일 수 있다. [[data/eda-and-causality|관계와 인과의 구분]]으로 이어진다.
+
+## 퀴즈: 어떤 범위까지 말할 수 있을까?
+
+다음은 **복습을 위해 새로 만든 보충 문제이며 아직 답하지 않았다.**
+
+“1등급 안에서 생존 여부별 요금 박스가 많이 겹친다. 따라서 모든 승객에서 요금과 생존은 관계가 없다.” 이 해석의 문제 두 가지는 무엇일까?
+
+<details>
+<summary>정답과 해설</summary>
+
+1. 1등급이라는 조건에서 얻은 관찰을 전체 승객으로 확대했다.
+2. 박스의 겹침만으로 모든 형태의 관계가 없다고 결론 냈다.
+
+먼저 말할 수 있는 것은 “1등급 안에서 두 그룹의 요금 중앙 구간이 많이 겹친다”다. 다른 등급·표본 수·전체 분포를 더 확인하고, 필요한 분석 방법을 정해야 한다.
+
+</details>
+
+[[learning/2026-09-29-statistics|실제 응답과 교정]] · [[data/statistics-data-and-groups|변수와 요약표]] · [[data/statistics-distributions-and-plots|분포를 그리는 코드]]

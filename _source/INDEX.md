@@ -2,6 +2,30 @@
 
 Generated from public Markdown. Read AGENTS.md for ingest/query/lint; CHANGELOG.md for changes. Course references support briefing and stay outside the learning graph. Course/lesson identify the curriculum placement; topics identify related subjects.
 
+- [통계 실습의 데이터 — 변수의 의미와 요약표의 인덱스](content/data/statistics-data-and-groups.md) — concept · 2026-09-29 · 숫자 dtype과 변수 유형, 개수와 비율, 결측치 요약표의 인덱스 정렬과 평균 대체의 한계를 연결한다.
+  Course: 데이터 분석 → 기초 통계와 데이터 시각화. Related topics: 데이터 분석
+  Sources: 통계시각화 실습 환경 설명 학습 대화 (2026-09-29); https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html; https://pandas.pydata.org/docs/reference/api/pandas.Series.value_counts.html
+- [분포를 그리는 코드 — Axes·히스토그램·KDE·박스플롯](content/data/statistics-distributions-and-plots.md) — concept · 2026-09-29 · 그릴 값과 그릴 장소를 구분하고, IQR 경계·수염·이상치와 로그 변환의 해석을 연결한다.
+  Course: 데이터 분석 → 기초 통계와 데이터 시각화. Related topics: 데이터 분석
+  Sources: 통계시각화 실습 환경 설명 학습 대화 (2026-09-29); https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html; https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.boxplot.html; https://seaborn.pydata.org/generated/seaborn.histplot.html; https://pandas.pydata.org/docs/reference/api/pandas.Series.quantile.html; https://numpy.org/doc/stable/reference/generated/numpy.log1p.html
+- [변수 사이의 관계 — 상관행렬과 그룹별 그래프를 읽는 법](content/data/statistics-relations-and-interpretation.md) — concept · 2026-09-29 · corr의 표 구조, 선형 상관의 한계, 생존율과 박스플롯, 등급을 고정한 비교의 범위를 정리한다.
+  Course: 데이터 분석 → 기초 통계와 데이터 시각화. Related topics: 데이터 분석
+  Sources: 통계시각화 실습 환경 설명 학습 대화 (2026-09-29); https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html; https://seaborn.pydata.org/generated/seaborn.barplot.html; https://seaborn.pydata.org/generated/seaborn.heatmap.html
+- [통계·시각화 실습 — 요약표의 구조에서 조건을 붙인 해석까지](content/learning/2026-09-29-statistics.md) — journal · 2026-09-29 · 실제 코드 작성과 응답을 바탕으로 변수 유형, 그래프 구성, 결측치 인덱스, 생존율 방향과 조건부 비교를 돌아본다.
+  Course: 데이터 분석 → 기초 통계와 데이터 시각화. Related topics: 데이터 분석
+  Sources: 통계시각화 실습 환경 설명 학습 대화 (2026-09-29)
+- [Pandas 정리와 검증 — 자료형, 결측, 중복, 파생 변수](content/data/pandas-cleaning-validation.md) — concept · 2026-09-28 · 값을 바꾸는 이유와 처리 후 확인할 조건을 구분하고 변환 실패, 0 채우기, 중복 제거, 복사와 대입을 실제 질문으로 살펴본다.
+  Course: 데이터 분석 → DataFrame 마스터하기. Related topics: 데이터 분석
+  Sources: 데이터 프레임 개념 총정리 학습 대화 (2026-09-28–29); https://pandas.pydata.org/docs/reference/api/pandas.to_numeric.html; https://pandas.pydata.org/docs/reference/api/pandas.to_datetime.html; https://pandas.pydata.org/docs/user_guide/missing_data.html; https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop_duplicates.html; https://pandas.pydata.org/docs/reference/api/pandas.cut.html
+- [DataFrame과 선택 — 표의 의미, Series, 불리언 마스크](content/data/pandas-dataframe-selection.md) — concept · 2026-09-28 · 이미 있는 표를 다시 가공하는 이유에서 출발해 인덱스와 열, Series와 DataFrame, 조건 선택의 반환값을 구분한다.
+  Course: 데이터 분석 → DataFrame 마스터하기. Related topics: 데이터 분석
+  Sources: 데이터 프레임 개념 총정리 학습 대화 (2026-09-28–29); https://pandas.pydata.org/docs/user_guide/dsintro.html; https://pandas.pydata.org/docs/user_guide/indexing.html
+- [Pandas 집계와 결합 — agg, transform, merge에서 pipe까지](content/data/pandas-groupby-merge-reshape.md) — concept · 2026-09-28 · 각 단계가 무엇을 반환하는지 실제 표로 추적하며 고객별 집계, 주문별 변환, 키 결합, 긴 표와 넓은 표, 함수 연결을 구분한다.
+  Course: 데이터 분석 → DataFrame 마스터하기. Related topics: 데이터 분석
+  Sources: 데이터 프레임 개념 총정리 학습 대화 (2026-09-28–29); https://pandas.pydata.org/docs/user_guide/groupby.html; https://pandas.pydata.org/docs/reference/api/pandas.merge.html; https://pandas.pydata.org/docs/reference/api/pandas.pivot_table.html; https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.melt.html; https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.pipe.html
+- [DataFrame 학습 기록 — 표의 목적부터 집계와 파이프라인까지](content/learning/2026-09-29-dataframe.md) — journal · 2026-09-28 · 9월 28–29일 실제 질문과 코드 수정, 설명의 정정을 따라 DataFrame의 반환값과 행의 의미를 정리한다.
+  Course: 데이터 분석 → DataFrame 마스터하기. Related topics: 데이터 분석
+  Sources: 데이터 프레임 개념 총정리 학습 대화 (2026-09-28–29)
 - [위클리 페이퍼 — 문제를 정의하고, 도구를 선택하는 기준](content/weekly/2026-09-28-four-questions.md) — weekly · 2026-09-28 · AI 엔지니어의 역량, 회사의 날짜 표현, 모델을 클래스로 만드는 이유, NumPy 성능 개선에 대한 나의 답변.
   Course: 실전 파이썬 준비하기 → 파이썬 기초 복습 (보충). Related topics: 실전 파이썬 준비하기; 데이터 분석
   Sources: 코드잇 AI 스프린트 위클리 페이퍼 공식 네 문항 (2026-09-24 확인); 위클리 페이퍼 발표 준비 대화 (2026-09-28 정리); https://docs.python.org/3/library/datetime.html; https://docs.python.org/3/tutorial/classes.html; https://docs.pytorch.org/tutorials/beginner/basics/buildmodel_tutorial.html; https://numpy.org/doc/stable/user/whatisnumpy.html; https://docs.python.org/3/faq/design.html#how-are-lists-implemented-in-cpython; https://docs.python.org/3/library/threading.html#gil-and-performance-considerations

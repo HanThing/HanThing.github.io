@@ -117,6 +117,257 @@ window.HANTHING_CONTENT = {
   ],
   "notes": [
     {
+      "id": "data/statistics-data-and-groups",
+      "title": "통계 실습의 데이터 — 변수의 의미와 요약표의 인덱스",
+      "description": "숫자 dtype과 변수 유형, 개수와 비율, 결측치 요약표의 인덱스 정렬과 평균 대체의 한계를 연결한다.",
+      "date": "2026-09-29",
+      "published": "2026-09-29",
+      "type": "concept",
+      "topics": [
+        "데이터 분석"
+      ],
+      "courseId": "data-analysis",
+      "lessonId": "statistics-and-visualization",
+      "url": "/notes/data/statistics-data-and-groups",
+      "links": [
+        "learning/2026-09-29-statistics",
+        "data/data-quality",
+        "data/observation-unit",
+        "data/statistics-distributions-and-plots",
+        "data/statistics-relations-and-interpretation"
+      ],
+      "relatedReasons": {
+        "learning/2026-09-29-statistics": "변수 유형과 인덱스를 직접 설명한 응답 및 교정 기록이다.",
+        "data/statistics-distributions-and-plots": "변수의 의미를 정한 다음 분포와 그래프를 고르는 방법으로 이어진다.",
+        "data/statistics-relations-and-interpretation": "그룹별 비율과 요약표의 라벨을 상관행렬 및 집단 비교에 적용한다.",
+        "data/data-quality": "결측치를 채우거나 이상치를 지우기 전에 원인을 확인하는 기준이다.",
+        "data/observation-unit": "승객 한 명과 변수 하나처럼 요약 전후 행의 의미를 구분한다."
+      },
+      "sources": [
+        "통계시각화 실습 환경 설명 학습 대화 (2026-09-29)",
+        "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html",
+        "https://pandas.pydata.org/docs/reference/api/pandas.Series.value_counts.html"
+      ]
+    },
+    {
+      "id": "data/statistics-distributions-and-plots",
+      "title": "분포를 그리는 코드 — Axes·히스토그램·KDE·박스플롯",
+      "description": "그릴 값과 그릴 장소를 구분하고, IQR 경계·수염·이상치와 로그 변환의 해석을 연결한다.",
+      "date": "2026-09-29",
+      "published": "2026-09-29",
+      "type": "concept",
+      "topics": [
+        "데이터 분석"
+      ],
+      "courseId": "data-analysis",
+      "lessonId": "statistics-and-visualization",
+      "url": "/notes/data/statistics-distributions-and-plots",
+      "links": [
+        "data/statistics-data-and-groups",
+        "learning/2026-09-29-statistics",
+        "data/eda-and-causality",
+        "data/statistics-relations-and-interpretation"
+      ],
+      "relatedReasons": {
+        "learning/2026-09-29-statistics": "직접 그래프를 작성하려고 질문한 흐름과 실제 코드 교정을 기록했다.",
+        "data/statistics-data-and-groups": "그릴 열의 의미와 개수·비율의 차이를 먼저 정한다.",
+        "data/statistics-relations-and-interpretation": "한 변수의 분포를 생존 여부별 집단 비교로 확장한다.",
+        "data/eda-and-causality": "평균 하나로 놓치는 분포를 그림으로 확인한다."
+      },
+      "sources": [
+        "통계시각화 실습 환경 설명 학습 대화 (2026-09-29)",
+        "https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html",
+        "https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.boxplot.html",
+        "https://seaborn.pydata.org/generated/seaborn.histplot.html",
+        "https://pandas.pydata.org/docs/reference/api/pandas.Series.quantile.html",
+        "https://numpy.org/doc/stable/reference/generated/numpy.log1p.html"
+      ]
+    },
+    {
+      "id": "data/statistics-relations-and-interpretation",
+      "title": "변수 사이의 관계 — 상관행렬과 그룹별 그래프를 읽는 법",
+      "description": "corr의 표 구조, 선형 상관의 한계, 생존율과 박스플롯, 등급을 고정한 비교의 범위를 정리한다.",
+      "date": "2026-09-29",
+      "published": "2026-09-29",
+      "type": "concept",
+      "topics": [
+        "데이터 분석"
+      ],
+      "courseId": "data-analysis",
+      "lessonId": "statistics-and-visualization",
+      "url": "/notes/data/statistics-relations-and-interpretation",
+      "links": [
+        "learning/2026-09-29-statistics",
+        "data/statistics-data-and-groups",
+        "data/statistics-distributions-and-plots",
+        "data/eda-and-causality"
+      ],
+      "relatedReasons": {
+        "learning/2026-09-29-statistics": "실제 생존율 방향 오류와 등급을 고정한 후속 해석을 구분해 기록했다.",
+        "data/statistics-data-and-groups": "이진 변수의 평균이 비율이 되는 이유와 요약표의 인덱스를 먼저 익힌다.",
+        "data/statistics-distributions-and-plots": "박스·중앙값·수염을 알아야 두 집단의 분포를 비교할 수 있다.",
+        "data/eda-and-causality": "관찰한 관계를 인과나 일반 법칙으로 확대하지 않는 기준이다."
+      },
+      "sources": [
+        "통계시각화 실습 환경 설명 학습 대화 (2026-09-29)",
+        "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html",
+        "https://seaborn.pydata.org/generated/seaborn.barplot.html",
+        "https://seaborn.pydata.org/generated/seaborn.heatmap.html"
+      ]
+    },
+    {
+      "id": "learning/2026-09-29-statistics",
+      "title": "통계·시각화 실습 — 요약표의 구조에서 조건을 붙인 해석까지",
+      "description": "실제 코드 작성과 응답을 바탕으로 변수 유형, 그래프 구성, 결측치 인덱스, 생존율 방향과 조건부 비교를 돌아본다.",
+      "date": "2026-09-29",
+      "published": "2026-09-29",
+      "type": "journal",
+      "topics": [
+        "데이터 분석"
+      ],
+      "courseId": "data-analysis",
+      "lessonId": "statistics-and-visualization",
+      "url": "/notes/learning/2026-09-29-statistics",
+      "links": [
+        "data/statistics-data-and-groups",
+        "data/statistics-distributions-and-plots",
+        "data/statistics-relations-and-interpretation"
+      ],
+      "relatedReasons": {
+        "data/statistics-data-and-groups": "변수의 의미, Series 인덱스, 결측치 요약과 평균 대체를 설명한다.",
+        "data/statistics-distributions-and-plots": "Figure와 Axes, 분포 그림, IQR 수염, 로그 변환의 읽는 법이다.",
+        "data/statistics-relations-and-interpretation": "상관행렬과 집단별 관찰을 해석할 때의 조건을 정리한다."
+      },
+      "sources": [
+        "통계시각화 실습 환경 설명 학습 대화 (2026-09-29)"
+      ]
+    },
+    {
+      "id": "data/pandas-cleaning-validation",
+      "title": "Pandas 정리와 검증 — 자료형, 결측, 중복, 파생 변수",
+      "description": "값을 바꾸는 이유와 처리 후 확인할 조건을 구분하고 변환 실패, 0 채우기, 중복 제거, 복사와 대입을 실제 질문으로 살펴본다.",
+      "date": "2026-09-28",
+      "published": "2026-09-29",
+      "type": "concept",
+      "topics": [
+        "데이터 분석"
+      ],
+      "courseId": "data-analysis",
+      "lessonId": "dataframe",
+      "url": "/notes/data/pandas-cleaning-validation",
+      "links": [
+        "learning/2026-09-29-dataframe",
+        "data/data-quality",
+        "data/interpretation",
+        "data/pandas-dataframe-selection",
+        "data/pandas-groupby-merge-reshape"
+      ],
+      "relatedReasons": {
+        "learning/2026-09-29-dataframe": "결측 처리의 목적과 중복 제거 코드의 실제 수정 과정을 보존한 기록이다.",
+        "data/pandas-dataframe-selection": "Series와 DataFrame의 구분이 열 변환과 표 전체 대입의 바탕이 된다.",
+        "data/data-quality": "데이터가 사용할 목적에 맞게 정확하고 일관되는지 확인하는 문제로 이어진다."
+      },
+      "sources": [
+        "데이터 프레임 개념 총정리 학습 대화 (2026-09-28–29)",
+        "https://pandas.pydata.org/docs/reference/api/pandas.to_numeric.html",
+        "https://pandas.pydata.org/docs/reference/api/pandas.to_datetime.html",
+        "https://pandas.pydata.org/docs/user_guide/missing_data.html",
+        "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop_duplicates.html",
+        "https://pandas.pydata.org/docs/reference/api/pandas.cut.html"
+      ]
+    },
+    {
+      "id": "data/pandas-dataframe-selection",
+      "title": "DataFrame과 선택 — 표의 의미, Series, 불리언 마스크",
+      "description": "이미 있는 표를 다시 가공하는 이유에서 출발해 인덱스와 열, Series와 DataFrame, 조건 선택의 반환값을 구분한다.",
+      "date": "2026-09-28",
+      "published": "2026-09-29",
+      "type": "concept",
+      "topics": [
+        "데이터 분석"
+      ],
+      "courseId": "data-analysis",
+      "lessonId": "dataframe",
+      "url": "/notes/data/pandas-dataframe-selection",
+      "links": [
+        "learning/2026-09-29-dataframe",
+        "data/eda-and-causality",
+        "data/numpy-array-axes",
+        "data/pandas-cleaning-validation",
+        "data/pandas-groupby-merge-reshape"
+      ],
+      "relatedReasons": {
+        "learning/2026-09-29-dataframe": "표의 목적과 선택 문법을 질문하고 짧은 퀴즈로 확인한 실제 학습 흐름이다.",
+        "data/numpy-array-axes": "NumPy 배열의 축과 모양을 DataFrame의 행과 열에 연결한다.",
+        "data/eda-and-causality": "표 가공과 그래프가 탐색 과정에서 어떤 역할을 하는지 연결한다."
+      },
+      "sources": [
+        "데이터 프레임 개념 총정리 학습 대화 (2026-09-28–29)",
+        "https://pandas.pydata.org/docs/user_guide/dsintro.html",
+        "https://pandas.pydata.org/docs/user_guide/indexing.html"
+      ]
+    },
+    {
+      "id": "data/pandas-groupby-merge-reshape",
+      "title": "Pandas 집계와 결합 — agg, transform, merge에서 pipe까지",
+      "description": "각 단계가 무엇을 반환하는지 실제 표로 추적하며 고객별 집계, 주문별 변환, 키 결합, 긴 표와 넓은 표, 함수 연결을 구분한다.",
+      "date": "2026-09-28",
+      "published": "2026-09-29",
+      "type": "concept",
+      "topics": [
+        "데이터 분석"
+      ],
+      "courseId": "data-analysis",
+      "lessonId": "dataframe",
+      "url": "/notes/data/pandas-groupby-merge-reshape",
+      "links": [
+        "learning/2026-09-29-dataframe",
+        "data/pandas-cleaning-validation",
+        "data/pandas-dataframe-selection"
+      ],
+      "relatedReasons": {
+        "learning/2026-09-29-dataframe": "반환값 설명의 생략과 agg 문법 변경을 지적하며 학습한 실제 질문 흐름이다.",
+        "data/pandas-dataframe-selection": "집계 결과의 Series와 DataFrame, 인덱스와 일반 열을 구분하는 바탕이다.",
+        "data/pandas-cleaning-validation": "집계 전 중복과 결측 처리 및 결합 후 검증 기준을 연결한다."
+      },
+      "sources": [
+        "데이터 프레임 개념 총정리 학습 대화 (2026-09-28–29)",
+        "https://pandas.pydata.org/docs/user_guide/groupby.html",
+        "https://pandas.pydata.org/docs/reference/api/pandas.merge.html",
+        "https://pandas.pydata.org/docs/reference/api/pandas.pivot_table.html",
+        "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.melt.html",
+        "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.pipe.html"
+      ]
+    },
+    {
+      "id": "learning/2026-09-29-dataframe",
+      "title": "DataFrame 학습 기록 — 표의 목적부터 집계와 파이프라인까지",
+      "description": "9월 28–29일 실제 질문과 코드 수정, 설명의 정정을 따라 DataFrame의 반환값과 행의 의미를 정리한다.",
+      "date": "2026-09-28",
+      "published": "2026-09-29",
+      "type": "journal",
+      "topics": [
+        "데이터 분석"
+      ],
+      "courseId": "data-analysis",
+      "lessonId": "dataframe",
+      "url": "/notes/learning/2026-09-29-dataframe",
+      "links": [
+        "data/pandas-dataframe-selection",
+        "data/pandas-cleaning-validation",
+        "data/pandas-groupby-merge-reshape",
+        "data/eda-and-causality"
+      ],
+      "relatedReasons": {
+        "data/pandas-dataframe-selection": "표를 다시 만드는 이유와 Series·DataFrame·조건 선택을 개념별로 정리했다.",
+        "data/pandas-cleaning-validation": "변환 실패·결측·중복·복사·검증의 판단 기준을 묶었다.",
+        "data/pandas-groupby-merge-reshape": "agg와 transform의 반환값에서 merge·피벗·pipe로 이어지는 흐름을 정리했다."
+      },
+      "sources": [
+        "데이터 프레임 개념 총정리 학습 대화 (2026-09-28–29)"
+      ]
+    },
+    {
       "id": "weekly/2026-09-28-four-questions",
       "title": "위클리 페이퍼 — 문제를 정의하고, 도구를 선택하는 기준",
       "description": "AI 엔지니어의 역량, 회사의 날짜 표현, 모델을 클래스로 만드는 이유, NumPy 성능 개선에 대한 나의 답변.",
@@ -875,6 +1126,526 @@ window.HANTHING_CONTENT = {
     }
   ],
   "questions": [
+    {
+      "id": "data/statistics-data-and-groups#질문-자료형과-별개로-변수-타입을-왜-분류해야-하나",
+      "title": "자료형과 별개로 변수 타입을 왜 분류해야 하나?",
+      "url": "/notes/data/statistics-data-and-groups#질문-자료형과-별개로-변수-타입을-왜-분류해야-하나",
+      "topic": "데이터 분석",
+      "sourceTitle": "통계 실습의 데이터 — 변수의 의미와 요약표의 인덱스",
+      "context": "숫자 dtype인 survived, pclass, age, fare를 모두 수치형으로 답한 뒤, 저장 자료형과 의미상의 변수 유형을 따로 나누는 이유를 물었다.",
+      "intent": "분류 이름을 외우는 일이 실제 계산과 그래프 선택에 어떤 차이를 만드는지 확인하려는 질문이다.",
+      "answer": "dtype은 저장·연산 방식이고 변수 유형은 값의 의미다. 컴퓨터가 평균을 계산할 수 있어도 그 평균을 해석할 수 있는지는 별도 문제다."
+    },
+    {
+      "id": "data/statistics-data-and-groups#질문-value_counts-결과도-series인가-무엇이-인덱스인가",
+      "title": "value_counts() 결과도 Series인가? 무엇이 인덱스인가?",
+      "url": "/notes/data/statistics-data-and-groups#질문-value_counts-결과도-series인가-무엇이-인덱스인가",
+      "topic": "데이터 분석",
+      "sourceTitle": "통계 실습의 데이터 — 변수의 의미와 요약표의 인덱스",
+      "context": "성별을 센 결과가 두 열짜리 표처럼 보여 Series인지 DataFrame인지 물었고, 원래 값인 male, female이 결과의 인덱스가 되는지 직접 확인했다.",
+      "intent": "화면의 모양보다 반환 객체의 구조와 각 숫자의 의미를 구분하려는 질문이다.",
+      "answer": "df[\"sex\"].value_counts()는 Series다. 서로 다른 성별 값이 인덱스가 되고 등장 횟수가 데이터 값이 된다. 왼쪽 인덱스를 데이터 열 하나로 세지 않는다."
+    },
+    {
+      "id": "data/statistics-data-and-groups#질문-결측치-표를-만들었는데-행-인덱스는-갑자기-어디서-왔나",
+      "title": "결측치 표를 만들었는데 행 인덱스는 갑자기 어디서 왔나?",
+      "url": "/notes/data/statistics-data-and-groups#질문-결측치-표를-만들었는데-행-인덱스는-갑자기-어디서-왔나",
+      "topic": "데이터 분석",
+      "sourceTitle": "통계 실습의 데이터 — 변수의 의미와 요약표의 인덱스",
+      "context": "pd.DataFrame({\"count\": ..., \"ratio\": ...})를 읽다가 age, fare가 왼쪽 행 이름에 붙는 이유가 납득되지 않아, 한 단계씩 확인 질문을 요청했다.",
+      "intent": "원본의 열 이름이 요약 결과의 행 인덱스가 되는 경로를 추적하려는 질문이다.",
+      "answer": "열별 집계는 각 열의 결과 하나를 만든다. 그 결과 Series의 인덱스가 원본 열 이름이고, Series들을 DataFrame에 넣으면 그 인덱스에 맞춰 행이 정렬된다. pandas DataFrame 문서"
+    },
+    {
+      "id": "data/statistics-data-and-groups#질문-나이-결측치를-평균으로-채우면-평균은-유지되고-표준편차는-줄지-않나",
+      "title": "나이 결측치를 평균으로 채우면 평균은 유지되고 표준편차는 줄지 않나?",
+      "url": "/notes/data/statistics-data-and-groups#질문-나이-결측치를-평균으로-채우면-평균은-유지되고-표준편차는-줄지-않나",
+      "topic": "데이터 분석",
+      "sourceTitle": "통계 실습의 데이터 — 변수의 의미와 요약표의 인덱스",
+      "context": "결측 나이를 삭제하는 대신 평균으로 대체하겠다고 제안하면서, 평균을 유지하지만 퍼짐을 줄이는 단점도 직접 설명했다.",
+      "intent": "자신의 처리 방안이 타당한지 확인하고 다른 선택의 장단점을 비교하려는 질문이다.",
+      "answer": "보존되는 것은 관측된 값들의 평균이다. 모르는 실제 나이까지 포함한 전체 평균이 보존된다는 뜻은 아니다. 평균을 여러 번 추가하면 평균에서 벗어난 정도는 늘지 않고 분모가 커져, 관측값 기준의 분산·표준편차가 줄어든다. 단, 원래 분산이 0이면 그대로 0이다."
+    },
+    {
+      "id": "data/statistics-distributions-and-plots#질문-퍼짐-그래프와-히스토그램kde를-스스로-작성하려면-어떻게-읽어야-하나",
+      "title": "퍼짐 그래프와 히스토그램·KDE를 스스로 작성하려면 어떻게 읽어야 하나?",
+      "url": "/notes/data/statistics-distributions-and-plots#질문-퍼짐-그래프와-히스토그램kde를-스스로-작성하려면-어떻게-읽어야-하나",
+      "topic": "데이터 분석",
+      "sourceTitle": "분포를 그리는 코드 — Axes·히스토그램·KDE·박스플롯",
+      "context": "표준편차가 퍼짐을 요약한다는 것은 알지만 fig, axes가 낯설어, 나중에 문제를 혼자 풀 수 있을 정도로 그래프 작성 과정을 설명해 달라고 했다.",
+      "intent": "코드를 통째로 외우는 대신 비교 목적에서 각 인수를 선택할 수 있게 되려는 요청이다.",
+      "answer": "plt.subplots()로 전체 그림과 그래프 영역을 만들고, Seaborn에 데이터·표현 방식·그릴 영역을 전달한다. 이후 해당 영역에 제목을 붙인다."
+    },
+    {
+      "id": "data/statistics-distributions-and-plots#질문-plt와-sns는-다른-라이브러리인데-같은-그림인-줄-어떻게-아나-figure-때문에-ax를-생략하나",
+      "title": "plt와 sns는 다른 라이브러리인데 같은 그림인 줄 어떻게 아나? figure() 때문에 ax를 생략하나?",
+      "url": "/notes/data/statistics-distributions-and-plots#질문-plt와-sns는-다른-라이브러리인데-같은-그림인-줄-어떻게-아나-figure-때문에-ax를-생략하나",
+      "topic": "데이터 분석",
+      "sourceTitle": "분포를 그리는 코드 — Axes·히스토그램·KDE·박스플롯",
+      "context": "plt.figure() 다음에 sns.boxplot()과 plt.title()이 이어지는데 같은 그림에 그리라는 명시적 연결이 보이지 않았다. 이후 figure()와 ax 생략의 관계를 다시 물었다.",
+      "intent": "두 라이브러리가 그림을 공유하는 숨은 실행 상태를 확인하려는 질문이다.",
+      "answer": "Seaborn은 Matplotlib을 기반으로 하며, 여기서 쓰는 Axes 수준 함수는 ax를 생략하면 현재 Axes를 사용한다. figure() 자체가 ax 생략을 허용하는 특별한 기능은 아니다."
+    },
+    {
+      "id": "data/statistics-distributions-and-plots#질문-quantile은-무엇을-반환하고-lowerupper와-수염-끝은-어떻게-다른가",
+      "title": "quantile()은 무엇을 반환하고, lower·upper와 수염 끝은 어떻게 다른가?",
+      "url": "/notes/data/statistics-distributions-and-plots#질문-quantile은-무엇을-반환하고-lowerupper와-수염-끝은-어떻게-다른가",
+      "topic": "데이터 분석",
+      "sourceTitle": "분포를 그리는 코드 — Axes·히스토그램·KDE·박스플롯",
+      "context": "사분위수 코드에서 quantile()만 이해하면 될 것 같다고 물었다. 이어 Q1·Q3에서 IQR의 일정 배수만큼 떨어진 경계와 그 안의 실제 최솟값·최댓값을 구분해 설명했다.",
+      "intent": "분위수의 위치와 실제 값, 계산 경계와 그래프에 표시되는 수염을 연결하려는 질문이다.",
+      "answer": "quantile(0.25)의 0.25는 위치를 정하는 비율이고, 반환값은 원래 변수의 단위를 가진 값이다. Q1·Q3의 차이가 IQR이며, 기본 1.5×IQR 규칙의 수염은 경계 안쪽의 실제 관측값까지 이어진다."
+    },
+    {
+      "id": "data/statistics-distributions-and-plots#질문-왜-상자와-수염을-나눠-그리나-가운데-절반은-어떤-절반인가",
+      "title": "왜 상자와 수염을 나눠 그리나? 가운데 절반은 어떤 절반인가?",
+      "url": "/notes/data/statistics-distributions-and-plots#질문-왜-상자와-수염을-나눠-그리나-가운데-절반은-어떤-절반인가",
+      "topic": "데이터 분석",
+      "sourceTitle": "분포를 그리는 코드 — Axes·히스토그램·KDE·박스플롯",
+      "context": "원래 세션 이후 정리 과정에서 상자와 수염을 나누는 이유, 특히 “가운데 50%”가 무엇의 절반인지 추가로 확인했다. 이 절은 그 후속 질문을 반영한 보충 설명이다.",
+      "intent": "박스플롯의 부품 이름보다 각 부분이 보여 주는 정보의 차이를 이해하려는 질문이다.",
+      "answer": "상자는 정렬한 자료의 25% 위치부터 75% 위치까지, 즉 중심부의 퍼짐을 보여 준다. 수염은 그 밖에도 관측값이 어디까지 이어지는지 보여 주되, IQR 경계 바깥 값은 별도 점으로 분리한다. 중심부와 바깥쪽 분포를 한 그림에서 따로 읽으려는 구성이다."
+    },
+    {
+      "id": "data/statistics-distributions-and-plots#질문-로그-변환은-실제-요금-의미를-잃는-눈속임-아닌가-배열을-주면-x를-생략해도-되나",
+      "title": "로그 변환은 실제 요금 의미를 잃는 눈속임 아닌가? 배열을 주면 x를 생략해도 되나?",
+      "url": "/notes/data/statistics-distributions-and-plots#질문-로그-변환은-실제-요금-의미를-잃는-눈속임-아닌가-배열을-주면-x를-생략해도-되나",
+      "topic": "데이터 분석",
+      "sourceTitle": "분포를 그리는 코드 — Axes·히스토그램·KDE·박스플롯",
+      "context": "np.log1p(df[\"fare\"])로 치우침을 줄여도 가로축이 실제 요금이 아니게 된다는 점을 지적했다. 세로축도 실제 개수가 아닌지, data에 값 자체를 넣으면 어떻게 되는지 함께 물었다.",
+      "intent": "보기 좋은 모양과 해석 가능한 표현을 구분하고 데이터 전달 방식도 확인하려는 질문이다.",
+      "answer": "로그 변환은 큰 값 사이의 간격을 압축하지만 읽는 단위가 바뀐다. 기본 histplot의 세로축은 여전히 해당 구간의 실제 개수다. 변환 후 구간 경계가 달라지므로 막대별 개수는 원래 그래프와 달라질 수 있다."
+    },
+    {
+      "id": "data/statistics-relations-and-interpretation#질문-corr-결과는-series인가-행-이름과-열-이름도-값인가",
+      "title": "corr() 결과는 Series인가? 행 이름과 열 이름도 값인가?",
+      "url": "/notes/data/statistics-relations-and-interpretation#질문-corr-결과는-series인가-행-이름과-열-이름도-값인가",
+      "topic": "데이터 분석",
+      "sourceTitle": "변수 사이의 관계 — 상관행렬과 그룹별 그래프를 읽는 법",
+      "context": "numeric_df.corr() 결과의 행·열 이름과 내부 숫자를 보고 Series인지 DataFrame인지 물었다. U자 데이터와 노이즈를 만든 코드가 상관계수 설명에 왜 필요한지도 함께 질문했다.",
+      "intent": "결과 표의 구조를 이해한 뒤, 상관계수라는 요약값이 무엇을 설명하고 놓치는지 확인하려는 질문이다.",
+      "answer": "DataFrame의 .corr()는 변수 쌍마다 상관계수를 계산한 DataFrame을 돌려준다. 행·열 라벨은 변수 이름이고 내부 값이 계수다. 기본 Pearson 상관계수는 선형 관계를 요약한다. pandas corr 문서"
+    },
+    {
+      "id": "data/statistics-relations-and-interpretation#질문-groupby로-구한-평균은-무엇인가-barplot은-어떻게-생존율인-줄-아나",
+      "title": "groupby로 구한 평균은 무엇인가? barplot은 어떻게 생존율인 줄 아나?",
+      "url": "/notes/data/statistics-relations-and-interpretation#질문-groupby로-구한-평균은-무엇인가-barplot은-어떻게-생존율인-줄-아나",
+      "topic": "데이터 분석",
+      "sourceTitle": "변수 사이의 관계 — 상관행렬과 그룹별 그래프를 읽는 법",
+      "context": "성별로 생존 열을 묶어 평균을 낸다는 설명은 직접 했지만, 요금을 이진 변수라고 표현하고 observed=False의 역할을 물었다.",
+      "intent": "그룹을 나누는 열, 요약할 열, 집계 함수의 역할을 분리하려는 질문이다.",
+      "answer": "groupby()가 그룹을 나누고 선택한 열의 .mean()이 평균을 구한다. Seaborn의 barplot()도 기본 집계가 평균이다. 생존율이라는 의미는 그래프 함수가 알아내는 것이 아니라 survived가 0·1로 코딩되어 있기 때문에 생긴다."
+    },
+    {
+      "id": "data/statistics-relations-and-interpretation#질문-남성의-생존율과-pclass가-높은-사람의-생존율이-더-높은가-박스플롯은-어떻게-읽나",
+      "title": "남성의 생존율과 pclass가 높은 사람의 생존율이 더 높은가? 박스플롯은 어떻게 읽나?",
+      "url": "/notes/data/statistics-relations-and-interpretation#질문-남성의-생존율과-pclass가-높은-사람의-생존율이-더-높은가-박스플롯은-어떻게-읽나",
+      "topic": "데이터 분석",
+      "sourceTitle": "변수 사이의 관계 — 상관행렬과 그룹별 그래프를 읽는 법",
+      "context": "처음 해석에서 남성의 생존율이 더 높고 pclass가 높을수록 생존율이 높다고 말했다. 이어 생존 여부별 나이·요금 박스플롯의 읽는 법을 물었다.",
+      "intent": "그래프의 그룹 이름과 숫자를 실제 의미에 연결하고, 평균 막대에서 분포 비교로 넘어가려는 질문이다.",
+      "answer": "당시 대화에 제시된 집계에서는 여성 생존율이 약 74.2%, 남성은 약 18.9%였다. 등급별로는 1등급 약 63.0%, 2등급 약 47.3%, 3등급 약 24.2%였다. 두 방향을 모두 고쳐 읽어야 한다. pclass 숫자가 작을수록 상위 객실 등급이다. 이 수치는 해당 표본의 관측 비율이지 성별·등급이 생존을 결정한다는 법칙이 아니다."
+    },
+    {
+      "id": "data/statistics-relations-and-interpretation#질문-1등급-안에서-요금-분포가-비슷하다면-요금과-생존의-관계가-작다는-뜻인가",
+      "title": "1등급 안에서 요금 분포가 비슷하다면, 요금과 생존의 관계가 작다는 뜻인가?",
+      "url": "/notes/data/statistics-relations-and-interpretation#질문-1등급-안에서-요금-분포가-비슷하다면-요금과-생존의-관계가-작다는-뜻인가",
+      "topic": "데이터 분석",
+      "sourceTitle": "변수 사이의 관계 — 상관행렬과 그룹별 그래프를 읽는 법",
+      "context": "“1등급 승객만 남겼을 때 생존 여부에 따른 요금 분포가 거의 비슷하다”는 가정에 대해, 요금과 생존의 관계가 크지 않아 보이며 먼저 등급과 요금의 관계를 확인하겠다고 답했다.",
+      "intent": "전체 집단에서 본 요금 차이가 객실 등급의 구성 차이와 연결되는지 점검하려는 응답이다.",
+      "answer": "후속 확인 방향은 타당하지만 해석에는 1등급 안에서라는 조건을 붙여야 한다. 이 가정만으로 2·3등급이나 전체 승객의 관계까지 결론 내릴 수 없다. 비슷해 보이는 박스만으로 관계의 크기를 정량화한 것도 아니다."
+    },
+    {
+      "id": "learning/2026-09-29-statistics#질문-실습-환경과-데이터-로딩은-무엇을-준비하는-단계인가",
+      "title": "실습 환경과 데이터 로딩은 무엇을 준비하는 단계인가?",
+      "url": "/notes/learning/2026-09-29-statistics#질문-실습-환경과-데이터-로딩은-무엇을-준비하는-단계인가",
+      "topic": "데이터 분석",
+      "sourceTitle": "통계·시각화 실습 — 요약표의 구조에서 조건을 붙인 해석까지",
+      "context": "통계·시각화 노트북의 환경 설정과 데이터 로딩 부분부터 설명을 요청했다.",
+      "intent": "라이브러리와 설정을 먼저 이해하고, 이후에 쓰는 df가 어디서 왔는지 확인하려는 요청이다.",
+      "answer": "NumPy는 수치 연산, pandas는 표와 집계, Matplotlib은 그림·축 관리, Seaborn은 통계 그래프를 맡는다. 표시 옵션을 바꾸는 것과 실제 데이터를 바꾸는 것은 다르다. 로딩 코드에서는 실제 Titanic 자료를 가져오는 경로와 실패 시 만든 합성 데이터 경로를 구분해야 한다."
+    },
+    {
+      "id": "learning/2026-09-29-statistics#질문-샘플-수피처-수수치형-열타깃을-이렇게-읽으면-맞나",
+      "title": "샘플 수·피처 수·수치형 열·타깃을 이렇게 읽으면 맞나?",
+      "url": "/notes/learning/2026-09-29-statistics#질문-샘플-수피처-수수치형-열타깃을-이렇게-읽으면-맞나",
+      "topic": "데이터 분석",
+      "sourceTitle": "통계·시각화 실습 — 요약표의 구조에서 조건을 붙인 해석까지",
+      "context": "첫 체크포인트에서 표의 행·열 수와 dtype을 보고 직접 답했다. 범주형의 의미는 아직 모르겠다고 밝혔다.",
+      "intent": "화면에 보이는 정보를 분석 대상과 연결해 스스로 읽어 보려는 시도다.",
+      "answer": "shape는 헤더를 제외한 데이터 크기다. 총 열 수와 타깃을 제외한 입력 열 수도 구분한다. 숫자 dtype을 의미상의 수치형 변수와 동일하게 세면 pclass·survived의 해석을 놓친다."
+    },
+    {
+      "id": "learning/2026-09-29-statistics#질문-그래프를-혼자-그릴-수-있게-figaxes와-각-인수를-설명해-줄-수-있나",
+      "title": "그래프를 혼자 그릴 수 있게 fig·axes와 각 인수를 설명해 줄 수 있나?",
+      "url": "/notes/learning/2026-09-29-statistics#질문-그래프를-혼자-그릴-수-있게-figaxes와-각-인수를-설명해-줄-수-있나",
+      "topic": "데이터 분석",
+      "sourceTitle": "통계·시각화 실습 — 요약표의 구조에서 조건을 붙인 해석까지",
+      "context": "퍼짐 비교와 히스토그램·KDE를 배우면서, 별도 설명 자료보다 나중에 직접 문제를 풀 수 있도록 코드의 구성을 설명해 달라고 했다. plt와 sns가 같은 그림을 쓰는 이유도 물었다.",
+      "intent": "눈앞의 그림을 보는 것에서, 목적에 맞는 데이터를 골라 원하는 영역에 그리는 단계로 가려는 요청이다.",
+      "answer": "fig는 전체 그림, ax는 그래프 영역 하나다. data·x는 사용할 값, bins는 히스토그램의 구간 수, ax는 그릴 장소를 정한다. Axes 수준 함수에서 ax를 생략하면 현재 영역을 사용한다."
+    },
+    {
+      "id": "learning/2026-09-29-statistics#질문-사분위수와-실제-수염-끝은-다르지-않나-로그를-씌우면-의미를-잃지-않나",
+      "title": "사분위수와 실제 수염 끝은 다르지 않나? 로그를 씌우면 의미를 잃지 않나?",
+      "url": "/notes/learning/2026-09-29-statistics#질문-사분위수와-실제-수염-끝은-다르지-않나-로그를-씌우면-의미를-잃지-않나",
+      "topic": "데이터 분석",
+      "sourceTitle": "통계·시각화 실습 — 요약표의 구조에서 조건을 붙인 해석까지",
+      "context": "quantile() 설명 뒤 IQR 경계가 실제 수염 끝과 다르다는 점을 짚었다. 이후 요금에 로그를 씌우면 눈속임처럼 보일 수 있고 원래 개수가 유지되는지도 물었다.",
+      "intent": "그림을 만드는 규칙이 원래 값을 어떻게 요약하거나 변환하는지 확인하려는 질문이다.",
+      "answer": "IQR 경계는 계산한 기준선이고, 기본 박스플롯의 수염은 그 안에 있는 실제 관측값까지 간다. 로그 변환은 원 단위의 간격을 바꾸므로 원래 요금 그래프와 같은 의미로 읽을 수 없다. 관측을 없애는 것은 아니지만 구간 경계가 바뀌어 막대별 개수는 달라질 수 있다."
+    },
+    {
+      "id": "learning/2026-09-29-statistics#질문-corr-표와-결측치-표의-행-인덱스는-어디서-오는가",
+      "title": "corr 표와 결측치 표의 행 인덱스는 어디서 오는가?",
+      "url": "/notes/learning/2026-09-29-statistics#질문-corr-표와-결측치-표의-행-인덱스는-어디서-오는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "통계·시각화 실습 — 요약표의 구조에서 조건을 붙인 해석까지",
+      "context": "상관행렬의 행·열 라벨과 내부 값의 차이를 질문했다. 결측치 요약표에서는 행 인덱스가 갑자기 생기는 것 같아 “질문을 더 해 달라”고 요청했다.",
+      "intent": "객체의 이름만 외우지 않고 원본 열 → 집계 Series → 요약 DataFrame으로 바뀌는 구조를 따라가려는 질문이다.",
+      "answer": "corr()의 행·열 라벨은 비교하는 변수 이름이다. 결측치 집계 Series의 인덱스도 원본 열 이름이며, 이 Series를 DataFrame의 열로 넣으면 인덱스 라벨에 맞춰 행이 정렬된다. 요약 결과의 행은 더 이상 승객 한 명을 뜻하지 않는다."
+    },
+    {
+      "id": "learning/2026-09-29-statistics#질문-미션-코드에서-무엇이-문제이고-그래프-이름은-어떻게-붙이나",
+      "title": "미션 코드에서 무엇이 문제이고, 그래프 이름은 어떻게 붙이나?",
+      "url": "/notes/learning/2026-09-29-statistics#질문-미션-코드에서-무엇이-문제이고-그래프-이름은-어떻게-붙이나",
+      "topic": "데이터 분석",
+      "sourceTitle": "통계·시각화 실습 — 요약표의 구조에서 조건을 붙인 해석까지",
+      "context": "미션으로 넘어가 “마지막 데이터셋”이 따로 있는지 물었고, 범주별 반복 그림과 비율 그래프의 오류를 차례로 점검했다.",
+      "intent": "문제의 대상을 먼저 확인하고, 작성한 코드를 실행 가능한 그림 구성으로 고치려는 요청이다.",
+      "answer": "문제의 “마지막에 데이터셋을 요약”은 별도 데이터셋 이름이 아니라 현재 df를 요약하라는 뜻이었다. 오류는 변수와 문자열, 반복 대상의 짝, 반환 객체의 개수, 키워드 인수를 구분하며 고쳤다."
+    },
+    {
+      "id": "learning/2026-09-29-statistics#질문-나이-결측치를-평균으로-채우면-평균은-유지되고-퍼짐은-줄어들지-않나",
+      "title": "나이 결측치를 평균으로 채우면 평균은 유지되고 퍼짐은 줄어들지 않나?",
+      "url": "/notes/learning/2026-09-29-statistics#질문-나이-결측치를-평균으로-채우면-평균은-유지되고-퍼짐은-줄어들지-않나",
+      "topic": "데이터 분석",
+      "sourceTitle": "통계·시각화 실습 — 요약표의 구조에서 조건을 붙인 해석까지",
+      "context": "미션 5에서 결측치를 단순히 삭제하는 대신 나이의 평균으로 채우겠다고 제안하고, 평균은 유지되지만 표준편차는 줄어든다고 설명했다.",
+      "intent": "행을 보존하는 이점과 분포를 바꾸는 단점을 함께 고려한 제안이다.",
+      "answer": "관측된 값의 평균으로 채우면 그 관측 평균은 유지된다. 다만 결측된 사람의 실제 나이를 모르므로 원래 전체 집단의 평균을 복구했다고 말할 수 없다. 평균에 값이 몰리면 퍼짐과 다른 변수와의 관계도 달라질 수 있다."
+    },
+    {
+      "id": "learning/2026-09-29-statistics#질문-생존율-방향을-맞게-읽었나-박스가-겹치면-관계가-없는가",
+      "title": "생존율 방향을 맞게 읽었나? 박스가 겹치면 관계가 없는가?",
+      "url": "/notes/learning/2026-09-29-statistics#질문-생존율-방향을-맞게-읽었나-박스가-겹치면-관계가-없는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "통계·시각화 실습 — 요약표의 구조에서 조건을 붙인 해석까지",
+      "context": "미션 6의 근거 있는 관찰을 쓰며 “남성이 여성보다 생존율이 높다”, “pclass가 높을수록 생존율이 높다”고 말했다. 이어 박스플롯 해석을 요청했다.",
+      "intent": "집계·그림을 문장으로 옮기고, 중심과 퍼짐을 근거로 관찰을 쓰려는 시도다.",
+      "answer": "당시 제시된 집계는 여성 약 74.2%·남성 약 18.9%, 1등급 약 63.0%·2등급 약 47.3%·3등급 약 24.2%였다. 처음의 두 방향은 모두 교정했다. 객실 등급은 숫자가 작을수록 상위 등급이다."
+    },
+    {
+      "id": "learning/2026-09-29-statistics#질문-미션-8의-답을-근거와-함께-채워-줄-수-있나",
+      "title": "미션 8의 답을 근거와 함께 채워 줄 수 있나?",
+      "url": "/notes/learning/2026-09-29-statistics#질문-미션-8의-답을-근거와-함께-채워-줄-수-있나",
+      "topic": "데이터 분석",
+      "sourceTitle": "통계·시각화 실습 — 요약표의 구조에서 조건을 붙인 해석까지",
+      "context": "마지막 요약 미션은 답을 직접 채우고 근거를 설명해 달라고 명시적으로 요청했다.",
+      "intent": "앞서 확인한 품질·분포·관계를 한 편의 분석 요약으로 묶는 형태를 보려는 요청이다.",
+      "answer": "당시 답변은 자료 품질 → 단변량 분포 → 변수 간 관계 → 추가 확인 → 모델링 전 준비 순서로 예시 답안을 제시했다. 이는 설명자가 제공한 답안이며 사용자가 독립적으로 작성하거나 제출한 결과로 세지 않는다."
+    },
+    {
+      "id": "data/pandas-cleaning-validation#질문-coerce와-regexfalse는-무엇을-바꾸는가",
+      "title": "coerce와 regex=False는 무엇을 바꾸는가?",
+      "url": "/notes/data/pandas-cleaning-validation#질문-coerce와-regexfalse는-무엇을-바꾸는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "Pandas 정리와 검증 — 자료형, 결측, 중복, 파생 변수",
+      "context": "쉼표가 든 금액을 숫자로 바꾸는 코드에서 두 인수의 뜻을 물었다. 날짜 변환 후 생긴 NaT를 보며 원래 비어 있던 값만 뜻하는지도 확인했다.",
+      "intent": "연속된 처리에서 문자열 정리와 자료형 변환을 분리하고, 변환 실패가 어떻게 드러나는지 이해하려는 질문이다.",
+      "answer": "str.replace(\",\", \"\", regex=False)는 문자 쉼표를 지울 뿐 숫자로 변환하지 않는다. pd.to_numeric(..., errors=\"coerce\")는 숫자로 해석할 수 없는 값을 결측으로 만든다. 날짜의 pd.to_datetime(..., errors=\"coerce\")는 해석하지 못한 값을 NaT로 만든다."
+    },
+    {
+      "id": "data/pandas-cleaning-validation#질문-문자열-정리-결측-찾기-빈칸-채우기는-무엇이-다른가",
+      "title": "문자열 정리, 결측 찾기, 빈칸 채우기는 무엇이 다른가?",
+      "url": "/notes/data/pandas-cleaning-validation#질문-문자열-정리-결측-찾기-빈칸-채우기는-무엇이-다른가",
+      "topic": "데이터 분석",
+      "sourceTitle": "Pandas 정리와 검증 — 자료형, 결측, 중복, 파생 변수",
+      "context": "공백·대소문자를 정리한 다음 isna().sum(), 평균·중앙값 채우기, dropna()를 연달아 보았다. 이후 “왜 그 값을 넣고, 어떤 기준으로 처리하는가”라는 설명을 다시 요청했다.",
+      "intent": "메서드 사용법보다 데이터의 의미에 근거한 처리 결정을 배우려는 질문이다.",
+      "answer": "문자열 정리는 표현을 통일하고, 결측 검사는 현재 비어 있다고 인식되는 위치를 찾는다. 채우기·유지·제외는 분석 목적과 원인에 따라 정할 별개의 결정이다. 평균이나 중앙값이 항상 올바른 대체값은 아니다."
+    },
+    {
+      "id": "data/pandas-cleaning-validation#질문-duplicated-결과를-고객-번호-열에-넣으면-중복이-제거되는가",
+      "title": "duplicated() 결과를 고객 번호 열에 넣으면 중복이 제거되는가?",
+      "url": "/notes/data/pandas-cleaning-validation#질문-duplicated-결과를-고객-번호-열에-넣으면-중복이-제거되는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "Pandas 정리와 검증 — 자료형, 결측, 중복, 파생 변수",
+      "context": "미션에서 다음 코드를 직접 작성하고 잘못된 점을 물었다.",
+      "intent": "중복을 발견하는 연산과 중복 행을 제거하는 연산, 열 대입과 표 전체 대입을 구분하려는 질문이다.",
+      "answer": "duplicated()는 중복 여부를 담은 불리언 Series를 반환한다. 이 코드를 실행하면 고객 번호를 True/False로 바꾸며 행을 제거하지 않는다. 주문 한 건을 구분하려면 고객 번호가 아니라 주문 식별자인 order_id를 기준으로 검사해야 한다."
+    },
+    {
+      "id": "data/pandas-cleaning-validation#질문-copy를-썼는데-raw-표의-행-수가-그대로인-이유는",
+      "title": "copy()를 썼는데 raw 표의 행 수가 그대로인 이유는?",
+      "url": "/notes/data/pandas-cleaning-validation#질문-copy를-썼는데-raw-표의-행-수가-그대로인-이유는",
+      "topic": "데이터 분석",
+      "sourceTitle": "Pandas 정리와 검증 — 자료형, 결측, 중복, 파생 변수",
+      "context": "중복 제거 뒤 정리한 표는 9행, 원본은 10행이라고 보고된 상황에서 두 변수가 같은 객체의 별명인지 물었다.",
+      "intent": "같은 이름으로 다시 저장하는 것, 같은 객체를 가리키는 것, 복사본을 만드는 것을 구분하려는 질문이다.",
+      "answer": "other = raw는 같은 객체에 다른 이름을 붙이고, 이 실습처럼 단순 열 값을 가진 표의 other = raw.copy()는 별도 DataFrame을 만든다. 이후 other = other.drop_duplicates(...)는 제거 결과를 other라는 이름에 다시 연결한다. 원본의 행 수가 그대로인 것은 기대되는 결과다."
+    },
+    {
+      "id": "data/pandas-cleaning-validation#질문-assert는-출력-뒤에-있어도-필요한가",
+      "title": "assert는 출력 뒤에 있어도 필요한가?",
+      "url": "/notes/data/pandas-cleaning-validation#질문-assert는-출력-뒤에-있어도-필요한가",
+      "topic": "데이터 분석",
+      "sourceTitle": "Pandas 정리와 검증 — 자료형, 결측, 중복, 파생 변수",
+      "context": "변환 전후 행 수를 출력하는 코드에 assert가 추가됐다. 이미 출력하고 끝난다면 어떤 역할이 더 있는지 물었다.",
+      "intent": "사람이 읽는 출력과 컴퓨터가 확인하는 조건의 차이를 파악하려는 질문이다.",
+      "answer": "print()는 값을 보여 주고, assert 조건은 거짓일 때 AssertionError를 내어 그 지점 이후 실행을 멈춘다. 앞선 출력이나 데이터 변경을 되돌려 주지는 않는다."
+    },
+    {
+      "id": "data/pandas-cleaning-validation#질문-새-열은-자동으로-생기는가-나이-구간의-경계는-어떻게-읽는가",
+      "title": "새 열은 자동으로 생기는가? 나이 구간의 경계는 어떻게 읽는가?",
+      "url": "/notes/data/pandas-cleaning-validation#질문-새-열은-자동으로-생기는가-나이-구간의-경계는-어떻게-읽는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "Pandas 정리와 검증 — 자료형, 결측, 중복, 파생 변수",
+      "context": "order_year라는 새 열을 대입하는 코드와 pd.cut()의 bins, labels, right=False를 질문했다. 실제 붙여넣은 코드에는 경계 5개와 라벨 5개가 있었다.",
+      "intent": "Pandas가 어떤 의미를 자동 추론하는지와 사용자가 직접 정한 규칙을 구분하려는 질문이다.",
+      "answer": "df[\"새 이름\"] = 값은 그 이름의 열을 만들고, 같은 이름이 이미 있으면 덮어쓴다. cut()의 경계가 6개면 연속 구간은 5개이므로 라벨도 5개여야 한다. right=False에서는 왼쪽을 포함하고 오른쪽을 제외한다."
+    },
+    {
+      "id": "data/pandas-dataframe-selection#질문-이미-표인-데이터를-왜-다시-표로-만드는가",
+      "title": "이미 표인 데이터를 왜 다시 표로 만드는가?",
+      "url": "/notes/data/pandas-dataframe-selection#질문-이미-표인-데이터를-왜-다시-표로-만드는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "DataFrame과 선택 — 표의 의미, Series, 불리언 마스크",
+      "context": "DataFrame 실습의 목표를 “표를 만든다”라고 설명하자, 원본부터 표인데 왜 또 만드는지, 그래프와 AI 학습은 어디에 연결되는지 물었다.",
+      "intent": "개별 문법을 외우기 전에 전체 작업의 목적과 결과물의 쓰임을 확인하려는 질문이다.",
+      "answer": "표라는 외형을 만드는 것이 아니라, 풀려는 문제에 맞게 한 행의 단위와 열의 의미를 바꾸는 것이다. 고객 표는 고객당 한 행, 주문 표는 주문당 한 행, 행동 기록은 행동당 한 행일 수 있다. 다음 달 구매를 예측하려면 고객과 예측 기준 시점에 맞춘 입력표가 필요하다."
+    },
+    {
+      "id": "data/pandas-dataframe-selection#질문-numpy도-표를-만들-수-있는데-왜-pandas를-쓰는가",
+      "title": "NumPy도 표를 만들 수 있는데 왜 Pandas를 쓰는가?",
+      "url": "/notes/data/pandas-dataframe-selection#질문-numpy도-표를-만들-수-있는데-왜-pandas를-쓰는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "DataFrame과 선택 — 표의 의미, Series, 불리언 마스크",
+      "context": "NumPy 배열로도 행과 열을 만들 수 있으니 DataFrame의 별도 역할이 불분명했다. tabular를 튜플과 연결해서 이해하기도 했다.",
+      "intent": "데이터의 형태, 파이썬 객체, 그 객체를 다루는 라이브러리를 나누려는 질문이다.",
+      "answer": "tabular data는 행과 열로 된 데이터라는 뜻이고 특정 라이브러리 이름이 아니다. Pandas는 도구 모음이고, DataFrame은 그 도구가 제공하는 2차원 표 객체다. NumPy 배열은 수치 배열 계산에, Pandas는 이름이 있는 열·행 인덱스·서로 다른 열 자료형·조건 선택·그룹 집계·키 결합을 다루는 데 편리하다."
+    },
+    {
+      "id": "data/pandas-dataframe-selection#질문-인덱스는-기본키인가-표를-만드는-문법은-열-기준뿐인가",
+      "title": "인덱스는 기본키인가? 표를 만드는 문법은 열 기준뿐인가?",
+      "url": "/notes/data/pandas-dataframe-selection#질문-인덱스는-기본키인가-표를-만드는-문법은-열-기준뿐인가",
+      "topic": "데이터 분석",
+      "sourceTitle": "DataFrame과 선택 — 표의 의미, Series, 불리언 마스크",
+      "context": "고객 표 왼쪽의 0, 1, 2와 customer_id를 함께 보고, 기본키를 행 이름으로 이해했다. 딕셔너리로 만드는 표가 열 중심이라는 점은 설명했지만 행 중심 생성 방법도 물었다.",
+      "intent": "화면의 행 번호, 데이터의 식별자, 생성 코드의 자료구조를 구분하려는 질문이다.",
+      "answer": "인덱스는 Pandas가 행을 식별·선택·정렬하는 데 쓰는 레이블이며 중복될 수도 있다. 업무상 기본키는 각 대상을 유일하게 구분하고 결측이 없어야 한다. customer_id가 그 조건을 충족하는지는 검사해야 하고, 이름·도시·소득이 모두 식별키가 되는 것은 아니다."
+    },
+    {
+      "id": "data/pandas-dataframe-selection#질문-series는-튜플이나-딕셔너리인가-대괄호-하나가-왜-결과를-바꾸는가",
+      "title": "Series는 튜플이나 딕셔너리인가? 대괄호 하나가 왜 결과를 바꾸는가?",
+      "url": "/notes/data/pandas-dataframe-selection#질문-series는-튜플이나-딕셔너리인가-대괄호-하나가-왜-결과를-바꾸는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "DataFrame과 선택 — 표의 의미, Series, 불리언 마스크",
+      "context": "orders[\"amount\"]는 Series라는 말을 들었지만 Series 자체의 설명이 부족했다. columns = [\"amount\"]가 실제 데이터를 담는지, 이후 orders[columns]가 무엇인지도 혼동했다.",
+      "intent": "문법의 모양을 외우기보다 각각의 표현식이 만드는 객체를 확인하려는 질문이다.",
+      "answer": "Series는 인덱스가 붙은 1차원 데이터 객체다. 인덱스와 값을 묶은 튜플들의 리스트나 파이썬 딕셔너리와 같은 타입은 아니다. 하나의 열 이름 문자열로 선택하면 Series, 열 이름의 리스트로 선택하면 DataFrame을 받는다."
+    },
+    {
+      "id": "data/pandas-dataframe-selection#질문-비교-결과는-무엇이고-왜-and-대신-와-괄호를-쓰는가",
+      "title": "비교 결과는 무엇이고, 왜 and 대신 &와 괄호를 쓰는가?",
+      "url": "/notes/data/pandas-dataframe-selection#질문-비교-결과는-무엇이고-왜-and-대신-와-괄호를-쓰는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "DataFrame과 선택 — 표의 의미, Series, 불리언 마스크",
+      "context": "loc의 입력 개수와 마스크의 실제 값을 물었다. &가 반복 가능한 객체라면 어디에나 적용되는지, 조건을 감싼 괄호가 튜플을 만드는지도 질문했다.",
+      "intent": "조건식에서 행 선택까지 한 번에 설명하지 않고 중간 반환값을 확인하려는 질문이다.",
+      "answer": "열과 숫자의 비교는 각 원소를 비교한 불리언 Series를 만든다. 이를 .loc[행 선택, 열 선택]의 행 자리에 넣으면 True인 행을 선택한다. &와 |는 Series의 조건들을 원소별로 결합한다. 괄호는 연산 우선순위를 명확히 한다."
+    },
+    {
+      "id": "data/pandas-groupby-merge-reshape#질문-agg는-원래-표에-새-열을-추가하는-함수인가",
+      "title": "agg()는 원래 표에 새 열을 추가하는 함수인가?",
+      "url": "/notes/data/pandas-groupby-merge-reshape#질문-agg는-원래-표에-새-열을-추가하는-함수인가",
+      "topic": "데이터 분석",
+      "sourceTitle": "Pandas 집계와 결합 — agg, transform, merge에서 pipe까지",
+      "context": "고객별 요약표를 만들며 “계산한 뒤 대상 DataFrame에 새 열을 추가한다”고 이해해도 되는지 물었다. 이어 반환값과 함수의 필요성을 다시 확인했다.",
+      "intent": "함수 호출의 결과와 원본 표 수정 여부를 분리하려는 질문이다.",
+      "answer": "이 실습의 groupby(...).agg(새이름=(\"대상열\", \"계산법\"))는 그룹별 계산을 이름 붙인 열에 담은 새 요약 DataFrame을 반환한다. 원래 주문 표에 열을 추가하지 않는다."
+    },
+    {
+      "id": "data/pandas-groupby-merge-reshape#질문-transform은-실제로-무엇을-반환하는가",
+      "title": "transform()은 실제로 무엇을 반환하는가?",
+      "url": "/notes/data/pandas-groupby-merge-reshape#질문-transform은-실제로-무엇을-반환하는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "Pandas 집계와 결합 — agg, transform, merge에서 pipe까지",
+      "context": "“평균을 각 행에 붙인다”라는 요약만으로는 반환 타입과 처리 순서를 이해할 수 없다고 지적했다. 새 열이 어느 단계에서 생기는지도 불명확했다.",
+      "intent": "결과를 추상적으로 설명하는 대신 인덱스와 값이 있는 중간 객체를 확인하려는 질문이다.",
+      "answer": "여기서 orders.groupby(\"customer_id\")[\"amount\"].transform(\"mean\")은 원래 주문 행의 인덱스와 길이를 가진 Series를 반환한다. 열 추가는 그 다음 대입에서 일어난다."
+    },
+    {
+      "id": "data/pandas-groupby-merge-reshape#질문-agg-문법이-왜-갑자기-달라졌는가",
+      "title": "agg() 문법이 왜 갑자기 달라졌는가?",
+      "url": "/notes/data/pandas-groupby-merge-reshape#질문-agg-문법이-왜-갑자기-달라졌는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "Pandas 집계와 결합 — agg, transform, merge에서 pipe까지",
+      "context": "named aggregation을 설명한 뒤 비교 예제에서 ...[\"amount\"].agg(\"mean\")으로 문법을 바꾸자, 앞의 설명과 다르다고 질문했다. 답변도 설명 없이 사용법을 섞은 점을 인정했다.",
+      "intent": "배운 문법의 규칙과 새 문법의 관계를 일관되게 이해하려는 질문이다.",
+      "answer": "둘 다 집계지만 계산할 열을 정하는 위치와 반환 타입이 다르다. 한 가지 문법을 이해하는 중에 설명 없이 바꾸면 혼동을 키운다."
+    },
+    {
+      "id": "data/pandas-groupby-merge-reshape#질문-customer_id는-원래-열인데-왜-reset_index가-필요한가",
+      "title": "customer_id는 원래 열인데 왜 reset_index()가 필요한가?",
+      "url": "/notes/data/pandas-groupby-merge-reshape#질문-customer_id는-원래-열인데-왜-reset_index가-필요한가",
+      "topic": "데이터 분석",
+      "sourceTitle": "Pandas 집계와 결합 — agg, transform, merge에서 pipe까지",
+      "context": "고객 요약을 연결하기 전에 summary = customer_order_summary.reset_index()를 보고, 고객 번호는 애초에 일반 열 아니었는지 물었다.",
+      "intent": "원본 표와 집계 결과 표의 구조를 구별하려는 질문이다.",
+      "answer": "원래 주문 표에서는 일반 열이다. 기본 설정의 groupby(\"customer_id\").agg(...)로 만든 새 요약표에서는 그룹 기준이 인덱스가 된다. reset_index()는 그 인덱스를 일반 열로 꺼낸 새 표를 반환한다."
+    },
+    {
+      "id": "data/pandas-groupby-merge-reshape#질문-merge에서-왼쪽과-오른쪽은-무엇이고-how는-무엇인가",
+      "title": "merge()에서 왼쪽과 오른쪽은 무엇이고 how는 무엇인가?",
+      "url": "/notes/data/pandas-groupby-merge-reshape#질문-merge에서-왼쪽과-오른쪽은-무엇이고-how는-무엇인가",
+      "topic": "데이터 분석",
+      "sourceTitle": "Pandas 집계와 결합 — agg, transform, merge에서 pipe까지",
+      "context": "왼쪽·오른쪽을 정의하지 않은 설명이 어려웠고, 원본 주문 연결과 고객별 요약 연결을 오가며 행 수가 달라지는 이유를 다시 물었다.",
+      "intent": "무엇과 무엇을 어떤 기준으로 합치는지 작은 표 하나에서 확인하려는 질문이다.",
+      "answer": "left.merge(right, ...)에서 호출하는 객체가 왼쪽, 인수로 전달한 표가 오른쪽이다. 화면에 놓인 위치를 말하는 것이 아니다. on은 연결 키, how는 어느 쪽 키의 행을 남길지 정한다."
+    },
+    {
+      "id": "data/pandas-groupby-merge-reshape#질문-validate는-일대일로-만들어-주는-속성인가",
+      "title": "validate는 일대일로 만들어 주는 속성인가?",
+      "url": "/notes/data/pandas-groupby-merge-reshape#질문-validate는-일대일로-만들어-주는-속성인가",
+      "topic": "데이터 분석",
+      "sourceTitle": "Pandas 집계와 결합 — agg, transform, merge에서 pipe까지",
+      "context": "고객 정보와 고객별 요약을 연결할 때 validate=\"one_to_one\"의 의미를 물었다.",
+      "intent": "연결 동작, 기대 관계의 검사, 연결 성공 여부 표시를 구별하려는 질문이다.",
+      "answer": "validate는 merge()에 전달하는 인수다. 지정한 키 유일성 조건을 검사하고 맞지 않으면 오류를 낸다. 중복을 지워 일대일로 고쳐 주거나 양쪽의 모든 키가 일치하는지 확인해 주는 기능이 아니다."
+    },
+    {
+      "id": "data/pandas-groupby-merge-reshape#질문-pivot_table을-하면-category와-amount-열이-사라지는가",
+      "title": "pivot_table()을 하면 category와 amount 열이 사라지는가?",
+      "url": "/notes/data/pandas-groupby-merge-reshape#질문-pivot_table을-하면-category와-amount-열이-사라지는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "Pandas 집계와 결합 — agg, transform, merge에서 pipe까지",
+      "context": "다음 날 피벗 결과에서 기존 열 이름이 보이지 않는 점과 melt()에서 외울 것·이해할 것을 물었다.",
+      "intent": "열 이름과 셀 값이 자리만 바뀌는 경우와 집계로 정보가 줄어드는 경우를 나누려는 질문이다.",
+      "answer": "category의 값들이 새 열 이름이 되고 amount 값은 새 표의 칸을 채운다. 원본 표의 열은 그대로다. 다만 같은 고객·카테고리의 여러 주문을 합산하면 개별 주문 정보는 요약된다."
+    },
+    {
+      "id": "data/pandas-groupby-merge-reshape#질문-메서드-체이닝과-pipe는-무엇을-다음-단계에-넘기는가",
+      "title": "메서드 체이닝과 pipe()는 무엇을 다음 단계에 넘기는가?",
+      "url": "/notes/data/pandas-groupby-merge-reshape#질문-메서드-체이닝과-pipe는-무엇을-다음-단계에-넘기는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "Pandas 집계와 결합 — agg, transform, merge에서 pipe까지",
+      "context": "마지막 두 절에서 연속된 메서드와 직접 만든 함수를 연결하는 코드를 순서대로 설명해 달라고 요청했다.",
+      "intent": "긴 표현식이 하나의 마법처럼 보이지 않도록 입력과 반환값을 단계별로 추적하려는 맥락이다.",
+      "answer": "체이닝은 앞 메서드가 반환한 객체에 다음 메서드를 호출한다. 여기서 .pipe(함수, 추가인수)는 앞의 표를 함수의 첫 번째 인수로 넘기고 그 함수의 반환값을 돌려준다."
+    },
+    {
+      "id": "learning/2026-09-29-dataframe#질문-이미-표가-있는데-왜-또-표를-만드는가",
+      "title": "이미 표가 있는데 왜 또 표를 만드는가?",
+      "url": "/notes/learning/2026-09-29-dataframe#질문-이미-표가-있는데-왜-또-표를-만드는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "DataFrame 학습 기록 — 표의 목적부터 집계와 파이프라인까지",
+      "context": "DataFrame 실습의 큰 그림을 요청했다. 첫 설명의 “모델이나 분석이 사용할 표를 만든다”는 표현에, 원본도 표인데 무엇을 바꾸는지, 그래프는 왜 필요한지 다시 질문했다.",
+      "intent": "낯선 함수를 나열하기 전에 입력 데이터와 최종 결과물의 관계를 파악하려는 질문이다.",
+      "answer": "바꾸는 것은 표의 외형보다 한 행의 의미다. 주문 한 건·고객 한 명·행동 한 번이 각각 다른 행 단위이며, 예측 문제에서는 고객과 기준 시점에 맞춰 입력을 구성해야 한다. 집계·결합·기간 제한을 하는 이유가 여기에서 나온다."
+    },
+    {
+      "id": "learning/2026-09-29-dataframe#질문-eda와-전처리는-어디에서-나뉘는가",
+      "title": "EDA와 전처리는 어디에서 나뉘는가?",
+      "url": "/notes/learning/2026-09-29-dataframe#질문-eda와-전처리는-어디에서-나뉘는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "DataFrame 학습 기록 — 표의 목적부터 집계와 파이프라인까지",
+      "context": "EDA를 원본을 그래프로 보며 특징을 찾고 가공하는 과정으로 설명한 뒤, 조사에 근거한 전처리가 시작되면 EDA 밖으로 나가는지 물었다. tabular를 튜플과 연결해 듣기도 했다.",
+      "intent": "활동 이름, 데이터 형태, 사용하는 도구를 서로 다른 층위로 구분하려는 질문이다.",
+      "answer": "EDA는 이해를 위한 질문과 조사이고 전처리는 데이터를 바꾸는 연산이다. EDA 중 날짜나 문자열을 정리하고 다시 탐색할 수 있다. tabular는 표 형태라는 말이며 파이썬 튜플을 뜻하지 않는다."
+    },
+    {
+      "id": "learning/2026-09-29-dataframe#질문-한-행-기본키-자료형-결측을-어떻게-읽는가",
+      "title": "한 행, 기본키, 자료형, 결측을 어떻게 읽는가?",
+      "url": "/notes/learning/2026-09-29-dataframe#질문-한-행-기본키-자료형-결측을-어떻게-읽는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "DataFrame 학습 기록 — 표의 목적부터 집계와 파이프라인까지",
+      "context": "고객 표를 보고 한 행은 고객 한 명이라고 답했다. 기본키를 행 이름과 연결했고 여러 열이 후보라고 생각했으며, 결측도 모든 열에 있을 것이라고 추측했다.",
+      "intent": "표의 구조를 스스로 읽은 뒤 어떤 부분이 데이터 의미이고 어떤 부분이 도구의 표시인지 점검하는 맥락이다.",
+      "answer": "고객 한 명이라는 행 단위는 맞았다. 기본키는 그 고객을 유일하게 구분하고 결측이 없는 식별자여야 한다. 화면의 인덱스가 자동으로 그런 조건을 충족하는 업무상 키가 되는 것은 아니다. 결측은 전체 인상이 아니라 실제 열별 결과로 확인해야 한다."
+    },
+    {
+      "id": "learning/2026-09-29-dataframe#질문-series를-설명하지-않고-선택-문법부터-넘어가도-되는가",
+      "title": "Series를 설명하지 않고 선택 문법부터 넘어가도 되는가?",
+      "url": "/notes/learning/2026-09-29-dataframe#질문-series를-설명하지-않고-선택-문법부터-넘어가도-되는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "DataFrame 학습 기록 — 표의 목적부터 집계와 파이프라인까지",
+      "context": "orders_raw[\"category\"], 단일 열과 여러 열 선택, .loc의 두 입력을 차례로 질문했다. Series를 처음에는 인덱스가 붙은 1차원 리스트에 가깝게 설명했지만, 튜플·딕셔너리와의 차이와 혼합 자료형을 다시 확인했다.",
+      "intent": "코드의 일부를 생략하지 않고 각 표현식이 돌려주는 객체부터 이해하려는 질문이다.",
+      "answer": "Series는 인덱스가 있는 별도 1차원 객체다. df[\"amount\"]는 Series, df\"amount\"는 한 열짜리 DataFrame이다. columns = [\"amount\"]에는 실제 금액이 아니라 열 이름 문자열이 들어 있으며, 이를 df[columns]에 전달해야 데이터를 선택한다."
+    },
+    {
+      "id": "learning/2026-09-29-dataframe#질문-결측에-무엇을-넣을지는-왜-결정하지-않는가",
+      "title": "결측에 무엇을 넣을지는 왜 결정하지 않는가?",
+      "url": "/notes/learning/2026-09-29-dataframe#질문-결측에-무엇을-넣을지는-왜-결정하지-않는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "DataFrame 학습 기록 — 표의 목적부터 집계와 파이프라인까지",
+      "context": "coerce, regex=False, NaT, 문자열 정리, isna().sum(), 결측 대체 예제를 확인했다. 그 뒤 설명이 방법에 머문다며 목적과 판단 기준을 구체적으로 요청했다.",
+      "intent": "평균·중앙값을 넣는 문법을 외우는 대신 실제로 그렇게 해도 되는 근거를 이해하려는 질문이다.",
+      "answer": "모르는 값과 0인 값은 다르다. 원천에서 복구할 수 있는지, 해당 계산에서만 제외할 수 있는지, 결측 그대로 사용할 수 있는지, 추정이 필요한지를 분석 목적에 맞춰 판단한다. “누락 비율이 이 정도면 무조건 채운다”라는 보편 규칙은 없다."
+    },
+    {
+      "id": "learning/2026-09-29-dataframe#질문-copy를-썼는데-왜-원본은-그대로인가",
+      "title": "copy()를 썼는데 왜 원본은 그대로인가?",
+      "url": "/notes/learning/2026-09-29-dataframe#질문-copy를-썼는데-왜-원본은-그대로인가",
+      "topic": "데이터 분석",
+      "sourceTitle": "DataFrame 학습 기록 — 표의 목적부터 집계와 파이프라인까지",
+      "context": "copy()를 별명 만들기처럼 이해해, 정리본에서 중복을 제거했는데 원본 길이가 10인 이유를 물었다.",
+      "intent": "별명·복사본·반환값 재대입의 차이를 이해하려는 질문이다.",
+      "answer": "new = raw와 new = raw.copy()는 다르다. 이 실습의 복사본에서 제거한 결과를 new에 다시 저장해도 원본의 행 수를 줄이는 것은 아니다."
+    },
+    {
+      "id": "learning/2026-09-29-dataframe#질문-agg와-transform의-반환값을-왜-계속-헷갈리는가",
+      "title": "agg와 transform의 반환값을 왜 계속 헷갈리는가?",
+      "url": "/notes/learning/2026-09-29-dataframe#질문-agg와-transform의-반환값을-왜-계속-헷갈리는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "DataFrame 학습 기록 — 표의 목적부터 집계와 파이프라인까지",
+      "context": "“그룹 평균을 각 행에 붙인다”라는 짧은 설명을 듣고도 이해되지 않았고, 실제 Series와 처리 순서가 빠졌다고 지적했다. 이후 미션에서도 agg()가 원래 표에 새 열을 붙이는지, 왜 필요한지 다시 물었다.",
+      "intent": "비슷한 계산 결과를 단순한 말로 구별하는 대신 실제 인덱스·길이·타입을 확인하려는 질문이다.",
+      "answer": "집계는 고객당 결과 하나를 만들고, 이 예의 transform()은 원래 주문 행마다 그 고객의 값을 대응시킨 Series를 만든다. 새 열은 마지막 대입에서 생긴다. named agg()는 새 요약 DataFrame을 반환하며 원본에 열을 추가하지 않는다."
+    },
+    {
+      "id": "learning/2026-09-29-dataframe#질문-출력이-이미-됐는데-assert는-왜-필요한가",
+      "title": "출력이 이미 됐는데 assert는 왜 필요한가?",
+      "url": "/notes/learning/2026-09-29-dataframe#질문-출력이-이미-됐는데-assert는-왜-필요한가",
+      "topic": "데이터 분석",
+      "sourceTitle": "DataFrame 학습 기록 — 표의 목적부터 집계와 파이프라인까지",
+      "context": "transform()을 이미 실행한 뒤 이전 행 수를 어떻게 확인하는지, 그리고 출력 뒤 검사문이 어떤 역할을 하는지 물었다.",
+      "intent": "전후 상태의 기록과 자동 검사의 역할을 이해하려는 질문이다.",
+      "answer": "과거 상태가 일반적으로 자동 저장되는 것은 아니므로 전후 비교 기준은 작업 전에 기록해야 한다. 이 열 추가는 행 수를 유지하지만, 실제 전후 기록을 남기려면 셀 앞에서 저장한 뒤 다시 실행해 비교한다. assert는 조건이 틀리면 오류를 내어 이후 실행을 멈춘다."
+    },
+    {
+      "id": "learning/2026-09-29-dataframe#질문-merge에서-왼쪽-how-validate가-각각-무엇인가",
+      "title": "merge에서 왼쪽, how, validate가 각각 무엇인가?",
+      "url": "/notes/learning/2026-09-29-dataframe#질문-merge에서-왼쪽-how-validate가-각각-무엇인가",
+      "topic": "데이터 분석",
+      "sourceTitle": "DataFrame 학습 기록 — 표의 목적부터 집계와 파이프라인까지",
+      "context": "결합 설명을 여러 번 듣고도 어렵다고 했고, 잠시 설명을 중단한 뒤 문제 풀이로 전환했다. 이후 미션 6에서 고객 정보와 고객별 주문 요약 두 표만 놓고 다시 개념을 설명해 달라고 요청했다.",
+      "intent": "원본 주문의 일대다 연결과 고객 요약의 일대일 연결을 섞지 않고, 현재 문제의 두 표에서 이해하려는 질문이다.",
+      "answer": "customers_new.merge(summary, ...)에서 고객 표가 왼쪽, 인수의 요약표가 오른쪽이다. how=\"left\"는 모든 왼쪽 고객을 남기고, validate=\"one_to_one\"은 양쪽 고객 키가 각각 유일한지 검사한다. indicator=True는 연결 상태를 _merge 열로 표시한다."
+    },
+    {
+      "id": "learning/2026-09-29-dataframe#질문-피벗하면-기존-열-이름은-어디로-가는가",
+      "title": "피벗하면 기존 열 이름은 어디로 가는가?",
+      "url": "/notes/learning/2026-09-29-dataframe#질문-피벗하면-기존-열-이름은-어디로-가는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "DataFrame 학습 기록 — 표의 목적부터 집계와 파이프라인까지",
+      "context": "9월 28일 pivot_table()과 melt() 설명 뒤, 다음 날 category와 amount가 새 표에서 사라지는지 다시 물었다. 이어 외울 부분과 이해할 부분을 나눠 달라고 했다.",
+      "intent": "문법의 인수보다 결과 표의 행·열·칸이 무엇을 나타내는지 파악하려는 질문이다.",
+      "answer": "category의 값은 새 열 이름, amount의 값은 그 열의 칸으로 배치된다. 같은 고객과 카테고리의 주문 여러 건은 지정한 함수로 집계된다. melt()는 열 이름과 칸 값을 세로로 옮기지만 집계 전 주문들을 복원하지 않는다."
+    },
+    {
+      "id": "learning/2026-09-29-dataframe#질문-연속된-메서드와-pipe는-어떤-순서로-실행되는가",
+      "title": "연속된 메서드와 pipe는 어떤 순서로 실행되는가?",
+      "url": "/notes/learning/2026-09-29-dataframe#질문-연속된-메서드와-pipe는-어떤-순서로-실행되는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "DataFrame 학습 기록 — 표의 목적부터 집계와 파이프라인까지",
+      "context": "마지막으로 체이닝과 .pipe() 절의 진행을 요청했다. 결측 제외, 금액 조건 선택, 정렬과 직접 만든 두 함수를 차례로 확인했다.",
+      "intent": "앞 단계에서 반환한 객체가 다음 단계의 입력이 된다는 흐름을 따라가는 맥락이다.",
+      "answer": "체이닝은 앞 메서드의 반환값에 다음 메서드를 호출한다. .pipe(func)는 표를 함수의 첫 인수로 넘기며, 정리나 복사는 .pipe() 자체가 아니라 호출된 함수 내부에서 수행한다."
+    },
     {
       "id": "data/numpy-array-axes#질문-numpy는-그냥-같은-타입만-담는-리스트인가-텐서는-무엇인가",
       "title": "NumPy는 그냥 같은 타입만 담는 리스트인가? 텐서는 무엇인가?",
@@ -1647,6 +2418,55 @@ window.HANTHING_CONTENT = {
     }
   ],
   "quizzes": [
+    {
+      "id": "data/statistics-data-and-groups#퀴즈-순서가-다른-두-series와-결측치-없는-표",
+      "title": "순서가 다른 두 Series와 결측치 없는 표",
+      "url": "/notes/data/statistics-data-and-groups#퀴즈-순서가-다른-두-series와-결측치-없는-표",
+      "topic": "데이터 분석",
+      "sourceTitle": "통계 실습의 데이터 — 변수의 의미와 요약표의 인덱스"
+    },
+    {
+      "id": "data/statistics-distributions-and-plots#퀴즈-위-경계가-60인데-왜-수염은-55에서-끝날까",
+      "title": "위 경계가 60인데 왜 수염은 55에서 끝날까?",
+      "url": "/notes/data/statistics-distributions-and-plots#퀴즈-위-경계가-60인데-왜-수염은-55에서-끝날까",
+      "topic": "데이터 분석",
+      "sourceTitle": "분포를 그리는 코드 — Axes·히스토그램·KDE·박스플롯"
+    },
+    {
+      "id": "data/statistics-relations-and-interpretation#퀴즈-어떤-범위까지-말할-수-있을까",
+      "title": "어떤 범위까지 말할 수 있을까?",
+      "url": "/notes/data/statistics-relations-and-interpretation#퀴즈-어떤-범위까지-말할-수-있을까",
+      "topic": "데이터 분석",
+      "sourceTitle": "변수 사이의 관계 — 상관행렬과 그룹별 그래프를 읽는 법"
+    },
+    {
+      "id": "learning/2026-09-29-statistics#퀴즈-실제로-답한-구조비율-확인-문제",
+      "title": "실제로 답한 구조·비율 확인 문제",
+      "url": "/notes/learning/2026-09-29-statistics#퀴즈-실제로-답한-구조비율-확인-문제",
+      "topic": "데이터 분석",
+      "sourceTitle": "통계·시각화 실습 — 요약표의 구조에서 조건을 붙인 해석까지"
+    },
+    {
+      "id": "data/pandas-cleaning-validation#퀴즈-무엇을-확인했고-무엇은-모르는가",
+      "title": "무엇을 확인했고 무엇은 모르는가?",
+      "url": "/notes/data/pandas-cleaning-validation#퀴즈-무엇을-확인했고-무엇은-모르는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "Pandas 정리와 검증 — 자료형, 결측, 중복, 파생 변수"
+    },
+    {
+      "id": "data/pandas-dataframe-selection#퀴즈-선택-결과를-먼저-말하기",
+      "title": "선택 결과를 먼저 말하기",
+      "url": "/notes/data/pandas-dataframe-selection#퀴즈-선택-결과를-먼저-말하기",
+      "topic": "데이터 분석",
+      "sourceTitle": "DataFrame과 선택 — 표의 의미, Series, 불리언 마스크"
+    },
+    {
+      "id": "data/pandas-groupby-merge-reshape#퀴즈-결과가-대응하는-대상을-말하기",
+      "title": "결과가 대응하는 대상을 말하기",
+      "url": "/notes/data/pandas-groupby-merge-reshape#퀴즈-결과가-대응하는-대상을-말하기",
+      "topic": "데이터 분석",
+      "sourceTitle": "Pandas 집계와 결합 — agg, transform, merge에서 pipe까지"
+    },
     {
       "id": "data/numpy-array-axes#퀴즈-무엇을-모으고-무엇을-남길까",
       "title": "무엇을 모으고 무엇을 남길까?",
