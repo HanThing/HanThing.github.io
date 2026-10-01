@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-29",
+  "generatedAt": "2026-10-01",
   "sets": [
     {
       "id": "loop-exit",
@@ -3848,7 +3848,8 @@
       "title": "분포와 인과 해석",
       "version": "28f44eadbb60",
       "noteIds": [
-        "data/eda-and-causality"
+        "data/eda-and-causality",
+        "weekly/2026-10-01-distributions-and-data-integration"
       ],
       "goals": [
         {
@@ -4141,12 +4142,21 @@
           "1c347251-7b94-4c5d-a257-410eaccaf6c2"
         ],
         "sourceHashes": {
-          "data/eda-and-causality": "63b30c28ead1e4f2ff416d47101ce80d57b7630b0c541507aaff76f66d5c6efe"
+          "data/eda-and-causality": "63b30c28ead1e4f2ff416d47101ce80d57b7630b0c541507aaff76f66d5c6efe",
+          "weekly/2026-10-01-distributions-and-data-integration": "d3ceee2fd45a2e185c372c97bc61d7d7e4c785a60b2f4af9b048710bd2cb8bac"
         },
         "quizArtifactId": "a8530ae6-f2f5-4343-bdfc-288d24afddd8",
         "cardsArtifactId": "23d45554-78cf-47a5-a0c7-17b72c3edd5e",
         "supersededQuizArtifactId": "7465a010-15c1-4df7-a225-7b95e2112b10",
-        "exportedAt": "2026-09-24"
+        "exportedAt": "2026-09-24",
+        "sharedNoteReview": {
+          "reviewedAt": "2026-10-01",
+          "noteIds": [
+            "weekly/2026-10-01-distributions-and-data-integration"
+          ],
+          "method": "Existing artifacts reused without regeneration; added note hash is a mapping review snapshot, not an uploaded generation source.",
+          "reviewRecord": "docs/verification/2026-10-01-weekly-paper/release.md"
+        }
       }
     },
     {
@@ -6647,7 +6657,8 @@
         "data/pandas-dataframe-selection",
         "data/pandas-cleaning-validation",
         "data/pandas-groupby-merge-reshape",
-        "learning/2026-09-29-dataframe"
+        "learning/2026-09-29-dataframe",
+        "weekly/2026-10-01-distributions-and-data-integration"
       ],
       "goals": [
         {
@@ -7165,7 +7176,8 @@
           "data/pandas-dataframe-selection": "8fe9f7a40cc8e18ad68c12e674fb095018d7fbc650a86f1268c640dc65c01793",
           "data/pandas-cleaning-validation": "386f2a0dc22689883cb6533419081caeda135571014b71574a01ec3e422f233f",
           "data/pandas-groupby-merge-reshape": "6003bea872244d9c3b3f76871d603da5630fce90e42086619fa88462f55603ec",
-          "learning/2026-09-29-dataframe": "18c7977f808a999745f6e00ffcca7a92a6c1e89c62623f19e1b056da852aee9a"
+          "learning/2026-09-29-dataframe": "18c7977f808a999745f6e00ffcca7a92a6c1e89c62623f19e1b056da852aee9a",
+          "weekly/2026-10-01-distributions-and-data-integration": "d3ceee2fd45a2e185c372c97bc61d7d7e4c785a60b2f4af9b048710bd2cb8bac"
         },
         "revalidation": {
           "date": "2026-09-29",
@@ -7176,6 +7188,14 @@
             "data/pandas-groupby-merge-reshape": "6003bea872244d9c3b3f76871d603da5630fce90e42086619fa88462f55603ec",
             "learning/2026-09-29-dataframe": "8ab5a06d82b06c8ccbad03a75480662776f5b9a2723507b47616f1a5353b35fa"
           }
+        },
+        "sharedNoteReview": {
+          "reviewedAt": "2026-10-01",
+          "noteIds": [
+            "weekly/2026-10-01-distributions-and-data-integration"
+          ],
+          "method": "Existing artifacts reused without regeneration; added note hash is a mapping review snapshot, not an uploaded generation source.",
+          "reviewRecord": "docs/verification/2026-10-01-weekly-paper/release.md"
         }
       }
     },

@@ -117,6 +117,37 @@ window.HANTHING_CONTENT = {
   ],
   "notes": [
     {
+      "id": "weekly/2026-10-01-distributions-and-data-integration",
+      "title": "위클리 페이퍼 #2 — 평균을 해석하고 고객 데이터를 통합하는 기준",
+      "description": "평균과 중앙값으로 말할 수 있는 범위를 구분하고, 주문의 의미를 보존하며 중복·불일치·결측을 처리하는 순서를 정리했다.",
+      "date": "2026-10-01",
+      "published": "2026-10-01",
+      "type": "weekly",
+      "topics": [
+        "데이터 분석"
+      ],
+      "courseId": "data-analysis",
+      "lessonId": "statistics-and-visualization",
+      "url": "/notes/weekly/2026-10-01-distributions-and-data-integration",
+      "links": [
+        "data/eda-and-causality",
+        "data/statistics-distributions-and-plots",
+        "data/pandas-cleaning-validation",
+        "data/pandas-groupby-merge-reshape"
+      ],
+      "relatedReasons": {
+        "data/eda-and-causality": "평균이 같아도 실제 분포와 경험이 달라질 수 있다는 해석의 근거를 살펴본다.",
+        "data/statistics-distributions-and-plots": "히스토그램의 구간과 박스플롯이 보여 주는 정보를 비교한다.",
+        "data/pandas-cleaning-validation": "원본을 보존하며 결측과 중복을 처리하고 결과를 검증하는 코드로 이어진다.",
+        "data/pandas-groupby-merge-reshape": "결합 범위와 키 유일성을 확인하는 merge의 동작을 살펴본다."
+      },
+      "sources": [
+        "코드잇 AI 스프린트 위클리 페이퍼 2회차 공식 두 문항 (2026-10-01 확인)",
+        "위클리 페이퍼 1번 문항의 분포 방향에 관한 담당자 답변 (2026-10-01 확인)",
+        "위클리 페이퍼 답변 준비 학습 대화 (2026-10-01)"
+      ]
+    },
+    {
       "id": "data/statistics-data-and-groups",
       "title": "통계 실습의 데이터 — 변수의 의미와 요약표의 인덱스",
       "description": "숫자 dtype과 변수 유형, 개수와 비율, 결측치 요약표의 인덱스 정렬과 평균 대체의 한계를 연결한다.",

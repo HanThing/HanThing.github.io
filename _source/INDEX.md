@@ -2,6 +2,9 @@
 
 Generated from public Markdown. Read AGENTS.md for ingest/query/lint; CHANGELOG.md for changes. Course references support briefing and stay outside the learning graph. Course/lesson identify the curriculum placement; topics identify related subjects.
 
+- [위클리 페이퍼 #2 — 평균을 해석하고 고객 데이터를 통합하는 기준](content/weekly/2026-10-01-distributions-and-data-integration.md) — weekly · 2026-10-01 · 평균과 중앙값으로 말할 수 있는 범위를 구분하고, 주문의 의미를 보존하며 중복·불일치·결측을 처리하는 순서를 정리했다.
+  Course: 데이터 분석 → 기초 통계와 데이터 시각화. Related topics: 데이터 분석
+  Sources: 코드잇 AI 스프린트 위클리 페이퍼 2회차 공식 두 문항 (2026-10-01 확인); 위클리 페이퍼 1번 문항의 분포 방향에 관한 담당자 답변 (2026-10-01 확인); 위클리 페이퍼 답변 준비 학습 대화 (2026-10-01)
 - [통계 실습의 데이터 — 변수의 의미와 요약표의 인덱스](content/data/statistics-data-and-groups.md) — concept · 2026-09-29 · 숫자 dtype과 변수 유형, 개수와 비율, 결측치 요약표의 인덱스 정렬과 평균 대체의 한계를 연결한다.
   Course: 데이터 분석 → 기초 통계와 데이터 시각화. Related topics: 데이터 분석
   Sources: 통계시각화 실습 환경 설명 학습 대화 (2026-09-29); https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html; https://pandas.pydata.org/docs/reference/api/pandas.Series.value_counts.html

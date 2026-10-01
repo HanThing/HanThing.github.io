@@ -10,6 +10,7 @@ tags: [index]
 
 ## 위클리 페이퍼
 
+- [[weekly/2026-10-01-distributions-and-data-integration|평균을 해석하고 고객 데이터를 통합하는 기준 — 위클리 페이퍼 #2]]
 - [[weekly/2026-09-28-four-questions|문제를 정의하고, 도구를 선택하는 기준 — 네 질문에 대한 나의 답변]]
 
 ## 최근 학습 기록
