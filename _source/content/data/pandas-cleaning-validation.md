@@ -12,6 +12,8 @@ topics: [데이터 분석]
 tags: [pandas, preprocessing, missing-data, validation]
 sources:
   - 데이터 프레임 개념 총정리 학습 대화 (2026-09-28–29)
+  - Find DataFrame column index 학습 대화 (2026-09-30)
+  - 판매구분별 undefined 제외 수정 학습 대화 (2026-10-01)
   - https://pandas.pydata.org/docs/reference/api/pandas.to_numeric.html
   - https://pandas.pydata.org/docs/reference/api/pandas.to_datetime.html
   - https://pandas.pydata.org/docs/user_guide/missing_data.html
@@ -19,6 +21,7 @@ sources:
   - https://pandas.pydata.org/docs/reference/api/pandas.cut.html
 relatedReasons:
   learning/2026-09-29-dataframe: 결측 처리의 목적과 중복 제거 코드의 실제 수정 과정을 보존한 기록이다.
+  learning/2026-10-01-hotel-segment-comparison: 판매 구분을 모르는 예약을 전체 원본이 아닌 해당 비교에서만 제외한 판단이다.
   data/pandas-dataframe-selection: Series와 DataFrame의 구분이 열 변환과 표 전체 대입의 바탕이 된다.
   data/data-quality: 데이터가 사용할 목적에 맞게 정확하고 일관되는지 확인하는 문제로 이어진다.
 ---
@@ -79,6 +82,23 @@ city.str.strip().str.title()  # ["Seoul", "Busan", None]
 그룹별 중앙값을 구하는 `transform("median")`도 스스로 원본 결측을 채우지 않는다. 반환값을 어디에 대입하거나 `fillna()`에 어떻게 사용할지 지정해야 한다. 한 그룹이 전부 결측이면 중앙값도 결측일 수 있다.
 
 `dropna(subset=["city"])`는 도시가 없는 행만 제외하고, 인수 없는 `dropna()`는 기본적으로 어느 열이든 결측인 행을 제외한다. 반환값을 저장하지 않은 호출은 그 자체로 원본을 수정하는 코드가 아니다.
+
+## 질문: isna가 0인데 Undefined와 공백을 따로 확인해야 하는가?
+
+**상황:** 호텔 예약 분석에서 결측 검사만으로 충분한지 사용자가 공백·대소문자 점검을 먼저 제안했다. 이어 `Undefined` 두 건을 전체 데이터에서 지워도 되는지 물었다.
+
+**의도:** Pandas가 인식하는 결측과 분석에 필요한 의미를 알 수 없는 값을 구분하려는 질문이다.
+
+**핵심 답변:** `Undefined`와 빈 문자열은 그 자체로 NaN이 아니다. `dropna()`로 문자열 `Undefined`를 제거할 수는 없다. 판매 구분을 모르는 예약을 해당 비교에서 제외하더라도, 그 예약의 호텔·취소 여부까지 전체 분석에서 삭제할 필요가 생긴 것은 아니다.
+
+```python
+analysis["market_segment"].map(repr).value_counts(dropna=False)
+segment_data = analysis.loc[analysis["market_segment"] != "Undefined"]
+```
+
+첫 줄은 값의 표현을 살펴보는 검사이며 원본 문자열을 정리하는 대입이 아니다. `repr`은 앞뒤 공백이나 빈 문자열을 눈으로 구별하는 데 도움이 된다. `Online TA`에 일괄 `title()`을 적용하면 `Online Ta`가 되므로, 정리 전에 실제 범주 표기와 비교 규칙을 정한다.
+
+두 번째 줄은 이 자료에서 확인한 문자열을 해당 비교에서 제외하는 예다. 소수이기 때문에 지우는 규칙이나 모든 결측을 처리하는 일반식은 아니다. 범주를 실제로 복구한 것도 아니다. [[learning/2026-10-01-hotel-segment-comparison|당시 제외 범위와 후속 질문]]을 함께 남겼다.
 
 ## 질문: duplicated() 결과를 고객 번호 열에 넣으면 중복이 제거되는가?
 

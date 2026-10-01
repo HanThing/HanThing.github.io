@@ -12,6 +12,8 @@ topics: [데이터 분석]
 tags: [pandas, groupby, merge, reshape, pipeline]
 sources:
   - 데이터 프레임 개념 총정리 학습 대화 (2026-09-28–29)
+  - Find DataFrame column index 학습 대화 (2026-09-30)
+  - 판매구분별 undefined 제외 수정 학습 대화 (2026-10-01)
   - https://pandas.pydata.org/docs/user_guide/groupby.html
   - https://pandas.pydata.org/docs/reference/api/pandas.merge.html
   - https://pandas.pydata.org/docs/reference/api/pandas.pivot_table.html
@@ -19,6 +21,8 @@ sources:
   - https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.pipe.html
 relatedReasons:
   learning/2026-09-29-dataframe: 반환값 설명의 생략과 agg 문법 변경을 지적하며 학습한 실제 질문 흐름이다.
+  learning/2026-09-30-hotel-cancellation-eda: 호텔 집계에서 인덱스의 이름과 다중 그룹의 반환 구조를 다시 질문한 기록이다.
+  learning/2026-10-01-hotel-segment-comparison: 같은 판매 구분 안의 예약 구성비를 계산하며 transform과 sum의 인덱스를 비교한 기록이다.
   data/pandas-dataframe-selection: 집계 결과의 Series와 DataFrame, 인덱스와 일반 열을 구분하는 바탕이다.
   data/pandas-cleaning-validation: 집계 전 중복과 결측 처리 및 결합 후 검증 기준을 연결한다.
 ---
@@ -141,6 +145,32 @@ orders.groupby("customer_id")["amount"].agg("mean")
 ```
 
 원래 주문 표의 열이 이동한 것은 아니다. `reset_index()`가 금액을 다시 계산하는 것도 아니다. 이미 `.reset_index()`까지 실행한 요약표라면 같은 전처리를 무조건 반복하지 말고 현재 `columns`와 `index`를 확인한다. 처음부터 `groupby(..., as_index=False)`로 일반 열 형태의 결과를 받을 수도 있지만, 현재 코드의 반환값을 읽는 일이 먼저다.
+
+## 질문: 인덱스에도 이름이 있는가? 여러 열로 묶으면 Series가 아닌가?
+
+**상황:** 호텔별 취소 수를 집계한 Series에서 `reset_index()`의 열 이름이 어디서 오는지 물었다. 호텔과 판매 구분을 함께 묶는 경우, 집계 함수를 여러 개 지정하는 경우도 이어서 확인했다.
+
+**의도:** 그룹 기준의 개수와 데이터 열의 개수, 축 이름과 축에 놓인 값을 따로 읽으려는 질문이다.
+
+**핵심 답변:** `analysis.groupby("hotel")["is_canceled"].sum()`에는 인덱스 이름 `hotel`과 Series 이름 `is_canceled`가 있다. 인덱스 값은 호텔 이름이고 데이터 값은 취소 수다. `reset_index()`는 이 이름들을 열 이름으로 사용하고 기본 행 인덱스를 새로 만든다.
+
+두 그룹 키로 묶은 `analysis.groupby(["hotel", "market_segment"])["is_canceled"].sum()`은 기본 인덱스 방식에서 MultiIndex를 가진 Series다. 인덱스가 두 단계라는 사실만으로 DataFrame이 되는 것은 아니다. 반면 선택한 열에 `.agg(["size", "sum", "mean"])`을 적용하면 세 집계 결과가 열인 DataFrame이 되고 열 이름도 함수 이름에서 온다. 변수에 대입하는 이름과 DataFrame의 열 이름은 별개다. [[learning/2026-09-30-hotel-cancellation-eda|9월 30일 실제 질문]]과 연결된다.
+
+## 질문: 구성비를 구할 때 transform("sum") 대신 sum()만 쓰면 안 되는가?
+
+**상황:** 판매 구분과 리드타임 구간별 예약 수 표에서, 각 판매 구분의 전체 예약 수를 분모로 쓰려고 했다. `transform("sum")`을 빼도 같은 합계를 얻는 것 아닌지 물었다.
+
+**의도:** 계산한 수치뿐 아니라 그 수치가 대응하는 행과 인덱스를 확인하려는 질문이다.
+
+**핵심 답변:** `sum()`은 판매 구분마다 결과 하나로 줄인다. `transform("sum")`은 각 판매 구분의 합계를 원래 요약표의 각 행에 대응시킨다. 행별 예약 수를 자기 그룹의 합계로 나눌 때 이 대응이 필요하다.
+
+```python
+# city_summary는 한 호텔의 판매 구분·리드타임 구간별 예약 수 표다.
+totals = city_summary.groupby("market_segment")["bookings"].transform("sum")
+city_summary["segment_pct"] = city_summary["bookings"] / totals * 100
+```
+
+설명용 표의 판매 구분이 `Groups, Groups, Online TA, Online TA`, 예약 수가 `30, 70, 50, 150`이라면 `transform` 결과는 원래 행 인덱스에 `100, 100, 200, 200`이 대응한다. 일반 `sum()`은 판매 구분 이름을 인덱스로 하는 두 값 `100, 200`이다. Series끼리 나눌 때는 인덱스 레이블이 맞춰지므로, 숫자 행 인덱스의 예약 수와 이 두 값을 그대로 나누면 의도한 대응이 되지 않는다. 별도 요약표가 목적이라면 `sum()`이 맞다. [[learning/2026-10-01-hotel-segment-comparison|10월 1일 기록]]에서 두 구분을 직접 코드에 쓰지 않아도 그룹별 계산이 되는 이유를 이어 읽을 수 있다.
 
 ## 질문: merge()에서 왼쪽과 오른쪽은 무엇이고 how는 무엇인가?
 

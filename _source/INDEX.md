@@ -2,30 +2,36 @@
 
 Generated from public Markdown. Read AGENTS.md for ingest/query/lint; CHANGELOG.md for changes. Course references support briefing and stay outside the learning graph. Course/lesson identify the curriculum placement; topics identify related subjects.
 
+- [판매 구분 비교 기록 — Undefined 제외와 예약 구성비](content/learning/2026-10-01-hotel-segment-comparison.md) — journal · 2026-10-01 · Undefined를 필요한 비교에서만 제외하고, 행 선택과 범주별 집계, transform으로 계산한 구성비, 같은 조건 비교의 해석을 정리한다.
+  Course: 데이터 분석 → DataFrame 마스터하기. Related topics: 데이터 분석
+  Sources: 판매구분별 undefined 제외 수정 학습 대화 (2026-10-01)
 - [위클리 페이퍼 #2 — 평균을 해석하고 고객 데이터를 통합하는 기준](content/weekly/2026-10-01-distributions-and-data-integration.md) — weekly · 2026-10-01 · 평균과 중앙값으로 말할 수 있는 범위를 구분하고, 주문의 의미를 보존하며 중복·불일치·결측을 처리하는 순서를 정리했다.
   Course: 데이터 분석 → 기초 통계와 데이터 시각화. Related topics: 데이터 분석
   Sources: 코드잇 AI 스프린트 위클리 페이퍼 2회차 공식 두 문항 (2026-10-01 확인); 위클리 페이퍼 1번 문항의 분포 방향에 관한 담당자 답변 (2026-10-01 확인); 위클리 페이퍼 답변 준비 학습 대화 (2026-10-01)
+- [호텔 취소 분석 기록 — 집계표의 구조와 취소율의 분모](content/learning/2026-09-30-hotel-cancellation-eda.md) — journal · 2026-09-30 · 호텔 예약 자료를 읽으며 열 선택, 그룹 집계, 인덱스 이름, 그래프와 비율의 분모를 질문한 9월 30일 학습 기록이다.
+  Course: 데이터 분석 → DataFrame 마스터하기. Related topics: 데이터 분석
+  Sources: Find DataFrame column index 학습 대화 (2026-09-30)
 - [통계 실습의 데이터 — 변수의 의미와 요약표의 인덱스](content/data/statistics-data-and-groups.md) — concept · 2026-09-29 · 숫자 dtype과 변수 유형, 개수와 비율, 결측치 요약표의 인덱스 정렬과 평균 대체의 한계를 연결한다.
   Course: 데이터 분석 → 기초 통계와 데이터 시각화. Related topics: 데이터 분석
-  Sources: 통계시각화 실습 환경 설명 학습 대화 (2026-09-29); https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html; https://pandas.pydata.org/docs/reference/api/pandas.Series.value_counts.html
+  Sources: 통계시각화 실습 환경 설명 학습 대화 (2026-09-29); Find DataFrame column index 학습 대화 (2026-09-30); 판매구분별 undefined 제외 수정 학습 대화 (2026-10-01); https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html; https://pandas.pydata.org/docs/reference/api/pandas.Series.value_counts.html
 - [분포를 그리는 코드 — Axes·히스토그램·KDE·박스플롯](content/data/statistics-distributions-and-plots.md) — concept · 2026-09-29 · 그릴 값과 그릴 장소를 구분하고, IQR 경계·수염·이상치와 로그 변환의 해석을 연결한다.
   Course: 데이터 분석 → 기초 통계와 데이터 시각화. Related topics: 데이터 분석
   Sources: 통계시각화 실습 환경 설명 학습 대화 (2026-09-29); https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.subplots.html; https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.boxplot.html; https://seaborn.pydata.org/generated/seaborn.histplot.html; https://pandas.pydata.org/docs/reference/api/pandas.Series.quantile.html; https://numpy.org/doc/stable/reference/generated/numpy.log1p.html
 - [변수 사이의 관계 — 상관행렬과 그룹별 그래프를 읽는 법](content/data/statistics-relations-and-interpretation.md) — concept · 2026-09-29 · corr의 표 구조, 선형 상관의 한계, 생존율과 박스플롯, 등급을 고정한 비교의 범위를 정리한다.
   Course: 데이터 분석 → 기초 통계와 데이터 시각화. Related topics: 데이터 분석
-  Sources: 통계시각화 실습 환경 설명 학습 대화 (2026-09-29); https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html; https://seaborn.pydata.org/generated/seaborn.barplot.html; https://seaborn.pydata.org/generated/seaborn.heatmap.html
+  Sources: 통계시각화 실습 환경 설명 학습 대화 (2026-09-29); 판매구분별 undefined 제외 수정 학습 대화 (2026-10-01); https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html; https://seaborn.pydata.org/generated/seaborn.barplot.html; https://seaborn.pydata.org/generated/seaborn.heatmap.html
 - [통계·시각화 실습 — 요약표의 구조에서 조건을 붙인 해석까지](content/learning/2026-09-29-statistics.md) — journal · 2026-09-29 · 실제 코드 작성과 응답을 바탕으로 변수 유형, 그래프 구성, 결측치 인덱스, 생존율 방향과 조건부 비교를 돌아본다.
   Course: 데이터 분석 → 기초 통계와 데이터 시각화. Related topics: 데이터 분석
   Sources: 통계시각화 실습 환경 설명 학습 대화 (2026-09-29)
 - [Pandas 정리와 검증 — 자료형, 결측, 중복, 파생 변수](content/data/pandas-cleaning-validation.md) — concept · 2026-09-28 · 값을 바꾸는 이유와 처리 후 확인할 조건을 구분하고 변환 실패, 0 채우기, 중복 제거, 복사와 대입을 실제 질문으로 살펴본다.
   Course: 데이터 분석 → DataFrame 마스터하기. Related topics: 데이터 분석
-  Sources: 데이터 프레임 개념 총정리 학습 대화 (2026-09-28–29); https://pandas.pydata.org/docs/reference/api/pandas.to_numeric.html; https://pandas.pydata.org/docs/reference/api/pandas.to_datetime.html; https://pandas.pydata.org/docs/user_guide/missing_data.html; https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop_duplicates.html; https://pandas.pydata.org/docs/reference/api/pandas.cut.html
+  Sources: 데이터 프레임 개념 총정리 학습 대화 (2026-09-28–29); Find DataFrame column index 학습 대화 (2026-09-30); 판매구분별 undefined 제외 수정 학습 대화 (2026-10-01); https://pandas.pydata.org/docs/reference/api/pandas.to_numeric.html; https://pandas.pydata.org/docs/reference/api/pandas.to_datetime.html; https://pandas.pydata.org/docs/user_guide/missing_data.html; https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.drop_duplicates.html; https://pandas.pydata.org/docs/reference/api/pandas.cut.html
 - [DataFrame과 선택 — 표의 의미, Series, 불리언 마스크](content/data/pandas-dataframe-selection.md) — concept · 2026-09-28 · 이미 있는 표를 다시 가공하는 이유에서 출발해 인덱스와 열, Series와 DataFrame, 조건 선택의 반환값을 구분한다.
   Course: 데이터 분석 → DataFrame 마스터하기. Related topics: 데이터 분석
-  Sources: 데이터 프레임 개념 총정리 학습 대화 (2026-09-28–29); https://pandas.pydata.org/docs/user_guide/dsintro.html; https://pandas.pydata.org/docs/user_guide/indexing.html
+  Sources: 데이터 프레임 개념 총정리 학습 대화 (2026-09-28–29); 판매구분별 undefined 제외 수정 학습 대화 (2026-10-01); https://pandas.pydata.org/docs/user_guide/dsintro.html; https://pandas.pydata.org/docs/user_guide/indexing.html
 - [Pandas 집계와 결합 — agg, transform, merge에서 pipe까지](content/data/pandas-groupby-merge-reshape.md) — concept · 2026-09-28 · 각 단계가 무엇을 반환하는지 실제 표로 추적하며 고객별 집계, 주문별 변환, 키 결합, 긴 표와 넓은 표, 함수 연결을 구분한다.
   Course: 데이터 분석 → DataFrame 마스터하기. Related topics: 데이터 분석
-  Sources: 데이터 프레임 개념 총정리 학습 대화 (2026-09-28–29); https://pandas.pydata.org/docs/user_guide/groupby.html; https://pandas.pydata.org/docs/reference/api/pandas.merge.html; https://pandas.pydata.org/docs/reference/api/pandas.pivot_table.html; https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.melt.html; https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.pipe.html
+  Sources: 데이터 프레임 개념 총정리 학습 대화 (2026-09-28–29); Find DataFrame column index 학습 대화 (2026-09-30); 판매구분별 undefined 제외 수정 학습 대화 (2026-10-01); https://pandas.pydata.org/docs/user_guide/groupby.html; https://pandas.pydata.org/docs/reference/api/pandas.merge.html; https://pandas.pydata.org/docs/reference/api/pandas.pivot_table.html; https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.melt.html; https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.pipe.html
 - [DataFrame 학습 기록 — 표의 목적부터 집계와 파이프라인까지](content/learning/2026-09-29-dataframe.md) — journal · 2026-09-28 · 9월 28–29일 실제 질문과 코드 수정, 설명의 정정을 따라 DataFrame의 반환값과 행의 의미를 정리한다.
   Course: 데이터 분석 → DataFrame 마스터하기. Related topics: 데이터 분석
   Sources: 데이터 프레임 개념 총정리 학습 대화 (2026-09-28–29)

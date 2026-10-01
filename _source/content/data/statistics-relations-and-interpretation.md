@@ -11,11 +11,13 @@ topics: [데이터 분석]
 tags: [statistics, correlation, visualization, interpretation]
 sources:
   - 통계시각화 실습 환경 설명 학습 대화 (2026-09-29)
+  - 판매구분별 undefined 제외 수정 학습 대화 (2026-10-01)
   - https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html
   - https://seaborn.pydata.org/generated/seaborn.barplot.html
   - https://seaborn.pydata.org/generated/seaborn.heatmap.html
 relatedReasons:
   learning/2026-09-29-statistics: 실제 생존율 방향 오류와 등급을 고정한 후속 해석을 구분해 기록했다.
+  learning/2026-10-01-hotel-segment-comparison: 호텔과 리드타임 구간을 맞춘 판매 구분 비교에서도 인과 결론은 별도임을 확인한 기록이다.
   data/statistics-data-and-groups: 이진 변수의 평균이 비율이 되는 이유와 요약표의 인덱스를 먼저 익힌다.
   data/statistics-distributions-and-plots: 박스·중앙값·수염을 알아야 두 집단의 분포를 비교할 수 있다.
   data/eda-and-causality: 관찰한 관계를 인과나 일반 법칙으로 확대하지 않는 기준이다.
@@ -139,6 +141,18 @@ plt.show()
 ```
 
 두 번째 그림을 실제로 그릴 때는 그룹별 관측 수도 함께 확인한다. 전체 비교 → 같은 등급 안의 비교 → 남은 차이에 대한 가설 순서로 범위를 좁히면, 관찰보다 결론이 커지는 일을 줄일 수 있다. [[data/eda-and-causality|관계와 인과의 구분]]으로 이어진다.
+
+## 질문: 판매 구분별 예약 구성비와 취소율을 어떻게 해석하는가?
+
+**상황:** 호텔 예약 자료에서 판매 구분별 리드타임 구성비를 계산한 뒤, 같은 구간의 취소율과 함께 어떻게 해석할지 물었다. 최종 해석의 참고 예시도 요청했다.
+
+**의도:** 전체 비율 차이에 집단 구성의 차이가 섞일 수 있다는 점을 확인하고, 비교 범위를 좁혀 해석하려는 질문이다.
+
+**핵심 답변:** 먼저 각 판매 구분의 예약이 어느 리드타임 구간에 많이 속하는지 보고, 같은 호텔·구간 안에서도 취소율 차이가 있는지 살핀다. 이 비교는 전체 차이를 이해하는 데 도움이 되지만 판매 구분의 인과 효과를 계산한 것은 아니다.
+
+같은 `181+` 구간에도 정확한 예약 선행 일수는 다를 수 있고 다른 예약 조건도 같다고 보장되지 않는다. 구성비가 다르다는 관찰과 그 구성 때문에 취소율이 달라졌다는 주장은 구분한다. 실제 질문의 맥락과 당시 표 해석의 확인 범위는 [[learning/2026-10-01-hotel-segment-comparison|판매 구분 비교 기록]]에 남겼다.
+
+이미 구간·판매 구분별 취소율을 계산한 표를 그릴 때는 `hue="market_segment"`처럼 비교 구분을 유지한다. 구분을 빼고 여러 요약 비율을 단순 평균하면 예약 수로 가중한 전체 비율과 달라질 수 있다. 그림의 분류와 [[data/statistics-data-and-groups|비율의 분모]]를 함께 확인한다.
 
 ## 퀴즈: 어떤 범위까지 말할 수 있을까?
 

@@ -11,10 +11,14 @@ topics: [데이터 분석]
 tags: [statistics, pandas, missing-values]
 sources:
   - 통계시각화 실습 환경 설명 학습 대화 (2026-09-29)
+  - Find DataFrame column index 학습 대화 (2026-09-30)
+  - 판매구분별 undefined 제외 수정 학습 대화 (2026-10-01)
   - https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html
   - https://pandas.pydata.org/docs/reference/api/pandas.Series.value_counts.html
 relatedReasons:
   learning/2026-09-29-statistics: 변수 유형과 인덱스를 직접 설명한 응답 및 교정 기록이다.
+  learning/2026-09-30-hotel-cancellation-eda: 판매 구분별 취소율의 합이 100이 아닌 이유를 물었던 기록이다.
+  learning/2026-10-01-hotel-segment-comparison: 같은 판매 구분 안에서 리드타임 구간별 예약 구성비를 계산한 기록이다.
   data/statistics-distributions-and-plots: 변수의 의미를 정한 다음 분포와 그래프를 고르는 방법으로 이어진다.
   data/statistics-relations-and-interpretation: 그룹별 비율과 요약표의 라벨을 상관행렬 및 집단 비교에 적용한다.
   data/data-quality: 결측치를 채우거나 이상치를 지우기 전에 원인을 확인하는 기준이다.
@@ -51,6 +55,24 @@ sum(survived) / len(survived)  # 3 / 5 = 0.6
 ```
 
 이 계산의 0.6은 생존율 60%다. 결측치가 있는 이진 Series에서 `.mean()`을 쓰면 기본적으로 결측치를 제외한 값들이 분모가 된다는 조건도 확인한다.
+
+## 질문: 취소율을 모두 더하면 100이 아닌가? 예약 구성비와는 무엇이 다른가?
+
+**상황:** 호텔 예약의 판매 구분별 취소율을 보고 합이 100이어야 하는지 물었다. 다음 날에는 판매 구분마다 리드타임 구간별 예약 구성비를 계산하며 다른 분모를 사용했다.
+
+**의도:** 여러 퍼센트가 같은 전체를 나누는 값인지, 서로 다른 집단 안의 비율인지 구분하려는 질문이다.
+
+**핵심 답변:** 비율 이름보다 분자와 분모를 먼저 쓴다. 그룹별 취소율은 분모가 각 그룹의 예약 수이므로 합이 100일 필요가 없다. 전체를 빠짐없이 나눈 구성비는 공통 분모를 사용한다.
+
+| 비교하려는 것 | 분자 | 분모 |
+|---|---|---|
+| 판매 구분별 취소율 | 해당 구분의 취소 수 | 해당 구분의 예약 수 |
+| 전체 취소 중 판매 구분의 몫 | 해당 구분의 취소 수 | 비교 대상 전체의 취소 수 |
+| 한 판매 구분 안의 리드타임 구성비 | 해당 구분·구간의 예약 수 | 해당 구분의 모든 구간 예약 수 |
+
+설명용 A 구분이 예약 10건·취소 4건, B 구분이 예약 20건·취소 6건이면 취소율은 40%·30%다. 전체 취소 10건의 몫은 40%·60%다. 각 그룹 취소율의 단순 평균 35%도 전체 취소율 `10/30`과 다르다. 분모의 규모가 다르기 때문이다.
+
+리드타임 구성비가 각 판매 구분 안에서 100%가 되더라도, 분류되지 않아 집계에서 빠진 예약이 없다는 증거는 아니다. 포함한 행의 범위를 별도로 확인한다. [[learning/2026-09-30-hotel-cancellation-eda|취소율 질문]]과 [[learning/2026-10-01-hotel-segment-comparison|구성비 계산 질문]]을 이어 읽으면 분모가 바뀌는 지점을 볼 수 있다.
 
 ## 질문: value_counts() 결과도 Series인가? 무엇이 인덱스인가?
 

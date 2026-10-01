@@ -7173,9 +7173,9 @@
         "cardsArtifactId": "aa5bc1df-f5a6-4949-9a45-48dba475d72f",
         "exportedAt": "2026-09-29",
         "sourceHashes": {
-          "data/pandas-dataframe-selection": "8fe9f7a40cc8e18ad68c12e674fb095018d7fbc650a86f1268c640dc65c01793",
-          "data/pandas-cleaning-validation": "386f2a0dc22689883cb6533419081caeda135571014b71574a01ec3e422f233f",
-          "data/pandas-groupby-merge-reshape": "6003bea872244d9c3b3f76871d603da5630fce90e42086619fa88462f55603ec",
+          "data/pandas-dataframe-selection": "e78c138589b822b4f8b3352fdf11076c5eb53e9b036947fa6af0fd7831c023be",
+          "data/pandas-cleaning-validation": "4bf0aa3fd0d5c25e842d6395c28245547eaa9820300e566e329a7954a89cd5d5",
+          "data/pandas-groupby-merge-reshape": "a4f6df6081c73590501e33f22f34f5888ed9a6f05e082173e61da15782204ed9",
           "learning/2026-09-29-dataframe": "18c7977f808a999745f6e00ffcca7a92a6c1e89c62623f19e1b056da852aee9a",
           "weekly/2026-10-01-distributions-and-data-integration": "d3ceee2fd45a2e185c372c97bc61d7d7e4c785a60b2f4af9b048710bd2cb8bac"
         },
@@ -7196,7 +7196,18 @@
           ],
           "method": "Existing artifacts reused without regeneration; added note hash is a mapping review snapshot, not an uploaded generation source.",
           "reviewRecord": "docs/verification/2026-10-01-weekly-paper/release.md"
-        }
+        },
+        "sourceReviews": [
+          {
+            "reviewedAt": "2026-10-01",
+            "previousSourceHashes": {
+              "data/pandas-dataframe-selection": "8fe9f7a40cc8e18ad68c12e674fb095018d7fbc650a86f1268c640dc65c01793",
+              "data/pandas-cleaning-validation": "386f2a0dc22689883cb6533419081caeda135571014b71574a01ec3e422f233f",
+              "data/pandas-groupby-merge-reshape": "6003bea872244d9c3b3f76871d603da5630fce90e42086619fa88462f55603ec"
+            },
+            "reason": "호텔 분석 질문 절·출처·연결을 추가한 현재 공개 노트를 기존 채택 문항의 모든 선택지·해설·힌트와 카드에 대조했다. 기존 정답 기준과 목표는 유효해 artifact와 목표 버전을 유지한다. sourceHashes는 현재 검토 스냅샷이며 이번 변경을 원래 생성 소스로 다시 업로드한 것은 아니다."
+          }
+        ]
       }
     },
     {
@@ -7606,11 +7617,21 @@
         "cardsArtifactId": "7066847d-dd42-4eae-ae4d-a848bebed05f",
         "exportedAt": "2026-09-29",
         "sourceHashes": {
-          "data/statistics-data-and-groups": "48e115bedd55ee65f7877745b1b0049fc67c3db5f801a246ad61f491b0606be4",
+          "data/statistics-data-and-groups": "104816956d0c2320276c2f3f546200ab268ff3cd6ed2cbf32c69f7fecbfcee7e",
           "data/statistics-distributions-and-plots": "787db211dfdbc097c30485ee534df4f09e2412b5c5e7f93bf0898ec7c3ade51f",
-          "data/statistics-relations-and-interpretation": "85da3fa880612dd9aba2bad2a5f6e016aa017881396a93b945c2c4063d719032",
+          "data/statistics-relations-and-interpretation": "58d8643b6389a3b1ffce70ef588e1da4f94826963c303449fc50630dfb0974e3",
           "learning/2026-09-29-statistics": "a347971842fab2a943f5b6a9e186444eaa5c78d786788d7a4ee682682fd0cf0a"
-        }
+        },
+        "sourceReviews": [
+          {
+            "reviewedAt": "2026-10-01",
+            "previousSourceHashes": {
+              "data/statistics-data-and-groups": "48e115bedd55ee65f7877745b1b0049fc67c3db5f801a246ad61f491b0606be4",
+              "data/statistics-relations-and-interpretation": "85da3fa880612dd9aba2bad2a5f6e016aa017881396a93b945c2c4063d719032"
+            },
+            "reason": "호텔 분석 질문 절·출처·연결을 추가한 현재 공개 노트를 기존 채택 문항의 모든 선택지·해설·힌트와 카드에 대조했다. 기존 정답 기준과 목표는 유효해 artifact와 목표 버전을 유지한다. sourceHashes는 현재 검토 스냅샷이며 이번 변경을 원래 생성 소스로 다시 업로드한 것은 아니다."
+          }
+        ]
       }
     },
     {
@@ -7782,8 +7803,480 @@
         "cardsArtifactId": "f661d254-56ee-46ef-a473-ae783c6af956",
         "exportedAt": "2026-09-29",
         "sourceHashes": {
-          "data/statistics-data-and-groups": "48e115bedd55ee65f7877745b1b0049fc67c3db5f801a246ad61f491b0606be4",
+          "data/statistics-data-and-groups": "104816956d0c2320276c2f3f546200ab268ff3cd6ed2cbf32c69f7fecbfcee7e",
           "learning/2026-09-29-statistics": "a347971842fab2a943f5b6a9e186444eaa5c78d786788d7a4ee682682fd0cf0a"
+        },
+        "sourceReviews": [
+          {
+            "reviewedAt": "2026-10-01",
+            "previousSourceHashes": {
+              "data/statistics-data-and-groups": "48e115bedd55ee65f7877745b1b0049fc67c3db5f801a246ad61f491b0606be4"
+            },
+            "reason": "호텔 분석 질문 절·출처·연결을 추가한 현재 공개 노트를 기존 채택 문항의 모든 선택지·해설·힌트와 카드에 대조했다. 기존 정답 기준과 목표는 유효해 artifact와 목표 버전을 유지한다. sourceHashes는 현재 검토 스냅샷이며 이번 변경을 원래 생성 소스로 다시 업로드한 것은 아니다."
+          }
+        ]
+      }
+    },
+    {
+      "id": "hotel-cancellation-analysis",
+      "title": "호텔 취소 분석: 선택·집계·분모·해석",
+      "version": "429dcf989dde",
+      "noteIds": [
+        "learning/2026-09-30-hotel-cancellation-eda",
+        "learning/2026-10-01-hotel-segment-comparison"
+      ],
+      "goals": [
+        {
+          "id": "hotel-filter",
+          "title": "문자열 조건으로 행을 선택하고 행·열 선택과 대입을 구분한다",
+          "version": "1"
+        },
+        {
+          "id": "hotel-group",
+          "title": "집계 함수와 반환 구조, 인덱스 이름과 범주형 그룹을 설명한다",
+          "version": "1"
+        },
+        {
+          "id": "hotel-ratio",
+          "title": "분모와 transform의 행 대응, 구간 누락을 확인한다",
+          "version": "1"
+        },
+        {
+          "id": "hotel-interpretation",
+          "title": "그래프의 비교 기준과 관찰 해석의 한계를 설명한다",
+          "version": "1"
+        }
+      ],
+      "questions": [
+        {
+          "id": "32d42d5d-a4a7-4e94-971d-6ffbda0b6d9b:2",
+          "goalId": "hotel-filter",
+          "pool": "check",
+          "question": "문자열 데이터 'Undefined'가 포함된 행을 제외하려고 할 때, `dropna()` 메서드를 사용하지 않고 불리언 마스킹(조건문)을 사용하는 주된 이유는 무엇입니까?",
+          "options": [
+            {
+              "text": "'Undefined'는 실제 결측치($NaN$)가 아니라 문자열 값이므로 `dropna()`로 감지되지 않기 때문입니다.",
+              "isCorrect": true,
+              "rationale": "Pandas의 `dropna()`는 $NaN$이나 $None$ 같은 실제 Null 값을 찾으므로, 특정 의미를 지닌 문자열은 직접 조건식으로 걸러내야 합니다."
+            },
+            {
+              "text": "`dropna()`를 사용하면 해당 행 전체가 삭제되어 데이터 손실이 너무 크기 때문입니다.",
+              "isCorrect": false,
+              "rationale": "불리언 마스킹도 결과적으로 해당 행을 제외하므로 데이터 제외라는 목적은 같으나, 감지 대상이 다를 뿐입니다."
+            },
+            {
+              "text": "'Undefined'를 제외하는 작업은 대소문자를 구분하지 않아야 하므로 문자열 메서드가 필수적이기 때문입니다.",
+              "isCorrect": false,
+              "rationale": "질문은 `dropna()`와의 비교이며, 단순히 대소문자 문제 때문에 조건문을 사용하는 것은 아닙니다."
+            },
+            {
+              "text": "`dropna()`는 열 단위 삭제만 가능하고 행 단위 삭제가 불가능하기 때문입니다.",
+              "isCorrect": false,
+              "rationale": "`dropna()`는 `axis` 파라미터를 통해 행(0)과 열(1) 모두 삭제할 수 있습니다."
+            }
+          ],
+          "hint": "컴퓨터가 인식하는 '비어있는 값'과 분석가가 정의한 '의미 없는 문자열'의 차이를 생각해보세요."
+        },
+        {
+          "id": "32d42d5d-a4a7-4e94-971d-6ffbda0b6d9b:3",
+          "goalId": "hotel-filter",
+          "pool": "practice",
+          "question": "특정 판매 구분인 'Online TA' 데이터를 필터링할 때 `df['market_segment'] == 'Online Ta'`라고 작성했습니다. 이 경우 발생할 수 있는 문제는 무엇입니까?",
+          "options": [
+            {
+              "text": "문자열 비교 시 대소문자를 구분하므로 'Online TA'를 가진 행들이 선택되지 않습니다.",
+              "isCorrect": true,
+              "rationale": "Python과 Pandas의 문자열 비교는 대소문자를 정확히 일치시켜야 하므로 'TA'와 'Ta'는 서로 다른 값으로 처리됩니다."
+            },
+            {
+              "text": "Pandas가 자동으로 대소문자를 교정하여 'Online TA'를 찾아주지만 경고 메시지가 출력됩니다.",
+              "isCorrect": false,
+              "rationale": "자동 교정 기능은 없으며, 일치하지 않는 데이터는 단순히 조건식에서 `False`가 됩니다."
+            },
+            {
+              "text": "열 이름에 공백이 포함되어 있어 문법 오류(SyntaxError)가 발생합니다.",
+              "isCorrect": false,
+              "rationale": "문법 오류는 코드 구조의 문제이며, 문자열 내용이 틀린 것은 데이터 논리의 문제입니다."
+            },
+            {
+              "text": "데이터프레임의 모든 행이 'Online Ta'로 강제 치환됩니다.",
+              "isCorrect": false,
+              "rationale": "비교 연산자(`==`)는 값을 확인하여 True/False를 반환할 뿐, 값을 변경하는 할당 연산자(`=`)가 아닙니다."
+            }
+          ],
+          "hint": "컴퓨터는 'A'와 'a'를 같은 문자로 인식할까요?"
+        },
+        {
+          "id": "32d42d5d-a4a7-4e94-971d-6ffbda0b6d9b:4",
+          "goalId": "hotel-filter",
+          "pool": "practice",
+          "question": "전체 호텔 예약 데이터에서 'City Hotel'의 앞부분 10개 행만 확인하고 싶을 때 가장 적절한 코드 순서는 무엇입니까?",
+          "options": [
+            {
+              "text": "먼저 `hotel` 열이 'City Hotel'인 행들을 `.loc`으로 필터링한 후 `.head(10)`을 호출한다.",
+              "isCorrect": true,
+              "rationale": "원하는 조건을 만족하는 데이터 집합을 먼저 확보한 뒤, 그 결과물의 상단 행을 조회하는 것이 올바른 순서입니다."
+            },
+            {
+              "text": "전체 데이터에 `.head(10)`을 먼저 적용한 후 'City Hotel'을 필터링한다.",
+              "isCorrect": false,
+              "rationale": "앞의 10개 행 중에 'City Hotel'이 없다면 결과가 아무것도 나오지 않을 수 있습니다."
+            },
+            {
+              "text": "`df.columns`에서 'City Hotel' 인덱스를 찾아 10번 행까지 슬라이싱한다.",
+              "isCorrect": false,
+              "rationale": "`columns`는 열 이름을 담고 있으며, 특정 호텔의 예약 데이터를 찾는 것과는 무관합니다."
+            },
+            {
+              "text": "`pd.set_option`을 이용하여 표시 행수를 10으로 고정한 뒤 전체 데이터를 호출한다.",
+              "isCorrect": false,
+              "rationale": "이는 출력 설정을 바꾸는 것이지 특정 조건(City Hotel)의 데이터를 필터링하는 방법이 아닙니다."
+            }
+          ],
+          "hint": "범위를 좁히는 작업(필터링)과 개수를 제한하는 작업(head)의 논리적 순서를 생각해보세요."
+        },
+        {
+          "id": "32d42d5d-a4a7-4e94-971d-6ffbda0b6d9b:5",
+          "goalId": "hotel-group",
+          "pool": "practice",
+          "question": "취소 여부가 $0$(미취소)과 $1$(취소)로 기록된 `is_canceled` 열에 대해 `groupby` 후 `sum()`과 `size()`를 각각 적용했습니다. 이 두 결과의 차이는 무엇입니까?",
+          "options": [
+            {
+              "text": "`sum()`은 취소된 건수(1의 합)를 의미하고, `size()`는 전체 예약 건수(행의 개수)를 의미합니다.",
+              "isCorrect": true,
+              "rationale": "0과 1로 구성된 열에서 합계는 1이 나타난 횟수와 같으며, `size`는 그룹 내 데이터의 총 개수를 반환합니다."
+            },
+            {
+              "text": "`sum()`은 전체 예약 인원수를 의미하고, `size()`는 데이터프레임의 열 개수를 의미합니다.",
+              "isCorrect": false,
+              "rationale": "데이터 한 행이 예약 한 건을 의미하며, `size`는 그룹 내 행 수를 세는 함수이지 열 개수와는 무관합니다."
+            },
+            {
+              "text": "`sum()`은 취소율을 계산하고, `size()`는 취소되지 않은 건수를 계산합니다.",
+              "isCorrect": false,
+              "rationale": "취소율은 합계를 개수로 나눈 `mean()`이며, 취소되지 않은 건수를 구하려면 전체에서 합계를 빼야 합니다."
+            },
+            {
+              "text": "결측치가 없다면 두 함수의 결과값은 항상 동일하게 나타납니다.",
+              "isCorrect": false,
+              "rationale": "0이 포함된 데이터에서 합계(`sum`)와 개수(`size`)는 0의 존재 유무에 따라 값이 달라집니다."
+            }
+          ],
+          "hint": "데이터가 0과 1로만 이루어져 있을 때, 모두 더한 값과 개수를 센 값의 물리적 의미를 생각해보세요."
+        },
+        {
+          "id": "32d42d5d-a4a7-4e94-971d-6ffbda0b6d9b:6",
+          "goalId": "hotel-group",
+          "pool": "check",
+          "question": "`groupby('hotel')['is_canceled'].sum()` 실행 결과로 생성된 Series 객체에서 `index.name`은 무엇을 가리킵니까?",
+          "options": [
+            {
+              "text": "그룹화의 기준이 된 열 이름인 'hotel'입니다.",
+              "isCorrect": true,
+              "rationale": "Pandas에서 그룹 집계를 수행하면 기준 열은 결과 Series의 인덱스가 되며, 해당 인덱스의 이름은 원래 열 이름으로 유지됩니다."
+            },
+            {
+              "text": "집계 대상이 된 열 이름인 'is_canceled'입니다.",
+              "isCorrect": false,
+              "rationale": "'is_canceled'는 Series 자체의 이름(`name`)이 되며, 인덱스의 이름은 아닙니다."
+            },
+            {
+              "text": "결과값의 단위인 '취소 수'입니다.",
+              "isCorrect": false,
+              "rationale": "데이터 값의 의미는 사용자가 부여하는 것이며, 시스템적으로 인덱스 이름에 자동 반영되지 않습니다."
+            },
+            {
+              "text": "자동 생성된 정수형 인덱스 $0, 1, 2...$ 입니다.",
+              "isCorrect": false,
+              "rationale": "`groupby` 직후에는 그룹 기준값이 인덱스가 되므로 정수형 인덱스는 `reset_index()`를 수행한 후에 생성됩니다."
+            }
+          ],
+          "hint": "왼쪽에 표시되는 그룹 이름들이 속한 축의 이름이 무엇인지 생각해보세요."
+        },
+        {
+          "id": "32d42d5d-a4a7-4e94-971d-6ffbda0b6d9b:7",
+          "goalId": "hotel-group",
+          "pool": "practice",
+          "question": "집계된 데이터프레임에 `reset_index()`를 적용했을 때 일어나는 변화로 옳은 것은 무엇입니까?",
+          "options": [
+            {
+              "text": "인덱스에 있던 그룹 기준값들이 일반 열(column)로 이동하고, 새로운 정수 인덱스가 생성됩니다.",
+              "isCorrect": true,
+              "rationale": "`reset_index()`는 기존 인덱스를 데이터 열로 변환하여 표 구조를 평탄하게 만드는 역할을 합니다."
+            },
+            {
+              "text": "중복된 행들을 제거하여 데이터프레임의 크기를 줄입니다.",
+              "isCorrect": false,
+              "rationale": "중복 제거는 `drop_duplicates()`가 수행하며, `reset_index()`는 구조만 변경합니다."
+            },
+            {
+              "text": "기존의 모든 열 이름을 삭제하고 숫자로 바꿉니다.",
+              "isCorrect": false,
+              "rationale": "열 이름은 유지되며, 인덱스였던 값들이 새로운 열로 추가될 뿐입니다."
+            },
+            {
+              "text": "데이터의 정렬 순서를 인덱스 오름차순으로 강제 고정합니다.",
+              "isCorrect": false,
+              "rationale": "`reset_index()`는 현재 상태의 순서대로 새로운 번호를 매길 뿐, 데이터를 재정렬하지는 않습니다."
+            }
+          ],
+          "hint": "표 왼쪽 끝에 있던 이름들이 표 안으로 들어오는 과정을 상상해보세요."
+        },
+        {
+          "id": "32d42d5d-a4a7-4e94-971d-6ffbda0b6d9b:9",
+          "goalId": "hotel-group",
+          "pool": "check",
+          "question": "범주형(Categorical) 데이터를 그룹화할 때 `observed=True` 옵션을 사용하는 주된 목적은 무엇입니까?",
+          "options": [
+            {
+              "text": "데이터에 실제로 존재하지 않는 범주 조합이 집계 결과에 나타나지 않도록 제한하기 위해서입니다.",
+              "isCorrect": true,
+              "rationale": "범주형 데이터는 정의되었으나 실제 행에는 없는 값이 있을 수 있으며, `observed=True`는 실제 관측된 조합만 결과로 반환합니다."
+            },
+            {
+              "text": "'Undefined'와 같은 비정상적인 문자열 범주를 자동으로 삭제하기 위해서입니다.",
+              "isCorrect": false,
+              "rationale": "특정 값을 삭제하는 기능은 필터링(`.loc`)의 영역이며, `observed`는 범주의 관측 여부만을 다룹니다."
+            },
+            {
+              "text": "결측치가 있는 행을 집계에서 제외하고 계산하기 위해서입니다.",
+              "isCorrect": false,
+              "rationale": "결측치 제외는 `dropna` 파라미터가 담당하며, `observed`는 범주형 타입의 레벨(Levels)과 관련이 있습니다."
+            },
+            {
+              "text": "집계 결과의 데이터 타입을 항상 정수형으로 유지하기 위해서입니다.",
+              "isCorrect": false,
+              "rationale": "`observed` 옵션은 결과값의 수치적 타입과는 관련이 없습니다."
+            }
+          ],
+          "hint": "데이터에 'A', 'B', 'C'라는 선택지가 있는데 실제로는 'A'와 'B'만 기록되어 있을 때의 상황을 생각해보세요."
+        },
+        {
+          "id": "32d42d5d-a4a7-4e94-971d-6ffbda0b6d9b:11",
+          "goalId": "hotel-ratio",
+          "pool": "practice",
+          "question": "그룹 집계 후 `transform('sum')`을 사용하는 것과 일반 `sum()`을 사용하는 것의 결정적인 차이점은 무엇입니까?",
+          "options": [
+            {
+              "text": "`transform`은 결과값을 원래 데이터프레임의 행 길이에 맞춰 늘려서 반환합니다.",
+              "isCorrect": true,
+              "rationale": "`transform`은 그룹별 계산 결과를 각 행에 브로드캐스팅하여 원본과 동일한 인덱스를 유지하므로 열 추가가 용이합니다."
+            },
+            {
+              "text": "`transform`은 합계가 아닌 평균이나 중앙값만 계산할 수 있습니다.",
+              "isCorrect": false,
+              "rationale": "`transform`은 `sum`, `mean`, `std` 등 다양한 집계 함수를 지원합니다."
+            },
+            {
+              "text": "`sum()`은 문자열 열을 무시하지만 `transform`은 문자열도 모두 합칩니다.",
+              "isCorrect": false,
+              "rationale": "데이터 타입 처리에 대한 기본 로직은 유사하며, 반환되는 형태(Shape)의 차이가 핵심입니다."
+            },
+            {
+              "text": "`transform`을 사용하면 그룹화 기준 열이 인덱스에서 제거됩니다.",
+              "isCorrect": false,
+              "rationale": "`transform`은 원래 인덱스를 그대로 유지하며, 그룹 기준 열을 인덱스로 보내는 것은 `groupby().sum()`의 특성입니다."
+            }
+          ],
+          "hint": "계산된 합계 값을 원래 표의 모든 행 옆에 붙이고 싶을 때 어떤 함수가 더 편할지 생각해보세요."
+        },
+        {
+          "id": "32d42d5d-a4a7-4e94-971d-6ffbda0b6d9b:13",
+          "goalId": "hotel-ratio",
+          "pool": "check",
+          "question": "어떤 판매 구분의 예약이 특정 리드타임 구간에 집중되어 있는지 확인하기 위해 '예약 구성비'를 계산하고자 합니다. 이때 분자와 분모로 적절한 조합은?",
+          "options": [
+            {
+              "text": "분자: 해당 구간의 예약 수 / 분모: 해당 판매 구분의 총 예약 수",
+              "isCorrect": true,
+              "rationale": "특정 그룹 내에서의 분포(구성비)를 보려면 그룹 전체 내에서 각 부분(구간)이 차지하는 비중을 구해야 합니다."
+            },
+            {
+              "text": "분자: 해당 구간의 취소 수 / 분모: 해당 구간의 총 예약 수",
+              "isCorrect": false,
+              "rationale": "이는 해당 구간의 '취소율'을 구하는 식이지, 예약의 '분포'를 구하는 식이 아닙니다."
+            },
+            {
+              "text": "분자: 해당 판매 구분의 총 예약 수 / 분모: 전체 호텔의 예약 수",
+              "isCorrect": false,
+              "rationale": "이는 전체 대비 판매 구분의 점유율을 구하는 식이며, 리드타임 구간별 분포와는 무관합니다."
+            },
+            {
+              "text": "분자: 해당 구간의 예약 수 / 분모: 전체 호텔의 취소 수",
+              "isCorrect": false,
+              "rationale": "예약 건수를 취소 건수로 나누는 것은 논리적인 구성비 계산으로 보기 어렵습니다."
+            }
+          ],
+          "hint": "전체 피자 한 판(판매 구분 전체) 중 특정 조각(리드타임 구간)의 크기를 재는 법을 생각해보세요."
+        },
+        {
+          "id": "32d42d5d-a4a7-4e94-971d-6ffbda0b6d9b:14",
+          "goalId": "hotel-ratio",
+          "pool": "check",
+          "question": "리드타임 구간을 `pd.cut`으로 나눌 때, `labels`의 개수와 실제 데이터의 구간 수가 일치하더라도 주의해야 할 점은 무엇입니까?",
+          "options": [
+            {
+              "text": "구간 경계 밖의 값이나 결측치가 있어 모든 행이 분류되지 않았을 가능성을 확인해야 합니다.",
+              "isCorrect": true,
+              "rationale": "라벨은 단순히 이름표일 뿐이며, 실제 데이터가 지정한 `bins` 범위 안에 모두 포함되는지는 별도로 검증해야 합니다."
+            },
+            {
+              "text": "라벨에 특수 문자가 포함되면 그래프 출력 시 오류가 발생하므로 항상 숫자로 써야 합니다.",
+              "isCorrect": false,
+              "rationale": "라벨은 문자열로 자유롭게 지정 가능하며, 그래프 라이브러리는 이를 범주 이름으로 잘 처리합니다."
+            },
+            {
+              "text": "구간의 폭(Bin width)이 일정하지 않으면 자동으로 취소율 계산이 왜곡됩니다.",
+              "isCorrect": false,
+              "rationale": "폭이 달라도 각 구간 내에서의 비율 계산 자체는 산술적으로 정확하게 수행됩니다."
+            },
+            {
+              "text": "데이터가 정수형이 아니면 `pd.cut`을 사용할 수 없으므로 미리 형변환을 해야 합니다.",
+              "isCorrect": false,
+              "rationale": "`pd.cut`은 실수형(float) 데이터에 대해서도 정상적으로 작동합니다."
+            }
+          ],
+          "hint": "이름표를 다 준비했다고 해서 모든 손님(데이터)에게 이름표를 붙여줄 수 있을지 생각해보세요."
+        },
+        {
+          "id": "32d42d5d-a4a7-4e94-971d-6ffbda0b6d9b:16",
+          "goalId": "hotel-interpretation",
+          "pool": "practice",
+          "question": "서로 다른 두 호텔의 리드타임별 취소율을 막대 그래프로 비교할 때, 시각적 오해를 방지하기 위해 반드시 일치시켜야 할 요소는 무엇입니까?",
+          "options": [
+            {
+              "text": "$y$축의 범위(Scale)를 동일하게 설정하여 높이의 기준을 맞춥니다.",
+              "isCorrect": true,
+              "rationale": "비율 데이터 비교 시 $y$축 범위가 다르면, 같은 20%라도 그래프상 높이가 다르게 보여 잘못된 판단을 유도할 수 있습니다."
+            },
+            {
+              "text": "두 호텔의 전체 예약 건수(데이터 크기)를 동일하게 맞춥니다.",
+              "isCorrect": false,
+              "rationale": "비율(%)을 비교하는 것이 목적이라면 전체 모수를 억지로 맞출 필요는 없습니다."
+            },
+            {
+              "text": "그래프의 막대 색상을 호텔 종류와 관계없이 하나로 통일합니다.",
+              "isCorrect": false,
+              "rationale": "오히려 색상을 구분하는 것이 두 그룹을 식별하는 데 도움이 됩니다."
+            },
+            {
+              "text": "$x$축의 리드타임 구간을 호텔별로 최적화하여 다르게 설정합니다.",
+              "isCorrect": false,
+              "rationale": "비교를 위해서는 $x$축의 기준(구간 경계)도 동일해야 공정한 대조가 가능합니다."
+            }
+          ],
+          "hint": "눈금의 최대치가 다른 두 자(ruler)를 놓고 물건의 길이를 비교하는 상황을 상상해보세요."
+        },
+        {
+          "id": "32d42d5d-a4a7-4e94-971d-6ffbda0b6d9b:19",
+          "goalId": "hotel-interpretation",
+          "pool": "check",
+          "question": "Groups 판매 구분의 취소율이 Online TA보다 높다는 관찰 결과를 바탕으로 '판매 구분이 취소를 유발한다'고 단정할 수 없는 가장 근본적인 이유는 무엇입니까?",
+          "options": [
+            {
+              "text": "두 그룹 간 리드타임 구성 등 다른 특성이 다를 수 있어 인과관계를 확정할 수 없기 때문입니다.",
+              "isCorrect": true,
+              "rationale": "단순 관찰은 상관관계를 보여줄 뿐이며, 통제되지 않은 다른 변수(혼란 변수)가 결과에 영향을 미쳤을 가능성이 항상 존재합니다."
+            },
+            {
+              "text": "Groups의 전체 데이터 개수가 Online TA보다 항상 적기 때문입니다.",
+              "isCorrect": false,
+              "rationale": "데이터 개수의 차이는 신뢰도의 문제이지, 인과관계 성립 여부를 결정하는 논리적 근거는 아닙니다."
+            },
+            {
+              "text": "취소율은 미래를 예측하는 지표이지 과거의 원인을 설명하는 지표가 아니기 때문입니다.",
+              "isCorrect": false,
+              "rationale": "취소율은 과거 데이터를 요약한 통계량이며, 과거의 원인을 분석하는 데에도 활발히 사용됩니다."
+            },
+            {
+              "text": "통계적으로 유의미한 차이가 검증되지 않았기 때문입니다.",
+              "isCorrect": false,
+              "rationale": "유의미한 차이가 있더라도 그것이 곧바로 '직접적인 원인'임을 보장하지는 않습니다."
+            }
+          ],
+          "hint": "두 집단을 비교할 때, '판매 구분'이라는 이름표 외에 다른 모든 조건이 똑같았는지 의심해보세요."
+        }
+      ],
+      "cards": [
+        {
+          "id": "59a85957-ac78-40f0-93e4-f216697df188:1",
+          "goalId": "hotel-filter",
+          "front": "데이터 프레임에서 `df.loc[mask]`를 실행하는 것과 `df.loc[mask, 'col'] = value`를 실행하는 것의 결정적인 차이는 무엇입니까?",
+          "back": "전자는 조건에 맞는 데이터를 선택하여 조회(반환)하는 연산이며, 후자는 원본 데이터의 특정 위치에 값을 대입(수정)하는 연산입니다."
+        },
+        {
+          "id": "59a85957-ac78-40f0-93e4-f216697df188:2",
+          "goalId": "hotel-filter",
+          "front": "문자열 필터링 시 `Online TA`라는 범주를 `Online Ta`로 입력하면 왜 올바른 결과를 얻을 수 없습니까?",
+          "back": "Pandas의 문자열 비교 연산은 대소문자를 엄격하게 구분하여 서로 다른 값으로 인식하기 때문입니다."
+        },
+        {
+          "id": "59a85957-ac78-40f0-93e4-f216697df188:3",
+          "goalId": "hotel-group",
+          "front": "취소 여부가 $0$(미취소)과 $1$(취소)로 기록된 열에서 집계 함수 `sum()`이 의미하는 데이터는 무엇입니까?",
+          "back": "값의 합계인 취소 건수(1의 개수)를 의미합니다."
+        },
+        {
+          "id": "59a85957-ac78-40f0-93e4-f216697df188:4",
+          "goalId": "hotel-group",
+          "front": "집계된 Series에 `reset_index()`를 적용하면 기존 Series의 `index.name`은 결과 DataFrame에서 어떤 역할을 합니까?",
+          "back": "기존 인덱스 값이 일반 열로 이동하면서 해당 열의 이름(Column Name)이 됩니다."
+        },
+        {
+          "id": "59a85957-ac78-40f0-93e4-f216697df188:5",
+          "goalId": "hotel-group",
+          "front": "범주형 데이터를 그룹화할 때 `observed=True` 옵션을 설정하면 결과 표에는 어떤 그룹들만 남게 됩니까?",
+          "back": "데이터상에서 실제로 관측된(값이 존재하는) 범주 조합들만 결과에 포함됩니다."
+        },
+        {
+          "id": "59a85957-ac78-40f0-93e4-f216697df188:6",
+          "goalId": "hotel-ratio",
+          "front": "판매 구분 내 '리드타임 구간별 예약 구성비'를 계산할 때, 개별 구간 예약 수의 분모가 되는 값은 무엇입니까?",
+          "back": "해당 판매 구분에 속한 모든 리드타임 구간의 예약 수 총합입니다."
+        },
+        {
+          "id": "59a85957-ac78-40f0-93e4-f216697df188:7",
+          "goalId": "hotel-ratio",
+          "front": "그룹 집계 시 `sum()` 대신 `transform(\"sum\")`을 사용하면 반환되는 결과 객체의 길이는 어떻게 결정됩니까?",
+          "back": "그룹화하기 전 원본 데이터의 행(Index) 길이와 동일하게 유지됩니다."
+        },
+        {
+          "id": "59a85957-ac78-40f0-93e4-f216697df188:8",
+          "goalId": "hotel-group",
+          "front": "`pd.cut()` 함수를 사용할 때 경계값(`bins`) 리스트의 개수가 $N$개라면, 생성되는 구간의 개수는 몇 개입니까?",
+          "back": "$N-1$개입니다."
+        },
+        {
+          "id": "59a85957-ac78-40f0-93e4-f216697df188:9",
+          "goalId": "hotel-interpretation",
+          "front": "히스토그램의 특정 구간(Bin) 막대 높이가 가장 높더라도, 특정 단일 값(예: $0$일)의 빈도가 가장 높다고 확신할 수 없는 이유는 무엇입니까?",
+          "back": "히스토그램의 한 구간은 여러 수치 값을 포함할 수 있으므로, 막대 높이는 구간 내 모든 값의 빈도 합계를 나타내기 때문입니다."
+        },
+        {
+          "id": "59a85957-ac78-40f0-93e4-f216697df188:10",
+          "goalId": "hotel-interpretation",
+          "front": "서로 다른 그룹의 취소율 그래프를 나란히 배치하여 비교할 때, 각 그래프의 $y$축 범위(`ylim`)를 동일하게 고정해야 하는 이유는 무엇입니까?",
+          "back": "시각적인 막대 높이 차이를 통해 실제 비율의 크기를 왜곡 없이 직관적으로 비교하기 위해서입니다."
+        },
+        {
+          "id": "59a85957-ac78-40f0-93e4-f216697df188:11",
+          "goalId": "hotel-interpretation",
+          "front": "특정 판매 구분의 취소율이 높다는 관찰 결과를 바탕으로 '해당 판매 방식이 취소의 원인이다'라고 단정할 수 없는 이유는 무엇입니까?",
+          "back": "단순한 관찰 결과는 상관관계를 보여줄 뿐이며, 리드타임 구성이나 다른 숨은 변수와의 인과관계를 확정하는 것은 아니기 때문입니다."
+        }
+      ],
+      "provenance": {
+        "provider": "NotebookLM",
+        "notebookId": "1a06150b-e793-4906-942b-eac19d82b57b",
+        "sourceIds": [
+          "97d2fb33-a7a6-4c43-8c88-d49e13918ea0"
+        ],
+        "quizArtifactId": "32d42d5d-a4a7-4e94-971d-6ffbda0b6d9b",
+        "cardsArtifactId": "59a85957-ac78-40f0-93e4-f216697df188",
+        "exportedAt": "2026-10-01",
+        "sourceHashes": {
+          "learning/2026-09-30-hotel-cancellation-eda": "cb09bda132ee787f748608bc61100080e269e9ee205fffb3c3741142e4256dc4",
+          "learning/2026-10-01-hotel-segment-comparison": "8e03156e70931ef8da14cf50ef1c4d50711fbb6279c6293bb6eed13d648a102a"
         }
       }
     }

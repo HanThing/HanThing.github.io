@@ -17,6 +17,8 @@ tags: [index]
 
 실제 학습 대화에서 질문의 흐름을 주제별로 묶었습니다.
 
+- [[learning/2026-10-01-hotel-segment-comparison|10월 1일 — 판매 구분 필터와 예약 구성비: Undefined에서 transform까지]]
+- [[learning/2026-09-30-hotel-cancellation-eda|9월 30일 — 호텔 취소 분석: 행·열 선택에서 집계와 그래프 해석까지]]
 - [[learning/2026-09-23-numpy-and-tensors|9월 23일 — NumPy와 텐서: shape에서 벡터 검색까지]]
 
 - [[learning/2026-09-18-loop-exit|정답을 맞혔는데 실패 문장도 나오는 이유]]

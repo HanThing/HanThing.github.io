@@ -12,10 +12,12 @@ topics: [데이터 분석]
 tags: [pandas, dataframe, series, indexing]
 sources:
   - 데이터 프레임 개념 총정리 학습 대화 (2026-09-28–29)
+  - 판매구분별 undefined 제외 수정 학습 대화 (2026-10-01)
   - https://pandas.pydata.org/docs/user_guide/dsintro.html
   - https://pandas.pydata.org/docs/user_guide/indexing.html
 relatedReasons:
   learning/2026-09-29-dataframe: 표의 목적과 선택 문법을 질문하고 짧은 퀴즈로 확인한 실제 학습 흐름이다.
+  learning/2026-10-01-hotel-segment-comparison: 판매 구분 값으로 행을 고르는 것과 출력할 열을 고르는 것을 구별한 후속 질문이다.
   data/numpy-array-axes: NumPy 배열의 축과 모양을 DataFrame의 행과 열에 연결한다.
   data/eda-and-causality: 표 가공과 그래프가 탐색 과정에서 어떤 역할을 하는지 연결한다.
 ---
@@ -137,6 +139,22 @@ result = orders.loc[mask, ["amount"]]
 `loc`는 레이블을, `iloc`는 정수 위치를 사용한다. 불리언 마스크가 언제나 행 전용인 것도 아니다. 어느 자리에 전달했는지를 함께 봐야 한다. Series 마스크와 열 대입은 인덱스 정렬이 개입할 수 있으므로 처음에는 대상 표에서 직접 만든 마스크를 사용하면 대응 관계가 명확하다.
 
 노트북에서 셀 마지막의 `result`나 `orders.head()`는 결과가 표시될 수 있다. `result = ...`는 저장하는 대입문이고, 중간 결과를 확실히 표시하려면 `display(result)`를 사용한다. 반환과 출력은 같은 동작이 아니다.
+
+## 질문: 두 판매 구분만 골랐는데 왜 다른 열도 보이는가?
+
+**상황:** 호텔 예약 표에서 `market_segment`가 Groups 또는 Online TA인 행을 골랐는데 다른 열도 남아 있어, 필터가 적용된 것인지 물었다. `df["market_segment"]`와 `df.loc["market_segment"]`의 차이도 확인했다.
+
+**의도:** 열 안의 값으로 행을 고르는 연산과 열 자체를 선택하는 연산을 구분하려는 질문이다.
+
+**핵심 답변:** `df.loc[df["market_segment"].isin(["Groups", "Online TA"])]`는 해당 값을 가진 행을 선택하고 모든 열을 남긴다. `.loc[행, 열]`의 두 번째 자리에 열을 지정해야 출력 열도 좁아진다.
+
+| 표현식 | 선택 대상 |
+|---|---|
+| `df["market_segment"]` | market_segment 열 |
+| `df.loc[:, "market_segment"]` | 모든 행의 market_segment 열 |
+| `df.loc["market_segment"]` | market_segment라는 레이블의 행 |
+
+문자열 조건은 실제 표기와 맞춰야 하므로 `Online Ta`와 `Online TA`를 같다고 가정하지 않는다. 위 선택식 자체가 원본의 행을 삭제하지는 않지만, `df.loc[조건, "열"] = 값`은 대입이다. 모든 `.loc` 반환값이 완전히 독립적인 깊은 복사라는 뜻으로 일반화하지 않는다. [[learning/2026-10-01-hotel-segment-comparison|10월 1일 학습 기록]]에 실제 질문과 설명의 정정이 남아 있다.
 
 ## 퀴즈: 선택 결과를 먼저 말하기
 

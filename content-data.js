@@ -117,6 +117,39 @@ window.HANTHING_CONTENT = {
   ],
   "notes": [
     {
+      "id": "learning/2026-10-01-hotel-segment-comparison",
+      "title": "판매 구분 비교 기록 — Undefined 제외와 예약 구성비",
+      "description": "Undefined를 필요한 비교에서만 제외하고, 행 선택과 범주별 집계, transform으로 계산한 구성비, 같은 조건 비교의 해석을 정리한다.",
+      "date": "2026-10-01",
+      "published": "2026-10-01",
+      "type": "journal",
+      "topics": [
+        "데이터 분석"
+      ],
+      "courseId": "data-analysis",
+      "lessonId": "dataframe",
+      "url": "/notes/learning/2026-10-01-hotel-segment-comparison",
+      "links": [
+        "learning/2026-09-30-hotel-cancellation-eda",
+        "data/pandas-cleaning-validation",
+        "data/pandas-dataframe-selection",
+        "data/statistics-data-and-groups",
+        "data/pandas-groupby-merge-reshape",
+        "data/statistics-relations-and-interpretation"
+      ],
+      "relatedReasons": {
+        "learning/2026-09-30-hotel-cancellation-eda": "호텔 예약 표의 집계 구조와 취소율 분모를 먼저 질문했던 기록이다.",
+        "data/pandas-dataframe-selection": "조건에 맞는 행 선택과 출력할 열 선택을 분리한다.",
+        "data/pandas-cleaning-validation": "문자열 Undefined와 실제 결측, 분석별 제외 범위를 구분한다.",
+        "data/pandas-groupby-merge-reshape": "transform이 그룹 합계를 원래 행의 인덱스에 맞추는 이유를 설명한다.",
+        "data/statistics-data-and-groups": "취소율과 같은 판매 구분 안의 예약 구성비가 서로 다른 비율임을 설명한다.",
+        "data/statistics-relations-and-interpretation": "조건을 좁힌 관찰을 인과 효과로 확대하지 않는 기준을 연결한다."
+      },
+      "sources": [
+        "판매구분별 undefined 제외 수정 학습 대화 (2026-10-01)"
+      ]
+    },
+    {
       "id": "weekly/2026-10-01-distributions-and-data-integration",
       "title": "위클리 페이퍼 #2 — 평균을 해석하고 고객 데이터를 통합하는 기준",
       "description": "평균과 중앙값으로 말할 수 있는 범위를 구분하고, 주문의 의미를 보존하며 중복·불일치·결측을 처리하는 순서를 정리했다.",
@@ -148,6 +181,39 @@ window.HANTHING_CONTENT = {
       ]
     },
     {
+      "id": "learning/2026-09-30-hotel-cancellation-eda",
+      "title": "호텔 취소 분석 기록 — 집계표의 구조와 취소율의 분모",
+      "description": "호텔 예약 자료를 읽으며 열 선택, 그룹 집계, 인덱스 이름, 그래프와 비율의 분모를 질문한 9월 30일 학습 기록이다.",
+      "date": "2026-09-30",
+      "published": "2026-10-01",
+      "type": "journal",
+      "topics": [
+        "데이터 분석"
+      ],
+      "courseId": "data-analysis",
+      "lessonId": "dataframe",
+      "url": "/notes/learning/2026-09-30-hotel-cancellation-eda",
+      "links": [
+        "data/pandas-dataframe-selection",
+        "data/pandas-cleaning-validation",
+        "data/statistics-distributions-and-plots",
+        "data/pandas-groupby-merge-reshape",
+        "data/statistics-data-and-groups",
+        "learning/2026-10-01-hotel-segment-comparison"
+      ],
+      "relatedReasons": {
+        "data/pandas-dataframe-selection": "열 이름 목록과 실제 데이터 선택, Series와 DataFrame을 구분하는 기준이다.",
+        "data/pandas-groupby-merge-reshape": "그룹 집계의 반환값과 인덱스 이름, reset_index의 변화를 작은 표로 설명한다.",
+        "data/pandas-cleaning-validation": "결측 검사와 중복 판정이 곧 삭제 결정은 아니라는 기준을 연결한다.",
+        "data/statistics-data-and-groups": "취소율과 구성비의 분모가 다른 이유를 정리한다.",
+        "data/statistics-distributions-and-plots": "히스토그램의 구간과 Axes가 맡는 역할을 설명한다.",
+        "learning/2026-10-01-hotel-segment-comparison": "다음 날 Undefined 제외 범위와 같은 조건의 판매 구분 비교로 이어진다."
+      },
+      "sources": [
+        "Find DataFrame column index 학습 대화 (2026-09-30)"
+      ]
+    },
+    {
       "id": "data/statistics-data-and-groups",
       "title": "통계 실습의 데이터 — 변수의 의미와 요약표의 인덱스",
       "description": "숫자 dtype과 변수 유형, 개수와 비율, 결측치 요약표의 인덱스 정렬과 평균 대체의 한계를 연결한다.",
@@ -162,6 +228,8 @@ window.HANTHING_CONTENT = {
       "url": "/notes/data/statistics-data-and-groups",
       "links": [
         "learning/2026-09-29-statistics",
+        "learning/2026-09-30-hotel-cancellation-eda",
+        "learning/2026-10-01-hotel-segment-comparison",
         "data/data-quality",
         "data/observation-unit",
         "data/statistics-distributions-and-plots",
@@ -169,6 +237,8 @@ window.HANTHING_CONTENT = {
       ],
       "relatedReasons": {
         "learning/2026-09-29-statistics": "변수 유형과 인덱스를 직접 설명한 응답 및 교정 기록이다.",
+        "learning/2026-09-30-hotel-cancellation-eda": "판매 구분별 취소율의 합이 100이 아닌 이유를 물었던 기록이다.",
+        "learning/2026-10-01-hotel-segment-comparison": "같은 판매 구분 안에서 리드타임 구간별 예약 구성비를 계산한 기록이다.",
         "data/statistics-distributions-and-plots": "변수의 의미를 정한 다음 분포와 그래프를 고르는 방법으로 이어진다.",
         "data/statistics-relations-and-interpretation": "그룹별 비율과 요약표의 라벨을 상관행렬 및 집단 비교에 적용한다.",
         "data/data-quality": "결측치를 채우거나 이상치를 지우기 전에 원인을 확인하는 기준이다.",
@@ -176,6 +246,8 @@ window.HANTHING_CONTENT = {
       },
       "sources": [
         "통계시각화 실습 환경 설명 학습 대화 (2026-09-29)",
+        "Find DataFrame column index 학습 대화 (2026-09-30)",
+        "판매구분별 undefined 제외 수정 학습 대화 (2026-10-01)",
         "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html",
         "https://pandas.pydata.org/docs/reference/api/pandas.Series.value_counts.html"
       ]
@@ -231,16 +303,19 @@ window.HANTHING_CONTENT = {
         "learning/2026-09-29-statistics",
         "data/statistics-data-and-groups",
         "data/statistics-distributions-and-plots",
-        "data/eda-and-causality"
+        "data/eda-and-causality",
+        "learning/2026-10-01-hotel-segment-comparison"
       ],
       "relatedReasons": {
         "learning/2026-09-29-statistics": "실제 생존율 방향 오류와 등급을 고정한 후속 해석을 구분해 기록했다.",
+        "learning/2026-10-01-hotel-segment-comparison": "호텔과 리드타임 구간을 맞춘 판매 구분 비교에서도 인과 결론은 별도임을 확인한 기록이다.",
         "data/statistics-data-and-groups": "이진 변수의 평균이 비율이 되는 이유와 요약표의 인덱스를 먼저 익힌다.",
         "data/statistics-distributions-and-plots": "박스·중앙값·수염을 알아야 두 집단의 분포를 비교할 수 있다.",
         "data/eda-and-causality": "관찰한 관계를 인과나 일반 법칙으로 확대하지 않는 기준이다."
       },
       "sources": [
         "통계시각화 실습 환경 설명 학습 대화 (2026-09-29)",
+        "판매구분별 undefined 제외 수정 학습 대화 (2026-10-01)",
         "https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.corr.html",
         "https://seaborn.pydata.org/generated/seaborn.barplot.html",
         "https://seaborn.pydata.org/generated/seaborn.heatmap.html"
@@ -290,16 +365,20 @@ window.HANTHING_CONTENT = {
         "learning/2026-09-29-dataframe",
         "data/data-quality",
         "data/interpretation",
+        "learning/2026-10-01-hotel-segment-comparison",
         "data/pandas-dataframe-selection",
         "data/pandas-groupby-merge-reshape"
       ],
       "relatedReasons": {
         "learning/2026-09-29-dataframe": "결측 처리의 목적과 중복 제거 코드의 실제 수정 과정을 보존한 기록이다.",
+        "learning/2026-10-01-hotel-segment-comparison": "판매 구분을 모르는 예약을 전체 원본이 아닌 해당 비교에서만 제외한 판단이다.",
         "data/pandas-dataframe-selection": "Series와 DataFrame의 구분이 열 변환과 표 전체 대입의 바탕이 된다.",
         "data/data-quality": "데이터가 사용할 목적에 맞게 정확하고 일관되는지 확인하는 문제로 이어진다."
       },
       "sources": [
         "데이터 프레임 개념 총정리 학습 대화 (2026-09-28–29)",
+        "Find DataFrame column index 학습 대화 (2026-09-30)",
+        "판매구분별 undefined 제외 수정 학습 대화 (2026-10-01)",
         "https://pandas.pydata.org/docs/reference/api/pandas.to_numeric.html",
         "https://pandas.pydata.org/docs/reference/api/pandas.to_datetime.html",
         "https://pandas.pydata.org/docs/user_guide/missing_data.html",
@@ -325,15 +404,18 @@ window.HANTHING_CONTENT = {
         "data/eda-and-causality",
         "data/numpy-array-axes",
         "data/pandas-cleaning-validation",
+        "learning/2026-10-01-hotel-segment-comparison",
         "data/pandas-groupby-merge-reshape"
       ],
       "relatedReasons": {
         "learning/2026-09-29-dataframe": "표의 목적과 선택 문법을 질문하고 짧은 퀴즈로 확인한 실제 학습 흐름이다.",
+        "learning/2026-10-01-hotel-segment-comparison": "판매 구분 값으로 행을 고르는 것과 출력할 열을 고르는 것을 구별한 후속 질문이다.",
         "data/numpy-array-axes": "NumPy 배열의 축과 모양을 DataFrame의 행과 열에 연결한다.",
         "data/eda-and-causality": "표 가공과 그래프가 탐색 과정에서 어떤 역할을 하는지 연결한다."
       },
       "sources": [
         "데이터 프레임 개념 총정리 학습 대화 (2026-09-28–29)",
+        "판매구분별 undefined 제외 수정 학습 대화 (2026-10-01)",
         "https://pandas.pydata.org/docs/user_guide/dsintro.html",
         "https://pandas.pydata.org/docs/user_guide/indexing.html"
       ]
@@ -354,15 +436,21 @@ window.HANTHING_CONTENT = {
       "links": [
         "learning/2026-09-29-dataframe",
         "data/pandas-cleaning-validation",
+        "learning/2026-09-30-hotel-cancellation-eda",
+        "learning/2026-10-01-hotel-segment-comparison",
         "data/pandas-dataframe-selection"
       ],
       "relatedReasons": {
         "learning/2026-09-29-dataframe": "반환값 설명의 생략과 agg 문법 변경을 지적하며 학습한 실제 질문 흐름이다.",
+        "learning/2026-09-30-hotel-cancellation-eda": "호텔 집계에서 인덱스의 이름과 다중 그룹의 반환 구조를 다시 질문한 기록이다.",
+        "learning/2026-10-01-hotel-segment-comparison": "같은 판매 구분 안의 예약 구성비를 계산하며 transform과 sum의 인덱스를 비교한 기록이다.",
         "data/pandas-dataframe-selection": "집계 결과의 Series와 DataFrame, 인덱스와 일반 열을 구분하는 바탕이다.",
         "data/pandas-cleaning-validation": "집계 전 중복과 결측 처리 및 결합 후 검증 기준을 연결한다."
       },
       "sources": [
         "데이터 프레임 개념 총정리 학습 대화 (2026-09-28–29)",
+        "Find DataFrame column index 학습 대화 (2026-09-30)",
+        "판매구분별 undefined 제외 수정 학습 대화 (2026-10-01)",
         "https://pandas.pydata.org/docs/user_guide/groupby.html",
         "https://pandas.pydata.org/docs/reference/api/pandas.merge.html",
         "https://pandas.pydata.org/docs/reference/api/pandas.pivot_table.html",
@@ -1158,6 +1246,276 @@ window.HANTHING_CONTENT = {
   ],
   "questions": [
     {
+      "id": "learning/2026-10-01-hotel-segment-comparison#질문-undefined는-판매-구분-비교에서만-제외하면-되는가",
+      "title": "Undefined는 판매 구분 비교에서만 제외하면 되는가?",
+      "url": "/notes/learning/2026-10-01-hotel-segment-comparison#질문-undefined는-판매-구분-비교에서만-제외하면-되는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "판매 구분 비교 기록 — Undefined 제외와 예약 구성비",
+      "context": "전날 Undefined를 어떻게 다룰지 이야기한 뒤, 판매 구분별 집계 부분만 최소 수정해 달라고 요청했다.",
+      "intent": "필요한 분석 범위에만 제외 조건을 적용하고 전체 예약 정보는 유지하려는 질문이다.",
+      "answer": "집계 직전에 판매 구분이 Undefined가 아닌 행을 고르면 된다. Undefined는 NaN이 아닌 문자열이므로 dropna()로 같은 일을 할 수 없다. 판단 근거는 단순히 건수가 적다는 점이 아니라 해당 예약의 판매 구분을 알 수 없다는 점이다."
+    },
+    {
+      "id": "learning/2026-10-01-hotel-segment-comparison#질문-loc로-선택하면-원본도-삭제되는가",
+      "title": "loc로 선택하면 원본도 삭제되는가?",
+      "url": "/notes/learning/2026-10-01-hotel-segment-comparison#질문-loc로-선택하면-원본도-삭제되는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "판매 구분 비교 기록 — Undefined 제외와 예약 구성비",
+      "context": "제외 조건을 읽으며 .loc 선택이 기존 표 자체를 바꾸는지 물었다.",
+      "intent": "결과를 선택하는 연산과 기존 값에 대입하는 연산을 구분하려는 질문이다.",
+      "answer": "위 코드의 .loc[조건]은 조건에 맞는 행을 반환한다. 이를 별도 변수에 저장하는 것과 analysis.loc[조건, \"열\"] = 값으로 원본에 대입하는 것은 다르다. 이 설명은 모든 .loc 반환값이 언제나 완전히 독립적인 깊은 복사라는 뜻이 아니다."
+    },
+    {
+      "id": "learning/2026-10-01-hotel-segment-comparison#질문-groups와-online-ta만-골랐는데-왜-다른-열이-계속-보이는가",
+      "title": "Groups와 Online TA만 골랐는데 왜 다른 열이 계속 보이는가?",
+      "url": "/notes/learning/2026-10-01-hotel-segment-comparison#질문-groups와-online-ta만-골랐는데-왜-다른-열이-계속-보이는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "판매 구분 비교 기록 — Undefined 제외와 예약 구성비",
+      "context": "City Hotel 중 두 판매 구분을 선택한 뒤 다른 열도 보인다고 질문했다. 직접 제시한 코드에는 실제 범주 Online TA와 대소문자가 다른 Online Ta도 있었다.",
+      "intent": "선택 조건의 값과 출력 열 이름을 구별하려는 질문이다.",
+      "answer": "Groups와 Online TA는 열 이름이 아니라 market_segment 열 안의 값이다. 조건은 그 값을 가진 예약 행을 고른다. 열을 따로 지정하지 않았다면 선택된 행의 다른 정보도 모두 남는다. 문자열 비교에서는 Online TA처럼 실제 값과 맞춰야 한다."
+    },
+    {
+      "id": "learning/2026-10-01-hotel-segment-comparison#질문-dfmarket_segment와-dflocmarket_segment는-같은가",
+      "title": "df[\"market_segment\"]와 df.loc[\"market_segment\"]는 같은가?",
+      "url": "/notes/learning/2026-10-01-hotel-segment-comparison#질문-dfmarket_segment와-dflocmarket_segment는-같은가",
+      "topic": "데이터 분석",
+      "sourceTitle": "판매 구분 비교 기록 — Undefined 제외와 예약 구성비",
+      "context": "일반 대괄호 선택과 .loc 선택에서 같은 문자열을 넣으면 같은 대상을 고르는지 물었다.",
+      "intent": "같은 이름이라도 들어가는 위치에 따라 선택 축이 달라지는 이유를 이해하려는 질문이다.",
+      "answer": "이 DataFrame에서 df[\"market_segment\"]는 열 선택이다. df.loc[\"market_segment\"]는 그 이름을 가진 행 레이블을 찾는다. .loc로 같은 열을 고르려면 df.loc[:, \"market_segment\"]처럼 모든 행과 해당 열을 지정한다."
+    },
+    {
+      "id": "learning/2026-10-01-hotel-segment-comparison#질문-취소-여부-열의-size와-sum이-왜-다른-값인가",
+      "title": "취소 여부 열의 size와 sum이 왜 다른 값인가?",
+      "url": "/notes/learning/2026-10-01-hotel-segment-comparison#질문-취소-여부-열의-size와-sum이-왜-다른-값인가",
+      "topic": "데이터 분석",
+      "sourceTitle": "판매 구분 비교 기록 — Undefined 제외와 예약 구성비",
+      "context": "두 판매 구분을 리드타임 구간별로 집계하며 size, sum, mean의 의미를 다시 확인했다.",
+      "intent": "원본 예약 수와 취소 수, 취소율을 계산식 수준에서 연결하려는 질문이다.",
+      "answer": "설명용 취소 여부가 [1, 0, 1, 0, 0]이라면 행 수는 5, 합은 2, 평균은 0.4다. 각각 예약 5건, 취소 2건, 취소율 40%가 된다. 합이 취소 수가 되는 이유는 이 열에서 1이 취소, 0이 비취소라는 코딩 때문이다."
+    },
+    {
+      "id": "learning/2026-10-01-hotel-segment-comparison#질문-코드가-잘못됐다는-설명이-실제-코드와-다른데-무엇을-고쳐야-하는가",
+      "title": "코드가 잘못됐다는 설명이 실제 코드와 다른데 무엇을 고쳐야 하는가?",
+      "url": "/notes/learning/2026-10-01-hotel-segment-comparison#질문-코드가-잘못됐다는-설명이-실제-코드와-다른데-무엇을-고쳐야-하는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "판매 구분 비교 기록 — Undefined 제외와 예약 구성비",
+      "context": "답변이 집계 코드의 괄호와 reset_index() 위치를 오류 원인으로 지목했다. 사용자는 cancel_rate가 이미 agg() 안에 있고 괄호도 맞는다고 반박했다.",
+      "intent": "실제 코드와 일치하지 않는 진단을 바로잡으려는 질문이다.",
+      "answer": "이후 답변은 실행된 결과 표를 확인했다고 보고하며 앞선 진단을 정정했다. 당시 문제로 읽힌 것은 실행을 중단한 문법 오류가 아니라 범주형 그룹 집계의 기본값 변경을 알리는 FutureWarning이었다. 원하는 동작에 맞춰 observed를 명시하는 설명으로 바뀌었다."
+    },
+    {
+      "id": "learning/2026-10-01-hotel-segment-comparison#질문-observedtrue는-어떤-그룹을-남기는가",
+      "title": "observed=True는 어떤 그룹을 남기는가?",
+      "url": "/notes/learning/2026-10-01-hotel-segment-comparison#질문-observedtrue는-어떤-그룹을-남기는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "판매 구분 비교 기록 — Undefined 제외와 예약 구성비",
+      "context": "pd.cut()으로 만든 lead_group과 market_segment를 묶는 코드에서 observed=True의 의미를 물었다.",
+      "intent": "경고를 없애기 위한 옵션으로만 외우지 않고 결과 행이 어떻게 달라지는지 이해하려는 질문이다.",
+      "answer": "범주형 dtype에는 현재 행에서 관측되지 않은 범주도 정의돼 있을 수 있다. observed=True는 실제 관측된 범주 조합으로 결과를 제한한다. 관측되지 않은 조합까지 포함하는 집계에서는 예약 수가 0이거나 평균이 NaN인 행이 생길 수 있다. 모든 조합이 관측됐다면 이 옵션의 결과 차이가 없을 수도 있다."
+    },
+    {
+      "id": "learning/2026-10-01-hotel-segment-comparison#질문-표에는-두-판매-구분이-있는데-그래프에는-왜-구분이-안-되는가",
+      "title": "표에는 두 판매 구분이 있는데 그래프에는 왜 구분이 안 되는가?",
+      "url": "/notes/learning/2026-10-01-hotel-segment-comparison#질문-표에는-두-판매-구분이-있는데-그래프에는-왜-구분이-안-되는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "판매 구분 비교 기록 — Undefined 제외와 예약 구성비",
+      "context": "집계 표에는 Groups와 Online TA가 따로 있는데 그림에서 분리되지 않아 hue를 질문했다. data와 축 이름의 따옴표 사용, 같은 y축 범위도 확인했다.",
+      "intent": "표의 분류 열을 그림의 막대와 범례에 연결하려는 질문이다.",
+      "answer": "같은 lead_group 안에서 두 판매 구분을 따로 보려면 hue=\"market_segment\"를 전달한다. 이를 빠뜨리면 같은 x값에 있는 여러 요약 행이 다시 함께 집계될 수 있다. 그 평균은 원본 예약 수를 반영한 전체 취소율과 같다고 보장할 수 없다."
+    },
+    {
+      "id": "learning/2026-10-01-hotel-segment-comparison#질문-예약-구성비의-분모는-무엇이며-어떻게-계산하는가",
+      "title": "예약 구성비의 분모는 무엇이며 어떻게 계산하는가?",
+      "url": "/notes/learning/2026-10-01-hotel-segment-comparison#질문-예약-구성비의-분모는-무엇이며-어떻게-계산하는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "판매 구분 비교 기록 — Undefined 제외와 예약 구성비",
+      "context": "판매 구분마다 예약이 각 리드타임 구간에 얼마나 분포하는지 계산하려 했다. 분모를 찾는 힌트를 받은 뒤 어렵다고 말했고, 이어 전체 계산 코드를 요청했다.",
+      "intent": "“같은 판매 구분 안에서의 비중”을 행별 나눗셈으로 구현하려는 질문이다.",
+      "answer": "분자는 해당 판매 구분·리드타임 구간의 예약 수다. 분모는 같은 판매 구분의 모든 리드타임 구간 예약 수를 합한 값이다. 앞에서 City Hotel만 골랐으므로 아래 분모도 City Hotel 안에서 계산된다."
+    },
+    {
+      "id": "learning/2026-10-01-hotel-segment-comparison#질문-groups와-online-ta를-코드에-적지-않았는데-어떻게-따로-100이-되는가",
+      "title": "Groups와 Online TA를 코드에 적지 않았는데 어떻게 따로 100이 되는가?",
+      "url": "/notes/learning/2026-10-01-hotel-segment-comparison#질문-groups와-online-ta를-코드에-적지-않았는데-어떻게-따로-100이-되는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "판매 구분 비교 기록 — Undefined 제외와 예약 구성비",
+      "context": "사용자는 구성비 합계 출력이 두 구분 모두 100이라고 보고했다. 그런데 계산 코드에 두 이름을 직접 쓰지 않았으므로 어떻게 구분했는지 물었다.",
+      "intent": "그룹 이름을 직접 반복하지 않고 같은 값끼리 계산하는 동작을 이해하려는 질문이다.",
+      "answer": "groupby(\"market_segment\")가 그 열의 같은 값끼리 묶는다. transform(\"sum\")은 각 묶음의 합을 그 묶음에 속한 모든 원래 행 위치로 돌려준다. 그룹 이름을 코드에 하나씩 적을 필요가 없다."
+    },
+    {
+      "id": "learning/2026-10-01-hotel-segment-comparison#질문-transformsum-대신-sum만-쓰면-왜-안-되는가",
+      "title": "transform(\"sum\") 대신 sum()만 쓰면 왜 안 되는가?",
+      "url": "/notes/learning/2026-10-01-hotel-segment-comparison#질문-transformsum-대신-sum만-쓰면-왜-안-되는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "판매 구분 비교 기록 — Undefined 제외와 예약 구성비",
+      "context": "같은 합계를 구하는데 transform()을 빼면 안 되는지 물었다.",
+      "intent": "수치 계산이 같아도 반환 길이와 인덱스가 다른 이유를 확인하려는 질문이다.",
+      "answer": "위 설명용 표에서 sum()은 Groups 100, Online TA 200이라는 두 값으로 줄인다. 인덱스도 판매 구분 이름이다. transform(\"sum\")은 원래 네 행의 인덱스 0·1·2·3에 100·100·200·200을 대응시킨다. Pandas의 Series 나눗셈은 인덱스 레이블을 맞추므로 두 결과를 같은 모양으로 취급할 수 없다."
+    },
+    {
+      "id": "learning/2026-10-01-hotel-segment-comparison#질문-같은-리드타임-구간에서-비교하면-어떤-결론까지-말할-수-있는가",
+      "title": "같은 리드타임 구간에서 비교하면 어떤 결론까지 말할 수 있는가?",
+      "url": "/notes/learning/2026-10-01-hotel-segment-comparison#질문-같은-리드타임-구간에서-비교하면-어떤-결론까지-말할-수-있는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "판매 구분 비교 기록 — Undefined 제외와 예약 구성비",
+      "context": "판매 구분별 예약 구성비 표를 읽고 해석을 요청한 뒤, 최종 답변에 참고할 예시 문장도 요청했다.",
+      "intent": "전체 취소율 차이와 예약 시점 구성의 차이를 나눠 해석하려는 질문이다.",
+      "answer": "먼저 판매 구분별로 긴 리드타임 예약의 비중이 다른지 보고, 이어 같은 호텔·리드타임 구간 안에서도 취소율 차이가 남는지 확인한다. 구성 차이는 전체 비율 차이를 이해할 단서이며, 같은 구간 안의 비교도 인과 효과를 확정하지는 않는다."
+    },
+    {
+      "id": "learning/2026-09-30-hotel-cancellation-eda#질문-열-인덱스와-전체-열을-보려면-어떻게-하는가",
+      "title": "열 인덱스와 전체 열을 보려면 어떻게 하는가?",
+      "url": "/notes/learning/2026-09-30-hotel-cancellation-eda#질문-열-인덱스와-전체-열을-보려면-어떻게-하는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "호텔 취소 분석 기록 — 집계표의 구조와 취소율의 분모",
+      "context": "열이 많은 호텔 예약 표에서 열 이름을 확인하고, 잘리지 않는 표와 앞 10행을 보고 싶다고 요청했다. City Hotel과 Resort Hotel의 앞부분도 각각 확인하려 했다.",
+      "intent": "분석을 시작하기 전에 데이터의 열 이름과 일부 행을 직접 읽으려는 질문이다.",
+      "answer": "열 이름은 df.columns, 행 인덱스는 df.index다. df.columns.tolist()는 열 이름을 파이썬 리스트로 돌려준다. pd.set_option(\"display.max_columns\", None)은 표시 설정이고, df.head(10)은 앞 10행을 선택한다. 호텔별 예시는 먼저 해당 호텔의 행을 고른 뒤 head(10)을 붙인다."
+    },
+    {
+      "id": "learning/2026-09-30-hotel-cancellation-eda#질문-많은-변수-중-이번-분석에-필요한-것은-무엇인가",
+      "title": "많은 변수 중 이번 분석에 필요한 것은 무엇인가?",
+      "url": "/notes/learning/2026-09-30-hotel-cancellation-eda#질문-많은-변수-중-이번-분석에-필요한-것은-무엇인가",
+      "topic": "데이터 분석",
+      "sourceTitle": "호텔 취소 분석 기록 — 집계표의 구조와 취소율의 분모",
+      "context": "열들을 의미별로 구분해 달라고 요청했고, 분석 준비 코드의 analysis = df.copy()와 question_columns가 하는 일을 물었다.",
+      "intent": "모든 열을 한꺼번에 처리하기보다 현재 분석 질문에 필요한 변수를 찾으려는 맥락이다.",
+      "answer": "이번 비교의 중심은 호텔 종류 hotel, 취소 여부 is_canceled, 예약 선행 일수 lead_time, 판매 구분 market_segment였다. question_columns = [...]는 열 이름을 담는 목록이고, analysis[question_columns]라고 써야 그 열의 데이터를 선택한다. copy()로 만든 분석용 표와 열 이름 목록도 서로 다른 객체다."
+    },
+    {
+      "id": "learning/2026-09-30-hotel-cancellation-eda#질문-결측이-없고-중복이-많다는-결과를-어떻게-판단해야-하는가",
+      "title": "결측이 없고 중복이 많다는 결과를 어떻게 판단해야 하는가?",
+      "url": "/notes/learning/2026-09-30-hotel-cancellation-eda#질문-결측이-없고-중복이-많다는-결과를-어떻게-판단해야-하는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "호텔 취소 분석 기록 — 집계표의 구조와 취소율의 분모",
+      "context": "결측을 확인하는 코드의 결과를 읽었고, duplicated().sum()이 33,103이라고 직접 보고했다. 분석에 쓰지 않는 열의 결측도 문제가 되는지 물었다.",
+      "intent": "검사 결과를 보고 바로 삭제할지, 이번 분석과 관계가 있는지 판단하려는 질문이다.",
+      "answer": "필요한 열의 결측 여부와 전체 표의 결측 여부를 구분한다. 사용하지 않는 열에 결측이 있다고 전체 행을 지우면 분석 대상과 분모까지 달라진다. 기본 duplicated()는 같은 값 조합의 첫 행 다음에 나타난 반복 행을 표시하지만, 예약 식별 근거 없이 그것을 동일한 예약의 중복 수집이라고 확정할 수는 없다."
+    },
+    {
+      "id": "learning/2026-09-30-hotel-cancellation-eda#질문-size-sum-mean은-각각-무엇을-세는가",
+      "title": "size, sum, mean은 각각 무엇을 세는가?",
+      "url": "/notes/learning/2026-09-30-hotel-cancellation-eda#질문-size-sum-mean은-각각-무엇을-세는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "호텔 취소 분석 기록 — 집계표의 구조와 취소율의 분모",
+      "context": "호텔별 표의 bookings, cancellations, cancel_rate가 어떻게 만들어지는지 물었다. size가 취소 수인지도 확인했다.",
+      "intent": "집계 함수 이름을 실제 예약 건수와 취소율에 연결하려는 질문이다.",
+      "answer": "한 행이 예약 한 건이고 is_canceled가 결측 없는 0·1이라면, size는 예약 수, sum은 1의 개수인 취소 수, mean은 취소 수를 예약 수로 나눈 비율이다. 예약 한 건을 사람 한 명으로 바꾸어 읽지는 않는다."
+    },
+    {
+      "id": "learning/2026-09-30-hotel-cancellation-eda#질문-호텔별-취소율을-왜-히스토그램으로-그리지-않는가",
+      "title": "호텔별 취소율을 왜 히스토그램으로 그리지 않는가?",
+      "url": "/notes/learning/2026-09-30-hotel-cancellation-eda#질문-호텔별-취소율을-왜-히스토그램으로-그리지-않는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "호텔 취소 분석 기록 — 집계표의 구조와 취소율의 분모",
+      "context": "집계한 표를 그래프로 옮기면서 histplot, barplot, data, 두 개의 Axes를 질문했다. 사용자는 호텔별 그림을 좌우로 나누려 했지만 첫 답변은 한 그림의 두 막대로 이해했다.",
+      "intent": "무엇을 그릴지와 어디에 그릴지를 코드에서 따로 지정하려는 질문이다.",
+      "answer": "히스토그램은 수치 값이 구간마다 얼마나 있는지 보여 준다. 이미 계산한 호텔별 취소율을 비교하려면 범주별 막대가 맞는다. data=hotel_summary는 표 변수이며, 표 이름을 따옴표로 감싼 문자열과 다르다. axes[0]은 왼쪽 그림의 위치를 고를 뿐 City Hotel 행을 골라 주지 않는다."
+    },
+    {
+      "id": "learning/2026-09-30-hotel-cancellation-eda#질문-lead_time의-평균과-중앙값을-왜-함께-보는가",
+      "title": "lead_time의 평균과 중앙값을 왜 함께 보는가?",
+      "url": "/notes/learning/2026-09-30-hotel-cancellation-eda#질문-lead_time의-평균과-중앙값을-왜-함께-보는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "호텔 취소 분석 기록 — 집계표의 구조와 취소율의 분모",
+      "context": "lead_time의 의미를 확인한 뒤 평균과 중앙값을 둘 다 살피는 이유를 물었다. 이후 히스토그램을 보고 “반비례”라는 표현이 맞는지도 질문했다.",
+      "intent": "대표값과 분포 그림을 연결해 설명하려는 질문이다.",
+      "answer": "lead_time은 예약한 날부터 도착일까지의 일수다. 평균과 중앙값의 차이는 큰 값의 영향을 살필 단서지만, 두 숫자만으로 분포 모양이나 최빈값을 확정할 수 없다. 히스토그램과 범위를 함께 확인한다. 오른쪽으로 긴 꼬리가 있는 분포를 수학적 관계인 “반비례”라고 부르지는 않는다."
+    },
+    {
+      "id": "learning/2026-09-30-hotel-cancellation-eda#질문-lead_time을-구간으로-나누는-경계와-라벨은-어떻게-읽는가",
+      "title": "lead_time을 구간으로 나누는 경계와 라벨은 어떻게 읽는가?",
+      "url": "/notes/learning/2026-09-30-hotel-cancellation-eda#질문-lead_time을-구간으로-나누는-경계와-라벨은-어떻게-읽는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "호텔 취소 분석 기록 — 집계표의 구조와 취소율의 분모",
+      "context": "pd.cut()의 경계, 라벨, include_lowest를 질문하고 lead_group의 뜻을 다시 확인했다. 첫 답변에는 구간 설명에 불필요한 할당 표현식이 들어갔고 이후 제거됐다.",
+      "intent": "외운 라벨을 붙이는 대신 실제 어느 값이 어느 구간에 들어가는지 이해하려는 질문이다.",
+      "answer": "경계가 다섯 개면 구간은 네 개다. 아래처럼 오른쪽 경계를 포함하면 30일은 첫 구간, 90일은 둘째 구간에 들어가고, include_lowest=True는 첫 경계 0도 포함시킨다. 일수가 음이 아닌 정수라는 조건에서 라벨을 읽는다."
+    },
+    {
+      "id": "learning/2026-09-30-hotel-cancellation-eda#질문-describe와-value_counts는-왜-기대한-정보를-다-보여-주지-않는가",
+      "title": "describe와 value_counts는 왜 기대한 정보를 다 보여 주지 않는가?",
+      "url": "/notes/learning/2026-09-30-hotel-cancellation-eda#질문-describe와-value_counts는-왜-기대한-정보를-다-보여-주지-않는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "호텔 취소 분석 기록 — 집계표의 구조와 취소율의 분모",
+      "context": "수치형과 문자형 열을 함께 골랐는데 describe()에서 일부만 보이는 이유와 value_counts()의 숫자·순서를 물었다. 판매 구분별 예약 수를 보고 중요한 변수인지도 질문했다.",
+      "intent": "요약 함수가 어떤 대상을 어떤 기준으로 요약하는지 확인하려는 질문이다.",
+      "answer": "수치형과 문자형이 섞인 표에서 기본 describe()는 수치형 중심으로 요약하므로 전체 자료형을 보려면 include=\"all\"을 지정한다. value_counts()의 기본 결과는 등장 횟수가 큰 순서이며, 결측은 기본적으로 제외한다. 판매 구분 열을 센 숫자는 취소 수가 아니라 그 구분의 예약 수다."
+    },
+    {
+      "id": "learning/2026-09-30-hotel-cancellation-eda#질문-인덱스에도-이름이-있는가-reset_index를-하면-무엇이-열로-옮겨지는가",
+      "title": "인덱스에도 이름이 있는가? reset_index를 하면 무엇이 열로 옮겨지는가?",
+      "url": "/notes/learning/2026-09-30-hotel-cancellation-eda#질문-인덱스에도-이름이-있는가-reset_index를-하면-무엇이-열로-옮겨지는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "호텔 취소 분석 기록 — 집계표의 구조와 취소율의 분모",
+      "context": "groupby(\"hotel\")[\"is_canceled\"].sum()이 Series라는 점을 짚고, reset_index()에서 열 이름이 어디서 생기는지 거듭 물었다. “인덱스에도 이름을 붙일 수 있다는 것을 처음 알았다”고 말했다.",
+      "intent": "화면 왼쪽에 보이는 값과 그 값들이 속한 축의 이름을 구분하려는 질문이다.",
+      "answer": "이 Series에는 호텔 이름이라는 인덱스 값, 인덱스의 이름 hotel, 데이터 값인 취소 수, Series의 이름 is_canceled가 있다. reset_index()는 인덱스 값을 일반 열로 꺼내고 그 이름을 열 이름으로 사용한다. 기존 취소 수를 다시 계산하거나 호텔 이름을 새로 만들어 내지 않는다."
+    },
+    {
+      "id": "learning/2026-09-30-hotel-cancellation-eda#질문-여러-열로-묶으면-무엇이-인덱스가-되고-agg는-원본에-열을-추가하는가",
+      "title": "여러 열로 묶으면 무엇이 인덱스가 되고, agg는 원본에 열을 추가하는가?",
+      "url": "/notes/learning/2026-09-30-hotel-cancellation-eda#질문-여러-열로-묶으면-무엇이-인덱스가-되고-agg는-원본에-열을-추가하는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "호텔 취소 분석 기록 — 집계표의 구조와 취소율의 분모",
+      "context": "hotel과 market_segment를 함께 묶는 구조를 물었다. 이어 agg()가 원본에 새 열을 추가하는지, 이름을 직접 지정하지 않으면 이름 없는 표가 되는지 질문했다.",
+      "intent": "그룹 기준, 결과의 행 단위, 결과 열 이름이 생기는 지점을 구별하려는 질문이다.",
+      "answer": "기본 인덱스 방식으로 두 열을 묶으면 결과의 인덱스가 두 단계인 MultiIndex가 될 수 있다. 호텔·판매 구분 조합마다 결과가 하나씩 대응한다. 열 하나에서 합계 하나를 구한 결과는 Series이고, 여러 집계 함수를 적용한 예는 DataFrame이다. agg([\"size\", \"sum\", \"mean\"])의 결과 열 이름은 함수 이름에서 온다."
+    },
+    {
+      "id": "learning/2026-09-30-hotel-cancellation-eda#질문-정렬했는데-왜-다음-그래프에는-적용되지-않는가",
+      "title": "정렬했는데 왜 다음 그래프에는 적용되지 않는가?",
+      "url": "/notes/learning/2026-09-30-hotel-cancellation-eda#질문-정렬했는데-왜-다음-그래프에는-적용되지-않는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "호텔 취소 분석 기록 — 집계표의 구조와 취소율의 분모",
+      "context": "판매 구분별 취소율을 정렬하고 ascending을 어디에 쓰는지 물었다. 정렬한 표를 출력한 뒤 그래프에 전달할 데이터도 확인했다.",
+      "intent": "화면에 보여 준 결과와 변수에 저장된 표를 구분하려는 질문이다.",
+      "answer": "ascending=False는 sort_values()에 전달한다. display(summary.sort_values(...))는 정렬한 결과를 보여 주지만 그 자체로 summary를 바꾸지 않는다. 그 순서를 이어 쓰려면 반환값을 저장하거나 그래프에 직접 전달한다. 정렬 기준인 cancel_pct 열도 먼저 만들어져 있어야 한다."
+    },
+    {
+      "id": "learning/2026-09-30-hotel-cancellation-eda#질문-cancel_pct를-모두-더하면-왜-100이-아닌가",
+      "title": "cancel_pct를 모두 더하면 왜 100이 아닌가?",
+      "url": "/notes/learning/2026-09-30-hotel-cancellation-eda#질문-cancel_pct를-모두-더하면-왜-100이-아닌가",
+      "topic": "데이터 분석",
+      "sourceTitle": "호텔 취소 분석 기록 — 집계표의 구조와 취소율의 분모",
+      "context": "판매 구분별 취소율 표를 보고 모든 퍼센트를 더하면 100이어야 하는지 물었다.",
+      "intent": "각각의 비율이 하나의 전체를 나눠 가진 값인지 확인하려는 질문이다.",
+      "answer": "판매 구분별 취소율의 분모는 각 구분의 예약 수다. 서로 다른 분모에서 계산한 비율이므로 더해서 100이 될 필요가 없다. 전체 취소 중 각 구분의 몫을 구하려면 전체 취소 수라는 공통 분모를 사용해야 한다."
+    },
+    {
+      "id": "learning/2026-09-30-hotel-cancellation-eda#질문-취소율이-가장-높은-구분을-먼저-관리하면-되는가",
+      "title": "취소율이 가장 높은 구분을 먼저 관리하면 되는가?",
+      "url": "/notes/learning/2026-09-30-hotel-cancellation-eda#질문-취소율이-가장-높은-구분을-먼저-관리하면-되는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "호텔 취소 분석 기록 — 집계표의 구조와 취소율의 분모",
+      "context": "Groups를 운영상 우선 대상으로 고르는 판단과 그 이유를 확인했고, 참고할 답변 예시를 요청했다.",
+      "intent": "표에서 읽은 차이를 실제 제안으로 연결하되 어떤 목표를 우선하는지 분명히 하려는 질문이다.",
+      "answer": "취소율이 높은 구분과 취소 건수가 많은 구분은 다를 수 있다. 예약 한 건의 취소 위험을 낮추려는지, 전체 취소 건수를 많이 줄이려는지에 따라 우선순위가 달라진다. 비용과 개입 가능성도 필요하다."
+    },
+    {
+      "id": "learning/2026-09-30-hotel-cancellation-eda#질문-isna가-0이어도-공백이나-undefined를-따로-확인해야-하지-않는가",
+      "title": "isna가 0이어도 공백이나 Undefined를 따로 확인해야 하지 않는가?",
+      "url": "/notes/learning/2026-09-30-hotel-cancellation-eda#질문-isna가-0이어도-공백이나-undefined를-따로-확인해야-하지-않는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "호텔 취소 분석 기록 — 집계표의 구조와 취소율의 분모",
+      "context": "사용자가 공백·대소문자까지 확인하지 않았다는 점을 먼저 지적했다. 뒤에는 isna()로는 결측이 없는데 Undefined가 두 건이라는 점과 이 행을 삭제해도 되는지 물었다.",
+      "intent": "프로그램이 인식하는 결측과 분석에서 의미를 알 수 없는 값을 구별하려는 질문이다.",
+      "answer": "Undefined와 빈 문자열은 문자열로 존재할 수 있으므로 isna()만으로 충분하지 않다. map(repr)로 공백 등을 드러내고 실제 값을 확인할 수 있다. 다만 Online TA에 무조건 title()을 적용해 Online Ta로 바꾸면 기존 범주 표기와 달라진다."
+    },
+    {
+      "id": "learning/2026-09-30-hotel-cancellation-eda#질문-두-그래프의-높이를-비교하려면-축을-어떻게-맞춰야-하는가",
+      "title": "두 그래프의 높이를 비교하려면 축을 어떻게 맞춰야 하는가?",
+      "url": "/notes/learning/2026-09-30-hotel-cancellation-eda#질문-두-그래프의-높이를-비교하려면-축을-어떻게-맞춰야-하는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "호텔 취소 분석 기록 — 집계표의 구조와 취소율의 분모",
+      "context": "사용자는 호텔별 그림의 막대 높이를 비교하려면 y축 기준이 같아야 한다고 직접 설명했다. 제목, x축 라벨 겹침·정렬, 한글 글꼴 경고도 질문했다.",
+      "intent": "같은 비율이 같은 높이로 보이게 하고, 표시 문제를 데이터 오류와 구분하려는 질문이다.",
+      "answer": "취소율을 퍼센트로 그린 두 그림이라면 같은 범위의 y축을 사용한다. 예를 들어 각 Axes에 set_ylim(0, 100)을 적용한다. 제목은 해당 Axes의 set_title()로 지정한다. 라벨 회전·정렬과 한글 글꼴 경고는 표시 설정이며 집계값을 바꾸는 처리는 아니다."
+    },
+    {
       "id": "data/statistics-data-and-groups#질문-자료형과-별개로-변수-타입을-왜-분류해야-하나",
       "title": "자료형과 별개로 변수 타입을 왜 분류해야 하나?",
       "url": "/notes/data/statistics-data-and-groups#질문-자료형과-별개로-변수-타입을-왜-분류해야-하나",
@@ -1166,6 +1524,16 @@ window.HANTHING_CONTENT = {
       "context": "숫자 dtype인 survived, pclass, age, fare를 모두 수치형으로 답한 뒤, 저장 자료형과 의미상의 변수 유형을 따로 나누는 이유를 물었다.",
       "intent": "분류 이름을 외우는 일이 실제 계산과 그래프 선택에 어떤 차이를 만드는지 확인하려는 질문이다.",
       "answer": "dtype은 저장·연산 방식이고 변수 유형은 값의 의미다. 컴퓨터가 평균을 계산할 수 있어도 그 평균을 해석할 수 있는지는 별도 문제다."
+    },
+    {
+      "id": "data/statistics-data-and-groups#질문-취소율을-모두-더하면-100이-아닌가-예약-구성비와는-무엇이-다른가",
+      "title": "취소율을 모두 더하면 100이 아닌가? 예약 구성비와는 무엇이 다른가?",
+      "url": "/notes/data/statistics-data-and-groups#질문-취소율을-모두-더하면-100이-아닌가-예약-구성비와는-무엇이-다른가",
+      "topic": "데이터 분석",
+      "sourceTitle": "통계 실습의 데이터 — 변수의 의미와 요약표의 인덱스",
+      "context": "호텔 예약의 판매 구분별 취소율을 보고 합이 100이어야 하는지 물었다. 다음 날에는 판매 구분마다 리드타임 구간별 예약 구성비를 계산하며 다른 분모를 사용했다.",
+      "intent": "여러 퍼센트가 같은 전체를 나누는 값인지, 서로 다른 집단 안의 비율인지 구분하려는 질문이다.",
+      "answer": "비율 이름보다 분자와 분모를 먼저 쓴다. 그룹별 취소율은 분모가 각 그룹의 예약 수이므로 합이 100일 필요가 없다. 전체를 빠짐없이 나눈 구성비는 공통 분모를 사용한다."
     },
     {
       "id": "data/statistics-data-and-groups#질문-value_counts-결과도-series인가-무엇이-인덱스인가",
@@ -1288,6 +1656,16 @@ window.HANTHING_CONTENT = {
       "answer": "후속 확인 방향은 타당하지만 해석에는 1등급 안에서라는 조건을 붙여야 한다. 이 가정만으로 2·3등급이나 전체 승객의 관계까지 결론 내릴 수 없다. 비슷해 보이는 박스만으로 관계의 크기를 정량화한 것도 아니다."
     },
     {
+      "id": "data/statistics-relations-and-interpretation#질문-판매-구분별-예약-구성비와-취소율을-어떻게-해석하는가",
+      "title": "판매 구분별 예약 구성비와 취소율을 어떻게 해석하는가?",
+      "url": "/notes/data/statistics-relations-and-interpretation#질문-판매-구분별-예약-구성비와-취소율을-어떻게-해석하는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "변수 사이의 관계 — 상관행렬과 그룹별 그래프를 읽는 법",
+      "context": "호텔 예약 자료에서 판매 구분별 리드타임 구성비를 계산한 뒤, 같은 구간의 취소율과 함께 어떻게 해석할지 물었다. 최종 해석의 참고 예시도 요청했다.",
+      "intent": "전체 비율 차이에 집단 구성의 차이가 섞일 수 있다는 점을 확인하고, 비교 범위를 좁혀 해석하려는 질문이다.",
+      "answer": "먼저 각 판매 구분의 예약이 어느 리드타임 구간에 많이 속하는지 보고, 같은 호텔·구간 안에서도 취소율 차이가 있는지 살핀다. 이 비교는 전체 차이를 이해하는 데 도움이 되지만 판매 구분의 인과 효과를 계산한 것은 아니다."
+    },
+    {
       "id": "learning/2026-09-29-statistics#질문-실습-환경과-데이터-로딩은-무엇을-준비하는-단계인가",
       "title": "실습 환경과 데이터 로딩은 무엇을 준비하는 단계인가?",
       "url": "/notes/learning/2026-09-29-statistics#질문-실습-환경과-데이터-로딩은-무엇을-준비하는-단계인가",
@@ -1398,6 +1776,16 @@ window.HANTHING_CONTENT = {
       "answer": "문자열 정리는 표현을 통일하고, 결측 검사는 현재 비어 있다고 인식되는 위치를 찾는다. 채우기·유지·제외는 분석 목적과 원인에 따라 정할 별개의 결정이다. 평균이나 중앙값이 항상 올바른 대체값은 아니다."
     },
     {
+      "id": "data/pandas-cleaning-validation#질문-isna가-0인데-undefined와-공백을-따로-확인해야-하는가",
+      "title": "isna가 0인데 Undefined와 공백을 따로 확인해야 하는가?",
+      "url": "/notes/data/pandas-cleaning-validation#질문-isna가-0인데-undefined와-공백을-따로-확인해야-하는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "Pandas 정리와 검증 — 자료형, 결측, 중복, 파생 변수",
+      "context": "호텔 예약 분석에서 결측 검사만으로 충분한지 사용자가 공백·대소문자 점검을 먼저 제안했다. 이어 Undefined 두 건을 전체 데이터에서 지워도 되는지 물었다.",
+      "intent": "Pandas가 인식하는 결측과 분석에 필요한 의미를 알 수 없는 값을 구분하려는 질문이다.",
+      "answer": "Undefined와 빈 문자열은 그 자체로 NaN이 아니다. dropna()로 문자열 Undefined를 제거할 수는 없다. 판매 구분을 모르는 예약을 해당 비교에서 제외하더라도, 그 예약의 호텔·취소 여부까지 전체 분석에서 삭제할 필요가 생긴 것은 아니다."
+    },
+    {
       "id": "data/pandas-cleaning-validation#질문-duplicated-결과를-고객-번호-열에-넣으면-중복이-제거되는가",
       "title": "duplicated() 결과를 고객 번호 열에 넣으면 중복이 제거되는가?",
       "url": "/notes/data/pandas-cleaning-validation#질문-duplicated-결과를-고객-번호-열에-넣으면-중복이-제거되는가",
@@ -1488,6 +1876,16 @@ window.HANTHING_CONTENT = {
       "answer": "열과 숫자의 비교는 각 원소를 비교한 불리언 Series를 만든다. 이를 .loc[행 선택, 열 선택]의 행 자리에 넣으면 True인 행을 선택한다. &와 |는 Series의 조건들을 원소별로 결합한다. 괄호는 연산 우선순위를 명확히 한다."
     },
     {
+      "id": "data/pandas-dataframe-selection#질문-두-판매-구분만-골랐는데-왜-다른-열도-보이는가",
+      "title": "두 판매 구분만 골랐는데 왜 다른 열도 보이는가?",
+      "url": "/notes/data/pandas-dataframe-selection#질문-두-판매-구분만-골랐는데-왜-다른-열도-보이는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "DataFrame과 선택 — 표의 의미, Series, 불리언 마스크",
+      "context": "호텔 예약 표에서 market_segment가 Groups 또는 Online TA인 행을 골랐는데 다른 열도 남아 있어, 필터가 적용된 것인지 물었다. df[\"market_segment\"]와 df.loc[\"market_segment\"]의 차이도 확인했다.",
+      "intent": "열 안의 값으로 행을 고르는 연산과 열 자체를 선택하는 연산을 구분하려는 질문이다.",
+      "answer": "df.loc[df[\"market_segment\"].isin([\"Groups\", \"Online TA\"])]는 해당 값을 가진 행을 선택하고 모든 열을 남긴다. .loc[행, 열]의 두 번째 자리에 열을 지정해야 출력 열도 좁아진다."
+    },
+    {
       "id": "data/pandas-groupby-merge-reshape#질문-agg는-원래-표에-새-열을-추가하는-함수인가",
       "title": "agg()는 원래 표에 새 열을 추가하는 함수인가?",
       "url": "/notes/data/pandas-groupby-merge-reshape#질문-agg는-원래-표에-새-열을-추가하는-함수인가",
@@ -1526,6 +1924,26 @@ window.HANTHING_CONTENT = {
       "context": "고객 요약을 연결하기 전에 summary = customer_order_summary.reset_index()를 보고, 고객 번호는 애초에 일반 열 아니었는지 물었다.",
       "intent": "원본 표와 집계 결과 표의 구조를 구별하려는 질문이다.",
       "answer": "원래 주문 표에서는 일반 열이다. 기본 설정의 groupby(\"customer_id\").agg(...)로 만든 새 요약표에서는 그룹 기준이 인덱스가 된다. reset_index()는 그 인덱스를 일반 열로 꺼낸 새 표를 반환한다."
+    },
+    {
+      "id": "data/pandas-groupby-merge-reshape#질문-인덱스에도-이름이-있는가-여러-열로-묶으면-series가-아닌가",
+      "title": "인덱스에도 이름이 있는가? 여러 열로 묶으면 Series가 아닌가?",
+      "url": "/notes/data/pandas-groupby-merge-reshape#질문-인덱스에도-이름이-있는가-여러-열로-묶으면-series가-아닌가",
+      "topic": "데이터 분석",
+      "sourceTitle": "Pandas 집계와 결합 — agg, transform, merge에서 pipe까지",
+      "context": "호텔별 취소 수를 집계한 Series에서 reset_index()의 열 이름이 어디서 오는지 물었다. 호텔과 판매 구분을 함께 묶는 경우, 집계 함수를 여러 개 지정하는 경우도 이어서 확인했다.",
+      "intent": "그룹 기준의 개수와 데이터 열의 개수, 축 이름과 축에 놓인 값을 따로 읽으려는 질문이다.",
+      "answer": "analysis.groupby(\"hotel\")[\"is_canceled\"].sum()에는 인덱스 이름 hotel과 Series 이름 is_canceled가 있다. 인덱스 값은 호텔 이름이고 데이터 값은 취소 수다. reset_index()는 이 이름들을 열 이름으로 사용하고 기본 행 인덱스를 새로 만든다."
+    },
+    {
+      "id": "data/pandas-groupby-merge-reshape#질문-구성비를-구할-때-transformsum-대신-sum만-쓰면-안-되는가",
+      "title": "구성비를 구할 때 transform(\"sum\") 대신 sum()만 쓰면 안 되는가?",
+      "url": "/notes/data/pandas-groupby-merge-reshape#질문-구성비를-구할-때-transformsum-대신-sum만-쓰면-안-되는가",
+      "topic": "데이터 분석",
+      "sourceTitle": "Pandas 집계와 결합 — agg, transform, merge에서 pipe까지",
+      "context": "판매 구분과 리드타임 구간별 예약 수 표에서, 각 판매 구분의 전체 예약 수를 분모로 쓰려고 했다. transform(\"sum\")을 빼도 같은 합계를 얻는 것 아닌지 물었다.",
+      "intent": "계산한 수치뿐 아니라 그 수치가 대응하는 행과 인덱스를 확인하려는 질문이다.",
+      "answer": "sum()은 판매 구분마다 결과 하나로 줄인다. transform(\"sum\")은 각 판매 구분의 합계를 원래 요약표의 각 행에 대응시킨다. 행별 예약 수를 자기 그룹의 합계로 나눌 때 이 대응이 필요하다."
     },
     {
       "id": "data/pandas-groupby-merge-reshape#질문-merge에서-왼쪽과-오른쪽은-무엇이고-how는-무엇인가",
