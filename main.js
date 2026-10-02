@@ -479,7 +479,7 @@
   }
   resize(); updateMotion();
   async function renderTodayReview() {
-    const { loadSyncedProgress, getReviewQueue } = await import('./review-state.mjs');
+    const { loadSyncedProgress, getReviewQueue } = await import('./review-state.mjs?v=20261001-scheduled');
     let storage;
     try { storage = localStorage; } catch {}
     const { state } = loadSyncedProgress(storage, sets);

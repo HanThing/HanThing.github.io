@@ -1,11 +1,12 @@
 const STORAGE_KEY = 'hanthing-review-v1';
 const DAY = 86400000;
+const RETRY = 10 * 60 * 1000;
 const statuses = ['review', 'pending', 'mastered'];
 const object = value => value && typeof value === 'object' && !Array.isArray(value);
 const wording = question => String(question.question).replace(/\s+/g, ' ').trim();
 
 export function createProgress() {
-  return { schemaVersion: 2, session: 0, goals: {}, attempts: {} };
+  return { schemaVersion: 2, session: 0, goals: {}, attempts: {}, questionPreferences: {}, lastQuestionKind: null };
 }
 
 function addSchedule(goal, now) {
@@ -28,6 +29,10 @@ export function loadProgress(storage, now = Date.now()) {
         !object(state.goals) || !object(state.attempts)) throw new Error('Invalid progress');
     const migrated = state.schemaVersion === 1;
     for (const goal of Object.values(state.goals)) if (object(goal)) addSchedule(goal, now);
+    state.questionPreferences = object(state.questionPreferences) ? Object.fromEntries(
+      Object.entries(state.questionPreferences).filter(([, preference]) => object(preference)).map(([key, preference]) =>
+        [key, { reviewAgain: preference.reviewAgain === true, excluded: preference.excluded === true }])) : {};
+    if (!['new', 'due'].includes(state.lastQuestionKind)) state.lastQuestionKind = null;
     state.schemaVersion = 2;
     // Save once so reopening a legacy record does not keep postponing its due date.
     const saved = !migrated || saveProgress(storage, state);
@@ -62,6 +67,10 @@ export function changeProgress(storage, state, sets, action, readLatest = true) 
 
 export function syncProgress(state, sets, now = Date.now()) {
   state.schemaVersion = 2;
+  for (const bucket of Object.values(state.attempts)) {
+    if (!object(bucket?.questions)) continue;
+    for (const attempt of Object.values(bucket.questions)) if (object(attempt)) Object.assign(attempt, scheduleForAttempt(attempt));
+  }
   for (const set of sets) for (const goal of set.goals) {
     let current = state.goals[goal.id];
     if (!object(current) || !statuses.includes(current.status)) {
@@ -102,6 +111,37 @@ export function getAttempts(state, set) {
   return state.attempts[key];
 }
 
+function scheduleForAttempt(attempt) {
+  const intervalDays = [0, 1, 3, 7, 21].includes(attempt.intervalDays) ? attempt.intervalDays :
+    attempt.correct === true && attempt.assisted !== true ? 1 : 0;
+  const answeredAt = Number.isFinite(attempt.answeredAt) && attempt.answeredAt >= 0 ? attempt.answeredAt : 0;
+  const dueAt = Number.isFinite(attempt.dueAt) && attempt.dueAt >= 0 ? attempt.dueAt :
+    answeredAt ? answeredAt + (intervalDays ? intervalDays * DAY : RETRY) : 0;
+  return { dueAt, intervalDays };
+}
+
+export function getQuestionSchedule(state, set, question) {
+  const attempt = storedAttempts(state, set)?.questions?.[question.id];
+  return object(attempt) ? scheduleForAttempt(attempt) : null;
+}
+
+const preferenceKey = (set, question) => JSON.stringify([set.id, set.version, question.id]);
+
+export function getQuestionPreference(state, set, question) {
+  const preference = state.questionPreferences?.[preferenceKey(set, question)];
+  return { reviewAgain: preference?.reviewAgain === true, excluded: preference?.excluded === true };
+}
+
+export function setQuestionPreference(state, set, question, patch) {
+  const preference = getQuestionPreference(state, set, question);
+  const fields = ['reviewAgain', 'excluded'].filter(field => typeof patch?.[field] === 'boolean');
+  if (!fields.length) return preference;
+  if (!object(state.questionPreferences)) state.questionPreferences = {};
+  for (const field of fields) preference[field] = patch[field];
+  state.questionPreferences[preferenceKey(set, question)] = preference;
+  return preference;
+}
+
 export function validQuestion(question) {
   return question && typeof question.id === 'string' && typeof question.question === 'string' &&
     question.question.trim() && Array.isArray(question.options) && question.options.length >= 2 &&
@@ -125,16 +165,25 @@ export function answerQuestion(state, set, question, { optionIndex, assisted = f
   if (!validQuestion(question) || !Number.isInteger(optionIndex) || !question.options[optionIndex]) return null;
   const attempts = getAttempts(state, set).questions;
   const previous = attempts[question.id];
-  assisted = Boolean(assisted || (previous?.session === session && (previous.assisted || !previous.correct)));
+  const previousSchedule = getQuestionSchedule(state, set, question);
+  const early = Boolean(previousSchedule && now < previousSchedule.dueAt);
+  const goalAssisted = Boolean(assisted || (previous?.session === session &&
+    (previous.goalAssisted || previous.assisted || !previous.correct)));
+  assisted = Boolean(assisted || (early && previous?.session === session && (previous.assisted || !previous.correct)));
   const correct = question.options[optionIndex].isCorrect === true;
-  attempts[question.id] = { correct, assisted, optionIndex, session, answeredAt: now,
-    seenCount: (previous?.seenCount || 0) + 1 };
+  const intervalDays = !correct || assisted ? 0 : early ? previousSchedule.intervalDays :
+    !previousSchedule || previousSchedule.intervalDays === 0 ? 1 : previousSchedule.intervalDays === 1 ? 3 :
+      previousSchedule.intervalDays === 3 ? 7 : 21;
+  const dueAt = !correct || assisted ? now + RETRY : early ? previousSchedule.dueAt : now + intervalDays * DAY;
+  if (!early) state.lastQuestionKind = previousSchedule ? 'due' : 'new';
+  attempts[question.id] = { correct, assisted, goalAssisted, optionIndex, session, answeredAt: now,
+    seenCount: (previous?.seenCount || 0) + 1, dueAt, intervalDays };
   const goal = set.goals.some(item => item.id === question.goalId) && state.goals[question.goalId];
   let reason = 'unmapped';
   if (goal && (question.pool === 'practice' || distinctCheck(set, question))) {
     if (!correct) {
       reviewAgain(state, question.goalId, now); reason = 'incorrect';
-    } else if (assisted) {
+    } else if (goalAssisted) {
       if (goal.status === 'review') reviewAgain(state, question.goalId, now);
       else Object.assign(goal, { status: 'pending', pendingSession: session, pendingAt: now,
         lastReviewedAt: now, intervalDays: 1, dueAt: now + DAY });
@@ -152,7 +201,7 @@ export function answerQuestion(state, set, question, { optionIndex, assisted = f
       reason = 'mastered';
     }
   }
-  return { correct, assisted, status: goal?.status, reason };
+  return { correct, assisted, status: goal?.status, reason, dueAt, intervalDays, early };
 }
 
 export function assessCard(state, set, card, known, session = state.session, now = Date.now()) {
@@ -160,9 +209,7 @@ export function assessCard(state, set, card, known, session = state.session, now
   if (!known && set.goals.some(goal => goal.id === card.goalId)) reviewAgain(state, card.goalId, now);
 }
 
-// Product rule: at most five goals, recent difficulty → due review → never checked.
-// This reads state without creating records, so the homepage can use it directly.
-export function getReviewQueue(sets, state, { limit = 5, now = Date.now() } = {}) {
+function scheduledEntries(sets, state, now, includeExcluded = false) {
   const entries = new Map();
   for (const set of sets) for (const goal of set.goals) {
     if (entries.has(goal.id)) continue;
@@ -172,6 +219,7 @@ export function getReviewQueue(sets, state, { limit = 5, now = Date.now() } = {}
     const pool = current && current.status !== 'review' ? 'check' : 'practice';
     const attempts = storedAttempts(state, set)?.questions || {};
     const questions = set.questions.filter(question => validQuestion(question) && question.goalId === goal.id &&
+      (includeExcluded || !getQuestionPreference(state, set, question).excluded) &&
       (pool === 'check' ? distinctCheck(set, question) : question.pool === 'practice'));
     questions.sort((a, b) => (attempts[a.id]?.seenCount || 0) - (attempts[b.id]?.seenCount || 0));
     if (questions[0]) entries.set(goal.id, { set, goal, question: questions[0], reason,
@@ -179,34 +227,113 @@ export function getReviewQueue(sets, state, { limit = 5, now = Date.now() } = {}
   }
   const rank = { weak: 0, due: 1, new: 2 };
   return [...entries.values()].sort((a, b) => rank[a.reason] - rank[b.reason] ||
-    (a.reason === 'weak' ? state.goals[b.goal.id].lastWeakAt - state.goals[a.goal.id].lastWeakAt : a.dueAt - b.dueAt)).slice(0, limit);
+    (a.reason === 'weak' ? state.goals[b.goal.id].lastWeakAt - state.goals[a.goal.id].lastWeakAt : a.dueAt - b.dueAt));
+}
+
+// The homepage intentionally previews five goals; queue reads never create records.
+export function getReviewQueue(sets, state, { limit = 5, now = Date.now() } = {}) {
+  return scheduledEntries(sets, state, now).slice(0, limit);
+}
+
+function spreadGroups(groups, compare) {
+  groups.sort(compare);
+  const entries = [];
+  for (let round = 0; groups.some(group => round < group.length); round++) {
+    for (const group of groups) if (group[round]) entries.push(group[round]);
+  }
+  return entries;
+}
+
+function questionEntries(state, sets, onlyMarked) {
+  const entries = new Map();
+  for (const set of sets) for (const question of set.questions) {
+    if (!validQuestion(question) || (onlyMarked && !getQuestionPreference(state, set, question).reviewAgain)) continue;
+    const key = preferenceKey(set, question);
+    if (!entries.has(key)) entries.set(key, { set, question, goal: set.goals.find(goal => goal.id === question.goalId) });
+  }
+  return [...entries.values()];
+}
+
+export function getQuestionCounts(state, sets, { onlyMarked = false, now = Date.now() } = {}) {
+  const entries = questionEntries(state, sets, onlyMarked);
+  const counts = { total: entries.length, excluded: 0, active: 0, answered: 0, unseen: 0, due: 0, waiting: 0, nextDueAt: null };
+  for (const { set, question } of entries) {
+    if (getQuestionPreference(state, set, question).excluded) { counts.excluded++; continue; }
+    counts.active++;
+    const schedule = getQuestionSchedule(state, set, question);
+    if (!schedule) { counts.unseen++; continue; }
+    counts.answered++;
+    if (schedule.dueAt <= now) counts.due++;
+    else {
+      counts.waiting++;
+      counts.nextDueAt = Math.min(counts.nextDueAt ?? Infinity, schedule.dueAt);
+    }
+  }
+  return counts;
+}
+
+export function questionQueue(state, sets, { onlyMarked = false, now = Date.now(), includeFuture = false } = {}) {
+  const attempt = entry => storedAttempts(state, entry.set)?.questions?.[entry.question.id];
+  const compare = (a, b) => (attempt(a)?.seenCount || 0) - (attempt(b)?.seenCount || 0) ||
+    (attempt(a)?.answeredAt || 0) - (attempt(b)?.answeredAt || 0) ||
+    Number(getQuestionPreference(state, b.set, b.question).reviewAgain) - Number(getQuestionPreference(state, a.set, a.question).reviewAgain);
+  const coverage = entries => entries.reduce((rank, entry) => ({
+    leastSeen: Math.min(rank.leastSeen, attempt(entry)?.seenCount || 0),
+    totalSeen: rank.totalSeen + (attempt(entry)?.seenCount || 0),
+    lastAnswered: Math.max(rank.lastAnswered, attempt(entry)?.answeredAt || 0)
+  }), { leastSeen: Infinity, totalSeen: 0, lastAnswered: 0 });
+  const compareGroups = (a, b) => {
+    const left = coverage(a); const right = coverage(b);
+    return left.leastSeen - right.leastSeen || left.totalSeen - right.totalSeen ||
+      left.lastAnswered - right.lastAnswered || compare(a[0], b[0]);
+  };
+  const sources = new Map();
+  for (const entry of questionEntries(state, sets, onlyMarked)) {
+    const { set, question, goal } = entry;
+    if (getQuestionPreference(state, set, question).excluded) continue;
+    const schedule = getQuestionSchedule(state, set, question);
+    entry.kind = !schedule ? 'new' : schedule.dueAt <= now ? 'due' : 'extra';
+    entry.dueAt = schedule?.dueAt ?? null;
+    entry.reasonLabel = { new: '아직 풀지 않은 문제', due: '다시 확인할 때', extra: '예정 시각 전 추가 연습' }[entry.kind];
+    if (!sources.has(set.id)) sources.set(set.id, new Map());
+    const goals = sources.get(set.id); const key = goal?.id ?? null;
+    if (!goals.has(key)) goals.set(key, []);
+    goals.get(key).push(entry);
+  }
+  const ordered = spreadGroups([...sources.values()].map(goals =>
+    spreadGroups([...goals.values()].map(entries => entries.sort(compare)), compareGroups)), compareGroups);
+  const unseen = ordered.filter(entry => entry.kind === 'new');
+  const due = ordered.filter(entry => entry.kind === 'due').sort((a, b) => a.dueAt - b.dueAt);
+  if (!unseen.length && !due.length) return includeFuture ? ordered : [];
+  return spreadGroups(state.lastQuestionKind === 'new' ? [due, unseen] : [unseen, due], () => 0);
 }
 
 export function practiceQueue(state, sets, all = false) {
   return sets.flatMap(set => set.questions.filter(question => validQuestion(question) && question.pool === 'practice' &&
+    !getQuestionPreference(state, set, question).excluded &&
     (all || state.goals[question.goalId]?.status === 'review')).map(question => ({ set, question })));
 }
 
 export function checkQueue(state, sets, all = false, now = Date.now()) {
-  if (!all) return getReviewQueue(sets, state, { now, limit: Infinity }).filter(entry => entry.question.pool === 'check').slice(0, 5);
+  if (!all) return getReviewQueue(sets, state, { now, limit: Infinity }).filter(entry => entry.question.pool === 'check');
   const entries = [];
   for (const set of sets) for (const goal of set.goals) {
     if (!['pending', 'mastered'].includes(state.goals[goal.id]?.status)) continue;
     const attempts = storedAttempts(state, set)?.questions || {};
-    const questions = set.questions.filter(question => validQuestion(question) && question.goalId === goal.id && distinctCheck(set, question));
+    const questions = set.questions.filter(question => validQuestion(question) && question.goalId === goal.id &&
+      !getQuestionPreference(state, set, question).excluded && distinctCheck(set, question));
     questions.sort((a, b) => (attempts[a.id]?.seenCount || 0) - (attempts[b.id]?.seenCount || 0));
     if (questions[0]) entries.push({ set, question: questions[0] });
   }
-  return entries.slice(0, 5);
+  return entries;
 }
 
 export function cardQueue(state, sets, all = false, now = Date.now()) {
-  const priority = new Map(getReviewQueue(sets, state, { now, limit: Infinity }).map((entry, index) => [entry.goal.id, index]));
+  const priority = new Map(scheduledEntries(sets, state, now, true).map((entry, index) => [entry.goal.id, index]));
   return sets.flatMap(set => set.cards.filter(card => typeof card.front === 'string' && typeof card.back === 'string' &&
     (all || priority.has(card.goalId))).map(card => ({ set, card })))
     .sort((a, b) => (priority.get(a.card.goalId) ?? Infinity) - (priority.get(b.card.goalId) ?? Infinity) ||
       (storedAttempts(state, a.set)?.cards[a.card.id]?.known === false ? -1 : 0) -
       (storedAttempts(state, b.set)?.cards[b.card.id]?.known === false ? -1 : 0) ||
-      (storedAttempts(state, a.set)?.cards[a.card.id]?.answeredAt || 0) - (storedAttempts(state, b.set)?.cards[b.card.id]?.answeredAt || 0))
-    .slice(0, 5);
+      (storedAttempts(state, a.set)?.cards[a.card.id]?.answeredAt || 0) - (storedAttempts(state, b.set)?.cards[b.card.id]?.answeredAt || 0));
 }
