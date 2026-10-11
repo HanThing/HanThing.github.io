@@ -52,7 +52,13 @@ window.HANTHING_CONTENT = {
     {
       "id": "machine-learning",
       "title": "머신러닝",
-      "lessons": []
+      "lessons": [
+        {
+          "id": "supervised-learning",
+          "title": "지도학습",
+          "kind": "official"
+        }
+      ]
     },
     {
       "id": "pytorch",
@@ -116,6 +122,31 @@ window.HANTHING_CONTENT = {
     }
   ],
   "notes": [
+    {
+      "id": "weekly/2026-10-08-learning-rate-and-classification",
+      "title": "위클리 페이퍼 #3 — 학습률과 콘텐츠 이용 등급 분류",
+      "description": "경사하강법이 진동하며 발산하는 이유를 수식과 그래프로 확인하고, 콘텐츠 이용 등급을 다중 분류로 예측하려는 이유와 회귀의 장단점을 비교한다.",
+      "date": "2026-10-08",
+      "published": "2026-10-12",
+      "type": "weekly",
+      "topics": [
+        "머신러닝"
+      ],
+      "courseId": "machine-learning",
+      "lessonId": "supervised-learning",
+      "url": "/notes/weekly/2026-10-08-learning-rate-and-classification",
+      "links": [
+        "data/numpy-linear-layers"
+      ],
+      "relatedReasons": {
+        "data/numpy-linear-layers": "선형 점수를 계산하는 가중치·편향의 역할과, 출력 계산에 파라미터 갱신을 더해야 학습이 된다는 구분을 연결한다."
+      },
+      "sources": [
+        "코드잇 AI 스프린트 위클리 페이퍼 3회차 공식 두 문항 (2026-10-11 확인)",
+        "https://developers.google.com/machine-learning/crash-course/linear-regression/hyperparameters",
+        "https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression"
+      ]
+    },
     {
       "id": "learning/2026-10-01-hotel-segment-comparison",
       "title": "판매 구분 비교 기록 — Undefined 제외와 예약 구성비",

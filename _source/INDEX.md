@@ -2,6 +2,9 @@
 
 Generated from public Markdown. Read AGENTS.md for ingest/query/lint; CHANGELOG.md for changes. Course references support briefing and stay outside the learning graph. Course/lesson identify the curriculum placement; topics identify related subjects.
 
+- [위클리 페이퍼 #3 — 학습률과 콘텐츠 이용 등급 분류](content/weekly/2026-10-08-learning-rate-and-classification.md) — weekly · 2026-10-08 · 경사하강법이 진동하며 발산하는 이유를 수식과 그래프로 확인하고, 콘텐츠 이용 등급을 다중 분류로 예측하려는 이유와 회귀의 장단점을 비교한다.
+  Course: 머신러닝 → 지도학습. Related topics: 머신러닝
+  Sources: 코드잇 AI 스프린트 위클리 페이퍼 3회차 공식 두 문항 (2026-10-11 확인); https://developers.google.com/machine-learning/crash-course/linear-regression/hyperparameters; https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
 - [판매 구분 비교 기록 — Undefined 제외와 예약 구성비](content/learning/2026-10-01-hotel-segment-comparison.md) — journal · 2026-10-01 · Undefined를 필요한 비교에서만 제외하고, 행 선택과 범주별 집계, transform으로 계산한 구성비, 같은 조건 비교의 해석을 정리한다.
   Course: 데이터 분석 → DataFrame 마스터하기. Related topics: 데이터 분석
   Sources: 판매구분별 undefined 제외 수정 학습 대화 (2026-10-01)

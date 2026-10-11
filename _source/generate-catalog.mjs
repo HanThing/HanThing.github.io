@@ -25,7 +25,9 @@ const courses = [
     { id: 'statistics-and-visualization', title: '기초 통계와 데이터 시각화', kind: 'official' },
     { id: 'dataframe', title: 'DataFrame 마스터하기', kind: 'official' },
   ] },
-  { id: 'machine-learning', title: '머신러닝', lessons: [] },
+  { id: 'machine-learning', title: '머신러닝', lessons: [
+    { id: 'supervised-learning', title: '지도학습', kind: 'official' },
+  ] },
   { id: 'pytorch', title: 'PyTorch', lessons: [] },
   { id: 'deep-learning', title: '딥러닝', lessons: [] },
   { id: 'computer-vision', title: '컴퓨터 비전', lessons: [] },
