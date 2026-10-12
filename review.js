@@ -45,13 +45,14 @@ function learningText(tag, className, text) {
     else if (part.startsWith('`') && part.endsWith('`')) node.append(element('code', '', part.slice(1, -1)));
     else if (part.startsWith('$') && part.endsWith('$')) {
       const source = part.slice(1, -1);
-      const rendered = source.replace(/\\text\{([^{}]*)\}/g, '$1').replace(/\^\\circ\b/g, '°')
-        .replace(/\\times\b/g, '×').replace(/\\div\b/g, '÷').replace(/\\([_{}% ])/g, '$1');
-      if (/[\\^]|[×÷°]/.test(rendered)) {
-        const math = element('span', 'math-expression');
-        math.append(element('small', 'notation-label', '수식'), element('span', 'math-notation', rendered));
-        node.append(math);
-      } else node.append(element('code', '', rendered));
+      const math = element('span', 'math-expression');
+      try {
+        if (!window.katex) throw new Error('Math renderer unavailable');
+        window.katex.render(source, math, { throwOnError: true, trust: false });
+      } catch {
+        math.textContent = source.replace(/\\text\{([^}]+)\}/g, '$1');
+      }
+      node.append(math);
     }
     else node.append(document.createTextNode(part));
   }
