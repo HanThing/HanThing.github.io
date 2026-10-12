@@ -123,6 +123,105 @@ window.HANTHING_CONTENT = {
   ],
   "notes": [
     {
+      "id": "learning/2026-10-08-logistic-loss",
+      "title": "p·q·로그 손실에서 실제 파라미터 기울기까지",
+      "description": "이진 분류 확률과 로그 손실, p-y의 미분 대상, softmax 점수에 관한 실제 질문을 정리한다.",
+      "date": "2026-10-08",
+      "published": "2026-10-12",
+      "type": "journal",
+      "topics": [
+        "머신러닝"
+      ],
+      "courseId": "machine-learning",
+      "lessonId": "supervised-learning",
+      "url": "/notes/learning/2026-10-08-logistic-loss",
+      "links": [
+        "machine-learning/logistic-loss-and-evaluation",
+        "learning/2026-10-07-regression-gradient",
+        "learning/2026-10-08-wine-classification"
+      ],
+      "relatedReasons": {
+        "machine-learning/logistic-loss-and-evaluation": "확률·손실·미분·평가를 한 예로 다시 연결한다.",
+        "learning/2026-10-07-regression-gradient": "회귀의 평균 기울기와 행렬곱에서 출발한다.",
+        "learning/2026-10-08-wine-classification": "라벨 결정과 실제 분류 평가 코드로 이어진다."
+      },
+      "sources": [
+        "분류 손실과 회귀 오차 구분 학습 대화 (2026-10-08)",
+        "Q와 로그 손실 설명 학습 대화 (2026-10-08)",
+        "Day1·Day2 맞춤형 학습자료 만들기 중 분류 LAB 맥락 (2026-10-08)",
+        "https://numpy.org/doc/stable/reference/generated/numpy.where.html",
+        "https://numpy.org/doc/stable/reference/generated/numpy.logaddexp.html",
+        "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.log_loss.html"
+      ]
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification",
+      "title": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "description": "확률 임계값과 평균 기울기 오류부터 flatnonzero, 혼동행렬, 전처리 Pipeline, 다중·이진 Wine 실습까지 연결한다.",
+      "date": "2026-10-08",
+      "published": "2026-10-12",
+      "type": "journal",
+      "topics": [
+        "머신러닝"
+      ],
+      "courseId": "machine-learning",
+      "lessonId": "supervised-learning",
+      "url": "/notes/learning/2026-10-08-wine-classification",
+      "links": [
+        "machine-learning/logistic-loss-and-evaluation",
+        "learning/2026-10-08-logistic-loss",
+        "machine-learning/linear-regression-gradient"
+      ],
+      "relatedReasons": {
+        "machine-learning/logistic-loss-and-evaluation": "예측 확률과 라벨 평가를 구분하는 개념 글이다.",
+        "learning/2026-10-08-logistic-loss": "p·q와 점수 미분을 이해한 뒤 실습으로 연결한다.",
+        "machine-learning/linear-regression-gradient": "샘플 평균과 파라미터 축을 섞지 않는 이유를 복습한다."
+      },
+      "sources": [
+        "코드 문제 진단 학습 대화 중 Wine 분류·지표 (2026-10-08)",
+        "문제 풀이 정보 찾기 학습 대화 (2026-10-08)",
+        "Day1·Day2 맞춤형 학습자료 중 Day 2 PRACTICE (2026-10-08)",
+        "https://numpy.org/doc/stable/reference/generated/numpy.flatnonzero.html",
+        "https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_wine.html",
+        "https://scikit-learn.org/stable/common_pitfalls.html",
+        "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html"
+      ]
+    },
+    {
+      "id": "machine-learning/logistic-loss-and-evaluation",
+      "title": "로지스틱 분류: 확률·로그 손실·기울기·평가의 구분",
+      "description": "p와 q, 점수 미분과 파라미터 기울기, softmax와 라벨 평가, Pipeline의 누수 방지를 실제 값으로 연결한다.",
+      "date": "2026-10-08",
+      "published": "2026-10-12",
+      "type": "concept",
+      "topics": [
+        "머신러닝"
+      ],
+      "courseId": "machine-learning",
+      "lessonId": "supervised-learning",
+      "url": "/notes/machine-learning/logistic-loss-and-evaluation",
+      "links": [
+        "machine-learning/linear-regression-gradient",
+        "learning/2026-10-08-logistic-loss",
+        "learning/2026-10-08-wine-classification"
+      ],
+      "relatedReasons": {
+        "learning/2026-10-08-logistic-loss": "p-y를 b·w의 변화와 연결해 달라는 실제 질문의 흐름이다.",
+        "learning/2026-10-08-wine-classification": "라벨·오류 위치·다중 클래스 평가와 Pipeline을 코드로 읽은 기록이다.",
+        "machine-learning/linear-regression-gradient": "평균 기울기를 X.T @ error로 만드는 공통 구조를 설명한다."
+      },
+      "sources": [
+        "분류 손실과 회귀 오차 구분 학습 대화 (2026-10-08)",
+        "Q와 로그 손실 설명 학습 대화 (2026-10-08)",
+        "문제 풀이 정보 찾기 분류 PRACTICE 학습 대화 (2026-10-08)",
+        "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.log_loss.html",
+        "https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html",
+        "https://numpy.org/doc/stable/reference/generated/numpy.logaddexp.html",
+        "https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html",
+        "https://scikit-learn.org/stable/common_pitfalls.html"
+      ]
+    },
+    {
       "id": "weekly/2026-10-08-learning-rate-and-classification",
       "title": "위클리 페이퍼 #3 — 학습률과 콘텐츠 이용 등급 분류",
       "description": "경사하강법이 진동하며 발산하는 이유를 수식과 그래프로 확인하고, 콘텐츠 이용 등급을 다중 분류로 예측하려는 이유와 회귀의 장단점을 비교한다.",
@@ -145,6 +244,412 @@ window.HANTHING_CONTENT = {
         "코드잇 AI 스프린트 위클리 페이퍼 3회차 공식 두 문항 (2026-10-11 확인)",
         "https://developers.google.com/machine-learning/crash-course/linear-regression/hyperparameters",
         "https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression"
+      ]
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient",
+      "title": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "description": "SSE에서 dW·db, X.T @ error, shape 오류와 fit·predict까지 실제 후속 질문을 이어 정리한다.",
+      "date": "2026-10-07",
+      "published": "2026-10-12",
+      "type": "journal",
+      "topics": [
+        "머신러닝"
+      ],
+      "courseId": "machine-learning",
+      "lessonId": "supervised-learning",
+      "url": "/notes/learning/2026-10-07-regression-gradient",
+      "links": [
+        "weekly/2026-10-08-learning-rate-and-classification",
+        "machine-learning/linear-regression-gradient",
+        "learning/2026-10-08-logistic-loss",
+        "data/numpy-linear-layers"
+      ],
+      "relatedReasons": {
+        "machine-learning/linear-regression-gradient": "손실 정의부터 행렬 기울기를 다시 유도하는 개념 글이다.",
+        "learning/2026-10-08-logistic-loss": "회귀의 오차 신호가 분류의 p-y와 어떻게 이어지는지 확인한다.",
+        "data/numpy-linear-layers": "가중치·편향으로 출력을 만드는 선형 계산을 복습한다."
+      },
+      "sources": [
+        "텍스트셀 줄바꿈 방법 찾기 학습 대화 중 회귀 계산 (2026-10-02)",
+        "DW와 DB 선택하기 학습 대화: dW·db 미분 (2026-10-07)",
+        "에러와 잔차 차이 이해하기 학습 대화 (2026-10-07)",
+        "코드 문제 진단 학습 대화 중 회귀 코드 (2026-10-08)",
+        "https://numpy.org/doc/stable/reference/generated/numpy.matmul.html",
+        "https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html",
+        "https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html"
+      ]
+    },
+    {
+      "id": "learning/2026-10-07-values-and-imports",
+      "title": "실제 값으로 다시 보기 — 딕셔너리 항목, 그룹 집계와 import",
+      "description": "딕셔너리의 항목 튜플, agg와 transform의 반환값, 패키지 초기화와 이름 연결을 실제 값으로 따라간 10월 7일 기록이다.",
+      "date": "2026-10-07",
+      "published": "2026-10-12",
+      "type": "journal",
+      "topics": [
+        "실전 파이썬 준비하기",
+        "데이터 분석"
+      ],
+      "courseId": "python",
+      "lessonId": "python-modules",
+      "url": "/notes/learning/2026-10-07-values-and-imports",
+      "links": [
+        "data/statistics-data-and-groups",
+        "learning/2026-09-18-collections-and-palindrome",
+        "data/interpretation",
+        "data/pandas-groupby-merge-reshape",
+        "learning/2026-10-01-hotel-segment-comparison",
+        "learning/2026-09-18-frameworks",
+        "python/imports-and-packages",
+        "learning/2026-10-02-python-numpy-review"
+      ],
+      "sources": [
+        "실제 값으로 문제 보여주기 학습 대화 (2026-10-07)"
+      ]
+    },
+    {
+      "id": "machine-learning/linear-regression-gradient",
+      "title": "선형 회귀의 기울기: 손실 정의에서 X.T @ error까지",
+      "description": "반 MSE의 미분을 실제 값과 shape으로 유도하고, 편향 열·평균 축·최소제곱·평가를 구분한다.",
+      "date": "2026-10-07",
+      "published": "2026-10-12",
+      "type": "concept",
+      "topics": [
+        "머신러닝"
+      ],
+      "courseId": "machine-learning",
+      "lessonId": "supervised-learning",
+      "url": "/notes/machine-learning/linear-regression-gradient",
+      "links": [
+        "learning/2026-10-07-regression-gradient",
+        "machine-learning/logistic-loss-and-evaluation",
+        "data/numpy-linear-layers"
+      ],
+      "relatedReasons": {
+        "learning/2026-10-07-regression-gradient": "이 식을 읽으면서 생긴 실제 후속 질문과 코드 진단을 보존한 기록이다.",
+        "data/numpy-linear-layers": "행렬곱으로 가중치와 편향을 적용하는 계산을 복습한다.",
+        "machine-learning/logistic-loss-and-evaluation": "같은 행렬 구조가 로지스틱 회귀의 파라미터 기울기로 이어진다."
+      },
+      "sources": [
+        "회귀 SSE·오차 부호 학습 대화 (2026-10-02)",
+        "dW·db와 회귀 LAB 학습 대화 (2026-10-07)",
+        "회귀 코드 진단 학습 대화 (2026-10-08)",
+        "https://numpy.org/doc/stable/reference/generated/numpy.matmul.html",
+        "https://numpy.org/doc/stable/user/basics.broadcasting.html",
+        "https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html",
+        "https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html"
+      ]
+    },
+    {
+      "id": "machine-learning/probability-and-bayes",
+      "title": "확률변수에서 밀도와 베이즈 정리까지",
+      "description": "확률변수와 관측값, 분포의 축, 표준화, 확률 0인 사건, 베이즈 정리의 분모를 실제 숫자로 연결한다.",
+      "date": "2026-10-06",
+      "published": "2026-10-12",
+      "type": "concept",
+      "topics": [
+        "머신러닝"
+      ],
+      "courseId": "machine-learning",
+      "lessonId": "supervised-learning",
+      "url": "/notes/machine-learning/probability-and-bayes",
+      "links": [
+        "learning/2026-10-05-06-linear-algebra-probability",
+        "machine-learning/model-and-validation",
+        "data/numpy-broadcasting",
+        "machine-learning/linear-algebra-and-gradient"
+      ],
+      "relatedReasons": {
+        "learning/2026-10-05-06-linear-algebra-probability": "확률변수·분포·표준화·확률 0·베이즈 정리에 관한 실제 질문을 담는다.",
+        "machine-learning/linear-algebra-and-gradient": "표준화로 좌표 단위가 바뀌면 미분값도 달라지는 이유를 연결한다.",
+        "machine-learning/model-and-validation": "표준화 통계도 훈련 데이터에서만 구해야 하는 이유를 설명한다.",
+        "data/numpy-broadcasting": "열별 평균과 표준편차로 여러 샘플을 변환할 때 배열 모양을 확인한다."
+      },
+      "sources": [
+        "확률변수 의미 설명 학습 대화 (2026-10-06)",
+        "문서 심화 내용 설명과 검증 질문 학습 대화 (2026-10-06)",
+        "재가공해 AI 엔지니어 학습자료 만들기 학습 대화 (2026-10-06)"
+      ]
+    },
+    {
+      "id": "learning/2026-10-05-06-linear-algebra-probability",
+      "title": "수식을 계산한 뒤 어떻게 해석할까",
+      "description": "선형결합·내적·미분과 확률변수·분포의 축·표준화·베이즈를 물은 10월 5~6일 기록과 실제 확인 응답을 정리한다.",
+      "date": "2026-10-05",
+      "published": "2026-10-12",
+      "type": "journal",
+      "topics": [
+        "머신러닝"
+      ],
+      "courseId": "machine-learning",
+      "lessonId": "supervised-learning",
+      "url": "/notes/learning/2026-10-05-06-linear-algebra-probability",
+      "links": [
+        "machine-learning/linear-algebra-and-gradient",
+        "machine-learning/probability-and-bayes",
+        "data/numpy-vectors-matmul",
+        "machine-learning/model-and-validation",
+        "data/numpy-broadcasting"
+      ],
+      "relatedReasons": {
+        "machine-learning/linear-algebra-and-gradient": "선형결합과 내적을 손실 변화 및 경사하강법의 해석으로 연결한다.",
+        "machine-learning/probability-and-bayes": "확률변수·분포·표준화·확률 0·조건부확률을 작은 예로 설명한다.",
+        "machine-learning/model-and-validation": "훈련 점수가 같은 모델을 비교할 때 검증과 테스트를 구분한다.",
+        "data/numpy-vectors-matmul": "내적과 코사인 유사도의 실제 NumPy 계산을 연결한다."
+      },
+      "sources": [
+        "선형결합의 필요성 이해하기 학습 대화 (2026-10-05)",
+        "확률변수 의미 설명 학습 대화 (2026-10-06)",
+        "문서 심화 내용 설명과 검증 질문 학습 대화 (2026-10-06)",
+        "재가공해 AI 엔지니어 학습자료 만들기 학습 대화 (2026-10-06, 2026-10-11 상태 확인)",
+        "Actual_Day1_CORE_R4.1.pdf를 바탕으로 한 학습 대화"
+      ]
+    },
+    {
+      "id": "learning/2026-10-02-model-and-validation",
+      "title": "모델을 학습하고 검증한다는 말의 의미",
+      "description": "가설·오차·비용의 구분부터 학습률, 하이퍼파라미터, K-fold와 공통 가중치의 한계까지 이어진 10월 2일 질문을 정리한다.",
+      "date": "2026-10-02",
+      "published": "2026-10-12",
+      "type": "journal",
+      "topics": [
+        "머신러닝"
+      ],
+      "courseId": "machine-learning",
+      "lessonId": "supervised-learning",
+      "url": "/notes/learning/2026-10-02-model-and-validation",
+      "links": [
+        "machine-learning/linear-algebra-and-gradient",
+        "machine-learning/model-and-validation",
+        "data/numpy-linear-layers",
+        "machine-learning/linear-regression-gradient"
+      ],
+      "relatedReasons": {
+        "machine-learning/model-and-validation": "예측 함수와 비용, 모델 선택과 최종 평가를 한 흐름으로 설명한다.",
+        "machine-learning/linear-algebra-and-gradient": "선형대수의 적용 범위와 기울기가 이동 방향·크기에 미치는 영향을 수식으로 확인한다.",
+        "machine-learning/linear-regression-gradient": "오차를 가중치의 미분으로 바꾸는 다음 학습을 연결한다.",
+        "data/numpy-linear-layers": "모든 샘플에 같은 가중치와 편향을 적용하는 배열 계산을 설명한다."
+      },
+      "sources": [
+        "선형대수학 적용 범위 이해 학습 대화 (2026-10-02)"
+      ]
+    },
+    {
+      "id": "learning/2026-10-02-python-numpy-review",
+      "title": "복습 중 다시 물은 것 — 인자 전달, NumPy 축과 데이터 해석",
+      "description": "별표의 위치, 뷰의 데이터 공유, 축별 계산과 표준화의 의미를 10월 2일의 후속 질문으로 다시 연결한다.",
+      "date": "2026-10-02",
+      "published": "2026-10-12",
+      "type": "journal",
+      "topics": [
+        "실전 파이썬 준비하기",
+        "데이터 분석"
+      ],
+      "courseId": "data-analysis",
+      "lessonId": "data-toolkit",
+      "url": "/notes/learning/2026-10-02-python-numpy-review",
+      "links": [
+        "python/args-and-kwargs",
+        "data/numpy-shape-views",
+        "data/numpy-array-axes",
+        "data/numpy-vectors-matmul",
+        "data/numpy-broadcasting",
+        "data/statistics-data-and-groups",
+        "data/data-science-overview",
+        "data/observation-unit",
+        "python/imports-and-packages",
+        "learning/2026-10-07-values-and-imports"
+      ],
+      "sources": [
+        "Explain current args problem 학습 대화 (2026-10-02)"
+      ]
+    },
+    {
+      "id": "machine-learning/linear-algebra-and-gradient",
+      "title": "선형결합과 내적으로 그래디언트 읽기",
+      "description": "벡터에 스칼라를 곱하는 이유를 출발점으로, 내적의 기여도 해석과 손실 변화의 1차 근사, 경사하강법의 방향·크기를 연결한다.",
+      "date": "2026-10-02",
+      "published": "2026-10-12",
+      "type": "concept",
+      "topics": [
+        "머신러닝"
+      ],
+      "courseId": "machine-learning",
+      "lessonId": "supervised-learning",
+      "url": "/notes/machine-learning/linear-algebra-and-gradient",
+      "links": [
+        "learning/2026-10-02-model-and-validation",
+        "learning/2026-10-05-06-linear-algebra-probability",
+        "data/numpy-vectors-matmul",
+        "data/numpy-linear-layers",
+        "machine-learning/probability-and-bayes",
+        "machine-learning/linear-regression-gradient"
+      ],
+      "relatedReasons": {
+        "learning/2026-10-02-model-and-validation": "기울기가 이동 방향뿐 아니라 크기도 정하는지 물은 기록이다.",
+        "learning/2026-10-05-06-linear-algebra-probability": "선형결합·내적·미분·그래디언트의 의미를 물은 실제 질문과 응답을 담는다.",
+        "data/numpy-vectors-matmul": "내적·코사인 유사도와 배치 행렬곱을 NumPy로 계산한다.",
+        "data/numpy-linear-layers": "같은 가중치를 샘플에 적용해 출력 feature를 만드는 계산이다.",
+        "machine-learning/probability-and-bayes": "표준화로 중심과 단위가 어떻게 바뀌는지 설명한다.",
+        "machine-learning/linear-regression-gradient": "회귀의 손실을 실제 가중치로 미분하는 과정을 이어 읽는다."
+      },
+      "sources": [
+        "선형대수학 적용 범위 이해 학습 대화 (2026-10-02)",
+        "선형결합의 필요성 이해하기 학습 대화 (2026-10-05)",
+        "문서 심화 내용 설명과 검증 질문 학습 대화 (2026-10-06)",
+        "재가공해 AI 엔지니어 학습자료 만들기 학습 대화 (2026-10-06)"
+      ]
+    },
+    {
+      "id": "machine-learning/model-and-validation",
+      "title": "모델의 가정과 검증 데이터의 역할",
+      "description": "예측·오차·비용을 구분하고 파라미터 학습, 하이퍼파라미터 선택, K-fold와 최종 테스트의 경계를 설명한다.",
+      "date": "2026-10-02",
+      "published": "2026-10-12",
+      "type": "concept",
+      "topics": [
+        "머신러닝"
+      ],
+      "courseId": "machine-learning",
+      "lessonId": "supervised-learning",
+      "url": "/notes/machine-learning/model-and-validation",
+      "links": [
+        "learning/2026-10-02-model-and-validation",
+        "learning/2026-10-05-06-linear-algebra-probability",
+        "machine-learning/linear-regression-gradient",
+        "data/numpy-linear-layers"
+      ],
+      "relatedReasons": {
+        "learning/2026-10-02-model-and-validation": "검증의 순서와 공통 가중치의 한계를 물은 실제 질문 기록이다.",
+        "learning/2026-10-05-06-linear-algebra-probability": "훈련 점수가 같은 두 모델을 어떻게 비교할지 답한 기록을 연결한다.",
+        "data/numpy-linear-layers": "하나의 가중치 배열을 모든 샘플에 적용하는 계산을 설명한다.",
+        "machine-learning/linear-regression-gradient": "선택한 비용을 가중치로 미분해 갱신하는 과정을 설명한다."
+      },
+      "sources": [
+        "선형대수학 적용 범위 이해 학습 대화 (2026-10-02)",
+        "문서 심화 내용 설명과 검증 질문 학습 대화 (2026-10-06)"
+      ]
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv",
+      "title": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "description": "반환값과 시간 처리부터 CSV writer·reader, 정렬 콜백, 도서관 객체의 상태 동기화까지 이어진 9월 22일 질문 기록.",
+      "date": "2026-09-22",
+      "published": "2026-10-12",
+      "type": "journal",
+      "topics": [
+        "실전 파이썬 준비하기"
+      ],
+      "courseId": "python",
+      "lessonId": "objects-and-classes",
+      "url": "/notes/learning/2026-09-22-library-and-csv",
+      "links": [
+        "python/files-and-with",
+        "python/sorting-and-callables",
+        "python/iterables-and-iterators",
+        "python/object-state-and-composition",
+        "learning/2026-09-21-oop-text-pipeline"
+      ],
+      "relatedReasons": {
+        "python/object-state-and-composition": "도서관 목록·회원 목록·대여 기록의 소유자와 갱신 범위를 비교한다.",
+        "python/files-and-with": "파일 객체를 열고 닫는 범위와 닫힌 뒤에도 남는 데이터를 설명한다.",
+        "python/sorting-and-callables": "sorted의 key가 각 항목을 받아 기준값을 반환하는 함수라는 점을 복습한다."
+      },
+      "sources": [
+        "문제2 원인 확인 학습 대화 (2026-09-22)",
+        "CSV 첫행 키값 질문 검토 학습 대화 (2026-09-22)",
+        "마지막 문제 오류 쉽게 해결 학습 대화 (2026-09-22)"
+      ]
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline",
+      "title": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "description": "self와 메서드 바인딩, 이름과 복사, TextSample과 Prediction의 연결, 조건식과 제너레이터를 따라간 9월 21일 질문 기록.",
+      "date": "2026-09-21",
+      "published": "2026-10-12",
+      "type": "journal",
+      "topics": [
+        "실전 파이썬 준비하기"
+      ],
+      "courseId": "python",
+      "lessonId": "objects-and-classes",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline",
+      "links": [
+        "python/self-and-objects",
+        "python/iterables-and-iterators",
+        "python/comprehensions",
+        "python/methods-types-and-inheritance",
+        "python/object-state-and-composition"
+      ],
+      "relatedReasons": {
+        "python/methods-types-and-inheritance": "자동 인자 전달과 타입 힌트·특별 메서드의 실제 규칙을 값으로 비교한다.",
+        "python/object-state-and-composition": "복사·속성의 소유자·파이프라인의 반환값을 객체 사이의 연결로 설명한다.",
+        "python/iterables-and-iterators": "sum과 for가 제너레이터에서 다음 값을 요청하는 기본 동작을 복습한다."
+      },
+      "sources": [
+        "강아지 클래스 self 매개변수 확인 학습 대화 (2026-09-21)",
+        "TextSample 문법과 메서드 설명 학습 대화 (2026-09-21)",
+        "필터 오류 원인 찾기 학습 대화 (2026-09-21)"
+      ]
+    },
+    {
+      "id": "python/methods-types-and-inheritance",
+      "title": "메서드의 자동 인자와 객체의 타입 계약",
+      "description": "일반·클래스·정적 메서드의 호출 차이, 타입 힌트와 특별 메서드의 실제 규칙, 상속과 오버라이딩을 값으로 구분한다.",
+      "date": "2026-09-21",
+      "published": "2026-10-12",
+      "type": "concept",
+      "topics": [
+        "실전 파이썬 준비하기"
+      ],
+      "courseId": "python",
+      "lessonId": "objects-and-classes",
+      "url": "/notes/python/methods-types-and-inheritance",
+      "links": [
+        "python/self-and-objects",
+        "learning/2026-09-21-oop-text-pipeline",
+        "python/object-state-and-composition"
+      ],
+      "relatedReasons": {
+        "learning/2026-09-21-oop-text-pipeline": "self·정적 메서드·타입 힌트·pass를 묻게 된 당시 코드와 후속 질문이다.",
+        "python/self-and-objects": "인스턴스 호출이 첫 인자를 연결하는 기본 관계를 확인한다.",
+        "python/object-state-and-composition": "메서드가 접근하는 상태의 소유자와 여러 객체의 연결을 설명한다."
+      },
+      "sources": [
+        "강아지 클래스 self 매개변수 확인 학습 대화 (2026-09-21)",
+        "TextSample 문법과 메서드 설명 학습 대화 (2026-09-21)"
+      ]
+    },
+    {
+      "id": "python/object-state-and-composition",
+      "title": "객체의 상태, 복사, 합성으로 데이터 흐름 읽기",
+      "description": "이름과 객체, 얕은 복사와 깊은 복사, 클래스 속성과 인스턴스 속성을 구분하고 전처리·도서 대여 실습의 상태 흐름을 연결한다.",
+      "date": "2026-09-21",
+      "published": "2026-10-12",
+      "type": "concept",
+      "topics": [
+        "실전 파이썬 준비하기"
+      ],
+      "courseId": "python",
+      "lessonId": "objects-and-classes",
+      "url": "/notes/python/object-state-and-composition",
+      "links": [
+        "python/self-and-objects",
+        "python/methods-types-and-inheritance",
+        "learning/2026-09-21-oop-text-pipeline",
+        "learning/2026-09-22-library-and-csv"
+      ],
+      "relatedReasons": {
+        "learning/2026-09-21-oop-text-pipeline": "복사와 이름·속성 구분이 분류 파이프라인으로 이어진 실제 질문이다.",
+        "learning/2026-09-22-library-and-csv": "같은 book_list 이름의 소유자와 대여·반납의 상태 갱신을 물은 기록이다.",
+        "python/methods-types-and-inheritance": "메서드를 호출할 때 자동으로 받는 객체와 반환값 규칙을 비교한다."
+      },
+      "sources": [
+        "강아지 클래스 self 매개변수 확인 학습 대화 (2026-09-21)",
+        "필터 오류 원인 찾기 학습 대화 (2026-09-21)",
+        "문제2 원인 확인 학습 대화 (2026-09-22)",
+        "마지막 문제 오류 쉽게 해결 학습 대화 (2026-09-22)"
       ]
     },
     {
@@ -1276,6 +1781,2506 @@ window.HANTHING_CONTENT = {
     }
   ],
   "questions": [
+    {
+      "id": "learning/2026-10-08-logistic-loss#질문-왜-회귀에서는-오차-분류에서는-손실이라고-부르는가",
+      "title": "왜 회귀에서는 오차, 분류에서는 손실이라고 부르는가?",
+      "url": "/notes/learning/2026-10-08-logistic-loss#질문-왜-회귀에서는-오차-분류에서는-손실이라고-부르는가",
+      "topic": "머신러닝",
+      "sourceTitle": "p·q·로그 손실에서 실제 파라미터 기울기까지",
+      "context": "회귀에서 배운 error와 분류 슬라이드의 loss가 서로 다른 분야의 용어인지 물었다.",
+      "intent": "이전 단원에서 쓰던 말과 새 단원의 목적함수를 연결하려는 질문이다.",
+      "answer": "회귀에서도 손실을 사용한다. 오차를 ŷ-y라는 차이로 정의했다면 그 제곱을 벌점으로 삼은 것이 제곱손실이고, 여러 행의 평균이 MSE다. 분류에서는 정답에 준 확률로 로그 손실을 만들 수 있다. “회귀=오차, 분류=손실”로 나누지 않는다."
+    },
+    {
+      "id": "learning/2026-10-08-logistic-loss#질문-모델이-class-1을-골랐는데-왜-class-0의-확률로-손실을-구하는가",
+      "title": "모델이 class 1을 골랐는데 왜 class 0의 확률로 손실을 구하는가?",
+      "url": "/notes/learning/2026-10-08-logistic-loss#질문-모델이-class-1을-골랐는데-왜-class-0의-확률로-손실을-구하는가",
+      "topic": "머신러닝",
+      "sourceTitle": "p·q·로그 손실에서 실제 파라미터 기울기까지",
+      "context": "슬라이드에는 확률 [0.244728,0.665241,0.090031], 실제 정답 0이 나왔다.",
+      "intent": "모델이 고른 답과 손실에서 평가하는 답을 구별하려는 질문이다.",
+      "answer": "예측은 가장 높은 확률의 class 1이다. 손실은 이미 주어진 실제 정답 class 0에 준 확률을 평가하므로 -ln(0.244728)≈1.407606이다. 0은 클래스 이름이지 확률 0이라는 뜻이 아니다. 틀린 답에 준 최대 확률로 손실을 계산하면 자신 있게 틀리는 모델을 잘했다고 평가하게 된다."
+    },
+    {
+      "id": "learning/2026-10-08-logistic-loss#질문-p와-q를-쉬운-예로-구별하면-무엇인가",
+      "title": "p와 q를 쉬운 예로 구별하면 무엇인가?",
+      "url": "/notes/learning/2026-10-08-logistic-loss#질문-p와-q를-쉬운-예로-구별하면-무엇인가",
+      "topic": "머신러닝",
+      "sourceTitle": "p·q·로그 손실에서 실제 파라미터 기울기까지",
+      "context": "이진 분류 표를 본 뒤 스팸 같은 쉬운 예로 설명해 달라고 했다.",
+      "intent": "class 1 확률과 실제 정답에 해당하는 확률을 구체적으로 구분하려는 질문이다.",
+      "answer": "class 1을 스팸으로 정하면 p는 항상 스팸 확률이다. y=1,p=.8이면 q=.8이고, y=0,p=.2이면 q=1-.2=.8이다. 두 예측은 p가 다르지만 실제 정답에 모두 80%를 주어 손실이 같다. y=1,p=.1이면 q=.1이므로 손실은 더 크다."
+    },
+    {
+      "id": "learning/2026-10-08-logistic-loss#질문-정답-확률에-왜--log를-씌우는가",
+      "title": "정답 확률에 왜 -log를 씌우는가?",
+      "url": "/notes/learning/2026-10-08-logistic-loss#질문-정답-확률에-왜--log를-씌우는가",
+      "topic": "머신러닝",
+      "sourceTitle": "p·q·로그 손실에서 실제 파라미터 기울기까지",
+      "context": "q를 고르는 것까지 이해한 뒤 그 값을 다시 변환하는 이유를 물었다.",
+      "intent": "좋은 예측의 확률과 최소화할 벌점의 방향을 연결하려는 질문이다.",
+      "answer": "q는 클수록 좋고 손실은 작을수록 좋아야 한다. $-\\ln q$는 q=1에서 0, q가 0에 가까워질수록 무한히 커진다. .8, .1, .01의 손실은 약 .223, 2.303, 4.605다."
+    },
+    {
+      "id": "learning/2026-10-08-logistic-loss#질문-p-q--lnq의-정확한-정의는-무엇인가",
+      "title": "p, q, -ln(q)의 정확한 정의는 무엇인가?",
+      "url": "/notes/learning/2026-10-08-logistic-loss#질문-p-q--lnq의-정확한-정의는-무엇인가",
+      "topic": "머신러닝",
+      "sourceTitle": "p·q·로그 손실에서 실제 파라미터 기울기까지",
+      "context": "직관 다음에는 기억할 정의를 정확히 정해 달라고 했다.",
+      "intent": "서로 연관된 세 값을 같은 예측값으로 뭉뚱그리지 않으려는 질문이다.",
+      "answer": "이 글의 이진 분류에서 p는 모델의 class 1 예측 확률, q는 모델이 실제 정답 클래스에 부여한 확률, -ln(q)는 샘플 하나의 로그 손실이다. p는 y 없이 계산하지만 q를 고르려면 y가 필요하다. q는 정답표가 옳을 확률이나 데이터 자체의 확실성이 아니다."
+    },
+    {
+      "id": "learning/2026-10-08-logistic-loss#질문-그러면-q도-결국-예측값-아닌가",
+      "title": "그러면 q도 결국 예측값 아닌가?",
+      "url": "/notes/learning/2026-10-08-logistic-loss#질문-그러면-q도-결국-예측값-아닌가",
+      "topic": "머신러닝",
+      "sourceTitle": "p·q·로그 손실에서 실제 파라미터 기울기까지",
+      "context": "q가 모델에서 나온 값이라는 점을 다시 확인했다.",
+      "intent": "예측 클래스와 예측 확률, 정답으로 고른 확률의 관계를 확인하려는 질문이다.",
+      "answer": "q도 예측 확률에서 나온 값이 맞다. 다만 새로 예측한 클래스 번호가 아니라, 모델이 만든 확률 중 정답 열을 고른 값이다. [P(0),P(1)]=[.2,.8]이면 예측 라벨은 1이고 p=.8이다. 정답이 0이면 q=.2, 정답이 1이면 q=.8이다."
+    },
+    {
+      "id": "learning/2026-10-08-logistic-loss#질문-q--npwhere는-배열을-거르는-문법인가",
+      "title": "q = np.where(...)는 배열을 거르는 문법인가?",
+      "url": "/notes/learning/2026-10-08-logistic-loss#질문-q--npwhere는-배열을-거르는-문법인가",
+      "topic": "머신러닝",
+      "sourceTitle": "p·q·로그 손실에서 실제 파라미터 기울기까지",
+      "context": "y와 p가 shape (3,)인 것은 알지만 np.where 문법을 모른다고 말했다.",
+      "intent": "조건식이 함수 인자로 들어갈 때 실제 어떤 값이 선택되는지 알고 싶은 질문이다.",
+      "answer": "세 인자 형식은 np.where(조건, 참일 때 값, 거짓일 때 값)이다. y=[1,0,1], p=[.8,.2,.1]에서 조건은 [True,False,True], 1-p는 [.2,.8,.9]다. 각 위치에서 하나씩 골라 q=[.8,.8,.1]이 된다. 여기서는 원소를 제거하는 필터가 아니어서 shape (3,)을 유지한다."
+    },
+    {
+      "id": "learning/2026-10-08-logistic-loss#질문-손실이-음수가-아니어서-제곱을-안-하는-것인가",
+      "title": "손실이 음수가 아니어서 제곱을 안 하는 것인가?",
+      "url": "/notes/learning/2026-10-08-logistic-loss#질문-손실이-음수가-아니어서-제곱을-안-하는-것인가",
+      "topic": "머신러닝",
+      "sourceTitle": "p·q·로그 손실에서 실제 파라미터 기울기까지",
+      "context": "terms=-log(q), loss=terms.mean()을 읽으며 “이미 양수여서 제곱할 필요가 없겠다”고 추측했다.",
+      "intent": "제곱오차에서 배운 상쇄 방지 논리를 로그 손실에 적용하려는 질문이다.",
+      "answer": "유효한 0<q≤1에서 로그 손실은 음수가 아니므로 부호 상쇄는 없다. 그러나 제곱하지 않는 직접적인 이유는 손실을 -log(q)로 정의했기 때문이다. 이를 다시 제곱하면 다른 목적함수가 된다. q=[.8,.8,.1]에서 terms≈[.223144,.223144,2.302585], 평균은 .916291이다. terms는 (3,)이고 loss는 스칼라다."
+    },
+    {
+      "id": "learning/2026-10-08-logistic-loss#질문-왜-모든-z가-0이면-모든-p가-05인가",
+      "title": "왜 모든 z가 0이면 모든 p가 0.5인가?",
+      "url": "/notes/learning/2026-10-08-logistic-loss#질문-왜-모든-z가-0이면-모든-p가-05인가",
+      "topic": "머신러닝",
+      "sourceTitle": "p·q·로그 손실에서 실제 파라미터 기울기까지",
+      "context": "초기 w=b=0인 그림에서 입력과 정답이 다른데 확률이 같은 이유를 물었다.",
+      "intent": "입력 → 점수 → 확률의 빠진 계산을 연결하려는 질문이다.",
+      "answer": "$z=b+wx$이므로 w=b=0이면 어떤 x에서도 z=0이다. $\\sigma(0)=1/(1+e^0)=1/2$이므로 p=.5다. 정답 y는 예측을 만드는 이 식에 들어가지 않는다. 이후 파라미터를 갱신하면 점수와 확률이 달라질 수 있다."
+    },
+    {
+      "id": "learning/2026-10-08-logistic-loss#질문-손실은-q로-계산하는데-왜-기울기에는-p-y가-나오는가",
+      "title": "손실은 q로 계산하는데 왜 기울기에는 p-y가 나오는가?",
+      "url": "/notes/learning/2026-10-08-logistic-loss#질문-손실은-q로-계산하는데-왜-기울기에는-p-y가-나오는가",
+      "topic": "머신러닝",
+      "sourceTitle": "p·q·로그 손실에서 실제 파라미터 기울기까지",
+      "context": "q를 배운 뒤 갱신 코드의 p-y가 납득되지 않아 q-y가 아닌 이유를 물었다.",
+      "intent": "손실 계산과 손실 미분을 구별해 회귀의 오차와 연결하려는 질문이다.",
+      "answer": "p-y는 로그 손실값이 아니라 한 행 손실을 선형 점수 z로 미분한 값이다."
+    },
+    {
+      "id": "learning/2026-10-08-logistic-loss#질문-로지스틱-회귀에서-학습하는-파라미터는-p인가",
+      "title": "로지스틱 회귀에서 학습하는 파라미터는 p인가?",
+      "url": "/notes/learning/2026-10-08-logistic-loss#질문-로지스틱-회귀에서-학습하는-파라미터는-p인가",
+      "topic": "머신러닝",
+      "sourceTitle": "p·q·로그 손실에서 실제 파라미터 기울기까지",
+      "context": "확률을 올리고 내린다는 설명을 들은 뒤 회귀의 theta에 대응하는 값이 p인지 물었다.",
+      "intent": "학습으로 저장·갱신하는 값과 그 값으로 계산한 출력을 구분하려는 질문이다.",
+      "answer": "파라미터는 여전히 b와 w다. theta=[b,w] → z=Xb@theta → p=sigmoid(z) 순서다. theta를 바꾸어 점수가 달라지면 확률이 다시 계산된다. p를 독립적인 파라미터로 직접 저장해 갱신하는 코드가 아니다."
+    },
+    {
+      "id": "learning/2026-10-08-logistic-loss#질문-실제-b와-w를-늘리면-손실이-어떻게-변하는지-설명해-달라",
+      "title": "실제 b와 w를 늘리면 손실이 어떻게 변하는지 설명해 달라",
+      "url": "/notes/learning/2026-10-08-logistic-loss#질문-실제-b와-w를-늘리면-손실이-어떻게-변하는지-설명해-달라",
+      "topic": "머신러닝",
+      "sourceTitle": "p·q·로그 손실에서 실제 파라미터 기울기까지",
+      "context": "p-y의 부호를 확률 변화로만 말하면 더 헷갈린다고 지적했다. 회귀 때처럼 theta와 손실의 관계로 설명해 달라고 요청했다.",
+      "intent": "점수에 대한 미분과 실제 파라미터에 대한 미분을 분리하려는 요청이다.",
+      "answer": "x=[-1,0,1], y=[0,0,1], b=w=0이면 p-y=[.5,.5,-.5]다. 평균 손실의 실제 편미분은"
+    },
+    {
+      "id": "learning/2026-10-08-logistic-loss#질문-그-해석이-g와-theta-갱신-코드로-어떻게-이어지는가",
+      "title": "그 해석이 g와 theta 갱신 코드로 어떻게 이어지는가?",
+      "url": "/notes/learning/2026-10-08-logistic-loss#질문-그-해석이-g와-theta-갱신-코드로-어떻게-이어지는가",
+      "topic": "머신러닝",
+      "sourceTitle": "p·q·로그 손실에서 실제 파라미터 기울기까지",
+      "context": "파라미터별 미분 설명 이후 실제 학습 코드를 설명해 달라고 했다.",
+      "intent": "수식의 두 편미분이 배열 어느 위치로 들어가는지 확인하려는 질문이다.",
+      "answer": "D=[[1,-1],[1,0],[1,1]], t0=[0,0]일 때 g=D.T@(p-y)/3은 [1/6,-1/3]이다. shape (3,)인 점수 미분이 shape (2,)인 파라미터 기울기로 바뀐다. t1=t0-.3*g이면 [-.05,.1], 새 점수는 [-.15,-.05,.05], 평균 로그 손실은 약 .652625다. 갱신 전의 .693147보다 작지만 이 한 예가 모든 학습률에서의 감소를 보장하지는 않는다."
+    },
+    {
+      "id": "learning/2026-10-08-logistic-loss#질문-복잡한-sigmoid-함수도-11exp-z를-계산하는가",
+      "title": "복잡한 sigmoid 함수도 1/(1+exp(-z))를 계산하는가?",
+      "url": "/notes/learning/2026-10-08-logistic-loss#질문-복잡한-sigmoid-함수도-11exp-z를-계산하는가",
+      "topic": "머신러닝",
+      "sourceTitle": "p·q·로그 손실에서 실제 파라미터 기울기까지",
+      "context": "학습 셀의 exp(-logaddexp(0,-asarray(z))) 표현을 한 줄씩 설명해 달라고 했다.",
+      "intent": "수치 안정성을 위한 구현과 익숙한 수학식을 대응시키려는 질문이다.",
+      "answer": "logaddexp(a,b)는 $\\ln(e^a+e^b)$를 안정적으로 계산한다. 따라서 $\\exp[-\\ln(1+e^{-z})]=1/(1+e^{-z})$다. asarray(...,dtype=float)는 실수 배열로 맞춘다. 배열이면 같은 shape의 확률을 반환한다. 이 함수 정의만 읽은 상태와 호출해서 나온 결과는 구분한다."
+    },
+    {
+      "id": "learning/2026-10-08-logistic-loss#질문-binary_loss는-확률-배열을-반환하는가-손실-하나를-반환하는가",
+      "title": "binary_loss는 확률 배열을 반환하는가, 손실 하나를 반환하는가?",
+      "url": "/notes/learning/2026-10-08-logistic-loss#질문-binary_loss는-확률-배열을-반환하는가-손실-하나를-반환하는가",
+      "topic": "머신러닝",
+      "sourceTitle": "p·q·로그 손실에서 실제 파라미터 기울기까지",
+      "context": "학습 셀의 함수와 그 출력이 무엇인지 다시 물었다.",
+      "intent": "함수 입력의 의미와 mean 이후 반환 타입을 확인하려는 질문이다.",
+      "answer": "이 코드의 함수는 점수 z와 정답 y를 받아 평균 손실 스칼라를 반환한다."
+    },
+    {
+      "id": "learning/2026-10-08-logistic-loss#질문-predict_probax1은-무엇을-선택하며-classes_는-무엇인가",
+      "title": "predict_proba(X)[:,1]은 무엇을 선택하며 classes_는 무엇인가?",
+      "url": "/notes/learning/2026-10-08-logistic-loss#질문-predict_probax1은-무엇을-선택하며-classes_는-무엇인가",
+      "topic": "머신러닝",
+      "sourceTitle": "p·q·로그 손실에서 실제 파라미터 기울기까지",
+      "context": "직접 만든 로지스틱 회귀와 scikit-learn을 비교하는 셀의 배열 선택을 물었다.",
+      "intent": "확률의 열 위치가 어떤 클래스에 대응하는지 확인하려는 질문이다.",
+      "answer": "predict_proba는 샘플별 클래스 확률 행렬을 반환한다. [:,1]은 모든 행의 두 번째 열이다. 그 열이 class 1인지 classes_의 순서로 확인한다. classes_=[0,1]이면 맞지만 열 번호와 라벨이 항상 같은 것은 아니다. 직접 계산한 p와 이 열의 최대 차이는 구현 출력의 일치 정도이며 정답률이나 새 데이터 성능이 아니다."
+    },
+    {
+      "id": "learning/2026-10-08-logistic-loss#질문-클래스가-012이면-p-하나로-어떻게-표현하는가",
+      "title": "클래스가 0·1·2이면 p 하나로 어떻게 표현하는가?",
+      "url": "/notes/learning/2026-10-08-logistic-loss#질문-클래스가-012이면-p-하나로-어떻게-표현하는가",
+      "topic": "머신러닝",
+      "sourceTitle": "p·q·로그 손실에서 실제 파라미터 기울기까지",
+      "context": "이전의 p는 class 1 확률이었는데 softmax 셀에는 세 클래스가 있어 혼란스럽다고 했다.",
+      "intent": "이진 확률 하나와 다중 클래스 확률 벡터의 차이를 이해하려는 질문이다.",
+      "answer": "이진 분류는 P(0)=1-P(1)이라 하나만 알면 된다. 세 클래스는 하나를 알아도 나머지 둘의 배분을 모른다. 따라서 샘플 하나에 [p₀,p₁,p₂]를 계산한다. softmax는 $p_k=e^{z_k}/\\sum_j e^{z_j}$다. 점수 1,2,0은 샘플 1개·클래스 3개의 (1,3) 배열이고 확률은 약 .244728,.665241,.090031이다. 점수 0은 확률 0이 아니다."
+    },
+    {
+      "id": "learning/2026-10-08-logistic-loss#질문-softmax에서-최댓값을-빼고-argmax를-쓰는-줄은-무엇인가",
+      "title": "softmax에서 최댓값을 빼고 argmax를 쓰는 줄은 무엇인가?",
+      "url": "/notes/learning/2026-10-08-logistic-loss#질문-softmax에서-최댓값을-빼고-argmax를-쓰는-줄은-무엇인가",
+      "topic": "머신러닝",
+      "sourceTitle": "p·q·로그 손실에서 실제 파라미터 기울기까지",
+      "context": "softmax 셀 전체 설명 요청에서 안정화·열 선택·정답 확률 계산이 이어졌다.",
+      "intent": "한 행 안의 연산과 클래스 라벨 선택 과정을 확인하려는 질문이다.",
+      "answer": "각 행의 최댓값을 빼도 지수의 공통 배수가 약분돼 확률이 같다. 1,2,0에서 -1,0,-2로 바꾸면 지수 넘침을 줄일 수 있다. axis=1, keepdims=True는 각 행의 최대나 합을 (n,1)로 남긴다. argmax(axis=1)은 가장 큰 확률의 열 위치를 주므로 classes[위치]로 라벨을 찾는다. 손실은 최대 열이 아니라 정답 라벨에 대응하는 열을 선택한다."
+    },
+    {
+      "id": "learning/2026-10-08-logistic-loss#질문-범주는-등급이-아닌데-왜-클래스별-점수가-있는가",
+      "title": "범주는 등급이 아닌데 왜 클래스별 점수가 있는가?",
+      "url": "/notes/learning/2026-10-08-logistic-loss#질문-범주는-등급이-아닌데-왜-클래스별-점수가-있는가",
+      "topic": "머신러닝",
+      "sourceTitle": "p·q·로그 손실에서 실제 파라미터 기울기까지",
+      "context": "A와 B는 다른 범주일 뿐인데 B에 높은 점수를 주는 설명은 등급처럼 느껴진다고 지적했다.",
+      "intent": "클래스 번호의 의미와 모델 점수의 의미를 분리하려는 질문이다.",
+      "answer": "점수는 클래스 자체의 우열이 아니라 현재 입력을 그 클래스로 판단하는 모델의 값이다. 입력과 클래스별 파라미터가 바뀌면 달라진다. 설명용 고양이 사진에 [4,1,-2]라는 점수를 줬다고 고양이가 더 좋은 동물이라는 뜻은 아니다. 점수 2가 1보다 두 배 적합하다는 뜻도 아니다. softmax에서는 점수 차이가 상대 확률을 결정한다."
+    },
+    {
+      "id": "learning/2026-10-08-logistic-loss#질문-정답이-고양이면-강아지와-토끼는-둘-다-틀린데-왜-점수가-다른가",
+      "title": "정답이 고양이면 강아지와 토끼는 둘 다 틀린데 왜 점수가 다른가?",
+      "url": "/notes/learning/2026-10-08-logistic-loss#질문-정답이-고양이면-강아지와-토끼는-둘-다-틀린데-왜-점수가-다른가",
+      "topic": "머신러닝",
+      "sourceTitle": "p·q·로그 손실에서 실제 파라미터 기울기까지",
+      "context": "범주 점수가 입력에 대한 판단이라는 설명은 받아들였지만, 두 오답의 값이 달라야 하는지 후속 질문을 했다.",
+      "intent": "정답의 0/1 표시와 모델의 불확실한 추정을 구별하려는 질문이다.",
+      "answer": "정답 one-hot은 [1,0,0]이어도 예측은 [.7,.2,.1]일 수 있다. 모델은 정답을 보기 전에 현재 파라미터로 확률을 만든다. 정답 확률 .7이 같으면 [.7,.1,.2], [.7,.15,.15]도 손실은 모두 $-\\ln .7$로 같다."
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification#질문-로지스틱-분류-코드는-어떤-순서로-채우는가",
+      "title": "로지스틱 분류 코드는 어떤 순서로 채우는가?",
+      "url": "/notes/learning/2026-10-08-wine-classification#질문-로지스틱-분류-코드는-어떤-순서로-채우는가",
+      "topic": "머신러닝",
+      "sourceTitle": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "context": "오전의 코드 진단 대화에서는 Wine 문제의 모델 정의가 비어 있었고, 오후 PRACTICE에서는 확률·라벨 계산의 힌트를 요청했다.",
+      "intent": "함수 이름을 나열하기보다 필요한 중간 결과의 순서를 잡으려는 질문이다.",
+      "answer": "기본 흐름은 입력·정답 준비 → 학습·평가 분리 → 모델 fit → 평가 입력 predict → 정답과 비교다. 오전 과제에서 제안한 saga·random_state=5와 오후 실습의 lbfgs·random_state=42는 서로 다른 코드 맥락이므로 한 실험의 설정처럼 섞지 않는다. 제안받은 코드가 실행·채점됐다는 뜻도 아니다."
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification#질문-per_row_lossmean_losslabels_calc에는-서로-다른-값이-들어가는가",
+      "title": "per_row_loss·mean_loss·labels_calc에는 서로 다른 값이 들어가는가?",
+      "url": "/notes/learning/2026-10-08-wine-classification#질문-per_row_lossmean_losslabels_calc에는-서로-다른-값이-들어가는가",
+      "topic": "머신러닝",
+      "sourceTitle": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "context": "정답 확률을 고른 다음 남은 세 빈칸의 힌트와 답을 차례로 요청했다.",
+      "intent": "확률 배열에서 행별 손실·전체 요약·예측 라벨이 갈라지는 지점을 확인하려는 질문이다.",
+      "answer": "y=[1,0,1], p=[.8,.2,.1]에서 q=[.8,.8,.1]이다. -np.log(q)는 행별 손실 약 [.223144,.223144,2.302585], 그 mean은 .916291이다. (p>=.5).astype(int)는 예측 라벨 [1,0,0]이다. p라는 임시 이름이 아니라 셀에서 정의한 p_calc를 사용해야 한다. 라벨로 바꾸면 .51과 .99가 모두 1이 되어 확신 정도가 사라진다."
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification#질문-class-1-확률만-비교하면-class-0-판단은-빠지는-것-아닌가",
+      "title": "class 1 확률만 비교하면 class 0 판단은 빠지는 것 아닌가?",
+      "url": "/notes/learning/2026-10-08-wine-classification#질문-class-1-확률만-비교하면-class-0-판단은-빠지는-것-아닌가",
+      "topic": "머신러닝",
+      "sourceTitle": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "context": "p_calc>=.5 대신 정답 확률 q가 .5 이상인지 봐야 한다고 생각했다.",
+      "intent": "어느 클래스를 고르는 것과 정답에 높은 확률을 줬는지를 구별하려는 질문이다.",
+      "answer": "p<.5이면 1-p>.5이므로 그 결과 False를 정수 0으로 바꾸는 것이 class 0 선택이다. y=0,p=.2라면 올바른 예측 라벨은 0이고 q=.8이다. q>=.5를 정수 1로 바꾸면 “정답에 높은 확률을 줬다”는 표시를 class 1로 오해하게 된다. q를 구하려면 이미 y가 필요하므로 새 데이터의 예측 기준으로 쓸 수 없다. p=.5에서는 이 코드가 1을 고른다는 동점 규칙도 포함된다."
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification#질문-확률부터-한-번-갱신한-손실까지-어떻게-연결하는가",
+      "title": "확률부터 한 번 갱신한 손실까지 어떻게 연결하는가?",
+      "url": "/notes/learning/2026-10-08-wine-classification#질문-확률부터-한-번-갱신한-손실까지-어떻게-연결하는가",
+      "topic": "머신러닝",
+      "sourceTitle": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "context": "1-2의 빈칸에서 probability_error, first_gradient, theta_next, loss_next 순서의 힌트를 요청했다.",
+      "intent": "앞서 배운 식을 각 변수의 값으로 연결하려는 질문이다.",
+      "answer": "D=[[1,-1],[1,0],[1,1]], theta=[0,0], y=[0,0,1]에서 p=[.5,.5,.5], p-y=[.5,.5,-.5]다. D.T@(p-y)/3은 [1/6,-1/3]이고 학습률 .3으로 theta_next=[-.05,.1]이다. 새 손실은 binary_loss(D @ theta_next,y)처럼 새 점수로 계산한다. 이전 theta나 확률 p를 넣지 않는다."
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification#질문-binary_loss-안에서-숫자는-실제로-어떻게-바뀌는가",
+      "title": "binary_loss 안에서 숫자는 실제로 어떻게 바뀌는가?",
+      "url": "/notes/learning/2026-10-08-wine-classification#질문-binary_loss-안에서-숫자는-실제로-어떻게-바뀌는가",
+      "topic": "머신러닝",
+      "sourceTitle": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "context": "함수 설명보다 쉬운 숫자로 실제 계산을 보여 달라고 거듭 요청했다.",
+      "intent": "logaddexp와 정답 곱셈, 평균을 눈으로 따라가려는 요청이다.",
+      "answer": "함수의 한 행 계산은 $\\ln(1+e^z)-yz$다. 새 점수 [-.15,-.05,.05], 정답 [0,0,1]을 넣으면 다음과 같다."
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification#질문-npmean을-쓴-first_gradient에서-무엇이-틀렸는가",
+      "title": "np.mean을 쓴 first_gradient에서 무엇이 틀렸는가?",
+      "url": "/notes/learning/2026-10-08-wine-classification#질문-npmean을-쓴-first_gradient에서-무엇이-틀렸는가",
+      "topic": "머신러닝",
+      "sourceTitle": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "context": "작성한 코드가 np.mean(design_first.T @ (p_first-y_first))인 상태에서 오류를 물었다.",
+      "intent": "평균을 냈는데도 다른 결과가 나온 원인을 찾으려는 질문이다.",
+      "answer": "행렬곱 결과는 [0.5,-1.0]으로 b와 w의 합 기울기 두 개다. 전체 mean은 -.25라는 스칼라로 이 둘을 섞는다. 원하는 결과는 각 값에 샘플 수 3을 나눈 [.166667,-.333333]이다. 따라서 (D.T @ error)/len(y)를 쓴다. “평균이니까 mean”보다 어느 축을 평균 내야 하는지가 먼저다."
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification#질문-고친-평균-기울기가-맞으면-1-3-전체도-끝난-것인가",
+      "title": "고친 평균 기울기가 맞으면 1-3 전체도 끝난 것인가?",
+      "url": "/notes/learning/2026-10-08-wine-classification#질문-고친-평균-기울기가-맞으면-1-3-전체도-끝난-것인가",
+      "topic": "머신러닝",
+      "sourceTitle": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "context": "return (design.T @ (probability-target))/len(target)로 바꾼 뒤 맞는지 물었다.",
+      "intent": "국소적인 수정의 타당성과 전체 빈칸 완성을 확인하려는 질문이다.",
+      "answer": "그 식은 이 평균 로그 손실의 기울기에 맞는다. 여섯 샘플 초기값에서는 [0,-3.5]/6=[0,-.583333…]이다. 다만 당시 final_binary_loss, final_probability, final_label, binary_error_indices에는 None이 남아 있었다. 기울기 한 줄의 확인을 전체 실습 완료로 기록하지 않는다."
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification#질문-label은-정답-여부인가-final_label은-무엇인가",
+      "title": "label은 정답 여부인가? final_label은 무엇인가?",
+      "url": "/notes/learning/2026-10-08-wine-classification#질문-label은-정답-여부인가-final_label은-무엇인가",
+      "topic": "머신러닝",
+      "sourceTitle": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "context": "label의 뜻을 묻고 간략한 설명을 요청한 뒤 final_label이 예측 라벨인지 확인했다.",
+      "intent": "0과 1이라는 클래스 이름을 맞음·틀림 표시와 분리하려는 질문이다.",
+      "answer": "라벨은 데이터의 클래스 이름이다. 정답 라벨은 실제 분류, 예측 라벨은 모델의 판단이다. final_label은 최종 확률로 정한 예측 라벨이다. 0이라고 틀리고 1이라고 맞는 것이 아니라, 예측 라벨과 정답 라벨이 같은지를 비교해 맞았는지 판단한다."
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification#질문-indices는-무엇이며-오류-위치를-어떻게-구하는가",
+      "title": "indices는 무엇이며 오류 위치를 어떻게 구하는가?",
+      "url": "/notes/learning/2026-10-08-wine-classification#질문-indices는-무엇이며-오류-위치를-어떻게-구하는가",
+      "topic": "머신러닝",
+      "sourceTitle": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "context": "마지막 binary_error_indices 줄의 뜻과 코드·이유를 연달아 물었다.",
+      "intent": "예측 차이의 값과 틀린 샘플의 위치를 구별하려는 질문이다.",
+      "answer": "indices는 index의 복수형이다. 설명용 정답 [0,1,1], 예측 [0,0,1]을 비교하면 [False,True,False]다. np.flatnonzero(예측 != 정답)은 True인 위치 [1]을 반환한다. 예측-정답은 차이 [0,-1,0]를 계산할 뿐 위치 배열을 만드는 식이 아니다."
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification#질문-여러-개가-틀리면-flatnonzero는-하나만-반환하는가",
+      "title": "여러 개가 틀리면 flatnonzero는 하나만 반환하는가?",
+      "url": "/notes/learning/2026-10-08-wine-classification#질문-여러-개가-틀리면-flatnonzero는-하나만-반환하는가",
+      "topic": "머신러닝",
+      "sourceTitle": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "context": "오류가 한 개인 예시를 본 뒤 여러 개일 때를 물었다.",
+      "intent": "반환값이 단일 번호인지 가변 길이 배열인지 확인하려는 질문이다.",
+      "answer": "모든 오류 위치를 반환한다. 설명용 정답 [0,1,1,0], 예측 [1,1,0,1]이면 비교 결과 [True,False,True,True], 결과는 [0,2,3]이다. 전부 맞으면 길이 0인 배열이다. 일반 배열에서는 펼친 배열의 위치를 반환하므로 여기처럼 1차원 라벨을 비교한다는 조건을 확인한다."
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification#질문-flatnonzero에-전달하는-것은-조건문인가-불리언-series인가",
+      "title": "flatnonzero에 전달하는 것은 조건문인가, 불리언 Series인가?",
+      "url": "/notes/learning/2026-10-08-wine-classification#질문-flatnonzero에-전달하는-것은-조건문인가-불리언-series인가",
+      "topic": "머신러닝",
+      "sourceTitle": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "context": "np.flatnonzero(pred_metric != y_metric)에 어떤 타입이 들어가는지 아직 이해되지 않는다고 말했다.",
+      "intent": "함수 호출 전에 내부 표현식이 평가된다는 점을 구체적으로 확인하려는 질문이다.",
+      "answer": "두 변수가 NumPy 배열이면 먼저 원소별 비교가 끝난 불리언 ndarray가 만들어진다. pandas Series가 아니다. different=pred_metric!=y_metric 다음 flatnonzero(different)라고 두 줄로 써도 같다. 함수가 조건문 코드를 전달받는 것이 아니라 계산된 배열 값을 받는다."
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification#질문-tpfpfntn에서-positive와-true는-각각-무엇인가",
+      "title": "TP·FP·FN·TN에서 Positive와 True는 각각 무엇인가?",
+      "url": "/notes/learning/2026-10-08-wine-classification#질문-tpfpfntn에서-positive와-true는-각각-무엇인가",
+      "topic": "머신러닝",
+      "sourceTitle": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "context": "오전에는 지표 용어를, 오후에는 정답·예측을 네 종류로 나누는 필수 2를 물었다.",
+      "intent": "두 글자의 기준을 나눠 오류 종류를 읽으려는 질문이다.",
+      "answer": "이 이진 문제에서 관심 대상으로 정한 class 1이 Positive다. 뒤의 P/N은 예측, 앞의 T/F는 그 판단이 맞았는지다. 정답·예측이 (1,1)이면 TP, (0,1)이면 FP, (1,0)이면 FN, (0,0)이면 TN이다. Positive가 항상 “좋은 상태”를 뜻하지 않는다. 불량을 1로 두면 불량 탐지가 양성이다."
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification#질문-sum을-하면-숫자-하나가-되는데-그것이-맞는가",
+      "title": "sum을 하면 숫자 하나가 되는데 그것이 맞는가?",
+      "url": "/notes/learning/2026-10-08-wine-classification#질문-sum을-하면-숫자-하나가-되는데-그것이-맞는가",
+      "topic": "머신러닝",
+      "sourceTitle": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "context": "TP·FP·FN·TN 조건에 np.sum을 적용하면 상수처럼 하나가 되는 점을 지적했다.",
+      "intent": "위치 찾기와 개수 세기의 다른 반환 형태를 구별하려는 질문이다.",
+      "answer": "여기서는 개수를 구하므로 스칼라가 맞다. TP 조건 [True,False,True,...]의 합은 2다. flatnonzero(조건)은 [0,2]라는 위치 배열, sum(조건)은 2라는 개수다. 두 조건을 원소별로 모두 만족시키려면 (y==1) & (pred==1)처럼 각 비교를 괄호로 묶는다."
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification#질문-남은-정확도정밀도재현율f1은-어떻게-계산하는가",
+      "title": "남은 정확도·정밀도·재현율·F1은 어떻게 계산하는가?",
+      "url": "/notes/learning/2026-10-08-wine-classification#질문-남은-정확도정밀도재현율f1은-어떻게-계산하는가",
+      "topic": "머신러닝",
+      "sourceTitle": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "context": "남은 지표 계산을 요청했고 예제에서 두 수치가 같게 나왔다.",
+      "intent": "숫자가 우연히 같아도 분모가 무엇을 세는지 확인하려는 질문이다.",
+      "answer": "대화의 TP=2, FP=1, FN=1, TN=6에서 accuracy=8/10=.8, precision=2/(2+1), recall=2/(2+1), F1=2/3이다. 정밀도의 분모는 1이라고 예측한 세 개, 재현율의 분모는 실제 1인 세 개로 구성원이 다르다. 이 수치는 해당 예제의 분모가 모두 양수인 경우다. 평가 코드에서는 양성 예측이 없는 경우의 처리도 확인한다."
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification#질문-모두-0으로-예측해도-정확도가-높다면-좋은-모델인가",
+      "title": "모두 0으로 예측해도 정확도가 높다면 좋은 모델인가?",
+      "url": "/notes/learning/2026-10-08-wine-classification#질문-모두-0으로-예측해도-정확도가-높다면-좋은-모델인가",
+      "topic": "머신러닝",
+      "sourceTitle": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "context": "오전에는 정확도의 한계를, 오후에는 전부 0으로 예측하는 기준 모델의 지표를 물었다.",
+      "intent": "클래스 수가 치우친 상황에서 모델이 놓치는 것을 찾으려는 질문이다.",
+      "answer": "오후 예제는 실제 0이 7개, 1이 3개다. 모두 0으로 예측하면 정확도 .7이지만 양성 재현율은 0이다. 오전의 정상 9,990개·불량 10개 설명용 예에서는 정확도 .999여도 불량을 하나도 못 찾을 수 있다. 어떤 오류가 중요한지에 맞춰 정확도와 정밀도·재현율을 함께 읽는다."
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification#질문-logisticregressionscore는-손실을-반환하는가",
+      "title": "LogisticRegression.score는 손실을 반환하는가?",
+      "url": "/notes/learning/2026-10-08-wine-classification#질문-logisticregressionscore는-손실을-반환하는가",
+      "topic": "머신러닝",
+      "sourceTitle": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "context": "오전 Wine 코드의 score 메서드가 무엇을 하는지 물었다.",
+      "intent": "학습 손실과 라이브러리 기본 평가값을 구별하려는 질문이다.",
+      "answer": "이 분류기의 score(X,y)는 예측 라벨을 구해 정확도를 계산한다. 로그 손실이 아니다. 예를 들어 네 개 중 세 개를 맞히면 .75다. 같은 이름의 LinearRegression.score는 R²를 반환하므로 score라는 이름만 보고 모든 모델에 같은 지표를 대입하지 않는다."
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification#질문-make_pipeline을-호출하면-이미-학습한-것인가",
+      "title": "make_pipeline을 호출하면 이미 학습한 것인가?",
+      "url": "/notes/learning/2026-10-08-wine-classification#질문-make_pipeline을-호출하면-이미-학습한-것인가",
+      "topic": "머신러닝",
+      "sourceTitle": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "context": "StandardScaler와 LogisticRegression을 연결한 줄의 뜻을 물었다.",
+      "intent": "단계 구성과 실제 fit·predict 실행을 나누려는 질문이다.",
+      "answer": "호출 시점에는 두 단계를 가진 객체를 만든다. pipeline.fit(X_train,y_train)에서 scaler가 학습 평균·표준편차를 저장하고 X_train을 변환한 뒤 분류기가 학습한다. predict에서는 저장한 같은 기준으로 X_test를 변환하고 예측한다. 평가 데이터로 scaler를 새로 fit하면 평가 정보가 학습에 새는 문제가 생긴다. 설명용 평균10·표준편차2에서 새 값14의 변환은 2다."
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification#질문-wine의-x와-y-분할-결과는-어떤-모양인가",
+      "title": "Wine의 X와 y, 분할 결과는 어떤 모양인가?",
+      "url": "/notes/learning/2026-10-08-wine-classification#질문-wine의-x와-y-분할-결과는-어떤-모양인가",
+      "topic": "머신러닝",
+      "sourceTitle": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "context": "필수 3의 make_pipeline 이외 나머지 코드도 설명해 달라고 했다.",
+      "intent": "데이터 준비에서 평가까지 행 수가 어떻게 유지되는지 확인하려는 질문이다.",
+      "answer": "load_wine(return_X_y=True)의 X는 (178,13), y는 (178,)이다. 라벨은 종류 0·1·2다. test_size=.25이면 학습133개·평가45개이고 stratify=y는 클래스 비율이 비슷하도록 나눈다. X와 y를 함께 넘기면 같은 행끼리 분할된다. random_state는 같은 조건의 분할 재현에 쓰인다."
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification#질문-wine_probawine_predwine_classes와-기준-모델은-각각-무엇인가",
+      "title": "wine_proba·wine_pred·wine_classes와 기준 모델은 각각 무엇인가?",
+      "url": "/notes/learning/2026-10-08-wine-classification#질문-wine_probawine_predwine_classes와-기준-모델은-각각-무엇인가",
+      "topic": "머신러닝",
+      "sourceTitle": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "context": "필수 3에서 None으로 남긴 값과 most_frequent 모델의 역할이 설명됐다.",
+      "intent": "확률·라벨·열 이름·비교 기준을 구분하려는 질문이다.",
+      "answer": "학습 후 평가45개에 대해 proba는 (45,3), pred는 (45,), classes는 확률 열에 대응하는 [0,1,2]다. 세 클래스 중 최대 확률의 클래스를 고르므로 꼭 .5를 넘어야 하는 것은 아니다. DummyClassifier의 most_frequent는 학습 정답에서 가장 흔한 종류를 저장해 항상 그 종류를 예측한다. max_iter=3000은 최대 반복 수이며 반드시 3,000회 학습한다는 뜻은 아니다."
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification#질문-wine_metrics는-왜-따로-필요하며-무엇을-담는가",
+      "title": "wine_metrics는 왜 따로 필요하며 무엇을 담는가?",
+      "url": "/notes/learning/2026-10-08-wine-classification#질문-wine_metrics는-왜-따로-필요하며-무엇을-담는가",
+      "topic": "머신러닝",
+      "sourceTitle": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "context": "나머지 코드를 설명하는 답변에서 wine_metrics가 빠져 사용자가 이를 지적했다.",
+      "intent": "생략된 평가 결과 저장 단계까지 완결된 흐름으로 이해하려는 요청이다.",
+      "answer": "여러 평가 결과를 이름과 함께 담는 딕셔너리다."
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification#질문-none-검사shape-검사확률-합-검사는-무엇을-보장하는가",
+      "title": "None 검사·shape 검사·확률 합 검사는 무엇을 보장하는가?",
+      "url": "/notes/learning/2026-10-08-wine-classification#질문-none-검사shape-검사확률-합-검사는-무엇을-보장하는가",
+      "topic": "머신러닝",
+      "sourceTitle": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "context": "필수 3 코드 설명에 any, assert, allclose와 출력문의 의미가 포함됐다.",
+      "intent": "구조를 확인한 것과 성능을 평가한 것을 구별하려는 질문이다.",
+      "answer": "None 검사는 미입력 여부, shape 검사는 평가 샘플 수×클래스 수, allclose(proba.sum(axis=1),1)은 행별 확률 합을 확인한다. 이것만으로 정답을 잘 맞혔다거나 실습이 통과했다고 볼 수 없다. wine_errors=np.flatnonzero(wine_pred!=y_test)는 평가 배열 안의 오류 위치이며 원본 행 번호와는 별도다."
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification#질문-필수-3과-필수-4는-무엇이-달라지는가",
+      "title": "필수 3과 필수 4는 무엇이 달라지는가?",
+      "url": "/notes/learning/2026-10-08-wine-classification#질문-필수-3과-필수-4는-무엇이-달라지는가",
+      "topic": "머신러닝",
+      "sourceTitle": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "context": "복잡한 설명이 어렵다고 말한 뒤 “class 0과 1만 구별한다”는 문장을 앞 문제와 연결해 달라고 했다.",
+      "intent": "새 문제에서 데이터와 예측 대상이 어떻게 바뀌는지 다시 잡으려는 질문이다.",
+      "answer": "필수 3은 종류 0·1·2 세 개를 구별하고, 필수 4는 종류 2의 행을 제외해 0·1만 구별하는 새 이진 문제다. 2를 0으로 바꾸는 것이 아니다. 다중 클래스 혼동행렬은 3×3이고 TP·FP·FN·TN을 말하려면 어느 클래스를 양성으로 볼지 정해야 한다. 새 이진 문제에서는 그 기준을 1로 두고 앞의 네 칸을 적용할 수 있다."
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification#질문-npisin과-같은-mask를-xy에-쓰는-줄은-무엇인가",
+      "title": "np.isin과 같은 mask를 X·y에 쓰는 줄은 무엇인가?",
+      "url": "/notes/learning/2026-10-08-wine-classification#질문-npisin과-같은-mask를-xy에-쓰는-줄은-무엇인가",
+      "topic": "머신러닝",
+      "sourceTitle": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "context": "필수 4 준비 코드를 한 줄씩 설명해 달라고 했다.",
+      "intent": "선택 조건과 실제 선택, 특징·정답의 짝 유지 과정을 확인하려는 질문이다.",
+      "answer": "mask=np.isin(target,[0,1])은 각 라벨이 0 또는 1인지 표시하는 길이178 불리언 배열이다. data[mask], target[mask]로 같은 행만 선택한다. 선택 후 X는 (130,13), y는 (130,)이다. mask를 만든 순간 원본 데이터가 삭제되는 것은 아니다."
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification#질문-binary_source_rows와-class_names는-학습할-특성인가",
+      "title": "binary_source_rows와 class_names는 학습할 특성인가?",
+      "url": "/notes/learning/2026-10-08-wine-classification#질문-binary_source_rows와-class_names는-학습할-특성인가",
+      "topic": "머신러닝",
+      "sourceTitle": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "context": "필수 4에서 원본 행 번호와 클래스 이름 딕셔너리를 만드는 코드도 이어 설명해 달라고 했다.",
+      "intent": "모델 입력과 결과 해석을 위한 부가 정보를 구별하려는 질문이다.",
+      "answer": "flatnonzero(mask)는 남긴 행의 원본 위치다. 예를 들어 mask=[True,False,True]이면 [0,2]여서 새 배열 위치1의 원본 위치가 2임을 알 수 있다. class_names={i:str(target_names[i]) for i in [0,1]}은 {0:'class_0',1:'class_1'} 같은 이름표다. 둘 다 이 코드에서는 학습 특성으로 주는 값이 아니다."
+    },
+    {
+      "id": "learning/2026-10-08-wine-classification#질문-배열-세-개를-split에-넘기면-반환값은-왜-여섯-개인가",
+      "title": "배열 세 개를 split에 넘기면 반환값은 왜 여섯 개인가?",
+      "url": "/notes/learning/2026-10-08-wine-classification#질문-배열-세-개를-split에-넘기면-반환값은-왜-여섯-개인가",
+      "topic": "머신러닝",
+      "sourceTitle": "분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가",
+      "context": "특징·정답·원본 행 번호를 함께 분할하는 긴 대입문을 물었다.",
+      "intent": "행의 짝과 반환 순서를 눈으로 따라가려는 질문이다.",
+      "answer": "각 입력마다 train·test가 한 쌍씩 반환된다. 순서는 X_train,X_test,y_train,y_test,rows_train,rows_test다. 동일한 기준으로 나누므로 한 와인의 특징·정답·원본 번호가 함께 이동한다. 130개를 test_size=.25로 나누면 학습97개·평가33개다. 준비된 Pipeline 객체는 이후 fit을 해야 학습된다. 준비 코드 설명을 최종 학습·평가 완료로 기록하지 않는다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-제곱오차의-합이-왜-14w10라는-함수가-되는가",
+      "title": "제곱오차의 합이 왜 14(w−10)²라는 함수가 되는가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-제곱오차의-합이-왜-14w10라는-함수가-되는가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "10월 2일에는 각 오차를 제곱해 더하는 SSE와 교재의 C(w)=14(w−10)²가 다른 계산처럼 보인다고 물었다.",
+      "intent": "숫자로 구한 오차와 파라미터를 남긴 함수가 같은 계산인지 확인하려는 질문이다.",
+      "answer": "대화의 입력은 $x=[1,2,3]$, 정답은 $y=[10,20,30]$, 예측은 $wx$다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-오차는-예측정답인가-정답예측인가",
+      "title": "오차는 예측−정답인가, 정답−예측인가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-오차는-예측정답인가-정답예측인가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "10월 2일에는 오차의 부호가 중요하다고 짚었고, 10월 7일에는 error와 residual이 단순히 부호만 다른지 물었다.",
+      "intent": "부호가 미분과 갱신 방향에 미치는 영향, 통계 용어의 차이를 구별하려는 질문이다.",
+      "answer": "이 글의 계산은 e = prediction - target으로 통일한다. 정답 10, 예측 8이면 e=-2다. 잔차를 y-ŷ로 정의하면 +2이며 제곱은 같다. 미분은 선택한 정의에 맞게 끝까지 일관되게 해야 한다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-dw에는-왜-x를-곱하고-db에는-곱하지-않는가",
+      "title": "dW에는 왜 x를 곱하고 db에는 곱하지 않는가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-dw에는-왜-x를-곱하고-db에는-곱하지-않는가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "예측식 wx+b를 학습시키는 코드에서 두 미분식이 다른 이유를 물었다.",
+      "intent": "외운 공식 대신 각 파라미터가 예측을 바꾸는 정도를 알고 싶은 질문이다.",
+      "answer": "$e_i=wx_i+b-y_i$, $J=\\frac1{2n}\\sum_i e_i^2$라 두면 연쇄법칙으로"
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-제곱을-미분했는데-앞의-2는-어디로-갔는가",
+      "title": "제곱을 미분했는데 앞의 2는 어디로 갔는가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-제곱을-미분했는데-앞의-2는-어디로-갔는가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "dW와 db 식에 2가 없는 이유를 다시 물었다.",
+      "intent": "MSE와 반 MSE의 정의 차이가 생략된 것인지 확인하려는 질문이다.",
+      "answer": "MSE $\\frac1n\\sum e_i^2$의 미분에는 2가 있다. 반 MSE $\\frac1{2n}\\sum e_i^2$에서는 2가 약분된다. MSE라고 써 두고 2를 생략했다면 정확한 미분식은 아니다. 정규화 항이 없는 같은 문제에서 갱신 폭만 보면 학습률을 절반으로 둔 MSE 경사하강법과 같지만, 손실 이름과 미분 정의는 구별해서 적는다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-파라미터를-갱신한-뒤의-mse는-무엇으로-계산하는가",
+      "title": "파라미터를 갱신한 뒤의 MSE는 무엇으로 계산하는가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-파라미터를-갱신한-뒤의-mse는-무엇으로-계산하는가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "새 w와 b를 구한 뒤 이전 error로 new_mse를 계산하는 코드가 설명됐다.",
+      "intent": "갱신된 모델을 평가하는 순서를 확인하려는 질문이다.",
+      "answer": "새 파라미터로 예측부터 다시 만든다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-none을-채웠는데-왜-아직-미완성-안내가-나오는가",
+      "title": "None을 채웠는데 왜 아직 미완성 안내가 나오는가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-none을-채웠는데-왜-아직-미완성-안내가-나오는가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "any(v is None for v in ...) 검사와 셀에 남아 있는 출력에 관해 물었다.",
+      "intent": "코드에 적힌 값과 실제 실행 상태를 구별하려는 질문이다.",
+      "answer": "any는 검사 대상 중 하나라도 None이면 참이다. 수정 후 해당 셀을 다시 실행하지 않으면 이전 출력은 그대로 남을 수 있다. 반대로 None을 0이나 빈 딕셔너리로 바꾸기만 해도 이 검사는 통과한다. None 검사는 값이 채워졌는지만 확인하며 계산이 맞다는 증거가 아니다. 대화에서 제공한 수정 설명을 재실행 성공으로 보지 않는다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-npc_로-만든-xb와-theta에는-실제로-무엇이-들어-있는가",
+      "title": "np.c_로 만든 Xb와 theta에는 실제로 무엇이 들어 있는가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-npc_로-만든-xb와-theta에는-실제로-무엇이-들어-있는가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "Xb = np.c_[np.ones(len(x)), x]의 결과를 두 차례 물었다.",
+      "intent": "편향과 기울기를 배열의 어느 자리에 넣는지 확인하려는 질문이다.",
+      "answer": "x=[0,1,2]이면 Xb는 [[1,0],[1,1],[1,2]], shape은 (3,2)다. theta=[b,w]라 두면 각 행의 곱은 1*b+x*w다. np.ones(3)은 기본적으로 실수형 ndarray [1.,1.,1.]이고 파이썬 리스트와 타입이 다르다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-입력-앞에-1의-열을-꼭-붙여야-하는가",
+      "title": "입력 앞에 1의 열을 꼭 붙여야 하는가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-입력-앞에-1의-열을-꼭-붙여야-하는가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "Xb를 만든 뒤에도 1을 붙이는 필요성을 따로 물었다.",
+      "intent": "편향을 넣는 구현 방식과 모델 자체의 조건을 구분하려는 질문이다.",
+      "answer": "b를 따로 더해도 된다. 1의 열은 편향까지 하나의 파라미터 벡터와 행렬곱으로 묶는 방법이다. X @ w + b와 [1,X] @ [b,w]는 같은 예측을 표현한다. scikit-learn의 기본 LinearRegression은 절편을 자체 처리하므로 원래 X를 전달한다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-design-parameter-target은-xb-theta-y와-다른-값인가",
+      "title": "design, parameter, target은 Xb, theta, y와 다른 값인가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-design-parameter-target은-xb-theta-y와-다른-값인가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "함수 정의에서 변수 이름이 바뀌자 실제 전달값과의 관계를 물었다.",
+      "intent": "호출부의 이름과 함수 매개변수 이름을 연결하려는 질문이다.",
+      "answer": "gradient(Xb, theta, y)를 호출하면 함수 안의 design, parameter, target이 차례로 그 값을 받는다. 이름이 다르다고 새 데이터가 생기지 않는다. 이 코드에서 parameter는 수학의 파라미터 벡터를 받는 함수 인자이고, theta는 호출부에서 그 벡터를 가리키는 이름이다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-평균-기울기는-그냥-기울기와-다른-것인가",
+      "title": "평균 기울기는 그냥 기울기와 다른 것인가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-평균-기울기는-그냥-기울기와-다른-것인가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "행별 미분을 평균 낸다는 설명 뒤에 “평균 기울기”의 의미를 재차 물었다.",
+      "intent": "개별 손실의 미분과 전체 손실의 미분을 연결하려는 질문이다.",
+      "answer": "평균 손실의 기울기가 각 행 손실의 기울기 평균이다. 미분과 유한합을 바꿔 계산할 수 있어서다. x=[0,1,2], y=[1,3,5], theta=[0,0]이면 반 제곱손실의 행별 [db,dw]는 [-1,0], [-3,-3], [-5,-10]이고 평균은 [-3,-13/3]이다. “평균 기울기”가 별도의 미분 종류인 것은 아니다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-npasarray는-무엇을-바꾸는가",
+      "title": "np.asarray는 무엇을 바꾸는가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-npasarray는-무엇을-바꾸는가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "학습 함수 앞부분의 np.asarray가 하는 일을 물었다.",
+      "intent": "입력 변환과 새 배열 생성의 차이를 알고 싶은 질문이다.",
+      "answer": "리스트 같은 입력을 NumPy 배열로 취급할 수 있게 변환한다. dtype=float를 지정하면 실수형을 요구한다. 이미 조건에 맞는 ndarray면 항상 복사본을 만들지는 않는다. 배열로 바꿨다는 이유만으로 shape이 자동으로 학습에 맞아지는 것도 아니다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-theta---에서--는-원래-파이썬-문법인가",
+      "title": "theta -= ...에서 -=는 원래 파이썬 문법인가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-theta---에서--는-원래-파이썬-문법인가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "파라미터 갱신에 쓰인 축약 대입 연산자를 물었다.",
+      "intent": "수학 갱신식과 파이썬 대입을 연결하려는 질문이다.",
+      "answer": "t -= delta는 t에서 delta를 빼 다시 반영하는 증강 대입이다. 숫자 10에서 3을 빼면 7이다. NumPy 배열에서는 같은 자리의 원소를 갱신하며 dtype 제약을 받는다. 리스트에는 원소별 뺄셈이 정의되지 않아 같은 방식으로 쓸 수 없다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-데이터가-세-개면-입력-변수도-세-개인가",
+      "title": "데이터가 세 개면 입력 변수도 세 개인가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-데이터가-세-개면-입력-변수도-세-개인가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "x=3을 예측하는 코드와 입력 데이터 개수를 혼동해 질문했다.",
+      "intent": "샘플 수와 특성 수, 새 입력 하나를 구별하려는 질문이다.",
+      "answer": "x=[0,1,2]는 특성 하나를 가진 샘플 세 개다. 새 입력 x=3은 네 번째 샘플이 될 수 있다. 편향을 포함한 새 행은 [1,3]이고 [1,3] @ [b,w]=b+3w다. 특성 하나당 가중치 하나라는 구조는 샘플을 더 넣어도 바뀌지 않는다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-반복을-2000번-하면-데이터도-2000개인가",
+      "title": "반복을 2,000번 하면 데이터도 2,000개인가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-반복을-2000번-하면-데이터도-2000개인가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "for _ in range(2000)이 같은 데이터에 적용되는지 물었다.",
+      "intent": "반복 횟수와 샘플 수의 역할을 나누려는 질문이다.",
+      "answer": "이 전체 배치 코드에서는 같은 데이터 세 개로 기울기를 다시 계산하며 theta를 2,000번 갱신한다. 데이터가 늘어나는 것이 아니다. _는 여기서 반복 번호를 사용하지 않겠다는 관례상의 변수명이다. 파이썬에서 특별히 무시 기능을 가진 예약어는 아니다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-3에서-31을-빼면-왜-오차가-아홉-개가-되는가",
+      "title": "(3,)에서 (3,1)을 빼면 왜 오차가 아홉 개가 되는가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-3에서-31을-빼면-왜-오차가-아홉-개가-되는가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "예측과 정답의 차이를 구하는 코드, 이어서 y[:, None]의 의미를 물었다.",
+      "intent": "shape이 달라져도 연산이 되는 이유와 의도하지 않은 결과를 확인하려는 질문이다.",
+      "answer": "설명용 예측 [2,4,6]의 shape이 (3,), 정답 [1,3,5]를 열로 만든 shape이 (3,1)이면 브로드캐스팅 결과는 (3,3)이다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-앞에서는-데이터-오차였는데-왜-갑자기-jthetatheta2인가",
+      "title": "앞에서는 데이터 오차였는데 왜 갑자기 J(theta)=theta²/2인가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-앞에서는-데이터-오차였는데-왜-갑자기-jthetatheta2인가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "실제 회귀 예제 뒤에 등장한 단일 파라미터 함수를 앞 손실의 변형으로 읽었다.",
+      "intent": "설명의 전제가 새 문제로 바뀌었는지 확인하려는 질문이다.",
+      "answer": "이것은 앞의 회귀 손실을 변형한 결과가 아니라 반복 갱신을 보기 위한 별도 장난감 문제다. 여기서는 theta가 숫자 하나이고 J(theta)=theta²/2, J′(theta)=theta다. 함수의 t는 현재 theta, alpha는 고정한 학습률이다. 두 변수를 바꾸어 읽지 않는다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-values에-손실을-넣는-시점은-갱신-전인가-후인가",
+      "title": "values에 손실을 넣는 시점은 갱신 전인가 후인가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-values에-손실을-넣는-시점은-갱신-전인가-후인가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "중첩 반복문, values.append((k,t,t*t/2)), scalar_update 순서를 물었다.",
+      "intent": "기록된 반복 번호와 실제 파라미터 상태를 맞추려는 질문이다.",
+      "answer": "append가 update보다 앞이면 현재 t의 J를 기록한 뒤 다음 t로 바꾼다. 8회 반복이면 기록은 t₀부터 t₇까지고 t₈은 마지막에 계산되지만 그 코드에서는 기록되지 않는다. t*t/2는 함수식 자체가 아니라 현재 t를 넣은 손실값이다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-values2와-values-12는-각각-무엇을-꺼내는가",
+      "title": "values[:2]와 values[-1][2]는 각각 무엇을 꺼내는가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-values2와-values-12는-각각-무엇을-꺼내는가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "학습 기록 리스트를 출력하는 슬라이싱과 두 번의 인덱싱을 물었다.",
+      "intent": "리스트 구조와 선택 결과를 확인하려는 질문이다.",
+      "answer": "values가 (반복 번호, t, 손실) 튜플 8개의 리스트라면 values[:2]는 앞의 튜플 두 개다. 원본을 두 개로 줄이지 않는다. values[-1][2]는 마지막 튜플을 고른 뒤 그 안의 세 번째 값인 손실을 꺼낸다. 8×1 NumPy 배열이라고 볼 수 없다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-왜-lenerror나-leny로-나누는가",
+      "title": "왜 len(error)나 len(y)로 나누는가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-왜-lenerror나-leny로-나누는가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "기울기 평균의 분모와 두 길이가 같은 이유를 반복해서 물었다. 10월 8일에도 나누지 않은 식의 의미를 확인했다.",
+      "intent": "어느 축의 평균인지 이해하려는 질문이다.",
+      "answer": "샘플마다 오차 하나가 있으면 두 길이는 샘플 수 n으로 같다. n으로 나누는 이유는 목적함수가 평균 손실이기 때문이다. 데이터 전체를 두 번 복제하면 합 기울기는 두 배지만 평균 기울기는 같다. 단, 잘못된 브로드캐스팅으로 error가 행렬이 됐다면 len이 같아도 올바른 계산이 아니다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-왜-y가-갑자기-3개에서-442개로-바뀌었는가",
+      "title": "왜 y가 갑자기 3개에서 442개로 바뀌었는가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-왜-y가-갑자기-3개에서-442개로-바뀌었는가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "앞쪽 회귀 셀에서 shape 오류가 났고, 뒤의 diabetes 셀이 같은 이름 y를 사용한 상태가 설명됐다.",
+      "intent": "코드가 적힌 순서와 노트북 메모리 상태가 다른 문제를 찾으려는 질문이다.",
+      "answer": "노트북 변수는 마지막으로 실행한 대입을 따른다. 아래 셀에서 y를 442개 정답으로 바꿨다면 위 셀의 3개 예측과 맞지 않는다. 관련 데이터 정의부터 다시 실행하거나 y_small, y_diabetes처럼 역할을 나눠 둔다. 원문은 원인과 방법을 설명했으며 이후 재실행 성공을 이 기록에서 확정하지 않는다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-assert와-isclose는-학습을-하는-코드인가",
+      "title": "assert와 isclose는 학습을 하는 코드인가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-assert와-isclose는-학습을-하는-코드인가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "앞선 shape 문제 이후 검증 줄의 동작을 물었다.",
+      "intent": "값 계산과 결과 검사를 분리하려는 질문이다.",
+      "answer": "np.isclose는 두 수가 허용 오차 안에서 가까운지 비교하고, assert는 조건이 거짓이면 AssertionError를 낸다. 모델을 갱신하지 않는다. 비교할 값을 만드는 연산에서 shape 오류가 먼저 나면 assert까지 도달하지 못한다. 검사 통과 범위는 그 조건뿐이다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-diabetes-데이터는-당뇨병-유무를-분류하는-것인가",
+      "title": "diabetes 데이터는 당뇨병 유무를 분류하는 것인가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-diabetes-데이터는-당뇨병-유무를-분류하는-것인가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "무엇을 설명해 달라는 것인지 불분명했던 요청 다음에 scikit-learn diabetes 데이터셋을 명시했다.",
+      "intent": "입력과 예측 대상이 무엇인지 확인하려는 질문이다.",
+      "answer": "이 실습은 당뇨병 유무 0/1 분류가 아니라 질병 진행 정도라는 수치 목표를 예측하는 회귀다. load_diabetes의 입력은 442행, 10특성이고 정답은 (442,)다. 데이터셋 이름만으로 분류 문제라고 판단하지 않는다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-train_test_split은-무엇을-보고-무엇을-나누는가",
+      "title": "train_test_split은 무엇을 보고 무엇을 나누는가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-train_test_split은-무엇을-보고-무엇을-나누는가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "인덱스만 넘긴 분할 코드에서 함수가 X와 y를 자동으로 찾는지 물었다.",
+      "intent": "함수에 전달한 인자와 주변 변수 사이의 경계를 확인하려는 질문이다.",
+      "answer": "train_test_split(np.arange(len(y)), ...)는 전달한 행 번호 배열을 나눈다. X나 y를 자동으로 찾지 않는다. test_size=.25라면 12개 중 학습 9개, 평가 3개가 되는 식이다. 일반적인 무작위 분할은 섞어서 고르고 random_state를 고정하면 같은 입력과 설정에서 같은 분할을 재현한다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-y_train--ytrain_idx에서는-실제-정답을-나누는-것이-맞는가",
+      "title": "y_train = y[train_idx]에서는 실제 정답을 나누는 것이 맞는가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-y_train--ytrain_idx에서는-실제-정답을-나누는-것이-맞는가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "인덱스만 나눈다는 설명 뒤에 사용자가 가리킨 줄은 y를 인덱싱하는 별도 줄이었다.",
+      "intent": "설명 대상이 바뀌었을 때 각 줄의 결과를 정확히 구별하려는 질문이다.",
+      "answer": "그 줄에서는 실제 y값을 선택하는 것이 맞다. train_idx는 행 번호, y[train_idx]는 그 번호에 있는 정답이다. 같은 인덱스로 X[train_idx]도 선택해야 입력과 정답의 짝이 맞는다. “분할 함수는 인덱스를 반환한다”와 “그 인덱스로 정답값을 선택한다”는 서로 다른 단계다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-regression_results는-모델인가-결과를-넣는-변수인가",
+      "title": "regression_results는 모델인가, 결과를 넣는 변수인가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-regression_results는-모델인가-결과를-넣는-변수인가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "한 번에 한 부분씩 설명해 달라고 한 뒤 첫 TODO의 역할을 물었다.",
+      "intent": "저장할 결과의 타입부터 파악하려는 질문이다.",
+      "answer": "모델별 평가 결과를 담는 딕셔너리다. 예를 들어 모델 이름을 키, 그 모델의 평가 MSE를 값으로 저장한다. 딕셔너리를 만든 것만으로 모델이 학습되거나 점수가 계산되지는 않는다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-빈칸-순서와-실제-fitpredict-순서가-왜-다른가",
+      "title": "빈칸 순서와 실제 fit·predict 순서가 왜 다른가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-빈칸-순서와-실제-fitpredict-순서가-왜-다른가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "결과 저장 TODO를 먼저 본 뒤 힌트를 요청했고, 전체 풀이보다 기존 틀을 유지해 달라고 했다.",
+      "intent": "빈칸을 채우는 일과 데이터가 계산되는 순서를 연결하려는 질문이다.",
+      "answer": "실행 순서는 모델 생성 → 학습 자료로 fit → 평가 입력으로 predict → 정답과 비교해 MSE → 결과 저장이다. 코드 위치가 먼저 보인다고 결과 딕셔너리부터 계산할 수는 없다. 원문의 LAB 틀을 확인하기 전 제안된 불필요한 초기값은 정답 근거로 삼지 않는다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-csv를-읽은-값은-dataframe인가-reshape-11은-왜-필요한가",
+      "title": "CSV를 읽은 값은 DataFrame인가? reshape(-1,1)은 왜 필요한가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-csv를-읽은-값은-dataframe인가-reshape-11은-왜-필요한가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "np.genfromtxt(..., names=True) 결과의 타입과 입력 열의 모양을 물었다.",
+      "intent": "자료 읽기 결과를 모델 입력 규격으로 연결하려는 질문이다.",
+      "answer": "이 호출은 pandas DataFrame이 아니라 필드 이름을 가진 NumPy 구조화 배열을 만든다. 한 숫자 필드를 고르면 보통 (n,)이고, 입력 X를 n행 1열로 넘기려고 .reshape(-1,1)을 쓴다. -1은 원소 수에 맞춰 그 차원을 계산하라는 뜻이다. .reshape(,1)처럼 인자를 비울 수 없다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-price_index는-학습해서-만든-값인가",
+      "title": "price_index는 학습해서 만든 값인가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-price_index는-학습해서-만든-값인가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "예제 CSV의 목표 열 이름과 수치가 어디서 왔는지 물었다.",
+      "intent": "주어진 정답과 모델이 계산한 예측값을 구분하려는 질문이다.",
+      "answer": "대화의 price_index는 예제 CSV에 미리 들어 있는 수치 목표다. 모델이 학습 중 만든 값이 아니며 이름의 index가 곧 배열 행 번호라는 뜻도 아니다. 무엇을 뜻하는 지표인지는 데이터 설명으로 확인해야 한다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-x는-2차원인데-y는-왜-1차원인가",
+      "title": "X는 2차원인데 y는 왜 1차원인가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-x는-2차원인데-y는-왜-1차원인가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "X를 (n,1)로 바꾼 뒤 y도 같은 모양이어야 하는지 물었다.",
+      "intent": "입력과 정답의 짝이 맞는 조건을 확인하려는 질문이다.",
+      "answer": "X의 행은 샘플, 열은 특성이다. 단일 목표 y는 샘플당 숫자 하나라 (n,)이면 충분하다. 필요한 것은 같은 행 수와 같은 순서이지 항상 같은 rank가 아니다. 이 단일 출력 회귀 코드에서 예측도 (n,)이므로 y와 원소별 비교가 된다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-모델에는-x_test를-넣는데-y_test는-언제-쓰는가",
+      "title": "모델에는 X_test를 넣는데 y_test는 언제 쓰는가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-모델에는-x_test를-넣는데-y_test는-언제-쓰는가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "평가 입력과 정답을 전달하는 줄을 구분해 달라고 했다.",
+      "intent": "예측과 채점이 분리되는 이유를 확인하려는 질문이다.",
+      "answer": "predict(X_test)는 특징으로 예측한다. y_test는 그 예측과 비교해 MSE 같은 지표를 계산할 때 쓴다. 평가 정답을 모델의 예측 입력으로 주면 무엇을 예측하는지 의미가 달라진다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-linearregressionfit은-한-줄에서-무엇을-하는가",
+      "title": "LinearRegression().fit(...)은 한 줄에서 무엇을 하는가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-linearregressionfit은-한-줄에서-무엇을-하는가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "화면 대상을 특정하지 못한 짧은 요청들이 이어진 뒤 실제 생성·학습 코드를 제시했다.",
+      "intent": "객체 생성과 메서드 호출, 반환값을 분리하려는 질문이다.",
+      "answer": "LinearRegression()이 객체를 만들고 .fit(X_train,y_train)이 계수를 구해 객체에 저장한다. fit은 학습된 자기 자신을 반환하므로 model = LinearRegression().fit(...)로 받을 수 있다. 학습 후 가중치는 coef_, 절편은 intercept_에서 읽는다. 바깥에 w와 b 변수를 따로 선언할 필요는 없다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-fit은-항상-경사하강법을-뜻하는가",
+      "title": "fit은 항상 경사하강법을 뜻하는가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-fit은-항상-경사하강법을-뜻하는가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "학습률을 주지 않은 LinearRegression이 어떻게 학습되는지 물었다.",
+      "intent": "학습 인터페이스와 최적화 방법을 구별하려는 질문이다.",
+      "answer": "fit은 라이브러리의 공통 학습 메서드 이름이다. 이 실습의 일반적인 LinearRegression은 최소제곱 문제를 수치적으로 풀며, 사용자가 작성한 고정 학습률 경사하강 반복과 같지 않다. 어떤 solver가 쓰이는지는 모델과 입력 조건에 따라 다르다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-dummyregressor는-입력을-보지-않는데-무엇을-학습하는가",
+      "title": "DummyRegressor는 입력을 보지 않는데 무엇을 학습하는가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-dummyregressor는-입력을-보지-않는데-무엇을-학습하는가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "평균 기준 모델을 fit한다고 부르는 이유를 여러 번 물었다.",
+      "intent": "복잡한 입력 관계를 학습하는 모델과 기준값을 저장하는 모델을 비교하려는 질문이다.",
+      "answer": "평균 전략의 DummyRegressor는 학습 정답의 평균을 구해 저장한다. 이후 어떤 X를 받아도 그 평균을 행 수만큼 반복한다. 대화의 y_train 합은 174, 개수는 9여서 평균은 19.333333이다. y_test=[14,17,25]에 대한 MSE는 22다. 특징에 따른 관계를 배우지 않아도 비교 기준을 마련할 수 있다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-평균을-직접-계산하면-되는데-왜-기준-모델-객체를-쓰는가",
+      "title": "평균을 직접 계산하면 되는데 왜 기준 모델 객체를 쓰는가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-평균을-직접-계산하면-되는데-왜-기준-모델-객체를-쓰는가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "단순 평균을 모델로 감싸는 필요성을 물었다.",
+      "intent": "수동 계산과 라이브러리 인터페이스의 차이를 확인하려는 질문이다.",
+      "answer": "np.full(len(X_test), y_train.mean())으로 같은 평균 예측을 만들 수 있다. DummyRegressor는 다른 모델처럼 fit/predict를 제공해 동일한 평가 코드에 넣기 편하다. 객체를 써야만 평균 기준선이 성립하는 것은 아니다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-특성이-여러-개면-그래디언트는-어떤-순서인가",
+      "title": "특성이 여러 개면 그래디언트는 어떤 순서인가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-특성이-여러-개면-그래디언트는-어떤-순서인가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "[b,w₁,w₂]를 담은 theta와 세 숫자인 gradient의 관계를 물었다.",
+      "intent": "각 미분값이 어떤 파라미터를 바꾸는지 연결하려는 질문이다.",
+      "answer": "편향 열을 첫 열에 두었다면 gradient도 [∂J/∂b, ∂J/∂w₁, ∂J/∂w₂] 순서다. 대화의 네 입력 행 [[1,0,0],[1,1,0],[1,0,1],[1,1,1]], y=[1,3,4,6], 초기 theta=0에서 반 MSE 기울기는 [-3.5,-2.25,-2.5]다. 학습률 .1로 한 번 갱신하면 [.35,.225,.25]가 된다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-왜-예측은-x--theta이고-기울기는-xt--error인가",
+      "title": "왜 예측은 X @ theta이고 기울기는 X.T @ error인가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-왜-예측은-x--theta이고-기울기는-xt--error인가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "10월 7일 행렬식을 물었고, 10월 8일에는 전치가 왜 필요한지 미분과 연결해 달라고 했다.",
+      "intent": "shape을 맞추는 요령을 넘어 합산 대상이 바뀌는 이유를 이해하려는 질문이다.",
+      "answer": "예측은 한 샘플의 특성들을 가중합한다. 기울기는 같은 파라미터에 대한 여러 샘플의 기여를 합친다. 반 MSE라면 j번째 미분은 $\\frac1n\\sum_i X_{ij}e_i$다. X.T의 j번째 행에 모든 샘플의 j번째 특성이 모이므로 이 합을 행렬곱으로 계산할 수 있다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-x--theta도-각-항을-곱하는데-왜-예측값이-아닌가",
+      "title": "X * theta도 각 항을 곱하는데 왜 예측값이 아닌가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-x--theta도-각-항을-곱하는데-왜-예측값이-아닌가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "10월 7일에는 *와 @를 비교했고, 10월 8일 실제 predict 함수의 return X * theta를 진단했다.",
+      "intent": "원소별 곱과 가중합의 결과 shape을 구별하려는 질문이다.",
+      "answer": "*는 각 항을 곱한 (n,d) 배열을 남긴다. @는 특성 축을 합쳐 샘플별 예측 (n,)을 만든다. 설명용 한 행 [1,1,5,1], theta=[1,2,3,4]라면 원소별 곱은 [1,2,15,4], 내적은 합계 22다. 당시 16행 4열 예측과 정답 16개를 비교하려면 X @ theta가 필요했다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-alpha는-곱셈이-아닌가-정수-theta는-왜-갱신에-실패하는가",
+      "title": "alpha(...)는 곱셈이 아닌가? 정수 theta는 왜 갱신에 실패하는가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-alpha는-곱셈이-아닌가-정수-theta는-왜-갱신에-실패하는가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "10월 8일 경사하강 코드에서 float를 호출한 오류와 정수 배열의 갱신 문제가 설명됐다.",
+      "intent": "수식처럼 적은 표현과 파이썬 문법·dtype의 차이를 확인하려는 질문이다.",
+      "answer": "alpha(...)는 alpha를 함수처럼 호출한다. 학습률이 숫자라면 alpha * (...)로 곱해야 한다. 또 theta -= 실수배열은 정수 theta에 실수를 제자리 저장하려다 실패할 수 있다. 학습 파라미터를 np.zeros(d, dtype=float)로 준비한다. 제공된 진단을 실제 파일 수정이나 재실행 성공으로 확대하지 않는다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-기울기는-d1인가-d인가-이것도-브로드캐스팅인가",
+      "title": "기울기는 (d,1)인가, (d,)인가? 이것도 브로드캐스팅인가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-기울기는-d1인가-d인가-이것도-브로드캐스팅인가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "그래디언트의 모양을 물은 뒤 1차원 배열이 행렬곱에서 처리되는 방식을 다시 물었다.",
+      "intent": "수학의 열벡터 표기와 NumPy의 1차원 배열을 구분하려는 질문이다.",
+      "answer": "X.T:(d,n)과 e:(n,)의 @ 결과는 (d,)다. 오른쪽 1차원 피연산자는 계산상 열로 취급된 뒤 추가한 차원이 결과에서 제거된다. e.reshape(-1,1)을 명시하면 결과는 (d,1)이다. 이 1차원 처리 규칙을 원소별 뺄셈의 브로드캐스팅과 혼동하지 않는다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-npmeanxt--error로-평균-기울기를-구하면-안-되는가",
+      "title": "np.mean(X.T @ error)로 평균 기울기를 구하면 안 되는가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-npmeanxt--error로-평균-기울기를-구하면-안-되는가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "행렬곱 결과를 mean에 넣는 방법을 제안했다.",
+      "intent": "데이터 평균과 파라미터 평균의 차이를 확인하려는 질문이다.",
+      "answer": "X.T@error는 이미 샘플 축을 합쳐 파라미터마다 하나씩 남긴 벡터다. 그 벡터 전체의 mean을 구하면 다른 파라미터들을 섞은 스칼라가 된다. 필요한 것은 (X.T @ error) / n이다. 같은 뜻의 식은 np.mean(X * error[:,None], axis=0)으로, 이때는 행별 기여에서 샘플 축만 평균 낸다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-lstsq가-반환하는-값과-theta_ls-_는-무엇인가",
+      "title": "lstsq가 반환하는 값과 theta_ls, *_는 무엇인가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-lstsq가-반환하는-값과-theta_ls-_는-무엇인가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "NumPy 최소제곱 함수의 입력·출력과 별표 언패킹을 물었다.",
+      "intent": "함수 결과 묶음에서 모델 계수를 꺼내는 과정을 확인하려는 질문이다.",
+      "answer": "np.linalg.lstsq(Xb,y,rcond=None)은 계수, 잔차 제곱합 정보, rank, 특이값의 네 결과를 반환한다. theta_ls, *_ = ...는 첫 결과를 theta_ls에, 나머지를 리스트 _에 받는다. 잔차 정보는 rank·배열 크기 조건에 따라 비어 있을 수 있다. rcond는 작은 특이값을 판정하는 상대 기준이며 학습률이 아니다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-최소제곱법과-경사하강법은-서로-다른-목표인가",
+      "title": "최소제곱법과 경사하강법은 서로 다른 목표인가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-최소제곱법과-경사하강법은-서로-다른-목표인가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "lstsq 설명 뒤에 두 이름의 관계를 다시 물었다.",
+      "intent": "최적화할 기준과 그 문제를 푸는 알고리즘을 구별하려는 질문이다.",
+      "answer": "최소제곱은 제곱오차 합을 작게 만드는 목표다. 경사하강법으로도 그 문제를 풀 수 있고, 선형 최소제곱용 수치 알고리즘으로도 풀 수 있다. “최소제곱”이라는 말만으로 모든 계수를 무작위 탐색한다거나 경사하강법과 배타적이라고 해석하지 않는다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-세-방법의-예측-차이가-작으면-모델-성능이-좋다는-뜻인가",
+      "title": "세 방법의 예측 차이가 작으면 모델 성능이 좋다는 뜻인가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-세-방법의-예측-차이가-작으면-모델-성능이-좋다는-뜻인가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "직접 경사하강법·lstsq·LinearRegression의 예측을 비교하는 코드와 max gap을 물었다.",
+      "intent": "구현 비교와 정답을 대상으로 한 평가를 구분하려는 질문이다.",
+      "answer": "np.max(np.abs(pred_a-pred_b))는 두 방법의 예측이 가장 많이 달랐던 정도다. 정답과 비교한 손실이 아니다. 같은 학습 입력에서 출력이 일치해도 새 데이터 성능을 입증하지 않는다. 모델 평가에는 별도 평가 자료와 정답에 대한 지표가 필요하다."
+    },
+    {
+      "id": "learning/2026-10-07-regression-gradient#질문-코드를-보면-알겠는데-처음부터-쓰기는-왜-어려운가",
+      "title": "코드를 보면 알겠는데 처음부터 쓰기는 왜 어려운가?",
+      "url": "/notes/learning/2026-10-07-regression-gradient#질문-코드를-보면-알겠는데-처음부터-쓰기는-왜-어려운가",
+      "topic": "머신러닝",
+      "sourceTitle": "회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가",
+      "context": "마지막에는 단순 함수 설명을 읽는 것과 직접 풀이 코드를 작성하는 데 차이가 있다고 말했다.",
+      "intent": "설명을 따라가는 단계에서 계산 순서를 스스로 구성하는 단계로 넘어가려는 요청이다.",
+      "answer": "원문에서는 평균 예측 만들기 → 예측 배열 만들기 → 정답과 비교해 MSE → 이름과 결과 저장처럼 작은 결과를 연결하는 방법을 제안했다. 이 말은 독립 구현을 완료했다는 증거가 아니다. 다시 풀 때 각 줄의 입력·출력 타입과 shape을 먼저 적어 보는 것이 남은 확인 과제다."
+    },
+    {
+      "id": "learning/2026-10-07-values-and-imports#질문-isnamean은-실제로-어떤-값을-반환하는가",
+      "title": "isna().mean()은 실제로 어떤 값을 반환하는가?",
+      "url": "/notes/learning/2026-10-07-values-and-imports#질문-isnamean은-실제로-어떤-값을-반환하는가",
+      "topic": "실전 파이썬 준비하기 · 데이터 분석",
+      "sourceTitle": "실제 값으로 다시 보기 — 딕셔너리 항목, 그룹 집계와 import",
+      "context": "복습 문제에 나온 코드를 실제 값으로 보여 달라고 요청했다.",
+      "intent": "중간 불리언 표가 비율을 담은 Series로 바뀌는 과정을 확인하려는 질문이다.",
+      "answer": "4행 표에서 나이 열에 결측값이 1개, 점수 열에 2개 있다면 df.isna()는 각 칸의 결측 여부를 같은 크기의 불리언 DataFrame으로 반환한다. .mean()은 기본적으로 열마다 참을 1, 거짓을 0으로 평균 내므로 나이 0.25, 점수 0.50을 반환한다. 결과는 열 이름을 인덱스로 갖는 Series다. 결측 개수와 비율의 계산을 실제 값으로 다시 확인한 예다."
+    },
+    {
+      "id": "learning/2026-10-07-values-and-imports#질문-딕셔너리인데-왜-튜플을-언패킹한다고-하는가",
+      "title": "딕셔너리인데 왜 튜플을 언패킹한다고 하는가?",
+      "url": "/notes/learning/2026-10-07-values-and-imports#질문-딕셔너리인데-왜-튜플을-언패킹한다고-하는가",
+      "topic": "실전 파이썬 준비하기 · 데이터 분석",
+      "sourceTitle": "실제 값으로 다시 보기 — 딕셔너리 항목, 그룹 집계와 import",
+      "context": "실제 값을 보여 달라고 요청한 뒤, 딕셔너리와 튜플은 다른데 왜 튜플 설명이 나오는지 물었다.",
+      "intent": "원래 자료구조와 반복 중 반환되는 한 항목의 자료형을 구분하려는 질문이다.",
+      "answer": "data={\"사과\":3,\"바나나\":5}에서 data.items()를 순회하면 한 번에 (\"사과\",3) 같은 키·값 튜플 하나를 받는다. for key, value in data.items()는 그 한 항목을 두 이름에 나눠 연결한다. 원래 data가 튜플로 바뀐 것은 아니다. 딕셔너리 뷰와 항목 언패킹의 구분을 다시 적용한 질문이다."
+    },
+    {
+      "id": "learning/2026-10-07-values-and-imports#질문-주문-수에-관한-문장은-왜-관측이-아니라-근거인가",
+      "title": "주문 수에 관한 문장은 왜 관측이 아니라 근거인가?",
+      "url": "/notes/learning/2026-10-07-values-and-imports#질문-주문-수에-관한-문장은-왜-관측이-아니라-근거인가",
+      "topic": "실전 파이썬 준비하기 · 데이터 분석",
+      "sourceTitle": "실제 값으로 다시 보기 — 딕셔너리 항목, 그룹 집계와 import",
+      "context": "매출 감소를 설명하는 문제에서 문장의 분류 이유를 물었다.",
+      "intent": "문장 자체의 내용과 앞의 결론에 대한 역할을 나누려는 질문이다.",
+      "answer": "주문 수 100건·주문당 1만 원에서 90건·1만 원이 되면 매출은 100만 원에서 90만 원으로 줄어든다. 주문 수와 평균 금액의 관측은 ‘매출 감소’라는 결론을 뒷받침하는 근거 역할을 한다. 다만 주문 수가 왜 줄었는지는 이 관계만으로 알 수 없다. 문장만 떼면 관측이기도 하므로 분류에는 앞뒤 맥락이 필요하다. 결과 해석과 결론의 범위로 연결한다."
+    },
+    {
+      "id": "learning/2026-10-07-values-and-imports#질문-groupby와-agg는-실제로-어떤-표를-반환하는가",
+      "title": "groupby와 agg는 실제로 어떤 표를 반환하는가?",
+      "url": "/notes/learning/2026-10-07-values-and-imports#질문-groupby와-agg는-실제로-어떤-표를-반환하는가",
+      "topic": "실전 파이썬 준비하기 · 데이터 분석",
+      "sourceTitle": "실제 값으로 다시 보기 — 딕셔너리 항목, 그룹 집계와 import",
+      "context": "orders.groupby('customer_id').agg(total_amt=('amount','sum'))을 실제 값으로 설명해 달라고 한 뒤, 반환값이 Series인지 DataFrame인지 물었다.",
+      "intent": "집계 후 한 행의 의미, 인덱스와 열을 확인하려는 질문이다.",
+      "answer": "다음 설명용 표는 주문 5행을 고객 3행으로 줄인다. 이름 있는 집계는 total_amt 열을 가진 DataFrame을 반환한다. 열이 하나라는 이유로 Series가 되지는 않는다."
+    },
+    {
+      "id": "learning/2026-10-07-values-and-imports#질문-원래-orders에-고객별-합계-열을-붙이려면-어떻게-하는가",
+      "title": "원래 orders에 고객별 합계 열을 붙이려면 어떻게 하는가?",
+      "url": "/notes/learning/2026-10-07-values-and-imports#질문-원래-orders에-고객별-합계-열을-붙이려면-어떻게-하는가",
+      "topic": "실전 파이썬 준비하기 · 데이터 분석",
+      "sourceTitle": "실제 값으로 다시 보기 — 딕셔너리 항목, 그룹 집계와 import",
+      "context": "새 요약표 대신 기존 주문 표에 값을 추가하는 방법을 물었다.",
+      "intent": "고객당 한 행으로 줄이는 집계와 원래 주문 행을 유지하는 계산을 구분하려는 질문이다.",
+      "answer": "orders.groupby(\"customer_id\")[\"amount\"].transform(\"sum\")은 원래 행에 대응하는 [4000,7000,4000,7000,4000]의 Series를 반환한다. orders[\"total_amt\"] = ...로 대입할 때 열이 추가된다. transform() 호출 자체가 원본에 열을 추가하지는 않는다. 예약 구성비에서 쓴 transform과 같은 행 대응 원리다."
+    },
+    {
+      "id": "learning/2026-10-07-values-and-imports#질문-모듈패키지라이브러리는-왜-그렇게-부르는가",
+      "title": "모듈·패키지·라이브러리는 왜 그렇게 부르는가?",
+      "url": "/notes/learning/2026-10-07-values-and-imports#질문-모듈패키지라이브러리는-왜-그렇게-부르는가",
+      "topic": "실전 파이썬 준비하기 · 데이터 분석",
+      "sourceTitle": "실제 값으로 다시 보기 — 딕셔너리 항목, 그룹 집계와 import",
+      "context": "구체적인 예를 요청한 뒤, 패키지를 여러 개 담은 디렉터리가 라이브러리인지와 라이브러리의 정확한 뜻을 연이어 물었다.",
+      "intent": "파일 개수에 따라 단계가 올라가는 분류인지 확인하려는 질문이다.",
+      "answer": "addition.py 같은 파일은 모듈의 한 형태이며, 모듈·하위 패키지를 import 가능한 구조로 묶은 calculator는 패키지다. 라이브러리는 다른 코드가 재사용하도록 제공하는 기능 모음을 뜻한다. 같은 대상이 구조상 패키지이면서 계산 라이브러리일 수 있다. ‘모듈 여러 개 → 패키지 여러 개 → 라이브러리’라는 고정 계층은 아니다. 구조와 역할을 구분한 이전 기록에 연결된다."
+    },
+    {
+      "id": "learning/2026-10-07-values-and-imports#질문-from-뒤에는-모듈과-패키지-모두-올-수-있는가",
+      "title": "from 뒤에는 모듈과 패키지 모두 올 수 있는가?",
+      "url": "/notes/learning/2026-10-07-values-and-imports#질문-from-뒤에는-모듈과-패키지-모두-올-수-있는가",
+      "topic": "실전 파이썬 준비하기 · 데이터 분석",
+      "sourceTitle": "실제 값으로 다시 보기 — 딕셔너리 항목, 그룹 집계와 import",
+      "context": "가져오는 경로의 종류를 확인했다.",
+      "intent": "어디에서 무엇을 가져오는지 이름 수준에서 읽으려는 질문이다.",
+      "answer": "from calculator import addition은 패키지의 하위 모듈, from calculator.addition import add는 그 모듈의 함수를 가져오는 예다. from calculator import add가 동작하려면 패키지에 해당 이름이 연결되어 있는 등의 조건이 필요하다. 내부 모든 함수가 자동으로 바깥 이름이 되는 것은 아니다. import의 실행과 이름 연결을 참고한다."
+    },
+    {
+      "id": "learning/2026-10-07-values-and-imports#질문-initpy는-어떻게-함수를-패키지에-노출하는가",
+      "title": "init.py는 어떻게 함수를 패키지에 노출하는가?",
+      "url": "/notes/learning/2026-10-07-values-and-imports#질문-initpy는-어떻게-함수를-패키지에-노출하는가",
+      "topic": "실전 파이썬 준비하기 · 데이터 분석",
+      "sourceTitle": "실제 값으로 다시 보기 — 딕셔너리 항목, 그룹 집계와 import",
+      "context": "초기화 파일을 다시 설명해 달라고 한 뒤, 내부에서 실제로 일어나는 동작을 더 자세히 요청했다.",
+      "intent": "‘노출’이라는 표현을 함수 객체와 이름 연결로 풀어 이해하려는 질문이다.",
+      "answer": "일반 패키지의 __init__.py는 패키지 모듈 객체의 이름 공간에서 실행된다. 그 안에 from .addition import add가 있으면 addition의 함수와 같은 객체를 패키지의 add라는 이름으로도 참조한다. 함수 코드를 복사하거나 덧셈을 미리 수행하는 것이 아니다."
+    },
+    {
+      "id": "learning/2026-10-05-06-linear-algebra-probability#질문-벡터를-더하면-되는데-왜-스칼라를-곱한-합이라고-하나",
+      "title": "벡터를 더하면 되는데 왜 스칼라를 곱한 합이라고 하나?",
+      "url": "/notes/learning/2026-10-05-06-linear-algebra-probability#질문-벡터를-더하면-되는데-왜-스칼라를-곱한-합이라고-하나",
+      "topic": "머신러닝",
+      "sourceTitle": "수식을 계산한 뒤 어떻게 해석할까",
+      "context": "선형결합을 배우며, 단순한 벡터 덧셈과 다르게 설명하는 이유와 이점을 물었다.",
+      "intent": "정의를 외우기보다 계수를 바꿀 수 있게 하면 어떤 질문을 풀 수 있는지 알고 싶다는 요청이다.",
+      "answer": "벡터 덧셈 $u+v$는 계수를 모두 1로 정한 선형결합이다. $au+bv$는 각 벡터를 얼마나 사용할지 조절한다. 당시 예의 $u=(1,0),v=(0,1)$에서는 $3u-2v=(3,-2)$가 된다. 계수를 바꾸며 만들 수 있는 모든 결과가 생성 공간이다."
+    },
+    {
+      "id": "learning/2026-10-05-06-linear-algebra-probability#질문-확률변수는-무엇이며-왜-변수를-함수라고-정의하나",
+      "title": "확률변수는 무엇이며, 왜 변수를 함수라고 정의하나?",
+      "url": "/notes/learning/2026-10-05-06-linear-algebra-probability#질문-확률변수는-무엇이며-왜-변수를-함수라고-정의하나",
+      "topic": "머신러닝",
+      "sourceTitle": "수식을 계산한 뒤 어떻게 해석할까",
+      "context": "확률변수의 정확한 의미를 물은 뒤, 함수라는 설명이 이해되지 않는다고 두 차례 말했다.",
+      "intent": "변수의 값과 값을 정하는 규칙을 같은 말로 부르는 듯한 혼란을 풀려는 질문이다.",
+      "answer": "확률변수 $X$는 실험 결과를 수로 바꾸는 고정된 규칙이고, 관측값은 그 규칙을 한 결과에 적용해 얻은 수다. 동전 두 번의 결과가 앞뒤이면 앞면 횟수를 세는 $X$의 관측값은 1이다. 모든 변수가 함수라는 뜻은 아니다. 확률변수를 엄밀하게 정의할 때 함수의 개념을 쓴다."
+    },
+    {
+      "id": "learning/2026-10-05-06-linear-algebra-probability#질문-내적을-보면-실제로-무엇을-생각해야-하나",
+      "title": "내적을 보면 실제로 무엇을 생각해야 하나?",
+      "url": "/notes/learning/2026-10-05-06-linear-algebra-probability#질문-내적을-보면-실제로-무엇을-생각해야-하나",
+      "topic": "머신러닝",
+      "sourceTitle": "수식을 계산한 뒤 어떻게 해석할까",
+      "context": "두 벡터의 길이와 코사인을 곱한다는 공식은 말할 수 있었지만, 그 값을 어떻게 유용하게 해석할지 질문했다.",
+      "intent": "내적 공식을 실제 예측 점수나 벡터 비교와 연결하려는 요청이다.",
+      "answer": "내적은 대응하는 성분의 기여를 곱해 합한 스칼라다. 당시 예 $x=(3,2),w=(4,-1)$에서는 $x\\cdot w=12-2=10$이다. 선형모델에서는 특성별 기여의 합으로, 벡터 비교에서는 크기와 방향의 일치가 함께 들어간 점수로 읽는다. 코사인 유사도는 두 길이로 나누어 방향을 비교한다."
+    },
+    {
+      "id": "learning/2026-10-05-06-linear-algebra-probability#질문-미분값에는-방향이-담겨-있다고-이해해도-되나",
+      "title": "미분값에는 방향이 담겨 있다고 이해해도 되나?",
+      "url": "/notes/learning/2026-10-05-06-linear-algebra-probability#질문-미분값에는-방향이-담겨-있다고-이해해도-되나",
+      "topic": "머신러닝",
+      "sourceTitle": "수식을 계산한 뒤 어떻게 해석할까",
+      "context": "미분을 작은 변화에 대한 예측이라고 설명하자, 미분값의 의미가 방향인지 물었다.",
+      "intent": "부호만 읽으면 충분한지, 절댓값까지 읽어야 하는지 확인하려는 질문이다.",
+      "answer": "부호는 입력을 증가시킬 때 함수가 증가·감소하는 방향을, 절댓값은 그 작은 변화에 얼마나 민감한지를 나타낸다. $\\Delta L\\approx L'(w)\\Delta w$로 읽으면 된다. 도착점에서 기울기가 양수라는 사실만으로 출발점보다 손실이 커졌다고 판단할 수는 없다."
+    },
+    {
+      "id": "learning/2026-10-05-06-linear-algebra-probability#질문-베르누이이항정규분포의-x축은-정확히-무엇인가",
+      "title": "베르누이·이항·정규분포의 x축은 정확히 무엇인가?",
+      "url": "/notes/learning/2026-10-05-06-linear-algebra-probability#질문-베르누이이항정규분포의-x축은-정확히-무엇인가",
+      "topic": "머신러닝",
+      "sourceTitle": "수식을 계산한 뒤 어떻게 해석할까",
+      "context": "베르누이의 x축은 0·1뿐인데 이항분포에서는 여러 정수가 나오며, 정규분포를 이항분포의 $n$을 무한히 늘린 결과로 이해해도 되는지 물었다.",
+      "intent": "그래프를 보기 전에 무엇을 세거나 측정하는지를 명확히 하려는 질문이다.",
+      "answer": "x축은 정의한 확률변수의 가능한 값이다. 베르누이에서는 한 번의 성공 여부, 이항에서는 정해진 횟수 중 성공 횟수다. 10번 던진 이항분포의 3은 세 번째 시행이 아니라 앞면이 총 3번 나온 결과다. 정규분포는 연속 확률밀도 분포이고, 이항분포의 정규 근사는 관련 성질이지 정의가 아니다."
+    },
+    {
+      "id": "learning/2026-10-05-06-linear-algebra-probability#질문-표준화를-쉬운-설명뿐-아니라-수학적으로-해석하고-싶다",
+      "title": "표준화를 쉬운 설명뿐 아니라 수학적으로 해석하고 싶다",
+      "url": "/notes/learning/2026-10-05-06-linear-algebra-probability#질문-표준화를-쉬운-설명뿐-아니라-수학적으로-해석하고-싶다",
+      "topic": "머신러닝",
+      "sourceTitle": "수식을 계산한 뒤 어떻게 해석할까",
+      "context": "재구성한 학습 자료를 읽은 뒤 표준화를 이해하기 어렵다고 말하며, 공식 안의 연산을 해석할 수 있을 만큼 자세한 설명을 요청했다.",
+      "intent": "평균을 빼고 표준편차로 나누는 두 연산이 각각 무엇을 바꾸는지 알고 싶다는 요청이다.",
+      "answer": "$z=(x-\\mu)/\\sigma$는 평균으로 중심을 옮기고 표준편차를 새 단위로 쓴다. $x=80,\\mu=60,\\sigma=10$이면 평균보다 표준편차 2개 위다. 평균 0·분산 1이 되는 이유는 기댓값과 분산의 계산으로 확인할 수 있지만, 표준화가 원래 분포를 정규분포로 바꾸지는 않는다."
+    },
+    {
+      "id": "learning/2026-10-05-06-linear-algebra-probability#질문-그래디언트가-무엇인지는-알겠는데-어떻게-해석하나",
+      "title": "그래디언트가 무엇인지는 알겠는데 어떻게 해석하나?",
+      "url": "/notes/learning/2026-10-05-06-linear-algebra-probability#질문-그래디언트가-무엇인지는-알겠는데-어떻게-해석하나",
+      "topic": "머신러닝",
+      "sourceTitle": "수식을 계산한 뒤 어떻게 해석할까",
+      "context": "여러 편미분을 모은 벡터라고 직접 설명한 뒤, 정의를 아는 것과 값을 해석하는 것은 다르다고 말했다.",
+      "intent": "성분·방향·크기가 실제 손실 변화와 어떤 관계인지 이해하려는 요청이다.",
+      "answer": "현재 점 근처에서 $\\Delta L\\approx\\nabla L\\cdot\\Delta w$로 읽는다. 각 성분은 한 좌표의 민감도이며, 실제 이동량과 내적하면 예상 손실 변화가 된다. 같은 유클리드 거리의 작은 이동을 비교하면 그래디언트 방향으로 가장 크게 증가하고 반대로 가장 크게 감소한다. 큰 이동이나 수직 이동의 실제 변화까지 1차 근사와 같다고 보장하지는 않는다."
+    },
+    {
+      "id": "learning/2026-10-05-06-linear-algebra-probability#질문-한-점의-확률이-0이면-왜-불가능하다는-뜻이-아닌가",
+      "title": "한 점의 확률이 0이면 왜 불가능하다는 뜻이 아닌가?",
+      "url": "/notes/learning/2026-10-05-06-linear-algebra-probability#질문-한-점의-확률이-0이면-왜-불가능하다는-뜻이-아닌가",
+      "topic": "머신러닝",
+      "sourceTitle": "수식을 계산한 뒤 어떻게 해석할까",
+      "context": "한 점의 폭이 0이라 면적도 0이라는 설명은 받아들이면서도, 확률이 0이면 절대 나오지 않는다는 해석을 왜 부정하는지 물었다.",
+      "intent": "면적 계산이 아니라 사건의 가능성과 확률값 사이의 논리 관계를 확인하려는 질문이다.",
+      "answer": "표본공간이 $[0,1]$인 균등분포에서 ${0.5}$는 비어 있지 않은 사건이지만 확률은 정확히 0이다. 범위 밖의 2가 나오는 사건은 빈 사건이다. 확률은 둘 다 0이지만 사건의 존재 여부는 다르다. 셀 수 없이 많은 점을, 가산 합에 적용되는 확률의 덧셈 규칙으로 합칠 수는 없다."
+    },
+    {
+      "id": "learning/2026-10-05-06-linear-algebra-probability#질문-베이즈-정리를-다시-짚어-줄-수-있나",
+      "title": "베이즈 정리를 다시 짚어 줄 수 있나?",
+      "url": "/notes/learning/2026-10-05-06-linear-algebra-probability#질문-베이즈-정리를-다시-짚어-줄-수-있나",
+      "topic": "머신러닝",
+      "sourceTitle": "수식을 계산한 뒤 어떻게 해석할까",
+      "context": "표준화·그래디언트·확률 0의 상세 설명을 요청하면서 베이즈 정리도 다시 설명해 달라고 했다.",
+      "intent": "조건부확률의 방향과 분모를 수식의 의미에 맞게 읽으려는 요청으로 해석했다.",
+      "answer": "$P(A\\mid B)$는 B인 경우만 새 전체로 놓고 A의 비율을 구한다. $P(B\\mid A)$와 분모가 다르다. 당시 설명의 메일 100개에서 스팸은 20개, “무료”가 있는 메일은 24개, 둘 다인 메일은 16개였다. $P(\\text{스팸}\\mid\\text{무료})=16/24$와 $P(\\text{무료}\\mid\\text{스팸})=16/20$을 구분했다."
+    },
+    {
+      "id": "learning/2026-10-02-model-and-validation#질문-선형대수는-선형이-아닌-상황에서는-쓸-수-없나",
+      "title": "선형대수는 선형이 아닌 상황에서는 쓸 수 없나?",
+      "url": "/notes/learning/2026-10-02-model-and-validation#질문-선형대수는-선형이-아닌-상황에서는-쓸-수-없나",
+      "topic": "머신러닝",
+      "sourceTitle": "모델을 학습하고 검증한다는 말의 의미",
+      "context": "선형대수의 이름에서 적용 범위를 추측하며, 비선형적인 상황에도 사용할 수 있는지 물었다.",
+      "intent": "앞으로 배울 수학이 어떤 문제까지 다룰 수 있는지 경계를 확인하려는 질문이다.",
+      "answer": "선형은 값의 종류가 아니라 변환의 성질이다. 선형대수는 비선형 함수의 국소 근사나 신경망의 선형 계산 부분에도 쓰인다. 전체 모델이 비선형이어도 내부의 행렬곱과 미분 계산에 선형대수가 필요하다."
+    },
+    {
+      "id": "learning/2026-10-02-model-and-validation#질문-머신러닝에서-cost는-무엇인가",
+      "title": "머신러닝에서 cost는 무엇인가?",
+      "url": "/notes/learning/2026-10-02-model-and-validation#질문-머신러닝에서-cost는-무엇인가",
+      "topic": "머신러닝",
+      "sourceTitle": "모델을 학습하고 검증한다는 말의 의미",
+      "context": "모델 학습 설명에 등장한 cost의 뜻을 물었다.",
+      "intent": "모델이 학습하면서 줄인다는 숫자가 무엇을 평가하는지 알고 싶다는 질문이다.",
+      "answer": "비용은 선택한 기준으로 예측의 나쁨을 수치화한 값이다. 당시에는 회귀의 평균제곱오차를 예로 들었다. 오차가 $-1,2$이면 평균제곱오차는 $(1+4)/2=2.5$다. 모든 비용 함수가 제곱오차인 것은 아니다."
+    },
+    {
+      "id": "learning/2026-10-02-model-and-validation#질문-regression과-classification은-무엇이-다른가",
+      "title": "regression과 classification은 무엇이 다른가?",
+      "url": "/notes/learning/2026-10-02-model-and-validation#질문-regression과-classification은-무엇이-다른가",
+      "topic": "머신러닝",
+      "sourceTitle": "모델을 학습하고 검증한다는 말의 의미",
+      "context": "지도학습 문제를 회귀와 분류로 나누는 기준을 물었다.",
+      "intent": "출력이 숫자라는 겉모양보다 예측하려는 대상의 의미를 구분하려는 질문이다.",
+      "answer": "회귀는 가격·온도처럼 양을 예측하고, 분류는 스팸 여부처럼 범주를 예측한다. 합격을 1, 불합격을 0으로 표시해도 그 숫자는 범주의 이름이므로 분류다. 같은 공부 시간 자료로 점수를 예측할지 합격 여부를 예측할지에 따라 문제가 달라진다."
+    },
+    {
+      "id": "learning/2026-10-02-model-and-validation#질문-hypothesis는-무엇인가",
+      "title": "hypothesis는 무엇인가?",
+      "url": "/notes/learning/2026-10-02-model-and-validation#질문-hypothesis는-무엇인가",
+      "topic": "머신러닝",
+      "sourceTitle": "모델을 학습하고 검증한다는 말의 의미",
+      "context": "예측식에 붙은 가설이라는 이름을 물었다.",
+      "intent": "가설, 비용, 학습이 각각 하는 일을 연결하려는 질문이다.",
+      "answer": "가설 함수는 입력을 받아 예측을 계산하는 함수다. 당시 설명의 $h(x)=5x+40$은 $x=4$에서 60을 예측한다. 비용은 그 예측과 정답을 비교하고, 학습은 비용을 줄이도록 5와 40 같은 파라미터를 바꾼다."
+    },
+    {
+      "id": "learning/2026-10-02-model-and-validation#질문-cost와-error는-어떻게-다른가",
+      "title": "cost와 error는 어떻게 다른가?",
+      "url": "/notes/learning/2026-10-02-model-and-validation#질문-cost와-error는-어떻게-다른가",
+      "topic": "머신러닝",
+      "sourceTitle": "모델을 학습하고 검증한다는 말의 의미",
+      "context": "두 용어가 모두 틀린 정도를 나타내는 것 같아 차이를 물었다.",
+      "intent": "개별 데이터의 차이와 전체 모델을 평가하는 수치를 구분하려는 질문이다.",
+      "answer": "이 회귀 설명에서는 $e_i=\\hat y_i-y_i$를 개별 오차로 정하고, $J=\\frac1m\\sum_i e_i^2$를 비용으로 쓴다. 오차 $-10,20$의 평균제곱오차는 250이다. 교재마다 error·loss·cost를 다르게 쓰므로 명칭보다 실제 식과 평균을 내는 범위를 확인한다."
+    },
+    {
+      "id": "learning/2026-10-02-model-and-validation#질문-딥러닝은-지도학습인가-비지도학습인가-강화학습인가",
+      "title": "딥러닝은 지도학습인가, 비지도학습인가, 강화학습인가?",
+      "url": "/notes/learning/2026-10-02-model-and-validation#질문-딥러닝은-지도학습인가-비지도학습인가-강화학습인가",
+      "topic": "머신러닝",
+      "sourceTitle": "모델을 학습하고 검증한다는 말의 의미",
+      "context": "딥러닝이 학습 방식의 분류 어디에 속하는지 물었다.",
+      "intent": "서로 다른 기준으로 나눈 개념을 같은 줄에 놓아도 되는지 확인하려는 질문이다.",
+      "answer": "딥러닝은 여러 층의 신경망을 쓰는 방법이고, 지도·비지도·강화학습은 어떤 학습 신호를 사용하는지에 관한 구분이다. 신경망으로 정답이 붙은 사진을 분류할 수도 있고, 정답 표시 없이 구조를 학습하거나 보상을 바탕으로 행동을 학습할 수도 있다."
+    },
+    {
+      "id": "learning/2026-10-02-model-and-validation#질문-기울기는-업데이트-방향만-정하나-크기도-정하나",
+      "title": "기울기는 업데이트 방향만 정하나, 크기도 정하나?",
+      "url": "/notes/learning/2026-10-02-model-and-validation#질문-기울기는-업데이트-방향만-정하나-크기도-정하나",
+      "topic": "머신러닝",
+      "sourceTitle": "모델을 학습하고 검증한다는 말의 의미",
+      "context": "$w_{new}=w-\\eta\\nabla J$를 보고, 기울기가 1뿐 아니라 5도 될 수 있으므로 이동 폭에도 영향을 줄 것이라는 직관을 직접 설명했다.",
+      "intent": "학습률이 이동 크기를 정한다는 설명에서 빠진 조건을 확인하려는 질문이다.",
+      "answer": "기본 경사하강법의 이동 크기는 학습률과 기울기가 함께 결정한다. 한 변수에서 $|\\Delta w|=\\eta|J'(w)|$다. $\\eta=0.1$일 때 기울기 1, 5, -5는 각각 가중치를 -0.1, -0.5, +0.5만큼 바꾼다. 큰 이동이 더 좋은 학습이라는 뜻은 아니다."
+    },
+    {
+      "id": "learning/2026-10-02-model-and-validation#질문-무엇이-하이퍼파라미터인가",
+      "title": "무엇이 하이퍼파라미터인가?",
+      "url": "/notes/learning/2026-10-02-model-and-validation#질문-무엇이-하이퍼파라미터인가",
+      "topic": "머신러닝",
+      "sourceTitle": "모델을 학습하고 검증한다는 말의 의미",
+      "context": "학습률과 가중치, 기울기가 한 식에 함께 나타나자 무엇을 설정값이라고 부르는지 물었다.",
+      "intent": "설정하는 값, 학습으로 바뀌는 값, 현재 상태에서 계산하는 값을 구분하려는 질문이다.",
+      "answer": "이 예에서 학습률은 학습 방식을 정하는 하이퍼파라미터, 가중치와 편향은 학습하는 파라미터다. 기울기는 현재 파라미터와 데이터로 계산한 미분값이다. 배치 크기나 모델의 깊이도 하이퍼파라미터가 될 수 있다."
+    },
+    {
+      "id": "learning/2026-10-02-model-and-validation#질문-설정이-틀릴-수-있는데-왜-학습한-다음에-validation을-하나",
+      "title": "설정이 틀릴 수 있는데 왜 학습한 다음에 validation을 하나?",
+      "url": "/notes/learning/2026-10-02-model-and-validation#질문-설정이-틀릴-수-있는데-왜-학습한-다음에-validation을-하나",
+      "topic": "머신러닝",
+      "sourceTitle": "모델을 학습하고 검증한다는 말의 의미",
+      "context": "하이퍼파라미터를 조정하려면 검증이 필요하다면서, 그 설정으로 먼저 학습해야 한다는 순서가 납득되지 않는다고 말했다.",
+      "intent": "검증이 설정을 직접 계산하는 단계인지, 학습 결과를 평가하는 단계인지 확인하려는 질문이다.",
+      "answer": "어떤 설정이 좋은지는 그 설정으로 학습한 결과를 평가해야 알 수 있다. 후보 설정으로 훈련하고 검증 점수를 보고 다음 후보를 고른다. 검증은 매 에포크 뒤에도 할 수 있지만 일반적인 가중치 갱신에는 훈련 데이터를 쓴다. 검증 성능이 나쁘다는 사실만으로 학습률이 원인이라고 확정할 수는 없다."
+    },
+    {
+      "id": "learning/2026-10-02-model-and-validation#질문-하이퍼파라미터도-자동으로-학습해-정할-수-있지-않나",
+      "title": "하이퍼파라미터도 자동으로 학습해 정할 수 있지 않나?",
+      "url": "/notes/learning/2026-10-02-model-and-validation#질문-하이퍼파라미터도-자동으로-학습해-정할-수-있지-않나",
+      "topic": "머신러닝",
+      "sourceTitle": "모델을 학습하고 검증한다는 말의 의미",
+      "context": "“사람이 직접 정하는 값”이라는 초기 설명에 반문하며, 설정을 찾는 일도 자동화할 수 있지 않느냐고 물었다.",
+      "intent": "파라미터와 하이퍼파라미터의 구분이 사람과 컴퓨터의 역할 차이인지 따져 보는 질문이다.",
+      "answer": "자동으로 정할 수 있다. 학습률 후보마다 훈련·검증을 반복해 좋은 값을 고르는 것만으로도 자동 튜닝이다. 구분 기준은 사람이 정했는지가 아니라, 모델 내부의 예측 규칙을 학습하는 값인지 그 학습 방식을 정하는 값인지다. 후보 탐색 자체가 반드시 또 하나의 지도학습이나 비지도학습 모델일 필요는 없다."
+    },
+    {
+      "id": "learning/2026-10-02-model-and-validation#질문-모델의-복잡도란-정확히-무엇인가",
+      "title": "모델의 복잡도란 정확히 무엇인가?",
+      "url": "/notes/learning/2026-10-02-model-and-validation#질문-모델의-복잡도란-정확히-무엇인가",
+      "topic": "머신러닝",
+      "sourceTitle": "모델을 학습하고 검증한다는 말의 의미",
+      "context": "모델의 복잡도라는 표현이 무엇을 뜻하는지 물었다. 원문의 “무대의 복잡도”는 당시 문맥에 따라 모델의 복잡도로 해석해 설명했다.",
+      "intent": "복잡도가 계산식의 어려움인지, 표현할 수 있는 규칙의 다양함인지 구분하려는 질문이다.",
+      "answer": "여기서 복잡도는 모델이 표현할 수 있는 패턴의 자유도를 가리킨다. 다항식의 차수나 트리의 깊이를 늘리면 더 세밀한 모양을 맞출 수 있다. 그만큼 훈련 자료의 우연한 흔들림까지 따라갈 수 있으므로 복잡도가 높다고 새 데이터의 성능이 보장되지는 않는다."
+    },
+    {
+      "id": "learning/2026-10-02-model-and-validation#질문-검증-결과가-나쁘면-다시-학습하나-k-fold는-이전-모델을-이어-쓰나",
+      "title": "검증 결과가 나쁘면 다시 학습하나? K-fold는 이전 모델을 이어 쓰나?",
+      "url": "/notes/learning/2026-10-02-model-and-validation#질문-검증-결과가-나쁘면-다시-학습하나-k-fold는-이전-모델을-이어-쓰나",
+      "topic": "머신러닝",
+      "sourceTitle": "모델을 학습하고 검증한다는 말의 의미",
+      "context": "일반적인 검증 후 재학습과 5개 분할을 사용하는 교차검증을 비교했다. 다음 분할에서 이전 가중치를 이어받는지 명확히 물었다.",
+      "intent": "설정 선택의 반복과 폴드별 평가의 반복을 구분하려는 질문이다.",
+      "answer": "일반적인 K-fold는 같은 설정으로 폴드마다 모델을 새로 학습한다. 1회차에서 B를 훈련에 쓴 모델을 2회차에서 이어 쓰며 B를 검증하면 이미 본 데이터로 평가하기 때문이다. 설정 후보를 비교할 때도 보통 같은 시작 조건에서 학습한다. 다만 한 번의 훈련 도중 검증에 따라 학습률을 줄여 계속 학습하는 방식도 있으므로 모든 검증 뒤에 반드시 초기화하는 것은 아니다."
+    },
+    {
+      "id": "learning/2026-10-02-model-and-validation#질문-k-fold는-검증-데이터에-과적합된-설정을-고르는-것을-막기-위한-것인가",
+      "title": "K-fold는 검증 데이터에 과적합된 설정을 고르는 것을 막기 위한 것인가?",
+      "url": "/notes/learning/2026-10-02-model-and-validation#질문-k-fold는-검증-데이터에-과적합된-설정을-고르는-것을-막기-위한-것인가",
+      "topic": "머신러닝",
+      "sourceTitle": "모델을 학습하고 검증한다는 말의 의미",
+      "context": "앞 설명을 듣고, 특정 검증 데이터에만 맞는 하이퍼파라미터를 고르는 상황을 피하려는 것이라고 스스로 해석했다.",
+      "intent": "여러 번 나누는 비용을 들이는 이유를 일반화 문제와 연결하려는 질문이다.",
+      "answer": "특정 한 번의 분할에 평가가 좌우되는 위험을 줄이는 목적은 맞다. 다만 같은 교차검증 결과를 보며 후보를 지나치게 많이 고르면 그 점수에도 맞춰질 수 있다. K-fold가 검증 과적합을 완전히 방지하는 것은 아니므로, 선택에 쓰지 않은 최종 테스트가 여전히 필요하다."
+    },
+    {
+      "id": "learning/2026-10-02-model-and-validation#질문-가중치-세-개가-서로-다른-모든-행을-설명할-수-있나",
+      "title": "가중치 세 개가 서로 다른 모든 행을 설명할 수 있나?",
+      "url": "/notes/learning/2026-10-02-model-and-validation#질문-가중치-세-개가-서로-다른-모든-행을-설명할-수-있나",
+      "topic": "머신러닝",
+      "sourceTitle": "모델을 학습하고 검증한다는 말의 의미",
+      "context": "집값 데이터의 여러 행에 공통 가중치 세 개를 적용하는 그림을 보고, 각 행의 특징이 다른데 그 정보가 소수의 값으로 압축될 수 있는지 물었다. 상황마다 가중치도 바뀌어야 하지 않느냐는 의문이었다.",
+      "intent": "행렬곱의 계산 가능성보다 선형회귀가 가정하는 공통 규칙과 그 한계를 확인하려는 질문이다.",
+      "answer": "모든 정답을 정확히 설명하는 가중치가 존재한다는 보장은 없다. 선형회귀는 공통 가중치에 서로 다른 입력을 넣어 예측하고 전체 오차를 줄이는 절충안을 찾는다. 당시 설명처럼 입력이 같은 두 집의 실제 가격이 5억·8억이면 같은 예측 함수로 둘을 정확히 맞힐 수 없으며, 두 집의 제곱오차를 최소화하는 예측은 6.5억이다."
+    },
+    {
+      "id": "learning/2026-10-02-python-numpy-review#질문-args는-어떤-값이고-리스트를-보내면-어떻게-되는가",
+      "title": "args는 어떤 값이고, 리스트를 보내면 어떻게 되는가?",
+      "url": "/notes/learning/2026-10-02-python-numpy-review#질문-args는-어떤-값이고-리스트를-보내면-어떻게-되는가",
+      "topic": "실전 파이썬 준비하기 · 데이터 분석",
+      "sourceTitle": "복습 중 다시 물은 것 — 인자 전달, NumPy 축과 데이터 해석",
+      "context": "*args의 자료형을 묻는 문제에서 시작해, 마지막에는 리스트 하나를 전달하는 경우와 **kwargs까지 다시 물었다.",
+      "intent": "이름을 외우기보다 실제로 전달된 인자의 개수와 모이는 자료형을 확인하려는 질문이다.",
+      "answer": "def show(*args, **kwargs)에서 남는 위치 인자는 튜플, 남는 키워드 인자는 딕셔너리에 모인다. show([10, 20])의 args는 ([10, 20],)이고, show(10, 20, unit=\"원\")에서는 (10, 20)과 {\"unit\": \"원\"}이다. 리스트 안의 값이 자동으로 별개 인자가 되지는 않는다. 정의에서 모으기와 호출에서 풀기를 구분한다."
+    },
+    {
+      "id": "learning/2026-10-02-python-numpy-review#질문-별표가-반대-역할을-하는데-print의-결과도-튜플인가",
+      "title": "별표가 반대 역할을 하는데, print의 결과도 튜플인가?",
+      "url": "/notes/learning/2026-10-02-python-numpy-review#질문-별표가-반대-역할을-하는데-print의-결과도-튜플인가",
+      "topic": "실전 파이썬 준비하기 · 데이터 분석",
+      "sourceTitle": "복습 중 다시 물은 것 — 인자 전달, NumPy 축과 데이터 해석",
+      "context": "print(numbers)와 print(*numbers)의 차이를 보며 뒤의 결과를 튜플로 예상했다. 이후 같은 별표가 반대 의미로 쓰여 헷갈린다고 말했다.",
+      "intent": "호출 문법의 역할과 호출된 함수의 처리 방식을 분리하려는 질문이다.",
+      "answer": "numbers = [10, 20, 30]일 때 print(*numbers)는 print(10, 20, 30)처럼 세 인자를 전달해서 10 20 30을 출력한다. 호출의 *는 튜플 변환이 아니다. def show(*args): print(args)라면 받는 쪽에서 튜플로 모은 뒤 그 튜플을 출력하므로 (10, 20, 30)이 보인다. 같은 입력도 함수가 처리하는 방식에 따라 출력이 다르다."
+    },
+    {
+      "id": "learning/2026-10-02-python-numpy-review#질문-뷰는-무엇이며-왜-y를-바꿨는데-x도-바뀌는가",
+      "title": "뷰는 무엇이며, 왜 y를 바꿨는데 x도 바뀌는가?",
+      "url": "/notes/learning/2026-10-02-python-numpy-review#질문-뷰는-무엇이며-왜-y를-바꿨는데-x도-바뀌는가",
+      "topic": "실전 파이썬 준비하기 · 데이터 분석",
+      "sourceTitle": "복습 중 다시 물은 것 — 인자 전달, NumPy 축과 데이터 해석",
+      "context": "x = np.array([5, 10, 15]); y = x[None, :]에서 y[0, 1] = 77을 실행하는 문제를 읽었다. 첫 설명 후 뷰의 정의 자체를 다시 물었다.",
+      "intent": "새 객체가 생기는 일과 실제 데이터를 새로 복사하는 일을 구별하려는 질문이다.",
+      "answer": "이 기본 인덱싱은 데이터 메모리를 공유하는 별도 배열 객체를 만든다. 따라서 x는 [5, 77, 15], y는 5, 77, 15가 되지만 shape은 각각 (3,), (1, 3)이다. y is x는 거짓이어도 np.shares_memory(x, y)는 참이다. 수정 후 변경을 복사해서 전달하는 과정이 아니라 처음부터 같은 저장 위치를 사용한다. 독립적인 수치 배열이 필요하면 .copy()를 쓴다. 뷰·복사·shape에 연결된다."
+    },
+    {
+      "id": "learning/2026-10-02-python-numpy-review#질문-axis0은-첫-행인가-행-방향인가-전체-피처를-섞는가",
+      "title": "axis=0은 첫 행인가, 행 방향인가? 전체 피처를 섞는가?",
+      "url": "/notes/learning/2026-10-02-python-numpy-review#질문-axis0은-첫-행인가-행-방향인가-전체-피처를-섞는가",
+      "topic": "실전 파이썬 준비하기 · 데이터 분석",
+      "sourceTitle": "복습 중 다시 물은 것 — 인자 전달, NumPy 축과 데이터 해석",
+      "context": "행은 가로인데 axis=0을 세로라고 부르는 이유를 물었다. 이어 축을 지정하면 원소 하나를 고르는지, 모든 피처를 한 번에 계산하는지 다시 확인했다.",
+      "intent": "축 번호와 위치 인덱스, 축소 연산의 묶음을 분리하려는 질문이다.",
+      "answer": "2차원 배열에서 axis=0은 행 번호가 변하는 축이다. 축소 연산은 나머지 좌표를 고정하고 지정한 축의 값들을 모은다. X=[[1,2,3],[10,20,30]]이면 mean(axis=0)은 [1,10], [2,20], [3,30]을 각각 평균 내 [5.5,11,16.5]를 만든다. axis=1은 각 행을 묶어 [2,20]을 만든다. X[0, :]처럼 첫 행을 선택하는 문법과 다르다."
+    },
+    {
+      "id": "learning/2026-10-02-python-numpy-review#질문-3차원인데-x-0에는-왜-두-자리만-있는가",
+      "title": "3차원인데 x[:, 0]에는 왜 두 자리만 있는가?",
+      "url": "/notes/learning/2026-10-02-python-numpy-review#질문-3차원인데-x-0에는-왜-두-자리만-있는가",
+      "topic": "실전 파이썬 준비하기 · 데이터 분석",
+      "sourceTitle": "복습 중 다시 물은 것 — 인자 전달, NumPy 축과 데이터 해석",
+      "context": "shape이 (2,3,4)인 배열의 인덱싱을 읽다가 조건이 헷갈린다고 말했다.",
+      "intent": "생략된 축과 정수 인덱싱으로 없어진 축을 구분하려는 질문이다.",
+      "answer": "뒤의 축을 생략한 x[:, 0]은 x[:, 0, :]와 같다. 두 묶음 모두에서 두 번째 축의 0번 항목과 마지막 축의 전체 값을 선택한다. 정수로 선택한 축이 사라져 결과는 (2,4)이다. x[:, 0:1, :]처럼 슬라이스를 쓰면 길이 1인 축이 남아 (2,1,4)이다."
+    },
+    {
+      "id": "learning/2026-10-02-python-numpy-review#질문-표준화된-값-15에-왜-평균과의-거리라는-의미가-생기는가",
+      "title": "표준화된 값 1.5에 왜 평균과의 거리라는 의미가 생기는가?",
+      "url": "/notes/learning/2026-10-02-python-numpy-review#질문-표준화된-값-15에-왜-평균과의-거리라는-의미가-생기는가",
+      "topic": "실전 파이썬 준비하기 · 데이터 분석",
+      "sourceTitle": "복습 중 다시 물은 것 — 인자 전달, NumPy 축과 데이터 해석",
+      "context": "어떤 피처의 값이 1.5라는 정보만으로 해석할 수 있는지 물었다.",
+      "intent": "문제에 붙은 ‘표준화된 데이터’ 조건이 숫자의 의미를 어떻게 바꾸는지 확인하려는 질문이다.",
+      "answer": "단순한 원래 값 1.5라면 평균과의 관계를 알 수 없다. 평균을 빼고 양수인 표준편차로 나눈 값이라면 그 단위가 표준편차가 된다. 평균 키 170cm, 표준편차 10cm, 키 185cm인 설명용 예에서 (185-170)/10=1.5이다. 한 샘플의 한 피처가 그 피처 평균보다 표준편차 1.5배만큼 높다는 뜻이다. 피처별 표준화와 연결된다."
+    },
+    {
+      "id": "learning/2026-10-02-python-numpy-review#질문-순서가-다른-두-series는-무엇을-기준으로-합치는가",
+      "title": "순서가 다른 두 Series는 무엇을 기준으로 합치는가?",
+      "url": "/notes/learning/2026-10-02-python-numpy-review#질문-순서가-다른-두-series는-무엇을-기준으로-합치는가",
+      "topic": "실전 파이썬 준비하기 · 데이터 분석",
+      "sourceTitle": "복습 중 다시 물은 것 — 인자 전달, NumPy 축과 데이터 해석",
+      "context": "결측 개수와 비율을 합치는 문제의 질문 자체를 이해하기 어렵다고 말했다.",
+      "intent": "값의 물리적인 줄 순서와 인덱스 라벨의 차이를 확인하려는 질문이다.",
+      "answer": "pd.DataFrame({\"개수\": counts, \"비율\": ratios})는 Series의 라벨을 맞춘다. counts가 age:20, fare:5, ratios가 fare:0.05, age:0.20 순서여도 age 행에는 20과 0.20이 연결된다. 한쪽에 없는 라벨은 결측값을 만들 수 있다. 결측 요약표의 정렬에 같은 원리를 정리했다."
+    },
+    {
+      "id": "learning/2026-10-02-python-numpy-review#질문-평균값을-추가하면-편차와-분산은-어떻게-달라지는가",
+      "title": "평균값을 추가하면 편차와 분산은 어떻게 달라지는가?",
+      "url": "/notes/learning/2026-10-02-python-numpy-review#질문-평균값을-추가하면-편차와-분산은-어떻게-달라지는가",
+      "topic": "실전 파이썬 준비하기 · 데이터 분석",
+      "sourceTitle": "복습 중 다시 물은 것 — 인자 전달, NumPy 축과 데이터 해석",
+      "context": "[20,40]에 평균 30을 두 번 추가한 예에서 편차와 분산을 실제로 계산해 달라고 했다.",
+      "intent": "평균 대체가 분포를 좁히는 이유를 수치로 확인하려는 질문이다.",
+      "answer": "평균은 전후 모두 30이다. 편차 제곱 합은 100+100=200으로 같고, ddof=0 분산은 200/2=100에서 200/4=50으로 줄어든다. 추가한 값의 편차는 0인데 분모만 늘었기 때문이다. 다른 분모 기준에서는 수치도 달라진다. 평균 보존이 분산 보존을 뜻하지 않는다는 점을 평균 대체의 한계와 연결한다."
+    },
+    {
+      "id": "learning/2026-10-02-python-numpy-review#질문-데이터-분석-개념지도는-무엇이고-네-분석은-무엇을-하는가",
+      "title": "데이터 분석 개념지도는 무엇이고, 네 분석은 무엇을 하는가?",
+      "url": "/notes/learning/2026-10-02-python-numpy-review#질문-데이터-분석-개념지도는-무엇이고-네-분석은-무엇을-하는가",
+      "topic": "실전 파이썬 준비하기 · 데이터 분석",
+      "sourceTitle": "복습 중 다시 물은 것 — 인자 전달, NumPy 축과 데이터 해석",
+      "context": "낯선 ‘개념지도’ 표현의 뜻을 물은 뒤, 다음 문제에서는 정답을 바로 말하지 말고 분석 종류의 의미만 설명해 달라고 요청했다.",
+      "intent": "문제의 용어를 먼저 이해하고 직접 선택하려는 질문이다.",
+      "answer": "여기서 개념지도는 별도 계산 기법이라기보다 작업 흐름을 안내하는 표현이었다. 집계 전에 한 행과 열의 의미, 결측·중복 등 품질을 확인해야 계산을 해석할 수 있다. 기술적 분석은 관측한 현황 요약, 진단적 분석은 가능한 이유 조사, 예측적 분석은 미지의 결과 추정, 처방적 분석은 목표와 제약 아래 행동 선택이다. 조사된 관련성만으로 원인을 확정하지 않는다. 분석 질문의 목적, 관측 단위에 연결된다."
+    },
+    {
+      "id": "learning/2026-10-02-python-numpy-review#질문-initpy는-무엇인가",
+      "title": "init.py는 무엇인가?",
+      "url": "/notes/learning/2026-10-02-python-numpy-review#질문-initpy는-무엇인가",
+      "topic": "실전 파이썬 준비하기 · 데이터 분석",
+      "sourceTitle": "복습 중 다시 물은 것 — 인자 전달, NumPy 축과 데이터 해석",
+      "context": "함수 인자와 배열 복습 사이에 패키지 초기화 파일도 다시 물었다.",
+      "intent": "클래스의 초기화 메서드와 파일 이름의 역할을 구별하려는 질문이다.",
+      "answer": "일반 패키지를 처음 불러올 때 실행되는 파이썬 파일이다. 내용이 비어 있어도 되며 초기화나 이름 연결에 쓴다. 클래스의 __init__()와는 별개다. 모든 패키지가 반드시 이 파일을 갖는다는 뜻은 아니다. import와 패키지 및 10월 7일 내부 동작 후속 질문으로 이어진다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-문자열에서-모음을-remove로-지우면-왜-안-될까",
+      "title": "문자열에서 모음을 remove로 지우면 왜 안 될까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-문자열에서-모음을-remove로-지우면-왜-안-될까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "모음 제거 문제에서 for i in len(s)+1과 s.remove(s[i])를 사용했다.",
+      "intent": "반복 대상의 타입과 문자열을 바꾸는 방법을 확인하려 했다.",
+      "answer": "len(s)+1은 정수 하나여서 순회 대상이 아니다. 인덱스가 필요하면 range(len(s)), 글자만 필요하면 for char in s를 쓴다. 문자열은 불변이고 remove 메서드가 없다. 모음이 아닌 글자를 새 결과에 모으는 방식으로 작성한다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-함수-결과를-print했는데-none이-한-줄-더-나오는-이유는",
+      "title": "함수 결과를 print했는데 None이 한 줄 더 나오는 이유는?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-함수-결과를-print했는데-none이-한-줄-더-나오는-이유는",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "비교 함수 내부에서 출력한 뒤 바깥에서도 함수 호출을 print했다.",
+      "intent": "화면 출력과 반환값을 구분하려 했다.",
+      "answer": "함수 내부 print가 숫자를 출력해도 함수 자체는 return 없이 끝나면 None을 반환한다. 바깥 print가 그 None을 한 번 더 표시한다. 값을 나중에 사용할 함수라면 계산 결과를 return하고 출력은 호출하는 쪽에서 한다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-return-print도-가능한-문법일까",
+      "title": "return print(...)도 가능한 문법일까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-return-print도-가능한-문법일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "출력과 반환을 한 줄로 합칠 수 있는지 물었다.",
+      "intent": "return 뒤의 식이 어떤 순서로 실행되는지 확인하려 했다.",
+      "answer": "문법상 가능하다. 다만 print를 먼저 실행해 출력한 뒤 print의 반환값인 None을 돌려준다. return \"안녕\"과는 다르다. print 결과가 글자 자체라고 생각하면 호출 다음 줄의 값이 어긋난다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-문제-정답-없이-try와-except의-사용법만-알-수-있을까",
+      "title": "문제 정답 없이 try와 except의 사용법만 알 수 있을까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-문제-정답-없이-try와-except의-사용법만-알-수-있을까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "문제는 직접 풀겠다며 예외 처리 문법만 요청했다.",
+      "intent": "실패를 처리하는 구조를 익혀 자신의 풀이에 적용하려 했다.",
+      "answer": "try 안에서 지정한 예외가 나면 남은 try 코드를 건너뛰고 해당 except로 이동한다. 예외가 없으면 except를 건너뛴다. int(\"hello\")는 ValueError를 내므로 except ValueError:로 처리할 수 있다. 어떤 실패를 처리하려는지 알 수 있도록 예외 종류를 명시한다. 당시 미완성 문제의 독립 풀이 성공을 뜻하는 기록은 아니다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-문자열-압축은-문자별-총개수를-세면-될까",
+      "title": "문자열 압축은 문자별 총개수를 세면 될까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-문자열-압축은-문자별-총개수를-세면-될까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "압축 게임에서 정답 대신 힌트를 요청했다.",
+      "intent": "연속 구간마다 상태를 갱신하는 방법을 찾으려 했다.",
+      "answer": "aaabbaaa의 앞 aaa와 뒤 aaa는 별도 구간이다. 이전 문자, 현재 연속 횟수, 완성된 결과를 구분한다. 문자가 바뀌면 이전 묶음을 저장하고 새 묶음을 시작한다. 마지막 묶음은 뒤에 새 문자가 오지 않으므로 반복 뒤 따로 마무리해야 한다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-rear가-이전-문자를-기억하게-하려면-어느-줄에서-바꿀까",
+      "title": "rear가 이전 문자를 기억하게 하려면 어느 줄에서 바꿀까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-rear가-이전-문자를-기억하게-하려면-어느-줄에서-바꿀까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "이전 문자를 유지하는 구체적인 순서를 물었다.",
+      "intent": "대입 시점이 다음 반복의 상태를 결정한다는 점을 확인하려 했다.",
+      "answer": "rear는 반복 전에 만들고 이번 char와 비교한 뒤 rear = char를 실행한다. aab라면 비교 시 rear는 차례로 빈 문자열, a, a다. 비교 전에 rear를 char로 바꾸면 두 값이 항상 같아져 이전 문자 정보가 사라진다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-숫자가-아니면이라는-조건은-isdigit의-반대일까",
+      "title": "숫자가 아니면이라는 조건은 isdigit의 반대일까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-숫자가-아니면이라는-조건은-isdigit의-반대일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "입력 검증 조건을 물었다.",
+      "intent": "허용할 입력과 검사 함수의 의미를 일치시키려 했다.",
+      "answer": "정수의 숫자 문자만 검사할 때는 not text.isdigit()을 사용할 수 있다. 하지만 -3이나 3.5도 isdigit은 False다. 음수·소수를 받으려면 float 변환을 시도해 ValueError를 처리하는 등 목적에 맞게 정한다. 숫자 변환 가능성과 모든 응용 조건을 만족하는지는 또 다르다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-덧셈-프로그램의-do와-빈-if에-왜-빨간-줄이-생길까",
+      "title": "덧셈 프로그램의 do와 빈 if에 왜 빨간 줄이 생길까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-덧셈-프로그램의-do와-빈-if에-왜-빨간-줄이-생길까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "작성 도중 표시된 문법 오류를 물었다.",
+      "intent": "조건식 자체와 코드 블록의 문법 문제를 나누려 했다.",
+      "answer": "Python에는 do: 문이 없다. 먼저 실행하고 종료 조건을 확인할 때는 while True와 break 등을 쓴다. if 다음에는 들여쓴 본문이 필요하다. 아직 작성하지 않았다면 pass를 넣을 수 있다. if not num1.isdigit(): 자체는 올바른 문법이다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-time이라는-이름은-쓸-수-없는-변수명일까",
+      "title": "time이라는 이름은 쓸 수 없는 변수명일까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-time이라는-이름은-쓸-수-없는-변수명일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "카운트다운 코드에서 time에 보이는 표시를 물었다.",
+      "intent": "문법 오류와 이름 충돌, 편집기 경고를 구분하려 했다.",
+      "answer": "time을 변수명으로 쓰는 것 자체는 가능하다. 당시 페이지 텍스트로 정확한 빨간 줄 경고는 확인되지 않았고, 함수의 미완성 이름 pri는 별도 NameError 후보였다. 이후 import time을 쓰는 코드에서 time = 10으로 덮으면 time이 모듈 대신 정수를 가리키므로 이름 충돌이 생긴다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-1초-기다리기는-어떻게-하고-import는-어디에-둘까",
+      "title": "1초 기다리기는 어떻게 하고 import는 어디에 둘까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-1초-기다리기는-어떻게-하고-import는-어디에-둘까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "time.sleep을 받은 뒤에도 함수 들여쓰기와 모듈 이름 충돌을 질문했다.",
+      "intent": "호출할 모듈 객체와 카운트다운 숫자를 따로 유지하려 했다.",
+      "answer": "import time 뒤 time.sleep(1)로 현재 실행 흐름을 기다리게 한다. 입력 초는 seconds처럼 다른 이름에 둔다. 당시 함수 중간에서 들여쓰기 없는 import로 본문이 끝난 뒤 다시 들여쓴 while이 나와 문제가 됐다. import를 함수 정의 위에 두면 구조가 분명해진다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-timetracker의-초기화시작종료경과-계산은-어떻게-나눌까",
+      "title": "TimeTracker의 초기화·시작·종료·경과 계산은 어떻게 나눌까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-timetracker의-초기화시작종료경과-계산은-어떻게-나눌까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "메서드 위치와 들여쓰기가 섞여 있었다.",
+      "intent": "각 메서드가 저장하거나 반환해야 할 상태를 정하려 했다.",
+      "answer": "__init__은 시간 속성의 초기값, start는 시작 시각, stop은 종료 시각을 저장한다. get_elapsed_time은 저장한 두 시각의 차이를 반환한다. 인스턴스 메서드에 self가 필요하며 빈 return 다음의 계산은 실행되지 않는다. 분 단위 숫자를 반환할지 timedelta를 반환할지는 호출부와 같은 계약으로 맞춰야 한다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-total_seconds-뒤에-괄호가-없으면-무엇이-달라질까",
+      "title": "total_seconds 뒤에 괄호가 없으면 무엇이 달라질까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-total_seconds-뒤에-괄호가-없으면-무엇이-달라질까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "시간 차이에 .total_seconds / 60.0을 적용했다.",
+      "intent": "메서드 객체와 호출해 얻은 숫자를 구분하려 했다.",
+      "answer": ".total_seconds는 메서드이고 .total_seconds()는 초 숫자를 얻는 호출이다. 반환값이 timedelta라면 호출 결과를 60으로 나눠 분을 얻는다. 당시 답변은 get_elapsed_time에 빈 return이 남았다고 잘못 지적했지만, 사용자가 제시한 화면에서는 이미 시간 차이를 올바르게 반환하고 있었다. 이 정정을 기준으로 읽는다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-시간-출력에-2f를-바로-붙여도-될까",
+      "title": "시간 출력에 .2f를 바로 붙여도 될까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-시간-출력에-2f를-바로-붙여도-될까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "0.7243666333333334분의 소수 자릿수를 줄이려 했다.",
+      "intent": "객체의 타입과 표시 형식을 맞추려 했다.",
+      "answer": "분 단위 숫자라면 f\"{minutes:.2f}\"로 0.72를 표시한다. get_elapsed_time이 timedelta를 반환한다면 먼저 .total_seconds() / 60으로 숫자를 얻어야 한다. 당시 마지막 답변은 메서드 결과에 .2f를 바로 붙였지만, 그것이 맞으려면 메서드가 이미 숫자를 반환하도록 바뀌었다는 전제가 필요하다. 기록만으로 변경을 확정하지 않는다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-phone-number처럼-공백이-들어간-매개변수-이름을-쓸-수-있을까",
+      "title": "phone number처럼 공백이 들어간 매개변수 이름을 쓸 수 있을까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-phone-number처럼-공백이-들어간-매개변수-이름을-쓸-수-있을까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "연락처 객체의 __init__을 작성해 확인을 요청했다.",
+      "intent": "사람이 읽는 항목명과 코드의 식별자 규칙을 연결하려 했다.",
+      "answer": "매개변수 이름에 공백을 넣을 수 없다. phone_number, email_address처럼 적고 self.phone_number = phone_number로 전달값을 객체 속성에 저장한다. 같은 철자라도 오른쪽은 매개변수이고 왼쪽은 해당 인스턴스의 속성이다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-후보자-집합에-0을-저장하면-딕셔너리처럼-되는-것-아닐까",
+      "title": "후보자 집합에 0을 저장하면 딕셔너리처럼 되는 것 아닐까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-후보자-집합에-0을-저장하면-딕셔너리처럼-되는-것-아닐까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "후보자 추가 코드의 self.candidate[name] = 0을 보고 set 여부를 물었다.",
+      "intent": "중복 방지와 후보별 표 수 저장에 맞는 자료구조를 고르려 했다.",
+      "answer": "해당 코드는 실제 딕셔너리다. 이름에 초기 득표 수 0을 연결한다. set은 후보자 이름만 저장할 수 있지만 표 수까지 연결하려면 추가 구조가 필요하다. 문제의 이름·표 수 관리에는 딕셔너리가 맞고, 키 중복도 막는다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-직원-인스턴스를-인자로-안-주는데-클래스-메서드가-평균을-어떻게-계산할까",
+      "title": "직원 인스턴스를 인자로 안 주는데 클래스 메서드가 평균을 어떻게 계산할까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-직원-인스턴스를-인자로-안-주는데-클래스-메서드가-평균을-어떻게-계산할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "평균 급여 메서드에 직원 객체가 전달되지 않아 의문을 가졌다.",
+      "intent": "클래스 메서드가 아는 정보의 출처를 찾으려 했다.",
+      "answer": "클래스 메서드가 만들어진 모든 인스턴스를 자동으로 추적하는 것은 아니다. 생성할 때 클래스의 employees 목록에 append(self)로 등록했다면 cls.employees를 통해 다시 접근할 수 있다. 그 저장 코드가 없다면 목록에 직원 정보가 저절로 생기지 않는다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-클래스-변수를-self로-접근해도-되고-cls라고-쓰지-않아도-될까",
+      "title": "클래스 변수를 self로 접근해도 되고 cls라고 쓰지 않아도 될까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-클래스-변수를-self로-접근해도-되고-cls라고-쓰지-않아도-될까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "클래스도 객체라면 항상 클래스명을 써야 하는지 물었다.",
+      "intent": "이름 관례와 실제로 바인딩된 대상, 속성 탐색을 함께 정리하려 했다.",
+      "answer": "일반 메서드의 self는 인스턴스다. 그 인스턴스에 employees가 없으면 클래스의 목록을 찾을 수 있다. classmethod 첫 매개변수를 self라고 적어도 실제 받는 값은 클래스지만 cls 관례가 명확하다. self.employees.append(self)는 찾은 공용 리스트를 변경하고 self.employees = []는 별도 인스턴스 속성을 만드는 차이가 있다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-예약-시스템의-self에-손님-이름을-저장해도-될까",
+      "title": "예약 시스템의 self에 손님 이름을 저장해도 될까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-예약-시스템의-self에-손님-이름을-저장해도-될까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "지점 객체와 손님 예약 정보가 한 객체에 섞이는 느낌이 들었다.",
+      "intent": "self가 가리키는 객체와 여러 건 저장할 데이터의 구조를 나누려 했다.",
+      "answer": "restaurant.add_reservation(...)에서 self는 지점이다. self.name = name 같은 세 속성만 갱신하면 다음 예약이 앞 예약을 덮는다. 지점의 reservations 리스트 안에 예약 한 건씩 담는다. 이 실습에서는 예약 딕셔너리면 충분하며 손님 클래스를 꼭 새로 만들 필요는 없다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-출력만-하는-메서드도-return을-적어야-할까",
+      "title": "출력만 하는 메서드도 return을 적어야 할까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-출력만-하는-메서드도-return을-적어야-할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "예약 목록을 print하고 끝내고 싶다고 했다.",
+      "intent": "부수 효과만 필요한 메서드와 계산 결과가 필요한 메서드를 구분하려 했다.",
+      "answer": "끝까지 실행하면 자동으로 None을 반환하므로 마지막에 빈 return은 불필요하다. 중간에 종료할 때는 쓸 수 있다. 반면 total = sum_reservations(...)처럼 다음 코드가 숫자를 쓰려면 합계를 return해야 한다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-첫-매개변수를-cls로-쓰면-자동으로-클래스-메서드가-될까",
+      "title": "첫 매개변수를 cls로 쓰면 자동으로 클래스 메서드가 될까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-첫-매개변수를-cls로-쓰면-자동으로-클래스-메서드가-될까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "sum_reservations 호출에서 인자 부족과 오타 문제가 있었다.",
+      "intent": "메서드 종류를 결정하는 문법을 확인하려 했다.",
+      "answer": "아니다. @classmethod가 있어야 클래스가 첫 인자로 바인딩된다. cls라는 이름만으로는 달라지지 않는다. 당시 reservation과 revservation 오타도 별개 이름이었다. 전달받은 지점 목록에서 각 res.reservations의 길이를 합친 뒤 반환하는 흐름으로 연결한다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-최대한-많은-할-일을-고를-때-가장-짧은-것부터-선택하면-될까",
+      "title": "최대한 많은 할 일을 고를 때 가장 짧은 것부터 선택하면 될까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-최대한-많은-할-일을-고를-때-가장-짧은-것부터-선택하면-될까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "제한 시간 문제를 그리디로 풀 수 있는지 물었다.",
+      "intent": "정렬 기준이 목표를 보장하는 이유를 확인하려 했다.",
+      "answer": "각 일을 최대 한 번 선택하고 소요 시간이 음수가 아니며 목표가 개수 최대화인 문제에서는 짧은 순으로 고르면 된다. k개를 고르는 조합 중 가장 짧은 k개의 합이 최소이기 때문이다. 남는 시간을 최소화하는 목표까지 같지는 않다. 10분에 3·4·6분이면 짧은 순은 7분, 4+6은 10분으로 둘 다 두 개다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-csv-저장-셀은-무엇을-준비하는-코드일까",
+      "title": "CSV 저장 셀은 무엇을 준비하는 코드일까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-csv-저장-셀은-무엇을-준비하는-코드일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "118번 셀 전체의 역할을 쉽게 설명해 달라고 했다.",
+      "intent": "추천 알고리즘과 입력 파일 생성 단계를 분리하려 했다.",
+      "answer": "해당 셀은 할 일과 시간을 파일로 쓰는 준비 코드다. 목록 생성 → 함수 호출 → 파일 열기 → writer 설정 → 헤더 쓰기 → 데이터 행 쓰기 순이다. 아직 할 일을 선택하지 않는다. print가 없어도 파일 쓰기는 일어날 수 있고, w 모드는 기존 내용이 있다면 덮어쓴다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-튜플은-무엇이고-for-task-minutes는-어떻게-값을-받을까",
+      "title": "튜플은 무엇이고 for task, minutes는 어떻게 값을 받을까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-튜플은-무엇이고-for-task-minutes는-어떻게-값을-받을까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "할 일 목록의 (이름, 시간) 구조가 낯설었다.",
+      "intent": "한 행을 묶는 방법과 언패킹을 이해하려 했다.",
+      "answer": "튜플은 항목의 순서가 있고 해당 튜플의 항목 참조를 교체할 수 없는 묶음이다. (\"공부\", 120)은 두 항목이며 name, minutes = ...로 나눠 받는다. 한 항목 튜플은 (\"공부\",)처럼 쉼표가 필요하다. 불변 튜플 안에 가변 객체가 있다면 그 내부까지 불변이 되는 것은 아니라는 점은 보충해서 구분한다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-fieldnamesfieldnames의-왼쪽과-오른쪽은-왜-같을까",
+      "title": "fieldnames=fieldnames의 왼쪽과 오른쪽은 왜 같을까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-fieldnamesfieldnames의-왼쪽과-오른쪽은-왜-같을까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "writer 생성에서 같은 이름을 양쪽에 쓰는 뜻을 이해하기 어려웠다.",
+      "intent": "매개변수 이름과 전달할 변수의 역할을 나누려 했다.",
+      "answer": "왼쪽은 DictWriter가 받는 매개변수 이름, 오른쪽은 호출하는 코드의 변수다. columns = [\"할일\", \"소요시간\"] 뒤 fieldnames=columns로 써도 같다. 키워드로 지정한다면 왼쪽 이름은 API가 정한 fieldnames를 사용한다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-변수-이름은-같으면-안-된다고-배웠는데-왜-이-경우-괜찮을까",
+      "title": "변수 이름은 같으면 안 된다고 배웠는데 왜 이 경우 괜찮을까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-변수-이름은-같으면-안-된다고-배웠는데-왜-이-경우-괜찮을까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "키워드 인자를 설명한 뒤 같은 이름 사용 자체를 다시 물었다.",
+      "intent": "대입으로 값을 덮는 경우와 함수 호출의 문법을 구분하려 했다.",
+      "answer": "같은 이름의 사용 자체가 금지는 아니다. fieldnames=fieldnames는 같은 변수를 두 번 정의하거나 바깥 값을 덮는 문장이 아니다. 오른쪽 식의 값을 왼쪽 이름의 매개변수로 전달하는 호출 문법이다. 함수의 매개변수와 바깥 변수는 사용되는 이름 공간도 다르다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-키워드-인자는-반드시-써야-할까",
+      "title": "키워드 인자는 반드시 써야 할까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-키워드-인자는-반드시-써야-할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "fieldnames를 위치로 주어도 되는지 물었다.",
+      "intent": "읽기 편하게 적는 선택과 API가 강제하는 인자를 구분하려 했다.",
+      "answer": "이 DictWriter 생성에서는 두 번째 인자를 위치로 줄 수 있어 csv.DictWriter(file, columns)도 된다. 모든 함수가 모든 인자를 위치로 허용하는 것은 아니므로 일반화하지 않는다. fieldnames=columns는 전달 목적을 드러낸다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-확장자를-csv로-붙이면-딕셔너리-파일이-되는-것일까",
+      "title": "확장자를 .csv로 붙이면 딕셔너리 파일이 되는 것일까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-확장자를-csv로-붙이면-딕셔너리-파일이-되는-것일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "CSV 자체를 모른다며 파일 이름, fieldnames, 딕셔너리의 연결을 물었다.",
+      "intent": "파일 형식과 메모리의 Python 객체를 구분하려 했다.",
+      "answer": "CSV는 행과 필드를 텍스트로 표현하는 형식이다. 이 예에서는 쉼표로 열을 구분하며 쉼표나 줄바꿈이 필드 안에 있으면 따옴표 처리도 필요하다. 확장자만 바꿔 내용이 변환되지는 않는다. 파일에 Python 딕셔너리가 저장되는 것이 아니라 csv 모듈이 값들을 CSV 텍스트로 쓴다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-dictwriter를-만들-때-아직-딕셔너리가-없는데-무엇을-쓰는-것일까",
+      "title": "DictWriter를 만들 때 아직 딕셔너리가 없는데 무엇을 쓰는 것일까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-dictwriter를-만들-때-아직-딕셔너리가-없는데-무엇을-쓰는-것일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "fieldnames도 파일도 딕셔너리가 아닌데 DictWriter가 무엇을 변환하는지 물었다.",
+      "intent": "객체 준비와 실제 쓰기 시점을 나누려 했다.",
+      "answer": "생성은 쓸 파일과 열 순서를 기억하는 writer 객체를 준비한다. 데이터는 나중에 writer.writerow({\"할일\": \"공부\", \"소요시간\": 120})에서 전달한다. 정확히는 중괄호 표현식이 딕셔너리를 만들고 writerow가 이를 받아 값을 찾아 쓴다. 생성자 호출 자체가 내용 한 행을 쓰는 것은 아니다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-writerow에-이미-키가-있는데-fieldnames와-writeheader는-왜-필요할까",
+      "title": "writerow에 이미 키가 있는데 fieldnames와 writeheader는 왜 필요할까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-writerow에-이미-키가-있는데-fieldnames와-writeheader는-왜-필요할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "키를 알려 줬는데 같은 정보를 반복해서 주는 것 같다고 했다.",
+      "intent": "메모리에서 값을 찾는 설정과 파일에 기록되는 제목을 구분하려 했다.",
+      "answer": "fieldnames는 어떤 키의 값을 어떤 열 순서로 쓸지 정한다. writeheader는 열 이름을 파일에 한 행으로 적는다. writerow는 설정된 순서의 값만 데이터 행으로 쓴다. 키는 값을 찾는 데 쓰이지만 행마다 키 이름이 파일에 붙지는 않는다. 헤더 없이도 저장은 가능하지만 읽는 쪽이 열의 뜻을 따로 알아야 한다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-키가-파일에-저장되지-않으면-딕셔너리에-아무-키나-써도-될까",
+      "title": "키가 파일에 저장되지 않으면 딕셔너리에 아무 키나 써도 될까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-키가-파일에-저장되지-않으면-딕셔너리에-아무-키나-써도-될까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "writerow가 값만 쓴다는 설명에서 키가 자유롭다고 추론했다.",
+      "intent": "파일에 기록되지 않는 정보도 처리 과정에서 필요한지 확인하려 했다.",
+      "answer": "키는 fieldnames에 맞아야 writer가 값을 찾는다. 기본 설정에서 fieldnames에 없는 추가 키를 주면 ValueError가 난다. 필요한 키가 빠진 경우는 기본 restval인 빈 문자열을 쓰므로 “모든 불일치가 똑같이 오류”인 것은 아니다. 이름을 바꾸려면 설정과 행 데이터 양쪽을 맞춘다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-load_tasks-suggest_tasks-main은-어떻게-연결할까",
+      "title": "load_tasks, suggest_tasks, main은 어떻게 연결할까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-load_tasks-suggest_tasks-main은-어떻게-연결할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "세 함수의 이름만으로 역할이 잡히지 않아 설명과 구체적인 힌트를 요청했다.",
+      "intent": "하나의 프로그램을 입력·변환·선택·출력으로 나누려 했다.",
+      "answer": "load_tasks는 파일에서 목록을 만들고, suggest_tasks는 목록과 남은 시간으로 선택한 목록을 반환한다. main은 결과를 받아 다음 함수의 인자로 전달하고 출력한다. 함수들을 위에서 아래로 정의한다고 결과가 자동으로 흐르지 않는다. 아래 보충 연결 예제에서 타입이 바뀌는 지점을 확인한다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-첫-행을-키로-쓰는-것은-csv-자체의-규칙일까",
+      "title": "첫 행을 키로 쓰는 것은 CSV 자체의 규칙일까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-첫-행을-키로-쓰는-것은-csv-자체의-규칙일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "처음에는 왜 첫 행이 키인지 물었고 별도 세션에서도 질문이 적절한지 재검토했다.",
+      "intent": "파일 형식의 약속과 Python 읽기 도구의 기본 동작을 분리하려 했다.",
+      "answer": "CSV는 헤더가 없을 수도 있다. csv.DictReader(file)는 fieldnames를 따로 주지 않으면 첫 행을 열 이름으로 사용한다. 직접 fieldnames를 주면 첫 행부터 데이터로 읽는다. csv.reader는 각 행을 리스트로 내므로 헤더도 자동으로 딕셔너리 키가 되지 않는다. 질문의 초점을 “CSV의 필수 규칙인가, DictReader의 기본 동작인가”로 나누면 정확하다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-입력-예시에는-남은-시간만-있는데-왜-파일-경로도-입력받을까",
+      "title": "입력 예시에는 남은 시간만 있는데 왜 파일 경로도 입력받을까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-입력-예시에는-남은-시간만-있는데-왜-파일-경로도-입력받을까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "제시된 완성 풀이가 CSV 경로까지 사용자에게 물었다.",
+      "intent": "요구사항과 실제 사용 예시의 차이를 확인하려 했다.",
+      "answer": "당시 답변은 기능 설명의 경로 입력 문구와 입출력 예시가 달랐다고 정정했다. 남은 시간만 묻는 예시를 따르려면 코드 안에서 filename = \"tasks.csv\"로 정한다. 둘 다 해야 하는 필수 흐름으로 합치지 않는다. 아래 연결 예제는 파일 경로를 코드에서 정하는 쪽이다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-with-open-as-csvfile에서-csvfile은-파일-내용일까",
+      "title": "with open(...) as csvfile에서 csvfile은 파일 내용일까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-with-open-as-csvfile에서-csvfile은-파일-내용일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "with와 as를 자세히 설명해 달라고 했다.",
+      "intent": "파일 객체를 받은 뒤 쓰고 닫는 범위를 이해하려 했다.",
+      "answer": "csvfile은 내용 문자열이 아니라 열린 파일 객체를 참조하는 변수다. 이 파일 컨텍스트에서는 with를 벗어나면 예외나 return이 있어도 닫기 처리를 한다. with는 반복문이 아니며 예외 자체를 없애지도 않는다. 이미 읽어 tasks에 저장한 데이터는 파일이 닫혀도 남는다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-with가-끝나면-변수와-파일-객체의-연결도-끊길까",
+      "title": "with가 끝나면 변수와 파일 객체의 연결도 끊길까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-with가-끝나면-변수와-파일-객체의-연결도-끊길까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "참조는 남지만 객체만 닫힌 상태가 되는지 자신의 설명을 확인했다.",
+      "intent": "이름의 수명과 자원의 사용 가능 상태를 구분하려 했다.",
+      "answer": "같은 범위에서 csvfile 이름은 여전히 닫힌 파일 객체를 가리킨다. csvfile.closed는 True이고 상태 조회는 가능하지만 read는 실패한다. with가 별도 지역 변수 범위를 만들어 이름을 지우는 것은 아니다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-newline은-공백을-넣거나-줄바꿈을-없애라는-뜻일까",
+      "title": "newline=\"\"은 공백을 넣거나 줄바꿈을 없애라는 뜻일까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-newline은-공백을-넣거나-줄바꿈을-없애라는-뜻일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "빈 문자열을 newline에 주는 이유가 연결되지 않는다고 했다.",
+      "intent": "일반 문자열의 뜻과 매개변수 설정값의 약속을 구분하려 했다.",
+      "answer": "빈 문자열은 공백 한 칸과 다르다. 여기서는 open이 줄바꿈을 자동 변환하지 않는 모드를 선택하는 설정값이다. 읽을 때 newline=None은 여러 줄바꿈을 \\n으로 통일하고 newline=\"\"는 인식하되 원문 줄바꿈을 유지한다. 빈 문자열 자체에 그런 보편적 의미가 있는 것이 아니라 open의 계약이다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-newline-설정을-생략하면-실제로-무엇이-달라질까",
+      "title": "newline 설정을 생략하면 실제로 무엇이 달라질까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-newline-설정을-생략하면-실제로-무엇이-달라질까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "추상 설명 대신 빠졌을 때의 사례를 요청했다.",
+      "intent": "설정이 필요한 환경과 데이터 범위를 확인하려 했다.",
+      "answer": "Windows 텍스트 쓰기의 기본 줄바꿈 변환이 CSV writer의 \\r\\n과 겹치면 \\r\\r\\n이 되어 빈 행처럼 보일 수 있다. 필드 내부 줄바꿈도 읽기 변환의 영향을 받는다. 단순 CSV를 다른 환경에서 읽을 때 결과가 같을 수 있으므로 생략하면 언제나 오류라고 말하지 않는다. CSV 모듈이 줄바꿈을 처리하도록 newline=\"\"로 연다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-역슬래시-r은-어떤-문자일까",
+      "title": "역슬래시 r은 어떤 문자일까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-역슬래시-r은-어떤-문자일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "줄바꿈 예시에 나온 \\r을 물었다.",
+      "intent": "문자열 표기와 출력 장치의 동작을 연결하려 했다.",
+      "answer": "\\r은 carriage return 제어 문자다. 터미널에서는 보통 현재 줄의 맨 앞으로 이동하고 \\n은 줄바꿈에 쓰인다. \"ABC\\rXY\"가 XYC처럼 보일 수 있지만 표시 환경에 따라 다르다. 문자열 리터럴의 \"\\r\"은 역슬래시와 r 두 글자가 아닌 제어 문자 하나를 나타낸다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-for-row-in-reader는-키를-순회할까-행을-순회할까",
+      "title": "for row in reader는 키를 순회할까, 행을 순회할까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-for-row-in-reader는-키를-순회할까-행을-순회할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "DictReader가 키 이름을 안다면 for에서 키를 주는 것인지 혼동했다.",
+      "intent": "순회 대상과 매번 반환되는 항목의 타입을 확인하려 했다.",
+      "answer": "reader는 딕셔너리 한 개가 아니라 행마다 딕셔너리를 내는 이터레이터다. 첫 row는 {\"할일\": \"공부하기\", \"소요시간\": \"120\"}이고 row[\"할일\"]은 그 행의 값을 읽는다. for key in row를 따로 쓸 때는 딕셔너리 키를 순회한다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-네-행을-읽으면-tasks에-딕셔너리-네-개가-저장될까",
+      "title": "네 행을 읽으면 tasks에 딕셔너리 네 개가 저장될까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-네-행을-읽으면-tasks에-딕셔너리-네-개가-저장될까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "reader가 행을 제공하는 흐름을 자신의 말로 설명했다.",
+      "intent": "중간 객체와 최종 저장 형태를 구분하려 했다.",
+      "answer": "reader가 딕셔너리 네 개를 하나씩 제공하는 설명은 맞지만, tasks에 무엇을 넣는지는 append 인자가 정한다. 당시 코드는 시간을 int로 바꾸고 (name, minutes) 튜플을 추가했다. 따라서 파일은 텍스트, row는 딕셔너리, tasks는 튜플들의 리스트다. reader가 처음부터 모든 행을 딕셔너리로 모아 두는 것도 아니다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-결국-튜플로-저장할-건데-왜-dictreader를-거칠까",
+      "title": "결국 튜플로 저장할 건데 왜 DictReader를 거칠까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-결국-튜플로-저장할-건데-왜-dictreader를-거칠까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "딕셔너리에서 튜플로 바꾸는 과정의 필요성을 따졌다.",
+      "intent": "필수 형 변환과 구현 선택의 비용을 구분하려 했다.",
+      "answer": "필수는 아니다. DictReader는 열 이름으로 접근하기 좋고 튜플은 두 값을 언패킹하기 간단하다. 딕셔너리를 그대로 저장하거나 csv.reader가 내는 리스트를 바로 변환해도 된다. 후자는 열 순서에 의존한다. 뒤 함수도 선택한 구조에 맞게 접근해야 하며 하나의 풀이만 유일한 구조로 설명하면 안 된다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-sorted의-lambda는-언제-누구에게-호출될까",
+      "title": "sorted의 lambda는 언제 누구에게 호출될까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-sorted의-lambda는-언제-누구에게-호출될까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "suggest_tasks의 정렬 한 줄을 자세히 설명해 달라고 했다.",
+      "intent": "함수를 전달하는 것과 정렬 기준 숫자를 전달하는 것을 구분하려 했다.",
+      "answer": "key=lambda task: task[1]은 함수 객체를 전달한다. sorted가 각 튜플을 그 함수에 넣어 120, 60 같은 기준값을 얻고 원래 튜플들을 정렬한다. key에 정수들이 차례로 대입되는 문법이 아니다. 결과도 시간 숫자만이 아니라 (이름, 시간) 튜플들의 새 리스트다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-task라고-이름-붙이면-컴퓨터가-tasks의-한-항목인지-알까",
+      "title": "task라고 이름 붙이면 컴퓨터가 tasks의 한 항목인지 알까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-task라고-이름-붙이면-컴퓨터가-tasks의-한-항목인지-알까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "정의되지 않은 듯한 람다 매개변수가 왜 튜플인지 물었다.",
+      "intent": "단수·복수 이름 관례와 실제 값 전달을 구분하려 했다.",
+      "answer": "task는 임의로 정한 매개변수 이름이다. sorted가 목록의 항목 하나를 전달하기 때문에 이번 호출에서 튜플을 받는다. item이나 x로 바꿔도 같다. lambda tasks: tasks[1]도 가능하지만 바깥 목록과 이름이 겹쳐 읽기 어려워진다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-sorted도-하나씩-꺼내-쓰는데-이터레이터가-아닌-이유는",
+      "title": "sorted도 하나씩 꺼내 쓰는데 이터레이터가 아닌 이유는?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-sorted도-하나씩-꺼내-쓰는데-이터레이터가-아닌-이유는",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "정렬에 숨어 있는 순회와 이터레이터의 관계를 두 번 확인했다.",
+      "intent": "동작을 수행하는 함수와 다음 값을 제공하는 객체를 구분하려 했다.",
+      "answer": "sorted는 입력을 순회하는 함수이며 정렬한 새 리스트를 반환한다. 순회 과정에서 이터레이터를 사용하지만 함수 자체나 반환한 리스트가 이터레이터인 것은 아니다. next(sorted_tasks)는 실패하고 next(iter(sorted_tasks))는 가능하다. 당시 “이터레이터와 관련이 없다”는 식의 설명은 이 차이로 정정됐다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-main은-특별한-함수이고-enumerate는-세-값을-주는-함수일까",
+      "title": "main은 특별한 함수이고 enumerate는 세 값을 주는 함수일까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-main은-특별한-함수이고-enumerate는-세-값을-주는-함수일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "main의 뜻과 마지막 출력 반복을 자세히 물었다.",
+      "intent": "프로그램 진입 흐름과 중첩 언패킹을 나누려 했다.",
+      "answer": "main은 관례적인 이름의 일반 함수이고 호출해야 실행된다. enumerate는 (번호, 원래 항목) 두 요소의 튜플을 하나씩 준다. 원래 항목이 (이름, 분)이라 number, (name, minutes)로 다시 나눈다. start=1은 시작 번호일 뿐 첫 항목을 건너뛰는 설정이 아니다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-for-in-뒤에는-이터러블과-이터레이터가-둘-다-올-수-있을까",
+      "title": "for in 뒤에는 이터러블과 이터레이터가 둘 다 올 수 있을까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-for-in-뒤에는-이터러블과-이터레이터가-둘-다-올-수-있을까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "enumerate가 이터레이터라는 설명을 기존 리스트 반복과 연결했다.",
+      "intent": "두 종류의 포함 관계를 확인하려 했다.",
+      "answer": "for 항목 in 대상의 대상 자리에는 이터러블이 온다. 이터레이터도 이터러블에 포함되며 자신에 iter를 적용하면 자기 자신을 돌려주는 규약을 따른다. for가 next 요청과 종료 처리를 한다. 리스트는 새 이터레이터로 다시 읽을 수 있지만 소진한 기존 이터레이터를 다시 순회해도 값은 나오지 않는다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-if-name--main은-무엇을-막아-줄까",
+      "title": "if name == \"main\"은 무엇을 막아 줄까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-if-name--main은-무엇을-막아-줄까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "실행을 감싼 if문의 의미를 추가로 요청했다.",
+      "intent": "직접 실행과 import 시 실행을 나누려 했다.",
+      "answer": "파일을 시작점으로 직접 실행하면 __name__이 \"main\"이어서 안의 main을 호출한다. import할 때는 보통 모듈명이 들어가 호출을 건너뛴다. 함수 이름 main과 문자열 \"main\"은 별개다. import가 최상위 코드를 전혀 실행하지 않는 것은 아니며 조건문 바깥 코드는 첫 import 과정에서 실행될 수 있다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-소수-판별의-if가-복잡해지면-어떻게-정리할까",
+      "title": "소수 판별의 if가 복잡해지면 어떻게 정리할까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-소수-판별의-if가-복잡해지면-어떻게-정리할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "여러 경우를 나눈 조건문이 지저분하다고 느꼈다.",
+      "intent": "하나의 함수가 무엇을 판정해야 하는지 좁히려 했다.",
+      "answer": "2 미만이면 False, 약수를 찾으면 False, 끝까지 찾지 못했으면 True라는 조기 반환 구조로 정리한다. 마지막 True는 반복 밖에 둔다. 합을 누적하는 역할은 별도 함수가 맡는다. 약수 쌍 중 작은 쪽은 제곱근 이하이므로 그 범위까지만 검사할 수 있다. 보충 구현에서 큰 정수의 정확한 경계가 필요하면 math.isqrt를 쓸 수 있다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-도서관-관리가-bookmemberrental을-모두-상속해야-할까",
+      "title": "도서관 관리가 Book·Member·Rental을 모두 상속해야 할까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-도서관-관리가-bookmemberrental을-모두-상속해야-할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "관리 클래스의 add_book이 다른 클래스를 사용하므로 상속이 필요하다고 생각했다.",
+      "intent": "사용 관계와 종류 관계를 구분하려 했다.",
+      "answer": "도서관 관리 시스템은 책이나 회원의 한 종류가 아니다. 독립된 Book, Member, Rental 객체를 생성해 목록에 보관하는 관계로 표현한다. 다른 클래스를 사용하기 위해 상속은 필요 없다. 관리 메서드의 self와 Book 생성자의 self는 서로 다른 객체다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-rental을-만들-때-self-외의-값은-어디서-구할까",
+      "title": "Rental을 만들 때 self 외의 값은 어디서 구할까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-rental을-만들-때-self-외의-값은-어디서-구할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "Rental() 호출과 생성자 매개변수가 맞지 않는다고 느꼈다.",
+      "intent": "인자 개수뿐 아니라 각 값의 출처를 연결하려 했다.",
+      "answer": "self는 자동 전달되지만 회원 ID, ISBN, 대여일은 직접 주어야 한다. 반납 전이라면 return_date=None을 기본값으로 둘 수 있다. 회원 ID는 검색한 Member에서, ISBN은 요청에서, 대여일은 처리 시각에서 가져온다. 모두 같은 의미의 값이거나 자동 변환되는 것은 아니다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-사용-예시는-회원-이름을-받는데-rental은-왜-회원-id를-받을까",
+      "title": "사용 예시는 회원 이름을 받는데 Rental은 왜 회원 ID를 받을까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-사용-예시는-회원-이름을-받는데-rental은-왜-회원-id를-받을까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "예시의 rent_book과 Rental의 매개변수가 달라 문제 설계가 모순처럼 보였다.",
+      "intent": "외부 요청 형태와 내부 저장 구조의 차이를 확인하려 했다.",
+      "answer": "회원 이름은 Rental 생성자가 아니라 관리 시스템의 rent_book에 들어간다. 시스템이 이름으로 Member를 찾고 그 member_id로 Rental을 만든다. 이름이 자동으로 ID로 변환되지 않는다. 당시 문제에는 ID 부여와 동명이인 처리 기준이 충분히 명시되지 않아 별도 설계 항목으로 남았다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-대여일은-언제-현재-시각으로-저장할까",
+      "title": "대여일은 언제 현재 시각으로 저장할까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-대여일은-언제-현재-시각으로-저장할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "rental_date에 넣을 값을 물었다.",
+      "intent": "상태 변경 시각과 조회 시각을 구분하려 했다.",
+      "answer": "즉시 대여를 처리하는 실습에서는 회원과 책을 찾은 뒤 datetime.now() 결과를 한 번 저장한다. 반납할 때는 해당 Rental.return_date를 별도로 바꾼다. 조회할 때마다 대여일을 현재 시각으로 갱신하면 기록의 뜻이 달라진다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-member--member_name은-회원-이름-비교가-아닐까",
+      "title": "member == member_name은 회원 이름 비교가 아닐까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-member--member_name은-회원-이름-비교가-아닐까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "대여·반납 조건에서 회원 객체를 문자열과 비교했다.",
+      "intent": "객체 전체와 그 객체의 속성을 구분하려 했다.",
+      "answer": "해당 클래스에는 이름으로 비교하는 특별한 동작을 정의하지 않았으므로 member.member_name == member_name으로 이름 속성을 꺼내 비교한다. 찾지 못한 상태에서 member_id를 사용하지 않도록 흐름도 확인해야 한다. 메서드의 단수·복수 이름, None 철자, self 누락은 각각 별개의 호출·이름 문제였다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-오류-없이-끝났으면-대여-상태도-해결된-것일까",
+      "title": "오류 없이 끝났으면 대여 상태도 해결된 것일까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-오류-없이-끝났으면-대여-상태도-해결된-것일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "수정 후 해결된 것 같은지 확인을 요청했다.",
+      "intent": "실행 완료와 요구된 출력·상태 일치를 구분하려 했다.",
+      "answer": "당시 예시는 예외 없이 끝났지만 대여 직후와 반납 후 모두 회원 대여 목록이 None으로 보였다. Rental 목록만 바뀌고 Member.book_list가 갱신되지 않았기 때문이다. 출력 조건만 if not member.book_list로 바꾸면 항상 없음으로 보일 수 있다. 대여와 반납이 실제 저장 상태를 바꾸는지 별도로 확인한다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-책-목록을-순회하며-같은-목록에-append하면-왜-계속-돌까",
+      "title": "책 목록을 순회하며 같은 목록에 append하면 왜 계속 돌까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-책-목록을-순회하며-같은-목록에-append하면-왜-계속-돌까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "ISBN이 맞는 book을 self.book_list에 다시 append했다.",
+      "intent": "반복 횟수가 시작 길이로 고정되는지 확인하려 했다.",
+      "answer": "리스트 이터레이터는 뒤에 추가된 항목도 방문할 수 있다. 같은 조건을 만족하는 객체를 계속 추가하고 break가 없다면 다시 그 항목을 만나 끝나지 않는 패턴이 된다. 빈 리스트 초기화는 최대 길이 설정이 아니다. 이후 제시한 코드에는 break가 있어 무한 반복 대신 한 번 중복 추가되는 상태였다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-book_list가-분명-인데-왜-none이라고-했을까",
+      "title": "book_list가 분명 []인데 왜 None이라고 했을까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-book_list가-분명-인데-왜-none이라고-했을까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "사용자가 전체 코드를 붙여 도서관 목록은 이미 리스트라고 반박했다.",
+      "intent": "같은 속성 이름이 붙은 서로 다른 객체를 명확히 구별하려 했다.",
+      "answer": "LibraryManagement의 self.book_list는 전체 도서 목록 []였고, Member의 self.book_list는 회원별 대여 목록 None이었다. 초기 답변이 소유 객체를 생략해 혼동을 만들었다. library.book_list와 member.book_list처럼 소유 대상을 함께 적어야 한다. 회원 목록에 append하려면 Member 쪽 초기값이 리스트여야 한다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-책-검색을-회원-반복문-안에-꼭-넣어야-할까",
+      "title": "책 검색을 회원 반복문 안에 꼭 넣어야 할까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-책-검색을-회원-반복문-안에-꼭-넣어야-할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "중첩 반복문을 넣으라는 설명을 듣고 연결이 더 어려워졌다고 했다.",
+      "intent": "서로 독립된 검색을 어떻게 보관해 이어 쓰는지 이해하려 했다.",
+      "answer": "반드시 중첩할 필요는 없다. 이름으로 찾은 회원을 target_member에 저장하고, ISBN으로 책을 따로 찾은 뒤 그 회원의 목록을 바꾸면 된다. 책 이름은 Book에서 찾고 회원 정보는 Member에서 찾는다. 검색이 끝난 뒤 단순히 마지막 반복 변수 member를 쓰면 다른 회원을 가리킬 수 있다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-break-다음-코드와-빈-if-때문에-반납-처리에-무엇이-생길까",
+      "title": "break 다음 코드와 빈 if 때문에 반납 처리에 무엇이 생길까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-break-다음-코드와-빈-if-때문에-반납-처리에-무엇이-생길까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "마지막 문제에서 단순한 수정 위치를 요청했다.",
+      "intent": "실행되지 않는 줄과 아직 작성하지 않은 본문을 찾으려 했다.",
+      "answer": "break 뒤에 같은 반복 블록의 코드가 있으면 그 경로에서는 실행되지 않는다. if 다음에 들여쓴 본문이 없으면 문법 오류다. 다만 당시 첫 답변은 실제 오류 메시지를 확보하지 못한 화면 진단이어서 특정 예외가 발생한 사실로 단정하지 않는다. 도서관 전체 목록에서 지우지 않은 책을 반납 때 다시 추가할 필요도 없다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-예시-출력에-맞추는-최소-수정에서-회원-목록에-무엇을-저장할까",
+      "title": "예시 출력에 맞추는 최소 수정에서 회원 목록에 무엇을 저장할까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-예시-출력에-맞추는-최소-수정에서-회원-목록에-무엇을-저장할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "전체 코드를 크게 바꾸는 답변보다 필요한 변경만 알려 달라고 거듭 요청했다.",
+      "intent": "작동 범위를 좁히고 저장 타입과 출력 코드를 맞추려 했다.",
+      "answer": "최종 최소안은 Member.book_list에 책 제목 문자열을 저장하고 출력에서 \", \".join(member.book_list)를 쓰는 방식이었다. 앞선 대안은 Book 객체를 넣었으므로 섞으면 안 된다. 문자열 방식은 실습 예시에 한정되며 같은 제목의 여러 책을 구분할 구조까지 해결한 것은 아니다."
+    },
+    {
+      "id": "learning/2026-09-22-library-and-csv#질문-대여-기록을-remove했는데-회원-목록에서도-책을-지워야-할까",
+      "title": "대여 기록을 remove했는데 회원 목록에서도 책을 지워야 할까?",
+      "url": "/notes/learning/2026-09-22-library-and-csv#질문-대여-기록을-remove했는데-회원-목록에서도-책을-지워야-할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기",
+      "context": "마지막으로 정확히 어디에 한 줄을 더할지 요청했다.",
+      "intent": "따로 저장한 두 상태가 자동으로 연동되는지 확인하려 했다.",
+      "answer": "Rental 목록에서 rental을 지워도 회원의 별도 제목 리스트는 바뀌지 않는다. 최종 답변은 제목 문자열을 저장하는 방식을 전제로 self.rental_list.remove(rental) 다음에 member.book_list.remove(book_name)을 같은 처리 경로에 두는 최소 수정이었다. 이 마지막 수정 후 실제 실행 결과는 기록에 남지 않아 최종 통과로 표시하지 않는다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-메서드에서-쓰지-않는-self도-적어야-할까",
+      "title": "메서드에서 쓰지 않는 self도 적어야 할까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-메서드에서-쓰지-않는-self도-적어야-할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "Dog의 메서드가 인스턴스 속성을 읽지 않는데도 self가 필요한지 물었다.",
+      "intent": "사용하지 않는 매개변수와 호출 시 자동 전달되는 인자를 구분하려 했다.",
+      "answer": "일반 메서드를 dog.bark()로 호출하면 dog가 첫 인자로 전달된다. 본문에서 쓰지 않더라도 받을 자리는 필요하다. def bark():처럼 자리가 없으면 인자 개수 오류가 난다. self라는 철자가 특별한 것이 아니라 호출 방식이 인스턴스를 전달한다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-괄호가-비어-있는데-인자-한-개가-전달됐다는-이유는",
+      "title": "괄호가 비어 있는데 인자 한 개가 전달됐다는 이유는?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-괄호가-비어-있는데-인자-한-개가-전달됐다는-이유는",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "인자를 쓰지 않은 호출에서 “0개를 받는데 1개가 전달됐다”는 오류가 낯설었다.",
+      "intent": "화면의 빈 괄호와 내부 호출 사이의 차이를 확인하려 했다.",
+      "answer": "이 예제의 dog.bark()는 Dog.bark(dog)처럼 풀어 볼 수 있다. 변수명 dog라는 글자가 넘어가는 것이 아니라 그 이름이 가리키는 인스턴스가 전달된다. self를 적어서 자동 전달이 생기는 순서가 아니다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-정적-메서드는-무엇이-다를까",
+      "title": "정적 메서드는 무엇이 다를까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-정적-메서드는-무엇이-다를까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "인스턴스를 만들지 않고 호출하는 방식과 static의 뜻을 물었다.",
+      "intent": "자동 인자 전달을 없애는 방법을 이해하려 했다.",
+      "answer": "@staticmethod는 인스턴스나 클래스를 첫 인자로 자동 전달하지 않는다. Dog.check(text)와 dog.check(text) 모두 명시한 text만 받는다. “속성을 사용할 수 없다”는 제한이 아니다. 필요한 객체를 직접 인자로 받으면 그 객체의 속성과 메서드도 사용할 수 있다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-일반-메서드도-클래스-이름으로-호출할-수-있을까",
+      "title": "일반 메서드도 클래스 이름으로 호출할 수 있을까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-일반-메서드도-클래스-이름으로-호출할-수-있을까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "정적 메서드만 클래스에서 호출 가능하다는 설명처럼 들려 재확인했다.",
+      "intent": "접근 가능 여부와 인자를 자동으로 붙이는 여부를 나누려 했다.",
+      "answer": "일반 메서드도 Dog.bark(dog)처럼 호출할 수 있다. 이때는 호출에 사용할 인스턴스를 직접 전달한다. 클래스에서 일반 함수를 꺼내 호출하는 것과 인스턴스에서 바인딩된 메서드를 호출하는 것은 첫 인자를 누가 준비하는지가 다르다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-가-붙은-데코레이터는-언제-무엇을-할까",
+      "title": "@가 붙은 데코레이터는 언제 무엇을 할까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-가-붙은-데코레이터는-언제-무엇을-할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "staticmethod 설명을 듣다가 데코레이터 자체의 작동이 궁금해졌다.",
+      "intent": "기호를 외우기보다 함수가 변환되는 순서를 알고 싶어 했다.",
+      "answer": "단순한 함수 데코레이터 @decorate는 정의 뒤 greet = decorate(greet)로 다시 연결하는 형태로 이해한다. 데코레이터 적용은 정의 시점에 일어난다. 데코레이터가 반환한 함수의 본문이 나중에 호출되는 시점과는 다르다. 모든 데코레이터가 단순히 출력문을 앞뒤에 붙이는 것은 아니다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-함수-이름만-쓰면-함수를-전달하는-것일까",
+      "title": "함수 이름만 쓰면 함수를 전달하는 것일까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-함수-이름만-쓰면-함수를-전달하는-것일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "데코레이터 예시에서 greet와 greet()가 다른 이유를 물었다.",
+      "intent": "함수 객체와 실행 결과를 구분하려 했다.",
+      "answer": "greet는 함수 객체를 가리키고 greet()는 지금 호출해서 결과를 얻는 식이다. use(greet)는 함수를, use(greet())는 결과를 넘긴다. 단독으로 이름을 적었다고 무조건 어디론가 전달되는 것은 아니다. 주변의 호출식이 그 값을 인자로 사용한다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-del로-객체를-없애면-소멸자가-곧바로-실행될까",
+      "title": "del로 객체를 없애면 소멸자가 곧바로 실행될까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-del로-객체를-없애면-소멸자가-곧바로-실행될까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "생성과 반대로 객체가 사라지는 시점을 물었다.",
+      "intent": "변수 삭제와 객체 수명을 연결하려 했다.",
+      "answer": "del dog는 그 이름의 연결을 지운다. 다른 이름이나 컨테이너가 같은 객체를 참조하면 객체는 남는다. __del__의 실행 시점에 파일 정리 같은 중요한 동작을 의존하지 않는다. 파일은 with로 사용 범위를 정리한다. 특정 구현에서 관찰한 즉시 정리를 모든 Python 실행환경의 보장으로 확대하면 안 된다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-인스턴스를-만들기-전-클래스와-상속은-설계도만-있는-상태일까",
+      "title": "인스턴스를 만들기 전 클래스와 상속은 설계도만 있는 상태일까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-인스턴스를-만들기-전-클래스와-상속은-설계도만-있는-상태일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "상속을 정의해도 객체 생성 전에는 무엇이 존재하는지 물었다.",
+      "intent": "클래스 정의의 실행과 인스턴스 메서드 실행을 구분하려 했다.",
+      "answer": "class 문을 실행하면 클래스 객체가 만들어진다. 아직 Dog 인스턴스는 없어도 Dog가 가리키는 객체는 존재한다. 부모의 메서드를 물려받았다고 그 메서드 본문이 저절로 실행되지는 않는다. 일반 메서드 본문은 해당 호출이 있어야 실행된다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-python-객체를-코드데이터스택힙으로-나누어-이해해도-될까",
+      "title": "Python 객체를 코드·데이터·스택·힙으로 나누어 이해해도 될까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-python-객체를-코드데이터스택힙으로-나누어-이해해도-될까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "다른 언어에서 배운 메모리 영역을 Python 변수와 클래스에 대응시키려 했다.",
+      "intent": "이름, 값, 클래스가 실제로 어디에 존재하는지 명확히 하려 했다.",
+      "answer": "학습 코드에서는 먼저 이름 공간과 객체의 참조 관계를 추적하는 편이 정확하다. 전역 이름이면 데이터 영역, 지역 이름이면 스택이라는 식으로 곧바로 대응할 수 없다. Python의 객체 모델과 CPython 같은 구현체의 메모리 배치는 설명 층위가 다르다. 클래스 변수의 공유도 저장 영역의 이름이 아니라 속성을 어느 객체에서 찾는지로 설명한다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-cpython은-python과-무엇이-다를까",
+      "title": "CPython은 Python과 무엇이 다를까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-cpython은-python과-무엇이-다를까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "메모리 설명에 CPython이 등장하자 언어와 실행기의 관계를 되물었다.",
+      "intent": "구현에 따른 성질을 언어 자체의 규칙과 구분하려 했다.",
+      "answer": "Python은 언어이고 CPython은 그 언어를 실행하는 대표적인 구현이다. 소스의 x = 1만 보고 네이티브 프로그램의 특정 메모리 구역을 확정할 수는 없다. 이름이 객체를 참조한다는 코드 수준 설명과 구현체 내부 구조를 분리한다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-대입할-때마다-새-객체가-만들어질까",
+      "title": "대입할 때마다 새 객체가 만들어질까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-대입할-때마다-새-객체가-만들어질까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "할당은 새 값 객체를 만드는지 기존 객체를 가리키는지 물었다.",
+      "intent": "같은 값과 같은 객체를 구분하려 했다.",
+      "answer": "오른쪽 식에 따라 다르다. a = []는 새 리스트를 만들고 b = a는 같은 리스트를 가리키게 한다. a == b는 값 비교이고 a is b는 동일 객체인지 확인한다. 작은 정수 재사용 같은 최적화를 일반적인 대입 규칙으로 삼지 않는다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-오른쪽에-적힌-것은-모두-객체일까",
+      "title": "오른쪽에 적힌 것은 모두 객체일까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-오른쪽에-적힌-것은-모두-객체일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "대입 설명을 들은 뒤 오른쪽 코드 전체를 객체라고 불러도 되는지 확인했다.",
+      "intent": "표현식과 그 평가 결과를 나누려 했다.",
+      "answer": "오른쪽에 적힌 소스 글자 자체와 평가해 얻은 객체는 다르다. x = 1 + 2에서는 식을 평가해 정수 객체를 얻고 x가 이를 참조한다. None도 객체다. 평가 도중 예외가 나면 결과 객체를 얻고 대입하는 단계까지 가지 못한다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-classmethod의-cls는-어떻게-클래스가-될까",
+      "title": "classmethod의 cls는 어떻게 클래스가 될까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-classmethod의-cls는-어떻게-클래스가-될까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "클래스 자체도 객체라는 설명 뒤 클래스 메서드의 첫 인자를 물었다.",
+      "intent": "self와 cls가 단순 이름인지 호출 규칙인지 확인하려 했다.",
+      "answer": "@classmethod로 정의한 메서드를 호출하면 클래스가 첫 인자로 바인딩된다. cls는 관례적인 이름이다. 이름을 self로 바꿔도 받는 대상은 클래스다. 다만 실제 인스턴스를 뜻하는 self와 혼동되므로 cls를 쓴다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-점으로-접근하는-것과-메서드를-실행하는-것은-같을까",
+      "title": "점으로 접근하는 것과 메서드를 실행하는 것은 같을까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-점으로-접근하는-것과-메서드를-실행하는-것은-같을까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "dog.introduce 같은 표현이 무엇을 가져오는지 물었다.",
+      "intent": "속성 조회와 함수 호출의 경계를 찾으려 했다.",
+      "answer": "이 일반 메서드 예시에서 dog.introduce는 호출할 인스턴스와 함수를 연결한 바인딩된 메서드를 얻고, dog.introduce()가 그것을 호출한다. dog.name은 속성 조회다. dog.name = \"초코\"처럼 대입 왼쪽에 있으면 속성을 설정하는 동작이다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-부모-클래스의-area에-pass만-있으면-자식이-꼭-구현해야-할까",
+      "title": "부모 클래스의 area에 pass만 있으면 자식이 꼭 구현해야 할까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-부모-클래스의-area에-pass만-있으면-자식이-꼭-구현해야-할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "Shape.area의 빈 본문이 어떤 역할인지 물었다.",
+      "intent": "상속용 틀과 강제 규칙의 차이를 확인하려 했다.",
+      "answer": "pass는 아무 동작도 하지 않는 문장이다. 그대로 호출하면 함수 끝에 도달해 None을 반환한다. 자식이 같은 이름의 메서드를 정의하면 재정의되지만, pass 자체가 재정의를 강제하지는 않는다. 강제하고 싶을 때 쓰는 추상 메서드는 별도 장치다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-클래스-안의-count를-count--1로-늘리면-왜-오류가-날까",
+      "title": "클래스 안의 count를 count += 1로 늘리면 왜 오류가 날까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-클래스-안의-count를-count--1로-늘리면-왜-오류가-날까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "Counter를 만들면서 누적 횟수 변경에 오류가 났다.",
+      "intent": "지역 변수, 인스턴스 속성, 클래스 속성 중 어느 것을 바꾸는지 찾으려 했다.",
+      "answer": "함수 안에서 count += 1은 count에 대입하므로 지역 이름으로 취급된다. 먼저 읽을 지역 값이 없으면 UnboundLocalError가 난다. 공용 횟수를 바꾸려는 예제라면 Counter.count += 1이다. self.count += 1은 기본적인 속성 동작에서는 클래스 값을 읽은 뒤 인스턴스 속성에 저장해 공용 값과 갈라질 수 있다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-acount--10은-클래스-변수도-바꿀까",
+      "title": "a.count = 10은 클래스 변수도 바꿀까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-acount--10은-클래스-변수도-바꿀까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "얕은 복사를 묻다가 클래스 속성 가리기까지 다시 확인했다.",
+      "intent": "조회와 대입이 같은 대상을 다루는지 확인하려 했다.",
+      "answer": "인스턴스 a에 별도 count가 없다면 a.count 조회가 클래스 값으로 이어질 수 있다. 하지만 일반적인 a.count = 10은 a의 속성을 만들거나 바꾼다. 다른 인스턴스는 여전히 클래스의 값을 읽을 수 있다. 이것은 숫자를 공유 메모리 구역에 넣는 문제가 아니라 속성 조회와 저장 위치의 문제다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-얕은-복사는-겉-리스트만-새로-만드는-것일까",
+      "title": "얕은 복사는 겉 리스트만 새로 만드는 것일까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-얕은-복사는-겉-리스트만-새로-만드는-것일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "중첩 리스트의 복사를 보고 바깥과 안쪽이 같은 객체인지 물었다.",
+      "intent": "복사 뒤 어느 수정이 원본에 보이는지 예상하려 했다.",
+      "answer": "b = a.copy()는 새 바깥 리스트를 만들지만 안쪽 객체의 참조를 그대로 담는다. a = [[1, 2], [3, 4]]라면 a is b는 False, a[0] is b[0]는 True다. b.append([5])는 바깥 b만 바꾸고 b[0].append(9)는 공유한 안쪽 리스트를 바꾼다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-복사는-리스트에만-있는-개념일까",
+      "title": "복사는 리스트에만 있는 개념일까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-복사는-리스트에만-있는-개념일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "얕은 복사를 다른 객체에도 적용할 수 있는지 물었다.",
+      "intent": "자료형별 메서드와 공통 복사 개념을 구분하려 했다.",
+      "answer": "딕셔너리에도 얕은 복사가 있고 일반 인스턴스에도 copy.copy()를 적용할 수 있다. 모든 객체에 .copy() 메서드가 있는 것은 아니다. 복사 가능 여부와 동작은 객체 종류에 따라 다르다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-깊은-복사는-정확히-무엇을-복사할까",
+      "title": "깊은 복사는 정확히 무엇을 복사할까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-깊은-복사는-정확히-무엇을-복사할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "deepcopy의 정의를 다시 요청했다.",
+      "intent": "중첩된 참조를 어느 단계까지 따라가는지 확인하려 했다.",
+      "answer": "copy.deepcopy()는 내부에서 참조하는 객체를 재귀적으로 복사한다. 중첩된 가변 객체의 변경이 원본과 분리되게 하는 데 유용하다. 불변 객체는 그대로 재사용될 수 있고 공유 관계나 순환 참조도 처리하므로 “모든 메모리를 무조건 새로 만든다”는 뜻은 아니다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-객체지향을-더-공부하려면-어떤-질문으로-이어가면-좋을까",
+      "title": "객체지향을 더 공부하려면 어떤 질문으로 이어가면 좋을까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-객체지향을-더-공부하려면-어떤-질문으로-이어가면-좋을까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "기본 호출 뒤에도 더 깊은 개념을 요청했다.",
+      "intent": "새 용어를 외우기보다 지금 코드의 혼란을 풀 다음 주제를 찾으려 했다.",
+      "answer": "당시 대화에서는 바인딩·동일성·가변성·속성 탐색을 먼저 연결하고, 객체가 지킬 조건과 역할 분리, 상속과 합성, 다형성으로 넓히는 방향이 제시됐다. 이는 후속 학습 제안이며 해당 내용을 모두 구현하거나 익혔다는 기록은 아니다. 이번 정리는 바로 이어진 사례인 객체 상태와 합성까지 다룬다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-sample_id-int와---str은-값을-넣는-문법일까",
+      "title": "sample_id: int와 -> str은 값을 넣는 문법일까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-sample_id-int와---str은-값을-넣는-문법일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "TextSample에서 타입 표기가 처음 등장했다.",
+      "intent": "매개변수 이름, 기본값, 반환값과 타입 힌트를 구분하려 했다.",
+      "answer": "sample_id: int는 sample_id가 정수일 것으로 기대한다는 타입 표기이고 -> str은 반환 타입 표기다. 값을 대입하거나 실제 값을 반환하는 문장이 아니다. return은 따로 필요하고, Python 실행 자체가 모든 타입 힌트를 검사해 주지도 않는다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-정수여야-한다가-아니라-정수일-것으로-기대한다는-이유는",
+      "title": "정수여야 한다가 아니라 정수일 것으로 기대한다는 이유는?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-정수여야-한다가-아니라-정수일-것으로-기대한다는-이유는",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "타입 설명의 표현이 느슨하게 들려 다시 물었다.",
+      "intent": "힌트와 실행 시 검증의 효력을 비교하려 했다.",
+      "answer": "타입 힌트만 있는 함수는 다른 타입의 인자를 받아도 호출 자체가 바로 차단되지는 않는다. 본문에서 +나 .strip()을 실행하다 실제 타입에 맞지 않아 오류가 날 수 있다. 실행 시 거절하려면 별도 검사와 예외 처리를 작성한다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-__str__와-__len__은-타입-힌트와-같은-약속일까",
+      "title": "__str__와 __len__은 타입 힌트와 같은 약속일까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-__str__와-__len__은-타입-힌트와-같은-약속일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "두 특수 메서드의 이름과 반환 형식이 낯설었다.",
+      "intent": "내장 함수가 객체의 어떤 메서드를 사용하는지 이해하려 했다.",
+      "answer": "str(sample)이나 print(sample)에서 쓰는 __str__는 문자열을 반환해야 한다. len(sample)에 쓰는 __len__는 유효한 비음수 정수를 반환해야 한다. 이는 -> str, -> int라는 주석만의 기대와 다르며 내장 동작이 실제로 요구하는 계약이다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-문자열과-정수는-어떻게-검증하면-될까",
+      "title": "문자열과 정수는 어떻게 검증하면 될까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-문자열과-정수는-어떻게-검증하면-될까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "TextSample.validate를 구현하기 위한 조건을 물었다.",
+      "intent": "조건 검사 순서와 타입 검사 기준을 정하려 했다.",
+      "answer": "isinstance(text, str) and bool(text.strip())는 문자열인지 먼저 확인한 뒤 공백만 있는지 검사한다. and가 단락 평가하므로 문자열이 아닐 때 strip을 호출하지 않는다. isinstance(True, int)는 True이므로 bool을 제외한 정확한 int만 허용하려는 조건이라면 type(sample_id) is int처럼 요구에 맞게 정한다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-정적-메서드-안에서도-다른-인스턴스-메서드를-호출할-수-있을까",
+      "title": "정적 메서드 안에서도 다른 인스턴스 메서드를 호출할 수 있을까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-정적-메서드-안에서도-다른-인스턴스-메서드를-호출할-수-있을까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "정적 메서드는 속성이나 메서드를 사용할 수 없다고 생각했다.",
+      "intent": "접근 제한과 자동 전달의 차이를 실제 호출에 적용하려 했다.",
+      "answer": "가능하다. @staticmethod인 relay(speaker) 안에서 speaker.say()를 호출할 수 있다. 다만 speaker를 자동으로 받지 않으므로 호출자가 전달해야 한다. 이 차이를 python/methods-types-and-inheritance의 예제로 확인할 수 있다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-텍스트만-받는-is_valid_text에서-sample-전체를-검증할-수-있을까",
+      "title": "텍스트만 받는 is_valid_text에서 sample 전체를 검증할 수 있을까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-텍스트만-받는-is_valid_text에서-sample-전체를-검증할-수-있을까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "텍스트용 정적 메서드와 인스턴스 validate의 연결이 헷갈렸다.",
+      "intent": "현재 인자로 가진 정보의 범위를 따지려 했다.",
+      "answer": "text만 받은 함수는 그 문자열을 검사할 수 있지만 자동으로 어떤 TextSample의 sample_id와 label을 알지는 못한다. 인스턴스의 validate에서 self.text를 검사 함수로 넘기는 방향이 자연스럽다. 인스턴스를 사용하려면 무조건 그 자리에서 생성자를 다시 호출해야 하는 것은 아니다. 이미 받은 객체를 사용할 수 있다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-공백-문자열과-문장부호는-어떤-기준으로-처리할까",
+      "title": "공백 문자열과 문장부호는 어떤 기준으로 처리할까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-공백-문자열과-문장부호는-어떤-기준으로-처리할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "공백만 있는 텍스트와 RemovePunctuation의 제거 범위를 물었다.",
+      "intent": "작동하는 조건과 문제에 명시된 범위를 구분하려 했다.",
+      "answer": "\"   \".strip()은 빈 문자열이므로 유효한 내용이 없다고 판단할 수 있다. string.punctuation을 쓰면 ASCII 문장부호를 검사한다. 모든 언어의 모든 문장부호가 포함되는 것은 아니다. 당시 문제 예시만으로 유니코드 전체 제거를 요구한다고 단정할 수 없었다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-문장부호를-빼고-문자열을-다시-만들려면",
+      "title": "문장부호를 빼고 문자열을 다시 만들려면?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-문장부호를-빼고-문자열을-다시-만들려면",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "RemovePunctuation 클래스의 전체 작성 예를 요청했다.",
+      "intent": "조건으로 문자를 거른 뒤 결과를 결합하는 과정을 연결하려 했다.",
+      "answer": "문자열을 순회하며 제거 대상이 아닌 문자만 모아 join으로 이어 붙인다. 원본 문자열의 문자를 제자리에서 지우는 방식은 아니다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-return을-썼는데-파이프라인-결과가-none인-이유는",
+      "title": "return을 썼는데 파이프라인 결과가 None인 이유는?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-return을-썼는데-파이프라인-결과가-none인-이유는",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "저장된 코드만 읽은 답변이 pass를 원인으로 지목했지만, 사용자는 화면에 return이 있다고 바로잡았다. 이후 run 코드를 직접 제시했다.",
+      "intent": "실제 실행 경로에서 값이 끊기는 위치를 찾으려 했다.",
+      "answer": "당시 최종 제시된 PreprocessingPipeline.run은 각 처리기의 반환값을 text에 다시 넣지만 반복이 끝난 값을 반환하지 않았다. return은 개별 처리기뿐 아니라 run에도 필요하다. 이전 화면 진단은 최신 편집 내용과 맞지 않았으며 이를 분리해야 한다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-분류기는-어떤-단어를-어느-결과로-바꾸는-문제일까",
+      "title": "분류기는 어떤 단어를 어느 결과로 바꾸는 문제일까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-분류기는-어떤-단어를-어느-결과로-바꾸는-문제일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "KeywordClassifier의 문제 규칙 자체를 다시 요청했다.",
+      "intent": "구현 전 입력과 출력 조건을 확인하려 했다.",
+      "answer": "당시 규칙은 python 또는 class이면 python, rag 또는 retrieval이면 rag, ai·machine·model·language 중 하나이면 ai, 어느 것도 없으면 unknown이었다. 여러 범주의 단어가 함께 있는 문장의 우선순위는 예시만으로 확정하지 않는다. if/elif 순서를 정하면 먼저 참인 조건이 결과를 결정한다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-if-python-or-class-in-text가-왜-항상-첫-분류로-갈까",
+      "title": "if \"python\" or \"class\" in text가 왜 항상 첫 분류로 갈까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-if-python-or-class-in-text가-왜-항상-첫-분류로-갈까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "분류기 테스트 네 개가 모두 python으로 나왔다.",
+      "intent": "필터 결과가 입력과 무관해진 조건을 찾으려 했다.",
+      "answer": "이 식은 (\"python\") or (\"class\" in text)로 평가된다. 빈 문자열이 아닌 python 자체가 참으로 취급되어 입력을 검사하지 않아도 조건을 통과한다. \"python\" in text or \"class\" in text처럼 양쪽 모두 포함 검사를 쓴다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-python은-문자열인데-어떻게-true가-될까",
+      "title": "python은 문자열인데 어떻게 True가 될까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-python은-문자열인데-어떻게-true가-될까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "rag 문장에 python이 없는데도 참이라는 설명이 납득되지 않았다.",
+      "intent": "문자열의 타입과 조건 문맥의 참·거짓을 구분하려 했다.",
+      "answer": "python은 여전히 문자열이다. if는 객체를 조건으로 해석할 때 참·거짓을 판단하고 비어 있지 않은 문자열은 참이다. 문자열 내용이 입력 문장 안에 있는지를 검사하는 기능은 없다. 그 검사는 in을 써야 한다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-단어-in-문장과-단어1-단어2-in-문장은-같은-검사일까",
+      "title": "단어 in 문장과 단어1, 단어2 in 문장은 같은 검사일까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-단어-in-문장과-단어1-단어2-in-문장은-같은-검사일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "따옴표, in의 방향, 쉼표로 두 단어를 묶는 방법을 이어서 물었다.",
+      "intent": "포함 조건을 정확한 문법으로 표현하려 했다.",
+      "answer": "\"python\" in text가 “문장에 단어가 포함됐는가”다. 쉼표는 두 포함 조건을 묶는 or가 아니다. 둘 중 하나면 \"python\" in text or \"class\" in text, 둘 다면 and를 쓴다. text in \"python\"은 검사 방향이 반대다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-typemodel__name__과-print의-쉼표는-무엇일까",
+      "title": "type(model).__name__과 print의 쉼표는 무엇일까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-typemodel__name__과-print의-쉼표는-무엇일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "클래스 이름을 출력하면서 f-string 없이 쉼표를 쓴 이유를 물었다.",
+      "intent": "클래스 객체, 이름 문자열, 출력 형식을 구분하려 했다.",
+      "answer": "type(model)은 클래스이고 그 __name__은 이름 문자열이다. print(name, \"->\", result)는 세 인자를 기본 공백으로 구분해 출력한다. print(f\"{name} -> {result}\")는 문자열 하나를 먼저 만들어 전달한다. 문자열 출력에 f가 항상 필요한 것은 아니다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-prediction은-분류하는-클래스일까-결과를-담는-클래스일까",
+      "title": "Prediction은 분류하는 클래스일까, 결과를 담는 클래스일까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-prediction은-분류하는-클래스일까-결과를-담는-클래스일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "11번 문제를 반복해서 설명해 달라고 한 뒤 작성 예를 요청했다.",
+      "intent": "이미 만든 모델과 새 객체의 역할을 나누려 했다.",
+      "answer": "Prediction은 이미 계산된 sample_id, input_text, processed_text, prediction 네 값을 저장한다. 분류 계산은 모델이 한다. __str__가 [1] python만 보여 주더라도 원본과 전처리 문자열은 객체에 그대로 보관될 수 있다. 출력 형식이 저장된 속성 전체를 뜻하지 않는다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-속성-초기화가-__str__에-있으면-왜-안-될까",
+      "title": "속성 초기화가 __str__에 있으면 왜 안 될까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-속성-초기화가-__str__에-있으면-왜-안-될까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "화면에서 값 저장 코드가 __init__이 아니라 str 안에 있어 이유를 물었다.",
+      "intent": "객체를 만들 때와 출력할 때 실행되는 일을 나누려 했다.",
+      "answer": "네 속성은 __init__에서 저장하는 것이 해당 실습의 구조다. __str__는 이미 저장된 self.sample_id와 self.prediction으로 문자열을 만든다. __init__의 지역 매개변수 sample_id가 별도 메서드에도 자동으로 이어지는 것은 아니다. 들여쓰기로 어느 메서드 본문인지 확인해야 한다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-aienginerun에서-앞서-만든-클래스들을-어떻게-연결할까",
+      "title": "AIEngine.run에서 앞서 만든 클래스들을 어떻게 연결할까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-aienginerun에서-앞서-만든-클래스들을-어떻게-연결할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "클래스를 하나씩 만들었지만 이름과 역할이 한꺼번에 혼동됐다.",
+      "intent": "한 문장이 이동하는 순서로 전체 흐름을 잡으려 했다.",
+      "answer": "TextSample에서 원문을 꺼내 pipeline.run에 넣고, 나온 문자열을 model.predict에 넣고, 결과를 Prediction에 묶는다. 엔진은 이 순서를 연결한다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-100-none에서-none은-샘플-번호가-잘못된-것일까",
+      "title": "[100] None에서 None은 샘플 번호가 잘못된 것일까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-100-none에서-none은-샘플-번호가-잘못된-것일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "12-1 결과를 보고 sample_id가 None인지 물었다.",
+      "intent": "출력 위치와 실제 속성을 대응시키려 했다.",
+      "answer": "당시 [100]은 번호였고 뒤의 None이 분류 결과였다. 코드에서는 predicition에 계산값을 저장하고 prediction을 결과 생성자에 전달했다. 두 이름은 별개다. 출력 문자열의 각 부분이 어느 속성에서 왔는지 추적해야 원인 위치를 잡을 수 있다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-오타가-있는데-왜-nameerror가-아니라-none이-나왔을까",
+      "title": "오타가 있는데 왜 NameError가 아니라 None이 나왔을까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-오타가-있는데-왜-nameerror가-아니라-none이-나왔을까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "두 철자가 다른데 예외 없이 반환된 점을 다시 물었다.",
+      "intent": "노트북에 남은 이름이 함수에 끼치는 영향을 확인하려 했다.",
+      "answer": "함수 안에 prediction 대입이 없고 바깥 이름 공간에 prediction이 있으면 그 값을 읽을 수 있다. 당시 답변은 이전 셀의 prediction을 원인으로 설명했다. 원문에 런타임 전체 덤프가 남은 것은 아니므로 남은 전역 값은 설명 가능한 원인으로 구분한다. 아래는 재현용 보충 예다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-raw_samples는-딕셔너리일까-딕셔너리들의-리스트일까",
+      "title": "raw_samples는 딕셔너리일까, 딕셔너리들의 리스트일까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-raw_samples는-딕셔너리일까-딕셔너리들의-리스트일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "id와 text가 한 중괄호 안에 같이 있는 구조가 낯설었다.",
+      "intent": "컨테이너의 바깥과 안쪽 타입을 각각 읽으려 했다.",
+      "answer": "전체는 리스트이고 항목 하나가 딕셔너리다. 당시 항목에는 id·text·label 세 쌍이 있었다. raw_samples[0]으로 한 딕셔너리를 꺼낸 뒤 raw_samples[0][\"text\"]로 그 안의 문자열을 꺼낸다. 딕셔너리는 키·값 쌍을 여러 개 가질 수 있다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-컴프리헨션에서-for-앞에-textsample을-쓰는-이유는",
+      "title": "컴프리헨션에서 for 앞에 TextSample을 쓰는 이유는?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-컴프리헨션에서-for-앞에-textsample을-쓰는-이유는",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "13번 변환 코드에서 결과를 만드는 식이 앞에 있어 순서가 헷갈렸다.",
+      "intent": "각 반복에서 객체가 한 번씩 만들어지는지 확인하려 했다.",
+      "answer": "[TextSample(item[\"id\"], item[\"text\"], item[\"label\"]) for item in raw_samples]는 항목을 item에 넣은 뒤 앞의 식을 평가해 결과 리스트에 추가한다. 객체 하나를 미리 만든 뒤 반복하는 것이 아니다. 일반 for문의 append 안 표현식을 앞에 쓴 것으로 풀어 보면 된다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-뒤에서-꺼낸-변수를-앞의-식에서-어떻게-사용할까",
+      "title": "뒤에서 꺼낸 변수를 앞의 식에서 어떻게 사용할까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-뒤에서-꺼낸-변수를-앞의-식에서-어떻게-사용할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "num이 for 뒤에 나오는데 앞의 num * 10에서 이미 사용되는 점을 되물었다.",
+      "intent": "작성 순서와 실행 순서가 다른 문법을 이해하려 했다.",
+      "answer": "[num * 10 for num in numbers]는 글의 왼쪽부터 모든 부분을 실행하는 문장이 아니다. 반복에서 num을 먼저 바인딩하고 결과 식을 계산한다. 실행을 추적할 때는 for절을 먼저 읽고 앞의 식으로 돌아온다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-for-앞의-식에서-반복-변수를-사용하지-않아도-될까",
+      "title": "for 앞의 식에서 반복 변수를 사용하지 않아도 될까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-for-앞의-식에서-반복-변수를-사용하지-않아도-될까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "결과 식과 반복 변수의 관계를 일반화했다.",
+      "intent": "항목의 값이 아니라 반복 횟수만 쓰는 경우를 확인하려 했다.",
+      "answer": "가능하다. [\"안녕\" for _ in [1, 2, 3]]은 안녕 세 개가 든 리스트다. 반복 변수는 결과 식 외에 뒤의 필터 조건에서만 쓰일 수도 있다. 나중의 1 for sample in samples if ...가 바로 조건을 통과할 때마다 같은 1을 내는 사례다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-count_by_prediction은-어떤-것을-하나씩-세는-함수일까",
+      "title": "count_by_prediction은 어떤 것을 하나씩 세는 함수일까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-count_by_prediction은-어떤-것을-하나씩-세는-함수일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "15번 집계 함수를 구현할 지식부터 요청했다.",
+      "intent": "객체를 세는 일과 그 객체의 특정 속성별로 세는 일을 연결하려 했다.",
+      "answer": "self.predictions에서 Prediction 객체를 하나씩 꺼내 result.prediction 문자열을 읽는다. 처음 나온 문자열이면 1을 저장하고, 이미 키가 있으면 1을 더한다. 빈 딕셔너리에서 바로 counts[category] += 1을 하면 없는 키를 읽어 오류가 난다. 모든 반복 뒤 완성된 counts를 반환한다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-predictions에는-엔진-객체가-들어-있을까-결과-객체가-들어-있을까",
+      "title": "predictions에는 엔진 객체가 들어 있을까, 결과 객체가 들어 있을까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-predictions에는-엔진-객체가-들어-있을까-결과-객체가-들어-있을까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "분석기에 전달된 매개변수 안의 실제 값을 물었다.",
+      "intent": "생성자, 실행 도구, 실행 결과를 분리하려 했다.",
+      "answer": "[engine.run(sample) for sample in samples]는 각 run이 반환한 Prediction 객체를 모은 리스트다. 엔진을 다섯 개 담은 것이 아니다. 첫 항목은 번호 1, 원문, 전처리문, 분류 python을 각각 속성으로 가진다. 분석기는 리스트를 받아 저장한 뒤 필요한 분류 속성만 읽는다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-객체-관계와-실행-순서를-그림으로-나눌-수-있을까",
+      "title": "객체 관계와 실행 순서를 그림으로 나눌 수 있을까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-객체-관계와-실행-순서를-그림으로-나눌-수-있을까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "머릿속으로만 관계를 추적하기 어려워 실제 값이 보이는 그림을 요청했다.",
+      "intent": "무엇을 보관하는지와 누구를 호출하는지를 따로 보고 싶어 했다.",
+      "answer": "객체가 가진 참조와 호출 순서는 서로 다른 정보다. 엔진은 파이프라인과 모델을 보관하고, 실행 중에는 전처리 → 예측 → 결과 객체 생성 순서로 호출한다. 당시 별도 HTML은 생성됐지만 요청한 Chrome 자동 열기는 완료되지 않았다고 보고됐다. 아래는 공개 글을 위한 보충 도식이다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-correct_count는-분류별-개수와-무엇이-다를까",
+      "title": "correct_count는 분류별 개수와 무엇이 다를까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-correct_count는-분류별-개수와-무엇이-다를까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "집계 함수 다음에 정답 개수 함수의 역할을 물었다.",
+      "intent": "정답 라벨과 예측 라벨 중 무엇을 비교하는지 확인하려 했다.",
+      "answer": "분류별 집계는 python이 몇 번 예측됐는지를 센다. correct_count는 같은 샘플의 sample.label == result.prediction을 비교해 맞힌 개수를 센다. zip으로 묶는다면 두 리스트가 같은 샘플 순서이며 길이가 일치하는지 전제가 필요하다. 이는 정답과 예측을 짝짓는 문제다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-맞힌-개수를-세었는데-accuracy에서-오류가-나는-이유는",
+      "title": "맞힌 개수를 세었는데 accuracy에서 오류가 나는 이유는?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-맞힌-개수를-세었는데-accuracy에서-오류가-나는-이유는",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "15번 오류를 다시 확인했다.",
+      "intent": "앞 메서드의 반환값이 다음 계산에 무엇으로 들어가는지 추적하려 했다.",
+      "answer": "당시 correct_count에는 마지막 return count가 빠져 있었다. 계산을 해도 반환하지 않으면 호출자는 None을 받고 이후 float 변환 등이 실패한다. return은 반복 밖에서 전체 개수를 돌려준다. 파이프라인의 None 문제와 같은 반환 연결 문제다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-정확도가-10이면-이상한-결과일까",
+      "title": "정확도가 1.0이면 이상한 결과일까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-정확도가-10이면-이상한-결과일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "실습 정확도가 1.0이 나와 가능한 수치인지 물었다.",
+      "intent": "비율과 퍼센트, 작은 예제의 성공 범위를 구분하려 했다.",
+      "answer": "당시 확인한 다섯 예제는 정답과 예측이 모두 일치했다. 5 / 5 = 1.0은 100%다. 이것은 그 다섯 문장에 대한 결과이며 새 문장 모두에 대한 성능 보장은 아니다. 실습 출력 확인을 일반적인 모델 성능이나 학습자의 숙련도 증거로 확대하지 않는다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-samplelabel-for-sample-in-samples는-값-없는-딕셔너리일까",
+      "title": "{sample.label for sample in samples}는 값 없는 딕셔너리일까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-samplelabel-for-sample-in-samples는-값-없는-딕셔너리일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "중괄호를 보고 딕셔너리의 키만 채우는 것인지 물었다.",
+      "intent": "집합과 딕셔너리 컴프리헨션을 구분하려 했다.",
+      "answer": "이 표현은 set을 만든다. sample 객체에서 꺼낸 label 문자열을 모으므로 중복 라벨은 하나만 남는다. 딕셔너리는 {sample.sample_id: sample.label for sample in samples}처럼 키:값을 적는다. 빈 {}는 딕셔너리이고 빈 집합은 set()이다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-집합은-딕셔너리의-키와-같은-것일까",
+      "title": "집합은 딕셔너리의 키와 같은 것일까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-집합은-딕셔너리의-키와-같은-것일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "set을 값 없는 딕셔너리처럼 이해해도 되는지 되물었다.",
+      "intent": "공통 성질과 실제 자료형을 구분하려 했다.",
+      "answer": "둘 다 중복 없는 해시 가능한 항목을 다룬다는 점은 연결된다. 하지만 set 자체와 딕셔너리는 다른 타입이고, 딕셔너리의 개별 키가 set인 것도 아니다. 딕셔너리는 각 키에 값을 연결하고, set은 항목의 존재와 집합 연산을 다룬다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-label_counts의-sum-안에서-왜-1을-반복할까",
+      "title": "label_counts의 sum 안에서 왜 1을 반복할까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-label_counts의-sum-안에서-왜-1을-반복할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "이중으로 보이는 컴프리헨션에서 숫자가 밸류가 되는 과정이 끊겼다.",
+      "intent": "필터, 개수 세기, 딕셔너리 생성을 순서로 펼치려 했다.",
+      "answer": "바깥 반복은 개수를 세려는 label 하나를 고른다. 안쪽은 해당 label과 같은 sample만 통과시키고 매번 1을 내보낸다. 그 합이 개수가 되어 해당 키의 값이 된다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-컴프리헨션-뒤의-if는-어떤-값을-넣을지-고르는-것일까",
+      "title": "컴프리헨션 뒤의 if는 어떤 값을 넣을지 고르는 것일까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-컴프리헨션-뒤의-if는-어떤-값을-넣을지-고르는-것일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "조건이 붙은 컴프리헨션을 처음 봤다고 했다.",
+      "intent": "조건이 거짓인 항목이 결과에 어떻게 남는지 확인하려 했다.",
+      "answer": "뒤의 if는 필터다. [n * 10 for n in [1, 2, 3, 4] if n % 2 == 0]은 [20, 40]이다. 거짓인 항목 자리에 0이나 None을 넣지 않는다. 항목 가져오기 → 조건 검사 → 통과하면 결과 식 계산 순서다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-sum-안에-대괄호가-없는데도-리스트가-생길까",
+      "title": "sum 안에 대괄호가 없는데도 리스트가 생길까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-sum-안에-대괄호가-없는데도-리스트가-생길까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "설명 중 [1, 1]이라는 값 예시를 보고 실제 중간 리스트가 만들어지는지 물었다.",
+      "intent": "값의 흐름을 그린 예시와 실제 생성 타입을 구분하려 했다.",
+      "answer": "sum([1 for ...])는 리스트를 먼저 만들지만 sum(1 for ...)는 제너레이터 표현식을 소비한다. 함수에 유일한 인자로 전달할 때 제너레이터 표현식 괄호 한 겹을 생략할 수 있다. 설명용 [1, 1] 표기는 실제 리스트 할당의 증거가 아니다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-제너레이터는-언제-계산하고-어디까지-진행했는지-기억할까",
+      "title": "제너레이터는 언제 계산하고 어디까지 진행했는지 기억할까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-제너레이터는-언제-계산하고-어디까지-진행했는지-기억할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "처음 접한 generator를 자세히 설명해 달라고 했다.",
+      "intent": "리스트를 한꺼번에 만드는 방식과 비교하려 했다.",
+      "answer": "제너레이터는 next 요청 때 실행을 진행해 다음 값을 내고 멈춘다. (n * 10 for n in [1, 2, 3])에 next를 세 번 호출하면 10, 20, 30이고 이후는 StopIteration이다. 한 번 소진한 제너레이터를 sum에 다시 주면 남은 값이 없어 0이다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-직접-next를-쓰지-않았는데-누가-다음-값을-요청할까",
+      "title": "직접 next를 쓰지 않았는데 누가 다음 값을 요청할까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-직접-next를-쓰지-않았는데-누가-다음-값을-요청할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "제너레이터가 이전의 이터레이터와 닮았다는 점을 짚었다.",
+      "intent": "숨겨진 반복 소비 주체를 찾으려 했다.",
+      "answer": "제너레이터는 이터레이터의 한 종류다. sum(values)와 for가 반복 프로토콜을 통해 다음 값을 요청한다. 직접 while/next/except로 펼친 코드는 동작을 이해하기 위한 모형이지 내장 sum의 실제 구현 소스를 옮긴 것은 아니다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-stopiteration을-except로-받는-이유와-yield의-역할은",
+      "title": "StopIteration을 except로 받는 이유와 yield의 역할은?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-stopiteration을-except로-받는-이유와-yield의-역할은",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "예외 처리 부분과 제너레이터를 만드는 다른 방법을 함께 물었다.",
+      "intent": "값을 내는 것, 끝을 알리는 것, 예외 처리 문법을 나누려 했다.",
+      "answer": "StopIteration은 더 이상 값이 없다는 종료 신호다. for는 이를 받아 반복을 끝낸다. 함수 안에 yield를 쓰면 호출 시 제너레이터 객체를 만들고, next 때 yield까지 진행한 뒤 멈춘다. return은 그 실행을 끝내고 yield는 값을 내며 일시 정지한다. 자세한 기본 비교는 python/iterables-and-iterators로 연결한다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-제너레이터-표현식을-대입하면-아무-일도-안-하는-것일까",
+      "title": "제너레이터 표현식을 대입하면 아무 일도 안 하는 것일까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-제너레이터-표현식을-대입하면-아무-일도-안-하는-것일까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "values에 표현식을 넣는 줄은 객체 정의뿐이라고 이해해도 되는지 확인했다.",
+      "intent": "생성 시점의 실행과 지연되는 실행의 경계를 확인하려 했다.",
+      "answer": "객체 생성도 실행이다. 가장 바깥 반복 대상의 식을 평가하고 그 이터레이터를 얻는 준비는 생성 시점에 한다. 각 항목의 n * 10 같은 본문 계산은 다음 값을 요청할 때 진행한다. “모든 코드가 무조건 나중에 실행된다”는 표현은 너무 넓다."
+    },
+    {
+      "id": "learning/2026-09-21-oop-text-pipeline#질문-제너레이터가-아닌-이터레이터는-어떻게-만들까",
+      "title": "제너레이터가 아닌 이터레이터는 어떻게 만들까?",
+      "url": "/notes/learning/2026-09-21-oop-text-pipeline#질문-제너레이터가-아닌-이터레이터는-어떻게-만들까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "self에서 전처리 파이프라인까지, 객체가 이어지는 과정",
+      "context": "generator가 iterator의 한 종류임을 확인한 뒤 나머지 종류를 물었다.",
+      "intent": "공통 인터페이스와 생성 방법을 분리하려 했다.",
+      "answer": "iter([10, 20, 30])은 리스트 이터레이터다. next를 호출해도 원본 리스트를 삭제하는 것이 아니라 읽는 위치가 이동한다. 직접 만들 때는 __iter__에서 자신을 반환하고 __next__에서 다음 값 또는 StopIteration을 제공한다. 제너레이터의 실행 상태는 Python이 관리하고 직접 만든 이터레이터는 보통 속성으로 진행 상태를 관리한다."
+    },
     {
       "id": "learning/2026-10-01-hotel-segment-comparison#질문-undefined는-판매-구분-비교에서만-제외하면-되는가",
       "title": "Undefined는 판매 구분 비교에서만 제외하면 되는가?",
@@ -2898,6 +5903,97 @@ window.HANTHING_CONTENT = {
     }
   ],
   "quizzes": [
+    {
+      "id": "machine-learning/logistic-loss-and-evaluation#퀴즈-q로-예측-라벨을-결정하면-왜-틀리는가",
+      "title": "q로 예측 라벨을 결정하면 왜 틀리는가?",
+      "url": "/notes/machine-learning/logistic-loss-and-evaluation#퀴즈-q로-예측-라벨을-결정하면-왜-틀리는가",
+      "topic": "머신러닝",
+      "sourceTitle": "로지스틱 분류: 확률·로그 손실·기울기·평가의 구분"
+    },
+    {
+      "id": "machine-learning/logistic-loss-and-evaluation#퀴즈-p-y가-양수면-w를-줄여야-하는가",
+      "title": "p-y가 양수면 w를 줄여야 하는가?",
+      "url": "/notes/machine-learning/logistic-loss-and-evaluation#퀴즈-p-y가-양수면-w를-줄여야-하는가",
+      "topic": "머신러닝",
+      "sourceTitle": "로지스틱 분류: 확률·로그 손실·기울기·평가의 구분"
+    },
+    {
+      "id": "machine-learning/linear-regression-gradient#퀴즈-mean은-어느-축에-적용해야-하는가",
+      "title": "mean은 어느 축에 적용해야 하는가?",
+      "url": "/notes/machine-learning/linear-regression-gradient#퀴즈-mean은-어느-축에-적용해야-하는가",
+      "topic": "머신러닝",
+      "sourceTitle": "선형 회귀의 기울기: 손실 정의에서 X.T @ error까지"
+    },
+    {
+      "id": "machine-learning/linear-regression-gradient#퀴즈-shape만으로-의도한-오차인지-확인할-수-있는가",
+      "title": "shape만으로 의도한 오차인지 확인할 수 있는가?",
+      "url": "/notes/machine-learning/linear-regression-gradient#퀴즈-shape만으로-의도한-오차인지-확인할-수-있는가",
+      "topic": "머신러닝",
+      "sourceTitle": "선형 회귀의 기울기: 손실 정의에서 X.T @ error까지"
+    },
+    {
+      "id": "machine-learning/probability-and-bayes#퀴즈-분포-그래프의-높이를-곧바로-확률로-읽어도-되나",
+      "title": "분포 그래프의 높이를 곧바로 확률로 읽어도 되나?",
+      "url": "/notes/machine-learning/probability-and-bayes#퀴즈-분포-그래프의-높이를-곧바로-확률로-읽어도-되나",
+      "topic": "머신러닝",
+      "sourceTitle": "확률변수에서 밀도와 베이즈 정리까지"
+    },
+    {
+      "id": "machine-learning/probability-and-bayes#퀴즈-표준화하면-언제나-정규분포가-되나",
+      "title": "표준화하면 언제나 정규분포가 되나?",
+      "url": "/notes/machine-learning/probability-and-bayes#퀴즈-표준화하면-언제나-정규분포가-되나",
+      "topic": "머신러닝",
+      "sourceTitle": "확률변수에서 밀도와 베이즈 정리까지"
+    },
+    {
+      "id": "machine-learning/probability-and-bayes#퀴즈-베이즈-정리의-분모는-어느-집단인가",
+      "title": "베이즈 정리의 분모는 어느 집단인가?",
+      "url": "/notes/machine-learning/probability-and-bayes#퀴즈-베이즈-정리의-분모는-어느-집단인가",
+      "topic": "머신러닝",
+      "sourceTitle": "확률변수에서 밀도와 베이즈 정리까지"
+    },
+    {
+      "id": "machine-learning/linear-algebra-and-gradient#퀴즈-이동-방향과-이동-크기를-분리해-읽을-수-있나",
+      "title": "이동 방향과 이동 크기를 분리해 읽을 수 있나?",
+      "url": "/notes/machine-learning/linear-algebra-and-gradient#퀴즈-이동-방향과-이동-크기를-분리해-읽을-수-있나",
+      "topic": "머신러닝",
+      "sourceTitle": "선형결합과 내적으로 그래디언트 읽기"
+    },
+    {
+      "id": "machine-learning/linear-algebra-and-gradient#퀴즈-기울기가-양수로-바뀌면-손실이-증가했다는-뜻인가",
+      "title": "기울기가 양수로 바뀌면 손실이 증가했다는 뜻인가?",
+      "url": "/notes/machine-learning/linear-algebra-and-gradient#퀴즈-기울기가-양수로-바뀌면-손실이-증가했다는-뜻인가",
+      "topic": "머신러닝",
+      "sourceTitle": "선형결합과 내적으로 그래디언트 읽기"
+    },
+    {
+      "id": "machine-learning/model-and-validation#퀴즈-두-번째-폴드에-첫-모델을-이어-쓰면-왜-안-되나",
+      "title": "두 번째 폴드에 첫 모델을 이어 쓰면 왜 안 되나?",
+      "url": "/notes/machine-learning/model-and-validation#퀴즈-두-번째-폴드에-첫-모델을-이어-쓰면-왜-안-되나",
+      "topic": "머신러닝",
+      "sourceTitle": "모델의 가정과 검증 데이터의 역할"
+    },
+    {
+      "id": "machine-learning/model-and-validation#퀴즈-숫자로-표시하면-모두-회귀인가",
+      "title": "숫자로 표시하면 모두 회귀인가?",
+      "url": "/notes/machine-learning/model-and-validation#퀴즈-숫자로-표시하면-모두-회귀인가",
+      "topic": "머신러닝",
+      "sourceTitle": "모델의 가정과 검증 데이터의 역할"
+    },
+    {
+      "id": "python/methods-types-and-inheritance#퀴즈-호출-규칙과-반환-규칙-중-무엇이-작동할까",
+      "title": "호출 규칙과 반환 규칙 중 무엇이 작동할까?",
+      "url": "/notes/python/methods-types-and-inheritance#퀴즈-호출-규칙과-반환-규칙-중-무엇이-작동할까",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "메서드의 자동 인자와 객체의 타입 계약"
+    },
+    {
+      "id": "python/object-state-and-composition#퀴즈-같은-객체인가-같은-목록인가",
+      "title": "같은 객체인가, 같은 목록인가?",
+      "url": "/notes/python/object-state-and-composition#퀴즈-같은-객체인가-같은-목록인가",
+      "topic": "실전 파이썬 준비하기",
+      "sourceTitle": "객체의 상태, 복사, 합성으로 데이터 흐름 읽기"
+    },
     {
       "id": "data/statistics-data-and-groups#퀴즈-순서가-다른-두-series와-결측치-없는-표",
       "title": "순서가 다른 두 Series와 결측치 없는 표",

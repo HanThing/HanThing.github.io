@@ -19,6 +19,16 @@ tags: [index]
 
 실제 학습 대화에서 질문의 흐름을 주제별로 묶었습니다.
 
+- [[learning/2026-10-08-logistic-loss|10월 8일 — 로지스틱 확률·로그 손실·점수와 가중치의 미분]]
+- [[learning/2026-10-08-wine-classification|10월 8일 — Wine 분류 실습의 값·타입·평가]]
+- [[learning/2026-10-07-regression-gradient|10월 2·7일 — 오차와 제곱오차에서 실제 회귀 미분까지]]
+- [[learning/2026-10-07-values-and-imports|10월 7일 — 딕셔너리 항목·그룹 집계·import]]
+- [[learning/2026-10-05-06-linear-algebra-probability|10월 5~6일 — 선형결합·그래디언트·확률·베이즈]]
+- [[learning/2026-10-02-model-and-validation|10월 2일 — 모델의 가정·검증·K-fold]]
+- [[learning/2026-10-02-python-numpy-review|10월 2일 — 인자 전달·NumPy 축·데이터 해석 복습]]
+- [[learning/2026-09-22-library-and-csv|9월 22일 — 도서관 객체 상태와 CSV]]
+- [[learning/2026-09-21-oop-text-pipeline|9월 21일 — 메서드·타입·텍스트 처리 흐름]]
+
 - [[learning/2026-10-01-hotel-segment-comparison|10월 1일 — 판매 구분 필터와 예약 구성비: Undefined에서 transform까지]]
 - [[learning/2026-09-30-hotel-cancellation-eda|9월 30일 — 호텔 취소 분석: 행·열 선택에서 집계와 그래프 해석까지]]
 - [[learning/2026-09-23-numpy-and-tensors|9월 23일 — NumPy와 텐서: shape에서 벡터 검색까지]]
@@ -38,11 +48,14 @@ tags: [index]
 - **실전 파이썬 준비하기**
   - 데이터 활용 오버뷰: [[data/data-science-overview|질문에서 판단까지]] — 데이터의 단위, 품질과 해석
   - 파이썬 응용하기(모듈, 라이브러리): [[python/imports-and-packages|import와 패키지]]
-  - 객체와 클래스: [[python/self-and-objects|self와 객체 호출]]
+  - 객체와 클래스: [[python/self-and-objects|self와 객체 호출]] · [[python/methods-types-and-inheritance|메서드·타입·상속]] · [[python/object-state-and-composition|객체 상태와 합성]]
   - 보충: [[python/index|파이썬 기초 복습]] — 호출, 값의 흐름, 반복과 실행 상태
 - **데이터 분석**
   - 데이터 사이언스 툴킷: [[data/numpy-array-axes|배열과 축]] · [[data/numpy-shape-views|shape과 뷰]] · [[data/numpy-broadcasting|브로드캐스팅과 표준화]]
   - 이어서: [[data/numpy-vectors-matmul|벡터·행렬곱·유사도]] · [[data/numpy-linear-layers|선형층]]
+- **머신러닝**
+  - 모델과 수학: [[machine-learning/model-and-validation|모델·검증]] · [[machine-learning/linear-algebra-and-gradient|선형결합·그래디언트]] · [[machine-learning/probability-and-bayes|확률·베이즈]]
+  - 지도학습: [[machine-learning/linear-regression-gradient|회귀 미분]] · [[machine-learning/logistic-loss-and-evaluation|분류 손실·평가]]
 - [코드잇 학습 채널](https://discord.com/channels/1542383524290494535/1542383525930729546) · [공식 커리큘럼](https://docs.google.com/spreadsheets/d/1vF_S-DV4Pm0qRnsspfpEmKRvyj0j4Miam4YofqXPM04/edit?gid=624392885)
 
 ## 퀴즈와 플래시카드

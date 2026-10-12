@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr"><head><title>객체의 상태, 복사, 합성으로 데이터 흐름 읽기 · HanThing</title><meta charset="utf-8"/><link rel="preload" href="../index-8e49e03b.css" as="style"/><link rel="preload" href="../prescript-feb9b791.js" as="script"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="HanThing Notes"/><meta property="og:title" content="객체의 상태, 복사, 합성으로 데이터 흐름 읽기 · HanThing"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="객체의 상태, 복사, 합성으로 데이터 흐름 읽기 · HanThing"/><meta name="twitter:description" content="이름과 객체, 얕은 복사와 깊은 복사, 클래스 속성과 인스턴스 속성을 구분하고 전처리·도서 대여 실습의 상태 흐름을 연결한다."/><meta property="og:description" content="이름과 객체, 얕은 복사와 깊은 복사, 클래스 속성과 인스턴스 속성을 구분하고 전처리·도서 대여 실습의 상태 흐름을 연결한다."/><meta property="og:image:alt" content="이름과 객체, 얕은 복사와 깊은 복사, 클래스 속성과 인스턴스 속성을 구분하고 전처리·도서 대여 실습의 상태 흐름을 연결한다."/><meta property="og:image" content="https://hanthing.github.io/notes/static/og-image.png"/><meta property="og:image:url" content="https://hanthing.github.io/notes/static/og-image.png"/><meta name="twitter:image" content="https://hanthing.github.io/notes/static/og-image.png"/><meta property="og:image:type" content="image/.png"/><meta property="twitter:domain" content="hanthing.github.io/notes"/><meta property="og:url" content="https://hanthing.github.io/notes/python/object-state-and-composition"/><meta property="twitter:url" content="https://hanthing.github.io/notes/python/object-state-and-composition"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="이름과 객체, 얕은 복사와 깊은 복사, 클래스 속성과 인스턴스 속성을 구분하고 전처리·도서 대여 실습의 상태 흐름을 연결한다."/><meta name="generator" content="Quartz"/><link href="../index-8e49e03b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../prescript-feb9b791.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script></head><body data-slug="python/object-state-and-composition" data-basepath="/notes"><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="검색" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>검색</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="검색어를 입력하세요" placeholder="검색어를 입력하세요"/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div></div></div><div class="center"><div class="page-header"><header><nav class="hanthing-home" aria-label="한띵 노트"><a href="/" data-no-popover="true" data-router-ignore="true">HanThing <span>Notes</span></a><a href="/#journal" data-no-popover="true" data-router-ignore="true">기록</a><a href="/#questions" data-no-popover="true" data-router-ignore="true">질문</a><a href="/#quizzes" data-no-popover="true" data-router-ignore="true">퀴즈</a><button class="theme-toggle" type="button" data-theme-toggle="true" aria-label="밝은 화면으로 전환">밝게</button></nav></header><div class="popover-hint"><h1 class="article-title">객체의 상태, 복사, 합성으로 데이터 흐름 읽기</h1><p show-comma="true" class="content-meta"><time datetime="2026-09-20T15:00:00.000Z">2026년 9월 21일</time><span>12 min read</span></p><nav id="learning-actions" class="learning-actions" aria-label="이 글 복습과 관련 개념"><strong>이 글 복습하기</strong><div class="learning-set"><p>객체·메서드와 도서 관리·텍스트 처리</p><div class="learning-links"><a href="/review.html?set=backlog-oop&amp;mode=quiz&amp;from=python%2Fobject-state-and-composition" data-no-popover="true" data-router-ignore="true">퀴즈 풀기 <span>12문항</span> ↗</a><a href="/review.html?set=backlog-oop&amp;mode=cards&amp;from=python%2Fobject-state-and-composition" data-no-popover="true" data-router-ignore="true">플래시카드 <span>11장</span> ↗</a></div></div><a class="learning-related-jump" href="#learning-related" data-no-popover="true">연결된 개념·기록 4개 보기 ↓</a></nav></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><p><code>self.book_list</code>라는 글자만으로는 어느 목록인지 알 수 없다. <strong>지금 <code>self</code>가 누구이고, 그 속성이 어떤 객체를 가리키는지</strong> 따라가야 한다. 같은 목록 객체를 두 이름이 함께 가리킬 수도 있고, 서로 다른 목록이 같은 책 객체를 담을 수도 있다.</p>
+<p>기본 호출 관계는 <a href="../python/self-and-objects" class="internal internal-link" data-slug="python/self-and-objects">self-and-objects</a>, 호출 종류와 타입 규칙은 <a href="../python/methods-types-and-inheritance" class="internal internal-link" data-slug="python/methods-types-and-inheritance">methods-types-and-inheritance</a>에 정리했다. 여기서는 <a href="../learning/2026-09-21-oop-text-pipeline" class="internal internal-link alias" data-slug="learning/2026-09-21-oop-text-pipeline">9월 21일 복사·분류기 질문</a>과 <a href="../learning/2026-09-22-library-and-csv" class="internal internal-link alias" data-slug="learning/2026-09-22-library-and-csv">9월 22일 도서 대여 질문</a>에서 반복된 상태 구분을 다룬다.</p>
+<h2 id="변수에는-객체를-가리키는-이름이-붙는다">변수에는 객체를 가리키는 이름이 붙는다<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#변수에는-객체를-가리키는-이름이-붙는다" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><code>a = [1, 2]</code>에서 <code>a</code>는 리스트 객체를 가리키는 이름이다. <code>b = a</code>는 리스트를 복사하는 문장이 아니다. <code>a</code>와 <code>b</code>가 같은 객체를 가리킨다. 이후 <code>a</code>를 다른 리스트에 연결하는 것과 기존 리스트를 변경하는 것도 다르다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">a </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> [</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">, </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">]</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">b </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> a</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">a.append(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">3</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">)</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">print</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">(b)       </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># [1, 2, 3]</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">a </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> [</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">9</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">]</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">print</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">(a)       </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># [9]</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">print</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">(b)       </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># [1, 2, 3]</span></span></code></pre></figure>
+<p>이 <strong>보충 예제</strong>에서 <code>append</code>는 기존 객체를 변경했다. 두 번째 대입은 이름 <code>a</code>가 가리키는 객체를 바꿨다. <code>b</code>의 연결은 바꾸지 않았다. 이 관계를 이해하기 위해 모든 이름을 “스택”, 모든 객체를 “힙”이라고 단정할 필요는 없다. 구체적인 메모리 배치는 Python 구현에 관한 별도 문제다.</p>
+<p><code>del a</code> 역시 이름 연결을 지우는 동작이다. 다른 참조가 남아 있거나 순환 참조가 있는지, 어떤 Python 구현인지에 따라 객체 정리 시점이 달라질 수 있다. 소멸자가 즉시 실행된다고 일반화하지 않는다.</p>
+<h2 id="얕은-복사는-바깥-컨테이너를-새로-만든다">얕은 복사는 바깥 컨테이너를 새로 만든다<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#얕은-복사는-바깥-컨테이너를-새로-만든다" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>아래는 중첩 리스트를 비교하는 <strong>보충 예제</strong>다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">from</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> copy </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">import</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> deepcopy</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">original </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> [[</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">], [</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">2</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">]]</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">alias </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> original</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">shallow </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> original.copy()</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">deep </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> deepcopy(original)</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">original[</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">].append(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">9</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">)</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">original.append([</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">3</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">])</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">print</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">(original)  </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># [[1, 9], [2], [3]]</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">print</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">(alias)     </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># [[1, 9], [2], [3]]</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">print</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">(shallow)   </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># [[1, 9], [2]]</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">print</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">(deep)      </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># [[1], [2]]</span></span></code></pre></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>이름</th><th>바깥 리스트</th><th>내부 리스트</th><th>관찰한 결과</th></tr></thead><tbody><tr><td><code>alias</code></td><td>원본과 같음</td><td>원본과 같음</td><td>내부 변경과 바깥 추가 모두 보임</td></tr><tr><td><code>shallow</code></td><td>새 객체</td><td>원본과 공유</td><td>내부 변경만 보임</td></tr><tr><td><code>deep</code></td><td>새 객체</td><td>이 예제에서는 새 객체</td><td>두 변경 모두 보이지 않음</td></tr></tbody></table></div>
+<p>“깊은 복사는 모든 값을 언제나 새로 만든다”도 정확하지 않다. 불변 객체는 재사용될 수 있고 사용자 정의 복사 동작도 있다. 여기서 확인한 것은 <strong>중첩 리스트의 공유 관계</strong>다. 값의 같음을 비교하는 <code>==</code>와 같은 객체인지를 확인하는 <code>is</code>도 구별한다.</p>
+<h2 id="클래스-속성-조회와-인스턴스-속성-대입">클래스 속성 조회와 인스턴스 속성 대입<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#클래스-속성-조회와-인스턴스-속성-대입" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>다음은 특별한 속성 제어 기능을 정의하지 않은 일반 클래스의 <strong>보충 예제</strong>다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="property"> Counter</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">:</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    count </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 0</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">    def</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="function"> increment</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">(self):</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">        self</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">.count </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">+=</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 1</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">a </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> Counter()</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">b </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> Counter()</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">a.increment()</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">print</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">(a.count)        </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 1</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">print</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">(b.count)        </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 0</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">print</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">(Counter.count)  </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 0</span></span></code></pre></figure>
+<p>처음 <code>a.count</code>를 읽을 때는 인스턴스에 그 속성이 없어 클래스의 <code>0</code>을 찾는다. 그다음 <code>self.count += 1</code>은 이 예제에서 <code>a</code>에 인스턴스 속성 <code>count = 1</code>을 만든다. 클래스의 <code>count</code>를 올린 결과가 아니다. <code>Counter.count += 1</code>로 클래스 쪽에 대입하는 동작과 구별해야 한다.</p>
+<p>함수 안의 맨몸 <code>count += 1</code>도 별개다. 클래스 속성을 자동으로 뜻하지 않는다. 지역 변수로 판단된 <code>count</code>를 값이 연결되기 전에 읽으면 <code>UnboundLocalError</code>가 발생한다.</p>
+<p>공유되는 가변 객체는 결과가 다르다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="property"> Group</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">:</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">    members </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> []</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">one </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> Group()</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">two </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> Group()</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">one.members.append(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;민수&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">)</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">print</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">(two.members)  </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># ['민수']</span></span></code></pre></figure>
+<p><code>append</code>는 이 예제에서 클래스 속성이 가리키는 리스트 자체를 바꾼다. 객체마다 별도 목록이 필요하면 <code>__init__</code> 안에서 <code>self.members = []</code>를 만들어야 한다. 클래스 속성과 인스턴스 속성의 차이를 숫자 예시 하나만으로 판단하면 이 공유를 놓치기 쉽다.</p>
+<h2 id="합성에서는-각-객체가-맡는-값과-동작을-따라간다">합성에서는 각 객체가 맡는 값과 동작을 따라간다<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#합성에서는-각-객체가-맡는-값과-동작을-따라간다" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>전처리·분류 실습은 하나의 거대한 객체 대신 역할을 나눈 객체들을 연결했다. 엔진이 파이프라인과 모델을 속성으로 보관하고 사용하는 관계를 <strong>합성</strong>으로 설명할 수 있다. 상속으로 엔진이 모델의 일종이 되는 관계와는 다르다.</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart LR\n    A[TextSample] --> B[원문 문자열]\n    B --> C[전처리 파이프라인]\n    C --> D[처리된 문자열]\n    D --> E[키워드 모델]\n    E --> F[Prediction]&quot;">flowchart LR
+    A[TextSample] --> B[원문 문자열]
+    B --> C[전처리 파이프라인]
+    C --> D[처리된 문자열]
+    D --> E[키워드 모델]
+    E --> F[Prediction]
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>역할</th><th>보관하거나 받는 값</th><th>다음 단계에 주는 값</th></tr></thead><tbody><tr><td><code>TextSample</code></td><td>샘플 번호, 텍스트, 정답 라벨</td><td>엔진이 속성에서 꺼내는 원문 문자열</td></tr><tr><td>전처리 파이프라인</td><td>처리기 목록과 입력 문자열</td><td>처리기를 차례로 적용한 문자열</td></tr><tr><td>키워드 모델</td><td>분류 기준과 처리된 문자열</td><td><code>python</code> 같은 분류 문자열</td></tr><tr><td><code>Prediction</code></td><td>샘플 번호, 원문, 처리된 문자열, 예측 라벨</td><td>출력용 문자열 또는 속성값</td></tr><tr><td>엔진</td><td>파이프라인과 모델</td><td>두 객체를 순서대로 호출한 결과</td></tr></tbody></table></div>
+<p>이 표는 당시 실습의 역할을 요약한 것이다. 파이프라인 끝에서 <code>return text</code>가 빠지면 다음 단계에 <code>None</code>이 넘어간다. 엔진의 호출 문법이 맞더라도 단계 사이의 반환값 계약이 끊어진다.</p>
+<p>반대로 <code>Prediction.__str__</code>에서 번호와 예측 라벨만 출력한다고 입력 속성이 없어진 것은 아니다. <strong>객체가 보관하는 상태</strong>와 <strong>화면에 표현하는 문자열</strong>은 다른 범위다. 속성을 초기화하는 코드를 <code>__str__</code> 안에 두면 객체 생성 시점에 필요한 상태가 준비되지 않을 수도 있다.</p>
+<h2 id="도서-목록-세-개는-같은-역할이-아니다">도서 목록 세 개는 같은 역할이 아니다<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#도서-목록-세-개는-같은-역할이-아니다" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>도서 대여 실습에서는 같은 이름 <code>book_list</code>가 서로 다른 클래스에 있었다. 목록의 소유자와 항목 타입을 먼저 고정하면 오류를 좁힐 수 있다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>상태</th><th>소유자</th><th>역할</th></tr></thead><tbody><tr><td>전체 보유 도서</td><td>도서관 객체</td><td>대여 중인 책을 포함한 도서 목록</td></tr><tr><td>회원의 대여 목록</td><td>회원 객체</td><td>그 회원이 현재 빌린 책</td></tr><tr><td>대여 기록</td><td>도서관 또는 대여 관리 객체</td><td>어느 회원이 어느 책을 빌렸는지 연결</td></tr></tbody></table></div>
+<p>당시 최소 수정안에서는 회원 목록에 <strong>책 제목 문자열</strong>을 넣었다. 그러면 반납에서도 같은 제목 문자열을 찾아 지워야 한다. 다른 답변에서 제시한 <strong>Book 객체를 담는 방식</strong>을 중간에 섞으면 비교와 삭제가 어긋난다. 어느 방식이든 일관성이 필요하다.</p>
+<p>아래는 두 컨테이너가 같은 책 객체를 담는 관계를 보여 주는 <strong>별도 보충 예제</strong>다. 당시 제목 문자열 구현을 그대로 옮긴 코드가 아니며, 완성된 도서 관리 프로그램도 아니다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="property"> Book</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">:</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">    def</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function"> __init__</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">(self, title):</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">        self</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">.title </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> title</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="property"> Member</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">:</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">    def</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function"> __init__</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">(self, name):</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">        self</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">.name </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> name</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">        self</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">.borrowed </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> []</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">book </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> Book(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;파이썬 입문&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">)</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">catalog </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> [book]</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">member </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> Member(</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;지수&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">)</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">member.borrowed.append(book)</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">print</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">(catalog </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">is</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> member.borrowed)       </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># False</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">print</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">(catalog[</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">] </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">is</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> member.borrowed[</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">])  </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># True</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">member.borrowed.remove(book)</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">print</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">len</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">(catalog))          </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 1</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">print</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">(</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function">len</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">(member.borrowed))  </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;" data-token-type="comment"># 0</span></span></code></pre></figure>
+<p>대여 목록에서 제거해도 전체 보유 도서 목록이 자동으로 사라지지 않는다. 서로 다른 리스트이기 때문이다. 별도의 대여 기록까지 저장한다면 그 기록도 함께 갱신해야 한다. 여러 곳에 같은 상태를 저장하면 한쪽만 갱신하는 실수가 생길 수 있다.</p>
+<p>전체 보유 도서를 순회하면서 같은 목록에 찾은 책을 다시 <code>append</code>하는 것도 대여 처리가 아니다. 책이 중복된다. <code>break</code>가 없으면 순회 중 계속 길이가 늘어 끝나지 않을 수도 있다. 실제 질문의 마지막 코드에는 <code>break</code>가 있었으므로 그 상태를 곧바로 무한 반복이라고 부르면 안 된다.</p>
+<h2 id="퀴즈-같은-객체인가-같은-목록인가">퀴즈: 같은 객체인가, 같은 목록인가?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#퀴즈-같은-객체인가-같은-목록인가" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>아래는 새로 만든 복습 문제다.</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="python" data-theme="github-light github-dark"><code data-language="python" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">class</span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;" data-token-type="property"> Box</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">:</span></span>
+<span data-line><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="keyword">    def</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="function"> __init__</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">(self):</span></span>
+<span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">        self</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">.items </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> []</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">first </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> Box()</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">second </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="function"> Box()</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">item </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> {</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;count&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value">1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">}</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">first.items.append(item)</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">second.items </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation"> first.items.copy()</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">item[</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;" data-token-type="string">&quot;count&quot;</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">] </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;" data-token-type="operator">=</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;" data-token-type="value"> 2</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;" data-token-type="punctuation">first.items.clear()</span></span></code></pre></figure>
+<ol>
+<li><code>first.items</code>와 <code>second.items</code>는 각각 어떤 값인가?</li>
+<li><code>second.items = first.items</code>로 바꾸었다면 마지막 결과는 어떻게 달라지는가?</li>
+<li>원래 코드에서 <code>item</code>을 수정해도 두 번째 상자에 영향이 없게 하려면 무엇이 달라져야 하는가?</li>
+</ol>
+<details>
+<summary>정답과 이유</summary>
+<ol>
+<li><code>first.items</code>는 <code>[]</code>, <code>second.items</code>는 <code>[{&quot;count&quot;: 2}]</code>다. 바깥 리스트는 별개지만 내부 딕셔너리는 공유했다.</li>
+<li>두 속성이 같은 리스트를 가리키므로 <code>clear()</code> 뒤에 둘 다 <code>[]</code>다.</li>
+<li>내부 딕셔너리도 별도로 복사해야 한다. 이 구조에서는 <code>deepcopy(first.items)</code>를 사용하면 된다. 단순히 <code>Box</code> 객체 두 개를 만드는 것만으로 내부의 모든 객체가 자동 복사되지는 않는다.</li>
+</ol>
+</details></div></article><hr/><div class="page-footer"><section id="learning-related" class="learning-related" aria-labelledby="learning-related-title"><div id="learning-review" class="learning-actions"><h2>읽은 내용을 떠올려 보세요</h2><div class="learning-set"><p>객체·메서드와 도서 관리·텍스트 처리</p><div class="learning-links"><a href="/review.html?set=backlog-oop&amp;mode=quiz&amp;from=python%2Fobject-state-and-composition" data-no-popover="true" data-router-ignore="true">퀴즈 풀기 <span>12문항</span> ↗</a><a href="/review.html?set=backlog-oop&amp;mode=cards&amp;from=python%2Fobject-state-and-composition" data-no-popover="true" data-router-ignore="true">플래시카드 <span>11장</span> ↗</a></div></div></div><h2 id="learning-related-title">이어서 읽는 개념과 기록</h2><ul class="learning-related-list"><li><a href="/notes/python/methods-types-and-inheritance" data-no-popover="true"><small>개념 노트 · 이 글에서 연결한 노트</small><strong>메서드의 자동 인자와 객체의 타입 계약 ↗</strong><span>함께 읽는 이유: 메서드를 호출할 때 자동으로 받는 객체와 반환값 규칙을 비교한다.</span></a></li><li><a href="/notes/python/self-and-objects" data-no-popover="true"><small>개념 노트 · 이 글에서 연결한 노트</small><strong>self와 객체 호출 ↗</strong><span>노트 요약: item.label()은 개념적으로 Item.label(item)과 같다. 호출한 인스턴스가 첫 매개변수 self에 연결된다. 왼쪽 self.value는 인스턴스의 속성이고, 오른쪽 value는 전달받은 매개변수일 수 있으므로 둘을 구분한다.</span></a></li><li><a href="/notes/learning/2026-09-22-library-and-csv" data-no-popover="true"><small>학습 기록 · 이 글에서 연결한 노트</small><strong>CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기 ↗</strong><span>함께 읽는 이유: 같은 book_list 이름의 소유자와 대여·반납의 상태 갱신을 물은 기록이다.</span></a></li><li><a href="/notes/learning/2026-09-21-oop-text-pipeline" data-no-popover="true"><small>학습 기록 · 이 글에서 연결한 노트</small><strong>self에서 전처리 파이프라인까지, 객체가 이어지는 과정 ↗</strong><span>함께 읽는 이유: 복사와 이름·속성 구분이 분류 파이프라인으로 이어진 실제 질문이다.</span></a></li></ul><a class="learning-map-link" href="/?note=python%2Fobject-state-and-composition#brain" data-no-popover="true" data-router-ignore="true">지도에서 이 글의 연결 보기 ↗</a></section><div class="backlinks"><h3>백링크</h3><ul id="list-0" class="overflow"><li><a href="../" class="internal">HanThing Notes</a></li><li><a href="../learning/2026-09-21-oop-text-pipeline" class="internal">self에서 전처리 파이프라인까지, 객체가 이어지는 과정</a></li><li><a href="../learning/2026-09-22-library-and-csv" class="internal">CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기</a></li><li><a href="../python/methods-types-and-inheritance" class="internal">메서드의 자동 인자와 객체의 타입 계약</a></li><li class="overflow-end"></li></ul></div></div></div><div class="right sidebar"></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="/">Home</a></li><li><a href="https://github.com/HanThing">GitHub</a></li></ul></footer></div></div></body><script src="../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../postscript-7ab7a94d.js" type="module" data-persist="true"></script></html>

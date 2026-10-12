@@ -2,9 +2,57 @@
 
 Generated from public Markdown. Read AGENTS.md for ingest/query/lint; CHANGELOG.md for changes. Course references support briefing and stay outside the learning graph. Course/lesson identify the curriculum placement; topics identify related subjects.
 
+- [p·q·로그 손실에서 실제 파라미터 기울기까지](content/learning/2026-10-08-logistic-loss.md) — journal · 2026-10-08 · 이진 분류 확률과 로그 손실, p-y의 미분 대상, softmax 점수에 관한 실제 질문을 정리한다.
+  Course: 머신러닝 → 지도학습. Related topics: 머신러닝
+  Sources: 분류 손실과 회귀 오차 구분 학습 대화 (2026-10-08); Q와 로그 손실 설명 학습 대화 (2026-10-08); Day1·Day2 맞춤형 학습자료 만들기 중 분류 LAB 맥락 (2026-10-08); https://numpy.org/doc/stable/reference/generated/numpy.where.html; https://numpy.org/doc/stable/reference/generated/numpy.logaddexp.html; https://scikit-learn.org/stable/modules/generated/sklearn.metrics.log_loss.html
+- [분류 실습의 값과 타입 읽기: 라벨·오류 위치·Wine 평가](content/learning/2026-10-08-wine-classification.md) — journal · 2026-10-08 · 확률 임계값과 평균 기울기 오류부터 flatnonzero, 혼동행렬, 전처리 Pipeline, 다중·이진 Wine 실습까지 연결한다.
+  Course: 머신러닝 → 지도학습. Related topics: 머신러닝
+  Sources: 코드 문제 진단 학습 대화 중 Wine 분류·지표 (2026-10-08); 문제 풀이 정보 찾기 학습 대화 (2026-10-08); Day1·Day2 맞춤형 학습자료 중 Day 2 PRACTICE (2026-10-08); https://numpy.org/doc/stable/reference/generated/numpy.flatnonzero.html; https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_wine.html; https://scikit-learn.org/stable/common_pitfalls.html; https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html
+- [로지스틱 분류: 확률·로그 손실·기울기·평가의 구분](content/machine-learning/logistic-loss-and-evaluation.md) — concept · 2026-10-08 · p와 q, 점수 미분과 파라미터 기울기, softmax와 라벨 평가, Pipeline의 누수 방지를 실제 값으로 연결한다.
+  Course: 머신러닝 → 지도학습. Related topics: 머신러닝
+  Sources: 분류 손실과 회귀 오차 구분 학습 대화 (2026-10-08); Q와 로그 손실 설명 학습 대화 (2026-10-08); 문제 풀이 정보 찾기 분류 PRACTICE 학습 대화 (2026-10-08); https://scikit-learn.org/stable/modules/generated/sklearn.metrics.log_loss.html; https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html; https://numpy.org/doc/stable/reference/generated/numpy.logaddexp.html; https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html; https://scikit-learn.org/stable/common_pitfalls.html
 - [위클리 페이퍼 #3 — 학습률과 콘텐츠 이용 등급 분류](content/weekly/2026-10-08-learning-rate-and-classification.md) — weekly · 2026-10-08 · 경사하강법이 진동하며 발산하는 이유를 수식과 그래프로 확인하고, 콘텐츠 이용 등급을 다중 분류로 예측하려는 이유와 회귀의 장단점을 비교한다.
   Course: 머신러닝 → 지도학습. Related topics: 머신러닝
   Sources: 코드잇 AI 스프린트 위클리 페이퍼 3회차 공식 두 문항 (2026-10-11 확인); https://developers.google.com/machine-learning/crash-course/linear-regression/hyperparameters; https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
+- [회귀 기울기를 코드로 읽기: 오차·평균·행렬곱·모델 평가](content/learning/2026-10-07-regression-gradient.md) — journal · 2026-10-07 · SSE에서 dW·db, X.T @ error, shape 오류와 fit·predict까지 실제 후속 질문을 이어 정리한다.
+  Course: 머신러닝 → 지도학습. Related topics: 머신러닝
+  Sources: 텍스트셀 줄바꿈 방법 찾기 학습 대화 중 회귀 계산 (2026-10-02); DW와 DB 선택하기 학습 대화: dW·db 미분 (2026-10-07); 에러와 잔차 차이 이해하기 학습 대화 (2026-10-07); 코드 문제 진단 학습 대화 중 회귀 코드 (2026-10-08); https://numpy.org/doc/stable/reference/generated/numpy.matmul.html; https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html; https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html
+- [실제 값으로 다시 보기 — 딕셔너리 항목, 그룹 집계와 import](content/learning/2026-10-07-values-and-imports.md) — journal · 2026-10-07 · 딕셔너리의 항목 튜플, agg와 transform의 반환값, 패키지 초기화와 이름 연결을 실제 값으로 따라간 10월 7일 기록이다.
+  Course: 실전 파이썬 준비하기 → 파이썬 응용하기(모듈, 라이브러리). Related topics: 실전 파이썬 준비하기; 데이터 분석
+  Sources: 실제 값으로 문제 보여주기 학습 대화 (2026-10-07)
+- [선형 회귀의 기울기: 손실 정의에서 X.T @ error까지](content/machine-learning/linear-regression-gradient.md) — concept · 2026-10-07 · 반 MSE의 미분을 실제 값과 shape으로 유도하고, 편향 열·평균 축·최소제곱·평가를 구분한다.
+  Course: 머신러닝 → 지도학습. Related topics: 머신러닝
+  Sources: 회귀 SSE·오차 부호 학습 대화 (2026-10-02); dW·db와 회귀 LAB 학습 대화 (2026-10-07); 회귀 코드 진단 학습 대화 (2026-10-08); https://numpy.org/doc/stable/reference/generated/numpy.matmul.html; https://numpy.org/doc/stable/user/basics.broadcasting.html; https://numpy.org/doc/stable/reference/generated/numpy.linalg.lstsq.html; https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html
+- [확률변수에서 밀도와 베이즈 정리까지](content/machine-learning/probability-and-bayes.md) — concept · 2026-10-06 · 확률변수와 관측값, 분포의 축, 표준화, 확률 0인 사건, 베이즈 정리의 분모를 실제 숫자로 연결한다.
+  Course: 머신러닝 → 지도학습. Related topics: 머신러닝
+  Sources: 확률변수 의미 설명 학습 대화 (2026-10-06); 문서 심화 내용 설명과 검증 질문 학습 대화 (2026-10-06); 재가공해 AI 엔지니어 학습자료 만들기 학습 대화 (2026-10-06)
+- [수식을 계산한 뒤 어떻게 해석할까](content/learning/2026-10-05-06-linear-algebra-probability.md) — journal · 2026-10-05 · 선형결합·내적·미분과 확률변수·분포의 축·표준화·베이즈를 물은 10월 5~6일 기록과 실제 확인 응답을 정리한다.
+  Course: 머신러닝 → 지도학습. Related topics: 머신러닝
+  Sources: 선형결합의 필요성 이해하기 학습 대화 (2026-10-05); 확률변수 의미 설명 학습 대화 (2026-10-06); 문서 심화 내용 설명과 검증 질문 학습 대화 (2026-10-06); 재가공해 AI 엔지니어 학습자료 만들기 학습 대화 (2026-10-06, 2026-10-11 상태 확인); Actual_Day1_CORE_R4.1.pdf를 바탕으로 한 학습 대화
+- [모델을 학습하고 검증한다는 말의 의미](content/learning/2026-10-02-model-and-validation.md) — journal · 2026-10-02 · 가설·오차·비용의 구분부터 학습률, 하이퍼파라미터, K-fold와 공통 가중치의 한계까지 이어진 10월 2일 질문을 정리한다.
+  Course: 머신러닝 → 지도학습. Related topics: 머신러닝
+  Sources: 선형대수학 적용 범위 이해 학습 대화 (2026-10-02)
+- [복습 중 다시 물은 것 — 인자 전달, NumPy 축과 데이터 해석](content/learning/2026-10-02-python-numpy-review.md) — journal · 2026-10-02 · 별표의 위치, 뷰의 데이터 공유, 축별 계산과 표준화의 의미를 10월 2일의 후속 질문으로 다시 연결한다.
+  Course: 데이터 분석 → 데이터 사이언스 Toolkit. Related topics: 실전 파이썬 준비하기; 데이터 분석
+  Sources: Explain current args problem 학습 대화 (2026-10-02)
+- [선형결합과 내적으로 그래디언트 읽기](content/machine-learning/linear-algebra-and-gradient.md) — concept · 2026-10-02 · 벡터에 스칼라를 곱하는 이유를 출발점으로, 내적의 기여도 해석과 손실 변화의 1차 근사, 경사하강법의 방향·크기를 연결한다.
+  Course: 머신러닝 → 지도학습. Related topics: 머신러닝
+  Sources: 선형대수학 적용 범위 이해 학습 대화 (2026-10-02); 선형결합의 필요성 이해하기 학습 대화 (2026-10-05); 문서 심화 내용 설명과 검증 질문 학습 대화 (2026-10-06); 재가공해 AI 엔지니어 학습자료 만들기 학습 대화 (2026-10-06)
+- [모델의 가정과 검증 데이터의 역할](content/machine-learning/model-and-validation.md) — concept · 2026-10-02 · 예측·오차·비용을 구분하고 파라미터 학습, 하이퍼파라미터 선택, K-fold와 최종 테스트의 경계를 설명한다.
+  Course: 머신러닝 → 지도학습. Related topics: 머신러닝
+  Sources: 선형대수학 적용 범위 이해 학습 대화 (2026-10-02); 문서 심화 내용 설명과 검증 질문 학습 대화 (2026-10-06)
+- [CSV 한 행에서 도서 대여 상태까지, 값과 역할을 연결하기](content/learning/2026-09-22-library-and-csv.md) — journal · 2026-09-22 · 반환값과 시간 처리부터 CSV writer·reader, 정렬 콜백, 도서관 객체의 상태 동기화까지 이어진 9월 22일 질문 기록.
+  Course: 실전 파이썬 준비하기 → 객체와 클래스. Related topics: 실전 파이썬 준비하기
+  Sources: 문제2 원인 확인 학습 대화 (2026-09-22); CSV 첫행 키값 질문 검토 학습 대화 (2026-09-22); 마지막 문제 오류 쉽게 해결 학습 대화 (2026-09-22)
+- [self에서 전처리 파이프라인까지, 객체가 이어지는 과정](content/learning/2026-09-21-oop-text-pipeline.md) — journal · 2026-09-21 · self와 메서드 바인딩, 이름과 복사, TextSample과 Prediction의 연결, 조건식과 제너레이터를 따라간 9월 21일 질문 기록.
+  Course: 실전 파이썬 준비하기 → 객체와 클래스. Related topics: 실전 파이썬 준비하기
+  Sources: 강아지 클래스 self 매개변수 확인 학습 대화 (2026-09-21); TextSample 문법과 메서드 설명 학습 대화 (2026-09-21); 필터 오류 원인 찾기 학습 대화 (2026-09-21)
+- [메서드의 자동 인자와 객체의 타입 계약](content/python/methods-types-and-inheritance.md) — concept · 2026-09-21 · 일반·클래스·정적 메서드의 호출 차이, 타입 힌트와 특별 메서드의 실제 규칙, 상속과 오버라이딩을 값으로 구분한다.
+  Course: 실전 파이썬 준비하기 → 객체와 클래스. Related topics: 실전 파이썬 준비하기
+  Sources: 강아지 클래스 self 매개변수 확인 학습 대화 (2026-09-21); TextSample 문법과 메서드 설명 학습 대화 (2026-09-21)
+- [객체의 상태, 복사, 합성으로 데이터 흐름 읽기](content/python/object-state-and-composition.md) — concept · 2026-09-21 · 이름과 객체, 얕은 복사와 깊은 복사, 클래스 속성과 인스턴스 속성을 구분하고 전처리·도서 대여 실습의 상태 흐름을 연결한다.
+  Course: 실전 파이썬 준비하기 → 객체와 클래스. Related topics: 실전 파이썬 준비하기
+  Sources: 강아지 클래스 self 매개변수 확인 학습 대화 (2026-09-21); 필터 오류 원인 찾기 학습 대화 (2026-09-21); 문제2 원인 확인 학습 대화 (2026-09-22); 마지막 문제 오류 쉽게 해결 학습 대화 (2026-09-22)
 - [판매 구분 비교 기록 — Undefined 제외와 예약 구성비](content/learning/2026-10-01-hotel-segment-comparison.md) — journal · 2026-10-01 · Undefined를 필요한 비교에서만 제외하고, 행 선택과 범주별 집계, transform으로 계산한 구성비, 같은 조건 비교의 해석을 정리한다.
   Course: 데이터 분석 → DataFrame 마스터하기. Related topics: 데이터 분석
   Sources: 판매구분별 undefined 제외 수정 학습 대화 (2026-10-01)
