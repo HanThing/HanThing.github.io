@@ -479,16 +479,16 @@
   }
   resize(); updateMotion();
   async function renderTodayReview() {
-    const { loadSyncedProgress, getReviewQueue } = await import('./review-state.mjs?v=20261001-scheduled');
+    const { loadSyncedProgress, questionQueue } = await import('./review-state.mjs?v=20261012-modules');
     let storage;
     try { storage = localStorage; } catch {}
     const { state } = loadSyncedProgress(storage, sets);
-    const queue = getReviewQueue(sets, state);
+    const queue = questionQueue(state, sets).slice(0, 5);
     const container = $('#today-review-list'); container.replaceChildren();
     queue.forEach(item => {
       const link = document.createElement('a');
-      link.href = `review.html?set=${encodeURIComponent(item.set.id)}&goal=${encodeURIComponent(item.goal.id)}`;
-      link.textContent = item.goal.title;
+      link.href = `review.html?set=${encodeURIComponent(item.set.id)}&phase=${item.kind === 'new' ? 'new' : 'due'}${item.goal ? `&goal=${encodeURIComponent(item.goal.id)}` : ''}`;
+      link.textContent = item.goal?.title || item.set.title;
       const reason = document.createElement('small'); reason.textContent = item.reasonLabel;
       link.append(reason); container.append(link);
     });

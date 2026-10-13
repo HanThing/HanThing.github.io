@@ -1,8 +1,8 @@
 import { loadProgress, loadSyncedProgress, changeProgress, beginSession, getAttempts, answerQuestion,
-  assessCard, reviewAgain, questionQueue, getQuestionCounts, getQuestionPreference, setQuestionPreference, checkQueue, cardQueue } from './review-state.mjs?v=20261001-scheduled';
+  assessCard, getReviewModules, questionQueue, getQuestionCounts, getQuestionPreference, setQuestionPreference, checkQueue, cardQueue,
+  exportProgress, parseProgressBackup, restoreProgress, undoProgressRestore, hasProgressRestore } from './review-state.mjs?v=20261012-modules';
 
 const $ = selector => document.querySelector(selector);
-const labels = { review: '복습 중', pending: '점검 대기', mastered: '익힘' };
 const query = new URLSearchParams(location.search);
 const sourceNote = window.HANTHING_CONTENT?.notes.find(note => note.id === query.get('from'));
 if (sourceNote) {
@@ -16,8 +16,11 @@ const player = $('#player');
 const setSelect = $('#set-select');
 const allGoals = $('#all-goals');
 const onlyMarked = $('#only-marked');
-if (mode === 'quiz') $('#all-goals-label').textContent = '예정일 전 문제도 연습';
-onlyMarked.closest('label').hidden = mode !== 'quiz';
+allGoals.checked = mode === 'cards';
+if (mode === 'check') $('#all-goals-label').textContent = '복습 시점과 관계없이 점검';
+let moduleId = query.get('module');
+let phase = query.get('phase') === 'due' ? 'due' : 'new';
+let modules = [];
 let requestedGoal = query.get('goal');
 let storage;
 try { storage = window.localStorage; } catch {}
@@ -64,17 +67,17 @@ function button(text, action, className = '') {
   node.addEventListener('click', action);
   return node;
 }
-function selectedSets() { return setSelect.value ? sets.filter(set => set.id === setSelect.value) : sets; }
+function moduleSets() { return moduleId === 'all' ? sets : modules.find(module => module.id === moduleId)?.sets || []; }
+function selectedSets() { return setSelect.value ? moduleSets().filter(set => set.id === setSelect.value) : moduleSets(); }
 function questionCounts() { return getQuestionCounts(state, selectedSets(), { onlyMarked: onlyMarked.checked }); }
 function reviewTime(time) { return new Date(time).toLocaleString('ko-KR', { month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit' }); }
-function goalsInScope() { return [...new Map(selectedSets().flatMap(set => set.goals).map(goal => [goal.id, goal])).values()]; }
 function updateStorageNotice() {
   const notice = $('#storage-notice');
   notice.classList.toggle('warning', unsaved);
-  notice.hidden = !unsaved && !loaded.notice;
+  notice.hidden = false;
   notice.textContent = unsaved
-    ? '이 브라우저에서는 기록을 저장할 수 없습니다. 풀이는 계속할 수 있지만 페이지를 닫으면 현재 기록이 사라집니다.'
-    : loaded.notice || '기록은 이 기기·브라우저에만 저장됩니다. 브라우저 데이터를 지우면 기록도 사라집니다.';
+    ? `${loaded.notice || '기록을 저장하지 못했습니다.'} 새 풀이는 이 화면에만 남습니다. 기존 저장 기록은 덮어쓰지 않습니다.`
+    : '기록은 이 브라우저에 자동 저장됩니다. 다른 브라우저·기기와 공유되지 않습니다. 브라우저 데이터 삭제 전 ‘기록 관리’에서 파일로 백업하세요.';
 }
 function change(action) {
   const changed = changeProgress(storage, state, sets, action, !unsaved);
@@ -83,7 +86,7 @@ function change(action) {
   return changed.result;
 }
 function updateProgress() {
-  $('#question-summary').hidden = mode !== 'quiz';
+  $('#question-summary').hidden = mode !== 'quiz' || !moduleId;
   if (mode === 'quiz') {
     const counts = questionCounts();
     $('#question-total').textContent = counts.active;
@@ -91,41 +94,10 @@ function updateProgress() {
     $('#question-due').textContent = counts.due;
     $('#question-breakdown').textContent = `${onlyMarked.checked ? '다시 보기 범위 · ' : ''}처음 풀 문제 ${counts.unseen} · 다음 복습 대기 ${counts.waiting} · 제외 ${counts.excluded}`;
   }
-  const goals = goalsInScope();
-  const counts = $('#progress-counts');
-  counts.replaceChildren();
-  for (const [status, label] of Object.entries(labels)) {
-    const item = element('div', `count-${status}`);
-    item.append(element('strong', '', goals.filter(goal => state.goals[goal.id]?.status === status).length), element('span', '', label));
-    counts.append(item);
-  }
-  const list = $('#goal-list');
-  list.replaceChildren();
-  for (const goal of goals) {
-    const current = state.goals[goal.id];
-    const row = element('div', 'goal-row');
-    row.append(element('h3', '', goal.title));
-    const detail = element('div');
-    const status = element('span', 'goal-status', labels[current.status]);
-    status.dataset.status = current.status;
-    detail.append(status);
-    if (current.dueAt > Date.now()) {
-      const date = new Date(current.dueAt).toLocaleDateString('ko-KR', { month: 'short', day: 'numeric' });
-      detail.append(element('span', 'goal-status', `${date} 다시 확인`));
-    }
-    if (current.status !== 'review') {
-      const reset = button('다시 복습', () => { change(current => reviewAgain(current, goal.id)); updateProgress(); if (!active) overview(); });
-      reset.setAttribute('aria-label', `${goal.title} 다시 복습하기`);
-      reset.disabled = active;
-      detail.append(reset);
-    }
-    row.append(detail);
-    list.append(row);
-  }
   const excluded = $('#excluded-list');
   excluded.replaceChildren();
   let markedCount = 0, excludedCount = 0;
-  for (const set of selectedSets()) for (const question of set.questions) {
+  for (const set of (moduleId ? selectedSets() : sets)) for (const question of set.questions) {
     const preference = getQuestionPreference(state, set, question);
     if (preference.reviewAgain && !preference.excluded) markedCount++;
     if (!preference.excluded) continue;
@@ -142,28 +114,53 @@ function updateProgress() {
   $('#marked-count').textContent = markedCount;
   $('#excluded-summary').textContent = `퀴즈에서 제외한 문제 · ${excludedCount}개`;
   if (!excludedCount) excluded.append(element('p', 'progress-help', '제외한 문제가 없습니다. 제외해도 노트와 풀이 기록은 그대로 남습니다.'));
+  if (!moduleId) renderModules();
+}
+function renderModules() {
+  const list = $('#module-list');
+  list.replaceChildren();
+  for (const module of modules) {
+    const counts = getQuestionCounts(state, module.sets);
+    const link = element('a', 'module-card');
+    link.href = `review.html?module=${encodeURIComponent(module.id)}&mode=${mode}`;
+    const cards = module.sets.reduce((count, set) => count + set.cards.length, 0);
+    link.append(element('h2', '', module.title),
+      element('p', 'module-counts', `안 푼 문제 ${counts.unseen} · 풀어본 문제 ${counts.answered} · 다시 볼 문제 ${counts.due}`),
+      element('span', 'module-enter', `문제 ${counts.active}개 · 카드 ${cards}개　들어가기 ↗`));
+    list.append(link);
+  }
+  if (!modules.length) list.append(element('p', 'welcome-copy', '아직 연결된 복습 모듈이 없습니다.'));
 }
 function updateContext() {
   const selected = selectedSets();
   const url = new URL(location.href);
   setSelect.value ? url.searchParams.set('set', setSelect.value) : url.searchParams.delete('set');
+  moduleId ? url.searchParams.set('module', moduleId) : url.searchParams.delete('module');
   url.searchParams.set('mode', mode);
+  if (mode === 'quiz' && phase === 'due') url.searchParams.set('phase', phase);
+  else url.searchParams.delete('phase');
   if (!requestedGoal) url.searchParams.delete('goal');
   history.replaceState(null, '', url);
   for (const link of document.querySelectorAll('[data-mode]')) {
     const params = new URLSearchParams({ mode: link.dataset.mode });
+    if (moduleId) params.set('module', moduleId);
     if (setSelect.value) params.set('set', setSelect.value);
     if (sourceNote) params.set('from', sourceNote.id);
+    if (link.dataset.mode === 'quiz' && phase === 'due') params.set('phase', phase);
     link.href = `review.html?${params}`;
     if (link.dataset.mode === mode) link.setAttribute('aria-current', 'page');
     else link.removeAttribute('aria-current');
   }
-  $('#set-title').textContent = setSelect.value ? selected[0]?.title || '복습 자료' : '모든 주제에서 복습';
-  $('#scope-title').textContent = setSelect.value ? selected[0].title : '모든 주제 · 오래된 내용까지 골고루';
-  $('#all-topics').hidden = !setSelect.value;
+  const title = modules.find(module => module.id === moduleId)?.title || '전체 모듈';
+  $('#scope-title').textContent = setSelect.value ? `${title} · ${selected[0]?.title || ''}` : title;
+  $('#all-topics').hidden = !moduleId;
+  $('#module-picker').hidden = Boolean(moduleId);
+  $('#workspace').hidden = !moduleId;
+  $('#marked-control').hidden = mode !== 'quiz' || phase !== 'due';
+  $('#future-control').hidden = mode === 'cards' || (mode === 'quiz' && phase !== 'due');
   $('#mode-description').textContent = {
-    quiz: '처음 푸는 문제와 복습할 때가 된 문제를 번갈아 보여 줍니다. 복습은 오래 기다린 문제부터, 새 문제는 여러 주제에서 고릅니다. 한쪽이 없으면 다른 쪽을 이어 풀고, 원할 때 마치세요.',
-    cards: '먼저 답을 떠올린 뒤 카드를 뒤집어 보세요. 카드의 알겠음은 자기평가로만 기록합니다.',
+    quiz: phase === 'new' ? '이 범위에서 안 푼 문제부터 이어 갑니다. 이미 푼 문제는 다시 복습하기에서 확인하세요.' : '복습할 때가 된 문제를 오래 기다린 순서로 확인합니다.',
+    cards: '이 모듈의 카드입니다. 먼저 답을 떠올린 뒤 뒤집어 보세요.',
     check: '최소 하루가 지난 점검 대기 목표와 다시 확인할 때가 된 익힌 목표를 확인합니다.',
   }[mode];
   const notes = $('#related-notes');
@@ -184,7 +181,7 @@ function makeQueue() {
   let entries;
   if (mode === 'cards') entries = cardQueue(state, selectedSets(), allGoals.checked);
   else if (mode === 'check') entries = checkQueue(state, selectedSets(), allGoals.checked);
-  else entries = questionQueue(state, selectedSets(), { onlyMarked: onlyMarked.checked, includeFuture: allGoals.checked });
+  else entries = questionQueue(state, selectedSets(), { onlyMarked: onlyMarked.checked, includeFuture: allGoals.checked, phase });
   if (requestedGoal) entries.sort((a, b) => Number((b.question || b.card).goalId === requestedGoal) - Number((a.question || a.card).goalId === requestedGoal));
   return entries;
 }
@@ -193,35 +190,48 @@ function setActive(value) {
   document.body.classList.toggle('review-active', value);
   for (const control of [allGoals, onlyMarked, setSelect, $('#all-topics')]) control.disabled = value;
 }
+function switchPhase(nextPhase) {
+  phase = nextPhase;
+  allGoals.checked = false;
+  onlyMarked.checked = false;
+  requestedGoal = null;
+  updateContext();
+  overview();
+}
 function showNextReview() {
   if (mode !== 'quiz') return;
   const counts = questionCounts();
-  if (!counts.waiting) return;
-  player.append(element('p', 'schedule-notice', `다음 복습: ${reviewTime(counts.nextDueAt)}. 예정일 전에도 원하면 더 풀 수 있어요.`),
-    button('예정일 전에 더 풀기', () => { allGoals.checked = true; start(); }));
+  if (counts.waiting) player.append(element('p', 'schedule-notice', `다음 복습: ${reviewTime(counts.nextDueAt)}.`));
+  if (phase === 'due' && counts.waiting) player.append(button('예정일 전에 더 풀기', () => { allGoals.checked = true; start(); }));
+}
+function phaseActions() {
+  if (mode !== 'quiz') return;
+  const actions = element('div', 'actions');
+  actions.append(button(phase === 'new' ? '다시 복습하기' : '안 푼 문제로 돌아가기', () => switchPhase(phase === 'new' ? 'due' : 'new')));
+  player.append(actions);
 }
 function overview() {
   setActive(false);
   player.replaceChildren();
   player.setAttribute('aria-busy', 'false');
+  if (!moduleId) { updateProgress(); return; }
   const entries = makeQueue();
-  const waiting = mode === 'quiz' && questionCounts().waiting > 0;
-  const title = !entries.length ? waiting ? '지금 예정된 복습을 마쳤어요.' : '지금 풀 수 있는 문제가 없어요.' : mode === 'cards' ? '답을 떠올리고, 확인해요.' : '하나씩, 원하는 만큼.';
+  const counts = questionCounts();
+  const complete = mode === 'quiz' && phase === 'new' && counts.active > 0 && !counts.unseen;
+  const title = complete ? '이 범위의 문제를 모두 한 번씩 풀었어요.' : !entries.length ? '지금 풀 수 있는 문제가 없어요.'
+    : mode === 'cards' ? '답을 떠올리고, 확인해요.' : mode === 'quiz' && phase === 'new' ? '안 푼 문제부터, 하나씩.' : '기억을 다시 확인해요.';
   player.append(element('h3', 'welcome-title', title));
-  const copy = !sets.length ? '아직 연결된 복습 세트가 없습니다.' : !entries.length
-    ? mode === 'quiz' ? waiting ? '풀었던 문제는 복습할 때가 되면 다시 나옵니다.' : onlyMarked.checked ? '다시 보기로 표시한 문제가 없습니다. 모든 문제로 돌아가거나 아래에서 제외한 문제를 복원하세요.'
-      : '아래에서 제외한 문제를 복원하거나 다른 주제를 선택하세요.' : '예정된 복습을 마쳤어요. 아래에서 복습 시점과 관계없이 살펴볼 수 있어요.'
+  const copy = complete ? '첫 풀이를 마쳤습니다. 원하면 이미 푼 문제를 다시 복습하세요.' : !entries.length
+    ? onlyMarked.checked ? '다시 보기로 표시한 문제 중 지금 복습할 문제가 없습니다.'
+      : counts.excluded === counts.total && counts.total ? '이 범위의 문제를 모두 제외했습니다. 기록 관리에서 복원할 수 있어요.'
+      : mode === 'quiz' && phase === 'due' ? '지금 복습할 때가 된 문제가 없습니다.' : '이 범위에서 지금 풀 수 있는 자료가 없습니다.'
     : mode === 'cards' ? '답을 떠올린 뒤 확인하세요. 원할 때 마칠 수 있어요.'
-      : mode === 'quiz' ? onlyMarked.checked ? '다시 보기로 표시한 문제를 이어 풉니다. 원할 때 마치세요.'
-        : '어떤 문제를 풀지 고를 필요 없어요. 주제를 넘나들며 이어 풀고, 원할 때 마치세요.'
-        : '복습할 때가 된 개념을 확인해요. 원할 때 마칠 수 있어요.';
+      : mode === 'quiz' && phase === 'new' ? `아직 안 푼 문제 ${counts.unseen}개를 이어 풉니다. 이미 푼 문제는 끼어들지 않아요.`
+      : '복습할 때가 된 내용을 확인해요. 원할 때 마칠 수 있어요.';
   player.append(element('p', 'welcome-copy', copy));
-  if (entries.length) player.append(button('복습 시작', start, 'primary'));
-  else {
-    showNextReview();
-    if (mode === 'quiz' && onlyMarked.checked) player.append(button('모든 문제로 복습', () => { onlyMarked.checked = false; overview(); }, 'primary'));
-    if (!waiting) $('#review-details').open = true;
-  }
+  if (entries.length) player.append(button(mode === 'quiz' && phase === 'new' ? '안 푼 문제 이어 풀기' : '복습 시작', start, 'primary'));
+  else showNextReview();
+  phaseActions();
   updateProgress();
 }
 function start() {
@@ -233,7 +243,6 @@ function start() {
   requestedGoal = null;
   updateContext();
   setActive(true);
-  $('#review-details').open = false;
   updateProgress();
   renderItem();
 }
@@ -391,7 +400,8 @@ function renderCard({ set, card }) {
 }
 function finish() {
   setActive(false);
-  player.replaceChildren(element('h3', 'finish-title', '이번 복습을 마쳤어요.'));
+  const complete = mode === 'quiz' && phase === 'new' && questionCounts().active > 0 && !questionCounts().unseen;
+  player.replaceChildren(element('h3', 'finish-title', complete ? '이 범위의 문제를 모두 한 번씩 풀었어요.' : '이번 복습을 마쳤어요.'));
   const clean = results.filter(result => result.correct && !result.assisted).length;
   player.append(element('p', 'finish-copy', mode === 'cards'
     ? `${results.length}장의 카드를 확인했습니다. 어려웠던 개념은 다음 복습에서 먼저 나옵니다.`
@@ -401,15 +411,64 @@ function finish() {
   if (makeQueue().length) actions.append(button('조금 더 복습하기', start));
   player.append(actions);
   if (!makeQueue().length) showNextReview();
+  phaseActions();
   updateProgress();
   player.querySelector('h3').tabIndex = -1;
   player.querySelector('h3').focus({ preventScroll: true });
 }
 
-setSelect.addEventListener('change', () => { requestedGoal = null; updateContext(); overview(); });
+$('#backup-undo').hidden = !hasProgressRestore(storage);
+$('#backup-export').addEventListener('click', () => {
+  try {
+    const latest = loadProgress(storage);
+    if (!unsaved && !latest.saved) throw new Error(latest.notice);
+    // A damaged original must not be disguised as an empty, successful backup.
+    let raw;
+    try { raw = storage?.getItem('hanthing-review-v1'); } catch {}
+    if (raw) {
+      try { parseProgressBackup(raw); }
+      catch (error) {
+        if (!unsaved) throw error;
+        if (!confirm('기존 저장 기록을 읽지 못했습니다. 현재 화면의 새 풀이만 백업하며, 읽지 못한 과거 기록은 파일에 포함되지 않습니다. 원본 저장 기록은 그대로 둡니다. 현재 풀이를 백업할까요?')) return;
+      }
+    }
+    const backup = exportProgress(unsaved ? state : latest.state);
+    const url = URL.createObjectURL(new Blob([backup], { type: 'application/json' }));
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `hanthing-review-${new Date().toISOString().replace(/[:.]/g, '-')}.json`;
+    document.body.append(link); link.click(); link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    $('#backup-result').textContent = '백업 파일 다운로드를 요청했습니다. 다운로드 폴더에서 파일을 확인해 주세요.';
+  } catch (error) { $('#backup-result').textContent = `백업하지 못했습니다. ${error.message}`; }
+});
+$('#backup-import').addEventListener('click', () => $('#backup-file').click());
+$('#backup-file').addEventListener('change', async event => {
+  const file = event.target.files[0];
+  if (!file) return;
+  try {
+    const raw = await file.text();
+    const backup = parseProgressBackup(raw);
+    const date = backup.exportedAt ? `${new Date(backup.exportedAt).toLocaleString('ko-KR')} 백업입니다.\n` : '';
+    const warning = unsaved ? '이 화면에만 남은 새 풀이는 되돌릴 수 없습니다. 필요한 풀이는 먼저 파일로 백업하세요.\n' : '';
+    if (!confirm(`${date}${warning}현재 기록을 이 파일의 기록으로 교체합니다. 진행 중인 풀이는 종료됩니다.\n교체 전 저장 기록은 이 브라우저에서 되돌릴 수 있습니다. 불러올까요?`)) return;
+    restoreProgress(storage, raw);
+    location.reload();
+  } catch (error) { $('#backup-result').textContent = `불러오지 못했습니다. ${error.message}`; }
+  finally { event.target.value = ''; }
+});
+$('#backup-undo').addEventListener('click', () => {
+  if (!confirm('백업을 불러오기 전 기록으로 되돌립니다. 불러온 뒤 새로 푼 기록은 사라집니다. 필요한 기록은 먼저 파일로 백업해 주세요. 되돌릴까요?')) return;
+  try { undoProgressRestore(storage); location.reload(); }
+  catch (error) { $('#backup-result').textContent = `되돌리지 못했습니다. ${error.message}`; }
+});
+
+setSelect.addEventListener('change', () => { requestedGoal = null; onlyMarked.checked = false; allGoals.checked = mode === 'cards'; updateContext(); overview(); });
 allGoals.addEventListener('change', overview);
 onlyMarked.addEventListener('change', overview);
-$('#all-topics').addEventListener('click', () => { setSelect.value = ''; requestedGoal = null; onlyMarked.checked = false; updateContext(); overview(); });
+$('#all-topics').addEventListener('click', () => { location.href = `review.html?mode=${mode}`; });
+$('#manage-records').addEventListener('click', () => $('#record-management').showModal());
+$('#close-management').addEventListener('click', () => $('#record-management').close());
 window.addEventListener('storage', event => {
   if ((event.key !== 'hanthing-review-v1' && event.key !== null) || unsaved || !sets.length) return;
   const latest = loadSyncedProgress(storage, sets);
@@ -432,14 +491,21 @@ try {
   Object.assign(state, synced.state);
   unsaved = !synced.saved;
   updateStorageNotice();
-  setSelect.replaceChildren(new Option('모든 주제', ''));
-  for (const set of sets) setSelect.add(new Option(set.title, set.id));
-  setSelect.disabled = false;
+  modules = getReviewModules(window.HANTHING_CONTENT, sets);
   const requested = query.get('set');
-  if (sets.some(set => set.id === requested)) setSelect.value = requested;
+  const requestedSet = sets.find(set => set.id === requested);
+  if (moduleId !== 'all' && !modules.some(module => module.id === moduleId)) moduleId = null;
+  if (requestedSet && !moduleSets().includes(requestedSet)) {
+    moduleId = modules.find(module => module.id === sourceNote?.courseId && module.sets.includes(requestedSet))?.id
+      || modules.find(module => module.sets.includes(requestedSet))?.id || 'all';
+  }
+  setSelect.replaceChildren(new Option('모듈 전체', ''));
+  for (const set of moduleSets()) setSelect.add(new Option(set.title, set.id));
+  setSelect.disabled = false;
+  if (requestedSet) setSelect.value = requested;
   updateContext();
   overview();
-  if (requested && !sets.some(set => set.id === requested)) player.prepend(element('p', 'welcome-copy', '요청한 세트를 찾지 못했습니다. 아래에서 다른 주제를 골라 주세요.'));
+  if (requested && !requestedSet) $('#module-picker').prepend(element('p', 'welcome-copy', '요청한 세트를 찾지 못했습니다. 복습할 모듈을 골라 주세요.'));
 } catch {
   player.setAttribute('aria-busy', 'false');
   player.replaceChildren(element('h3', 'welcome-title', '복습 자료를 불러오지 못했습니다.'),

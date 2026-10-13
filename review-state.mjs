@@ -1,4 +1,5 @@
 const STORAGE_KEY = 'hanthing-review-v1';
+const RESTORE_KEY = 'hanthing-review-before-restore-v1';
 const DAY = 86400000;
 const RETRY = 10 * 60 * 1000;
 const statuses = ['review', 'pending', 'mastered'];
@@ -18,32 +19,117 @@ function addSchedule(goal, now) {
   goal.lastWeakAt ??= 0;
 }
 
+function parseJSON(raw) {
+  return JSON.parse(raw, (key, value) => {
+    if (['__proto__', 'constructor', 'prototype'].includes(key)) throw new Error('지원하지 않는 기록 키입니다.');
+    return value;
+  });
+}
+
+function normalizeProgress(state, now, strict = false) {
+  const number = value => Number.isFinite(value) && value >= 0;
+  const count = value => Number.isSafeInteger(value) && value >= 0;
+  const invalid = () => { throw new Error('복습 기록의 형식이나 값이 올바르지 않습니다.'); };
+  if (!object(state) || ![1, 2].includes(state.schemaVersion) || !count(state.session) ||
+      !object(state.goals) || !object(state.attempts)) invalid();
+  for (const goal of Object.values(state.goals)) {
+    if (!object(goal) || typeof goal.version !== 'string' || !statuses.includes(goal.status) ||
+        ['lastReviewedAt', 'dueAt', 'intervalDays', 'lastWeakAt'].some(key => goal[key] !== undefined && !number(goal[key])) ||
+        ['pendingSession', 'lastCheckSession'].some(key => goal[key] != null && !count(goal[key])) ||
+        (goal.pendingAt != null && !number(goal.pendingAt)) || (goal.history !== undefined &&
+        (!Array.isArray(goal.history) || goal.history.some(entry => !object(entry) || typeof entry.version !== 'string' ||
+          !statuses.includes(entry.status) || !count(entry.session))))) invalid();
+  }
+  for (const bucket of Object.values(state.attempts)) {
+    if (!object(bucket) || !object(bucket.questions) || !object(bucket.cards)) invalid();
+    for (const [kind, records] of Object.entries({ questions: bucket.questions, cards: bucket.cards })) {
+      for (const attempt of Object.values(records)) {
+        if (!object(attempt) || typeof attempt[kind === 'questions' ? 'correct' : 'known'] !== 'boolean' ||
+            ['session', 'seenCount', 'optionIndex'].some(key => attempt[key] !== undefined && !count(attempt[key])) ||
+            ['answeredAt', 'dueAt'].some(key => attempt[key] !== undefined && !number(attempt[key])) ||
+            ['assisted', 'goalAssisted'].some(key => attempt[key] !== undefined && typeof attempt[key] !== 'boolean') ||
+            (attempt.intervalDays !== undefined && ![0, 1, 3, 7, 21].includes(attempt.intervalDays))) invalid();
+      }
+    }
+  }
+  if (strict && ((state.questionPreferences !== undefined && (!object(state.questionPreferences) ||
+      Object.values(state.questionPreferences).some(preference => !object(preference) ||
+        ['reviewAgain', 'excluded'].some(key => preference[key] !== undefined && typeof preference[key] !== 'boolean')))) ||
+      (state.lastQuestionKind != null && !['new', 'due'].includes(state.lastQuestionKind)))) invalid();
+  for (const goal of Object.values(state.goals)) addSchedule(goal, now);
+  state.questionPreferences = object(state.questionPreferences) ? Object.fromEntries(
+    Object.entries(state.questionPreferences).filter(([, preference]) => object(preference)).map(([key, preference]) =>
+      [key, { reviewAgain: preference.reviewAgain === true, excluded: preference.excluded === true }])) : {};
+  if (!['new', 'due'].includes(state.lastQuestionKind)) state.lastQuestionKind = null;
+  state.schemaVersion = 2;
+  return state;
+}
+
 export function loadProgress(storage, now = Date.now()) {
   let raw;
   try { raw = storage.getItem(STORAGE_KEY); }
   catch { return { state: createProgress(), saved: false, notice: '이 브라우저에서는 기록을 저장할 수 없습니다. 페이지를 닫으면 현재 기록이 사라집니다.' }; }
-  if (!raw) return { state: createProgress(), saved: true, notice: '' };
+  if (raw === null) return { state: createProgress(), saved: true, notice: '' };
   try {
-    const state = JSON.parse(raw);
-    if (![1, 2].includes(state.schemaVersion) || !Number.isSafeInteger(state.session) || state.session < 0 ||
-        !object(state.goals) || !object(state.attempts)) throw new Error('Invalid progress');
+    const state = parseJSON(raw);
     const migrated = state.schemaVersion === 1;
-    for (const goal of Object.values(state.goals)) if (object(goal)) addSchedule(goal, now);
-    state.questionPreferences = object(state.questionPreferences) ? Object.fromEntries(
-      Object.entries(state.questionPreferences).filter(([, preference]) => object(preference)).map(([key, preference]) =>
-        [key, { reviewAgain: preference.reviewAgain === true, excluded: preference.excluded === true }])) : {};
-    if (!['new', 'due'].includes(state.lastQuestionKind)) state.lastQuestionKind = null;
-    state.schemaVersion = 2;
+    normalizeProgress(state, now);
     // Save once so reopening a legacy record does not keep postponing its due date.
     const saved = !migrated || saveProgress(storage, state);
     return { state, saved, notice: '' };
   } catch {
-    return { state: createProgress(), saved: true, notice: '기존 기록을 읽지 못해 새 기록으로 시작합니다.' };
+    return { state: createProgress(), saved: false, notice: '기존 기록을 읽지 못해 원본을 보존했습니다. 새 풀이로 덮어쓰지 않습니다. 백업 파일로 복원해 주세요.' };
   }
 }
 
 export function saveProgress(storage, state) {
-  try { storage.setItem(STORAGE_KEY, JSON.stringify(state)); return true; }
+  try {
+    const raw = storage.getItem(STORAGE_KEY);
+    if (raw !== null) normalizeProgress(parseJSON(raw), Date.now());
+    storage.setItem(STORAGE_KEY, JSON.stringify(state)); return true;
+  }
+  catch { return false; }
+}
+
+export function exportProgress(state, now = Date.now()) {
+  return JSON.stringify({ format: 'hanthing-review-backup', version: 1, exportedAt: new Date(now).toISOString(),
+    state: normalizeProgress(parseJSON(JSON.stringify(state)), now, true) }, null, 2);
+}
+
+export function parseProgressBackup(raw, now = Date.now()) {
+  let data;
+  try { data = parseJSON(raw); }
+  catch { throw new Error('읽을 수 있는 JSON 백업 파일이 아닙니다.'); }
+  let exportedAt = null;
+  if (object(data) && ('format' in data || 'state' in data)) {
+    if (data.format !== 'hanthing-review-backup' || data.version !== 1 ||
+        typeof data.exportedAt !== 'string' || !Number.isFinite(Date.parse(data.exportedAt))) {
+      throw new Error('지원하는 HanThing 백업 파일이 아닙니다.');
+    }
+    exportedAt = data.exportedAt; data = data.state;
+  }
+  return { state: normalizeProgress(data, now, true), exportedAt };
+}
+
+export function restoreProgress(storage, raw, now = Date.now()) {
+  const { state } = parseProgressBackup(raw, now);
+  const previous = storage.getItem(STORAGE_KEY) ?? JSON.stringify(createProgress());
+  storage.setItem(RESTORE_KEY, previous);
+  storage.setItem(STORAGE_KEY, JSON.stringify(state));
+  return state;
+}
+
+export function undoProgressRestore(storage, now = Date.now()) {
+  const raw = storage.getItem(RESTORE_KEY);
+  if (raw === null) throw new Error('되돌릴 이전 기록이 없습니다.');
+  storage.setItem(STORAGE_KEY, raw);
+  storage.removeItem(RESTORE_KEY);
+  try { return normalizeProgress(parseJSON(raw), now); }
+  catch { return createProgress(); }
+}
+
+export function hasProgressRestore(storage) {
+  try { return storage.getItem(RESTORE_KEY) !== null; }
   catch { return false; }
 }
 
@@ -272,7 +358,14 @@ export function getQuestionCounts(state, sets, { onlyMarked = false, now = Date.
   return counts;
 }
 
-export function questionQueue(state, sets, { onlyMarked = false, now = Date.now(), includeFuture = false } = {}) {
+export function getReviewModules(content, sets) {
+  const coursesByNote = new Map(content.notes.map(note => [note.id, note.courseId]));
+  return content.courses.map(course => ({ ...course,
+    sets: sets.filter(set => set.noteIds.some(id => coursesByNote.get(id) === course.id))
+  })).filter(course => course.sets.some(set => set.questions.length || set.cards.length));
+}
+
+export function questionQueue(state, sets, { onlyMarked = false, now = Date.now(), includeFuture = false, phase = 'all' } = {}) {
   const attempt = entry => storedAttempts(state, entry.set)?.questions?.[entry.question.id];
   const compare = (a, b) => (attempt(a)?.seenCount || 0) - (attempt(b)?.seenCount || 0) ||
     (attempt(a)?.answeredAt || 0) - (attempt(b)?.answeredAt || 0) ||
@@ -304,8 +397,10 @@ export function questionQueue(state, sets, { onlyMarked = false, now = Date.now(
     spreadGroups([...goals.values()].map(entries => entries.sort(compare)), compareGroups)), compareGroups);
   const unseen = ordered.filter(entry => entry.kind === 'new');
   const due = ordered.filter(entry => entry.kind === 'due').sort((a, b) => a.dueAt - b.dueAt);
+  if (phase === 'new') return unseen;
+  if (phase === 'due') return due.length || !includeFuture ? due : ordered.filter(entry => entry.kind === 'extra');
   if (!unseen.length && !due.length) return includeFuture ? ordered : [];
-  return spreadGroups(state.lastQuestionKind === 'new' ? [due, unseen] : [unseen, due], () => 0);
+  return [...unseen, ...due];
 }
 
 export function practiceQueue(state, sets, all = false) {
