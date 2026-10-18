@@ -123,6 +123,36 @@ window.HANTHING_CONTENT = {
   ],
   "notes": [
     {
+      "id": "weekly/2026-10-19-regularization-and-tree-ensembles",
+      "title": "위클리 페이퍼 #4 — 과적합과 규제, 랜덤 포레스트와 그레이디언트 부스팅",
+      "description": "L1·L2 규제의 의미를 짚고, 부스팅 트리의 입력·목표값·출력을 숫자로 따라가며 학습과 추론을 구분한다.",
+      "date": "2026-10-19",
+      "published": "2026-10-19",
+      "type": "weekly",
+      "topics": [
+        "머신러닝"
+      ],
+      "courseId": "machine-learning",
+      "lessonId": "supervised-learning",
+      "url": "/notes/weekly/2026-10-19-regularization-and-tree-ensembles",
+      "links": [
+        "machine-learning/linear-regression-gradient",
+        "weekly/2026-10-08-learning-rate-and-classification"
+      ],
+      "relatedReasons": {
+        "machine-learning/linear-regression-gradient": "예측값에 대한 미분과 가중치에 대한 미분이 왜 다른지, 손실 정의와 연쇄법칙으로 연결한다.",
+        "weekly/2026-10-08-learning-rate-and-classification": "학습률이 갱신 폭에 미치는 영향을 복습하고 부스팅의 보정량과 비교한다."
+      },
+      "sources": [
+        "코드잇 AI 스프린트 위클리 페이퍼 4회차 공식 두 문항 (2026-10-18 확인)",
+        "위클리 페이퍼 4회차 학습 대화와 답변 피드백 (2026-10-18~19)",
+        "https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression-and-classification",
+        "https://scikit-learn.org/stable/modules/linear_model.html#lasso",
+        "https://scikit-learn.org/stable/modules/ensemble.html",
+        "https://xgboost.readthedocs.io/en/stable/tutorials/model.html"
+      ]
+    },
+    {
       "id": "learning/2026-10-08-logistic-loss",
       "title": "p·q·로그 손실에서 실제 파라미터 기울기까지",
       "description": "이진 분류 확률과 로그 손실, p-y의 미분 대상, softmax 점수에 관한 실제 질문을 정리한다.",
@@ -1781,6 +1811,76 @@ window.HANTHING_CONTENT = {
     }
   ],
   "questions": [
+    {
+      "id": "weekly/2026-10-19-regularization-and-tree-ensembles#질문-l2-노름에는-루트가-있는데-l2-규제에는-왜-없을까",
+      "title": "L2 노름에는 루트가 있는데 L2 규제에는 왜 없을까?",
+      "url": "/notes/weekly/2026-10-19-regularization-and-tree-ensembles#질문-l2-노름에는-루트가-있는데-l2-규제에는-왜-없을까",
+      "topic": "머신러닝",
+      "sourceTitle": "위클리 페이퍼 #4 — 과적합과 규제, 랜덤 포레스트와 그레이디언트 부스팅",
+      "context": "L1은 절댓값의 합이고 L2 노름은 제곱합의 제곱근이라고 기억하고 있었다. 그런데 손실함수의 L2 벌점에는 루트가 보이지 않았다.",
+      "intent": "같은 이름으로 부르는 두 표현이 정말 같은 양인지 확인하려는 질문이었다.",
+      "answer": "통상적인 L2 규제는 L2 노름 자체가 아니라 L2 노름의 제곱을 벌점으로 사용한다."
+    },
+    {
+      "id": "weekly/2026-10-19-regularization-and-tree-ensembles#질문-가중치를-작게-만드는-것이-왜-새로운-데이터에-도움이-될까",
+      "title": "가중치를 작게 만드는 것이 왜 새로운 데이터에 도움이 될까?",
+      "url": "/notes/weekly/2026-10-19-regularization-and-tree-ensembles#질문-가중치를-작게-만드는-것이-왜-새로운-데이터에-도움이-될까",
+      "topic": "머신러닝",
+      "sourceTitle": "위클리 페이퍼 #4 — 과적합과 규제, 랜덤 포레스트와 그레이디언트 부스팅",
+      "context": "나는 “큰 가중치는 입력의 작은 변화도 크게 반영해서 노이즈까지 학습할 수 있다”고 설명했다.",
+      "intent": "가중치를 줄이는 계산과 과적합을 줄이는 효과를 연결하려는 질문이었다.",
+      "answer": "선형 모델에서는 입력 변화가 예측에 미치는 영향을 제한하고, 학습 표본의 우연한 패턴을 설명하려고 과도한 계수를 쓰는 것을 억제할 수 있다. 다만 큰 가중치만으로 과적합을 판정할 수는 없다."
+    },
+    {
+      "id": "weekly/2026-10-19-regularization-and-tree-ensembles#질문-부트스트랩-데이터셋은-하나일까-여러-개일까",
+      "title": "부트스트랩 데이터셋은 하나일까, 여러 개일까?",
+      "url": "/notes/weekly/2026-10-19-regularization-and-tree-ensembles#질문-부트스트랩-데이터셋은-하나일까-여러-개일까",
+      "topic": "머신러닝",
+      "sourceTitle": "위클리 페이퍼 #4 — 과적합과 규제, 랜덤 포레스트와 그레이디언트 부스팅",
+      "context": "하나의 부트스트랩에서 특성만 무작위로 고르면 여러 트리를 만들 수 있으니, 부트스트랩이 꼭 여러 개 필요한지 궁금했다.",
+      "intent": "행을 뽑는 무작위성과 특성을 고르는 무작위성이 각각 어디에 적용되는지 구분하려는 질문이었다.",
+      "answer": "일반적인 랜덤 포레스트에서는 트리마다 별도의 부트스트랩 표본을 뽑고, 각 노드에서 분할 후보 특성도 무작위로 고른다."
+    },
+    {
+      "id": "weekly/2026-10-19-regularization-and-tree-ensembles#질문-뒤쪽-트리일수록-성능이-좋으니-더-큰-비중으로-투표할까",
+      "title": "뒤쪽 트리일수록 성능이 좋으니 더 큰 비중으로 투표할까?",
+      "url": "/notes/weekly/2026-10-19-regularization-and-tree-ensembles#질문-뒤쪽-트리일수록-성능이-좋으니-더-큰-비중으로-투표할까",
+      "topic": "머신러닝",
+      "sourceTitle": "위클리 페이퍼 #4 — 과적합과 규제, 랜덤 포레스트와 그레이디언트 부스팅",
+      "context": "처음에는 뒤 트리의 잔차가 작으므로 더 좋은 예측 모델이고, 최종 투표에서 더 큰 비중을 주는 것으로 이해했다.",
+      "intent": "여러 트리를 합친다는 말이 두 모델에서 같은 뜻인지 확인하려는 질문이었다.",
+      "answer": "제곱오차 그레이디언트 부스팅의 뒤 트리는 원래 y를 혼자 잘 맞히는 모델이 아니라 앞선 누적 예측에 필요한 보정량을 예측하는 모델이다. 보정량이 작다고 독립적인 성능이 더 좋은 것은 아니다."
+    },
+    {
+      "id": "weekly/2026-10-19-regularization-and-tree-ensembles#질문-앞-트리의-출력을-입력으로-주지-않는데-다음-트리는-어떻게-알까",
+      "title": "앞 트리의 출력을 입력으로 주지 않는데 다음 트리는 어떻게 알까?",
+      "url": "/notes/weekly/2026-10-19-regularization-and-tree-ensembles#질문-앞-트리의-출력을-입력으로-주지-않는데-다음-트리는-어떻게-알까",
+      "topic": "머신러닝",
+      "sourceTitle": "위클리 페이퍼 #4 — 과적합과 규제, 랜덤 포레스트와 그레이디언트 부스팅",
+      "context": "“두 번째 트리는 첫 번째 트리의 영향을 받는다”와 “첫 번째 트리의 출력이 두 번째 트리의 입력은 아니다”가 모순처럼 느껴졌다.",
+      "intent": "여기서 입력이 X인지, 학습에 쓰는 모든 정보인지 구분하지 못했던 것으로 해석한다.",
+      "answer": "앞 트리의 영향은 다음 트리의 학습 목표값에 들어간다. 다음 트리의 입력 특성 열로 붙는 것은 아니다."
+    },
+    {
+      "id": "weekly/2026-10-19-regularization-and-tree-ensembles#질문-테스트-데이터에는-정답-y가-없는데-어떻게-잔차를-출력할까",
+      "title": "테스트 데이터에는 정답 y가 없는데 어떻게 잔차를 출력할까?",
+      "url": "/notes/weekly/2026-10-19-regularization-and-tree-ensembles#질문-테스트-데이터에는-정답-y가-없는데-어떻게-잔차를-출력할까",
+      "topic": "머신러닝",
+      "sourceTitle": "위클리 페이퍼 #4 — 과적합과 규제, 랜덤 포레스트와 그레이디언트 부스팅",
+      "context": "학습 중에는 y−예측으로 잔차를 구했기 때문에, 정답이 없는 새 데이터에서는 계산을 시작할 수 없는 것처럼 느껴졌다.",
+      "intent": "학습 때 목표를 만드는 계산과 학습된 모델을 사용하는 계산을 분리하려는 질문이었다.",
+      "answer": "추론에서는 실제 잔차를 새로 계산하지 않는다. 각 트리는 이미 학습한 분기와 잎 값을 사용해 보정값을 예측한다."
+    },
+    {
+      "id": "weekly/2026-10-19-regularization-and-tree-ensembles#질문-왜-이름에-그레이디언트가-붙을까-잔차는-파라미터의-이동-방향일까",
+      "title": "왜 이름에 그레이디언트가 붙을까? 잔차는 파라미터의 이동 방향일까?",
+      "url": "/notes/weekly/2026-10-19-regularization-and-tree-ensembles#질문-왜-이름에-그레이디언트가-붙을까-잔차는-파라미터의-이동-방향일까",
+      "topic": "머신러닝",
+      "sourceTitle": "위클리 페이퍼 #4 — 과적합과 규제, 랜덤 포레스트와 그레이디언트 부스팅",
+      "context": "손실을 미분한 값에 마이너스를 붙이는 경사하강법과, 잔차를 학습하는 부스팅이 연결된다고 느꼈다.",
+      "intent": "무엇에 대해 미분하는지를 구분해 이 직관을 정확하게 표현하려는 질문이었다.",
+      "answer": "그레이디언트 부스팅은 현재 예측 함수의 출력을 개선할 음의 기울기를 새 모델로 근사한다. 반 제곱오차에서는 그것이 실제값−예측값, 즉 여기서 정의한 잔차다."
+    },
     {
       "id": "learning/2026-10-08-logistic-loss#질문-왜-회귀에서는-오차-분류에서는-손실이라고-부르는가",
       "title": "왜 회귀에서는 오차, 분류에서는 손실이라고 부르는가?",
@@ -5903,6 +6003,13 @@ window.HANTHING_CONTENT = {
     }
   ],
   "quizzes": [
+    {
+      "id": "weekly/2026-10-19-regularization-and-tree-ensembles#퀴즈-두-번째-트리의-입력과-목표는-무엇일까",
+      "title": "두 번째 트리의 입력과 목표는 무엇일까?",
+      "url": "/notes/weekly/2026-10-19-regularization-and-tree-ensembles#퀴즈-두-번째-트리의-입력과-목표는-무엇일까",
+      "topic": "머신러닝",
+      "sourceTitle": "위클리 페이퍼 #4 — 과적합과 규제, 랜덤 포레스트와 그레이디언트 부스팅"
+    },
     {
       "id": "machine-learning/logistic-loss-and-evaluation#퀴즈-q로-예측-라벨을-결정하면-왜-틀리는가",
       "title": "q로 예측 라벨을 결정하면 왜 틀리는가?",

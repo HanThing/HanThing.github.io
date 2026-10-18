@@ -2,6 +2,9 @@
 
 Generated from public Markdown. Read AGENTS.md for ingest/query/lint; CHANGELOG.md for changes. Course references support briefing and stay outside the learning graph. Course/lesson identify the curriculum placement; topics identify related subjects.
 
+- [위클리 페이퍼 #4 — 과적합과 규제, 랜덤 포레스트와 그레이디언트 부스팅](content/weekly/2026-10-19-regularization-and-tree-ensembles.md) — weekly · 2026-10-19 · L1·L2 규제의 의미를 짚고, 부스팅 트리의 입력·목표값·출력을 숫자로 따라가며 학습과 추론을 구분한다.
+  Course: 머신러닝 → 지도학습. Related topics: 머신러닝
+  Sources: 코드잇 AI 스프린트 위클리 페이퍼 4회차 공식 두 문항 (2026-10-18 확인); 위클리 페이퍼 4회차 학습 대화와 답변 피드백 (2026-10-18~19); https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression-and-classification; https://scikit-learn.org/stable/modules/linear_model.html#lasso; https://scikit-learn.org/stable/modules/ensemble.html; https://xgboost.readthedocs.io/en/stable/tutorials/model.html
 - [p·q·로그 손실에서 실제 파라미터 기울기까지](content/learning/2026-10-08-logistic-loss.md) — journal · 2026-10-08 · 이진 분류 확률과 로그 손실, p-y의 미분 대상, softmax 점수에 관한 실제 질문을 정리한다.
   Course: 머신러닝 → 지도학습. Related topics: 머신러닝
   Sources: 분류 손실과 회귀 오차 구분 학습 대화 (2026-10-08); Q와 로그 손실 설명 학습 대화 (2026-10-08); Day1·Day2 맞춤형 학습자료 만들기 중 분류 LAB 맥락 (2026-10-08); https://numpy.org/doc/stable/reference/generated/numpy.where.html; https://numpy.org/doc/stable/reference/generated/numpy.logaddexp.html; https://scikit-learn.org/stable/modules/generated/sklearn.metrics.log_loss.html

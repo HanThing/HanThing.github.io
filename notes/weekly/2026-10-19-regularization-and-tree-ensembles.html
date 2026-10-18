@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ko" dir="ltr"><head><title>위클리 페이퍼 #4 — 과적합과 규제, 랜덤 포레스트와 그레이디언트 부스팅 · HanThing</title><meta charset="utf-8"/><link rel="preload" href="../index-8e49e03b.css" as="style"/><link rel="preload" href="../prescript-feb9b791.js" as="script"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="HanThing Notes"/><meta property="og:title" content="위클리 페이퍼 #4 — 과적합과 규제, 랜덤 포레스트와 그레이디언트 부스팅 · HanThing"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="위클리 페이퍼 #4 — 과적합과 규제, 랜덤 포레스트와 그레이디언트 부스팅 · HanThing"/><meta name="twitter:description" content="L1·L2 규제의 의미를 짚고, 부스팅 트리의 입력·목표값·출력을 숫자로 따라가며 학습과 추론을 구분한다."/><meta property="og:description" content="L1·L2 규제의 의미를 짚고, 부스팅 트리의 입력·목표값·출력을 숫자로 따라가며 학습과 추론을 구분한다."/><meta property="og:image:alt" content="L1·L2 규제의 의미를 짚고, 부스팅 트리의 입력·목표값·출력을 숫자로 따라가며 학습과 추론을 구분한다."/><meta property="og:image" content="https://hanthing.github.io/notes/static/og-image.png"/><meta property="og:image:url" content="https://hanthing.github.io/notes/static/og-image.png"/><meta name="twitter:image" content="https://hanthing.github.io/notes/static/og-image.png"/><meta property="og:image:type" content="image/.png"/><meta property="twitter:domain" content="hanthing.github.io/notes"/><meta property="og:url" content="https://hanthing.github.io/notes/weekly/2026-10-19-regularization-and-tree-ensembles"/><meta property="twitter:url" content="https://hanthing.github.io/notes/weekly/2026-10-19-regularization-and-tree-ensembles"/><link rel="icon" href="../static/icon.png"/><meta name="description" content="L1·L2 규제의 의미를 짚고, 부스팅 트리의 입력·목표값·출력을 숫자로 따라가며 학습과 추론을 구분한다."/><meta name="generator" content="Quartz"/><link href="../index-8e49e03b.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-589c1cea.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-bbc3f7c0.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-2911f5d1.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-642859cd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-8a06014f.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-4abc06bd.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-274a3dfe.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../component-94cb6c84.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-a5c806d2.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="../static/resource-style-6bd36952.css" rel="stylesheet" type="text/css" data-persist="true"/><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="../prescript-feb9b791.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("../static/contentIndex.json").then(data => data.json())</script></head><body data-slug="weekly/2026-10-19-regularization-and-tree-ensembles" data-basepath="/notes"><div id="quartz-root" class="page" data-frame="default"><div id="quartz-body"><div class="left sidebar"><div class="flex-component" style="flex-direction: row; flex-wrap: nowrap; gap: 0.5rem;"><div style="flex-grow: 1; flex-shrink: 1; flex-basis: auto; order: 0; align-self: center; justify-self: center;"><div class="search"><button class="search-button" aria-label="검색" aria-expanded="false"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>검색</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="검색어를 입력하세요" placeholder="검색어를 입력하세요"/><div class="search-layout" data-preview="true" data-field-priority="[&quot;title&quot;,&quot;content&quot;,&quot;tags&quot;]"></div></div></div></div></div></div></div><div class="center"><div class="page-header"><header><nav class="hanthing-home" aria-label="한띵 노트"><a href="/" data-no-popover="true" data-router-ignore="true">HanThing <span>Notes</span></a><a href="/#journal" data-no-popover="true" data-router-ignore="true">기록</a><a href="/#questions" data-no-popover="true" data-router-ignore="true">질문</a><a href="/#quizzes" data-no-popover="true" data-router-ignore="true">퀴즈</a><button class="theme-toggle" type="button" data-theme-toggle="true" aria-label="밝은 화면으로 전환">밝게</button></nav></header><div class="popover-hint"><h1 class="article-title">위클리 페이퍼 #4 — 과적합과 규제, 랜덤 포레스트와 그레이디언트 부스팅</h1><p show-comma="true" class="content-meta"><time datetime="2026-10-18T15:00:00.000Z">2026년 10월 19일</time><span>33 min read</span></p><nav id="learning-actions" class="learning-actions" aria-label="이 글 복습과 관련 개념"><strong>이 글 복습하기</strong><div class="learning-set"><p>위클리 페이퍼 4 — 규제와 트리 앙상블</p><div class="learning-links"><a href="/review.html?set=weekly4-regularization-ensembles&amp;mode=quiz&amp;from=weekly%2F2026-10-19-regularization-and-tree-ensembles" data-no-popover="true" data-router-ignore="true">퀴즈 풀기 <span>12문항</span> ↗</a><a href="/review.html?set=weekly4-regularization-ensembles&amp;mode=cards&amp;from=weekly%2F2026-10-19-regularization-and-tree-ensembles" data-no-popover="true" data-router-ignore="true">플래시카드 <span>12장</span> ↗</a></div></div><a class="learning-related-jump" href="#learning-related" data-no-popover="true">연결된 개념·기록 2개 보기 ↓</a></nav></div></div><article class="popover-hint"><div class="markdown-preview-view markdown-rendered"><p>이번 대화에서 가장 오래 붙잡았던 질문은 이것이었다. <strong>앞 트리의 출력을 다음 트리의 입력으로 주지 않는다면, 다음 트리는 어떻게 앞 트리의 영향을 받을까?</strong> 답은 입력 특성 X와 학습 목표값을 구분하는 데 있었다.</p>
+<p>공식 두 문항에 대한 내 답변을 먼저 말하고 피드백을 받았다. 아래는 그 과정에서 고친 설명과 숫자 예제를 정리한 글이다. 그레이디언트 부스팅의 트리 개수에 관한 마지막 답변은 설명을 요청해 보충했다. 수치는 이해를 위한 예시이며 실제 데이터셋으로 모델을 훈련하거나 성능을 측정한 실험 기록은 아니다.</p>
+<h2 id="1-학습-정확도-99-테스트-정확도-70라면">1. 학습 정확도 99%, 테스트 정확도 70%라면?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#1-학습-정확도-99-테스트-정확도-70라면" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>모델이 학습 데이터에서는 정확도 99%, 테스트 데이터에서는 70%가 나왔어요. 편향과 분산 중 어느 쪽 문제일까요? L1·L2 규제는 이 문제를 어떻게 줄이나요?</p>
+</blockquote>
+<p><strong>두 데이터셋이 같은 분포에서 적절히 나뉘었다는 전제에서는 높은 분산, 즉 과적합을 의심한다.</strong> 학습 데이터에는 잘 맞지만 새로운 데이터로 일반화하지 못하는 모습이기 때문이다. 다만 정확도 두 개만으로 편향과 분산을 직접 측정한 것은 아니다. 데이터 분포가 달라진 경우도 있으므로 “확실히 과적합”이라는 단정보다는 이 전제를 붙이는 것이 정확하다.</p>
+<p>편향은 학습 데이터를 여러 번 바꿔 학습했을 때 <strong>평균적인 예측이 실제 관계에서 얼마나 벗어나는지</strong>다. 분산은 <strong>같은 입력에 대한 예측이 학습 데이터가 달라짐에 따라 얼마나 달라지는지</strong>다. 서로 다른 입력에 서로 다른 값을 내놓는다는 뜻이 아니다. 단순한 모델은 관계를 충분히 표현하지 못해 편향이 높아질 수 있고, 지나치게 유연한 모델은 표본의 우연한 특징까지 따라가 분산이 높아질 수 있다.</p>
+<p>회귀의 제곱오차에서는 적절한 가정 아래 기대 예측 오차를 편향의 제곱, 분산, 줄일 수 없는 잡음으로 나누어 볼 수 있다. 여기서 잡음은 입력으로 설명할 수 없는 정답의 변동이다. 이 분해식에 분류 정확도 99%와 70%를 그대로 넣어 계산하는 것은 아니다.</p>
+<h3 id="l1l2는-가중치의-크기에-비용을-붙인다">L1·L2는 가중치의 크기에 비용을 붙인다<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#l1l2는-가중치의-크기에-비용을-붙인다" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>규제를 적용하면 학습 오차만 최소화하지 않고 <strong>학습 오차 + λ × 가중치 벌점</strong>을 최소화한다. 회귀에서 반 MSE를 사용한다면 다음처럼 읽으면 된다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>규제</th><th>최소화하는 값</th><th>가중치에 생기는 경향</th></tr></thead><tbody><tr><td>L1</td><td>MSE ÷ 2 + λ × 가중치 절댓값의 합</td><td>일부 가중치가 정확히 0이 되는 희소한 해</td></tr><tr><td>L2</td><td>MSE ÷ 2 + λ × 가중치 제곱의 합</td><td>가중치를 전반적으로 작게 만드는 해</td></tr></tbody></table></div>
+<p>MSE 앞의 1/2는 미분할 때 제곱에서 나오는 2를 상쇄하기 위한 관례다. 규제항과 손실항의 상수 배율은 구현마다 다를 수 있으므로 λ의 숫자만 비교해서는 안 된다. 분류에서는 MSE 대신 로그 손실 같은 분류용 손실에 벌점을 더할 수 있다. <a href="https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression-and-classification" class="external external-link">Ridge<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>, <a href="https://scikit-learn.org/stable/modules/linear_model.html#lasso" class="external external-link">Lasso<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></p>
+<p>여기서 규제는 regularization이다. 데이터를 일정 범위나 길이로 변환하는 normalization과는 다르다. 둘 다 한국어로 정규화라고 부르는 경우가 있어 문맥을 확인해야 한다.</p>
+<h2 id="질문-l2-노름에는-루트가-있는데-l2-규제에는-왜-없을까">질문: L2 노름에는 루트가 있는데 L2 규제에는 왜 없을까?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#질문-l2-노름에는-루트가-있는데-l2-규제에는-왜-없을까" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>상황:</strong> L1은 절댓값의 합이고 L2 노름은 제곱합의 제곱근이라고 기억하고 있었다. 그런데 손실함수의 L2 벌점에는 루트가 보이지 않았다.</p>
+<p><strong>의도:</strong> 같은 이름으로 부르는 두 표현이 정말 같은 양인지 확인하려는 질문이었다.</p>
+<p><strong>핵심 답변:</strong> 통상적인 L2 규제는 <strong>L2 노름 자체가 아니라 L2 노름의 제곱</strong>을 벌점으로 사용한다.</p>
+<p>가중치가 3과 4라면 L1 노름은 7, L2 노름은 √(9+16)=5, 통상적인 L2 벌점은 9+16=25다. 가중치 하나의 제곱 벌점을 미분하면 2λw가 되므로 크기가 클수록 더 강하게 줄이려는 힘이 생긴다. 제곱하지 않은 L2 노름도 별도의 벌점으로 사용할 수 있지만, 여기서 설명하는 Ridge의 목적함수와는 다르다.</p>
+<h2 id="질문-가중치를-작게-만드는-것이-왜-새로운-데이터에-도움이-될까">질문: 가중치를 작게 만드는 것이 왜 새로운 데이터에 도움이 될까?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#질문-가중치를-작게-만드는-것이-왜-새로운-데이터에-도움이-될까" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>상황:</strong> 나는 “큰 가중치는 입력의 작은 변화도 크게 반영해서 노이즈까지 학습할 수 있다”고 설명했다.</p>
+<p><strong>의도:</strong> 가중치를 줄이는 계산과 과적합을 줄이는 효과를 연결하려는 질문이었다.</p>
+<p><strong>핵심 답변:</strong> 선형 모델에서는 입력 변화가 예측에 미치는 영향을 제한하고, 학습 표본의 우연한 패턴을 설명하려고 과도한 계수를 쓰는 것을 억제할 수 있다. 다만 큰 가중치만으로 과적합을 판정할 수는 없다.</p>
+<p>예측이 w×x+b일 때 x가 0.01 변하면 w=100에서는 예측이 1, w=2에서는 0.02 변한다. 이것은 <strong>입력 변화에 대한 민감도</strong>의 예다. 앞에서 말한 분산은 <strong>학습 데이터가 바뀔 때 학습 결과가 달라지는 정도</strong>이므로 두 개념을 동일시하지 않는다. 규제는 학습할 수 있는 해를 제한해 후자의 불안정성도 줄이는 데 도움을 준다.</p>
+<p>또한 x의 단위를 바꾸면 같은 예측을 만드는 가중치 크기도 달라진다. 가중치 크기를 비교하거나 L1·L2를 적용할 때는 특성의 스케일을 고려해야 한다. 스케일러는 학습 데이터로만 맞추고 검증·테스트 데이터에는 같은 변환을 적용한다.</p>
+<h3 id="λ가-너무-크면-어떻게-될까">λ가 너무 크면 어떻게 될까?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#λ가-너무-크면-어떻게-될까" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>나는 “MSE가 덜 반영되어 오차를 보정하지 못하고 언더피팅이 될 수 있다”고 답했다. 방향은 맞지만, 정확히는 <strong>MSE 항이 사라지거나 그 계수가 줄어드는 것이 아니라, 벌점의 상대적인 영향이 커진다.</strong> 필요한 관계까지 표현하지 못하면 편향이 커지고 분산은 작아질 수 있다.</p>
+<p>“가중치가 전부 0이면 예측도 무조건 0”이라는 설명도 조건이 필요하다. 보통 규제하지 않는 절편 b가 남아 있으면 상수를 예측한다. 제곱오차 회귀에서는 그 상수가 학습 정답의 평균일 수 있다.</p>
+<p>L1은 입력 데이터의 값 자체를 0으로 바꾸는 것이 아니다. <strong>가중치가 0이 되어 해당 특성이 예측에 기여하지 않는 것</strong>이다. 파라미터 저장 개수가 자동으로 줄어드는 것도 아니다. 특성이 많다는 이유만으로 무조건 L1, 특성을 남기고 싶다는 이유만으로 무조건 L2라고 정하지 않는다. 필요한 희소성, 특성 간 관계와 검증 성능을 함께 보고 λ도 검증 데이터나 교차 검증으로 선택한다.</p>
+<h2 id="2-랜덤-포레스트와-그레이디언트-부스팅은-어떻게-다를까">2. 랜덤 포레스트와 그레이디언트 부스팅은 어떻게 다를까?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#2-랜덤-포레스트와-그레이디언트-부스팅은-어떻게-다를까" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>랜덤 포레스트와 그레이디언트 부스팅은 둘 다 결정 트리 여러 개를 합친 모델이에요. 두 모델은 트리를 만들고 합치는 방식이 어떻게 다른가요? 트리 개수를 계속 늘리면 각 모델에 어떤 일이 생길지도 예상해 주세요.</p>
+</blockquote>
+<p><strong>랜덤 포레스트는 여러 트리를 각각 학습해 예측을 평균하거나 투표로 모으고, 그레이디언트 부스팅은 지금까지의 모델이 놓친 부분을 학습하는 트리를 순차적으로 추가한다.</strong> 비교할 때는 데이터와 목표값, 트리 사이 의존성, 합치는 방식 순으로 설명하면 된다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>비교</th><th>랜덤 포레스트</th><th>그레이디언트 부스팅</th></tr></thead><tbody><tr><td>학습 자료</td><td>보통 트리마다 별도의 부트스트랩 표본</td><td>같은 원래 X를 쓰며, 단계별 목표가 달라짐. 일부 표본만 쓰는 변형도 있음</td></tr><tr><td>학습 목표</td><td>원래 정답 y</td><td>현재 누적 모델의 손실을 줄일 보정 방향</td></tr><tr><td>트리 간 관계</td><td>다른 트리의 결과를 기다릴 필요 없이 각각 학습</td><td>이전 누적 예측으로 다음 목표를 정하므로 순차 학습</td></tr><tr><td>합치기</td><td>회귀는 평균, 분류는 투표 또는 확률 평균</td><td>초기 예측에 학습률을 곱한 각 트리 출력을 더함</td></tr></tbody></table></div>
+<p>여기서 “독립적”은 <strong>학습 절차에서 앞 트리의 출력을 필요로 하지 않는다</strong>는 의미다. 같은 원본 데이터에서 만들어지므로 트리들의 예측 오차가 통계적으로 완전히 독립인 것은 아니다. scikit-learn의 랜덤 포레스트 분류는 각 트리의 클래스 확률을 평균한 뒤 가장 높은 클래스를 고른다. <a href="https://scikit-learn.org/stable/modules/ensemble.html#random-forests" class="external external-link">앙상블 공식 설명<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></p>
+<h2 id="질문-부트스트랩-데이터셋은-하나일까-여러-개일까">질문: 부트스트랩 데이터셋은 하나일까, 여러 개일까?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#질문-부트스트랩-데이터셋은-하나일까-여러-개일까" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>상황:</strong> 하나의 부트스트랩에서 특성만 무작위로 고르면 여러 트리를 만들 수 있으니, 부트스트랩이 꼭 여러 개 필요한지 궁금했다.</p>
+<p><strong>의도:</strong> 행을 뽑는 무작위성과 특성을 고르는 무작위성이 각각 어디에 적용되는지 구분하려는 질문이었다.</p>
+<p><strong>핵심 답변:</strong> 일반적인 랜덤 포레스트에서는 <strong>트리마다 별도의 부트스트랩 표본</strong>을 뽑고, 각 노드에서 분할 후보 특성도 무작위로 고른다.</p>
+<p>원본이 n개 행이면 보통 중복을 허용해 n번 뽑는다. 100개 트리를 만들면 100번 별도로 표본을 구성한다. 같은 행이 여러 번 포함되거나 어떤 행은 빠질 수 있다. 부트스트랩 일반 개념에서 표본 크기가 항상 원본과 같아야 하는 것은 아니며 설정으로 바꿀 수도 있다.</p>
+<p>각 노드는 선택된 후보 특성의 분할을 비교해 좋은 분할을 고른다. 분류에서는 지니 불순도 등을, 회귀에서는 제곱오차 등을 사용한다. 부트스트랩 하나만 쓰는 방법도 만들 수 있지만, 여기서 설명하는 전형적인 랜덤 포레스트 절차와는 다르다. 구현에는 부트스트랩을 끄는 설정도 있다.</p>
+<p>“부스팅이니까 부트스트랩을 절대 쓰지 않는다”는 정의도 피한다. 기본적인 그레이디언트 부스팅은 배깅처럼 독립 모델을 만드는 방식이 아니지만, 확률적 부스팅은 일부 표본을 뽑아 학습할 수 있다. 핵심 차이는 <strong>독립적인 예측을 모으느냐, 앞 모델을 보정하느냐</strong>다.</p>
+<h2 id="질문-뒤쪽-트리일수록-성능이-좋으니-더-큰-비중으로-투표할까">질문: 뒤쪽 트리일수록 성능이 좋으니 더 큰 비중으로 투표할까?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#질문-뒤쪽-트리일수록-성능이-좋으니-더-큰-비중으로-투표할까" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>상황:</strong> 처음에는 뒤 트리의 잔차가 작으므로 더 좋은 예측 모델이고, 최종 투표에서 더 큰 비중을 주는 것으로 이해했다.</p>
+<p><strong>의도:</strong> 여러 트리를 합친다는 말이 두 모델에서 같은 뜻인지 확인하려는 질문이었다.</p>
+<p><strong>핵심 답변:</strong> 제곱오차 그레이디언트 부스팅의 뒤 트리는 원래 y를 혼자 잘 맞히는 모델이 아니라 <strong>앞선 누적 예측에 필요한 보정량을 예측하는 모델</strong>이다. 보정량이 작다고 독립적인 성능이 더 좋은 것은 아니다.</p>
+<p>고정 학습률 0.1을 쓰는 기본 방식이라면 각 트리 출력에 같은 0.1을 곱해서 더한다. 뒤쪽이라는 이유로 더 높은 투표권을 주지 않는다. 분류 부스팅도 보통 클래스 점수에 보정량을 누적한 뒤 확률·클래스로 변환하며, 각 트리의 클래스 다수결과는 다르다.</p>
+<p>이후의 숫자 예시는 <strong>제곱오차 회귀</strong>로 한정한다. MSE는 오차를 측정하는 손실함수이고, 선형 회귀는 예측값을 만드는 모델의 형태다. 따라서 “MSE 회귀와 선형 회귀가 서로 다른 모델인가?”보다는 “어떤 모델을 어떤 손실로 학습하는가?”라고 구분한다.</p>
+<h2 id="숫자로-따라가는-부스팅-초기값부터-두-번째-트리까지">숫자로 따라가는 부스팅: 초기값부터 두 번째 트리까지<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#숫자로-따라가는-부스팅-초기값부터-두-번째-트리까지" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>입력 X는 1, 2, 3, 4이고 정답 y는 2, 4, 8, 10이라고 하자. 학습률은 0.5이며, 한 번만 분할하는 깊이 1의 회귀 트리 두 개를 만든다. 이 작은 예시는 설명을 위해 구성했다.</p>
+<h3 id="0단계-아직-트리가-없을-때">0단계: 아직 트리가 없을 때<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#0단계-아직-트리가-없을-때" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>제곱오차를 최소화하는 초기 상수는 정답의 평균이다. (2+4+8+10)÷4=6이므로 모든 입력에 6을 예측한다. 이 초기 상수는 첫 번째 보정 트리와 별개다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>X</th><th>정답 y</th><th>초기 예측</th><th>첫 트리가 맞힐 목표: y−초기 예측</th></tr></thead><tbody><tr><td>1</td><td>2</td><td>6</td><td>−4</td></tr><tr><td>2</td><td>4</td><td>6</td><td>−2</td></tr><tr><td>3</td><td>8</td><td>6</td><td>2</td></tr><tr><td>4</td><td>10</td><td>6</td><td>4</td></tr></tbody></table></div>
+<p>첫 번째 트리의 학습 호출을 말로 쓰면 **“X를 보고 [−4, −2, 2, 4]를 예측하도록 학습해라”**다. X가 잔차로 바뀌는 것이 아니라 목표값이 잔차로 바뀐다.</p>
+<h3 id="1단계-첫-트리의-분할과-출력">1단계: 첫 트리의 분할과 출력<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#1단계-첫-트리의-분할과-출력" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>가능한 분할점은 1.5, 2.5, 3.5다. 각 잎에서는 그 잎에 들어온 목표값의 평균을 출력한다. 분할 후 목표와 잎 출력 사이의 제곱오차 합을 비교하면 다음과 같다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>분할점</th><th>왼쪽 잎 출력</th><th>오른쪽 잎 출력</th><th>잎 내부 제곱오차 합</th></tr></thead><tbody><tr><td>1.5</td><td>−4</td><td>4/3</td><td>약 18.67</td></tr><tr><td>2.5</td><td>−3</td><td>3</td><td>4</td></tr><tr><td>3.5</td><td>−4/3</td><td>4</td><td>약 18.67</td></tr></tbody></table></div>
+<p>따라서 첫 트리는 <strong>X≤2.5이면 −3, 그렇지 않으면 3</strong>을 출력한다. 왼쪽 잎의 목표 −4와 −2를 각각 맞히는 대신 그 평균 −3을 내보내는 것이다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>X</th><th>첫 트리 목표</th><th>첫 트리 실제 출력</th><th>학습률을 곱한 보정량</th><th>갱신 예측: 6+보정량</th></tr></thead><tbody><tr><td>1</td><td>−4</td><td>−3</td><td>−1.5</td><td>4.5</td></tr><tr><td>2</td><td>−2</td><td>−3</td><td>−1.5</td><td>4.5</td></tr><tr><td>3</td><td>2</td><td>3</td><td>1.5</td><td>7.5</td></tr><tr><td>4</td><td>4</td><td>3</td><td>1.5</td><td>7.5</td></tr></tbody></table></div>
+<p>여기서 <strong>트리가 잔차를 출력한다</strong>는 말은 <strong>잔차를 예측한 값을 출력한다</strong>는 줄임말이다. 실제 잔차와 출력이 정확히 같다는 뜻은 아니다. 트리 출력 −3과 학습률을 적용한 실제 보정량 −1.5도 구분한다.</p>
+<h3 id="2단계-두-번째-트리가-학습할-목표를-다시-계산한다">2단계: 두 번째 트리가 학습할 목표를 다시 계산한다<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#2단계-두-번째-트리가-학습할-목표를-다시-계산한다" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>학습을 관리하는 과정에서 원래 정답 y에서 <strong>첫 번째 트리까지 반영한 누적 예측</strong>을 뺀다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>X</th><th>원래 정답 y</th><th>현재 누적 예측</th><th>두 번째 트리 목표: y−현재 예측</th></tr></thead><tbody><tr><td>1</td><td>2</td><td>4.5</td><td>−2.5</td></tr><tr><td>2</td><td>4</td><td>4.5</td><td>−0.5</td></tr><tr><td>3</td><td>8</td><td>7.5</td><td>0.5</td></tr><tr><td>4</td><td>10</td><td>7.5</td><td>2.5</td></tr></tbody></table></div>
+<p>두 번째 트리도 입력은 원래 X다. 목표만 [−2.5, −0.5, 0.5, 2.5]로 달라졌다. 같은 방법으로 분할을 비교하면 1.5와 3.5에서는 제곱오차 합이 약 4.67, 2.5에서는 4다. 따라서 이번에도 2.5에서 나뉘며 잎 출력은 −1.5와 1.5다.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>X</th><th>이전 누적 예측</th><th>두 번째 트리 출력</th><th>0.5×트리 출력</th><th>두 트리를 합친 예측</th></tr></thead><tbody><tr><td>1</td><td>4.5</td><td>−1.5</td><td>−0.75</td><td>3.75</td></tr><tr><td>2</td><td>4.5</td><td>−1.5</td><td>−0.75</td><td>3.75</td></tr><tr><td>3</td><td>7.5</td><td>1.5</td><td>0.75</td><td>8.25</td></tr><tr><td>4</td><td>7.5</td><td>1.5</td><td>0.75</td><td>8.25</td></tr></tbody></table></div>
+<p>MSE는 처음 10에서 첫 트리 추가 후 3.25, 두 번째 트리 추가 후 1.5625가 된다. 세 번째 트리를 만든다면 X=1의 새 목표는 2−3.75=−1.75다. <strong>마지막 트리 출력 −1.5가 최종 예측인 것이 아니라, 초기값과 보정량을 모두 누적한 3.75가 최종 예측</strong>이다.</p>
+<h2 id="질문-앞-트리의-출력을-입력으로-주지-않는데-다음-트리는-어떻게-알까">질문: 앞 트리의 출력을 입력으로 주지 않는데 다음 트리는 어떻게 알까?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#질문-앞-트리의-출력을-입력으로-주지-않는데-다음-트리는-어떻게-알까" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>상황:</strong> “두 번째 트리는 첫 번째 트리의 영향을 받는다”와 “첫 번째 트리의 출력이 두 번째 트리의 입력은 아니다”가 모순처럼 느껴졌다.</p>
+<p><strong>의도:</strong> 여기서 입력이 X인지, 학습에 쓰는 모든 정보인지 구분하지 못했던 것으로 해석한다.</p>
+<p><strong>핵심 답변:</strong> 앞 트리의 영향은 <strong>다음 트리의 학습 목표값</strong>에 들어간다. 다음 트리의 입력 특성 열로 붙는 것은 아니다.</p>
+<p>학습은 <code>첫 트리.fit(X, 첫 잔차)</code> → 누적 예측 계산 → 새 잔차 계산 → <code>둘째 트리.fit(X, 새 잔차)</code> 순서다. 두 번째 트리가 첫 트리 자체를 알 필요는 없다. 학습을 관리하는 쪽이 앞 트리의 결과를 반영한 새 정답을 만들어 전달한다.</p>
+<p>일반적인 그레이디언트 부스팅에서는 이 목표를 만들기 위해 앞 단계 계산이 필요하므로 모든 트리를 처음부터 동시에 학습시킬 수 없다. 하지만 이미 학습이 끝났다면 각 트리의 분기 기준과 잎 값이 정해져 있으므로, <strong>추론에서 각 트리 출력은 다른 트리 출력을 기다리지 않고 계산할 수 있다.</strong> 실제 병렬 실행 여부는 구현에 달려 있다.</p>
+<h2 id="질문-테스트-데이터에는-정답-y가-없는데-어떻게-잔차를-출력할까">질문: 테스트 데이터에는 정답 y가 없는데 어떻게 잔차를 출력할까?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#질문-테스트-데이터에는-정답-y가-없는데-어떻게-잔차를-출력할까" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>상황:</strong> 학습 중에는 y−예측으로 잔차를 구했기 때문에, 정답이 없는 새 데이터에서는 계산을 시작할 수 없는 것처럼 느껴졌다.</p>
+<p><strong>의도:</strong> 학습 때 목표를 만드는 계산과 학습된 모델을 사용하는 계산을 분리하려는 질문이었다.</p>
+<p><strong>핵심 답변:</strong> 추론에서는 실제 잔차를 새로 계산하지 않는다. 각 트리는 <strong>이미 학습한 분기와 잎 값을 사용해 보정값을 예측</strong>한다.</p>
+<p>새 입력이 1.5라면 다음과 같다.</p>
+<ol>
+<li>초기 예측은 저장된 6이다.</li>
+<li>첫 트리는 1.5≤2.5이므로 −3을 출력한다.</li>
+<li>두 번째 트리도 원래 새 입력 1.5를 받고 −1.5를 출력한다. −3이나 4.5를 입력받는 것이 아니다.</li>
+<li>최종 예측은 6 + 0.5×(−3) + 0.5×(−1.5) = <strong>3.75</strong>다.</li>
+</ol>
+<p>새 입력이 3.5라면 두 트리의 출력은 각각 3과 1.5이고, 최종 예측은 <strong>8.25</strong>다. 이 과정에는 정답 y가 한 번도 필요하지 않다. y가 있다면 나중에 예측 성능을 평가할 수 있다.</p>
+<p>최종 모델에는 초기값과 <strong>두 트리가 모두 남는다.</strong> 마지막 트리 하나로 앞 트리들을 대체하는 것이 아니다.</p>
+<h2 id="질문-왜-이름에-그레이디언트가-붙을까-잔차는-파라미터의-이동-방향일까">질문: 왜 이름에 그레이디언트가 붙을까? 잔차는 파라미터의 이동 방향일까?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#질문-왜-이름에-그레이디언트가-붙을까-잔차는-파라미터의-이동-방향일까" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>상황:</strong> 손실을 미분한 값에 마이너스를 붙이는 경사하강법과, 잔차를 학습하는 부스팅이 연결된다고 느꼈다.</p>
+<p><strong>의도:</strong> 무엇에 대해 미분하는지를 구분해 이 직관을 정확하게 표현하려는 질문이었다.</p>
+<p><strong>핵심 답변:</strong> 그레이디언트 부스팅은 현재 <strong>예측 함수의 출력을 개선할 음의 기울기</strong>를 새 모델로 근사한다. 반 제곱오차에서는 그것이 실제값−예측값, 즉 여기서 정의한 잔차다.</p>
+<p>한 샘플의 손실을 <code>(예측−실제)²÷2</code>로 두면 예측값으로 미분한 결과는 <code>예측−실제</code>, 그 반대 방향은 <code>실제−예측</code>이다. 여러 샘플에서 이 방향을 계산하고, X로 그 방향을 예측하는 트리를 붙인다. 손실의 평균이나 상수 배율에 따른 계수는 따로 고려한다. 다른 손실에서는 일반적으로 원래 y와 예측의 단순 차이가 아니라 그 손실에 맞는 음의 기울기를 사용한다. <a href="https://scikit-learn.org/stable/modules/ensemble.html#mathematical-formulation" class="external external-link">그레이디언트 부스팅의 수학적 설명<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></p>
+<p>반면 w×x를 w로 미분할 때는 x가 추가된다. 예를 들어 x=−2에서 예측을 4만큼 늘리려면 w는 2만큼 줄어야 한다. <strong>예측을 늘릴 방향과 파라미터를 늘릴 방향은 같다고 할 수 없다.</strong> 이 구분은 <a href="../machine-learning/linear-regression-gradient" class="internal internal-link" data-slug="machine-learning/linear-regression-gradient">linear-regression-gradient</a>의 연쇄법칙과 이어진다.</p>
+<p>“error와 residual은 언제나 부호가 반대”라는 명제도 성립하지 않는다. 이 글처럼 error를 예측−실제, residual을 실제−예측으로 정의하면 반대지만, error의 부호 관례는 자료마다 다르다. 먼저 정의를 확인한다.</p>
+<h3 id="adaboost-스텀프-xgboost는-어디에-놓일까">AdaBoost, 스텀프, XGBoost는 어디에 놓일까?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#adaboost-스텀프-xgboost는-어디에-놓일까" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>AdaBoost의 대표적인 분류 방식은 잘못 맞힌 샘플의 가중치를 높여 다음 약한 모델이 더 집중하게 하고, 모델 예측을 가중 결합한다. 그레이디언트 부스팅은 손실의 음의 기울기를 새 학습 목표로 사용한다. 둘 다 순차적으로 모델을 추가하는 부스팅이지만 설명 방식이 다르다.</p>
+<p>한 번만 분할하는 트리가 스텀프다. AdaBoost에서 흔히 쓰지만 필수는 아니고, 그레이디언트 부스팅에서도 스텀프나 더 깊은 트리를 사용할 수 있다. 이 글의 깊이 1은 계산을 쉽게 보이기 위한 선택이다. <a href="https://scikit-learn.org/stable/modules/ensemble.html#adaboost" class="external external-link">AdaBoost 설명<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></p>
+<p>XGBoost는 그레이디언트 부스팅 계열의 라이브러리다. 트리 복잡도에 대한 규제와 손실의 1차·2차 미분 정보를 사용하는 학습 등을 제공한다. AdaBoost를 단순히 빠르게 구현한 것이라고 이해하면 안 된다. <a href="https://xgboost.readthedocs.io/en/stable/tutorials/model.html" class="external external-link">XGBoost 모델 설명<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></p>
+<h2 id="트리-개수를-계속-늘리면-어떻게-될까">트리 개수를 계속 늘리면 어떻게 될까?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#트리-개수를-계속-늘리면-어떻게-될까" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>랜덤 포레스트에서 트리 하나의 예측이 평균에 미치는 비중은 트리가 많을수록 작아진다. 다양한 트리의 예측을 평균하면 불안정성이 줄어드는 경향이 있지만, 트리 사이의 상관 때문에 개선에는 한계가 있다. 개수를 늘릴수록 계산·저장 비용은 증가하고 성능은 어느 정도 안정된다. 테스트 점수가 매번 반드시 좋아지는 것은 아니며 랜덤 포레스트도 과적합할 수 있지만, <strong>트리 수 증가 자체를 부스팅과 같은 방식의 과적합 원인으로 보지는 않는다.</strong></p>
+<p>그레이디언트 부스팅은 보정 트리를 더할수록 모델이 더 복잡한 관계를 표현할 수 있다. 적절한 학습률과 학습 절차에서는 학습 손실이 대체로 줄지만, <strong>검증 손실은 줄다가 다시 커질 수 있다.</strong> 처음에는 공통 패턴을 배워 편향을 줄이고, 계속하면 훈련 표본의 잡음까지 설명할 수 있기 때문이다.</p>
+<p>예를 들어 실제 관계가 대략 y=2x인데 학습 데이터의 x=5에서 우연히 y=13이 관측되었다고 하자. 모델이 10을 예측하면 잔차는 3이다. 학습 과정은 이 3이 잡음인지 꼭 맞혀야 할 패턴인지 정답만 보고 완벽하게 구분할 수 없다. 이를 따라가는 보정을 계속 추가하면 학습 오차는 줄어도 새 데이터에는 불리할 수 있다. 이것은 가능성을 보여주는 예이며, 특정 트리가 반드시 이 한 점만 외운다는 뜻은 아니다.</p>
+<p>따라서 <strong>검증 성능을 보며 조기 종료하고, 학습률과 트리 깊이도 함께 조절한다.</strong> 작은 학습률은 보정량을 줄여 더 많은 트리가 필요할 수 있지만 과적합을 없애 주는 보장은 아니다. 최종 테스트 데이터는 이 선택에 반복 사용하지 않는다.</p>
+<p>대화 중에는 “뒤쪽 트리들은 작은 잔차를 학습하니 비슷한 모양이 되지 않을까?”라고 예상했다. 그러나 <strong>잔차 크기가 작다는 사실만으로 분할 구조가 같아지지는 않는다.</strong> 남은 오차가 어느 입력 영역에 분포하는지에 따라 분할이 달라진다. 앞의 두 트리 모양이 같았던 것은 그 작은 예제의 결과일 뿐이다.</p>
+<p>학습률의 역할은 <a href="../weekly/2026-10-08-learning-rate-and-classification" class="internal internal-link" data-slug="weekly/2026-10-08-learning-rate-and-classification">2026-10-08-learning-rate-and-classification</a>와 함께 보면 좋다. 경사하강법과 부스팅 모두 갱신 폭을 조절하지만, 여기서는 기존 가중치를 직접 고치는 대신 새 트리의 보정 출력을 누적한다.</p>
+<h2 id="퀴즈-두-번째-트리의-입력과-목표는-무엇일까">퀴즈: 두 번째 트리의 입력과 목표는 무엇일까?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#퀴즈-두-번째-트리의-입력과-목표는-무엇일까" class="internal internal-link"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>X=1의 정답이 2이고, 초기값은 6, 첫 트리 출력은 −3, 학습률은 0.5다. 두 번째 트리의 학습 입력, 학습 목표, 첫 트리까지의 누적 예측을 각각 말해 보자.</p>
+<details>
+<summary>답 확인</summary>
+<p>입력은 원래 X=1이다. 누적 예측은 6+0.5×(−3)=4.5이고, 두 번째 트리의 목표는 2−4.5=−2.5다. 두 번째 트리가 실제로 출력하는 값은 학습 결과에 달려 있으며 목표와 반드시 일치하지 않는다.</p>
+</details></div></article><hr/><div class="page-footer"><section id="learning-related" class="learning-related" aria-labelledby="learning-related-title"><div id="learning-review" class="learning-actions"><h2>읽은 내용을 떠올려 보세요</h2><div class="learning-set"><p>위클리 페이퍼 4 — 규제와 트리 앙상블</p><div class="learning-links"><a href="/review.html?set=weekly4-regularization-ensembles&amp;mode=quiz&amp;from=weekly%2F2026-10-19-regularization-and-tree-ensembles" data-no-popover="true" data-router-ignore="true">퀴즈 풀기 <span>12문항</span> ↗</a><a href="/review.html?set=weekly4-regularization-ensembles&amp;mode=cards&amp;from=weekly%2F2026-10-19-regularization-and-tree-ensembles" data-no-popover="true" data-router-ignore="true">플래시카드 <span>12장</span> ↗</a></div></div></div><h2 id="learning-related-title">이어서 읽는 개념과 기록</h2><ul class="learning-related-list"><li><a href="/notes/machine-learning/linear-regression-gradient" data-no-popover="true"><small>개념 노트 · 이 글에서 연결한 노트</small><strong>선형 회귀의 기울기: 손실 정의에서 X.T @ error까지 ↗</strong><span>함께 읽는 이유: 예측값에 대한 미분과 가중치에 대한 미분이 왜 다른지, 손실 정의와 연쇄법칙으로 연결한다.</span></a></li><li><a href="/notes/weekly/2026-10-08-learning-rate-and-classification" data-no-popover="true"><small>위클리 페이퍼 · 이 글에서 연결한 노트</small><strong>위클리 페이퍼 #3 — 학습률과 콘텐츠 이용 등급 분류 ↗</strong><span>함께 읽는 이유: 학습률이 갱신 폭에 미치는 영향을 복습하고 부스팅의 보정량과 비교한다.</span></a></li></ul><a class="learning-map-link" href="/?note=weekly%2F2026-10-19-regularization-and-tree-ensembles#brain" data-no-popover="true" data-router-ignore="true">지도에서 이 글의 연결 보기 ↗</a></section></div></div><div class="right sidebar"></div><footer class><p>Created with <a href="https://quartz.jzhao.xyz/">Quartz v5.0.0</a> © 2026</p><ul><li><a href="/">Home</a></li><li><a href="https://github.com/HanThing">GitHub</a></li></ul></footer></div></div></body><script src="../static/resource-after-e13fffa1.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-8b336f9a.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-baba652b.js" type="application/javascript" data-persist="true"></script><script src="../static/resource-after-5eb75950.js" type="module" data-persist="true"></script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="../postscript-7ab7a94d.js" type="module" data-persist="true"></script></html>
