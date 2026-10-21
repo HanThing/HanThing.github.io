@@ -123,6 +123,35 @@ window.HANTHING_CONTENT = {
   ],
   "notes": [
     {
+      "id": "learning/2026-10-19-titanic-validation",
+      "title": "타이타닉 캐글 75%에서 먼저 점검한 것",
+      "description": "캐글 점수와 내부 검증 점수를 구분하고, 제출 예측값과 전처리 누수를 확인한 뒤 같은 조건에서 랜덤 포레스트를 비교하는 방법을 정리한다.",
+      "date": "2026-10-19",
+      "published": "2026-10-21",
+      "type": "journal",
+      "topics": [
+        "머신러닝",
+        "데이터 분석"
+      ],
+      "courseId": "machine-learning",
+      "lessonId": "supervised-learning",
+      "url": "/notes/learning/2026-10-19-titanic-validation",
+      "links": [
+        "weekly/2026-10-19-regularization-and-tree-ensembles",
+        "data/pandas-cleaning-validation"
+      ],
+      "relatedReasons": {
+        "weekly/2026-10-19-regularization-and-tree-ensembles": "랜덤 포레스트의 구조와 과적합을 복습하고 트리 수와 개별 트리 복잡도를 구분한다.",
+        "data/pandas-cleaning-validation": "결측치를 채우는 목적과 처리 후 검증을 모델 평가 과정에 연결한다."
+      },
+      "sources": [
+        "미션 3 랜덤 포레스트 정확도 개선 제안 학습 대화 (2026-10-19)",
+        "https://scikit-learn.org/stable/common_pitfalls.html",
+        "https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html",
+        "https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedKFold.html"
+      ]
+    },
+    {
       "id": "weekly/2026-10-19-regularization-and-tree-ensembles",
       "title": "위클리 페이퍼 #4 — 과적합과 규제, 랜덤 포레스트와 그레이디언트 부스팅",
       "description": "L1·L2 규제의 의미를 짚고, 부스팅 트리의 입력·목표값·출력을 숫자로 따라가며 학습과 추론을 구분한다.",
@@ -1811,6 +1840,16 @@ window.HANTHING_CONTENT = {
     }
   ],
   "questions": [
+    {
+      "id": "learning/2026-10-19-titanic-validation#질문-랜덤-포레스트-정확도를-75에서-80로-올리려면-어디를-개선할까",
+      "title": "랜덤 포레스트 정확도를 75%에서 80%로 올리려면 어디를 개선할까?",
+      "url": "/notes/learning/2026-10-19-titanic-validation#질문-랜덤-포레스트-정확도를-75에서-80로-올리려면-어디를-개선할까",
+      "topic": "머신러닝 · 데이터 분석",
+      "sourceTitle": "타이타닉 캐글 75%에서 먼저 점검한 것",
+      "context": "전처리와 랜덤 포레스트 학습을 마친 뒤 제출 점수를 확인했다. 설명 도중 75%는 캐글에 제출해 받은 점수라고 덧붙였다.",
+      "intent": "설정을 무작정 바꾸기보다 성능 개선에 도움이 될 다음 실험을 고르고 싶었다.",
+      "answer": "제출 파일이 현재 모델의 예측인지 확인하고, 전처리를 학습 데이터에서만 맞추도록 정리한 다음, 같은 검증 조건에서 한 가지씩 비교한다. 나이와 요금의 구간화, 트리 깊이와 잎의 최소 표본 수가 비교 후보였다. 어느 변경도 캐글 80%를 보장하지 않는다."
+    },
     {
       "id": "weekly/2026-10-19-regularization-and-tree-ensembles#질문-l2-노름에는-루트가-있는데-l2-규제에는-왜-없을까",
       "title": "L2 노름에는 루트가 있는데 L2 규제에는 왜 없을까?",
