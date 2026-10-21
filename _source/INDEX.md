@@ -5,6 +5,9 @@ Generated from public Markdown. Read AGENTS.md for ingest/query/lint; CHANGELOG.
 - [타이타닉 캐글 75%에서 먼저 점검한 것](content/learning/2026-10-19-titanic-validation.md) — journal · 2026-10-19 · 캐글 점수와 내부 검증 점수를 구분하고, 제출 예측값과 전처리 누수를 확인한 뒤 같은 조건에서 랜덤 포레스트를 비교하는 방법을 정리한다.
   Course: 머신러닝 → 지도학습. Related topics: 머신러닝; 데이터 분석
   Sources: 미션 3 랜덤 포레스트 정확도 개선 제안 학습 대화 (2026-10-19); https://scikit-learn.org/stable/common_pitfalls.html; https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html; https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedKFold.html
+- [타이타닉 전처리: 열 선택, 나이 구간, 결측 처리](content/learning/2026-10-15-titanic-preprocessing.md) — journal · 2026-10-15 · Ticket과 Embarked의 역할을 비교하고, 0.5 단위 반올림, cut의 구간 값, 생존율 집계, fillna와 map의 차이를 실제 질문으로 읽는다.
+  Course: 머신러닝 → 지도학습. Related topics: 머신러닝; 데이터 분석
+  Sources: 타이타닉 미션 전처리 코드 학습 대화 (2026-10-15); https://pandas.pydata.org/docs/reference/api/pandas.cut.html; https://pandas.pydata.org/docs/reference/api/pandas.Series.map.html; https://pandas.pydata.org/docs/reference/api/pandas.Series.mode.html; https://pandas.pydata.org/docs/reference/api/pandas.Series.fillna.html
 - [위클리 페이퍼 #4 — 과적합과 규제, 랜덤 포레스트와 그레이디언트 부스팅](content/weekly/2026-10-19-regularization-and-tree-ensembles.md) — weekly · 2026-10-19 · L1·L2 규제의 의미를 짚고, 부스팅 트리의 입력·목표값·출력을 숫자로 따라가며 학습과 추론을 구분한다.
   Course: 머신러닝 → 지도학습. Related topics: 머신러닝
   Sources: 코드잇 AI 스프린트 위클리 페이퍼 4회차 공식 두 문항 (2026-10-18 확인); 위클리 페이퍼 4회차 학습 대화와 답변 피드백 (2026-10-18~19); https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression-and-classification; https://scikit-learn.org/stable/modules/linear_model.html#lasso; https://scikit-learn.org/stable/modules/ensemble.html; https://xgboost.readthedocs.io/en/stable/tutorials/model.html

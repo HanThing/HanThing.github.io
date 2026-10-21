@@ -152,6 +152,40 @@ window.HANTHING_CONTENT = {
       ]
     },
     {
+      "id": "learning/2026-10-15-titanic-preprocessing",
+      "title": "타이타닉 전처리: 열 선택, 나이 구간, 결측 처리",
+      "description": "Ticket과 Embarked의 역할을 비교하고, 0.5 단위 반올림, cut의 구간 값, 생존율 집계, fillna와 map의 차이를 실제 질문으로 읽는다.",
+      "date": "2026-10-15",
+      "published": "2026-10-21",
+      "type": "journal",
+      "topics": [
+        "머신러닝",
+        "데이터 분석"
+      ],
+      "courseId": "machine-learning",
+      "lessonId": "supervised-learning",
+      "url": "/notes/learning/2026-10-15-titanic-preprocessing",
+      "links": [
+        "learning/2026-10-19-titanic-validation",
+        "data/pandas-cleaning-validation",
+        "data/pandas-dataframe-selection",
+        "data/pandas-groupby-merge-reshape"
+      ],
+      "relatedReasons": {
+        "data/pandas-dataframe-selection": "한 열을 고른 Series와 행 조건을 적용하는 loc의 기본 문법을 다시 확인한다.",
+        "data/pandas-groupby-merge-reshape": "그룹을 정하는 단계와 평균을 계산하는 단계를 나눠 읽는다.",
+        "data/pandas-cleaning-validation": "결측을 채우는 판단과 새 열을 만드는 대입을 연결한다.",
+        "learning/2026-10-19-titanic-validation": "이후 같은 미션에서 전처리와 성능을 공정하게 비교하는 문제로 이어진다."
+      },
+      "sources": [
+        "타이타닉 미션 전처리 코드 학습 대화 (2026-10-15)",
+        "https://pandas.pydata.org/docs/reference/api/pandas.cut.html",
+        "https://pandas.pydata.org/docs/reference/api/pandas.Series.map.html",
+        "https://pandas.pydata.org/docs/reference/api/pandas.Series.mode.html",
+        "https://pandas.pydata.org/docs/reference/api/pandas.Series.fillna.html"
+      ]
+    },
+    {
       "id": "weekly/2026-10-19-regularization-and-tree-ensembles",
       "title": "위클리 페이퍼 #4 — 과적합과 규제, 랜덤 포레스트와 그레이디언트 부스팅",
       "description": "L1·L2 규제의 의미를 짚고, 부스팅 트리의 입력·목표값·출력을 숫자로 따라가며 학습과 추론을 구분한다.",
@@ -1849,6 +1883,66 @@ window.HANTHING_CONTENT = {
       "context": "전처리와 랜덤 포레스트 학습을 마친 뒤 제출 점수를 확인했다. 설명 도중 75%는 캐글에 제출해 받은 점수라고 덧붙였다.",
       "intent": "설정을 무작정 바꾸기보다 성능 개선에 도움이 될 다음 실험을 고르고 싶었다.",
       "answer": "제출 파일이 현재 모델의 예측인지 확인하고, 전처리를 학습 데이터에서만 맞추도록 정리한 다음, 같은 검증 조건에서 한 가지씩 비교한다. 나이와 요금의 구간화, 트리 깊이와 잎의 최소 표본 수가 비교 후보였다. 어느 변경도 캐글 80%를 보장하지 않는다."
+    },
+    {
+      "id": "learning/2026-10-15-titanic-preprocessing#질문-ticket은-왜-버리는가-그렇다면-embarked도-불필요하지-않은가",
+      "title": "Ticket은 왜 버리는가? 그렇다면 Embarked도 불필요하지 않은가?",
+      "url": "/notes/learning/2026-10-15-titanic-preprocessing#질문-ticket은-왜-버리는가-그렇다면-embarked도-불필요하지-않은가",
+      "topic": "머신러닝 · 데이터 분석",
+      "sourceTitle": "타이타닉 전처리: 열 선택, 나이 구간, 결측 처리",
+      "context": "결측이 많은 Cabin을 제외하는 이유와 달리, Ticket을 불필요한 열로 설명한 근거가 궁금했다. 이어 승선항인 Embarked에도 같은 논리를 적용할 수 있는지 물었다.",
+      "intent": "예제에서 삭제한 열이라는 사실과, 예측에 쓸 정보가 없다는 판단을 구별하려는 질문이다.",
+      "answer": "티켓 문자열을 그대로 모델에 넣기 어렵다는 것과 그 정보가 쓸모없다는 것은 다르다. 티켓 번호의 크기를 생존 가능성의 크기로 해석할 근거는 없지만, 티켓을 공유하는 승객 수처럼 다른 형태로 바꿔 비교할 수 있다. 승선항도 유지가 정답으로 정해진 열은 아니며 같은 검증 조건에서 유용성을 확인해야 한다."
+    },
+    {
+      "id": "learning/2026-10-15-titanic-preprocessing#질문-intage_guess--05--05--05는-무엇을-하는가",
+      "title": "int(age_guess / 0.5 + 0.5) * 0.5는 무엇을 하는가?",
+      "url": "/notes/learning/2026-10-15-titanic-preprocessing#질문-intage_guess--05--05--05는-무엇을-하는가",
+      "topic": "머신러닝 · 데이터 분석",
+      "sourceTitle": "타이타닉 전처리: 열 선택, 나이 구간, 결측 처리",
+      "context": "그룹별 나이 중앙값을 구한 뒤 guess_ages[i, j] = int(age_guess / 0.5 + 0.5) * 0.5를 대입하는 줄에서 계산의 의미를 물었다.",
+      "intent": "숫자마다 무슨 역할을 하는지 계산 순서대로 확인하려는 질문이다.",
+      "answer": "여기서는 결측이 아닌 0 이상의 나이를 가까운 0.5 단위에 맞추려는 계산이다. 0.5 단위는 22.0, 22.5, 23.0처럼 반 살씩 차이 나는 값을 뜻한다. 이 식을 음수까지 통하는 일반 반올림 공식으로 쓰지는 않는다."
+    },
+    {
+      "id": "learning/2026-10-15-titanic-preprocessing#질문-그냥-중앙값을-넣으면-안-되는가-왜-굳이-05-단위로-맞추는가",
+      "title": "그냥 중앙값을 넣으면 안 되는가? 왜 굳이 0.5 단위로 맞추는가?",
+      "url": "/notes/learning/2026-10-15-titanic-preprocessing#질문-그냥-중앙값을-넣으면-안-되는가-왜-굳이-05-단위로-맞추는가",
+      "topic": "머신러닝 · 데이터 분석",
+      "sourceTitle": "타이타닉 전처리: 열 선택, 나이 구간, 결측 처리",
+      "context": "계산 방법을 들은 뒤에도 중앙값을 그대로 guess_ages에 저장하면 되지 않는지 다시 물었다. 반 살 단위라는 개념도 낯설다고 덧붙였다.",
+      "intent": "코드가 어떤 계산을 하는지와 그 계산이 반드시 필요한지를 따로 판단하려는 질문이다.",
+      "answer": "중앙값을 그대로 쓰는 선택도 가능하다. 0.5 단위로 맞추는 것은 별도의 표현 규칙이며 결측 대체의 필수 단계가 아니다. 중앙값을 반올림했다고 더 정확한 나이를 알아낸 것이거나 모델 성능이 좋아진 것은 아니다."
+    },
+    {
+      "id": "learning/2026-10-15-titanic-preprocessing#질문-cut은-최솟값과-최댓값을-어떻게-아는가-ageband에는-정수가-들어가는가",
+      "title": "cut은 최솟값과 최댓값을 어떻게 아는가? AgeBand에는 정수가 들어가는가?",
+      "url": "/notes/learning/2026-10-15-titanic-preprocessing#질문-cut은-최솟값과-최댓값을-어떻게-아는가-ageband에는-정수가-들어가는가",
+      "topic": "머신러닝 · 데이터 분석",
+      "sourceTitle": "타이타닉 전처리: 열 선택, 나이 구간, 결측 처리",
+      "context": "train_df['AgeBand'] = pd.cut(train_df['Age'], 5)에서 다섯 구간을 만든다는 점은 이해했지만, 경계값을 알려 주지 않았는데 어떻게 나누는지 물었다. 이어 새 열의 값이 구간 번호인 정수인지 확인했다.",
+      "intent": "구간 경계를 정하는 방법과 각 행에 저장되는 값의 형태를 구별하려는 질문이다.",
+      "answer": "두 번째 인수에 정수 5를 주면 입력 나이의 범위를 이용해 폭이 같은 다섯 구간을 만든다. 기본 설정에서는 값이 들어간 구간 자체를 범주 값으로 돌려주며, 자동으로 0~4의 번호를 반환하는 것은 아니다. 번호가 필요하면 labels=False를 지정한다."
+    },
+    {
+      "id": "learning/2026-10-15-titanic-preprocessing#질문-ageband로-묶은-집단의-survived를-평균-내는-문장인가",
+      "title": "AgeBand로 묶은 집단의 Survived를 평균 내는 문장인가?",
+      "url": "/notes/learning/2026-10-15-titanic-preprocessing#질문-ageband로-묶은-집단의-survived를-평균-내는-문장인가",
+      "topic": "머신러닝 · 데이터 분석",
+      "sourceTitle": "타이타닉 전처리: 열 선택, 나이 구간, 결측 처리",
+      "context": "train_df'AgeBand', 'Survived'.groupby(['AgeBand'], as_index=False).mean()을 보고, 같은 나이 구간에 속한 집단의 Survived 값들을 평균 낸다고 설명하며 맞는지 확인했다.",
+      "intent": "열 선택, 그룹 지정, 계산을 한 문장으로 다시 풀어 확인하려는 질문이다.",
+      "answer": "그 설명이 이 코드의 계산을 짚는다. 두 열을 선택하고 AgeBand로 그룹을 정한 다음 Survived를 평균 낸다. Survived가 생존 1·사망 0이고 결측이 없다면 평균은 그 집단의 생존율이다."
+    },
+    {
+      "id": "learning/2026-10-15-titanic-preprocessing#질문-승선항은-바로-map하면-안-되는가-mode0은-무엇을-고르는가",
+      "title": "승선항은 바로 map하면 안 되는가? mode()[0]은 무엇을 고르는가?",
+      "url": "/notes/learning/2026-10-15-titanic-preprocessing#질문-승선항은-바로-map하면-안-되는가-mode0은-무엇을-고르는가",
+      "topic": "머신러닝 · 데이터 분석",
+      "sourceTitle": "타이타닉 전처리: 열 선택, 나이 구간, 결측 처리",
+      "context": "승선항의 최빈값을 구하고, fillna(freq_port)로 빈칸을 채운 뒤 {'S': 0, 'C': 1, 'Q': 2}로 매핑하는 코드를 보았다. 딕셔너리로 바로 바꾸면 안 되는지, mode()[0]은 최빈값 하나를 고른 것인지 물었다.",
+      "intent": "값의 변환과 결측 보완, 최빈값 계산과 첫 결과 선택을 구별하려는 질문이다.",
+      "answer": "일반 딕셔너리를 사용하는 이 예에서 map()은 대응하는 항구 문자를 숫자로 바꾼다. 사전에 없는 값은 결측이 되며, 빈 항구를 가장 흔한 항구로 추정해 주지 않는다. fillna()가 결측을 채우는 단계다. mode()는 최빈값들을 Series로 돌려주고 [0]은 그 결과의 첫 값을 선택한다."
     },
     {
       "id": "weekly/2026-10-19-regularization-and-tree-ensembles#질문-l2-노름에는-루트가-있는데-l2-규제에는-왜-없을까",
