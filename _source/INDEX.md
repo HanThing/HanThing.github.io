@@ -2,6 +2,9 @@
 
 Generated from public Markdown. Read AGENTS.md for ingest/query/lint; CHANGELOG.md for changes. Course references support briefing and stay outside the learning graph. Course/lesson identify the curriculum placement; topics identify related subjects.
 
+- [타이타닉 변수 해석: 이산형과 특성 선택](content/learning/2026-10-15-titanic-feature-selection.md) — journal · 2026-10-15 · 가족 수와 나이의 변수 유형을 구별하고, 상관계수·직관·생존율 표만으로 입력 특성을 선택할 수 있는지 실제 질문으로 확인한다.
+  Course: 머신러닝 → 지도학습. Related topics: 머신러닝; 데이터 분석
+  Sources: 타이타닉 미션의 변수 유형과 특성 선택 학습 대화 (2026-10-15); https://scikit-learn.org/stable/common_pitfalls.html
 - [타이타닉 캐글 75%에서 먼저 점검한 것](content/learning/2026-10-19-titanic-validation.md) — journal · 2026-10-19 · 캐글 점수와 내부 검증 점수를 구분하고, 제출 예측값과 전처리 누수를 확인한 뒤 같은 조건에서 랜덤 포레스트를 비교하는 방법을 정리한다.
   Course: 머신러닝 → 지도학습. Related topics: 머신러닝; 데이터 분석
   Sources: 미션 3 랜덤 포레스트 정확도 개선 제안 학습 대화 (2026-10-19); https://scikit-learn.org/stable/common_pitfalls.html; https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html; https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.StratifiedKFold.html

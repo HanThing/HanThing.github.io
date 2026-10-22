@@ -123,6 +123,37 @@ window.HANTHING_CONTENT = {
   ],
   "notes": [
     {
+      "id": "learning/2026-10-15-titanic-feature-selection",
+      "title": "타이타닉 변수 해석: 이산형과 특성 선택",
+      "description": "가족 수와 나이의 변수 유형을 구별하고, 상관계수·직관·생존율 표만으로 입력 특성을 선택할 수 있는지 실제 질문으로 확인한다.",
+      "date": "2026-10-15",
+      "published": "2026-10-22",
+      "type": "journal",
+      "topics": [
+        "머신러닝",
+        "데이터 분석"
+      ],
+      "courseId": "machine-learning",
+      "lessonId": "supervised-learning",
+      "url": "/notes/learning/2026-10-15-titanic-feature-selection",
+      "links": [
+        "data/statistics-data-and-groups",
+        "data/statistics-relations-and-interpretation",
+        "learning/2026-10-15-titanic-preprocessing",
+        "learning/2026-10-19-titanic-validation"
+      ],
+      "relatedReasons": {
+        "data/statistics-data-and-groups": "숫자의 저장 자료형과 변수의 의미를 나누고 범주별 비율의 분모를 확인한다.",
+        "data/statistics-relations-and-interpretation": "상관계수가 작아도 비선형 관계가 남을 수 있는 이유를 설명한다.",
+        "learning/2026-10-15-titanic-preprocessing": "같은 날 물었던 Ticket과 Embarked의 정보 역할 및 전처리 질문으로 이어진다.",
+        "learning/2026-10-19-titanic-validation": "이후 같은 미션에서 제기한 검증 점수와 전처리 비교 문제를 연결한다."
+      },
+      "sources": [
+        "타이타닉 미션의 변수 유형과 특성 선택 학습 대화 (2026-10-15)",
+        "https://scikit-learn.org/stable/common_pitfalls.html"
+      ]
+    },
+    {
       "id": "learning/2026-10-19-titanic-validation",
       "title": "타이타닉 캐글 75%에서 먼저 점검한 것",
       "description": "캐글 점수와 내부 검증 점수를 구분하고, 제출 예측값과 전처리 누수를 확인한 뒤 같은 조건에서 랜덤 포레스트를 비교하는 방법을 정리한다.",
@@ -1874,6 +1905,76 @@ window.HANTHING_CONTENT = {
     }
   ],
   "questions": [
+    {
+      "id": "learning/2026-10-15-titanic-feature-selection#질문-sibsp와-parch는-무엇이며-왜-이산형인가",
+      "title": "SibSp와 Parch는 무엇이며 왜 이산형인가?",
+      "url": "/notes/learning/2026-10-15-titanic-feature-selection#질문-sibsp와-parch는-무엇이며-왜-이산형인가",
+      "topic": "머신러닝 · 데이터 분석",
+      "sourceTitle": "타이타닉 변수 해석: 이산형과 특성 선택",
+      "context": "자료에서 두 열을 이산형으로 분류한 설명을 읽고, 용어와 열의 의미를 함께 물었다.",
+      "intent": "숫자의 모양을 보기 전에 무엇을 센 값인지 확인하려는 질문이다.",
+      "answer": "SibSp는 함께 탑승한 형제자매와 배우자 수, Parch는 함께 탑승한 부모와 자녀 수다. 본인은 포함하지 않는다. 사람 수는 0, 1, 2처럼 한 명씩 구별되므로 이산형 수치 변수다."
+    },
+    {
+      "id": "learning/2026-10-15-titanic-feature-selection#질문-이산형을-정수형이라고-바꿔-말해도-되는가",
+      "title": "이산형을 정수형이라고 바꿔 말해도 되는가?",
+      "url": "/notes/learning/2026-10-15-titanic-feature-selection#질문-이산형을-정수형이라고-바꿔-말해도-되는가",
+      "topic": "머신러닝 · 데이터 분석",
+      "sourceTitle": "타이타닉 변수 해석: 이산형과 특성 선택",
+      "context": "이산형을 설명할 때 나온 값 사이의 간격을 정수형이라는 말로 이해해도 되는지 물었다.",
+      "intent": "통계에서의 변수 유형과 프로그래밍의 자료형이 같은 분류인지 확인하려는 질문이다.",
+      "answer": "두 말은 다르다. 이산형은 변수가 가질 수 있는 값의 성격이고, int나 float는 컴퓨터에 저장하는 자료형이다. 사람 수가 2.0으로 저장돼도 의미는 두 명이며 이산형이다."
+    },
+    {
+      "id": "learning/2026-10-15-titanic-feature-selection#질문-소수로-나타낼-수-없는-수치형이면-모두-이산형인가",
+      "title": "소수로 나타낼 수 없는 수치형이면 모두 이산형인가?",
+      "url": "/notes/learning/2026-10-15-titanic-feature-selection#질문-소수로-나타낼-수-없는-수치형이면-모두-이산형인가",
+      "topic": "머신러닝 · 데이터 분석",
+      "sourceTitle": "타이타닉 변수 해석: 이산형과 특성 선택",
+      "context": "정수형과 이산형이 같지는 않다는 설명 뒤에, 소수 부분을 가질 수 없는 수치라면 이산형으로 판단해도 되는지 다시 물었다.",
+      "intent": "현재 표에 적힌 값과 변수가 원래 가질 수 있는 값을 구별해 판단 기준을 세우려는 질문이다.",
+      "answer": "무엇을 측정하거나 세는지 먼저 봐야 한다. 인원수처럼 의미상 소수 인원이 불가능한 경우에는 이산형이다. 표에 소수가 보이지 않는다는 사실만으로는 부족하다."
+    },
+    {
+      "id": "learning/2026-10-15-titanic-feature-selection#질문-survived와-상관관계가-있는-열만-입력으로-써야-하는가",
+      "title": "Survived와 상관관계가 있는 열만 입력으로 써야 하는가?",
+      "url": "/notes/learning/2026-10-15-titanic-feature-selection#질문-survived와-상관관계가-있는-열만-입력으로-써야-하는가",
+      "topic": "머신러닝 · 데이터 분석",
+      "sourceTitle": "타이타닉 변수 해석: 이산형과 특성 선택",
+      "context": "타깃 Survived와 각 입력 후보의 관계를 살펴본 뒤, 상관관계가 없어 보이는 열도 넣어도 되는지 물었다.",
+      "intent": "개별 변수의 관계를 보는 탐색 결과를 모델의 특성 선택 기준으로 바로 써도 되는지 확인하려는 질문이다.",
+      "answer": "피어슨 상관계수가 작다는 이유만으로 바로 버리지는 않는다. 이 값은 주로 선형 관계를 요약한다. 비선형 관계가 있거나 다른 변수와 함께 볼 때 정보가 생길 수 있다. 그렇다고 모든 열이 도움이 된다는 뜻도 아니다."
+    },
+    {
+      "id": "learning/2026-10-15-titanic-feature-selection#질문-승선항은-생존의-직접적인-원인-같지-않은데-직관으로-빼도-되는가",
+      "title": "승선항은 생존의 직접적인 원인 같지 않은데 직관으로 빼도 되는가?",
+      "url": "/notes/learning/2026-10-15-titanic-feature-selection#질문-승선항은-생존의-직접적인-원인-같지-않은데-직관으로-빼도-되는가",
+      "topic": "머신러닝 · 데이터 분석",
+      "sourceTitle": "타이타닉 변수 해석: 이산형과 특성 선택",
+      "context": "Embarked가 어느 항구에서 탔는지를 뜻한다는 설명을 듣고, 생존 여부와 직접 관계없어 보이니 제거해도 되는지 물었다.",
+      "intent": "현실에 대한 직관을 예측 변수 선택에 어느 정도까지 적용할 수 있는지 확인하려는 질문이다.",
+      "answer": "직관은 비교할 가설을 만드는 데 쓸 수 있다. 다만 직접적인 원인이 아니어도 예측에 도움이 되는 정보일 수 있으므로, 직관만으로 유용성을 확정하지는 않는다."
+    },
+    {
+      "id": "learning/2026-10-15-titanic-feature-selection#질문-나이는-값이-너무-다양해서-정확한-나이별-생존율을-보기-어려운가",
+      "title": "나이는 값이 너무 다양해서 정확한 나이별 생존율을 보기 어려운가?",
+      "url": "/notes/learning/2026-10-15-titanic-feature-selection#질문-나이는-값이-너무-다양해서-정확한-나이별-생존율을-보기-어려운가",
+      "topic": "머신러닝 · 데이터 분석",
+      "sourceTitle": "타이타닉 변수 해석: 이산형과 특성 선택",
+      "context": "연속형인 Age를 각 값으로 나눠 생존율을 계산하기보다 나이 구간으로 살펴보는 이유를 물었다.",
+      "intent": "값의 종류가 많은 것과 집계 결과가 불안정한 것의 관계를 이해하려는 질문이다.",
+      "answer": "정확히 같은 나이에 해당하는 승객이 적으면 생존율이 몇 사람의 결과에 크게 좌우될 수 있다. 값이 다양하다는 사실보다 각 값의 표본 수가 얼마인지가 중요하다."
+    },
+    {
+      "id": "learning/2026-10-15-titanic-feature-selection#질문-탐색에서-열을-살펴봤으면-선택이-끝난-것인가-실무에서도-넣고-빼며-비교하는가",
+      "title": "탐색에서 열을 살펴봤으면 선택이 끝난 것인가? 실무에서도 넣고 빼며 비교하는가?",
+      "url": "/notes/learning/2026-10-15-titanic-feature-selection#질문-탐색에서-열을-살펴봤으면-선택이-끝난-것인가-실무에서도-넣고-빼며-비교하는가",
+      "topic": "머신러닝 · 데이터 분석",
+      "sourceTitle": "타이타닉 변수 해석: 이산형과 특성 선택",
+      "context": "각 특성과 생존 여부의 관계를 이미 살펴봤는데도 추가 검증이 필요한지, 실제 모델링에서도 포함 여부를 비교하는지 물었다.",
+      "intent": "탐색적 분석과 예측 성능 검증이 각각 무엇을 확인하는지 나누려는 질문이다.",
+      "answer": "탐색은 변수의 의미·분포·이상한 값을 파악하고 가설을 만든다. 아직 보지 않은 데이터의 예측에 도움이 되는지는 검증용 데이터나 교차 검증으로 확인한다. 특성을 넣고 빼며 비교하는 방식도 쓰이지만 모든 조합을 반드시 시험하는 것은 아니다."
+    },
     {
       "id": "learning/2026-10-19-titanic-validation#질문-랜덤-포레스트-정확도를-75에서-80로-올리려면-어디를-개선할까",
       "title": "랜덤 포레스트 정확도를 75%에서 80%로 올리려면 어디를 개선할까?",
