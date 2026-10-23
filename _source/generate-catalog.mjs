@@ -28,7 +28,10 @@ const courses = [
   { id: 'machine-learning', title: '머신러닝', lessons: [
     { id: 'supervised-learning', title: '지도학습', kind: 'official' },
   ] },
-  { id: 'pytorch', title: 'PyTorch', lessons: [] },
+  { id: 'pytorch', title: 'PyTorch', lessons: [
+    { id: 'deep-learning-basics', title: '딥러닝 기본기', kind: 'official' },
+    { id: 'pytorch-usage', title: 'PyTorch 활용하기', kind: 'official' },
+  ] },
   { id: 'deep-learning', title: '딥러닝', lessons: [] },
   { id: 'computer-vision', title: '컴퓨터 비전', lessons: [] },
   { id: 'version-control', title: '버전관리 및 협업하기', lessons: [] },

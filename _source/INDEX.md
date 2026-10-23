@@ -2,6 +2,9 @@
 
 Generated from public Markdown. Read AGENTS.md for ingest/query/lint; CHANGELOG.md for changes. Course references support briefing and stay outside the learning graph. Course/lesson identify the curriculum placement; topics identify related subjects.
 
+- [위클리 페이퍼 #5 — vanishing gradient 확인과 zero_grad의 역할](content/weekly/2026-10-23-vanishing-gradient-and-zero-grad.md) — weekly · 2026-10-23 · 20층 sigmoid 모델의 layer.weight.grad를 직접 비교하고, PyTorch의 gradient 누적이 update에 미치는 영향을 정리한다.
+  Course: PyTorch → 딥러닝 기본기. Related topics: PyTorch
+  Sources: 위클리 페이퍼 5회차 공지의 두 문항 (학습 대화에 제공된 원문, 2026-10-23 정리); 위클리 페이퍼 5회차 답변·피드백과 20층 sigmoid 설명용 실험; https://docs.pytorch.org/docs/stable/generated/torch.Tensor.backward.html; https://docs.pytorch.org/docs/stable/generated/torch.optim.Optimizer.zero_grad.html; https://docs.pytorch.org/docs/stable/generated/torch.nn.Sigmoid.html; https://docs.pytorch.org/docs/stable/generated/torch.nn.ReLU.html
 - [타이타닉 변수 해석: 이산형과 특성 선택](content/learning/2026-10-15-titanic-feature-selection.md) — journal · 2026-10-15 · 가족 수와 나이의 변수 유형을 구별하고, 상관계수·직관·생존율 표만으로 입력 특성을 선택할 수 있는지 실제 질문으로 확인한다.
   Course: 머신러닝 → 지도학습. Related topics: 머신러닝; 데이터 분석
   Sources: 타이타닉 미션의 변수 유형과 특성 선택 학습 대화 (2026-10-15); https://scikit-learn.org/stable/common_pitfalls.html

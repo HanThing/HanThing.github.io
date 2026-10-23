@@ -63,7 +63,18 @@ window.HANTHING_CONTENT = {
     {
       "id": "pytorch",
       "title": "PyTorch",
-      "lessons": []
+      "lessons": [
+        {
+          "id": "deep-learning-basics",
+          "title": "딥러닝 기본기",
+          "kind": "official"
+        },
+        {
+          "id": "pytorch-usage",
+          "title": "PyTorch 활용하기",
+          "kind": "official"
+        }
+      ]
     },
     {
       "id": "deep-learning",
@@ -122,6 +133,36 @@ window.HANTHING_CONTENT = {
     }
   ],
   "notes": [
+    {
+      "id": "weekly/2026-10-23-vanishing-gradient-and-zero-grad",
+      "title": "위클리 페이퍼 #5 — vanishing gradient 확인과 zero_grad의 역할",
+      "description": "20층 sigmoid 모델의 layer.weight.grad를 직접 비교하고, PyTorch의 gradient 누적이 update에 미치는 영향을 정리한다.",
+      "date": "2026-10-23",
+      "published": "2026-10-23",
+      "type": "weekly",
+      "topics": [
+        "PyTorch"
+      ],
+      "courseId": "pytorch",
+      "lessonId": "deep-learning-basics",
+      "url": "/notes/weekly/2026-10-23-vanishing-gradient-and-zero-grad",
+      "links": [
+        "machine-learning/linear-regression-gradient",
+        "weekly/2026-10-08-learning-rate-and-classification"
+      ],
+      "relatedReasons": {
+        "machine-learning/linear-regression-gradient": "chain rule로 loss를 weight에 대해 미분하는 과정과 연결한다.",
+        "weekly/2026-10-08-learning-rate-and-classification": "gradient와 learning rate가 update 크기에 함께 관여한다는 점을 복습한다."
+      },
+      "sources": [
+        "위클리 페이퍼 5회차 공지의 두 문항 (학습 대화에 제공된 원문, 2026-10-23 정리)",
+        "위클리 페이퍼 5회차 답변·피드백과 20층 sigmoid 설명용 실험",
+        "https://docs.pytorch.org/docs/stable/generated/torch.Tensor.backward.html",
+        "https://docs.pytorch.org/docs/stable/generated/torch.optim.Optimizer.zero_grad.html",
+        "https://docs.pytorch.org/docs/stable/generated/torch.nn.Sigmoid.html",
+        "https://docs.pytorch.org/docs/stable/generated/torch.nn.ReLU.html"
+      ]
+    },
     {
       "id": "learning/2026-10-15-titanic-feature-selection",
       "title": "타이타닉 변수 해석: 이산형과 특성 선택",
@@ -1905,6 +1946,26 @@ window.HANTHING_CONTENT = {
     }
   ],
   "questions": [
+    {
+      "id": "weekly/2026-10-23-vanishing-gradient-and-zero-grad#질문-20층-sigmoid-모델에서-input-layer-근처의-weight가-거의-바뀌지-않는다면",
+      "title": "20층 sigmoid 모델에서 input layer 근처의 weight가 거의 바뀌지 않는다면?",
+      "url": "/notes/weekly/2026-10-23-vanishing-gradient-and-zero-grad#질문-20층-sigmoid-모델에서-input-layer-근처의-weight가-거의-바뀌지-않는다면",
+      "topic": "PyTorch",
+      "sourceTitle": "위클리 페이퍼 #5 — vanishing gradient 확인과 zero_grad의 역할",
+      "context": "20층 DNN의 activation function으로 sigmoid를 사용했다. output layer 근처는 잘 학습되는데 input layer 근처의 weight는 몇 epoch가 지나도 거의 그대로다. 어떤 원인을 의심하고, 어떻게 확인하고 해결할지 묻는 문제다.",
+      "intent": "weight update가 작다는 현상을 gradient의 전달 과정과 연결하고, 추측을 실제 측정으로 확인하려는 질문이다.",
+      "answer": "먼저 vanishing gradient를 의심한다. loss.backward() 직후 layer별 weight.grad의 크기를 비교해 input layer 쪽에서 매우 작아지는지 확인한다. 그다음 hidden layer의 sigmoid를 ReLU 계열로 바꾸는 등의 방법을 적용하고 같은 조건에서 gradient와 loss 변화를 비교한다."
+    },
+    {
+      "id": "weekly/2026-10-23-vanishing-gradient-and-zero-grad#질문-optimizerzero_grad를-빼먹으면-왜-loss가-이상하게-튈까",
+      "title": "optimizer.zero_grad()를 빼먹으면 왜 loss가 이상하게 튈까?",
+      "url": "/notes/weekly/2026-10-23-vanishing-gradient-and-zero-grad#질문-optimizerzero_grad를-빼먹으면-왜-loss가-이상하게-튈까",
+      "topic": "PyTorch",
+      "sourceTitle": "위클리 페이퍼 #5 — vanishing gradient 확인과 zero_grad의 역할",
+      "context": "PyTorch 학습 loop에서 optimizer.zero_grad()를 빠뜨렸더니 loss가 잘 줄지 않고 튀었다. 이 함수의 역할과 생략했을 때의 문제를 설명하는 문항이다.",
+      "intent": "gradient 계산, 저장, parameter update가 각각 어떤 단계에서 일어나는지 구분하려는 질문이다.",
+      "answer": "PyTorch의 .backward()는 새 gradient를 기존 parameter의 .grad에 누적해서 더한다. optimizer.zero_grad()는 optimizer가 관리하는 parameter들의 gradient를 초기화한다. 이를 생략하면 이전 batch에서 계산한 값까지 이번 update에 사용하므로, 의도한 update 크기와 방향이 달라질 수 있다. Tensor.backward, Optimizer.zero_grad"
+    },
     {
       "id": "learning/2026-10-15-titanic-feature-selection#질문-sibsp와-parch는-무엇이며-왜-이산형인가",
       "title": "SibSp와 Parch는 무엇이며 왜 이산형인가?",

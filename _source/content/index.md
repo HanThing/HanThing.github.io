@@ -10,6 +10,8 @@ tags: [index]
 
 ## 위클리 페이퍼
 
+- [[weekly/2026-10-23-vanishing-gradient-and-zero-grad|vanishing gradient 확인과 zero_grad의 역할 — 위클리 페이퍼 #5]]
+
 - [[weekly/2026-10-08-learning-rate-and-classification|학습률과 콘텐츠 이용 등급 분류 — 위클리 페이퍼 #3]]
 
 - [[weekly/2026-10-01-distributions-and-data-integration|평균을 해석하고 고객 데이터를 통합하는 기준 — 위클리 페이퍼 #2]]
