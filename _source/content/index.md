@@ -21,6 +21,8 @@ tags: [index]
 
 실제 학습 대화에서 질문의 흐름을 주제별로 묶었습니다.
 
+- [[learning/2026-10-16-feature-scaling|10월 16일 — feature scaling의 판단 기준과 binning의 차이]]
+
 - [[learning/2026-10-08-logistic-loss|10월 8일 — 로지스틱 확률·로그 손실·점수와 가중치의 미분]]
 - [[learning/2026-10-08-wine-classification|10월 8일 — Wine 분류 실습의 값·타입·평가]]
 - [[learning/2026-10-07-regression-gradient|10월 2·7일 — 오차와 제곱오차에서 실제 회귀 미분까지]]

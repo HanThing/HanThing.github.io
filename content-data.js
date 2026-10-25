@@ -134,6 +134,38 @@ window.HANTHING_CONTENT = {
   ],
   "notes": [
     {
+      "id": "learning/2026-10-16-feature-scaling",
+      "title": "Feature scaling: 언제 적용하고 어떤 열을 바꿀까?",
+      "description": "범주를 나타내는 숫자와 수치의 단위를 구별하고, 열별 scaling의 판단 기준과 binning이 잃는 정보를 실제 질문으로 확인한다.",
+      "date": "2026-10-16",
+      "published": "2026-10-25",
+      "type": "journal",
+      "topics": [
+        "머신러닝",
+        "데이터 분석"
+      ],
+      "courseId": "machine-learning",
+      "lessonId": "supervised-learning",
+      "url": "/notes/learning/2026-10-16-feature-scaling",
+      "links": [
+        "learning/2026-10-15-titanic-preprocessing",
+        "machine-learning/logistic-loss-and-evaluation",
+        "data/numpy-broadcasting",
+        "learning/2026-10-19-titanic-validation"
+      ],
+      "relatedReasons": {
+        "learning/2026-10-15-titanic-preprocessing": "승선항의 숫자 코드와 나이 구간이 무엇을 뜻하는지 앞선 질문에서 확인한다.",
+        "machine-learning/logistic-loss-and-evaluation": "입력 값이 weight의 gradient에 곱해지는 식과 Pipeline의 fit 범위를 연결한다.",
+        "data/numpy-broadcasting": "feature별 평균과 표준편차로 standardization하는 배열 계산을 확인한다.",
+        "learning/2026-10-19-titanic-validation": "원래 값과 binning을 같은 검증 조건에서 비교하는 후속 제안으로 이어진다."
+      },
+      "sources": [
+        "타이타닉 미션의 feature scaling 학습 대화 (2026-10-16)",
+        "https://scikit-learn.org/stable/modules/preprocessing.html",
+        "https://scikit-learn.org/stable/auto_examples/compose/plot_column_transformer_mixed_types.html"
+      ]
+    },
+    {
       "id": "weekly/2026-10-23-vanishing-gradient-and-zero-grad",
       "title": "위클리 페이퍼 #5 — vanishing gradient 확인과 zero_grad의 역할",
       "description": "20층 sigmoid 모델의 layer.weight.grad를 직접 비교하고, PyTorch의 gradient 누적이 update에 미치는 영향을 정리한다.",
@@ -1946,6 +1978,56 @@ window.HANTHING_CONTENT = {
     }
   ],
   "questions": [
+    {
+      "id": "learning/2026-10-16-feature-scaling#질문-범주를-숫자로-바꿨다면-평균과-표준편차도-의미가-있는가",
+      "title": "범주를 숫자로 바꿨다면 평균과 표준편차도 의미가 있는가?",
+      "url": "/notes/learning/2026-10-16-feature-scaling#질문-범주를-숫자로-바꿨다면-평균과-표준편차도-의미가-있는가",
+      "topic": "머신러닝 · 데이터 분석",
+      "sourceTitle": "Feature scaling: 언제 적용하고 어떤 열을 바꿀까?",
+      "context": "범주 숫자의 평균을 구하기 어렵다는 설명을 듣고, 숫자로 바꾼 범주는 모두 순서가 있는 것으로 취급하는지 물었다.",
+      "intent": "숫자로 저장할 수 있다는 사실과 그 숫자를 계산해 해석할 수 있다는 사실을 구별하려는 질문이다.",
+      "answer": "숫자가 무엇을 나타내는지 먼저 봐야 한다. 항구 이름에 임의로 붙인 코드와 실제 나이, 해당 범주에 속하는지를 나타내는 0·1은 서로 다르다. scaling을 한다고 임의의 코드에 올바른 거리나 순서가 생기지는 않는다."
+    },
+    {
+      "id": "learning/2026-10-16-feature-scaling#질문-일부-열만-feature-scaling해도-되는가",
+      "title": "일부 열만 feature scaling해도 되는가?",
+      "url": "/notes/learning/2026-10-16-feature-scaling#질문-일부-열만-feature-scaling해도-되는가",
+      "topic": "머신러닝 · 데이터 분석",
+      "sourceTitle": "Feature scaling: 언제 적용하고 어떤 열을 바꿀까?",
+      "context": "수치 열과 범주 열의 의미가 다르다면, 모든 열에 같은 처리를 하지 않아도 되는지 물었다.",
+      "intent": "표 전체를 한 번에 변환해야 한다는 생각에서 벗어나 열마다 알맞은 처리를 정하려는 질문이다.",
+      "answer": "필요한 열만 scaling할 수 있다. 예를 들어 원래의 Age, Fare에는 결측 대체 뒤 standardization을 적용하고, Embarked에는 one-hot encoding을 적용하는 흐름을 만들 수 있다. 이것은 가능한 구성이지 이 미션에서 최적이라고 확인한 결과는 아니다."
+    },
+    {
+      "id": "learning/2026-10-16-feature-scaling#질문-feature-scaling을-하면-성능이-항상-좋아지는가",
+      "title": "feature scaling을 하면 성능이 항상 좋아지는가?",
+      "url": "/notes/learning/2026-10-16-feature-scaling#질문-feature-scaling을-하면-성능이-항상-좋아지는가",
+      "topic": "머신러닝 · 데이터 분석",
+      "sourceTitle": "Feature scaling: 언제 적용하고 어떤 열을 바꿀까?",
+      "context": "scaling이 학습을 돕는다는 설명을 듣고, 적용하면 예측 성능이 반드시 좋아지는지 확인했다.",
+      "intent": "학습 계산을 다루기 편하게 만드는 것과 새 데이터의 예측이 좋아지는 것을 나누려는 질문이다.",
+      "answer": "항상 좋아지지는 않는다. scaling은 feature의 단위와 범위가 거리나 학습 계산에 미치는 영향을 바꾼다. 이것이 필요한지는 모델과 데이터에 따라 다르며, 최종 예측 성능은 같은 검증 조건에서 확인한다."
+    },
+    {
+      "id": "learning/2026-10-16-feature-scaling#질문-보장되지-않는다면-언제-scaling을-하라고-판단해야-하는가",
+      "title": "보장되지 않는다면 언제 scaling을 하라고 판단해야 하는가?",
+      "url": "/notes/learning/2026-10-16-feature-scaling#질문-보장되지-않는다면-언제-scaling을-하라고-판단해야-하는가",
+      "topic": "머신러닝 · 데이터 분석",
+      "sourceTitle": "Feature scaling: 언제 적용하고 어떤 열을 바꿀까?",
+      "context": "“항상 좋아지는 것은 아니다”라는 답 뒤에 판단 기준을 다시 물었다. 특정 모델 이야기보다 feature scaling 자체의 결론을 알고 싶다고 요청했다.",
+      "intent": "결과를 보고 결정하라는 말에 앞서, 무엇을 근거로 비교 후보를 골라야 하는지 알고 싶었다.",
+      "answer": "모델이 숫자의 크기를 어떻게 쓰는지와 feature의 단위가 얼마나 다른지 함께 본다. 단위 차이가 거리나 gradient 계산을 크게 좌우한다면 scaling을 적용한 구성을 우선 비교할 이유가 있다. 그 이유와 실제 성능 개선 여부는 별개의 판단이다."
+    },
+    {
+      "id": "learning/2026-10-16-feature-scaling#질문-나이를-구간-번호로-줄이는-binning도-feature-scaling인가",
+      "title": "나이를 구간 번호로 줄이는 binning도 feature scaling인가?",
+      "url": "/notes/learning/2026-10-16-feature-scaling#질문-나이를-구간-번호로-줄이는-binning도-feature-scaling인가",
+      "topic": "머신러닝 · 데이터 분석",
+      "sourceTitle": "Feature scaling: 언제 적용하고 어떤 열을 바꿀까?",
+      "context": "나이를 몇 개 구간으로 나누면 숫자 범위가 줄어드는 점을 보고, 이것도 scaling이라고 이해해도 되는지 물었다.",
+      "intent": "출력 숫자가 작아지는 모습이 비슷해도 원래 정보에 생기는 변화가 같은지 확인하려는 질문이다.",
+      "answer": "binning은 같은 구간의 서로 다른 값을 하나로 묶는다. 여기서 비교하는 단위 변경이나 standardization은 같은 규칙으로 척도를 바꾼다. 숫자 범위가 줄었다는 사실만으로 같은 작업은 아니다."
+    },
     {
       "id": "weekly/2026-10-23-vanishing-gradient-and-zero-grad#질문-20층-sigmoid-모델에서-input-layer-근처의-weight가-거의-바뀌지-않는다면",
       "title": "20층 sigmoid 모델에서 input layer 근처의 weight가 거의 바뀌지 않는다면?",

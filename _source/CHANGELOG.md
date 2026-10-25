@@ -1,5 +1,10 @@
 # Knowledge changes
 
+## 2026-10-25
+
+- 10월 23일 시작한 평일 자동 발행을 이어서 10월 16일의 feature scaling 질문 7개를 정리했다. 범주 코드·one-hot·수치의 의미, 열별 처리, 적용 판단과 binning의 정보 손실을 구분했다. 실제 점수 비교는 수행되지 않았으며 원래 값과 binning의 성능 비교 질문은 기존 검증 글에 연결했다.
+- 공개 원고로 생성한 NotebookLM 퀴즈 12문항과 재생성 카드 10장을 전수 검토해 퀴즈 9문항·카드 9장을 연결했다. 조건을 빠뜨린 단정은 제외하고 기존 복습 37세트의 내용·ID·버전을 보존했다.
+
 ## 2026-10-23
 
 - 위클리 페이퍼 #5에서 sigmoid의 vanishing gradient 원인·실제 layer gradient 측정과 zero_grad의 누적 초기화 역할을 정리했다. batch 단위 초기화와 기본 SGD의 negative gradient 방향을 구분하고 미실행 비교 실험을 명시했다.
