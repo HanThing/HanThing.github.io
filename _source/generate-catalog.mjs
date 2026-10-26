@@ -32,7 +32,9 @@ const courses = [
     { id: 'deep-learning-basics', title: '딥러닝 기본기', kind: 'official' },
     { id: 'pytorch-usage', title: 'PyTorch 활용하기', kind: 'official' },
   ] },
-  { id: 'deep-learning', title: '딥러닝', lessons: [] },
+  { id: 'deep-learning', title: '딥러닝', lessons: [
+    { id: 'rnn-lstm-review', title: 'RNN과 LSTM 복습', kind: 'supplemental' },
+  ] },
   { id: 'computer-vision', title: '컴퓨터 비전', lessons: [] },
   { id: 'version-control', title: '버전관리 및 협업하기', lessons: [] },
   { id: 'beginner-project', title: 'AI 엔지니어 초급 프로젝트', lessons: [] },

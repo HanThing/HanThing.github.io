@@ -79,7 +79,13 @@ window.HANTHING_CONTENT = {
     {
       "id": "deep-learning",
       "title": "딥러닝",
-      "lessons": []
+      "lessons": [
+        {
+          "id": "rnn-lstm-review",
+          "title": "RNN과 LSTM 복습",
+          "kind": "supplemental"
+        }
+      ]
     },
     {
       "id": "computer-vision",
@@ -133,6 +139,31 @@ window.HANTHING_CONTENT = {
     }
   ],
   "notes": [
+    {
+      "id": "learning/2026-10-26-rnn-lstm-state",
+      "title": "RNN에서 LSTM으로: unfolding, cell state와 gate",
+      "description": "과거가 hidden state에 반영되어도 왜 오래 기억하기 어려운지 묻고, LSTM의 state와 gate를 식과 작은 수치 예로 구별한다.",
+      "date": "2026-10-26",
+      "published": "2026-10-26",
+      "type": "journal",
+      "topics": [
+        "딥러닝"
+      ],
+      "courseId": "deep-learning",
+      "lessonId": "rnn-lstm-review",
+      "url": "/notes/learning/2026-10-26-rnn-lstm-state",
+      "links": [
+        "weekly/2026-10-23-vanishing-gradient-and-zero-grad"
+      ],
+      "relatedReasons": {
+        "weekly/2026-10-23-vanishing-gradient-and-zero-grad": "layer를 거슬러 전달되는 gradient의 곱을 시간 방향의 반복 계산과 비교한다."
+      },
+      "sources": [
+        "부트캠프 RNN·LSTM 학습 대화 (2026-10-26)",
+        "https://docs.pytorch.org/docs/stable/generated/torch.nn.RNN.html",
+        "https://docs.pytorch.org/docs/stable/generated/torch.nn.LSTMCell.html"
+      ]
+    },
     {
       "id": "learning/2026-10-16-feature-scaling",
       "title": "Feature scaling: 언제 적용하고 어떤 열을 바꿀까?",
@@ -1978,6 +2009,66 @@ window.HANTHING_CONTENT = {
     }
   ],
   "questions": [
+    {
+      "id": "learning/2026-10-26-rnn-lstm-state#질문-unfolding은-무엇이며-반복-계산을-펼친다는-말은-무슨-뜻인가",
+      "title": "unfolding은 무엇이며, 반복 계산을 펼친다는 말은 무슨 뜻인가?",
+      "url": "/notes/learning/2026-10-26-rnn-lstm-state#질문-unfolding은-무엇이며-반복-계산을-펼친다는-말은-무슨-뜻인가",
+      "topic": "딥러닝",
+      "sourceTitle": "RNN에서 LSTM으로: unfolding, cell state와 gate",
+      "context": "unfolding이 RNN의 반복 계산을 시간 순서대로 펼치는 것이라는 설명을 들었지만, 그 말만으로는 실제로 무엇이 달라지는지 보이지 않았다.",
+      "intent": "그림에 cell이 여러 개 보이는 이유와 실제 계산 횟수, weight를 공유한다는 말의 관계를 확인하려는 질문이다.",
+      "answer": "같은 RNN cell을 여러 time step에 적용하는 계산을 한 단계씩 적는 것이다. cell을 새로 학습하는 것이 아니라 같은 weight를 반복 사용한다. unfolding은 unrolling이라고도 한다."
+    },
+    {
+      "id": "learning/2026-10-26-rnn-lstm-state#질문-과거가-hidden-state에-들어-있는데-왜-오래된-정보를-기억하기-어려운가",
+      "title": "과거가 hidden state에 들어 있는데 왜 오래된 정보를 기억하기 어려운가?",
+      "url": "/notes/learning/2026-10-26-rnn-lstm-state#질문-과거가-hidden-state에-들어-있는데-왜-오래된-정보를-기억하기-어려운가",
+      "topic": "딥러닝",
+      "sourceTitle": "RNN에서 LSTM으로: unfolding, cell state와 gate",
+      "context": "h_{t-1}이 과거 입력의 영향을 받는다는 설명을 듣고, 과거가 이미 반영되어 있는데 오래된 정보를 잊는다는 말이 왜 나오는지 물었다.",
+      "intent": "과거의 영향을 받은 값이라는 사실과 과거 정보를 필요한 만큼 보존한다는 사실을 구별하려는 질문이다.",
+      "answer": "hidden state는 과거 입력 전체의 복사본이 아니다. 새 입력과 이전 state를 같은 크기의 state로 계속 변환한다. 그 과정에서 필요한 차이가 약해지거나 사라질 수 있고, 먼 과거를 이용하도록 weight를 학습시키는 gradient도 작아질 수 있다."
+    },
+    {
+      "id": "learning/2026-10-26-rnn-lstm-state#질문-lstm의-gate와-state는-어떤-식으로-계산하는가",
+      "title": "LSTM의 gate와 state는 어떤 식으로 계산하는가?",
+      "url": "/notes/learning/2026-10-26-rnn-lstm-state#질문-lstm의-gate와-state는-어떤-식으로-계산하는가",
+      "topic": "딥러닝",
+      "sourceTitle": "RNN에서 LSTM으로: unfolding, cell state와 gate",
+      "context": "LSTM의 설명을 비유 없이 정확하게 듣고 싶다고 요청한 뒤, gate와 state를 구하는 식을 모두 물었다.",
+      "intent": "무엇이 입력이고 무엇이 계산 결과인지, 각 기호가 어느 단계에서 쓰이는지를 한 흐름으로 확인하려는 질문이다.",
+      "answer": "LSTM cell은 x_t, h_{t-1}, c_{t-1}을 받아 새 hidden state h_t와 cell state c_t를 만든다. 세 gate와 candidate를 계산하고, cell state를 갱신한 다음 hidden state를 계산한다."
+    },
+    {
+      "id": "learning/2026-10-26-rnn-lstm-state#질문-c̃는-어디에-쓰이며-g를-쓰던-식과-왜-달라-보이는가",
+      "title": "c̃는 어디에 쓰이며, g를 쓰던 식과 왜 달라 보이는가?",
+      "url": "/notes/learning/2026-10-26-rnn-lstm-state#질문-c̃는-어디에-쓰이며-g를-쓰던-식과-왜-달라-보이는가",
+      "topic": "딥러닝",
+      "sourceTitle": "RNN에서 LSTM으로: unfolding, cell state와 gate",
+      "context": "candidate를 g_t로 설명하다가 c̃_t라는 표기가 나오자, 이전 cell state에 forget gate를 곱하고 i_t와 g_t의 곱을 더하던 식이 바뀐 것인지 물었다. 이때 곱셈을 “내적”, i_t를 “input state”라고 표현했다.",
+      "intent": "다른 기호가 같은 값을 뜻하는지 확인하고, 식의 연산과 각 값의 이름을 맞추려는 질문이다.",
+      "answer": "이 설명에서 g_t와 c̃_t는 같은 candidate다. i_t⊙g_t는 i_t⊙c̃_t와 같은 항이다. i_t는 input gate이며, ⊙는 dot product가 아니라 같은 위치의 성분끼리 곱하는 elementwise product다."
+    },
+    {
+      "id": "learning/2026-10-26-rnn-lstm-state#질문-o_t는-언제-쓰이며-h_t가-output-state인가",
+      "title": "o_t는 언제 쓰이며, h_t가 output state인가?",
+      "url": "/notes/learning/2026-10-26-rnn-lstm-state#질문-o_t는-언제-쓰이며-h_t가-output-state인가",
+      "topic": "딥러닝",
+      "sourceTitle": "RNN에서 LSTM으로: unfolding, cell state와 gate",
+      "context": "cell state 식을 따라간 뒤 output gate가 어느 계산에서 쓰이는지 물었다. 이어 o_t와 h_t 중 무엇이 출력에 해당하는지 다시 확인했다.",
+      "intent": "gate 자체와 gate를 적용한 결과를 구별하고, LSTM cell의 출력과 모델의 최종 예측을 나누려는 질문이다.",
+      "answer": "o_t는 h_t=o_t⊙tanh(c_t)에서 쓰이는 output gate다. h_t는 hidden state이며 cell의 출력으로 쓰인다. 분류 모델의 최종 label이나 확률과 자동으로 같은 값은 아니다. 최종 예측에는 별도의 output layer 등을 연결할 수 있다."
+    },
+    {
+      "id": "learning/2026-10-26-rnn-lstm-state#질문-cell-state를-추가하면-왜-먼-시점까지-gradient를-전달하기-쉬워지는가",
+      "title": "cell state를 추가하면 왜 먼 시점까지 gradient를 전달하기 쉬워지는가?",
+      "url": "/notes/learning/2026-10-26-rnn-lstm-state#질문-cell-state를-추가하면-왜-먼-시점까지-gradient를-전달하기-쉬워지는가",
+      "topic": "딥러닝",
+      "sourceTitle": "RNN에서 LSTM으로: unfolding, cell state와 gate",
+      "context": "cell state의 계산은 어느 정도 이해한 것 같다고 말했지만, 그것이 gradient 전달과 어떻게 연결되는지는 다시 물었다. weight의 변화에 관한 표현만으로는 long-term dependency가 나아지는 이유가 보이지 않았다.",
+      "intent": "LSTM이 좋다는 결론보다, 일반 RNN과 달라진 계산 경로와 그 효과의 조건을 확인하려는 질문이다.",
+      "answer": "cell state에는 이전 값을 forget gate와 곱해 더하는 경로가 있다. 이 경로에서는 매 time step마다 새로운 tanh를 반드시 통과하지 않는다. forget gate가 1에 가까우면 이 직접 경로를 따라 정보와 gradient를 유지하기 쉬워진다. 모든 조건에서 vanishing gradient가 사라진다는 뜻은 아니다."
+    },
     {
       "id": "learning/2026-10-16-feature-scaling#질문-범주를-숫자로-바꿨다면-평균과-표준편차도-의미가-있는가",
       "title": "범주를 숫자로 바꿨다면 평균과 표준편차도 의미가 있는가?",

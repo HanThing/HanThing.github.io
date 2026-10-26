@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-25",
+  "generatedAt": "2026-10-26",
   "sets": [
     {
       "id": "loop-exit",
@@ -12914,6 +12914,414 @@
         "exportedAt": "2026-10-25",
         "sourceHashes": {
           "learning/2026-10-16-feature-scaling": "b6dac77ed365588fd0609aa98757237a54f8975343520cf9595a06bf5f5f224c"
+        }
+      }
+    },
+    {
+      "id": "rnn-lstm-state",
+      "title": "RNN과 LSTM — state, gate와 gradient",
+      "version": "e85553c0cabe",
+      "noteIds": [
+        "learning/2026-10-26-rnn-lstm-state"
+      ],
+      "goals": [
+        {
+          "id": "unfolding",
+          "title": "unfolding과 시간에 걸친 weight 공유를 설명한다",
+          "version": "1"
+        },
+        {
+          "id": "state-gate",
+          "title": "gate와 candidate를 구별하고 cell state를 계산한다",
+          "version": "1"
+        },
+        {
+          "id": "output-state",
+          "title": "output gate와 hidden state의 역할을 구별한다",
+          "version": "1"
+        },
+        {
+          "id": "memory-gradient",
+          "title": "과거 정보와 gradient 전달 경로의 조건을 설명한다",
+          "version": "1"
+        }
+      ],
+      "questions": [
+        {
+          "id": "12f1bf06-fcf7-4376-8f81-6e0df0b5a31f:0",
+          "goalId": "unfolding",
+          "pool": "practice",
+          "question": "RNN에서 time step에 따라 계산 과정을 펼치는 unfolding(또는 unrolling) 동작과 parameter 학습에 대한 설명으로 가장 올바른 것은?",
+          "options": [
+            {
+              "text": "unfolding은 같은 weight를 매 time step마다 반복해서 적용하는 계산 과정을 순서대로 펼쳐 써서 나타내는 것이다.",
+              "isCorrect": true,
+              "rationale": "unfolding은 단순 반복 계산을 시간 순서대로 작성한 것일 뿐, 매 time step마다 동일한 parameter(weight와 bias)를 공유하여 사용합니다."
+            },
+            {
+              "text": "unfolding 시 time step마다 별도의 독립된 weight 파라미터를 새로 생성하여 학습시킨다.",
+              "isCorrect": false,
+              "rationale": "unfolding을 하더라도 각 time step에서 cell을 새로 학습하는 것이 아니라 동일한 weight를 공유합니다."
+            },
+            {
+              "text": "unfolding을 거치면 sequence 길이(time step 수)에 비례하여 모델의 총 parameter 수가 증가한다.",
+              "isCorrect": false,
+              "rationale": "time step이 늘어나도 사용되는 weight는 동일하므로 전체 학습 parameter 수에는 변함이 없습니다."
+            },
+            {
+              "text": "unfolding은 시간 축에 따른 반복 연산을 제거하여 이전 hidden state의 전달을 차단하는 기법이다.",
+              "isCorrect": false,
+              "rationale": "unfolding은 이전 hidden state가 다음 time step으로 전달되는 순차적 연산 흐름을 시각화하고 명시적으로 표현하는 과정입니다."
+            }
+          ],
+          "hint": "unfolding 진행 시 cell 내부의 weight가 각 시점마다 새로 생성되는지 아니면 공유되는지 생각해 보세요."
+        },
+        {
+          "id": "12f1bf06-fcf7-4376-8f81-6e0df0b5a31f:1",
+          "goalId": "unfolding",
+          "pool": "check",
+          "question": "단순화된 RNN의 설명용 규칙 $h_t = 2h_{t-1} + x_t$ 가 있고 $h_0 = 0$ 이다. 입력 sequence가 $x_1 = 3, x_2 = 5, x_3 = 2$ 순서로 들어올 때, unfolding 계산 결과로 얻어지는 $h_3$의 값은 얼마인가?",
+          "options": [
+            {
+              "text": "24",
+              "isCorrect": true,
+              "rationale": "$h_1 = 2(0) + 3 = 3$, $h_2 = 2(3) + 5 = 11$, $h_3 = 2(11) + 2 = 24$ 로 계산됩니다."
+            },
+            {
+              "text": "10",
+              "isCorrect": false,
+              "rationale": "입력값의 합($3+5+2=10$)만 더한 잘못된 계산입니다."
+            },
+            {
+              "text": "11",
+              "isCorrect": false,
+              "rationale": "두 번째 time step까지의 결과인 $h_2 = 11$ 에 해당하는 값입니다."
+            },
+            {
+              "text": "48",
+              "isCorrect": false,
+              "rationale": "마지막 계산에서 이전 state $h_2$에 계수를 중복해서 곱했거나 잘못 연산한 결과입니다."
+            }
+          ],
+          "hint": "$h_1, h_2, h_3$를 순차적으로 계산하는 과정을 규칙에 맞춰 적용해 보세요."
+        },
+        {
+          "id": "12f1bf06-fcf7-4376-8f81-6e0df0b5a31f:2",
+          "goalId": "state-gate",
+          "pool": "practice",
+          "question": "기본 LSTM cell 내부에서 새 state를 계산할 때 elementwise product($\\odot$)를 사용하는 주요 이유로 가장 적절한 것은?",
+          "options": [
+            {
+              "text": "벡터의 성분(element)별로 이전 정보와 새로운 후보 정보의 차단 및 반영 비율을 독립적으로 조절하기 위해서이다.",
+              "isCorrect": true,
+              "rationale": "elementwise product를 사용하면 각 차원 성분별로 값을 유지하거나 차단하도록 섬세하게 컨트롤할 수 있습니다."
+            },
+            {
+              "text": "dot product와 동일하게 모든 성분의 곱을 하나로 합산하여 스칼라 값으로 state를 변환하기 위해서이다.",
+              "isCorrect": false,
+              "rationale": "$\\odot$는 elementwise product로 차원을 줄이거나 내적하여 단일 스칼라로 만드는 dot product와 다릅니다."
+            },
+            {
+              "text": "hidden state의 차원을 각 time step마다 절반으로 줄여 연산 복잡도를 낮추기 위해서이다.",
+              "isCorrect": false,
+              "rationale": "elementwise product는 입출력 벡터의 차원을 그대로 유지하며 차원을 줄이지 않습니다."
+            },
+            {
+              "text": "candidate $g_t$의 모든 성분을 반드시 0과 1 사이의 양수 범위로 고정하기 위해서이다.",
+              "isCorrect": false,
+              "rationale": "성분별 곱셈은 값을 필터링하는 역할을 할 뿐, candidate $g_t$ 자체의 값 범위를 변환하는 수단이 아닙니다."
+            }
+          ],
+          "hint": "elementwise product와 dot product의 연산 방식 차이가 벡터의 차원 유지에 미치는 영향을 떠올려 보세요."
+        },
+        {
+          "id": "12f1bf06-fcf7-4376-8f81-6e0df0b5a31f:3",
+          "goalId": "state-gate",
+          "pool": "check",
+          "question": "기본 LSTM cell의 gate 및 state 값들의 범위(range)에 대한 설명 중 가장 옳은 것은?",
+          "options": [
+            {
+              "text": "sigmoid를 통과한 gate들($f_t, i_t, o_t$)은 0과 1 사이, candidate $g_t$는 $-1$과 $1$ 사이의 값을 가지지만, cell state $c_t$ 자체는 $[-1, 1]$ 범위로 제한되지 않는다.",
+              "isCorrect": true,
+              "rationale": "gate는 sigmoid로 인해 $0 \\sim 1$, candidate $g_t$와 $\\tanh(c_t)$는 $-1 \\sim 1$ 범위를 갖지만, 누적 덧셈이 이루어지는 $c_t$ 자체는 $[-1, 1]$ 범위로 제한되지 않습니다."
+            },
+            {
+              "text": "sigmoid와 $\\tanh$ activation function의 영향으로 $c_t$를 포함한 모든 내부 state와 gate 값은 반드시 $[-1, 1]$ 범위 내에 들어온다.",
+              "isCorrect": false,
+              "rationale": "cell state $c_t$는 이전 cell state에 새로운 candidate가 덧셈 연산으로 누적되므로 $[-1, 1]$ 범위를 넘어설 수 있습니다."
+            },
+            {
+              "text": "forget gate $f_t$와 input gate $i_t$는 $\\tanh$를 통과하므로 $-1$과 $1$ 사이의 값을 가진다.",
+              "isCorrect": false,
+              "rationale": "gate들($f_t, i_t, o_t$)은 $\\tanh$가 아닌 sigmoid($\\sigma$)를 통과하므로 0과 1 사이의 값을 가집니다."
+            },
+            {
+              "text": "cell state $c_t$는 항상 0과 1 사이의 값만 가질 수 있다.",
+              "isCorrect": false,
+              "rationale": "candidate $g_t$가 음수 값을 가질 수 있어 $c_t$ 역시 음수나 1보다 큰 값을 가질 수 있습니다."
+            }
+          ],
+          "hint": "$c_t = f_t \\odot c_{t-1} + i_t \\odot g_t$ 식에서 덧셈 연산이 계속 누적될 때 $c_t$의 범위가 한정되는지 검토해 보세요."
+        },
+        {
+          "id": "12f1bf06-fcf7-4376-8f81-6e0df0b5a31f:4",
+          "goalId": "state-gate",
+          "pool": "check",
+          "question": "한 성분 단위의 LSTM 설명용 수치 예시에서 $c_{t-1} = 0.8, f_t = 0.9, i_t = 0.2, g_t = -0.5$ 일 때, 갱신된 cell state $c_t$의 값은 얼마인가?",
+          "options": [
+            {
+              "text": "0.62",
+              "isCorrect": true,
+              "rationale": "$c_t = f_t \\cdot c_{t-1} + i_t \\cdot g_t = (0.9 \\times 0.8) + (0.2 \\times -0.5) = 0.72 - 0.10 = 0.62$ 로 계산됩니다."
+            },
+            {
+              "text": "0.82",
+              "isCorrect": false,
+              "rationale": "$g_t$의 음수 기호를 무시하고 $+0.10$으로 계산한 잘못된 결과입니다."
+            },
+            {
+              "text": "0.72",
+              "isCorrect": false,
+              "rationale": "input gate와 candidate의 곱항($i_t \\cdot g_t$)을 누락하고 $f_t \\cdot c_{t-1}$만 계산한 결과입니다."
+            },
+            {
+              "text": "0.10",
+              "isCorrect": false,
+              "rationale": "forget gate 연산($f_t \\cdot c_{t-1}$)을 제외하고 $i_t \\cdot g_t$의 절대값만 가져온 오류입니다."
+            }
+          ],
+          "hint": "LSTM cell state 갱신 식 $c_t = f_t \\odot c_{t-1} + i_t \\odot g_t$ 에 수치를 대입해 보세요."
+        },
+        {
+          "id": "12f1bf06-fcf7-4376-8f81-6e0df0b5a31f:5",
+          "goalId": "state-gate",
+          "pool": "practice",
+          "question": "LSTM 식을 정리할 때 사용되는 기호 표기 및 용어에 관한 설명으로 가장 올바른 것은?",
+          "options": [
+            {
+              "text": "candidate를 나타내는 기호로 $g_t$ 대신 $\\tilde{c}_t$를 표기하기도 하며, 두 기호는 더할 후보라는 동일한 개념을 의미한다.",
+              "isCorrect": true,
+              "rationale": "문헌에 따라 candidate를 $g_t$ 또는 $\\tilde{c}_t$로 다르게 표기하지만 둘 다 갱신 시 더해지는 candidate 정보를 가리킵니다."
+            },
+            {
+              "text": "$i_t$는 candidate의 비율을 결정하는 input gate가 아니라 입력값 전체를 저장하는 input state이다.",
+              "isCorrect": false,
+              "rationale": "$i_t$는 새 후보 $g_t$를 얼마나 반영할지 조절하는 input gate입니다."
+            },
+            {
+              "text": "candidate $g_t$와 갱신된 cell state $c_t$는 완전히 동일한 값이므로 구별 없이 사용해도 된다.",
+              "isCorrect": false,
+              "rationale": "$g_t$는 이번 시점에 더해질 후보이고, $c_t$는 이전 cell state와 결합하여 최종 갱신된 state이므로 구별해야 합니다."
+            },
+            {
+              "text": "$i_t \\odot g_t$ 연산은 $i_t$와 $g_t$ 두 벡터의 dot product(내적)를 의미한다.",
+              "isCorrect": false,
+              "rationale": "$\\odot$는 dot product가 아니라 같은 위치의 성분끼리 곱하는 elementwise product입니다."
+            }
+          ],
+          "hint": "표기가 달라져도 더해지는 후보(candidate) 개념과 각 gate의 정확한 연산 방식을 구별해 보세요."
+        },
+        {
+          "id": "12f1bf06-fcf7-4376-8f81-6e0df0b5a31f:6",
+          "goalId": "output-state",
+          "pool": "practice",
+          "question": "LSTM의 output gate($o_t$)와 hidden state($h_t$)에 대한 설명으로 가장 올바른 것은?",
+          "options": [
+            {
+              "text": "$h_t = o_t \\odot \\tanh(c_t)$ 로 계산되며, $h_t$는 cell의 출력이자 다음 time step으로 전달되는 hidden state이지만 분류 모델의 최종 예측값과 항상 같지는 않다.",
+              "isCorrect": true,
+              "rationale": "$h_t$는 cell의 계산 결과이자 hidden state이지만 최종 label 예측 등을 위해서는 별도의 output layer가 추가될 수 있습니다."
+            },
+            {
+              "text": "$o_t$는 cell state $c_t$를 직접 계산하기 위해 $c_{t-1}$에 곱해지는 gate이다.",
+              "isCorrect": false,
+              "rationale": "$c_{t-1}$에 곱해지는 gate는 forget gate $f_t$이며, $o_t$는 $\\tanh(c_t)$에 곱해집니다."
+            },
+            {
+              "text": "output gate $o_t$의 값을 0으로 설정하면 이미 계산되어 저장된 cell state $c_t$의 값 자체가 즉시 0으로 초기화된다.",
+              "isCorrect": false,
+              "rationale": "$o_t$가 작아지거나 0이 되어도 이미 계산된 $c_t$의 값을 직접 지우는 것은 아닙니다."
+            },
+            {
+              "text": "$h_t$는 항상 최종 분류 결과나 확률값을 나타내므로 별도의 layer 연결이 불가능하다.",
+              "isCorrect": false,
+              "rationale": "$h_t$는 hidden state 표현이며, 목적에 따라 추가적인 분류 layer나 선형 변환을 연결하여 최종 예측을 구합니다."
+            }
+          ],
+          "hint": "output gate가 $c_t$의 내부 계산에 쓰이는지, 아니면 $c_t$를 외부 hidden state로 드러내는 비율을 조절하는지 파악하세요."
+        },
+        {
+          "id": "12f1bf06-fcf7-4376-8f81-6e0df0b5a31f:7",
+          "goalId": "output-state",
+          "pool": "check",
+          "question": "특정 time step에서 $c_t = 0.8$ 일 때 $\\tanh(c_t) \\approx 0.664$ 이다. 이때 output gate가 $o_t = 0.9$ 인 경우와 $o_t = 0.1$ 인 경우의 hidden state $h_t$에 관한 설명으로 옳은 것은?",
+          "options": [
+            {
+              "text": "$o_t = 0.9$ 일 때 $h_t \\approx 0.598$ 이고 $o_t = 0.1$ 일 때 $h_t \\approx 0.066$ 이지만, $o_t$가 작아진다고 해서 이미 계산된 $c_t$의 값(0.8)이 직접 지워지는 것은 아니다.",
+              "isCorrect": true,
+              "rationale": "$0.9 \\times 0.664 \\approx 0.598$, $0.1 \\times 0.664 \\approx 0.066$ 이며, $o_t$는 $h_t$로 드러나는 정도를 조절할 뿐 이미 저장된 $c_t$를 직접 0으로 지우지 않습니다."
+            },
+            {
+              "text": "$o_t = 0.1$ 로 설정되면 $c_t$ 내부의 메모리가 직접 차단되어 $c_t$의 값도 0.066으로 감소한다.",
+              "isCorrect": false,
+              "rationale": "output gate 조절은 $h_t$의 계산에만 관여하므로 $c_t$ 자체를 직접 감소시키지는 않습니다."
+            },
+            {
+              "text": "$o_t = 0.9$ 일 때 $h_t$의 값은 $\\tanh$를 적용하지 않으므로 $0.9 \\times 0.8 = 0.72$ 가 된다.",
+              "isCorrect": false,
+              "rationale": "$h_t$ 계산 시에는 $c_t$에 반드시 $\\tanh$를 적용한 후 $o_t$를 곱해야 합니다."
+            },
+            {
+              "text": "$o_t$의 크기와 상관없이 $h_t$는 항상 $c_t$와 완전히 동일한 스칼라 값을 가진다.",
+              "isCorrect": false,
+              "rationale": "$h_t$는 $o_t$ 및 $\\tanh(c_t)$의 곱으로 결정되므로 $c_t$와 다릅니다."
+            }
+          ],
+          "hint": "$h_t = o_t \\odot \\tanh(c_t)$ 식의 계산 결과를 비교해 보고, $o_t$가 $c_t$ 자체에 직접 작용하는지 확인하세요."
+        },
+        {
+          "id": "12f1bf06-fcf7-4376-8f81-6e0df0b5a31f:8",
+          "goalId": "memory-gradient",
+          "pool": "practice",
+          "question": "LSTM이 cell state 경로를 통해 먼 시점까지 gradient를 전달하기 용이해지는 구조적 원리로 가장 적절한 것은?",
+          "options": [
+            {
+              "text": "cell state 직접 경로($c_{t-1} \\to c_t$)는 매 time step마다 새로운 $\\tanh$를 통과하지 않으며, forget gate $f_t$가 1에 가까우면 정보와 gradient를 유지하기 쉽다.",
+              "isCorrect": true,
+              "rationale": "cell state 경로에서는 매 단계 non-linear activation인 $\\tanh$를 거치지 않고 이전 상태를 곱해 더하므로 $f_t \\approx 1$ 일 때 gradient 감소가 적습니다."
+            },
+            {
+              "text": "LSTM은 cell state를 추가함으로써 모든 데이터셋과 모든 학습 조건에서 vanishing gradient 문제를 완전히 100% 제거한다.",
+              "isCorrect": false,
+              "rationale": "LSTM이 gradient 전달을 보존하기 쉬운 경로를 제공하지만, $f_t$가 작거나 학습 조건에 따라 vanishing gradient가 여전히 발생할 수 있습니다."
+            },
+            {
+              "text": "cell state 경로는 매 time step마다 반드시 $\\tanh$를 통과하도록 설계되어 gradient가 증폭된다.",
+              "isCorrect": false,
+              "rationale": "cell state의 직접 업데이트 경로($c_{t-1} \\to c_t$)는 매 단계 $\\tanh$를 거치지 않습니다."
+            },
+            {
+              "text": "forget gate $f_t$가 0에 가까워질수록 이전 cell state의 gradient 전달력이 극대화된다.",
+              "isCorrect": false,
+              "rationale": "$f_t$가 0에 가까워지면 이전 cell state의 정보와 gradient는 차단됩니다."
+            }
+          ],
+          "hint": "cell state 갱신 식에서 $c_{t-1}$이 $c_t$로 이어지는 연산 경로와 $f_t$의 역할을 떠올려 보세요."
+        },
+        {
+          "id": "12f1bf06-fcf7-4376-8f81-6e0df0b5a31f:10",
+          "goalId": "memory-gradient",
+          "pool": "check",
+          "question": "RNN 및 LSTM의 장기 의존성(long-term dependency)과 학습에 관한 설명 중 가장 올바른 명제는?",
+          "options": [
+            {
+              "text": "과거 입력의 영향을 받은 state 값과 먼 과거의 정보를 보존하는 것은 구분되며, LSTM이 보존하기 쉬운 경로를 제공하더라도 먼 과거를 활용하는지는 데이터와 학습 결과로 확인해야 한다.",
+              "isCorrect": true,
+              "rationale": "state에 과거의 영향이 남아있는 것과 유용한 정보가 보존되는 것은 다르며, 수식적 경로가 제공되어도 실제 학습 성능은 데이터와 결과로 평가해야 합니다."
+            },
+            {
+              "text": "RNN에서 $h_{t-1}$에 과거 입력의 영향이 반영되어 있다면, 먼 과거의 정보도 손실 없이 항상 동일한 크기로 보존된다.",
+              "isCorrect": false,
+              "rationale": "과거 입력의 영향이 남아있는 것과 그 영향의 크기가 줄어들지 않고 보존되는 것은 별개의 문제입니다."
+            },
+            {
+              "text": "forward 계산에서의 정보 보존 문제와 backpropagation에서의 gradient 전달 문제는 완전히 동일한 스칼라 값을 공유하는 동일한 대상이다.",
+              "isCorrect": false,
+              "rationale": "state는 순방향 계산 결과이고 gradient는 loss의 민감도를 나타내므로 연관되어 있지만 같은 값은 아닙니다."
+            },
+            {
+              "text": "수식 예시에서 직접 경로 gradient의 계산 결과가 컸으므로, 모든 sequence 데이터셋에서 LSTM이 일반 RNN보다 뛰어난 성능을 보인다고 단정할 수 있다.",
+              "isCorrect": false,
+              "rationale": "수치 예시는 이해를 돕기 위한 수식적 계산이며, 실전 성능 차이는 동일한 조건의 실제 데이터 학습으로 검증해야 합니다."
+            }
+          ],
+          "hint": "state(계산 결과)와 gradient(손실의 민감도)의 차이, 그리고 수식 예시와 실제 학습 성과의 구별에 유의하세요."
+        },
+        {
+          "id": "12f1bf06-fcf7-4376-8f81-6e0df0b5a31f:11",
+          "goalId": "memory-gradient",
+          "pool": "practice",
+          "question": "설명용 규칙 $h_t = 0.5h_{t-1} + x_t$ 를 사용하는 RNN 구조에서 이전 state 값 $h_0 = 8$ 이 존재하고 이후 입력 $x_1, x_2, x_3$ 이 모두 0일 때, $h_3$의 값 변화 과정으로 옳은 것은?",
+          "options": [
+            {
+              "text": "$h_1 = 4 \\to h_2 = 2 \\to h_3 = 1$ 로 줄어들며, 과거 영향이 남아있더라도 그 크기가 유지되지 않고 감쇄할 수 있음을 보여준다.",
+              "isCorrect": true,
+              "rationale": "$h_1 = 0.5(8) + 0 = 4$, $h_2 = 0.5(4) + 0 = 2$, $h_3 = 0.5(2) + 0 = 1$ 로 점차 줄어듭니다."
+            },
+            {
+              "text": "입력이 0이므로 이전 state 값 8이 지속되어 $h_1 = 8 \\to h_2 = 8 \\to h_3 = 8$ 로 보존된다.",
+              "isCorrect": false,
+              "rationale": "규칙에 곱해지는 계수 0.5에 의해 이전 state 값이 지속해서 감소합니다."
+            },
+            {
+              "text": "$h_1 = 4, h_2 = 0, h_3 = 0$ 으로 두 번째 time step에서 완전히 소멸한다.",
+              "isCorrect": false,
+              "rationale": "0.5를 곱해 나가는 연산이므로 2번째 단계에서 바로 0이 되지는 않습니다."
+            },
+            {
+              "text": "$h_1 = 8 \\to h_2 = 4 \\to h_3 = 2$ 로 한 단계씩 늦게 감쇄한다.",
+              "isCorrect": false,
+              "rationale": "첫 번째 time step $h_1$부터 즉시 0.5가 곱해져 4가 되므로 단계 설정이 틀렸습니다."
+            }
+          ],
+          "hint": "규칙 $h_t = 0.5h_{t-1} + x_t$ 에 $x_t = 0$ 을 대입하여 $h_1, h_2, h_3$를 단계별로 계산해 보세요."
+        }
+      ],
+      "cards": [
+        {
+          "id": "a8743918-9910-4016-bd8f-abed84e53516:0",
+          "goalId": "unfolding",
+          "front": "RNN에서 unfolding(unrolling)이란 무엇이며, 이때 weight는 어떻게 처리되는가?",
+          "back": "unfolding은 동일한 RNN cell의 반복 계산을 시간 순서(time step)대로 펼쳐 적는 것을 의미하며, 매 time step마다 새로운 cell을 학습하는 것이 아니라 동일한 weight($W_x, W_h, b$)를 반복하여 공유한다."
+        },
+        {
+          "id": "a8743918-9910-4016-bd8f-abed84e53516:1",
+          "goalId": "memory-gradient",
+          "front": "Vanilla RNN에서 과거 정보가 $h_{t-1}$에 반영됨에도 불구하고 오래된 정보를 기억하기 어려운 주요 원인은 무엇인가?",
+          "back": "새로운 입력과 이전 hidden state가 매 time step마다 동일한 크기의 state로 계속 변환되면서 과거 정보의 차이가 약해지거나 사라질 수 있고, 먼 과거로 전달되는 gradient가 작아질 수 있기 때문이다."
+        },
+        {
+          "id": "a8743918-9910-4016-bd8f-abed84e53516:3",
+          "goalId": "state-gate",
+          "front": "LSTM 표기에서 candidate를 나타내는 $g_t$와 $\\tilde{c}_t$의 관계 및 연산 특징은 무엇인가?",
+          "back": "$g_t$와 $\\tilde{c}_t$는 동일한 candidate를 뜻하는 다른 표기이다. gate들과 달리 $\\tanh$를 통과하므로 -1과 1 사이의 음수 값도 가질 수 있다."
+        },
+        {
+          "id": "a8743918-9910-4016-bd8f-abed84e53516:4",
+          "goalId": "state-gate",
+          "front": "LSTM의 cell state 갱신 식 $c_t = f_t \\odot c_{t-1} + i_t \\odot g_t$에서 $\\odot$ 연산의 의미와 효과는 무엇인가?",
+          "back": "$\\odot$는 dot product가 아닌 elementwise product(성분별 곱)이다. 벡터를 하나의 스칼라로 축소하지 않고, cell state의 각 성분별로 이전 값과 새 candidate의 반영 비율을 독립적으로 조절한다."
+        },
+        {
+          "id": "a8743918-9910-4016-bd8f-abed84e53516:5",
+          "goalId": "output-state",
+          "front": "LSTM에서 output gate($o_t$) 값이 작아지면 이미 계산된 현재 cell state($c_t$)는 직접 지워지는가?",
+          "back": "지워지지 않는다. $o_t$는 $h_t = o_t \\odot \\tanh(c_t)$ 계산에서 $c_t$가 hidden state로 드러나는 양을 조절할 뿐, 이미 계산된 $c_t$ 자체를 직접 수정하거나 삭제하지 않는다."
+        },
+        {
+          "id": "a8743918-9910-4016-bd8f-abed84e53516:8",
+          "goalId": "output-state",
+          "front": "output gate($o_t$)가 현재 시점의 $c_t$를 직접 변경하지 않음에도 불구하고, 이후 time step의 state 변화에 영향을 주는 이유는 무엇인가?",
+          "back": "$o_t$에 의해 조절된 $h_t$가 다음 time step의 입력으로 들어가 gate들($f_{t+1}, i_{t+1}, o_{t+1}$)과 candidate($g_{t+1}$)를 계산하는 데 사용되므로 간접적으로 이후 state 변화에 영향을 미친다."
+        },
+        {
+          "id": "a8743918-9910-4016-bd8f-abed84e53516:9",
+          "goalId": "memory-gradient",
+          "front": "LSTM 구조가 RNN에 비해 gradient vanishing을 완화하는 경로를 제공한다는 사실에서 유의해야 할 한계는 무엇인가?",
+          "back": "forget gate가 작아지거나 다른 미분 경로의 영향이 달라지면 gradient가 줄어들 수 있으므로, LSTM이 모든 조건에서 gradient 보존이나 먼 과거 정보 활용을 무조건 보장하는 것은 아니다."
+        }
+      ],
+      "provenance": {
+        "provider": "NotebookLM",
+        "notebookId": "23d99a52-8e77-4f35-9510-a960d8fc46d1",
+        "sourceIds": [
+          "68b1afb9-7497-489a-812e-8af1ccd654f7"
+        ],
+        "quizArtifactId": "12f1bf06-fcf7-4376-8f81-6e0df0b5a31f",
+        "cardsArtifactId": "a8743918-9910-4016-bd8f-abed84e53516",
+        "exportedAt": "2026-10-26",
+        "sourceHashes": {
+          "learning/2026-10-26-rnn-lstm-state": "96142e3d881b85f3e2d7679f86007555f83ee13edc95b7314f83531c5c112187"
         }
       }
     }

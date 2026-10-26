@@ -2,6 +2,9 @@
 
 Generated from public Markdown. Read AGENTS.md for ingest/query/lint; CHANGELOG.md for changes. Course references support briefing and stay outside the learning graph. Course/lesson identify the curriculum placement; topics identify related subjects.
 
+- [RNN에서 LSTM으로: unfolding, cell state와 gate](content/learning/2026-10-26-rnn-lstm-state.md) — journal · 2026-10-26 · 과거가 hidden state에 반영되어도 왜 오래 기억하기 어려운지 묻고, LSTM의 state와 gate를 식과 작은 수치 예로 구별한다.
+  Course: 딥러닝 → RNN과 LSTM 복습 (보충). Related topics: 딥러닝
+  Sources: 부트캠프 RNN·LSTM 학습 대화 (2026-10-26); https://docs.pytorch.org/docs/stable/generated/torch.nn.RNN.html; https://docs.pytorch.org/docs/stable/generated/torch.nn.LSTMCell.html
 - [Feature scaling: 언제 적용하고 어떤 열을 바꿀까?](content/learning/2026-10-16-feature-scaling.md) — journal · 2026-10-16 · 범주를 나타내는 숫자와 수치의 단위를 구별하고, 열별 scaling의 판단 기준과 binning이 잃는 정보를 실제 질문으로 확인한다.
   Course: 머신러닝 → 지도학습. Related topics: 머신러닝; 데이터 분석
   Sources: 타이타닉 미션의 feature scaling 학습 대화 (2026-10-16); https://scikit-learn.org/stable/modules/preprocessing.html; https://scikit-learn.org/stable/auto_examples/compose/plot_column_transformer_mixed_types.html

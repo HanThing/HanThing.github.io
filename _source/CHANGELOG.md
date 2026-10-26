@@ -1,5 +1,10 @@
 # Knowledge changes
 
+## 2026-10-26
+
+- RNN·LSTM 학습 대화의 질문 11개를 여섯 질문 묶음으로 정리했다. unfolding과 weight 공유, 과거 정보 보존, gate·candidate·state의 계산, elementwise product, output gate와 gradient의 직접 경로를 구별했다. 수치 예시는 설명용이며 실제 모델 성능이나 학습 완료로 기록하지 않았다.
+- 공개 원고로 생성한 NotebookLM 퀴즈 12문항·카드 10장을 전수 검토해 퀴즈 11문항·카드 7장을 연결했다. derivative의 범위와 보존 조건이 빠진 항목은 제외했다. 기존 복습 38세트의 내용·ID·버전은 보존했다.
+
 ## 2026-10-25
 
 - 10월 23일 시작한 평일 자동 발행을 이어서 10월 16일의 feature scaling 질문 7개를 정리했다. 범주 코드·one-hot·수치의 의미, 열별 처리, 적용 판단과 binning의 정보 손실을 구분했다. 실제 점수 비교는 수행되지 않았으며 원래 값과 binning의 성능 비교 질문은 기존 검증 글에 연결했다.
