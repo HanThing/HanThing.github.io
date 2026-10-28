@@ -84,6 +84,11 @@ window.HANTHING_CONTENT = {
           "id": "rnn-lstm-review",
           "title": "RNN과 LSTM 복습",
           "kind": "supplemental"
+        },
+        {
+          "id": "cnn-filter-review",
+          "title": "CNN filter 복습",
+          "kind": "supplemental"
         }
       ]
     },
@@ -139,6 +144,33 @@ window.HANTHING_CONTENT = {
     }
   ],
   "notes": [
+    {
+      "id": "learning/2026-10-27-cnn-filters",
+      "title": "CNN filter는 무엇을 학습할까: weight sharing과 feature map",
+      "description": "filter의 weight가 무엇에 대응하는지 묻고, 겹치는 영역의 계산과 RGB channel, feature map, parameter update를 구별한다.",
+      "date": "2026-10-27",
+      "published": "2026-10-28",
+      "type": "journal",
+      "topics": [
+        "딥러닝"
+      ],
+      "courseId": "deep-learning",
+      "lessonId": "cnn-filter-review",
+      "url": "/notes/learning/2026-10-27-cnn-filters",
+      "links": [
+        "weekly/2026-10-23-vanishing-gradient-and-zero-grad",
+        "learning/2026-10-26-rnn-lstm-state"
+      ],
+      "relatedReasons": {
+        "learning/2026-10-26-rnn-lstm-state": "시간마다 같은 weight를 쓰는 RNN과 공간 위치마다 같은 weight를 쓰는 CNN을 비교한다.",
+        "weekly/2026-10-23-vanishing-gradient-and-zero-grad": "forward 결과, gradient 계산, parameter update의 순서를 연결한다."
+      },
+      "sources": [
+        "부트캠프 CNN filter 학습 대화 (2026-10-27)",
+        "https://docs.pytorch.org/docs/stable/generated/torch.nn.Conv2d.html",
+        "https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html"
+      ]
+    },
     {
       "id": "learning/2026-10-26-rnn-lstm-state",
       "title": "RNN에서 LSTM으로: unfolding, cell state와 gate",
@@ -2009,6 +2041,96 @@ window.HANTHING_CONTENT = {
     }
   ],
   "questions": [
+    {
+      "id": "learning/2026-10-27-cnn-filters#질문-filter가-weight인가-rgb마다-다른-weight가-있는가",
+      "title": "filter가 weight인가? RGB마다 다른 weight가 있는가?",
+      "url": "/notes/learning/2026-10-27-cnn-filters#질문-filter가-weight인가-rgb마다-다른-weight가-있는가",
+      "topic": "딥러닝",
+      "sourceTitle": "CNN filter는 무엇을 학습할까: weight sharing과 feature map",
+      "context": "filter와 weight가 같은 말인지 물은 뒤, RGB 입력에서는 channel마다 weight가 따로 있는지 확인했다.",
+      "intent": "그림에 보이는 작은 격자와 실제로 학습하는 parameter의 관계를 알고 싶었다.",
+      "answer": "filter는 여러 weight를 묶은 tensor다. 입력 channel이 하나라면 3×3 filter 하나에 weight 9개가 있고, RGB라면 3×3×3=27개가 있다. RGB의 각 channel에는 서로 다른 weight가 대응하며, 세 channel의 계산 결과를 합쳐 출력 channel 하나의 값을 만든다."
+    },
+    {
+      "id": "learning/2026-10-27-cnn-filters#질문-filter가-훑는-영역이-겹치면-같은-입력을-어떻게-계산하는가",
+      "title": "filter가 훑는 영역이 겹치면 같은 입력을 어떻게 계산하는가?",
+      "url": "/notes/learning/2026-10-27-cnn-filters#질문-filter가-훑는-영역이-겹치면-같은-입력을-어떻게-계산하는가",
+      "topic": "딥러닝",
+      "sourceTitle": "CNN filter는 무엇을 학습할까: weight sharing과 feature map",
+      "context": "filter가 한 칸씩 움직일 때 이전에 본 입력을 다음 영역에서도 다시 쓰게 된다는 점을 물었다.",
+      "intent": "겹친 입력을 덮어쓰는지, 앞선 계산이 다음 계산을 바꾸는지 확인하려는 질문이다.",
+      "answer": "각 위치의 입력 영역을 읽어 별도의 출력 값을 만든다. 같은 입력이 여러 출력 계산에 참여해도 입력 자체를 바꾸지 않는다. 같은 filter의 weight를 각 위치에서 재사용하는 것이 weight sharing이다."
+    },
+    {
+      "id": "learning/2026-10-27-cnn-filters#질문-여러-filter로-지역적인-특징을-보는가-filter마다-feature-map이-생기는가",
+      "title": "여러 filter로 지역적인 특징을 보는가? filter마다 feature map이 생기는가?",
+      "url": "/notes/learning/2026-10-27-cnn-filters#질문-여러-filter로-지역적인-특징을-보는가-filter마다-feature-map이-생기는가",
+      "topic": "딥러닝",
+      "sourceTitle": "CNN filter는 무엇을 학습할까: weight sharing과 feature map",
+      "context": "여러 filter가 이미지의 지역적인 특징을 보는지 물은 뒤, filter마다 feature map이 따로 생기는지 확인했다.",
+      "intent": "filter 크기, filter 개수, 출력의 shape을 연결하려는 질문이다.",
+      "answer": "kernel_size는 한 filter가 보는 공간 영역의 크기이고, out_channels는 filter 개수이자 출력 channel 수다. 이미지 하나에 filter 하나를 여러 위치로 적용하면 2차원 feature map 하나가 생긴다. filter 32개라면 feature map도 32개다."
+    },
+    {
+      "id": "learning/2026-10-27-cnn-filters#질문-weight-9개로-이미지-전체를-표현하는가-feature-map에도-weight가-있는가",
+      "title": "weight 9개로 이미지 전체를 표현하는가? feature map에도 weight가 있는가?",
+      "url": "/notes/learning/2026-10-27-cnn-filters#질문-weight-9개로-이미지-전체를-표현하는가-feature-map에도-weight가-있는가",
+      "topic": "딥러닝",
+      "sourceTitle": "CNN filter는 무엇을 학습할까: weight sharing과 feature map",
+      "context": "3×3 filter에 weight가 9개뿐이라면 큰 이미지의 많은 특징을 어디에 담는지, feature map에 별도의 weight가 있는지 물었다.",
+      "intent": "학습해서 저장하는 값과 입력마다 계산하는 값을 구별하려는 질문이다.",
+      "answer": "weight는 여러 입력에 재사용하는 parameter이고, feature map은 현재 입력과 weight로 계산한 중간 결과다. feature map 자체를 이 layer의 독립 parameter로 저장해 학습하는 것은 아니다. 작은 filter를 많은 위치에 적용하므로 parameter 수보다 훨씬 많은 출력 값을 만들 수 있다."
+    },
+    {
+      "id": "learning/2026-10-27-cnn-filters#질문-pixel-값으로-예측하는가-rgb-외에-다른-종류의-filter도-있는가",
+      "title": "pixel 값으로 예측하는가? RGB 외에 다른 종류의 filter도 있는가?",
+      "url": "/notes/learning/2026-10-27-cnn-filters#질문-pixel-값으로-예측하는가-rgb-외에-다른-종류의-filter도-있는가",
+      "topic": "딥러닝",
+      "sourceTitle": "CNN filter는 무엇을 학습할까: weight sharing과 feature map",
+      "context": "이미지의 숫자로 예측값을 만드는 흐름을 확인한 뒤, RGB 외에도 filter 종류가 나뉘는지 물었다.",
+      "intent": "입력 channel, filter가 학습하는 패턴, 최종 예측을 연결하려는 질문이다.",
+      "answer": "이미지 분류 CNN은 보통 pixel 값에서 중간 feature를 계산하고, 이후 layer와 classification head가 class 점수를 만든다. convolution 한 번의 feature map이 곧 최종 class 예측인 것은 아니다. RGB는 입력 channel의 구분이며, filter의 역할을 빨강·초록·파랑 세 종류로 지정한다는 뜻도 아니다."
+    },
+    {
+      "id": "learning/2026-10-27-cnn-filters#질문-filter를-한-번-적용할-때마다-weight를-update하는가",
+      "title": "filter를 한 번 적용할 때마다 weight를 update하는가?",
+      "url": "/notes/learning/2026-10-27-cnn-filters#질문-filter를-한-번-적용할-때마다-weight를-update하는가",
+      "topic": "딥러닝",
+      "sourceTitle": "CNN filter는 무엇을 학습할까: weight sharing과 feature map",
+      "context": "여러 filter로 여러 위치를 계산한다면 어느 시점에 weight를 바꾸는지 물었다.",
+      "intent": "filter의 이동과 모델의 학습 단계를 구별하려는 질문이다.",
+      "answer": "일반적인 mini-batch 학습에서는 해당 batch의 forward 계산과 loss 계산을 마친 뒤, backward()로 gradient를 구하고 optimizer.step()으로 parameter를 update한다. 공간 위치 하나를 계산할 때마다 filter의 weight를 바꾸는 방식이 아니다."
+    },
+    {
+      "id": "learning/2026-10-27-cnn-filters#질문-학습의-목적은-loss가-작아지는-weight를-찾는-것인가",
+      "title": "학습의 목적은 loss가 작아지는 weight를 찾는 것인가?",
+      "url": "/notes/learning/2026-10-27-cnn-filters#질문-학습의-목적은-loss가-작아지는-weight를-찾는-것인가",
+      "topic": "딥러닝",
+      "sourceTitle": "CNN filter는 무엇을 학습할까: weight sharing과 feature map",
+      "context": "filter의 weight가 바뀌는 과정을 보고, 학습이 어떤 weight를 찾는 과정인지 다시 확인했다.",
+      "intent": "정해진 정답 weight를 맞히는 것인지, 예측과 정답의 차이를 줄이는 것인지 확인하려는 질문이다.",
+      "answer": "이 지도학습 설정에서는 예측과 target으로 loss를 구하고, 이를 줄이는 방향으로 weight와 bias를 조정한다. 정답 weight를 따로 받아 맞히는 것은 아니다. 다만 training loss를 낮추는 것만으로 새로운 데이터에서도 잘 예측한다고 결론낼 수는 없다."
+    },
+    {
+      "id": "learning/2026-10-27-cnn-filters#질문-bias는-filter끼리-공유하는가",
+      "title": "bias는 filter끼리 공유하는가?",
+      "url": "/notes/learning/2026-10-27-cnn-filters#질문-bias는-filter끼리-공유하는가",
+      "topic": "딥러닝",
+      "sourceTitle": "CNN filter는 무엇을 학습할까: weight sharing과 feature map",
+      "context": "weight sharing을 배운 뒤 bias도 서로 다른 filter가 함께 쓰는지 물었다.",
+      "intent": "같은 값을 반복 사용하는 범위가 어디까지인지 확인하려는 질문이다.",
+      "answer": "bias=True인 일반적인 Conv2d에는 출력 channel마다 bias 하나가 있다. 서로 다른 filter는 서로 다른 bias parameter를 쓰고, 같은 filter의 모든 공간 위치에는 같은 bias가 더해진다."
+    },
+    {
+      "id": "learning/2026-10-27-cnn-filters#질문-linear-layer의-weight는-feature에-대응하는데-cnn의-weight는-무엇에-대응하는가",
+      "title": "Linear layer의 weight는 feature에 대응하는데 CNN의 weight는 무엇에 대응하는가?",
+      "url": "/notes/learning/2026-10-27-cnn-filters#질문-linear-layer의-weight는-feature에-대응하는데-cnn의-weight는-무엇에-대응하는가",
+      "topic": "딥러닝",
+      "sourceTitle": "CNN filter는 무엇을 학습할까: weight sharing과 feature map",
+      "context": "앞서 배운 Linear layer에서는 weight를 입력 feature 번호와 연결할 수 있었지만, CNN에서는 그 대응이 모호하게 느껴졌다.",
+      "intent": "weight 하나가 정확히 어떤 입력 값에 곱해지는지 알고 싶었다.",
+      "answer": "Linear layer의 weight는 고정된 입력 feature 번호와 출력 번호에 대응한다. convolution의 weight는 출력 channel, 입력 channel, 현재 영역 안의 상대적 위치에 대응한다. 이미지의 특정 절대 위치에 고정된 값이 아니다."
+    },
     {
       "id": "learning/2026-10-26-rnn-lstm-state#질문-unfolding은-무엇이며-반복-계산을-펼친다는-말은-무슨-뜻인가",
       "title": "unfolding은 무엇이며, 반복 계산을 펼친다는 말은 무슨 뜻인가?",
@@ -6471,6 +6593,13 @@ window.HANTHING_CONTENT = {
     }
   ],
   "quizzes": [
+    {
+      "id": "learning/2026-10-27-cnn-filters#퀴즈-rgb-입력에-33-filter-16개를-적용하면-무엇이-몇-개-생기는가",
+      "title": "RGB 입력에 3×3 filter 16개를 적용하면 무엇이 몇 개 생기는가?",
+      "url": "/notes/learning/2026-10-27-cnn-filters#퀴즈-rgb-입력에-33-filter-16개를-적용하면-무엇이-몇-개-생기는가",
+      "topic": "딥러닝",
+      "sourceTitle": "CNN filter는 무엇을 학습할까: weight sharing과 feature map"
+    },
     {
       "id": "weekly/2026-10-19-regularization-and-tree-ensembles#퀴즈-두-번째-트리의-입력과-목표는-무엇일까",
       "title": "두 번째 트리의 입력과 목표는 무엇일까?",

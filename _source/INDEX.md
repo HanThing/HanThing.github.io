@@ -2,6 +2,9 @@
 
 Generated from public Markdown. Read AGENTS.md for ingest/query/lint; CHANGELOG.md for changes. Course references support briefing and stay outside the learning graph. Course/lesson identify the curriculum placement; topics identify related subjects.
 
+- [CNN filter는 무엇을 학습할까: weight sharing과 feature map](content/learning/2026-10-27-cnn-filters.md) — journal · 2026-10-27 · filter의 weight가 무엇에 대응하는지 묻고, 겹치는 영역의 계산과 RGB channel, feature map, parameter update를 구별한다.
+  Course: 딥러닝 → CNN filter 복습 (보충). Related topics: 딥러닝
+  Sources: 부트캠프 CNN filter 학습 대화 (2026-10-27); https://docs.pytorch.org/docs/stable/generated/torch.nn.Conv2d.html; https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html
 - [RNN에서 LSTM으로: unfolding, cell state와 gate](content/learning/2026-10-26-rnn-lstm-state.md) — journal · 2026-10-26 · 과거가 hidden state에 반영되어도 왜 오래 기억하기 어려운지 묻고, LSTM의 state와 gate를 식과 작은 수치 예로 구별한다.
   Course: 딥러닝 → RNN과 LSTM 복습 (보충). Related topics: 딥러닝
   Sources: 부트캠프 RNN·LSTM 학습 대화 (2026-10-26); https://docs.pytorch.org/docs/stable/generated/torch.nn.RNN.html; https://docs.pytorch.org/docs/stable/generated/torch.nn.LSTMCell.html

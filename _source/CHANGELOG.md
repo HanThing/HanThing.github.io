@@ -1,5 +1,10 @@
 # Knowledge changes
 
+## 2026-10-28
+
+- 10월 27일 CNN 학습 대화의 질문 13개를 아홉 질문 묶음으로 정리했다. filter의 weight와 feature map, 겹치는 입력 영역, RGB channel, bias의 공유 범위와 parameter update 시점을 구별했다. 수치 예시는 설명용이며 실제 모델 학습·성능 검증으로 기록하지 않았다.
+- 공개 원고로 생성한 NotebookLM 퀴즈 12문항·카드 10장을 전수 검토해 퀴즈 8문항·카드 8장을 연결했다. 값과 shape의 혼동, 조건 누락과 과도한 단정이 있는 항목은 제외했다. 기존 복습 39세트의 내용·ID·버전은 보존했다.
+
 ## 2026-10-26
 
 - RNN·LSTM 학습 대화의 질문 11개를 여섯 질문 묶음으로 정리했다. unfolding과 weight 공유, 과거 정보 보존, gate·candidate·state의 계산, elementwise product, output gate와 gradient의 직접 경로를 구별했다. 수치 예시는 설명용이며 실제 모델 성능이나 학습 완료로 기록하지 않았다.

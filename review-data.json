@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-26",
+  "generatedAt": "2026-10-28",
   "sets": [
     {
       "id": "loop-exit",
@@ -13322,6 +13322,323 @@
         "exportedAt": "2026-10-26",
         "sourceHashes": {
           "learning/2026-10-26-rnn-lstm-state": "96142e3d881b85f3e2d7679f86007555f83ee13edc95b7314f83531c5c112187"
+        }
+      }
+    },
+    {
+      "id": "cnn-filters",
+      "title": "CNN filter — weight sharing과 feature map",
+      "version": "cec6de43d888",
+      "noteIds": [
+        "learning/2026-10-27-cnn-filters"
+      ],
+      "goals": [
+        {
+          "id": "parameters-and-features",
+          "title": "weight, feature map과 channel 및 parameter 수를 구별한다",
+          "version": "1"
+        },
+        {
+          "id": "sharing-and-update",
+          "title": "공간 weight sharing, 상대 위치, bias와 update 시점을 설명한다",
+          "version": "1"
+        }
+      ],
+      "questions": [
+        {
+          "id": "239cffeb-8363-4da0-9534-b22e3bbb2f91:0",
+          "goalId": "parameters-and-features",
+          "pool": "practice",
+          "question": "다음 조건의 Conv2d layer가 주어졌을 때, 학습되는 total weight parameter 수, bias parameter 수, 그리고 단일 입력 이미지에 대한 output feature map shape으로 올바른 조합은 무엇인가?\n\n- input shape: (3, 32, 32)\n- out_channels: 16\n- groups: 1\n- kernel_size: 3\n- stride: 1\n- padding: 0\n- dilation: 1\n- bias: True",
+          "options": [
+            {
+              "text": "weight parameter 432개, bias parameter 16개, output feature map shape (16, 30, 30)",
+              "isCorrect": true,
+              "rationale": "weight parameter 수는 $16 \\times 3 \\times 3 \\times 3 = 432$개이고, bias=True이므로 out_channels 수와 같은 16개의 bias가 존재하며, spatial 크기는 $32 - 3 + 1 = 30$이 되어 (16, 30, 30)이 된다."
+            },
+            {
+              "text": "weight parameter 144개, bias parameter 48개, output feature map shape (48, 30, 30)",
+              "isCorrect": false,
+              "rationale": "RGB 3개 channel의 연산 결과가 합쳐져 out_channels 개수인 16개의 feature map이 생성되므로 출력 channel이 $16 \\times 3 = 48$개가 되는 것이 아니다."
+            },
+            {
+              "text": "weight parameter 432개, bias parameter 0개, output feature map shape (16, 32, 32)",
+              "isCorrect": false,
+              "rationale": "bias=True 조건에서는 out_channels 수만큼의 bias parameter가 추가되며, padding=0일 때 $3 \\times 3$ filter를 적용하면 spatial 크기가 32에서 30으로 줄어든다."
+            },
+            {
+              "text": "weight parameter 14,400개, bias parameter 16개, output feature map shape (16, 30, 30)",
+              "isCorrect": false,
+              "rationale": "feature map의 전체 원소 수($16 \\times 30 \\times 30 = 14,400$)는 입력과 weight로 계산된 중간 출력 값일 뿐 독립적으로 저장되어 학습되는 parameter가 아니다."
+            }
+          ],
+          "hint": "출력 channel 수는 filter의 개수와 동일하며, spatial 크기는 padding과 stride 조건에 따라 계산된다."
+        },
+        {
+          "id": "239cffeb-8363-4da0-9534-b22e3bbb2f91:1",
+          "goalId": "sharing-and-update",
+          "pool": "practice",
+          "question": "PyTorch Conv2d에서 weight tensor shape이 (32, 3, 3, 3)일 때, 인덱싱 `weight[7, 1, 0, 2]`가 의미하는 바로 올바른 것은 무엇인가?\n\n- input shape: (3, 64, 64)\n- out_channels: 32\n- groups: 1\n- kernel_size: 3\n- stride: 1\n- padding: 0\n- dilation: 1\n- bias: True",
+          "options": [
+            {
+              "text": "8번째 filter가 2번째 입력 channel(예: G channel)의 현재 sliding window 내부 상대 위치 (0, 2)에 곱하는 weight",
+              "isCorrect": true,
+              "rationale": "PyTorch Conv2d weight shape (out_channels, in_channels, kernel_height, kernel_width)에서 인덱스 0부터 시작하므로 [7, 1, 0, 2]는 8번째 filter, 2번째 input channel, 그리고 filter 영역 내 상단 오른쪽 상대 위치를 가리킨다."
+            },
+            {
+              "text": "입력 이미지 전체의 절대 공간 좌표 (7, 1)에 위치한 pixel에 3번째 filter가 곱해지는 weight",
+              "isCorrect": false,
+              "rationale": "Conv2d의 weight는 이미지의 절대 spatial 위치가 아니라 sliding window 내부의 상대적 위치에 대응한다."
+            },
+            {
+              "text": "8번째 output feature map의 절대 공간 좌표 (0, 2)를 계산하기 위해 2번째 filter 전체에 더해지는 bias 값",
+              "isCorrect": false,
+              "rationale": "`weight` tensor의 원소는 spatial 곱셈 연산에 쓰이는 weight이며, bias는 별도의 1차원 bias parameter tensor로 관리된다."
+            },
+            {
+              "text": "7번째 input channel의 (1, 0) 위치에서 3번째 output channel로 전달되는 고정된 feature index weight",
+              "isCorrect": false,
+              "rationale": "첫 번째 차원은 output channel(filter 인덱스)이며, 두 번째 차원이 input channel을 나타낸다."
+            }
+          ],
+          "hint": "PyTorch `Conv2d` weight tensor의 차원 순서는 `(out_channels, in_channels, kernel_height, kernel_width)`이다."
+        },
+        {
+          "id": "239cffeb-8363-4da0-9534-b22e3bbb2f91:2",
+          "goalId": "parameters-and-features",
+          "pool": "practice",
+          "question": "다음 설정을 갖는 Conv2d layer에서 생성되는 feature map 원소 수와 모델이 직접 학습하는 weight parameter 수 간의 관계를 가장 올바르게 설명한 것은 무엇인가?\n\n- input shape: (1, 100, 100)\n- out_channels: 1\n- groups: 1\n- kernel_size: 3\n- stride: 1\n- padding: 0\n- dilation: 1\n- bias: False",
+          "options": [
+            {
+              "text": "weight parameter는 9개에 불과하지만, 동일한 weight를 여러 spatial 위치에 재사용(weight sharing)하여 9,604개의 feature map 원소를 계산한다.",
+              "isCorrect": true,
+              "rationale": "kernel_size가 $3 \\times 3$이므로 weight parameter는 9개지만, spatial 크기가 $100 - 3 + 1 = 98$이 되어 $98 \\times 98 = 9,604$개의 feature map 값을 생성한다."
+            },
+            {
+              "text": "feature map의 9,604개 원소가 모두 독립적인 learnable parameter로 저장되어 backward pass 시 각각 update된다.",
+              "isCorrect": false,
+              "rationale": "feature map은 현재 입력과 weight로 계산된 중간 결과물일 뿐, 저장되어 학습되는 parameter가 아니다."
+            },
+            {
+              "text": "입력 이미지의 spatial 크기가 $100 \\times 100$이므로 filter 내부에는 입력 pixel마다 대응되는 10,000개의 weight parameter가 존재한다.",
+              "isCorrect": false,
+              "rationale": "filter 크기는 $3 \\times 3$이므로 weight parameter 수는 입력 이미지 크기와 무관하게 9개로 유지된다."
+            },
+            {
+              "text": "bias=False 조건이므로 feature map의 모든 원소 값이 0으로 초기화되어 학습 과정에서 변화하지 않는다.",
+              "isCorrect": false,
+              "rationale": "bias가 없어도 filter weight와 입력 간의 cross-correlation 계산 결과로 유의미한 feature map 값이 생성된다."
+            }
+          ],
+          "hint": "feature map은 입력과 weight의 연산 결과이며, filter weight는 입력의 모든 위치에서 공유된다."
+        },
+        {
+          "id": "239cffeb-8363-4da0-9534-b22e3bbb2f91:3",
+          "goalId": "sharing-and-update",
+          "pool": "practice",
+          "question": "mini-batch 학습 환경에서 Conv2d layer의 weight parameter update가 일어나는 시점에 대한 설명 중 가장 올바른 것은 무엇인가?\n\n- input shape: (N, 3, 28, 28)\n- out_channels: 32\n- groups: 1\n- kernel_size: 3\n- stride: 1\n- padding: 0\n- dilation: 1\n- bias: True",
+          "options": [
+            {
+              "text": "해당 mini-batch 전체의 forward와 loss 계산을 마친 후 backward()로 gradient를 모아 optimizer.step()을 호출할 때 update된다.",
+              "isCorrect": true,
+              "rationale": "Conv2d의 weight update는 filter가 spatial 영역을 훑을 때마다 일어나는 것이 아니라 mini-batch 단위의 optimization step에서 실행된다."
+            },
+            {
+              "text": "filter가 spatial 영역을 한 칸씩 sliding하며 cross-correlation 연산을 수행하는 순간마다 weight가 즉시 update된다.",
+              "isCorrect": false,
+              "rationale": "한 이미지 내 multi-location 연산 시 weight는 고정된 채 공유되며, 위치 이동 시마다 parameter가 바뀌지 않는다."
+            },
+            {
+              "text": "각 batch 샘플 내부의 RGB channel 계산이 끝날 때마다 해당 channel에 대응하는 weight만 분리하여 update된다.",
+              "isCorrect": false,
+              "rationale": "RGB 모든 channel의 계산 결과가 합쳐진 후 전체 loss에 기반하여 모든 weight가 동시에 update된다."
+            },
+            {
+              "text": "zero_grad()가 호출되는 순간 누적된 feature map 값에 비례하여 weight가 자동 update된다.",
+              "isCorrect": false,
+              "rationale": "`zero_grad()`는 이전 step의 gradient를 초기화하는 역할을 하며 parameter를 update하지 않는다."
+            }
+          ],
+          "hint": "sliding window 계산 과정과 Gradient Descent의 optimization step을 구별해야 한다."
+        },
+        {
+          "id": "239cffeb-8363-4da0-9534-b22e3bbb2f91:4",
+          "goalId": "parameters-and-features",
+          "pool": "check",
+          "question": "첫 번째 Conv2d layer의 출력 feature map이 두 번째 Conv2d layer의 입력으로 들어가는 연속된 구조가 있다. Layer 2의 weight parameter 수와 bias parameter 수로 올바른 것은 무엇인가?\n\n[Layer 2 조건]\n- input shape: (32, 26, 26) (Layer 1의 출력)\n- out_channels: 64\n- groups: 1\n- kernel_size: 3\n- stride: 1\n- padding: 0\n- dilation: 1\n- bias: True",
+          "options": [
+            {
+              "text": "weight parameter 18,432개, bias parameter 64개",
+              "isCorrect": true,
+              "rationale": "Layer 2의 input channel 수 $C_{in}=32$, output channel 수 $C_{out}=64$, kernel_size $3 \\times 3$이므로 weight 수는 $64 \\times 32 \\times 3 \\times 3 = 18,432$개이고, bias는 out_channels 수인 64개다."
+            },
+            {
+              "text": "weight parameter 576개, bias parameter 64개",
+              "isCorrect": false,
+              "rationale": "한 filter당 $32 \\times 3 \\times 3 = 288$개의 weight가 필요하며, 64개 filter가 있으므로 $64 \\times 3 \\times 3 = 576$개에 그치지 않는다."
+            },
+            {
+              "text": "weight parameter 18,432개, bias parameter 2,048개",
+              "isCorrect": false,
+              "rationale": "bias는 입력 channel 수($32$)와 출력 channel 수($64$)를 곱한 $2,048$개가 아니라 출력 channel 수인 $64$개만 존재한다."
+            },
+            {
+              "text": "weight parameter 43,264개, bias parameter 32개",
+              "isCorrect": false,
+              "rationale": "입력 feature map의 spatial 크기($26 \\times 26 = 676$)는 weight parameter 수 계산에 직접 곱해지지 않는다."
+            }
+          ],
+          "hint": "이전 layer의 output channel 수가 다음 layer의 input channel 수가 된다."
+        },
+        {
+          "id": "239cffeb-8363-4da0-9534-b22e3bbb2f91:6",
+          "goalId": "sharing-and-update",
+          "pool": "check",
+          "question": "Conv2d layer에서 bias parameter가 적용되는 범위(sharing scope)에 대한 설명으로 올바른 것은 무엇인가?\n\n- input shape: (3, 50, 50)\n- out_channels: 10\n- groups: 1\n- kernel_size: 5\n- stride: 1\n- padding: 0\n- dilation: 1\n- bias: True",
+          "options": [
+            {
+              "text": "출력 channel마다 1개의 bias parameter가 존재하며, 해당 filter가 생성하는 $46 \\times 46$ 모든 spatial 위치의 값에 동일하게 더해진다.",
+              "isCorrect": true,
+              "rationale": "Conv2d에서 bias=True일 때 bias parameter는 출력 channel당 1개(총 10개)이며, 한 filter가 만드는 feature map 전체 spatial 영역에 동일한 bias가 더해진다."
+            },
+            {
+              "text": "입력 RGB channel마다 1개씩 존재하여 총 3개의 bias가 spatial 위치 전체에 공유된다.",
+              "isCorrect": false,
+              "rationale": "bias는 입력 channel이 아니라 출력 channel(filter 개수)에 대응하여 설정된다."
+            },
+            {
+              "text": "feature map의 각 spatial pixel 위치마다 별도의 bias가 존재하여 총 $10 \\times 46 \\times 46 = 21,160$개의 bias parameter가 생성된다.",
+              "isCorrect": false,
+              "rationale": "bias는 spatial 위치마다 별도로 학습되는 것이 아니라 해당 channel 전체 공간 영역에서 공유된다."
+            },
+            {
+              "text": "10개의 서로 다른 filter가 1개의 공통 bias parameter를 공유하여 함께 학습한다.",
+              "isCorrect": false,
+              "rationale": "서로 다른 filter(출력 channel)는 각자 독립된 별개의 bias parameter를 갖는다."
+            }
+          ],
+          "hint": "bias parameter의 개수는 filter의 개수(out_channels)와 직접 연결된다."
+        },
+        {
+          "id": "239cffeb-8363-4da0-9534-b22e3bbb2f91:9",
+          "goalId": "parameters-and-features",
+          "pool": "check",
+          "question": "다음 두 Conv2d 모델 A와 B의 parameter 수 및 output feature map channel 수 비교로 올바른 것은 무엇인가?\n\n[모델 A]: input shape (3, 32, 32), out_channels 16, groups 1, kernel_size 3, stride 1, padding 0, dilation 1, bias True\n[모델 B]: input shape (6, 32, 32), out_channels 16, groups 1, kernel_size 3, stride 1, padding 0, dilation 1, bias True",
+          "options": [
+            {
+              "text": "모델 B의 weight parameter 수는 모델 A의 2배(864개 vs 432개)이지만, 두 모델의 output feature map channel 수는 16개로 동일하다.",
+              "isCorrect": true,
+              "rationale": "입력 channel이 3에서 6으로 2배 늘어났으므로 weight parameter 수($16 \\times 6 \\times 3 \\times 3 = 864$)는 2배가 되지만, output channel 수(out_channels=16)는 동일하다."
+            },
+            {
+              "text": "입력 channel이 2배가 되었으므로 모델 B의 output feature map channel 수도 32개로 늘어난다.",
+              "isCorrect": false,
+              "rationale": "output feature map channel 수는 out_channels 설정에 의해서만 결정되며 입력 channel 수와 직접 비례하여 바뀌지 않는다."
+            },
+            {
+              "text": "두 모델 모두 out_channels가 16이므로 weight parameter 수와 bias parameter 수가 완전히 동일하다.",
+              "isCorrect": false,
+              "rationale": "입력 channel 수가 다르면 각 filter 내부의 channel별 weight tensor 두께가 달라져 weight parameter 수가 변경된다."
+            },
+            {
+              "text": "모델 B는 입력 channel 수가 증가하여 bias parameter 수도 16개에서 32개로 증가한다.",
+              "isCorrect": false,
+              "rationale": "bias parameter 수는 out_channels 개수(16개)에만 의존하며 입력 channel 수의 영향으로 늘어나지 않는다."
+            }
+          ],
+          "hint": "입력 channel 수($C_{in}$)의 변경은 filter 한 개 내부의 weight 수에 영향을 주지만 output channel 수($C_{out}$)를 바꾸지는 않는다."
+        },
+        {
+          "id": "239cffeb-8363-4da0-9534-b22e3bbb2f91:11",
+          "goalId": null,
+          "pool": "check",
+          "question": "지도학습(supervised learning)으로 CNN을 학습시킬 때 filter weight가 학습되는 본질적인 목적 및 특징에 관한 설명으로 가장 올바른 것은 무엇인가?\n\n- input shape: (N, 3, 32, 32)\n- out_channels: 32\n- groups: 1\n- kernel_size: 3\n- stride: 1\n- padding: 0\n- dilation: 1\n- bias: True",
+          "options": [
+            {
+              "text": "예측값과 target 간의 loss를 줄이는 방향으로 gradient를 구해 weight와 bias를 조정하는 과정이다.",
+              "isCorrect": true,
+              "rationale": "지도학습 설정에서 CNN 학습의 목적은 정해진 정답 weight를 복사해 맞히는 것이 아니라 loss를 최소화하도록 parameter를 최적화하는 것이다."
+            },
+            {
+              "text": "학습 초기부터 사람이 정의한 정답 filter weight 값을 직접 주입받아 이를 그대로 복사하는 과정이다.",
+              "isCorrect": false,
+              "rationale": "지도학습은 정답 label과 loss를 통해 gradient를 계산하여 weight를 찾아가는 과정이며 외부 정답 weight를 직접 주입받지 않는다."
+            },
+            {
+              "text": "학습이 완료되면 32개 filter 모두에 대해 사람이 해석하기 쉬운 명확한 시각적 이름(예: '초록색 엣지 검출기')을 반드시 붙일 수 있다.",
+              "isCorrect": false,
+              "rationale": "학습된 모든 filter가 사람이 직관적으로 해석 가능한 패턴에만 반응하는 것은 아니다."
+            },
+            {
+              "text": "training loss를 0으로 만드는 데 성공하면 별도의 validation 검증 없이도 새로운 test 데이터에 대한 성능이 완벽하게 보장된다.",
+              "isCorrect": false,
+              "rationale": "training loss가 낮아지는 것만으로 새로운 데이터에서의 성능(일반화 성능)을 보장할 수 없으므로 validation 평가가 필요하다."
+            }
+          ],
+          "hint": "지도학습 최적화는 loss function의 gradient를 따라 weight를 변경하는 과정이다."
+        }
+      ],
+      "cards": [
+        {
+          "id": "0d730a31-28c4-413e-84e3-72f050840257:0",
+          "goalId": "parameters-and-features",
+          "front": "Conv2d에서 학습되는 parameter인 weight와 계산 결과인 feature map의 차이는 무엇인가?",
+          "back": "weight는 여러 입력에 재사용하기 위해 모델에 저장되는 parameter이고, feature map은 현재 입력과 weight로 계산한 중간 결과(intermediate result)이다."
+        },
+        {
+          "id": "0d730a31-28c4-413e-84e3-72f050840257:1",
+          "goalId": "parameters-and-features",
+          "front": "groups=1, stride=1, padding=0, dilation=1, bias=True 조건에서, RGB(3 channel) 입력에 $3 \\times 3$ filter 32개를 적용할 때 weight tensor의 shape과 총 weight 개수는?",
+          "back": "weight shape은 (32, 3, 3, 3)이며, 총 weight 개수는 $32 \\times 3 \\times 3 \\times 3 = 864$개이다."
+        },
+        {
+          "id": "0d730a31-28c4-413e-84e3-72f050840257:3",
+          "goalId": "sharing-and-update",
+          "front": "Conv2d에서 filter가 이미지 전체 영역을 이동하며 적용되는 spatial weight sharing(공간 weight sharing)의 개념은 무엇인가?",
+          "back": "동일한 filter의 weight 묶음을 이미지의 모든 공간 위치(spatial location)에서 재사용하여 계산하는 방식이다."
+        },
+        {
+          "id": "0d730a31-28c4-413e-84e3-72f050840257:4",
+          "goalId": "sharing-and-update",
+          "front": "Linear layer의 weight와 달리, Conv2d filter의 weight 하나는 입력의 어떤 위치 요소에 대응하는가?",
+          "back": "이미지의 절대적 위치가 아닌, 출력 channel, 입력 channel, 그리고 현재 입력 영역 안에서의 상대적 위치(relative position)에 대응한다."
+        },
+        {
+          "id": "0d730a31-28c4-413e-84e3-72f050840257:5",
+          "goalId": "sharing-and-update",
+          "front": "Conv2d(bias=True)에서 bias parameter가 공유되는 범위는 어디까지인가?",
+          "back": "서로 다른 filter끼리는 bias를 공유하지 않고(filter마다 독립된 bias 1개), 동일한 filter가 계산하는 모든 공간 위치(spatial location)에 동일한 bias 하나가 더해진다."
+        },
+        {
+          "id": "0d730a31-28c4-413e-84e3-72f050840257:6",
+          "goalId": "sharing-and-update",
+          "front": "CNN filter가 이미지 내 여러 공간 위치를 순회하며 계산할 때, filter의 weight parameter가 update되는 시점은 언제인가?",
+          "back": "공간 위치 하나를 계산할 때마다 바뀌는 것이 아니라, mini-batch의 forward와 loss 계산 후 backward()로 gradient를 구하고 optimizer.step()을 실행할 때 update된다."
+        },
+        {
+          "id": "0d730a31-28c4-413e-84e3-72f050840257:7",
+          "goalId": "parameters-and-features",
+          "front": "$32 \\times 32$ 크기의 RGB 이미지 1장에 $3 \\times 3$ filter 16개를 적용할 때(groups=1, stride=1, padding=0, dilation=1, bias=True), weight 개수, bias 개수, 출력 feature map의 shape은 각각 얼마인가?",
+          "back": "weight 개수는 $16 \\times 3 \\times 3 \\times 3 = 432$개, bias 개수는 16개, 출력 feature map shape은 (16, 30, 30)이다. (공간 크기: $32 - 3 + 1 = 30$)"
+        },
+        {
+          "id": "0d730a31-28c4-413e-84e3-72f050840257:9",
+          "goalId": null,
+          "front": "Conv2d layer 학습 시 training loss를 줄이는 방향으로 weight를 조정했다고 해서, validation 데이터에서도 예측 성능이 좋아졌다고 단정할 수 없는 이유는 무엇인가?",
+          "back": "training loss가 감소하는 것만으로 새로운 데이터에 대한 generalization 성능을 보장할 수 없으며, validation 데이터셋으로 별도 평가를 거쳐 확인해야 하기 때문이다."
+        }
+      ],
+      "provenance": {
+        "provider": "NotebookLM",
+        "notebookId": "50af2da4-e55d-416a-8664-867e04cccd34",
+        "sourceIds": [
+          "cb685d04-567f-488d-9b42-dcabb03283eb"
+        ],
+        "quizArtifactId": "239cffeb-8363-4da0-9534-b22e3bbb2f91",
+        "cardsArtifactId": "0d730a31-28c4-413e-84e3-72f050840257",
+        "exportedAt": "2026-10-28",
+        "sourceHashes": {
+          "learning/2026-10-27-cnn-filters": "ccece55795de8d16451a93d7c42923206739052704089c388bce3ec82982ff2b"
         }
       }
     }
