@@ -2,6 +2,9 @@
 
 Generated from public Markdown. Read AGENTS.md for ingest/query/lint; CHANGELOG.md for changes. Course references support briefing and stay outside the learning graph. Course/lesson identify the curriculum placement; topics identify related subjects.
 
+- [RNN의 time step과 layer: 반복과 쌓기를 구분하기](content/learning/2026-10-29-rnn-time-step-layer.md) — journal · 2026-10-29 · RNN을 이전 상태를 기억하는 Linear Regression으로 보아도 되는지 묻고, 같은 layer의 시간 반복과 서로 다른 layer의 연결을 구별한다.
+  Course: 딥러닝 → RNN과 LSTM 복습 (보충). Related topics: 딥러닝
+  Sources: 부트캠프 RNN 학습 대화 (2026-10-29); https://docs.pytorch.org/docs/stable/generated/torch.nn.RNN.html
 - [CNN filter는 무엇을 학습할까: weight sharing과 feature map](content/learning/2026-10-27-cnn-filters.md) — journal · 2026-10-27 · filter의 weight가 무엇에 대응하는지 묻고, 겹치는 영역의 계산과 RGB channel, feature map, parameter update를 구별한다.
   Course: 딥러닝 → CNN filter 복습 (보충). Related topics: 딥러닝
   Sources: 부트캠프 CNN filter 학습 대화 (2026-10-27); https://docs.pytorch.org/docs/stable/generated/torch.nn.Conv2d.html; https://docs.pytorch.org/tutorials/beginner/basics/optimization_tutorial.html

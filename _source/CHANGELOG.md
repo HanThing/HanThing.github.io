@@ -1,5 +1,10 @@
 # Knowledge changes
 
+## 2026-10-29
+
+- RNN 학습 대화의 질문 3개를 정리했다. hidden state 갱신의 affine transformation과 activation, time step 반복과 stacked layer, layer별 parameter를 구별했다. 숫자와 그림은 설명용이며 학습 완료나 실제 모델 실험으로 기록하지 않았다.
+- 공개 원고 기반 NotebookLM 퀴즈를 한국어로 재생성하고 퀴즈 7문항·카드 5장을 연결했다. 조건 누락·수식 오류·과도한 단정이 있는 항목은 제외하고 기존 복습 40세트의 내용·ID·버전을 보존했다.
+
 ## 2026-10-28
 
 - 10월 27일 CNN 학습 대화의 질문 13개를 아홉 질문 묶음으로 정리했다. filter의 weight와 feature map, 겹치는 입력 영역, RGB channel, bias의 공유 범위와 parameter update 시점을 구별했다. 수치 예시는 설명용이며 실제 모델 학습·성능 검증으로 기록하지 않았다.

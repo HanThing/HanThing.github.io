@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-28",
+  "generatedAt": "2026-10-29",
   "sets": [
     {
       "id": "loop-exit",
@@ -13639,6 +13639,276 @@
         "exportedAt": "2026-10-28",
         "sourceHashes": {
           "learning/2026-10-27-cnn-filters": "ccece55795de8d16451a93d7c42923206739052704089c388bce3ec82982ff2b"
+        }
+      }
+    },
+    {
+      "id": "rnn-time-step-layer",
+      "title": "RNN의 time step과 layer",
+      "version": "3fa2644cff82",
+      "noteIds": [
+        "learning/2026-10-29-rnn-time-step-layer"
+      ],
+      "goals": [
+        {
+          "id": "state-update",
+          "title": "affine transformation과 activation을 Linear Regression과 구별한다",
+          "version": "1"
+        },
+        {
+          "id": "time-and-layer",
+          "title": "time step 반복과 stacked layer 및 parameter 공유를 구별한다",
+          "version": "1"
+        }
+      ],
+      "questions": [
+        {
+          "id": "6d426e38-da7f-4649-bec8-4a2d7a2390de:0",
+          "goalId": "state-update",
+          "pool": "practice",
+          "question": "단방향 RNN의 한 layer에서 hidden state를 갱신하는 식 $h_t = \\tanh(W_x x_t + W_h h_{t-1} + b)$를 일반적인 Linear Regression 모델과 직접 동일시할 수 없는 가장 주된 이유는 무엇인가요?",
+          "options": [
+            {
+              "text": "affine transformation 계산 결과에 비선형 activation function인 $\\tanh$를 적용하여 다음 계산에 전달할 state를 생성하기 때문이다.",
+              "isCorrect": true,
+              "rationale": "RNN의 수식은 가중치 조합(affine transformation) 후 비선형 활성화 함수를 거쳐 다음 time step으로 전달될 state를 만들므로, 연속적인 target을 직접 예측하는 선형 회귀 모델과는 차이가 있습니다."
+            },
+            {
+              "text": "입력 $x_t$와 이전 hidden state $h_{t-1}$에 weight를 곱해 조합하는 가중합 연산 과정이 포함되지 않기 때문이다.",
+              "isCorrect": false,
+              "rationale": "괄호 내부의 $W_x x_t + W_h h_{t-1} + b$는 현재 입력과 이전 hidden state를 weight로 조합하는 연산으로, 식에 분명히 존재합니다."
+            },
+            {
+              "text": "time step이 진행될 때마다 weight $W_x$와 $W_h$가 매번 새로운 무작위 값으로 변경되기 때문이다.",
+              "isCorrect": false,
+              "rationale": "동일한 layer 안에서는 시간에 걸쳐 동일한 weight parameter를 반복 사용하여 연산합니다."
+            },
+            {
+              "text": "Linear Regression은 오직 scalar 입력만 처리할 수 있고 벡터나 행렬 연산을 다룰 수 없기 때문이다.",
+              "isCorrect": false,
+              "rationale": "Linear Regression 역시 다차원 벡터 및 행렬 연산으로 확장할 수 있으므로, 단순 다차원 연산 유무가 구별의 본질적인 원인은 아닙니다."
+            }
+          ],
+          "hint": "괄호 안의 연산 이후 적용되는 비선형 연산과 이 출력이 가지는 역할(state)을 생각해 보세요."
+        },
+        {
+          "id": "6d426e38-da7f-4649-bec8-4a2d7a2390de:2",
+          "goalId": "state-update",
+          "pool": "check",
+          "question": "단방향 RNN 연산에서 계산된 hidden state $h_t$와 모델의 최종 예측값(prediction)의 관계를 올바르게 설명한 것은 무엇인가요?",
+          "options": [
+            {
+              "text": "hidden state $h_t$는 다음 계산에 전달할 시퀀스의 상태이며, 목적에 맞는 별도의 output layer를 연결하여 최종 예측을 수행할 수 있다.",
+              "isCorrect": true,
+              "rationale": "hidden state는 순차 계산을 위한 내부 상태 저장 용도이며, 문제 목적에 맞게 별도의 output layer 등을 붙여 최종 예측을 구합니다."
+            },
+            {
+              "text": "hidden state $h_t$는 그 자체로 언제나 모델의 최종 예측 목표값(target)을 의미한다.",
+              "isCorrect": false,
+              "rationale": "hidden state가 곧바로 최종 예측값임을 의미하는 것은 아니며, 별도의 output 연산이 추가될 수 있습니다."
+            },
+            {
+              "text": "hidden state $h_t$는 시퀀스의 첫 번째 time step에서만 출력되며 이후 시점에서는 새로 계산되지 않는다.",
+              "isCorrect": false,
+              "rationale": "hidden state는 매 time step마다 현재 입력과 이전 state를 받아 새롭게 갱신됩니다."
+            },
+            {
+              "text": "RNN 내부 계산이 Linear Regression과 동일하므로 별도의 연산 없이 $h_t$가 항상 연속형 회귀 예측값이 된다.",
+              "isCorrect": false,
+              "rationale": "RNN 내부 갱신 연산은 Linear Regression 모델과 동일하지 않으며, $h_t$가 항상 직접적인 예측값으로 쓰이는 것도 아닙니다."
+            }
+          ],
+          "hint": "$h_t$의 역할이 정보를 전달하는 내부 state인지, 태스크의 최종 출력값인지 구분해 보세요."
+        },
+        {
+          "id": "6d426e38-da7f-4649-bec8-4a2d7a2390de:4",
+          "goalId": "state-update",
+          "pool": "practice",
+          "question": "PyTorch의 `torch.nn.RNN` 문서에 명시된 기본 activation function 모드와 관련 설정에 대한 설명으로 옳은 것은 무엇인가요?",
+          "options": [
+            {
+              "text": "기본 activation은 $\\tanh$이며 선택에 따라 `relu`도 사용할 수 있다.",
+              "isCorrect": true,
+              "rationale": "PyTorch RNN 공식 문서에서는 기본 activation으로 $\\tanh$를 제공하며, `nonlinearity='relu'` 설정을 통해 relu를 선택할 수 있다고 설명합니다."
+            },
+            {
+              "text": "기본 activation은 Linear Regression처럼 활성화 함수가 없는 항등 함수(identity)이다.",
+              "isCorrect": false,
+              "rationale": "기본 RNN layer는 활성화 함수가 없는 선형 연산이 아니라 기본적으로 $\\tanh$ 비선형 활성화 함수를 사용합니다."
+            },
+            {
+              "text": "입력 가중치용 bias와 hidden state 가중치용 bias는 통합될 수 없으며 PyTorch 식에서도 두 개의 별도 bias로 끝까지 분리된다.",
+              "isCorrect": false,
+              "rationale": "입력 쪽 bias와 hidden state 쪽 bias는 수식 정리 시 하나의 더해진 bias $b$로 합쳐서 표현할 수 있습니다."
+            },
+            {
+              "text": "PyTorch의 RNN은 비선형성을 배제하기 위해 오직 linear activation만을 지원한다.",
+              "isCorrect": false,
+              "rationale": "RNN은 비선형 관계 표현 및 state 유지를 위해 비선형 활성화 함수인 $\\tanh$ 또는 relu를 지원합니다."
+            }
+          ],
+          "hint": "PyTorch RNN 클래스의 디폴트 활성화 함수와 선택 가능한 옵션을 상기해 보세요."
+        },
+        {
+          "id": "6d426e38-da7f-4649-bec8-4a2d7a2390de:5",
+          "goalId": "time-and-layer",
+          "pool": "practice",
+          "question": "단방향 싱글 layer RNN(`num_layers=1`)에서 입력 sequence 길이가 3에서 5로 늘어날 때, time step과 weight parameter의 관계는 어떻게 되나요?",
+          "options": [
+            {
+              "text": "time step 수는 5로 늘어나지만, 연산에 사용되는 layer의 weight parameter는 매 시점 동일하게 반복 사용된다.",
+              "isCorrect": true,
+              "rationale": "같은 layer 내에서 sequence 길이가 늘어나 time step이 증가하더라도 동일한 layer의 weight를 시간에 걸쳐 재사용(unfolding)합니다."
+            },
+            {
+              "text": "time step이 5개가 되므로 서로 다른 weight parameter를 가진 5개의 독립된 layer가 자동으로 생성된다.",
+              "isCorrect": false,
+              "rationale": "시퀀스 길이가 늘어난다고 해서 layer의 개수가 늘어나거나 시점마다 다른 layer가 생기는 것은 아닙니다."
+            },
+            {
+              "text": "time step마다 weight가 계속 누적하여 곱해져 layer의 깊이가 5로 확장된다.",
+              "isCorrect": false,
+              "rationale": "time step은 시간 축의 반복일 뿐 layer 축의 수직 깊이가 늘어나는 것이 아닙니다."
+            },
+            {
+              "text": "매 time step마다 optimizer에 의해 weight parameter가 새로 초기화되어 매번 다른 값을 갖는다.",
+              "isCorrect": false,
+              "rationale": "time step마다 parameter가 초기화되거나 달라지지 않으며, 같은 parameter를 시간에 따라 공유합니다."
+            }
+          ],
+          "hint": "시간 축 방향의 unfolding 과정에서 동일한 가중치(weight)가 유지되는지 생각해 보세요."
+        },
+        {
+          "id": "6d426e38-da7f-4649-bec8-4a2d7a2390de:6",
+          "goalId": "time-and-layer",
+          "pool": "practice",
+          "question": "2개의 layer를 쌓은 기본 stacked 단방향 RNN (`num_layers=2`) 구조에서 time step $t$일 때 layer 2가 전달받는 입력값으로 올바른 것은 무엇인가요?",
+          "options": [
+            {
+              "text": "동일한 time step $t$에서 아래쪽 layer 1이 출력한 hidden state $h_t^{(1)}$이다.",
+              "isCorrect": true,
+              "rationale": "stacked RNN 구조에서 위쪽 layer는 동일 시점 아래쪽 layer의 출력을 자신의 입력으로 전달받습니다."
+            },
+            {
+              "text": "이전 time step $t-1$에서 layer 2가 생성했던 이전 hidden state $h_{t-1}^{(2)}$만 단독 입력으로 받는다.",
+              "isCorrect": false,
+              "rationale": "$h_{t-1}^{(2)}$는 이전 시점의 자체 상태일 뿐이며, 현재 시점의 외부 입력으로 아래 layer 1의 출력인 $h_t^{(1)}$도 함께 받습니다."
+            },
+            {
+              "text": "원본 입력 sequence의 현재 시점 입력인 $x_t$가 layer 1을 거치지 않고 직접 들어온다.",
+              "isCorrect": false,
+              "rationale": "원본 입력 $x_t$는 첫 번째 layer(layer 1)의 입력으로 들어가며, layer 2는 layer 1의 출력을 받습니다."
+            },
+            {
+              "text": "layer 1의 $h_t^{(1)}$과 layer 2의 $h_t^{(2)}$를 합산한 무작위 벡터이다.",
+              "isCorrect": false,
+              "rationale": "layer 2는 아래 layer 1의 현재 출력 $h_t^{(1)}$을 입력으로 고정하여 받아 연산을 수행합니다."
+            }
+          ],
+          "hint": "stacked 구조의 그림에서 위쪽 방향 화살표가 어디에서 출발하여 어느 layer로 들어가는지 확인해 보세요."
+        },
+        {
+          "id": "6d426e38-da7f-4649-bec8-4a2d7a2390de:7",
+          "goalId": "time-and-layer",
+          "pool": "check",
+          "question": "입력 sequence 길이가 3이고 `num_layers=2`인 단방향 stacked RNN을 구성할 때, time step과 layer 및 weight parameter의 개수 관계에 대한 설명으로 옳은 것은 무엇인가요?",
+          "options": [
+            {
+              "text": "layer 수는 2개, time step 수는 3개이며, 각 layer는 별도의 weight parameter 묶음을 갖는다.",
+              "isCorrect": true,
+              "rationale": "`num_layers=2`는 2개의 layer를 의미하며 각 layer는 고유의 weight를 가집니다. 각 layer는 3번의 time step 동안 자신의 weight를 반복 사용합니다."
+            },
+            {
+              "text": "layer 수 2와 time step 수 3이 곱해져 총 6개의 서로 다른 layer별 weight parameter 묶음이 존재한다.",
+              "isCorrect": false,
+              "rationale": "time step이 늘어난다고 별개의 layer weight가 생기지 않으므로 weight 묶음은 layer 개수인 2개입니다."
+            },
+            {
+              "text": "time step마다 별도의 weight가 할당되므로 총 3개의 weight parameter 묶음이 필요하다.",
+              "isCorrect": false,
+              "rationale": "time step 축으로는 동일 layer의 weight를 공유하므로 시점별로 별도의 weight가 생성되지 않습니다."
+            },
+            {
+              "text": "layer를 쌓더라도 하나의 동일한 weight parameter가 모든 layer와 time step에 공동 사용된다.",
+              "isCorrect": false,
+              "rationale": "기본 stacked RNN에서 서로 다른 layer는 각자 별도의 weight parameter 묶음을 사용합니다."
+            }
+          ],
+          "hint": "time step 축(수평)에서는 weight가 공유되고, layer 축(수직)에서는 layer별로 독립된 weight가 존재함을 상기하세요."
+        },
+        {
+          "id": "6d426e38-da7f-4649-bec8-4a2d7a2390de:8",
+          "goalId": "time-and-layer",
+          "pool": "check",
+          "question": "RNN에서 시간을 따른 반복(time step)과 layer를 쌓는 구조(layer)를 구별하는 기준으로 가장 적절한 설명은 무엇인가요?",
+          "options": [
+            {
+              "text": "시간을 따라 진행할 때는 동일한 layer의 weight를 재사용하고, layer를 쌓을 때는 layer마다 별도의 weight parameter를 사용한다.",
+              "isCorrect": true,
+              "rationale": "time step 방향은 같은 layer의 파라미터를 시간에 걸쳐 반복 적용하는 것이고, layer 방향은 별도의 파라미터를 가진 연산 단위를 수직으로 연결하는 것입니다."
+            },
+            {
+              "text": "시간을 따라 진행할 때 weight parameter 묶음이 새로 추가되고, layer를 쌓을 때는 기존 weight를 재사용한다.",
+              "isCorrect": false,
+              "rationale": "시간 축에서 파라미터가 공유(재사용)되고, layer 축에서 별도의 파라미터 묶음이 사용되므로 설명이 반대로 되어 있습니다."
+            },
+            {
+              "text": "time step이 늘어나면 PyTorch의 `num_layers` 옵션 값이 커지고, layer를 쌓으면 sequence 길이 값이 커진다.",
+              "isCorrect": false,
+              "rationale": "`num_layers`는 layer의 개수를 지정하는 파라미터이며, sequence 길이는 time step 수에 대응합니다."
+            },
+            {
+              "text": "time step은 입력을 위쪽(수직)으로 전달하는 축이고, layer는 입력을 오른쪽(수평)으로 전달하는 축이다.",
+              "isCorrect": false,
+              "rationale": "오른쪽(수평) 축이 시간의 흐름(time step)이고, 위쪽(수직) 축이 layer를 쌓는 방향입니다."
+            }
+          ],
+          "hint": "수평 축(시간)과 수직 축(층)에서 weight parameter가 공유되는지, 새로 만들어지는지의 차이를 생각해 보세요."
+        }
+      ],
+      "cards": [
+        {
+          "id": "ac308113-adff-407c-b612-d780b8a2b155:1",
+          "goalId": "state-update",
+          "front": "현재 입력 $x_t$, 이전 hidden state $h_{t-1}$, 가중치 $W_x, W_h$, 바이어스 $b$가 주어졌을 때, 기본 tanh RNN의 hidden state $h_t$ 갱신 수식은 무엇인가?",
+          "back": "$h_t = \\tanh(W_x x_t + W_h h_{t-1} + b)$"
+        },
+        {
+          "id": "ac308113-adff-407c-b612-d780b8a2b155:3",
+          "goalId": "time-and-layer",
+          "front": "RNN 구조에서 time step 축과 layer 축의 차이는 각각 무엇을 나타내는가?",
+          "back": "time step은 sequence에서 몇 번째 입력을 처리하는지(시간 흐름에 따른 순차 반복)를 나타내며, layer는 입력을 받아서 처리하는 연산 단위의 수직적 계층 구조를 나타낸다."
+        },
+        {
+          "id": "ac308113-adff-407c-b612-d780b8a2b155:4",
+          "goalId": "time-and-layer",
+          "front": "단일 RNN layer가 여러 time step에 걸쳐 sequence 입력을 순차적으로 처리할 때, 각 time step에서 사용하는 weight parameter의 관계는 어떠한가?",
+          "back": "동일한 layer 내에서는 모든 time step에 걸쳐 동일한 weight parameter를 재사용(공유)한다."
+        },
+        {
+          "id": "ac308113-adff-407c-b612-d780b8a2b155:5",
+          "goalId": "time-and-layer",
+          "front": "기본 stacked RNN 구조에서 아래 layer 1과 그 위에 쌓인 layer 2가 사용하는 weight parameter의 관계는 어떠한가?",
+          "back": "서로 다른 layer는 각층마다 별도의 weight parameter 묶음을 독립적으로 사용한다."
+        },
+        {
+          "id": "ac308113-adff-407c-b612-d780b8a2b155:6",
+          "goalId": "time-and-layer",
+          "front": "PyTorch의 `torch.nn.RNN` 설정에서 입력 sequence의 길이와 쌓아 올린 RNN layer의 수는 각각 어떤 하이퍼파라미터/상태에 대응하는가?",
+          "back": "입력 sequence의 길이는 처리하는 time step의 수에 대응하고, layer의 수는 `num_layers` 설정값에 대응한다."
+        }
+      ],
+      "provenance": {
+        "provider": "NotebookLM",
+        "notebookId": "876e222e-f483-4e48-8ac1-870d0e049d5b",
+        "sourceIds": [
+          "b43aff94-7921-40a9-9305-3053efaf0932"
+        ],
+        "quizArtifactId": "6d426e38-da7f-4649-bec8-4a2d7a2390de",
+        "cardsArtifactId": "ac308113-adff-407c-b612-d780b8a2b155",
+        "exportedAt": "2026-10-29",
+        "sourceHashes": {
+          "learning/2026-10-29-rnn-time-step-layer": "7279b138a93d3ada4f6e7a81ceb3d96b6cf4434ad6d8c4942a8c2eedc6715804"
         }
       }
     }

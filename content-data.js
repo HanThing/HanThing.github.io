@@ -145,6 +145,32 @@ window.HANTHING_CONTENT = {
   ],
   "notes": [
     {
+      "id": "learning/2026-10-29-rnn-time-step-layer",
+      "title": "RNN의 time step과 layer: 반복과 쌓기를 구분하기",
+      "description": "RNN을 이전 상태를 기억하는 Linear Regression으로 보아도 되는지 묻고, 같은 layer의 시간 반복과 서로 다른 layer의 연결을 구별한다.",
+      "date": "2026-10-29",
+      "published": "2026-10-29",
+      "type": "journal",
+      "topics": [
+        "딥러닝"
+      ],
+      "courseId": "deep-learning",
+      "lessonId": "rnn-lstm-review",
+      "url": "/notes/learning/2026-10-29-rnn-time-step-layer",
+      "links": [
+        "learning/2026-10-26-rnn-lstm-state",
+        "data/numpy-linear-layers"
+      ],
+      "relatedReasons": {
+        "learning/2026-10-26-rnn-lstm-state": "같은 parameter를 시간에 걸쳐 반복 사용하는 unfolding에서 출발해 layer 축을 따로 구분한다.",
+        "data/numpy-linear-layers": "weight와 bias로 출력을 만드는 affine transformation과 여러 layer의 연결을 복습한다."
+      },
+      "sources": [
+        "부트캠프 RNN 학습 대화 (2026-10-29)",
+        "https://docs.pytorch.org/docs/stable/generated/torch.nn.RNN.html"
+      ]
+    },
+    {
       "id": "learning/2026-10-27-cnn-filters",
       "title": "CNN filter는 무엇을 학습할까: weight sharing과 feature map",
       "description": "filter의 weight가 무엇에 대응하는지 묻고, 겹치는 영역의 계산과 RGB channel, feature map, parameter update를 구별한다.",
@@ -2041,6 +2067,36 @@ window.HANTHING_CONTENT = {
     }
   ],
   "questions": [
+    {
+      "id": "learning/2026-10-29-rnn-time-step-layer#질문-rnn-내부에서는-이전-상태를-기억하는-linear-regression이-계산되는가",
+      "title": "RNN 내부에서는 이전 상태를 기억하는 Linear Regression이 계산되는가?",
+      "url": "/notes/learning/2026-10-29-rnn-time-step-layer#질문-rnn-내부에서는-이전-상태를-기억하는-linear-regression이-계산되는가",
+      "topic": "딥러닝",
+      "sourceTitle": "RNN의 time step과 layer: 반복과 쌓기를 구분하기",
+      "context": "현재 입력뿐 아니라 이전 hidden state도 다음 계산에 들어간다는 설명을 듣고, 이를 이전 상태를 기억하는 Linear Regression이라고 표현했다.",
+      "intent": "익숙한 weight·bias 계산으로 RNN의 내부 연산을 이해하려는 질문이다.",
+      "answer": "현재 입력과 이전 hidden state를 weight로 조합한다는 연결은 맞다. 다만 기본 RNN의 hidden state 갱신은 affine transformation 뒤에 nonlinear activation을 적용하는 연산이다. 이 계산 자체를 Linear Regression 모델이라고 부르지는 않는다."
+    },
+    {
+      "id": "learning/2026-10-29-rnn-time-step-layer#질문-rnn에서-layer라는-개념이-이해되지-않는다",
+      "title": "RNN에서 layer라는 개념이 이해되지 않는다",
+      "url": "/notes/learning/2026-10-29-rnn-time-step-layer#질문-rnn에서-layer라는-개념이-이해되지-않는다",
+      "topic": "딥러닝",
+      "sourceTitle": "RNN의 time step과 layer: 반복과 쌓기를 구분하기",
+      "context": "이전 state를 받아 다음 state를 만드는 과정을 따라가다가 layer가 무엇인지 물었다. 시간에 따른 반복과 layer를 쌓는 구조를 구별하는 설명이 필요했다.",
+      "intent": "계산 그림에서 무엇이 같은 layer의 반복이고 무엇이 별도의 layer인지 확인하려는 질문이다.",
+      "answer": "time step은 sequence에서 몇 번째 입력을 처리하는지를 나타낸다. layer는 입력을 받아 결과를 만드는 연산 단위다. RNN layer 하나로 세 입력을 처리하면 같은 layer를 세 time step에 걸쳐 사용하는 것이다. 세 입력을 처리했다고 layer가 세 개 생기지 않는다."
+    },
+    {
+      "id": "learning/2026-10-29-rnn-time-step-layer#질문-layer를-더-쉽게-설명해-달라",
+      "title": "layer를 더 쉽게 설명해 달라",
+      "url": "/notes/learning/2026-10-29-rnn-time-step-layer#질문-layer를-더-쉽게-설명해-달라",
+      "topic": "딥러닝",
+      "sourceTitle": "RNN의 time step과 layer: 반복과 쌓기를 구분하기",
+      "context": "time step과 layer의 구분을 들은 뒤에도 더 쉬운 설명을 요청했다.",
+      "intent": "여러 기호에 앞서 한 계산의 결과가 다음 계산의 입력이 된다는 관계를 숫자로 확인하려는 요청이다.",
+      "answer": "입력 2를 첫 연산 ×3+1에 넣어 7을 만들고, 그 결과를 다른 연산 ×2+4에 넣어 18을 만들면 두 연산을 차례로 연결한 것이다. 반면 RNN에서 입력을 하나씩 처리하며 같은 layer를 다시 쓰는 것은 시간에 따른 반복이다."
+    },
     {
       "id": "learning/2026-10-27-cnn-filters#질문-filter가-weight인가-rgb마다-다른-weight가-있는가",
       "title": "filter가 weight인가? RGB마다 다른 weight가 있는가?",
