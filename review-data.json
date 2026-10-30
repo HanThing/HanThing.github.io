@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-29",
+  "generatedAt": "2026-10-30",
   "sets": [
     {
       "id": "loop-exit",
@@ -13909,6 +13909,231 @@
         "exportedAt": "2026-10-29",
         "sourceHashes": {
           "learning/2026-10-29-rnn-time-step-layer": "7279b138a93d3ada4f6e7a81ceb3d96b6cf4434ad6d8c4942a8c2eedc6715804"
+        }
+      }
+    },
+    {
+      "id": "lstm-input-output-shapes",
+      "title": "LSTM의 input과 반환값",
+      "version": "2aa97cfff45b",
+      "noteIds": [
+        "learning/2026-10-30-lstm-input-output-shapes"
+      ],
+      "goals": [
+        {
+          "id": "input-axes",
+          "title": "input과 indexing 및 Linear의 축을 읽는다",
+          "version": "1"
+        },
+        {
+          "id": "layer-time",
+          "title": "마지막 layer와 마지막 time step 및 반환 state를 구별한다",
+          "version": "1"
+        }
+      ],
+      "questions": [
+        {
+          "id": "3c8ea4c7-6206-4722-a676-80281aeaaf2a:0",
+          "goalId": "input-axes",
+          "pool": "practice",
+          "question": "`batch_first=True`, 단방향, `proj_size=0`, `dropout=0` 조건의 PyTorch LSTM에서 입력 텐서 `x = torch.tensor([[[20.0], [21.0], [19.0]]])` (shape: `(1, 3, 1)`)를 모델에 입력할 때, `x[0]` 인덱싱 결과의 의미와 shape로 올바른 것은 무엇입니까?",
+          "options": [
+            {
+              "text": "첫 번째 batch 샘플의 모든 time step과 feature를 포함하며 shape는 `(3, 1)`이다.",
+              "isCorrect": true,
+              "rationale": "`(batch, time, feature)` 구조에서 첫 번째 축 인덱스 `0`을 선택하면 batch 차원이 제거되어 3개의 time step과 각 feature 1개를 포함하는 `(3, 1)` shape가 남습니다."
+            },
+            {
+              "text": "첫 번째 time step의 모든 batch와 feature를 선택한 것으로 shape는 `(1, 1)`이다.",
+              "isCorrect": false,
+              "rationale": "첫 번째 time step만 선택하려면 `x[:, 0]` 형태의 인덱싱이 사용되어야 하며, `x[0]`은 첫 번째 batch 샘플 전체를 가리킵니다."
+            },
+            {
+              "text": "전체 dataset의 전체 행 수를 선택한 것으로 shape는 `(3,)`이다.",
+              "isCorrect": false,
+              "rationale": "`x[0]`의 결과는 time step 3과 feature 1이 남아 2차원 텐서 `(3, 1)`이 되며, sequence length 3이 전체 dataset의 행 수를 의미하는 것도 아닙니다."
+            },
+            {
+              "text": "첫 번째 feature 스칼라 값 `20.0`만 선택된다.",
+              "isCorrect": false,
+              "rationale": "스칼라 값 `20.0`을 얻으려면 `x[0, 0, 0]`과 같이 3개의 축 인덱스를 모두 지정해야 합니다."
+            }
+          ],
+          "hint": "`(batch, time, feature)` 축 순서에서 첫 번째 축 인덱스 0을 지정했을 때 남아있는 축들의 수와 의미를 고려해 보세요."
+        },
+        {
+          "id": "3c8ea4c7-6206-4722-a676-80281aeaaf2a:7",
+          "goalId": "input-axes",
+          "pool": "check",
+          "question": "입력 shape가 `(2, 48, 1)`이고 `input_size=1`, `hidden_size=32`, `num_layers=2`, `batch_first=True`, 단방향 설정인 LSTM의 `output` 텐서(shape: `(2, 48, 32)`)에서 마지막 time step의 hidden state만 추출하기 위해 `output[:, -1, :]` 슬라이싱을 수행했을 때, 결과 텐서의 shape는 무엇입니까?",
+          "options": [
+            {
+              "text": "`(2, 32)`",
+              "isCorrect": true,
+              "rationale": "` output` 텐서 `(2, 48, 32)`에서 가운데 time 축 인덱스로 `-1`을 지정하면 해당 차원이 인덱싱되어 제거되므로 `(2, 32)`가 남습니다."
+            },
+            {
+              "text": "`(2, 48, 1)`",
+              "isCorrect": false,
+              "rationale": "`Linear(32, 1)`을 통과한 후 전체 time step을 유지했을 때의 shape이며, `output[:, -1, :]` 슬라이싱 직후의 shape가 아닙니다."
+            },
+            {
+              "text": "`(2, 1, 32)`",
+              "isCorrect": false,
+              "rationale": "`output[:, -1:, :]`와 같이 범위 슬라이싱을 사용할 때 차원이 유지되어 `(2, 1, 32)`가 되지만, 단일 인덱스 `output[:, -1, :]`는 해당 차원을 축소시켜 `(2, 32)`가 됩니다."
+            },
+            {
+              "text": "`(48, 32)`",
+              "isCorrect": false,
+              "rationale": "batch 차원(2)은 유지되어야 하며, 제거된 것은 time step 차원(48)입니다."
+            }
+          ],
+          "hint": "`(batch, time, feature)` 형태인 `(2, 48, 32)` 텐서에서 time 축의 특정 단일 인덱스만 선택할 때 차원 수가 어떻게 달라지는지 계산해 보세요."
+        },
+        {
+          "id": "3c8ea4c7-6206-4722-a676-80281aeaaf2a:2",
+          "goalId": "layer-time",
+          "pool": "practice",
+          "question": "`input_size=1`, `hidden_size=4`, `num_layers=1`, `batch_first=True`, 단방향, `proj_size=0`, `dropout=0` 조건의 PyTorch LSTM에 shape가 `(1, 3, 1)`인 입력을 전달했을 때, 모델의 반환값 `output`과 `h_n`의 shape 조합으로 올바른 것은 무엇입니까?",
+          "options": [
+            {
+              "text": "`output`은 `(1, 3, 4)`, `h_n`은 `(1, 1, 4)`이다.",
+              "isCorrect": true,
+              "rationale": "`output`은 `batch_first=True`에 의해 `(batch, time, hidden_size)`인 `(1, 3, 4)`가 되고, `h_n`은 `(num_layers, batch, hidden_size)` 축을 따르므로 `(1, 1, 4)`가 됩니다."
+            },
+            {
+              "text": "`output`은 `(1, 3, 4)`, `h_n`은 `(1, 3, 4)`이다.",
+              "isCorrect": false,
+              "rationale": "`h_n`은 각 layer의 '마지막 time step' hidden state만 담으므로 time 축의 크기가 포함되지 않고 `num_layers` 축을 가집니다."
+            },
+            {
+              "text": "`output`은 `(3, 1, 4)`, `h_n`은 `(1, 1, 4)`이다.",
+              "isCorrect": false,
+              "rationale": "`batch_first=True` 설정 시 `output`의 첫 번째 축은 time이 아니라 batch가 되므로 `(1, 3, 4)` 형태여야 합니다."
+            },
+            {
+              "text": "`output`은 `(1, 3, 4)`, `h_n`은 `(1, 4, 1)`이다.",
+              "isCorrect": false,
+              "rationale": "`h_n`의 축 순서는 `(num_layers, batch, hidden_size)`이므로 `(1, 1, 4)` 형태가 올바릅니다."
+            }
+          ],
+          "hint": "`batch_first=True` 옵션은 `output`의 축 순서에는 적용되지만 `h_n`의 첫 번째 축(`num_layers`)을 batch 축으로 변경하지는 않는다는 점에 유의하세요."
+        },
+        {
+          "id": "3c8ea4c7-6206-4722-a676-80281aeaaf2a:5",
+          "goalId": "layer-time",
+          "pool": "check",
+          "question": "`batch_first=True`, 단방향, `proj_size=0`, `dropout=0` 조건에서 2개의 layer를 쌓은 LSTM 모델(`num_layers=2`)이 작동할 때, 동일한 time step에서 첫 번째 layer가 두 번째 layer(위쪽 layer)로 전달하는 값은 무엇입니까?",
+          "options": [
+            {
+              "text": "동일한 time step에서의 첫 번째 layer hidden state",
+              "isCorrect": true,
+              "rationale": "LSTM을 여러 층으로 쌓을 때 아래 layer에서 위 layer로(세로 방향) 전달되는 입력 데이터는 해당 time step에서의 hidden state입니다."
+            },
+            {
+              "text": "동일한 time step에서의 첫 번째 layer cell state",
+              "isCorrect": false,
+              "rationale": "cell state는 수평 방향(같은 layer의 다음 time step)으로만 전달되며, 위쪽 layer로 전달되지 않습니다."
+            },
+            {
+              "text": "첫 번째 layer의 마지막 time step hidden state",
+              "isCorrect": false,
+              "rationale": "위쪽 layer의 계산 입력으로 들어가는 것은 마지막 time step만이 아니라 각 time step별로 순차적으로 전달되는 hidden state입니다."
+            },
+            {
+              "text": "원본 입력 텐서 `x`의 해당 time step 값",
+              "isCorrect": false,
+              "rationale": "두 번째 layer는 원본 입력 `x` 대신 첫 번째 layer가 출력한 hidden state를 자신의 입력으로 전달받습니다."
+            }
+          ],
+          "hint": "수직 방향(layer를 위로 쌓는 방향)으로 다음 층 계산의 입력(x)으로 전달되는 state의 종류가 무엇인지 생각해 보세요."
+        }
+      ],
+      "cards": [
+        {
+          "id": "592c70ab-2b95-45c9-a0b8-0680ac4dd196:3",
+          "goalId": "input-axes",
+          "front": "`batch_first=True`일 때 PyTorch LSTM 입력 텐서 `x`의 기본 축(axis) 순서는 무엇인가?",
+          "back": "`(batch, time, feature)`"
+        },
+        {
+          "id": "592c70ab-2b95-45c9-a0b8-0680ac4dd196:4",
+          "goalId": "input-axes",
+          "front": "입력 텐서 `x`가 `(1, 3, 1)` 크기일 때, `x[0]`이 나타내는 선택 범위와 shape는?",
+          "back": "첫 번째 sample(batch)의 모든 time step과 feature를 포함하는 sequence 전체이며, shape는 `(3, 1)`이다."
+        },
+        {
+          "id": "592c70ab-2b95-45c9-a0b8-0680ac4dd196:5",
+          "goalId": "input-axes",
+          "front": "shape가 `(1, 3, 1)`인 입력 텐서 `x`에서 `x[0, 1]`을 인덱싱했을 때의 shape와 의미는?",
+          "back": "첫 번째 batch의 두 번째 time step에 해당하는 feature 묶음이며, shape는 `(1,)`이다."
+        },
+        {
+          "id": "592c70ab-2b95-45c9-a0b8-0680ac4dd196:8",
+          "goalId": "input-axes",
+          "front": "입력 텐서 shape가 `(2, 48, 1)`일 때, LSTM 설정값 `input_size=1`과 일치해야 하는 축은 무엇인가?",
+          "back": "입력 텐서의 마지막 축인 feature 크기 (1)."
+        },
+        {
+          "id": "592c70ab-2b95-45c9-a0b8-0680ac4dd196:9",
+          "goalId": "input-axes",
+          "front": "PyTorch LSTM의 `input_size` 매개변수는 입력 텐서의 전체 shape `(batch, time, feature)`와 동일한 개념인가?",
+          "back": "아니다. `input_size`는 batch나 time 축을 제외한 오직 feature 차원의 크기만을 의미한다."
+        },
+        {
+          "id": "592c70ab-2b95-45c9-a0b8-0680ac4dd196:12",
+          "goalId": "layer-time",
+          "front": "LSTM을 설명할 때 '마지막 layer'와 '마지막 time step'의 방향상 차이는 무엇인가?",
+          "back": "'마지막 layer'는 층(수직) 방향의 끝이고, '마지막 time step'은 시간(수평) 방향의 끝이다."
+        },
+        {
+          "id": "592c70ab-2b95-45c9-a0b8-0680ac4dd196:15",
+          "goalId": "layer-time",
+          "front": "`batch_first=True`, 단방향, `proj_size=0` 조건일 때 LSTM 반환값 `output`이 담고 있는 데이터 범위는?",
+          "back": "**마지막 layer**의 **모든 time step**에 대한 hidden state."
+        },
+        {
+          "id": "592c70ab-2b95-45c9-a0b8-0680ac4dd196:16",
+          "goalId": "layer-time",
+          "front": "`batch_first=True`, 단방향, `proj_size=0`일 때 반환값 `output`의 shape는?",
+          "back": "`(batch, time, hidden_size)`"
+        },
+        {
+          "id": "592c70ab-2b95-45c9-a0b8-0680ac4dd196:20",
+          "goalId": "layer-time",
+          "front": "LSTM 반환값 중 하나인 `output` 텐서에 cell state 값이 포함되어 있는가?",
+          "back": "포함되어 있지 않다. `output`은 hidden state 정보만 담고 있다."
+        },
+        {
+          "id": "592c70ab-2b95-45c9-a0b8-0680ac4dd196:28",
+          "goalId": "input-axes",
+          "front": "PyTorch의 `nn.Linear(in_features, out_features)` 모듈은 N차원 입력 텐서의 어느 축에 적용되는가?",
+          "back": "텐서의 **마지막 축** (feature 차원)."
+        },
+        {
+          "id": "592c70ab-2b95-45c9-a0b8-0680ac4dd196:29",
+          "goalId": "input-axes",
+          "front": "shape가 `(2, 48, 32)`인 LSTM output 텐서에 `nn.Linear(32, 1)`을 적용하면 출력 shape는?",
+          "back": "`(2, 48, 1)`"
+        },
+        {
+          "id": "592c70ab-2b95-45c9-a0b8-0680ac4dd196:39",
+          "goalId": "layer-time",
+          "front": "`batch_first=True` 설정 시 `output[0]`과 `h_n[0]`의 첫 번째 인덱스 `0`은 동일한 의미인가?",
+          "back": "아니다. `output[0]`의 `0`은 첫 번째 batch 인덱스를 가리키지만, `h_n[0]`의 `0`은 첫 번째 layer 인덱스를 가리킨다."
+        }
+      ],
+      "provenance": {
+        "provider": "NotebookLM",
+        "notebookId": "b4560702-b6c5-43fc-af2c-db3284637432",
+        "sourceIds": [
+          "0efcb472-3484-4647-8fe9-bf0fccc0b72d"
+        ],
+        "quizArtifactId": "3c8ea4c7-6206-4722-a676-80281aeaaf2a",
+        "cardsArtifactId": "592c70ab-2b95-45c9-a0b8-0680ac4dd196",
+        "exportedAt": "2026-10-30",
+        "sourceHashes": {
+          "learning/2026-10-30-lstm-input-output-shapes": "9562788dc842aff0667a93ebbd068c9f25fd7ade130797de0ee7def6bb4dab8f"
         }
       }
     }

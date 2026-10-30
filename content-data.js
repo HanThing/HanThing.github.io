@@ -145,6 +145,35 @@ window.HANTHING_CONTENT = {
   ],
   "notes": [
     {
+      "id": "learning/2026-10-30-lstm-input-output-shapes",
+      "title": "LSTM의 입력과 반환값: sequence, 마지막 layer와 마지막 time step",
+      "description": "작은 입력의 실제 값부터 따라가며 input_size 설정과 input shape, output과 h_n·c_n이 모으는 축을 구별한다.",
+      "date": "2026-10-30",
+      "published": "2026-10-30",
+      "type": "journal",
+      "topics": [
+        "딥러닝"
+      ],
+      "courseId": "deep-learning",
+      "lessonId": "rnn-lstm-review",
+      "url": "/notes/learning/2026-10-30-lstm-input-output-shapes",
+      "links": [
+        "data/numpy-array-axes",
+        "learning/2026-10-29-rnn-time-step-layer",
+        "learning/2026-10-26-rnn-lstm-state"
+      ],
+      "relatedReasons": {
+        "learning/2026-10-29-rnn-time-step-layer": "시간 방향의 반복과 layer를 쌓는 방향을 구별한 뒤 LSTM 반환값의 축에 적용한다.",
+        "learning/2026-10-26-rnn-lstm-state": "hidden state와 cell state를 구별하는 식을 작은 숫자 예시의 계산에 사용한다.",
+        "data/numpy-array-axes": "배열의 각 축을 주소로 읽는 방법을 batch·time·feature 인덱싱에 적용한다."
+      },
+      "sources": [
+        "부트캠프 LSTM 학습 대화 (2026-10-30)",
+        "https://docs.pytorch.org/docs/stable/generated/torch.nn.LSTM.html",
+        "https://docs.pytorch.org/docs/stable/generated/torch.nn.Linear.html"
+      ]
+    },
+    {
       "id": "learning/2026-10-29-rnn-time-step-layer",
       "title": "RNN의 time step과 layer: 반복과 쌓기를 구분하기",
       "description": "RNN을 이전 상태를 기억하는 Linear Regression으로 보아도 되는지 묻고, 같은 layer의 시간 반복과 서로 다른 layer의 연결을 구별한다.",
@@ -2067,6 +2096,56 @@ window.HANTHING_CONTENT = {
     }
   ],
   "questions": [
+    {
+      "id": "learning/2026-10-30-lstm-input-output-shapes#질문-x0이-첫-번째-sequence-전체라면-정확히-무엇인가",
+      "title": "x[0]이 첫 번째 sequence 전체라면 정확히 무엇인가?",
+      "url": "/notes/learning/2026-10-30-lstm-input-output-shapes#질문-x0이-첫-번째-sequence-전체라면-정확히-무엇인가",
+      "topic": "딥러닝",
+      "sourceTitle": "LSTM의 입력과 반환값: sequence, 마지막 layer와 마지막 time step",
+      "context": "x[0]과 x[0, 1]을 설명받고도, 예시에서 sequence 전체가 어느 부분인지 다시 물었다.",
+      "intent": "이름 대신 실제 괄호와 값으로 선택 범위를 확인하려는 질문이다.",
+      "answer": "(batch, time, feature)에서 첫 축 하나만 선택하면, 그 sample의 모든 time step과 feature가 남는다."
+    },
+    {
+      "id": "learning/2026-10-30-lstm-input-output-shapes#질문-마지막-lstm-layer가-대체-무엇인가",
+      "title": "마지막 LSTM layer가 대체 무엇인가?",
+      "url": "/notes/learning/2026-10-30-lstm-input-output-shapes#질문-마지막-lstm-layer가-대체-무엇인가",
+      "topic": "딥러닝",
+      "sourceTitle": "LSTM의 입력과 반환값: sequence, 마지막 layer와 마지막 time step",
+      "context": "output은 마지막 layer의 모든 time step, h_n은 각 layer의 마지막 hidden state라는 설명이 이해되지 않았다.",
+      "intent": "두 설명에 쓰인 “마지막”이 같은 대상을 가리키는지 확인하려는 질문이다.",
+      "answer": "마지막 layer는 층 방향의 끝이고, 마지막 time step은 시간 방향의 끝이다. num_layers=1이면 유일한 layer가 마지막 layer다."
+    },
+    {
+      "id": "learning/2026-10-30-lstm-input-output-shapes#질문-다른-예시의-그림으로-마지막-layer를-보여-달라",
+      "title": "다른 예시의 그림으로 마지막 layer를 보여 달라",
+      "url": "/notes/learning/2026-10-30-lstm-input-output-shapes#질문-다른-예시의-그림으로-마지막-layer를-보여-달라",
+      "topic": "딥러닝",
+      "sourceTitle": "LSTM의 입력과 반환값: sequence, 마지막 layer와 마지막 time step",
+      "context": "하나의 layer만 그린 설명으로는 어느 부분이 마지막 layer인지 잘 보이지 않아, 다른 예시를 요청했다.",
+      "intent": "time 방향과 layer 방향을 동시에 놓고 반환값의 선택 범위를 보려는 요청이다.",
+      "answer": "2-layer 모델이라면 아래 표의 B 행 전체가 마지막 layer다. 오른쪽 끝 A₃·B₃은 각 layer의 마지막 time step이다."
+    },
+    {
+      "id": "learning/2026-10-30-lstm-input-output-shapes#질문-input은-2481인데-lstm-설정은-1322이면-안-맞는-것-아닌가",
+      "title": "input은 (2,48,1)인데 LSTM 설정은 1·32·2이면 안 맞는 것 아닌가?",
+      "url": "/notes/learning/2026-10-30-lstm-input-output-shapes#질문-input은-2481인데-lstm-설정은-1322이면-안-맞는-것-아닌가",
+      "topic": "딥러닝",
+      "sourceTitle": "LSTM의 입력과 반환값: sequence, 마지막 layer와 마지막 time step",
+      "context": "입력의 세 숫자와 input_size=1, hidden_size=32, num_layers=2를 같은 종류의 shape처럼 비교했다.",
+      "intent": "어떤 숫자가 서로 맞아야 하는지, 각 layer에서 무엇이 바뀌는지 확인하려는 질문이다.",
+      "answer": "세 설정값은 input shape가 아니다. 입력의 마지막 축인 feature 크기 1이 input_size=1과 맞아야 한다. hidden size 32는 state의 폭, layer 수 2는 쌓는 층 수다."
+    },
+    {
+      "id": "learning/2026-10-30-lstm-input-output-shapes#질문-크기를-줄이고-실제-숫자가-어떻게-변하는지-보여-달라",
+      "title": "크기를 줄이고 실제 숫자가 어떻게 변하는지 보여 달라",
+      "url": "/notes/learning/2026-10-30-lstm-input-output-shapes#질문-크기를-줄이고-실제-숫자가-어떻게-변하는지-보여-달라",
+      "topic": "딥러닝",
+      "sourceTitle": "LSTM의 입력과 반환값: sequence, 마지막 layer와 마지막 time step",
+      "context": "shape를 그린 그림에서도 내부 값이 추상적이라서, 더 작은 입력과 실제 값으로 살펴보기를 요청했다.",
+      "intent": "input, layer 사이의 state, 반환값을 숫자와 연결하려는 요청이다.",
+      "answer": "두 time step·두 layer·hidden size 2로 줄이면 마지막 layer의 두 값 묶음과 각 layer의 마지막 값 묶음을 직접 비교할 수 있다."
+    },
     {
       "id": "learning/2026-10-29-rnn-time-step-layer#질문-rnn-내부에서는-이전-상태를-기억하는-linear-regression이-계산되는가",
       "title": "RNN 내부에서는 이전 상태를 기억하는 Linear Regression이 계산되는가?",

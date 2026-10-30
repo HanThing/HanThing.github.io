@@ -1,5 +1,10 @@
 # Knowledge changes
 
+## 2026-10-30
+
+- LSTM 학습 질문 5개를 정리했다. input indexing과 모델 설정, 마지막 layer와 마지막 time step, output·h_n·c_n 및 Linear의 축을 구별하고 작은 고정 parameter 예시의 값을 확인했다. 숫자는 설명용이며 학습·과제 완료로 기록하지 않았다.
+- 공개 원고 기반 NotebookLM 퀴즈 12문항과 카드 47장을 전수 검토해 단일 선택 4문항·카드 12장을 연결했다. 조건 누락·과도한 단정·중복·미지원 형식을 제외하고 기존 복습 41세트의 내용·ID·버전을 보존했다.
+
 ## 2026-10-29
 
 - RNN 학습 대화의 질문 3개를 정리했다. hidden state 갱신의 affine transformation과 activation, time step 반복과 stacked layer, layer별 parameter를 구별했다. 숫자와 그림은 설명용이며 학습 완료나 실제 모델 실험으로 기록하지 않았다.

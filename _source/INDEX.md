@@ -2,6 +2,9 @@
 
 Generated from public Markdown. Read AGENTS.md for ingest/query/lint; CHANGELOG.md for changes. Course references support briefing and stay outside the learning graph. Course/lesson identify the curriculum placement; topics identify related subjects.
 
+- [LSTM의 입력과 반환값: sequence, 마지막 layer와 마지막 time step](content/learning/2026-10-30-lstm-input-output-shapes.md) — journal · 2026-10-30 · 작은 입력의 실제 값부터 따라가며 input_size 설정과 input shape, output과 h_n·c_n이 모으는 축을 구별한다.
+  Course: 딥러닝 → RNN과 LSTM 복습 (보충). Related topics: 딥러닝
+  Sources: 부트캠프 LSTM 학습 대화 (2026-10-30); https://docs.pytorch.org/docs/stable/generated/torch.nn.LSTM.html; https://docs.pytorch.org/docs/stable/generated/torch.nn.Linear.html
 - [RNN의 time step과 layer: 반복과 쌓기를 구분하기](content/learning/2026-10-29-rnn-time-step-layer.md) — journal · 2026-10-29 · RNN을 이전 상태를 기억하는 Linear Regression으로 보아도 되는지 묻고, 같은 layer의 시간 반복과 서로 다른 layer의 연결을 구별한다.
   Course: 딥러닝 → RNN과 LSTM 복습 (보충). Related topics: 딥러닝
   Sources: 부트캠프 RNN 학습 대화 (2026-10-29); https://docs.pytorch.org/docs/stable/generated/torch.nn.RNN.html
