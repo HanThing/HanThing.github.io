@@ -2,6 +2,9 @@
 
 Generated from public Markdown. Read AGENTS.md for ingest/query/lint; CHANGELOG.md for changes. Course references support briefing and stay outside the learning graph. Course/lesson identify the curriculum placement; topics identify related subjects.
 
+- [위클리 페이퍼 #6 — CNN과 LSTM을 왜 쓰는지 내 말로 설명하기](content/weekly/2026-11-02-cnn-and-lstm.md) — weekly · 2026-11-02 · filter의 weight sharing과 학습, tanh의 derivative, forget gate의 조건을 다시 질문하며 두 답변을 다듬은 과정을 정리한다.
+  Course: 딥러닝 → RNN과 LSTM 복습 (보충). Related topics: 딥러닝
+  Sources: 위클리 페이퍼 6회차 준비 대화에서 다룬 두 공식 문항 (2026-11-02 정리); 위클리 페이퍼 6회차 사용자 답변·후속 질문과 AI의 설명·피드백
 - [LSTM의 입력과 반환값: sequence, 마지막 layer와 마지막 time step](content/learning/2026-10-30-lstm-input-output-shapes.md) — journal · 2026-10-30 · 작은 입력의 실제 값부터 따라가며 input_size 설정과 input shape, output과 h_n·c_n이 모으는 축을 구별한다.
   Course: 딥러닝 → RNN과 LSTM 복습 (보충). Related topics: 딥러닝
   Sources: 부트캠프 LSTM 학습 대화 (2026-10-30); https://docs.pytorch.org/docs/stable/generated/torch.nn.LSTM.html; https://docs.pytorch.org/docs/stable/generated/torch.nn.Linear.html

@@ -1,0 +1,175 @@
+---
+title: "위클리 페이퍼 #6 — CNN과 LSTM을 왜 쓰는지 내 말로 설명하기"
+description: filter의 weight sharing과 학습, tanh의 derivative, forget gate의 조건을 다시 질문하며 두 답변을 다듬은 과정을 정리한다.
+date: 2026-11-02
+publish: true
+draft: false
+type: weekly
+courseId: deep-learning
+lessonId: rnn-lstm-review
+topics: [딥러닝]
+tags: [weekly-paper, cnn, rnn, lstm, weight-sharing, vanishing-gradient]
+sources:
+  - 위클리 페이퍼 6회차 준비 대화에서 다룬 두 공식 문항 (2026-11-02 정리)
+  - 위클리 페이퍼 6회차 사용자 답변·후속 질문과 AI의 설명·피드백
+relatedReasons:
+  learning/2026-10-27-cnn-filters: filter weight의 공간 공유와 feature map, forward와 update의 차이를 연결한다.
+  learning/2026-10-26-rnn-lstm-state: hidden state와 cell state의 전달 경로 및 gate의 역할을 연결한다.
+  weekly/2026-10-23-vanishing-gradient-and-zero-grad: layer 방향의 gradient 전달과 시간 방향의 전달을 비교한다.
+---
+
+CNN이 이미지의 지역적 특징을 학습하고, LSTM이 오래전 정보를 기억하는 데 유리하다는 말은 알고 있었다. 그런데 왜 그런지 설명하려니 막혔다. “CNN은 filter를 사용하니까”, “LSTM은 cell state가 있으니까”라는 답만으로는 그 구조가 어떤 차이를 만드는지 설명할 수 없었다.
+
+이번에는 먼저 내 말로 답하고, 설명이 끊기는 부분을 다시 질문했다. Feature map의 숫자는 무엇을 뜻하는지, filter의 역할은 누가 정하는지, forget gate가 1에 가깝다는 보장도 없는데 LSTM이 왜 유리한지를 따라가며 답변을 고쳤다.
+
+*공식 두 문항에 내가 답한 내용과 실제 후속 질문을 바탕으로, AI의 설명과 피드백을 받아 글을 재구성했다. 완성된 예시 답변을 그대로 옮기는 대신 내가 설명하지 못한 부분을 다시 묻고 답변을 다듬는 과정을 담았다. 문장 정리·수식·설명용 예시에도 AI의 도움을 받았다. 이번에 모델을 학습하거나 성능을 비교한 것은 아니다.*
+
+## 1. Fully Connected Layer의 한계와 CNN의 해결 방식
+
+> 이미지 분류 모델을 완전연결층(Fully Connected Layer)만으로 만들었더니 파라미터 수가 수백만 개를 넘고, 사진 속 물체 위치가 조금만 바뀌어도 예측이 크게 달라져요. 왜 이런 문제가 생기고, CNN은 이 문제를 어떻게 해결하는지 설명해 주세요.
+
+내 답변은 CNN의 **local connectivity와 weight sharing**에 있다. 작은 영역 안의 pixel 관계를 함께 계산하고, 같은 filter를 여러 위치에서 재사용한다. 그 결과 위치마다 별도의 연결을 만드는 Fully Connected Layer보다 적은 parameter로 같은 종류의 지역적 패턴을 찾는 데 유리하다. 다만 최종 예측이 모든 위치 변화에 대해 같아진다는 뜻은 아니다.
+
+### “지역적 특징을 학습할 수 없다”는 설명부터 고쳤다
+
+처음에는 Fully Connected Layer만으로는 이미지의 지역적 특징을 반영해서 학습할 수 없다고 답했다. CNN은 작은 filter를 움직이며 feature map을 만든다는 설명도 덧붙였다. 하지만 왜 그 계산이 지역적 특징을 다루는 데 유리한지는 설명하지 못했다.
+
+먼저 “학습할 수 없다”는 표현을 고쳐야 했다. Fully Connected Layer도 충분한 데이터와 학습을 통해 지역적 특징을 배울 수는 있다. 차이는 **인접한 pixel의 관계를 우선해서 다루거나, 같은 특징을 다른 위치에서도 재사용하도록 구조가 정해져 있지는 않다**는 점이다.
+
+예를 들어 `(32, 32, 3)` RGB 이미지를 flatten하면 입력값은 3,072개다. 이를 neuron 100개에 연결하면 bias를 제외한 weight 수는 다음과 같다.
+
+```text
+32 × 32 × 3 × 100 = 307,200
+```
+
+이 예시 자체가 수백만 개라는 뜻은 아니다. 이미지나 layer의 크기가 더 커지면 그만큼 parameter 수도 늘어난다. 또한 입력 위치마다 별도의 weight가 있으므로 같은 물체가 이동하면 다른 weight와 연결된다. 이동 전후의 패턴을 같은 방식으로 처리하도록 별도로 학습해야 한다.
+
+### 같은 패턴이 다른 위치에 있어도 같은 계산을 하는 이유
+
+지역적 특징은 주변 pixel들이 함께 이루는 숫자의 패턴이다. 경계나 무늬는 pixel 하나보다 주변 값들의 상대적인 배열에서 드러난다. Convolution은 작은 영역의 값과 filter의 대응하는 weight를 곱해 더하고 bias를 더한다. 이 계산을 여러 위치에서 반복한다.
+
+나는 같은 패턴이 다른 위치로 옮겨져도 같은 filter와 내적하면 같은 값이 나온다고 설명했다. 이 방향은 맞지만, “출력이 그대로 유지된다”는 말은 구분할 필요가 있었다. **같은 패턴에 대한 반응값은 같을 수 있지만, feature map에서 그 반응이 나타나는 위치는 함께 옮겨진다.**
+
+단순화해서 입력 조각이 `[100, 100, 100]`, filter weight가 `[0.1, 0.2, 0.3]`, bias가 0이라면 출력은 60이다. 이 조각을 다른 위치에서 같은 배열로 만나도 계산 결과는 60이다. 이 숫자는 공유 계산을 설명하는 예시이며, 이 filter가 특정 경계를 검출한다는 뜻은 아니다.
+
+RGB 입력에 `3×3` filter 100개를 적용한다면 weight 수는 `3×3×3×100 = 2,700`개다. 앞의 Fully Connected Layer와 출력 shape이 같은 비교는 아니지만, convolution은 위치마다 새로운 weight를 만들지 않는다는 차이를 볼 수 있다.
+
+### 그런데 filter weight는 결국 업데이트되는 것 아닌가?
+
+같은 weight로 계산한다는 설명을 듣고도 걸리는 부분이 있었다. Filter도 학습 대상이라면 언젠가는 값이 바뀐다. 그렇다면 어떻게 같은 특징에 같은 반응을 낸다고 말할 수 있을까?
+
+여기서는 **한 번의 forward pass에서 위치를 옮겨 가며 계산하는 과정**과 **학습 과정에서 weight를 업데이트하는 단계**를 나눠야 했다. 한 forward pass 안에서는 동일한 filter weight를 모든 위치에 사용한다. Loss에 대한 gradient를 계산하고 optimizer가 weight를 바꾸면, 다음 forward pass에서는 바뀐 weight를 다시 모든 위치에 공유한다.
+
+Weight sharing은 weight가 영원히 고정된다는 뜻이 아니다. 어느 학습 단계에서든 위치별로 서로 다른 filter를 따로 학습하는 대신 하나의 filter를 공유한다는 뜻이다.
+
+### Feature map의 숫자는 무엇을 뜻하고, filter의 역할은 누가 정할까?
+
+Convolution의 결과가 feature map이라는 정의는 알고 있었다. 내가 다시 물은 것은 그 결과를 어떻게 해석하느냐는 것이었다. Feature map의 각 값은 해당 위치의 입력 조각에 filter가 보인 반응이다. 특정 패턴에 반응하는 filter라면 그 패턴이 어디에서 얼마나 강하게 나타나는지 살펴볼 수 있다. 그 값 자체가 특징이 존재할 확률은 아니다.
+
+“세로 경계에 반응하도록 학습된 filter”라는 예시도 다시 질문했다. 그런 역할을 의도해서 어떻게 학습시키는지 감이 오지 않았기 때문이다. 일반적인 이미지 분류 CNN에서는 사람이 filter마다 역할을 지정하거나 정답 경계 지도를 주는 것이 아니다. 최종 분류 loss를 줄이는 방향으로 backpropagation과 optimizer를 통해 filter weight가 업데이트된다. 그 과정에서 분류에 유용한 패턴에 반응할 수 있게 되는 것이다.
+
+따라서 세로 경계는 filter를 해석하는 예시다. 모든 filter가 사람이 이름 붙일 수 있는 하나의 특징을 맡는다고 보장할 수는 없다.
+
+### 이렇게 답변을 정리했다
+
+Fully Connected Layer는 모든 입력을 연결하므로 이미지가 커질수록 parameter 수가 빠르게 늘고, 같은 패턴이라도 위치가 바뀌면 다른 weight가 적용된다. CNN은 작은 영역을 함께 계산해 지역적 관계를 다루고, 동일한 filter weight를 여러 위치에 공유해 같은 종류의 특징을 찾는다.
+
+물체가 이동하면 feature map의 반응 위치도 이동하는 성질을 translation equivariance라고 한다. 다만 stride·padding·경계 등의 영향을 받으며, 이것이 최종 분류 결과의 완전한 위치 불변성을 뜻하지는 않는다. Pooling이나 global average pooling 등은 최종 예측이 위치 변화에 덜 민감해지는 데 도움을 줄 수 있다.
+
+내가 처음 말한 “CNN은 지역적 특징을 학습할 수 있다”는 결론에, 이제는 **어떤 값들을 함께 계산하고 어떤 weight를 공유하는지**라는 근거를 붙일 수 있게 답변을 다듬었다.
+
+## 2. 기본 RNN의 장기 의존성 문제와 LSTM
+
+> 긴 영화 리뷰 문장의 감성(긍정/부정)을 분류하는 모델에 기본 RNN을 사용했어요. 그런데 문장 맨 앞에 나온 중요한 단어의 정보가, 문장 끝에서 예측할 때는 거의 반영되지 않는 것 같아요. 어떤 원인을 의심할 건가요? 어떻게 해결할 건가요?
+
+먼저 long-term dependency를 학습하는 과정의 **vanishing gradient**를 의심하고, 이를 완화하는 방법으로 LSTM을 고려하겠다. 다만 주어진 증상만으로 원인을 확정할 수는 없다. 이번에 더 설명하고 싶었던 것은 “RNN은 오래 기억하지 못하고 LSTM은 cell state가 있어서 낫다”는 결론보다, 그 경로가 왜 차이를 만드는지였다.
+
+### 이전 hidden state를 계속 받는데 왜 오래전 정보를 쓰기 어려울까?
+
+기본 RNN은 이전 hidden state와 현재 입력으로 새로운 hidden state를 만든다. 이전 정보를 입력으로 받는 구조인데도 long-term dependency에 약하다는 점이 처음에는 연결되지 않았다.
+
+```text
+aₜ = Wₕ hₜ₋₁ + Wₓ xₜ + b
+hₜ = tanh(aₜ)
+```
+
+이때 tanh는 activation function이다. 선형 계산 결과에 tanh 값을 “곱하는” 것이 아니라, 그 결과를 tanh에 입력해 변환한다. 이전 hidden state도 매 시점 새 입력과 함께 변환되므로 과거 정보가 그대로 보존되는 것은 아니다.
+
+또한 마지막 예측에 앞부분의 정보를 활용하도록 학습하려면, 마지막 loss의 gradient가 앞선 시점까지 전달되어야 한다. 시간 방향으로 backpropagation할 때는 각 시점의 derivative가 chain rule에 따라 반복해서 곱해진다. 이 곱이 매우 작아지면 오래전 정보를 유지하고 활용하도록 학습시키는 신호도 약해진다. Forward 과정에서 정보가 바뀌는 현상과 backward 과정의 gradient가 작아지는 현상은 구분해야 한다.
+
+### “Weight가 왜 0.5인데?”에서 다시 확인한 조건
+
+처음 설명에서는 작은 값이 반복해서 곱해지면 작아진다는 예시가 나왔다. 나는 weight를 0.5로 둔 이유부터 물었다. 실제로 그 값이 된다는 근거가 없으면, 예시를 이해해도 RNN의 문제를 설명한 것은 아니라고 느꼈기 때문이다.
+
+Weight가 항상 0.5인 것은 아니다. 실제로 전달되는 gradient에는 recurrent weight와 activation function의 derivative가 함께 영향을 준다. Hidden state가 숫자 하나인 단순한 경우라면 한 단계의 derivative는 다음과 같다.
+
+```text
+∂hₜ / ∂hₜ₋₁ = wₕ × (1 − hₜ²)
+
+tanh′(aₜ) = 1 − tanh²(aₜ) = 1 − hₜ²
+```
+
+여러 차원의 hidden state에서는 대응하는 Jacobian들이 곱해진다. 따라서 tanh의 derivative만으로 전체 gradient의 크기를 결정할 수는 없다. Recurrent weight의 영향까지 포함해 gradient가 줄어들 수도, 커질 수도 있다.
+
+Sigmoid의 derivative가 최대 0.25인 것과 달리, tanh의 derivative는 **최대 1**이다. 입력이 0일 때는 1이고, 출력이 ±1에 가까운 saturation 영역에서는 0에 가까워진다. 예를 들어 tanh 출력이 `0.995`라면 derivative는 `1 − 0.995² = 0.009975`다.
+
+나는 tanh 출력이 1에 가깝다는 것이 어떤 상황인지도 다시 물었다. 이는 해당 hidden state 성분의 activation 전 값이 충분히 큰 양수여서, 입력이 더 변해도 출력이 거의 변하지 않는 구간이라는 뜻이다. 그 성분이 영화 리뷰의 “긍정 확률”을 나타낸다는 뜻은 아니다. 음수 쪽으로 saturation되어도 derivative는 작아진다.
+
+결국 “tanh의 derivative는 언제나 1보다 작으므로 반드시 사라진다”가 아니라, **작은 derivative와 recurrent weight가 긴 경로에서 반복해서 곱해지는 조건에서는 vanishing gradient가 발생할 수 있다**고 설명해야 한다.
+
+### LSTM도 tanh를 사용하는데 무엇이 달라질까?
+
+여기까지 정리한 뒤에는 다른 의문이 생겼다. LSTM도 tanh를 사용하고, 이전 cell state에는 forget gate를 곱한다. 그렇다면 단순히 cell state를 추가했다는 이유로 문제가 해결된다고 할 수 있을까?
+
+```text
+cₜ = fₜ ⊙ cₜ₋₁ + iₜ ⊙ gₜ
+hₜ = oₜ ⊙ tanh(cₜ)
+
+fₜ: forget gate — 이전 cell state를 유지할 비율
+iₜ: input gate  — 새 candidate를 반영할 비율
+gₜ: candidate   — 새로 추가할 정보의 후보
+oₜ: output gate — tanh(cₜ)를 hidden state에 드러낼 비율
+⊙ : elementwise product
+```
+
+핵심은 이전 cell state를 다음 cell state로 직접 전달하는 항인 `fₜ ⊙ cₜ₋₁`이다. 이 직접 경로에서는 이전 cell state에 tanh를 매번 적용하지 않는다. Hidden state를 만들 때 `tanh(cₜ)`를 사용하더라도, 그 결과로 cell state를 덮어쓰는 것은 아니다.
+
+나는 이를 “이전 cell state에 activation function이 적용되지 않아서 vanishing gradient가 완화된다”라고 정리했다. 방향은 맞지만 표현을 더 좁혀야 했다. Gate 자체는 sigmoid로 계산한다. **Gate와 candidate를 고정하고 직접 연결을 따라 보면** 이전 cell state에 대한 derivative가 forget gate라는 뜻이다. 전체 derivative에는 hidden state를 통해 gate 등의 계산으로 이어지는 다른 경로도 포함된다.
+
+### Forget gate가 1에 가깝다는 보장도 없는데 왜 유리할까?
+
+내가 끝까지 걸렸던 부분이다. Forget gate가 1에 가까우면 정보와 gradient를 유지하기 쉽다는 설명은 이해했다. 하지만 그 값이 1에 가깝다는 보장이 없다면, 좋은 결과가 나온 경우만 설명하는 것은 아닐까?
+
+실제로 보장은 없다. Forget gate가 여러 시점에서 계속 작은 값이면 LSTM의 직접 경로에서도 gradient는 작아진다. 예를 들어 20시점의 forget gate가 모두 0.99라면 그 곱은 약 0.818이지만, 모두 0.5라면 약 0.000000954다. 이 수치는 가능한 차이를 보여 주는 예시이며, 학습 결과가 반드시 어느 한쪽이 된다는 뜻은 아니다.
+
+Forget gate는 현재 입력과 이전 hidden state를 바탕으로 계산된다.
+
+```text
+fₜ = sigmoid(W_f xₜ + U_f hₜ₋₁ + b_f)
+```
+
+학습 대상은 gate 값 자체가 아니라 이를 계산하는 `W_f`, `U_f`, `b_f`다. 이 parameter들도 최종 loss에 대한 backpropagation과 optimizer의 업데이트로 학습한다. 어떤 정보를 유지하는 것이 예측에 도움이 되는지에 따라 gate를 만드는 방식이 바뀔 수 있다.
+
+LSTM의 이점은 “forget gate는 결국 1에 가까워진다”는 가정에 있지 않다. **기존 정보를 유지하는 직접 경로와 새 정보를 추가하는 경로를 두고, 유지 비율을 입력과 맥락에 따라 조절할 수 있게 했다는 구조적 차이**에 있다. 기본 RNN에서는 hidden state를 매번 recurrent weight와 tanh로 변환하지만, LSTM에는 필요한 정보를 상대적으로 덜 바꾸며 전달할 수 있는 경로가 추가된다. 그 경로를 실제로 활용하도록 학습되는지는 별개의 문제다.
+
+### 이렇게 답변을 정리했다
+
+긴 영화 리뷰 앞부분의 중요한 정보가 마지막 예측에 잘 반영되지 않는다면, 기본 RNN에서 long-term dependency를 학습하기 어려운 상황을 의심하겠다. 특히 시간 방향의 backpropagation에서 recurrent weight와 tanh의 derivative가 반복해서 곱해지며 vanishing gradient가 발생할 수 있다. Tanh 출력이 ±1에 가까운 구간에서는 derivative가 작아져 이 문제가 심해질 수 있다.
+
+이를 완화하기 위해 LSTM을 고려하겠다. LSTM은 cell state의 직접 전달 경로를 두고, forget gate와 input gate로 기존 정보의 유지와 새 정보의 반영을 조절한다. 직접 경로에는 tanh를 반복 적용하지 않으므로 forget gate가 1에 가까운 구간에서는 gradient를 유지하기 쉽다. 다만 gate 값과 학습 성공이 보장되는 것은 아니므로 vanishing gradient를 완전히 제거했다고 말하지는 않겠다.
+
+이번에 답변을 고친 지점은 “cell state가 있으니까 기억한다”에서 멈추지 않고, **어느 경로의 derivative가 무엇이며, 어떤 조건에서 유지가 쉬워지는지**까지 설명하는 것이다.
+
+### 정리 과정에서 보충한 확인 방법
+
+다음은 내가 처음 답변에서 제안한 실험이 아니라, AI가 초안을 정리하며 보충한 확인 방법이다. 증상만으로 원인을 단정하지 않으려면 입력 앞부분이 잘리는지, hidden state가 의도치 않게 초기화되는지, 중간의 detach가 학습 경로를 끊는지 등을 먼저 점검할 수 있다. 마지막 loss에 대한 시점별 hidden state의 gradient 크기도 참고할 수 있지만, 그 값 하나로 실제 정보 활용 여부가 모두 증명되는 것은 아니다.
+
+그 뒤 같은 데이터와 평가 기준으로 기본 RNN과 LSTM을 비교하고, 긴 리뷰나 앞부분에 중요한 단서가 있는 사례에서 개선되는지 살펴볼 수 있다. 이번 글에서는 이 측정이나 비교를 수행하지 않았다.
+
+## 출처와 작성 범위
+
+문항은 이번 Weekly Paper #6 준비 대화에서 다룬 두 문항을 사용했다. 본문은 내가 말한 답변·후속 질문과 AI의 설명·피드백을 바탕으로 정리했다. 원문 공지의 게시일과 링크를 이번 정리에서 새로 확인한 것은 아니다.
+
+[[learning/2026-10-27-cnn-filters|CNN filter와 feature map]]에서는 filter의 weight가 무엇에 대응하는지 물었다. [[learning/2026-10-26-rnn-lstm-state|RNN에서 LSTM으로: cell state와 gate]]는 state를 전달하는 계산을, [[weekly/2026-10-23-vanishing-gradient-and-zero-grad|5주차: vanishing gradient와 zero_grad]]는 layer 방향의 gradient 전달을 살펴본 기록이다.
+
+숫자는 원리를 설명하기 위한 예시다. 지난 주차의 실험을 이번에 수행한 결과로 옮기지 않았다. 이번 글에서는 모델 학습·gradient 측정·RNN과 LSTM 성능 비교를 수행하지 않았다.

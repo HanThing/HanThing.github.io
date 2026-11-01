@@ -145,6 +145,34 @@ window.HANTHING_CONTENT = {
   ],
   "notes": [
     {
+      "id": "weekly/2026-11-02-cnn-and-lstm",
+      "title": "위클리 페이퍼 #6 — CNN과 LSTM을 왜 쓰는지 내 말로 설명하기",
+      "description": "filter의 weight sharing과 학습, tanh의 derivative, forget gate의 조건을 다시 질문하며 두 답변을 다듬은 과정을 정리한다.",
+      "date": "2026-11-02",
+      "published": "2026-11-02",
+      "type": "weekly",
+      "topics": [
+        "딥러닝"
+      ],
+      "courseId": "deep-learning",
+      "lessonId": "rnn-lstm-review",
+      "url": "/notes/weekly/2026-11-02-cnn-and-lstm",
+      "links": [
+        "learning/2026-10-27-cnn-filters",
+        "learning/2026-10-26-rnn-lstm-state",
+        "weekly/2026-10-23-vanishing-gradient-and-zero-grad"
+      ],
+      "relatedReasons": {
+        "learning/2026-10-27-cnn-filters": "filter weight의 공간 공유와 feature map, forward와 update의 차이를 연결한다.",
+        "learning/2026-10-26-rnn-lstm-state": "hidden state와 cell state의 전달 경로 및 gate의 역할을 연결한다.",
+        "weekly/2026-10-23-vanishing-gradient-and-zero-grad": "layer 방향의 gradient 전달과 시간 방향의 전달을 비교한다."
+      },
+      "sources": [
+        "위클리 페이퍼 6회차 준비 대화에서 다룬 두 공식 문항 (2026-11-02 정리)",
+        "위클리 페이퍼 6회차 사용자 답변·후속 질문과 AI의 설명·피드백"
+      ]
+    },
+    {
       "id": "learning/2026-10-30-lstm-input-output-shapes",
       "title": "LSTM의 입력과 반환값: sequence, 마지막 layer와 마지막 time step",
       "description": "작은 입력의 실제 값부터 따라가며 input_size 설정과 input shape, output과 h_n·c_n이 모으는 축을 구별한다.",

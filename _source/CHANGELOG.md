@@ -1,5 +1,10 @@
 # Knowledge changes
 
+## 2026-11-02
+
+- 위클리 페이퍼 #6을 승인된 초안에서 공개했다. CNN filter 공유·학습과 feature map, RNN tanh derivative 및 LSTM forget gate의 조건을 실제 답변·질문·교정 과정에 연결하고 AI 기여와 미실행 실험을 명시했다.
+- 공개 원고 기반 NotebookLM 한국어 퀴즈 12문항·카드 52장을 전수 검토해 8문항·14장을 연결했다. 영어로 생성된 첫 퀴즈는 사용하지 않았으며 모호한 조건·단정·표현 오류가 있는 항목을 제외했다.
+
 ## 2026-10-30
 
 - LSTM 학습 질문 5개를 정리했다. input indexing과 모델 설정, 마지막 layer와 마지막 time step, output·h_n·c_n 및 Linear의 축을 구별하고 작은 고정 parameter 예시의 값을 확인했다. 숫자는 설명용이며 학습·과제 완료로 기록하지 않았다.
