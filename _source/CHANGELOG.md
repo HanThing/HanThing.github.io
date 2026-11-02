@@ -2,6 +2,7 @@
 
 ## 2026-11-02
 
+- Aside의 실제 Embedding·Attention 질문 11개를 새 학습 기록으로 정리했다. Encoder 범위, Q·K·V projection, softmax와 정규분포의 차이, energy와 i·j를 작은 수치 예시로 구별했다. 필수 화면 미확인·미완료 질문은 제외하고 독립 적용은 미확인으로 남겼다.
 - 위클리 페이퍼 #6을 승인된 초안에서 공개했다. CNN filter 공유·학습과 feature map, RNN tanh derivative 및 LSTM forget gate의 조건을 실제 답변·질문·교정 과정에 연결하고 AI 기여와 미실행 실험을 명시했다.
 - 공개 원고 기반 NotebookLM 한국어 퀴즈 12문항·카드 52장을 전수 검토해 8문항·14장을 연결했다. 영어로 생성된 첫 퀴즈는 사용하지 않았으며 모호한 조건·단정·표현 오류가 있는 항목을 제외했다.
 

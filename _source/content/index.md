@@ -21,6 +21,8 @@ tags: [index]
 
 실제 학습 대화에서 질문의 흐름을 주제별로 묶었습니다.
 
+- [[learning/2026-11-02-embedding-attention-qkv|11월 2일 — Embedding lookup에서 Q·K·V와 Attention의 weighted sum까지]]
+
 - [[learning/2026-10-16-feature-scaling|10월 16일 — feature scaling의 판단 기준과 binning의 차이]]
 
 - [[learning/2026-10-08-logistic-loss|10월 8일 — 로지스틱 확률·로그 손실·점수와 가중치의 미분]]

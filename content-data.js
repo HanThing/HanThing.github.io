@@ -89,6 +89,11 @@ window.HANTHING_CONTENT = {
           "id": "cnn-filter-review",
           "title": "CNN filter 복습",
           "kind": "supplemental"
+        },
+        {
+          "id": "attention-review",
+          "title": "Embedding과 Attention 복습",
+          "kind": "supplemental"
         }
       ]
     },
@@ -144,6 +149,32 @@ window.HANTHING_CONTENT = {
     }
   ],
   "notes": [
+    {
+      "id": "learning/2026-11-02-embedding-attention-qkv",
+      "title": "Embedding에서 Attention까지: Q·K·V와 i·j를 실제 값으로 읽기",
+      "description": "Encoder와 Embedding을 혼동한 질문에서 출발해 lookup, Q·K·V 변환, softmax, 한 head의 weighted sum을 작은 행렬로 따라간다.",
+      "date": "2026-11-02",
+      "published": "2026-11-02",
+      "type": "journal",
+      "topics": [
+        "딥러닝"
+      ],
+      "courseId": "deep-learning",
+      "lessonId": "attention-review",
+      "url": "/notes/learning/2026-11-02-embedding-attention-qkv",
+      "links": [
+        "learning/2026-10-26-rnn-lstm-state",
+        "machine-learning/logistic-loss-and-evaluation"
+      ],
+      "relatedReasons": {
+        "learning/2026-10-26-rnn-lstm-state": "RNN이 이전 hidden state와 현재 입력을 함께 처리한다는 설명을 Encoder의 문맥 처리와 연결한다.",
+        "machine-learning/logistic-loss-and-evaluation": "분류 확률로 썼던 softmax를 Attention의 위치별 혼합 비율과 구별한다."
+      },
+      "sources": [
+        "부트캠프 딥러닝 관련 Embedding·Attention 학습 대화 (2026-11-02)",
+        "https://arxiv.org/html/1706.03762v7"
+      ]
+    },
     {
       "id": "weekly/2026-11-02-cnn-and-lstm",
       "title": "위클리 페이퍼 #6 — CNN과 LSTM을 왜 쓰는지 내 말로 설명하기",
@@ -2124,6 +2155,116 @@ window.HANTHING_CONTENT = {
     }
   ],
   "questions": [
+    {
+      "id": "learning/2026-11-02-embedding-attention-qkv#질문-encoding과-embedding은-무엇이-다른가",
+      "title": "Encoding과 Embedding은 무엇이 다른가?",
+      "url": "/notes/learning/2026-11-02-embedding-attention-qkv#질문-encoding과-embedding은-무엇이-다른가",
+      "topic": "딥러닝",
+      "sourceTitle": "Embedding에서 Attention까지: Q·K·V와 i·j를 실제 값으로 읽기",
+      "context": "token을 vector로 바꾸는 설명과 Encoder가 입력을 처리한다는 설명을 함께 듣다가 둘의 차이를 물었다.",
+      "intent": "같은 숫자 변환처럼 보이는 두 과정의 역할을 구별하려는 질문이다.",
+      "answer": "여기서 token Embedding은 token ID로 기본 vector를 가져오는 단계이고, Encoder의 후속 layer는 여러 위치의 입력을 처리해 문맥을 반영한 representation을 만드는 단계다. Encoding은 정보를 다른 표현으로 바꾸는 넓은 말이므로 용어만으로 경계를 고정하면 안 된다."
+    },
+    {
+      "id": "learning/2026-11-02-embedding-attention-qkv#질문-encoder가-embedding을-하는-줄-알았는데-또-처리한다는-뜻인가",
+      "title": "Encoder가 Embedding을 하는 줄 알았는데 또 처리한다는 뜻인가?",
+      "url": "/notes/learning/2026-11-02-embedding-attention-qkv#질문-encoder가-embedding을-하는-줄-알았는데-또-처리한다는-뜻인가",
+      "topic": "딥러닝",
+      "sourceTitle": "Embedding에서 Attention까지: Q·K·V와 i·j를 실제 값으로 읽기",
+      "context": "token → Embedding → Encoder → Attention이라는 도식에서, 이미 vector가 된 입력을 Encoder가 다시 처리한다는 부분이 헷갈렸다.",
+      "intent": "도식의 각 상자가 별도 역할인지, 전체 모델을 부르는 이름인지 확인하려는 질문이다.",
+      "answer": "넓게 부르는 Encoder에는 입력 Embedding까지 포함할 수 있다. 반면 “Embedding 뒤의 Encoder layer”라고 하면 문맥을 처리하는 부분을 가리킨다. 특히 Transformer에서는 Attention이 Encoder layer 안에도 들어 있으므로 위 도식을 모든 모델의 고정 순서로 읽으면 안 된다."
+    },
+    {
+      "id": "learning/2026-11-02-embedding-attention-qkv#질문-attention-head는-무엇인가",
+      "title": "Attention head는 무엇인가?",
+      "url": "/notes/learning/2026-11-02-embedding-attention-qkv#질문-attention-head는-무엇인가",
+      "topic": "딥러닝",
+      "sourceTitle": "Embedding에서 Attention까지: Q·K·V와 i·j를 실제 값으로 읽기",
+      "context": "Attention 설명에서 head라는 단위를 처음 접하고 의미를 물었다.",
+      "intent": "head 하나가 token 하나를 뜻하는지, 별도의 계산을 뜻하는지 구별하려는 질문이다.",
+      "answer": "head 하나는 자체 projection parameter로 Q·K·V를 만들고, 관련도에 따른 weighted sum을 계산하는 한 갈래다. 모든 query 위치를 처리하면 head 하나에서도 위치별 output vector가 여러 개 나온다."
+    },
+    {
+      "id": "learning/2026-11-02-embedding-attention-qkv#질문-qkv로-바뀌는-과정을-실제-값으로-보여-달라",
+      "title": "Q·K·V로 바뀌는 과정을 실제 값으로 보여 달라",
+      "url": "/notes/learning/2026-11-02-embedding-attention-qkv#질문-qkv로-바뀌는-과정을-실제-값으로-보여-달라",
+      "topic": "딥러닝",
+      "sourceTitle": "Embedding에서 Attention까지: Q·K·V와 i·j를 실제 값으로 읽기",
+      "context": "이름만으로는 Query, Key, Value가 어떻게 생기는지 와닿지 않아 예시값을 요청했다.",
+      "intent": "입력 vector가 세 종류의 vector가 되는 계산을 직접 확인하려는 질문이다.",
+      "answer": "입력 row vector에 서로 다른 학습 parameter matrix를 곱한다. 같은 head 안에서는 위치가 달라도 같은 세 matrix를 공유한다."
+    },
+    {
+      "id": "learning/2026-11-02-embedding-attention-qkv#질문-softmax를-남에게-설명할-수-있게-정리하면",
+      "title": "softmax를 남에게 설명할 수 있게 정리하면?",
+      "url": "/notes/learning/2026-11-02-embedding-attention-qkv#질문-softmax를-남에게-설명할-수-있게-정리하면",
+      "topic": "딥러닝",
+      "sourceTitle": "Embedding에서 Attention까지: Q·K·V와 i·j를 실제 값으로 읽기",
+      "context": "지수 함수를 써 양수로 만든 뒤 합으로 나눈다는 흐름은 설명했지만, 그 결과를 “정규분포를 가진 확률”이라고 표현하고 eˣ와 2ˣ를 혼동했다.",
+      "intent": "계산 순서뿐 아니라 무엇을 만드는 함수인지 정확하게 설명하려는 요청이다.",
+      "answer": "softmax는 여러 score를 각각 지수 함수에 넣고 그 합으로 나누어, 양수이며 합이 1인 비율 vector로 바꾼다. 정규화는 합을 맞추는 처리이고, normal distribution을 만든다는 뜻은 아니다."
+    },
+    {
+      "id": "learning/2026-11-02-embedding-attention-qkv#질문-one-head-of-attention은-실제로-어떻게-계산하는가",
+      "title": "one head of attention은 실제로 어떻게 계산하는가?",
+      "url": "/notes/learning/2026-11-02-embedding-attention-qkv#질문-one-head-of-attention은-실제로-어떻게-계산하는가",
+      "topic": "딥러닝",
+      "sourceTitle": "Embedding에서 Attention까지: Q·K·V와 i·j를 실제 값으로 읽기",
+      "context": "Q·K·V의 값을 본 뒤, 한 head가 이 값들로 무엇을 내보내는지 다시 물었다.",
+      "intent": "projection 뒤의 score, softmax, weighted sum을 한 흐름으로 연결하려는 질문이다.",
+      "answer": "한 query와 모든 key의 내적으로 score를 만들고, √d_k로 나눈 후 softmax를 적용한다. 그 비율로 같은 위치의 Value를 곱해 더한다."
+    },
+    {
+      "id": "learning/2026-11-02-embedding-attention-qkv#질문-energy-eᵢⱼ는-어느-단계에서-쓰는가",
+      "title": "energy eᵢⱼ는 어느 단계에서 쓰는가?",
+      "url": "/notes/learning/2026-11-02-embedding-attention-qkv#질문-energy-eᵢⱼ는-어느-단계에서-쓰는가",
+      "topic": "딥러닝",
+      "sourceTitle": "Embedding에서 Attention까지: Q·K·V와 i·j를 실제 값으로 읽기",
+      "context": "숫자 계산을 본 뒤 이전에 등장한 energy라는 이름이 이 흐름의 어디에 해당하는지 물었다.",
+      "intent": "서로 다른 설명에서 쓰인 표기를 같은 단계에 대응시키려는 질문이다.",
+      "answer": "energy는 보통 softmax 이전의 관련도 score를 가리킨다. 이 글에서는 scaling을 포함해 eᵢⱼ=qᵢkⱼᵀ/√d_k로 정의한다. 따라서 위 예시의 e₂₁은 7/√2다."
+    },
+    {
+      "id": "learning/2026-11-02-embedding-attention-qkv#질문-같은-계산을-수식으로-압축하면",
+      "title": "같은 계산을 수식으로 압축하면?",
+      "url": "/notes/learning/2026-11-02-embedding-attention-qkv#질문-같은-계산을-수식으로-압축하면",
+      "topic": "딥러닝",
+      "sourceTitle": "Embedding에서 Attention까지: Q·K·V와 i·j를 실제 값으로 읽기",
+      "context": "숫자로 본 흐름을 다시 수학적 표현으로 정리해 달라고 요청했다.",
+      "intent": "각 기호를 실제 계산 단계와 연결한 채 필기하려는 요청이다.",
+      "answer": "한 query 위치 i의 output은 아래 순서로 계산한다. softmax의 합은 참고 위치 l 전체에 걸친다."
+    },
+    {
+      "id": "learning/2026-11-02-embedding-attention-qkv#질문-왜-query는-xᵢ이고-keyvalue는-xⱼ인가",
+      "title": "왜 Query는 xᵢ이고 Key·Value는 xⱼ인가?",
+      "url": "/notes/learning/2026-11-02-embedding-attention-qkv#질문-왜-query는-xᵢ이고-keyvalue는-xⱼ인가",
+      "topic": "딥러닝",
+      "sourceTitle": "Embedding에서 Attention까지: Q·K·V와 i·j를 실제 값으로 읽기",
+      "context": "같은 입력에서 출발하는데 수식에 i와 j가 나뉘어 있어 그 차이를 물었다.",
+      "intent": "기호가 다른 입력 종류를 뜻하는지, 같은 sequence의 위치를 뜻하는지 확인하려는 질문이다.",
+      "answer": "이 self-attention 예에서 i는 지금 output을 만들 위치, j는 참고할 위치다. i를 하나 고정하고 j를 전체 위치로 바꾸며 계산한다. i와 j는 같을 수도 있다."
+    },
+    {
+      "id": "learning/2026-11-02-embedding-attention-qkv#질문-입력-embedding의-단계를-짧게-정리하면",
+      "title": "입력 Embedding의 단계를 짧게 정리하면?",
+      "url": "/notes/learning/2026-11-02-embedding-attention-qkv#질문-입력-embedding의-단계를-짧게-정리하면",
+      "topic": "딥러닝",
+      "sourceTitle": "Embedding에서 Attention까지: Q·K·V와 i·j를 실제 값으로 읽기",
+      "context": "Attention을 계산한 뒤 입력 Embedding 과정을 필기할 수 있도록 핵심만 정리해 달라고 요청했다. 앞선 미완료 요청과 구별해 답변이 남은 후속 질문을 정리했다.",
+      "intent": "앞에서 생략했던 입력 준비 과정을 짧은 순서로 연결하려는 요청이다.",
+      "answer": "텍스트 → token 분리 → token ID → Embedding lookup → 위치 정보 결합 → Encoder 입력 순서로 읽으면 된다. tokenizer의 규칙과 특수 token은 모델에 따라 다르다."
+    },
+    {
+      "id": "learning/2026-11-02-embedding-attention-qkv#질문-token-id에-해당하는-row-vector를-가져온다는-말은",
+      "title": "token ID에 해당하는 row vector를 가져온다는 말은?",
+      "url": "/notes/learning/2026-11-02-embedding-attention-qkv#질문-token-id에-해당하는-row-vector를-가져온다는-말은",
+      "topic": "딥러닝",
+      "sourceTitle": "Embedding에서 Attention까지: Q·K·V와 i·j를 실제 값으로 읽기",
+      "context": "“학습되는 Embedding matrix에서 각 ID에 해당하는 row vector를 가져온다”는 문장을 다시 인용하며 의미를 물었다.",
+      "intent": "ID와 vector 사이에 어떤 연산이 일어나는지 숫자로 보려는 질문이다.",
+      "answer": "ID는 row를 고르는 정수 index다. ID 자체에 의미를 계산하는 수식을 적용하는 것이 아니라 학습 가능한 table의 해당 row를 읽는다."
+    },
     {
       "id": "learning/2026-10-30-lstm-input-output-shapes#질문-x0이-첫-번째-sequence-전체라면-정확히-무엇인가",
       "title": "x[0]이 첫 번째 sequence 전체라면 정확히 무엇인가?",

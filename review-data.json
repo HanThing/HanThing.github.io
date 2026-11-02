@@ -14489,6 +14489,342 @@
           "weekly/2026-11-02-cnn-and-lstm": "35e54e490aa982fcdfb0825221356ccf7c7584ae39f4e81c03612612806d826f"
         }
       }
+    },
+    {
+      "id": "embedding-attention-20261102",
+      "title": "Embedding과 Attention · Q·K·V",
+      "version": "5781b31193b1",
+      "noteIds": [
+        "learning/2026-11-02-embedding-attention-qkv"
+      ],
+      "goals": [
+        {
+          "id": "embedding-encoder",
+          "title": "Embedding lookup과 Encoder 범위를 구분하기",
+          "version": "1"
+        },
+        {
+          "id": "qkv-head",
+          "title": "Q·K·V projection과 위치 i/j를 설명하기",
+          "version": "1"
+        },
+        {
+          "id": "energy-softmax",
+          "title": "Energy·softmax·Value 가중합을 연결하기",
+          "version": "1"
+        }
+      ],
+      "questions": [
+        {
+          "id": "a97ce22f-3929-4201-b129-2c04e3a19763:0",
+          "goalId": "embedding-encoder",
+          "pool": "practice",
+          "question": "Token Embedding과 Encoder 후속 layer의 문맥 처리(representation) 차이에 대한 설명으로 가장 올바른 것은?",
+          "options": [
+            {
+              "text": "동일한 token ID는 항상 동일한 Embedding table row를 가져오지만, Encoder layer를 거치면 주변 입력에 따라 문맥이 반영된 표현으로 변한다.",
+              "rationale": "Token Embedding은 동일한 ID에 대해 고정된 정적 vector를 가져오는 단계이며, Encoder layer의 self-attention 등을 거치면서 주변 위치의 정보가 종합되어 문맥 표현으로 재구성됩니다.",
+              "isCorrect": true
+            },
+            {
+              "text": "동일한 token ID라도 문장 내 등장 위치에 따라 Embedding table에서 읽어오는 row index 자체가 자동으로 변경되어 문맥을 반영한다.",
+              "rationale": "Embedding lookup 단계는 단지 정수 ID에 대응하는 정적 table의 row를 가져올 뿐이며, 문맥에 따른 표현의 변화는 이후 Encoder layer에서 처리됩니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "Embedding lookup 과정은 token ID에 연속 함수 수식을 직접 적용하여 vector를 계산하며, Encoder layer는 단순 정수 조회를 수행한다.",
+              "rationale": "Token ID는 정수 index로서 가중치 행렬의 row를 조회하는 용도로 사용되며, 연속 수식 연산은 이후 projection 및 attention 단계에서 수행됩니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "Encoder layer는 입력된 문장 전체의 token들을 무조건 단 하나의 고정된 single vector로 압축하여 반환한다.",
+              "rationale": "Transformer Encoder layer는 모든 query 위치에 대해 각각의 위치별 output vector를 생성하며 시퀀스 전체를 단 하나의 vector로 압축하지 않습니다.",
+              "isCorrect": false
+            }
+          ],
+          "hint": "동일한 단어가 서로 다른 문맥에서 동일한 ID로 조회될 때 lookup 단계와 그 이후 layer 처리 결과의 차이를 생각해 보세요."
+        },
+        {
+          "id": "a97ce22f-3929-4201-b129-2c04e3a19763:1",
+          "goalId": "embedding-encoder",
+          "pool": "check",
+          "question": "Token ID를 이용해 입력 representation을 구성하는 Embedding lookup 메커니즘에 대한 설명으로 가장 올바른 것은?",
+          "options": [
+            {
+              "text": "Token ID는 수학적 가중치가 곱해지는 대상이 아니라, 학습 가능한 Embedding matrix에서 특정 row vector를 선택하기 위한 정수 index로 사용된다.",
+              "rationale": "Token ID는 Embedding table의 특정 row를 지칭하는 인덱스 역할을 수행하며, 학습 시에는 선택된 row vector의 파라미터가 역전파를 통해 업데이트됩니다.",
+              "isCorrect": true
+            },
+            {
+              "text": "Token ID 번호 자체에 가중치 행렬을 직접 곱하여 scalar 값으로 변환한 후 gradient를 계산한다.",
+              "rationale": "Embedding 연산은 정수 ID 자체를 가중치와 곱하는 것이 아니라 해당 ID 인덱스에 저장된 row vector를 가져오는 lookup 방식입니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "Vocabulary 크기가 4이고 차원이 3인 Embedding table에서 2개의 ID를 조회하면 출력 결과의 shape은 $(3, 2)$가 된다.",
+              "rationale": "Vocabulary 크기가 4이고 차원이 3인 표에서 2개의 ID를 선택하면 입력 개수가 2개이므로 $(2, 3)$ 크기의 행렬이 형성됩니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "Token ID로 조회해 온 vector 값은 완성된 언어적 의미를 고정적으로 내포하므로 후속 Encoder layer에서 파라미터가 다시 곱해지지 않는다.",
+              "rationale": "Embedding vector는 기본적인 입력 표현일 뿐이며 문맥을 반영하기 위해 후속 Encoder layer에서 $W_Q, W_K, W_V$ 등 추가 파라미터 행렬과 곱해집니다.",
+              "isCorrect": false
+            }
+          ],
+          "hint": "Token ID가 수식의 입력 숫자로 사용되는지, 아니면 테이블의 위치를 가리키는 지표로 사용되는지 구별해 보세요."
+        },
+        {
+          "id": "a97ce22f-3929-4201-b129-2c04e3a19763:2",
+          "goalId": "qkv-head",
+          "pool": "practice",
+          "question": "Transformer의 한 Attention head 내에서 Q, K, V vector를 생성하는 과정과 출력 구조에 대한 설명으로 가장 올바른 것은?",
+          "options": [
+            {
+              "text": "입력 행렬이 $X$일 때, 동일한 head 안에서는 문장 내 위치가 달라도 공유되는 학습 파라미터 행렬 $W_Q, W_K, W_V$를 각각 곱하여 Q, K, V를 구하고 위치별 output vector를 생성한다.",
+              "rationale": "동일한 head 내에서는 모든 위치의 입력 vector가 공유되는 파라미터 행렬 $W_Q, W_K, W_V$를 통해 Q, K, V로 변환되고 위치별로 각각 output vector $z_i$가 계산됩니다.",
+              "isCorrect": true
+            },
+            {
+              "text": "Attention head 내부에서는 token의 위치(position)마다 서로 다른 $W_Q, W_K, W_V$ 파라미터 행렬을 개별적으로 할당하여 계산한다.",
+              "rationale": "단일 head 내부의 파라미터 행렬은 동일한 계산 갈래 안에서 모든 위치의 token 입력에 대해 동일하게 공유되어 적용됩니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "한 head의 Attention 계산이 완료되면 문장 전체의 시퀀스는 단 하나의 output vector로 압축된다.",
+              "rationale": "Attention head는 각 query 위치 $i$마다 대응하는 vector $z_i$를 생성하므로 출력 행렬 $Z$는 위치별 vector를 모두 유지합니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "Multi-head attention에서 각 head의 역할(예: 첫 번째 head는 문법, 두 번째 head는 의미)은 학습 전에 사람이 직접 지정해야 한다.",
+              "rationale": "Multi-head attention의 각 head는 학습 과정을 통해 서로 다른 projection 표현 공간을 자율적으로 학습할 뿐, 사전 정의된 역할이 고정되어 지정되지 않습니다.",
+              "isCorrect": false
+            }
+          ],
+          "hint": "한 head 안에서 위치별 입력들에 적용되는 weight matrix의 공유 여부와 계산 후 출력의 shape 형태를 떠올려 보세요."
+        },
+        {
+          "id": "a97ce22f-3929-4201-b129-2c04e3a19763:3",
+          "goalId": "qkv-head",
+          "pool": "check",
+          "question": "Self-attention 수식 $q_i = x_i W_Q$, $k_j = x_j W_K$, $v_j = x_j W_V$에서 사용되는 위치 인덱스 $i$와 $j$에 대한 설명으로 가장 올바른 것은?",
+          "options": [
+            {
+              "text": "인덱스 $i$는 현재 output vector $z_i$를 생성하고자 하는 target query 위치이고, $j$는 관련도를 비교하고 정보를 가져올 reference key/value 위치이다.",
+              "rationale": "Self-attention 수식에서 $i$는 결과를 도출할 대상 query의 위치를 나타내고, $j$는 관련도를 측정하고 Value 정보를 추출할 참고 대상을 가리킵니다.",
+              "isCorrect": true
+            },
+            {
+              "text": "인덱스 $i$와 $j$는 반드시 서로 다른 입력 시퀀스에서만 출처를 가지며, Self-attention에서는 $i=j$인 경우가 존재할 수 없다.",
+              "rationale": "Self-attention에서는 동일한 입력 시퀀스 $X$ 내에서 $i$ 위치의 query가 자기 자신을 포함하여($i=j$) 모든 $j$ 위치의 key와 관련도를 계산합니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "Key와 Value는 서로 다른 인덱스를 사용해야 하므로 $k_j$로 관련도를 계산한 뒤에는 무관한 위치 $v_i$의 정보를 곱해야 한다.",
+              "rationale": "Key와 Value가 동일한 인덱스 $j$를 공유해야 특정 위치 $j$에서 평가된 관련도 비율 $\\alpha_{ij}$에 맞춰 동일 위치 $j$의 Value $v_j$를 적절히 가져올 수 있습니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "인덱스 $i$의 Query $q_i$는 해당 위치의 Key $k_i$와만 내적 연산이 가능하며 타 위치 $j$의 Key와는 내적할 수 없다.",
+              "rationale": "Query $q_i$는 문장 내 모든 위치 $j$의 Key $k_j$와 내적하여 위치별 관련도 score를 만듭니다.",
+              "isCorrect": false
+            }
+          ],
+          "hint": "어떤 인덱스가 '지금 결과를 만들 위치'이고 어떤 인덱스가 '참고할 위치'인지 역할을 구분해 보세요."
+        },
+        {
+          "id": "a97ce22f-3929-4201-b129-2c04e3a19763:4",
+          "goalId": "energy-softmax",
+          "pool": "practice",
+          "question": "Attention 메커니즘에서 softmax 함수를 적용하는 목적과 그 결과 성질에 대한 설명으로 가장 올바른 것은?",
+          "options": [
+            {
+              "text": "Softmax는 score들을 지수 함수에 넣은 뒤 총합으로 나누어, 모든 값이 양수이고 합이 1인 비율 vector로 정규화한다.",
+              "rationale": "Softmax 함수는 지수 함수를 통해 입력 score를 양수로 만든 뒤 총합으로 나누어 요소들의 합이 1이 되도록 정규화하는 비율 vector 생성 연산입니다.",
+              "isCorrect": true
+            },
+            {
+              "text": "Softmax 연산을 통한 정규화(normalization)는 score 값들의 분포를 가우시안 정규분포(normal distribution)로 변환한다.",
+              "rationale": "Softmax의 정규화는 합을 1로 맞추는 확률적 비율 변환이며 가우시안 정규분포(normal distribution)를 형성하는 것과는 무관합니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "Softmax를 거쳐 산출된 높은 attention weight $\\alpha_{ij}$는 해당 위치의 token이 최종 예측 정답일 확률을 직접적으로 의미한다.",
+              "rationale": "Attention weight는 Value vector들을 섞는 가중치 비율을 의미하며, 해당 위치가 분류 문제의 정답 클래스일 확률을 나타내지 않습니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "Softmax 연산 시 특정 위치의 출력 비율은 자기 자신의 score 값에만 의존하며 다른 위치 score들의 크기 변화에는 영향을 받지 않는다.",
+              "rationale": "Softmax 분모에는 입력된 모든 위치의 $\\exp(s_l)$ 합이 포함되므로, 특정 위치의 최종 결과 비율은 다른 위치 score들의 크기에도 영향을 받습니다.",
+              "isCorrect": false
+            }
+          ],
+          "hint": "Softmax의 '정규화'라는 단어가 통계학의 특정 분포 형태를 뜻하는지, 그리고 출력이 어떤 성질(합과 부호)을 갖는지 검토해 보세요."
+        },
+        {
+          "id": "a97ce22f-3929-4201-b129-2c04e3a19763:5",
+          "goalId": "energy-softmax",
+          "pool": "check",
+          "question": "입력 행렬 $X = \\begin{bmatrix} 2 & 1 \\\\ 1 & 2 \\\\ 1 & 1 \\end{bmatrix}$과 파라미터 행렬 $W_Q = \\begin{bmatrix} 1 & 0 \\\\ 1 & 1 \\end{bmatrix}$, $W_K = \\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix}$, $W_V = \\begin{bmatrix} 2 & 0 \\\\ 0 & 1 \\end{bmatrix}$이 주어졌을 때, scaled dot-product attention에서 위치 2($i=2$)의 query $q_2$와 위치 1($j=1$)의 key $k_1$ 사이의 scaled energy $e_{21} = \\frac{q_2 k_1^T}{\\sqrt{d_k}}$ 값으로 올바른 것은? (단, $d_k=2$이다.)",
+          "options": [
+            {
+              "text": "$\\frac{7}{\\sqrt{2}}$",
+              "rationale": "위치 2의 query $q_2 = [1, 2] W_Q = [3, 2]$이고 위치 1의 key $k_1 = [2, 1] W_K = [1, 2]$입니다. 내적 $q_2 k_1^T = 3\\cdot 1 + 2\\cdot 2 = 7$을 $\\sqrt{d_k} = \\sqrt{2}$로 나누면 $e_{21} = \\frac{7}{\\sqrt{2}}$가 됩니다.",
+              "isCorrect": true
+            },
+            {
+              "text": "$\\frac{8}{\\sqrt{2}}$",
+              "rationale": "$\\frac{8}{\\sqrt{2}}$는 위치 2의 query $q_2 = [3, 2]$와 위치 2의 key $k_2 = [2, 1]$ 사이의 scaled energy인 $e_{22}$를 계산한 결과입니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "$\\frac{5}{\\sqrt{2}}$",
+              "rationale": "$\\frac{5}{\\sqrt{2}}$는 위치 2의 query $q_2 = [3, 2]$와 위치 3의 key $k_3 = [1, 1]$ 사이의 scaled energy인 $e_{23}$을 계산한 결과입니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "$\\frac{7}{2}$",
+              "rationale": "Scaled dot-product attention에서는 내적 값을 $d_k$ 그대로 나누는 것이 아니라 제곱근 $\\sqrt{d_k}$로 나누어야 합니다.",
+              "isCorrect": false
+            }
+          ],
+          "hint": "$q_2 = x_2 W_Q$와 $k_1 = x_1 W_K$를 계산한 후 두 vector의 내적을 구하고 스케일링 요소인 $\\sqrt{d_k}$로 나누어 보세요."
+        }
+      ],
+      "cards": [
+        {
+          "id": "c0337421-ebb4-4a5c-8087-32e188f9671c:0",
+          "goalId": "embedding-encoder",
+          "front": "Token Embedding 단계에서 입력 Token ID는 어떤 방식으로 벡터로 변환되는가?",
+          "back": "학습 가능한 Embedding 테이블 $E$에서 Token ID에 해당하는 행 인덱스(row index)의 벡터를 가져온다 (lookup)."
+        },
+        {
+          "id": "c0337421-ebb4-4a5c-8087-32e188f9671c:1",
+          "goalId": "embedding-encoder",
+          "front": "Embedding 테이블 $E$의 차원이 $(\\text{vocabulary\\_size}, d_{\\text{embedding}})$일 때, Token ID 목록 $[2, 1]$을 lookup 한 출력의 shape은?",
+          "back": "$(2, d_{\\text{embedding}})$"
+        },
+        {
+          "id": "c0337421-ebb4-4a5c-8087-32e188f9671c:2",
+          "goalId": "embedding-encoder",
+          "front": "Embedding 테이블 $E$를 학습할 때 경사하강법(gradient update)으로 업데이트되는 대상은 무엇인가?",
+          "back": "Embedding 테이블 $E$의 가중치 파라미터값 (Token ID 정수값 자체는 변하지 않음)."
+        },
+        {
+          "id": "c0337421-ebb4-4a5c-8087-32e188f9671c:3",
+          "goalId": "embedding-encoder",
+          "front": "동일한 Token ID가 문장 내 서로 다른 위치에 등장할 때, Token Embedding lookup 결과 벡터는 서로 다른가?",
+          "back": "아니요. 동일한 Token ID는 Embedding 테이블에서 항상 동일한 row vector를 가져옵니다."
+        },
+        {
+          "id": "c0337421-ebb4-4a5c-8087-32e188f9671c:5",
+          "goalId": "embedding-encoder",
+          "front": "원시 Transformer 모델의 입력 처리 단계에서 Token Embedding 벡터에 적용하는 스케일링과 결합 정보는?",
+          "back": "Embedding 벡터에 $\\sqrt{d_{\\text{model}}}$을 곱한 후 Positional Encoding(위치 정보)을 더한다."
+        },
+        {
+          "id": "c0337421-ebb4-4a5c-8087-32e188f9671c:10",
+          "goalId": "qkv-head",
+          "front": "Self-Attention에서 입력 벡터 $x_i$로부터 Query($q_i$), Key($k_i$), Value($v_i$) 벡터를 얻는 수식은?",
+          "back": "$q_i = x_i W_Q, \\quad k_i = x_i W_K, \\quad v_i = x_i W_V$"
+        },
+        {
+          "id": "c0337421-ebb4-4a5c-8087-32e188f9671c:11",
+          "goalId": "qkv-head",
+          "front": "단일 Attention Head 내에서 서로 다른 위치의 token들이 Q, K, V 벡터를 생성할 때 파라미터 행렬 $W_Q, W_K, W_V$는 공유되는가?",
+          "back": "예. 같은 head 안에서는 토큰의 위치가 달라도 동일한 세 파라미터 행렬 $W_Q, W_K, W_V$를 공유합니다."
+        },
+        {
+          "id": "c0337421-ebb4-4a5c-8087-32e188f9671c:12",
+          "goalId": "qkv-head",
+          "front": "설명용 입력 $X = \\begin{bmatrix} 2 & 1 \\\\ 1 & 2 \\\\ 1 & 1 \\end{bmatrix}$와 가중치 $W_Q = \\begin{bmatrix} 1 & 0 \\\\ 1 & 1 \\end{bmatrix}$가 주어졌을 때, $Q = X W_Q$ 계산 결과는?",
+          "back": "$Q = \\begin{bmatrix} 3 & 1 \\\\ 3 & 2 \\\\ 2 & 1 \\end{bmatrix}$ (각 행 $x_i W_Q$ 연산 결과)"
+        },
+        {
+          "id": "c0337421-ebb4-4a5c-8087-32e188f9671c:13",
+          "goalId": "qkv-head",
+          "front": "Self-Attention 수식에서 인덱스 $i$와 $j$는 각각 무엇을 의미하는가?",
+          "back": "$i$는 현재 출력을 만들 대상(Query 위치), $j$는 참조 및 가중합할 대상(Key 및 Value 위치)을 의미한다."
+        },
+        {
+          "id": "c0337421-ebb4-4a5c-8087-32e188f9671c:15",
+          "goalId": "qkv-head",
+          "front": "Attention 수식에서 Key와 Value가 동일한 위치 인덱스 $j$를 공유하는 이유는?",
+          "back": "$k_j$로 관련도를 평가한 위치 $j$의 representation 정보($v_j$)를 그 가중치만큼 추출해 더하기 때문이다."
+        },
+        {
+          "id": "c0337421-ebb4-4a5c-8087-32e188f9671c:17",
+          "goalId": "qkv-head",
+          "front": "시퀀스 길이가 $n$일 때, 단일 Attention Head가 출력하는 벡터 $z_i$의 개수는 총 몇 개인가?",
+          "back": "각 Query 위치 $i$마다 하나의 출력 벡터 $z_i$가 계산되므로 총 $n$개의 벡터가 출력된다."
+        },
+        {
+          "id": "c0337421-ebb4-4a5c-8087-32e188f9671c:18",
+          "goalId": "qkv-head",
+          "front": "Multi-Head Attention에서 여러 head의 출력 결과를 최종 결합하는 방식은?",
+          "back": "각 head의 출력 벡터들을 이어 붙이고(concatenate), Output Projection 행렬 $W_O$를 곱한다."
+        },
+        {
+          "id": "c0337421-ebb4-4a5c-8087-32e188f9671c:24",
+          "goalId": "energy-softmax",
+          "front": "에너지 스코어 $e_{ij}$로부터 Attention 가중치 $\\alpha_{ij}$를 구하는 Softmax 수식은?",
+          "back": "$\\alpha_{ij} = \\frac{\\exp(e_{ij})}{\\sum_{l=1}^n \\exp(e_{il})}$"
+        },
+        {
+          "id": "c0337421-ebb4-4a5c-8087-32e188f9671c:26",
+          "goalId": "energy-softmax",
+          "front": "Attention 메커니즘에서 Softmax 결과인 $\\alpha_{ij}$가 뜻하는 의미는?",
+          "back": "참고할 각 위치 $j$의 Value($v_j$)를 가중합할 때의 가중치(혼합 비율)이다."
+        },
+        {
+          "id": "c0337421-ebb4-4a5c-8087-32e188f9671c:27",
+          "goalId": "energy-softmax",
+          "front": "Softmax 계산 과정에서의 '정규화(Normalization)'라는 용어가 정규분포(Normal distribution) 생성을 뜻하는가?",
+          "back": "아니요. 여기서 정규화는 합을 1로 맞추는 처리를 뜻하며, 정규분포(가우시안 분포)를 만드는 것과는 무관합니다."
+        },
+        {
+          "id": "c0337421-ebb4-4a5c-8087-32e188f9671c:28",
+          "goalId": "energy-softmax",
+          "front": "Softmax의 두 출력 원소 간 비율 $\\frac{\\operatorname{softmax}(s)_a}{\\operatorname{softmax}(s)_b}$를 수식으로 간단히 나타내면?",
+          "back": "$\\exp(s_a - s_b)$ (두 점수의 차이가 비율에 반영됨)"
+        },
+        {
+          "id": "c0337421-ebb4-4a5c-8087-32e188f9671c:30",
+          "goalId": "energy-softmax",
+          "front": "위치 $i$에서의 Scaled Dot-Product Attention 최종 출력 벡터 $z_i$를 구하는 가중합 수식은?",
+          "back": "$z_i = \\sum_{j=1}^n \\alpha_{ij} v_j$"
+        },
+        {
+          "id": "c0337421-ebb4-4a5c-8087-32e188f9671c:31",
+          "goalId": "energy-softmax",
+          "front": "전체 시퀀스에 대한 Scaled Dot-Product Attention 연산을 행렬식 하나로 압축한 표준 표현은?",
+          "back": "$Z = \\operatorname{softmax}\\left(\\frac{QK^T}{\\sqrt{d_k}}\\right)V$"
+        },
+        {
+          "id": "c0337421-ebb4-4a5c-8087-32e188f9671c:35",
+          "goalId": "energy-softmax",
+          "front": "예시 $q_2 = [3, 2]$이고 $K = \\begin{bmatrix} 1 & 2 \\\\ 2 & 1 \\\\ 1 & 1 \\end{bmatrix}$일 때, 내적 $q_2 K^T$의 결과 벡터는?",
+          "back": "$[7, 8, 5]$\n\n계산: $[3\\cdot1 + 2\\cdot2, \\quad 3\\cdot2 + 2\\cdot1, \\quad 3\\cdot1 + 2\\cdot1]$"
+        },
+        {
+          "id": "c0337421-ebb4-4a5c-8087-32e188f9671c:43",
+          "goalId": "energy-softmax",
+          "front": "Softmax 수식 표준 정의에서 사용되는 지수 함수의 밑(base)은 무엇인가?",
+          "back": "자연상수 $e$ (자연지수 함수 $e^x = \\exp(x)$)."
+        }
+      ],
+      "provenance": {
+        "provider": "NotebookLM",
+        "notebookId": "f410b065-74de-4f40-897d-0e0a31559434",
+        "sourceIds": [
+          "d78dc529-6162-4b8c-afdd-bec4c28e1194"
+        ],
+        "quizArtifactId": "a97ce22f-3929-4201-b129-2c04e3a19763",
+        "cardsArtifactId": "c0337421-ebb4-4a5c-8087-32e188f9671c",
+        "exportedAt": "2026-11-02",
+        "sourceHashes": {
+          "learning/2026-11-02-embedding-attention-qkv": "d99617dc34037325797da1baf9c2811865c4139bd9da327e67fae5a35c62bc46"
+        }
+      }
     }
   ]
 }
