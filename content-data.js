@@ -94,6 +94,11 @@ window.HANTHING_CONTENT = {
           "id": "attention-review",
           "title": "Embedding과 Attention 복습",
           "kind": "supplemental"
+        },
+        {
+          "id": "autoencoder-review",
+          "title": "Autoencoder 복습",
+          "kind": "supplemental"
         }
       ]
     },
@@ -149,6 +154,34 @@ window.HANTHING_CONTENT = {
     }
   ],
   "notes": [
+    {
+      "id": "learning/2026-11-03-autoencoder-reconstruction",
+      "title": "Autoencoder는 왜 입력을 복원할까: target과 sigmoid 출력의 의미",
+      "description": "입력 복원이 필요한 이유에서 출발해 latent representation, target, Transformer와의 차이, 이미지 외 입력과 sigmoid 출력 범위를 구별한다.",
+      "date": "2026-11-03",
+      "published": "2026-11-04",
+      "type": "journal",
+      "topics": [
+        "딥러닝"
+      ],
+      "courseId": "deep-learning",
+      "lessonId": "autoencoder-review",
+      "url": "/notes/learning/2026-11-03-autoencoder-reconstruction",
+      "links": [
+        "learning/2026-11-02-embedding-attention-qkv",
+        "machine-learning/logistic-loss-and-evaluation"
+      ],
+      "relatedReasons": {
+        "learning/2026-11-02-embedding-attention-qkv": "Transformer의 Encoder와 Attention 계산을 복원이라는 학습 목표와 구별한다.",
+        "machine-learning/logistic-loss-and-evaluation": "분류에서 확률로 해석한 sigmoid 출력을 복원에서는 밝기 값으로 해석하는 차이를 연결한다."
+      },
+      "sources": [
+        "부트캠프 딥러닝 관련 Autoencoder 학습 대화 (2026-10-26, 2026-11-03)",
+        "https://www.deeplearningbook.org/contents/autoencoders.html",
+        "https://arxiv.org/html/1706.03762v7",
+        "https://docs.pytorch.org/docs/stable/generated/torch.nn.Sigmoid.html"
+      ]
+    },
     {
       "id": "learning/2026-11-02-embedding-attention-qkv",
       "title": "Embedding에서 Attention까지: Q·K·V와 i·j를 실제 값으로 읽기",
@@ -2155,6 +2188,66 @@ window.HANTHING_CONTENT = {
     }
   ],
   "questions": [
+    {
+      "id": "learning/2026-11-03-autoencoder-reconstruction#질문-입력을-다시-출력한다면-왜-autoencoder를-학습하는가",
+      "title": "입력을 다시 출력한다면 왜 Autoencoder를 학습하는가?",
+      "url": "/notes/learning/2026-11-03-autoencoder-reconstruction#질문-입력을-다시-출력한다면-왜-autoencoder를-학습하는가",
+      "topic": "딥러닝",
+      "sourceTitle": "Autoencoder는 왜 입력을 복원할까: target과 sigmoid 출력의 의미",
+      "context": "입력과 출력 사이의 loss를 줄인다는 설명을 듣고, 결국 같은 값을 만들 뿐인데 무슨 쓸모가 있는지 물었다.",
+      "intent": "reconstruction이라는 학습 목표가 어떤 결과를 얻기 위한 수단인지 확인하려는 질문이다.",
+      "answer": "기본 Autoencoder는 x → Encoder → z → Decoder → x̂로 계산하고, 원본 x와 reconstruction x̂의 차이를 줄인다. 작은 bottleneck이나 regularization 같은 제약을 두면 복원에 필요한 정보를 representation z에 담도록 학습할 수 있다. 아무 제약 없이 복사하는 것만으로 유용한 representation이 보장되지는 않는다."
+    },
+    {
+      "id": "learning/2026-11-03-autoencoder-reconstruction#질문-의미는-latent-representation에만-있고-출력은-중요하지-않은가",
+      "title": "의미는 latent representation에만 있고 출력은 중요하지 않은가?",
+      "url": "/notes/learning/2026-11-03-autoencoder-reconstruction#질문-의미는-latent-representation에만-있고-출력은-중요하지-않은가",
+      "topic": "딥러닝",
+      "sourceTitle": "Autoencoder는 왜 입력을 복원할까: target과 sigmoid 출력의 의미",
+      "context": "reconstruction을 통해 z를 얻어 나중에 활용하는 것이라면, 입력과 같아지는 출력에는 의미가 별로 없는지 다시 물었다.",
+      "intent": "학습 중 비교 기준과 학습 후 사용할 결과를 구별하려는 질문이다.",
+      "answer": "representation learning에서는 z를 다른 작업의 feature로 사용할 수 있지만, 출력 x̂도 원본 정보를 얼마나 복원하는지 평가하는 학습 기준이다. denoising에서는 잡음을 줄인 출력 자체가 필요한 결과다. 입력과 출력은 같아지도록 학습하는 것이지 항상 정확히 같지는 않다."
+    },
+    {
+      "id": "learning/2026-11-03-autoencoder-reconstruction#질문-비지도-학습이면-target이-없는가-입력이-target인가",
+      "title": "비지도 학습이면 target이 없는가, 입력이 target인가?",
+      "url": "/notes/learning/2026-11-03-autoencoder-reconstruction#질문-비지도-학습이면-target이-없는가-입력이-target인가",
+      "topic": "딥러닝",
+      "sourceTitle": "Autoencoder는 왜 입력을 복원할까: target과 sigmoid 출력의 의미",
+      "context": "앞선 설명 뒤에 “별도 target이 없으니 input 자체가 target이 되겠다”는 해석을 말했다.",
+      "intent": "loss 계산에 필요한 정답을 어디서 얻는지 확인한 발언이다.",
+      "answer": "기본 reconstruction에서는 별도의 사람이 붙인 label이 필요하지 않을 뿐, target은 있다. x를 target으로 사용하고 모델 출력 x̂와 비교한다."
+    },
+    {
+      "id": "learning/2026-11-03-autoencoder-reconstruction#질문-원래-transformer도-encoder와-decoder가-있으니-autoencoder인가",
+      "title": "원래 Transformer도 Encoder와 Decoder가 있으니 Autoencoder인가?",
+      "url": "/notes/learning/2026-11-03-autoencoder-reconstruction#질문-원래-transformer도-encoder와-decoder가-있으니-autoencoder인가",
+      "topic": "딥러닝",
+      "sourceTitle": "Autoencoder는 왜 입력을 복원할까: target과 sigmoid 출력의 의미",
+      "context": "10월 26일에 최초 Transformer가 Autoencoder를 사용하는지 물었고, 11월 3일에도 「Attention Is All You Need」의 Encoder–Decoder와 Autoencoder의 관계를 다시 확인했다.",
+      "intent": "비슷한 구성 요소의 이름이 같은 학습 목표를 뜻하는지 구별하려는 질문이다.",
+      "answer": "Encoder–Decoder는 역할과 구조에 관한 표현이고, Autoencoder는 reconstruction을 학습한다는 구분이다. 원래 Transformer 논문의 번역 모델은 입력 문장을 다른 언어의 target 문장으로 변환한다. Encoder와 Decoder가 있다는 이유만으로 Autoencoder라고 부르지 않는다."
+    },
+    {
+      "id": "learning/2026-11-03-autoencoder-reconstruction#질문-autoencoder는-이미지가-아닌-입력에도-사용할-수-있는가",
+      "title": "Autoencoder는 이미지가 아닌 입력에도 사용할 수 있는가?",
+      "url": "/notes/learning/2026-11-03-autoencoder-reconstruction#질문-autoencoder는-이미지가-아닌-입력에도-사용할-수-있는가",
+      "topic": "딥러닝",
+      "sourceTitle": "Autoencoder는 왜 입력을 복원할까: target과 sigmoid 출력의 의미",
+      "context": "Autoencoder 설명에 이미지 예제가 자주 등장해서 이미지 전용 기술인지 물었다.",
+      "intent": "예제에 쓰인 데이터 형식이 모델의 정의에 포함되는지 확인하려는 질문이다.",
+      "answer": "핵심 조건은 이미지 여부가 아니라 입력으로부터 representation을 만들고 그에 맞는 reconstruction을 학습하는 것이다. 수치 vector, 음성, 시계열, 텍스트 등에도 구성할 수 있다. 입력 표현과 output, loss를 데이터에 맞춰야 한다."
+    },
+    {
+      "id": "learning/2026-11-03-autoencoder-reconstruction#질문-sigmoid-출력은-확률인데-01-밖의-입력과도-빼기가-가능한가",
+      "title": "sigmoid 출력은 확률인데, 0~1 밖의 입력과도 빼기가 가능한가?",
+      "url": "/notes/learning/2026-11-03-autoencoder-reconstruction#질문-sigmoid-출력은-확률인데-01-밖의-입력과도-빼기가-가능한가",
+      "topic": "딥러닝",
+      "sourceTitle": "Autoencoder는 왜 입력을 복원할까: target과 sigmoid 출력의 의미",
+      "context": "reconstruction loss에서 입력과 출력을 빼는데, 입력은 임의의 수이고 sigmoid 출력은 0~1의 확률이라면 입력도 0~1일 때만 계산할 수 있는지 물었다.",
+      "intent": "빼기 연산의 가능 여부, output의 의미, 모델이 표현할 수 있는 범위를 구별하려는 질문이다.",
+      "answer": "빼기는 가능하다. 다만 target을 output 범위로 표현할 수 있는지가 다르다. sigmoid는 각 값을 0과 1 사이로 보내는 activation function이며, 그 값을 반드시 확률로 해석해야 하는 것은 아니다. 이미지 복원에서는 scaling한 pixel 밝기로 해석할 수 있다."
+    },
     {
       "id": "learning/2026-11-02-embedding-attention-qkv#질문-encoding과-embedding은-무엇이-다른가",
       "title": "Encoding과 Embedding은 무엇이 다른가?",

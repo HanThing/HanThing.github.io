@@ -1,5 +1,10 @@
 # Knowledge changes
 
+## 2026-11-04
+
+- Aside의 10월 26일·11월 3일 Autoencoder 질문 7개를 복원 목적, target, Transformer와의 차이, 비이미지 입력, sigmoid 출력 범위와 scaling으로 정리했다. 필수 화면 미확인 질문은 보류하고 설명용 예시와 실제 학습 증거를 구별했다.
+- 공개 원고 기반 NotebookLM 퀴즈 24문항·카드 23장을 전수 검토해 한국어 단일 선택 8문항·카드 9장을 연결했다. 언어·미지원 형식·과도한 단정을 제외하고 기존 복습 ID·버전을 보존했다.
+
 ## 2026-11-02
 
 - Aside의 실제 Embedding·Attention 질문 11개를 새 학습 기록으로 정리했다. Encoder 범위, Q·K·V projection, softmax와 정규분포의 차이, energy와 i·j를 작은 수치 예시로 구별했다. 필수 화면 미확인·미완료 질문은 제외하고 독립 적용은 미확인으로 남겼다.

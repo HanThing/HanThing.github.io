@@ -36,6 +36,7 @@ const courses = [
     { id: 'rnn-lstm-review', title: 'RNN과 LSTM 복습', kind: 'supplemental' },
     { id: 'cnn-filter-review', title: 'CNN filter 복습', kind: 'supplemental' },
     { id: 'attention-review', title: 'Embedding과 Attention 복습', kind: 'supplemental' },
+    { id: 'autoencoder-review', title: 'Autoencoder 복습', kind: 'supplemental' },
   ] },
   { id: 'computer-vision', title: '컴퓨터 비전', lessons: [] },
   { id: 'version-control', title: '버전관리 및 협업하기', lessons: [] },

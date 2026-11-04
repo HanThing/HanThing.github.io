@@ -2,6 +2,9 @@
 
 Generated from public Markdown. Read AGENTS.md for ingest/query/lint; CHANGELOG.md for changes. Course references support briefing and stay outside the learning graph. Course/lesson identify the curriculum placement; topics identify related subjects.
 
+- [Autoencoder는 왜 입력을 복원할까: target과 sigmoid 출력의 의미](content/learning/2026-11-03-autoencoder-reconstruction.md) — journal · 2026-11-03 · 입력 복원이 필요한 이유에서 출발해 latent representation, target, Transformer와의 차이, 이미지 외 입력과 sigmoid 출력 범위를 구별한다.
+  Course: 딥러닝 → Autoencoder 복습 (보충). Related topics: 딥러닝
+  Sources: 부트캠프 딥러닝 관련 Autoencoder 학습 대화 (2026-10-26, 2026-11-03); https://www.deeplearningbook.org/contents/autoencoders.html; https://arxiv.org/html/1706.03762v7; https://docs.pytorch.org/docs/stable/generated/torch.nn.Sigmoid.html
 - [Embedding에서 Attention까지: Q·K·V와 i·j를 실제 값으로 읽기](content/learning/2026-11-02-embedding-attention-qkv.md) — journal · 2026-11-02 · Encoder와 Embedding을 혼동한 질문에서 출발해 lookup, Q·K·V 변환, softmax, 한 head의 weighted sum을 작은 행렬로 따라간다.
   Course: 딥러닝 → Embedding과 Attention 복습 (보충). Related topics: 딥러닝
   Sources: 부트캠프 딥러닝 관련 Embedding·Attention 학습 대화 (2026-11-02); https://arxiv.org/html/1706.03762v7

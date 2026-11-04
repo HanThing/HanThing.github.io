@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-02",
+  "generatedAt": "2026-11-04",
   "sets": [
     {
       "id": "loop-exit",
@@ -14823,6 +14823,339 @@
         "exportedAt": "2026-11-02",
         "sourceHashes": {
           "learning/2026-11-02-embedding-attention-qkv": "d99617dc34037325797da1baf9c2811865c4139bd9da327e67fae5a35c62bc46"
+        }
+      }
+    },
+    {
+      "id": "autoencoder-20261104",
+      "title": "Autoencoder · 복원 target과 sigmoid",
+      "version": "0862c459e04c",
+      "noteIds": [
+        "learning/2026-11-03-autoencoder-reconstruction"
+      ],
+      "goals": [
+        {
+          "id": "reconstruction",
+          "title": "복원 목적과 target을 구별하기",
+          "version": "1"
+        },
+        {
+          "id": "nonimage",
+          "title": "비이미지 입력과 loss를 연결하기",
+          "version": "1"
+        },
+        {
+          "id": "transformer",
+          "title": "Transformer의 구조와 학습 목표를 구별하기",
+          "version": "1"
+        },
+        {
+          "id": "sigmoid",
+          "title": "sigmoid 출력 범위와 scaling을 설명하기",
+          "version": "1"
+        }
+      ],
+      "questions": [
+        {
+          "id": "c57f80d0-82cf-4bb6-8db1-898507a1151c:0",
+          "goalId": "reconstruction",
+          "pool": "practice",
+          "question": "Autoencoder에서 입력을 받아 동일한 차원이나 형태로 다시 복원(reconstruction)하도록 학습시키는 주된 목적은 무엇인가?",
+          "options": [
+            {
+              "text": "모델 내부의 bottleneck이나 regularization과 같은 제약을 통해 입력 데이터의 유용한 representation을 z에 담도록 유도하기 위해서이다.",
+              "isCorrect": true,
+              "rationale": "Autoencoder는 입력과 출력을 비슷하게 맞추는 과정을 통해 중간의 제약 조건 하에서 의미 있는 representation z를 추출하는 것을 주요 목표로 삼는다."
+            },
+            {
+              "text": "원본 입력 데이터 x와 항상 100% 동일한 출력을 만들어내어 데이터 손실이 전혀 없는 완벽한 압축(perfect compression)을 달성하기 위해서이다.",
+              "isCorrect": false,
+              "rationale": "복원 과정은 유용한 representation을 얻기 위한 학습 수단일 뿐이며, 항상 완전 무손실 복원 자체만을 최종 목적으로 삼지는 않는다."
+            },
+            {
+              "text": "별도의 target 없이 학습하므로 모델 출력 x̂의 손실(loss) 계산 과정을 생략하고 z만을 빠르게 추출하기 위해서이다.",
+              "isCorrect": false,
+              "rationale": "사람이 작성한 별도 label이 없을 뿐, 원본 입력 x가 target 역할을 수행하여 모델 출력 x̂와의 loss를 계산한다."
+            },
+            {
+              "text": "입력 차원보다 항상 더 작은 크기의 latent representation만을 생성하도록 고정하여 단순 암기 방식을 원천 차단하기 위해서이다.",
+              "isCorrect": false,
+              "rationale": "모든 Autoencoder의 code가 반드시 입력보다 작아야 하는 것은 아니며, 다양한 제약 방식과 capacity 설정이 존재한다."
+            }
+          ],
+          "hint": "Autoencoder에서 입력 복원 자체는 ultimate goal이 아니라, 중간 표현(latent vector)이 갖는 유의미한 특징을 얻기 위한 학습 수단으로 작용합니다."
+        },
+        {
+          "id": "c57f80d0-82cf-4bb6-8db1-898507a1151c:1",
+          "goalId": "reconstruction",
+          "pool": "check",
+          "question": "노이즈가 포함된 입력 데이터 $\\tilde{x}$를 활용하는 Denoising Autoencoder의 학습 방식과 target 설정에 대한 설명으로 올바른 것은?",
+          "options": [
+            {
+              "text": "노이즈가 추가된 $\\tilde{x}$를 모델에 입력하고, 노이즈가 제거된 원본 $x$를 target으로 설정하여 복원을 학습한다.",
+              "isCorrect": true,
+              "rationale": "Denoising Autoencoder는 잡음이 섞인 $\\tilde{x}$를 입력을 통해 전달받고 노이즈 없는 원본 $x$를 target으로 설정해 오차를 줄이도록 학습한다."
+            },
+            {
+              "text": "노이즈가 추가된 $\\tilde{x}$ 자체를 target으로 설정하여, 입력의 노이즈 패턴까지 정확하게 복사하도록 학습한다.",
+              "isCorrect": false,
+              "rationale": "입력 $\\tilde{x}$를 그대로 target으로 삼아 복사하도록 학습하면 입력에 들어있는 노이즈까지 복원 결과에 남게 된다."
+            },
+            {
+              "text": "비지도 학습 기법이므로 target 개념 자체가 존재하지 않으며 loss 계산 시 모델 출력 $\\hat{x}$만을 사용한다.",
+              "isCorrect": false,
+              "rationale": "별도의 사람 라벨이 필요하지 않을 뿐, 노이즈가 제거된 원본 $x$가 target 역할을 하여 loss를 산출한다."
+            },
+            {
+              "text": "Encoder가 노이즈를 제거한 latent representation $z$를 생성하면, Decoder 과정 및 target 비교 없이 학습이 완료된다.",
+              "isCorrect": false,
+              "rationale": "representation $z$를 바탕으로 Decoder를 통해 $\\hat{x}$를 복원하고 target $x$와 손실을 비교하는 과정이 필수적이다."
+            }
+          ],
+          "hint": "잡음이 섞인 입력으로부터 원래의 깨끗한 상태를 복원해내는 과정에서 target이 무엇이어야 하는지 생각해 보세요."
+        },
+        {
+          "id": "c57f80d0-82cf-4bb6-8db1-898507a1151c:2",
+          "goalId": "nonimage",
+          "pool": "practice",
+          "question": "[키, 몸무게, 심박수, 혈압]과 같이 서로 다른 단위와 scale을 가진 수치 vector를 Autoencoder의 입력 및 target으로 사용할 때 고려해야 할 핵심 사항은 무엇인가?",
+          "options": [
+            {
+              "text": "각 항목의 단위와 scale이 다르면 loss 계산 시 특정 변수가 과도한 기여를 할 수 있으므로 전처리와 loss의 상대적 기여도를 함께 고려해야 한다.",
+              "isCorrect": true,
+              "rationale": "단위나 스케일이 크게 차이 나는 수치 vector는 스케일이 큰 피처가 loss 전체를 지배할 수 있어 적절한 scaling 및 loss 기여도 조율이 요구된다."
+            },
+            {
+              "text": "이미지 형태가 아닌 데이터는 Autoencoder의 입력으로 사용할 수 없으므로 반드시 2차원 행렬로 변환해야 한다.",
+              "isCorrect": false,
+              "rationale": "Autoencoder는 이미지뿐만 아니라 수치 vector, 텍스트, 음성, 시계열 등 다양한 형식의 데이터에 구성할 수 있다."
+            },
+            {
+              "text": "수치 vector 데이터는 항상 모든 항목의 값이 0과 1 사이로 고정되어 있으므로 별도의 scaling 전처리가 불필요하다.",
+              "isCorrect": false,
+              "rationale": "생체 측정 데이터 등 수치 vector는 측정 단위에 따라 스케일 변동 폭이 매우 크므로 적절한 데이터 전처리가 수반되어야 한다."
+            },
+            {
+              "text": "요소별 squared error 대신 항상 Mean Squared Error(MSE)만을 사용하면 scale 차이에 따른 영향이 완전히 제거된다.",
+              "isCorrect": false,
+              "rationale": "MSE를 적용하더라도 각 항목 스케일 간 상대적 단위 차이 자체가 자동으로 사라지는 것은 아니다."
+            }
+          ],
+          "hint": "서로 다른 단위(예: kg, mmHg)를 가진 변수들이 하나의 loss 함수로 합산될 때 발생하는 영향을 고려하세요."
+        },
+        {
+          "id": "c57f80d0-82cf-4bb6-8db1-898507a1151c:3",
+          "goalId": "nonimage",
+          "pool": "check",
+          "question": "텍스트 데이터의 token을 Autoencoder 구조로 복원하고자 할 때, 손실 함수(loss function) 설정에 관한 설명으로 적절한 것은?",
+          "options": [
+            {
+              "text": "token ID 숫자 간의 단순 차이에 의미가 없으므로 MSE 대신 token 예측 분류에 적합한 loss를 선택해야 한다.",
+              "isCorrect": true,
+              "rationale": "텍스트 token ID는 범주형 이산 변수이므로 번호 간 수치 차이를 단순 MSE로 재는 대신 token 예측 분류에 알맞은 손실 함수를 채택해야 한다."
+            },
+            {
+              "text": "token ID는 정수 수치이므로 원본 token ID와 출력 token ID 간의 MSE를 그대로 계산하는 것이 가장 이상적이다.",
+              "isCorrect": false,
+              "rationale": "token ID 5와 6의 숫격 차이가 단어 간 수치적 거리나 의미 차이를 직접 나타내지 않으므로 MSE 사용은 적절하지 않다."
+            },
+            {
+              "text": "텍스트 token은 연속형 수치 데이터이므로 마지막 출력층에 반드시 sigmoid activation만을 적용해야 한다.",
+              "isCorrect": false,
+              "rationale": "token 예측은 이산적인 범주 예측에 해당하므로 출력층에 sigmoid만을 고정 적용하는 방식으로 구성하지 않는다."
+            },
+            {
+              "text": "텍스트 복원 시에는 target 문장이 없으므로 loss 함수를 정의할 수 없다.",
+              "isCorrect": false,
+              "rationale": "텍스트 Autoencoder 역시 원본 문장의 token들이 target 역할을 수행하므로 손실 함수를 명확히 정의할 수 있다."
+            }
+          ],
+          "hint": "token ID 숫자의 크기 차이가 단어 의미 간의 실제 거리를 나타내는지 생각해 보세요."
+        },
+        {
+          "id": "c57f80d0-82cf-4bb6-8db1-898507a1151c:4",
+          "goalId": "transformer",
+          "pool": "practice",
+          "question": "최초 Transformer 논문(「Attention Is All You Need」)의 번역 모델과 기본 문장 Autoencoder의 학습 target 차이에 대한 설명으로 올바른 것은?",
+          "options": [
+            {
+              "text": "기본 문장 Autoencoder는 입력 문장 자체를 target으로 복원하지만, 번역 Transformer는 입력 문장과 다른 언어의 target 문장을 예측하도록 학습한다.",
+              "isCorrect": true,
+              "rationale": "둘 다 Encoder-Decoder 구성을 가질 수 있으나, 기본 Autoencoder는 동일 입력을 복원(reconstruction)하고 번역 Transformer는 타깃 언어 문장을 target으로 삼는다."
+            },
+            {
+              "text": "원래 Transformer는 Encoder와 Decoder 구조를 가지므로 학습 target 역시 원본 입력 문장과 항상 동일한 Autoencoder이다.",
+              "isCorrect": false,
+              "rationale": "Encoder와 Decoder라는 역할/구조 표현이 같다고 해서 학습 목표까지 reconstruction인 것은 아니다."
+            },
+            {
+              "text": "기본 문장 Autoencoder는 라벨이 있는 target 문장을 사용하고, 번역 Transformer는 target 문장 없이 비지도 방식으로 작동한다.",
+              "isCorrect": false,
+              "rationale": "기본 문장 Autoencoder는 입력 자체가 target이 되며, 번역 Transformer는 번역 쌍에 해당하는 타깃 언어 문장을 target으로 갖는다."
+            },
+            {
+              "text": "원래 Transformer는 입력 문장을 복원하고, 기본 문장 Autoencoder는 다른 구조의 임의 vector를 target으로 사용한다.",
+              "isCorrect": false,
+              "rationale": "번역 Transformer의 target은 타깃 언어 문장이며, 기본 문장 Autoencoder의 target은 입력 문장 본래 값이다."
+            }
+          ],
+          "hint": "두 모델이 최종적으로 출력하려는 문장이 입력 문장과 동일한지, 아니면 다른 언어의 문장인지 비교해 보세요."
+        },
+        {
+          "id": "c57f80d0-82cf-4bb6-8db1-898507a1151c:5",
+          "goalId": "transformer",
+          "pool": "check",
+          "question": "Transformer의 Encoder 역할 및 representation 방식에 대한 설명으로 올바른 것은?",
+          "options": [
+            {
+              "text": "Transformer의 Encoder는 입력을 최종 단일 vector 하나로만 압축하기보다는, 입력 token별 representation을 생성하여 Decoder가 참고하도록 한다.",
+              "isCorrect": true,
+              "rationale": "Transformer의 Encoder는 sequence 내 단어(token)별 representation을 형성하고 Decoder가 이를 Attention 메커니즘으로 활용한다."
+            },
+            {
+              "text": "Transformer의 Encoder는 입력 전체를 항상 하나의 고정된 1차원 bottleneck vector z로 강제 압축한다.",
+              "isCorrect": false,
+              "rationale": "Transformer의 Encoder는 입력 전체를 단 하나의 벡터로만 단순 압축하는 구조가 아닌 token별 representation을 유지 및 활용하는 방식이다."
+            },
+            {
+              "text": "Transformer의 Encoder는 입력 문장의 복원 손실(reconstruction loss)만을 직접 계산하여 weights를 업데이트한다.",
+              "isCorrect": false,
+              "rationale": "원래 Transformer 번역 모델은 입력 복원 손실이 아닌, 타깃 언어 문장 예측에 관한 손실을 기반으로 학습된다."
+            },
+            {
+              "text": "Transformer의 Encoder는 Decoder 없이 독립적으로만 작동하며 target 문장과의 직접 비교를 수행한다.",
+              "isCorrect": false,
+              "rationale": "원래 Transformer 구조에서 Encoder와 Decoder는 함께 작동하며, Encoder representation을 Decoder가 참고하여 target을 생성한다."
+            }
+          ],
+          "hint": "Transformer의 Attention 메커니즘이 입력 문장의 각 단어(token)별 정보에 어떻게 접근하는지 상기해 보세요."
+        },
+        {
+          "id": "c57f80d0-82cf-4bb6-8db1-898507a1151c:6",
+          "goalId": "sigmoid",
+          "pool": "practice",
+          "question": "모델의 마지막 activation으로 Sigmoid 함수 $\\sigma(t) = \\frac{1}{1 + e^{-t}}$를 사용할 때, target 값과 출력값 $\\hat{x}$ 간의 계산 및 표현 범위에 관한 설명으로 올바른 것은?",
+          "options": [
+            {
+              "text": "target이 200인 경우 $(\\text{target} - \\hat{x})^2$ 연산 자체는 가능하지만, Sigmoid의 출력 범위(0 < $\\hat{x}$ < 1) 한계로 인해 $\\hat{x}$를 200으로 만들 수는 없다.",
+              "isCorrect": true,
+              "rationale": "빼기 연산 자체는 수행될 수 있으나 Sigmoid 출력 치역이 0과 1 사이로 제약되므로 1보다 큰 target 수치를 출력 $\\hat{x}$로 정확히 표현할 수는 없다."
+            },
+            {
+              "text": "Sigmoid 출력 범위가 (0, 1)이므로 0~1 범위를 벗어나는 target 값과는 뺄셈 및 squared error 연산이 수학적으로 불가능하다.",
+              "isCorrect": false,
+              "rationale": "수학적으로 빼기 및 squared error 연산 자체는 문제없이 수행되며, 오직 모델 출력이 target 수치에 닿을 수 없다는 표현 범위 한계가 존재하는 것이다."
+            },
+            {
+              "text": "부동소수점 rounding 처리를 거치면 Sigmoid의 출력값이 200에 도달하여 target과 완전히 일치할 수 있다.",
+              "isCorrect": false,
+              "rationale": "부동소수점 구현상의 rounding은 수치 표현 정밀도의 한계일 뿐 Sigmoid 함수 본래의 수학적 표현 범위를 넘게 만들지 못한다."
+            },
+            {
+              "text": "target이 200일 때 Sigmoid 출력이 1에 가까워지면 loss가 0으로 수렴한다.",
+              "isCorrect": false,
+              "rationale": "출력 $\\hat{x}$가 1에 최대한 가까워져도 target이 200이면 squared error 오차가 상당 수준($199^2$)에 머물러 loss가 0이 되지 않는다."
+            }
+          ],
+          "hint": "Sigmoid 함수의 치역(output range)과 뺄셈 연산 가능 여부, 그리고 오차(error)의 하한을 구별해 보세요."
+        },
+        {
+          "id": "c57f80d0-82cf-4bb6-8db1-898507a1151c:7",
+          "goalId": "sigmoid",
+          "pool": "check",
+          "question": "이미지 Pixel 값을 255로 나누어 0~1 사이로 scaling한 뒤 Autoencoder의 마지막 층에 Sigmoid를 적용하여 출력 $\\hat{x} = 0.8$을 얻었다. 이 출력값에 대한 올바른 해석은 무엇인가?",
+          "options": [
+            {
+              "text": "해당 위치의 픽셀 밝기 값을 0~1 범위로 복원한 수치(원본 pixel 값 약 204에 해당)로 해석할 수 있다.",
+              "isCorrect": true,
+              "rationale": "복원(reconstruction) task에서 0~1로 scaling된 target과 연동된 Sigmoid 출력은 복원된 픽셀의 밝기 값을 의미한다."
+            },
+            {
+              "text": "모델이 해당 pixel이 특정 클래스에 속할 확률이 80%라고 판단한 분류 결과로만 해석해야 한다.",
+              "isCorrect": false,
+              "rationale": "Sigmoid 출력을 로지스틱 분류에서는 확률로 보지만, 이미지 복원 문제에서는 scaling된 밝기 값으로 해석하는 차이가 존재한다."
+            },
+            {
+              "text": "Sigmoid 출력은 무조건 확률 값이어야 하므로 이미지가 노이즈일 확률이 0.8임을 의미한다.",
+              "isCorrect": false,
+              "rationale": "Sigmoid 결과가 반드시 특정 사건이나 노이즈 발생 확률을 뜻하는 것은 아니며, 학습목표와 target 표현에 맞게 해석된다."
+            },
+            {
+              "text": "0~1 사이로 scaling된 target과 비교할 때 Sigmoid 출력을 사용하는 것은 항상 잘못된 설정이다.",
+              "isCorrect": false,
+              "rationale": "Pixel 밝기 수치를 0~1 사이로 scaling하고 마지막에 Sigmoid를 적용하여 복원하는 설계는 자주 쓰이는 적절한 방식이다."
+            }
+          ],
+          "hint": "동일한 activation function이라도 분류(classification) 문제와 복원(reconstruction) 문제에서 출력을 다르게 해석한다는 점을 기억하세요."
+        }
+      ],
+      "cards": [
+        {
+          "id": "b5aa9479-e059-49fc-be75-8433557c4d97:0",
+          "goalId": "reconstruction",
+          "front": "Autoencoder에서 입력을 그대로 복원하도록 학습하는 근본적인 목적은 무엇인가요?",
+          "back": "제약 조건(bottleneck, regularization 등)을 두어 입력을 복원하는 과정에서 유용한 latent representation $z$를 형성하기 위함입니다."
+        },
+        {
+          "id": "b5aa9479-e059-49fc-be75-8433557c4d97:1",
+          "goalId": "reconstruction",
+          "front": "입력이 $x = [a, b, a+b, 2a, 3b]$ 형식이고 $a=2, b=3$일 때, 입력 벡터 $x$와 이를 축약 표현할 수 있는 representation $z$의 수치 예시는 무엇인가요?",
+          "back": "입력 벡터는 $x = [2, 3, 5, 4, 9]$이며, 중간 표현으로 $z = [2, 3]$ 두 값만 추출하여 원래 다섯 개 항목을 복원할 수 있습니다."
+        },
+        {
+          "id": "b5aa9479-e059-49fc-be75-8433557c4d97:2",
+          "goalId": "reconstruction",
+          "front": "모든 Autoencoder의 code(latent representation) 차원은 반드시 입력 차원보다 작아야 하나요?",
+          "back": "아니오. code가 입력보다 작은 undercomplete 방식이 대표적이지만, 적절한 regularization이나 capacity 제약이 있다면 code 크기가 입력보다 크거나 같아도 유용한 표현을 학습할 수 있습니다."
+        },
+        {
+          "id": "b5aa9479-e059-49fc-be75-8433557c4d97:3",
+          "goalId": "reconstruction",
+          "front": "Denoising Autoencoder에서 모델의 입력, 복원 target, 그리고 모델 출력 간의 관계는 어떻게 되나요?",
+          "back": "잡음이 추가된 $\\tilde{x}$를 입력으로 받고, 잡음이 없는 원본 $x$를 target으로 사용하여 모델 출력 $\\hat{x}$와 $x$의 차이를 줄이도록 학습합니다."
+        },
+        {
+          "id": "b5aa9479-e059-49fc-be75-8433557c4d97:4",
+          "goalId": "reconstruction",
+          "front": "비지도 학습인 Autoencoder에서 target이 존재하는지 여부와, $x=[0.2, 0.8]$이고 $\\hat{x}=[0.3, 0.6]$일 때의 MSE loss 값은 무엇인가요?",
+          "back": "사람이 작성한 label은 없지만 입력 $x$ 자체가 target이 됩니다. 각 요소별 제곱 오차는 $[0.01, 0.04]$이며, MSE loss는 $\\frac{0.01 + 0.04}{2} = 0.025$입니다."
+        },
+        {
+          "id": "b5aa9479-e059-49fc-be75-8433557c4d97:5",
+          "goalId": "transformer",
+          "front": "Encoder와 Decoder 구조를 포함하는 Transformer 번역 모델을 Autoencoder로 분류하지 않는 이유는 무엇인가요?",
+          "back": "Autoencoder는 입력과 동일한 문장 복원을 target으로 하지만, 번역 모델은 입력 문장(예: \"나는 학생이다\")을 다른 언어의 문장(예: \"I am a student\")으로 변환하는 다른 target을 사용하기 때문입니다."
+        },
+        {
+          "id": "b5aa9479-e059-49fc-be75-8433557c4d97:6",
+          "goalId": "nonimage",
+          "front": "텍스트 데이터의 token을 Autoencoder로 복원할 때 token ID 숫자 차이에 MSE loss를 직접 사용하지 않는 이유는 무엇인가요?",
+          "back": "token ID 숫자의 산술적 차이가 단어 의미의 거리를 반영하지 않으므로, token 예측 문제에 맞는 loss(예: cross-entropy)를 선택해야 합니다."
+        },
+        {
+          "id": "b5aa9479-e059-49fc-be75-8433557c4d97:8",
+          "goalId": "sigmoid",
+          "front": "이미지 pixel 밝기 200을 복원할 때 마지막 출력층에 sigmoid를 적용하려면 target을 어떻게 전처리해야 하나요?",
+          "back": "pixel 값을 255로 나누어 target을 $0 \\sim 1$ 범위의 값으로 scaling해야 합니다. (예: $200 / 255 \\approx 0.7843$)"
+        },
+        {
+          "id": "b5aa9479-e059-49fc-be75-8433557c4d97:9",
+          "goalId": "sigmoid",
+          "front": "이미지 복원 Autoencoder에서 출력층의 sigmoid 값이 0.8로 나왔을 때, 이 값은 어떻게 해석해야 하나요?",
+          "back": "특정 class에 속할 확률 80%가 아니라, $0 \\sim 1$ 범위로 scaling된 복원 pixel의 밝기 값으로 해석합니다."
+        }
+      ],
+      "provenance": {
+        "provider": "NotebookLM",
+        "notebookId": "4bf10344-04d7-4f2b-9375-403c2ce19d85",
+        "sourceIds": [
+          "2034ccba-bcbd-44f4-887f-bfaf84cce4a2"
+        ],
+        "quizArtifactId": "c57f80d0-82cf-4bb6-8db1-898507a1151c",
+        "cardsArtifactId": "b5aa9479-e059-49fc-be75-8433557c4d97",
+        "exportedAt": "2026-11-04",
+        "sourceHashes": {
+          "learning/2026-11-03-autoencoder-reconstruction": "a4c5a7f033189c72e0e77e88d9a594f1fd0b278e0b4c23a1ab790df8e054b02e"
         }
       }
     }
