@@ -155,6 +155,35 @@ window.HANTHING_CONTENT = {
   ],
   "notes": [
     {
+      "id": "learning/2026-11-05-adam-learning-rate",
+      "title": "Adam은 learning rate를 바꿀까: gradient와 실제 update 구분하기",
+      "description": "Adam 선택 이유를 설명하다 생긴 혼동에서 출발해 mini-batch, gradient의 이동평균, 기본 lr과 parameter별 update를 구별한다.",
+      "date": "2026-11-05",
+      "published": "2026-11-05",
+      "type": "journal",
+      "topics": [
+        "PyTorch"
+      ],
+      "courseId": "pytorch",
+      "lessonId": "deep-learning-basics",
+      "url": "/notes/learning/2026-11-05-adam-learning-rate",
+      "links": [
+        "weekly/2026-10-23-vanishing-gradient-and-zero-grad",
+        "weekly/2026-10-08-learning-rate-and-classification",
+        "learning/2026-11-03-autoencoder-reconstruction"
+      ],
+      "relatedReasons": {
+        "weekly/2026-10-23-vanishing-gradient-and-zero-grad": "backward가 저장하는 gradient와 optimizer가 사용하는 update 규칙을 구별한다.",
+        "weekly/2026-10-08-learning-rate-and-classification": "기본 SGD의 learning rate 설명에서 Adam의 적응적인 update로 확장한다.",
+        "learning/2026-11-03-autoencoder-reconstruction": "Autoencoder의 reconstruction 목표와 이를 최적화하는 optimizer의 역할을 연결한다."
+      },
+      "sources": [
+        "부트캠프 Autoencoder 미션과 딥러닝 복습의 Adam 질문·피드백 (2026-11-05)",
+        "https://docs.pytorch.org/docs/stable/generated/torch.optim.Adam.html",
+        "https://docs.pytorch.org/docs/stable/optim.html"
+      ]
+    },
+    {
       "id": "learning/2026-11-03-autoencoder-reconstruction",
       "title": "Autoencoder는 왜 입력을 복원할까: target과 sigmoid 출력의 의미",
       "description": "입력 복원이 필요한 이유에서 출발해 latent representation, target, Transformer와의 차이, 이미지 외 입력과 sigmoid 출력 범위를 구별한다.",
@@ -2188,6 +2217,46 @@ window.HANTHING_CONTENT = {
     }
   ],
   "questions": [
+    {
+      "id": "learning/2026-11-05-adam-learning-rate#질문-sgd는-한-개씩-adam은-batch로-update하는가",
+      "title": "SGD는 한 개씩, Adam은 batch로 update하는가?",
+      "url": "/notes/learning/2026-11-05-adam-learning-rate#질문-sgd는-한-개씩-adam은-batch로-update하는가",
+      "topic": "PyTorch",
+      "sourceTitle": "Adam은 learning rate를 바꿀까: gradient와 실제 update 구분하기",
+      "context": "optimizer 선택 이유를 설명하며 SGD는 sample마다 update하고 Adam은 batch 단위로 처리한다고 구분했다.",
+      "intent": "두 optimizer의 차이를 데이터 처리 단위와 update 규칙 중 어디에서 찾아야 하는지 확인하려는 발언이다.",
+      "answer": "sample 또는 mini-batch를 사용하는 것은 데이터 구성과 학습 loop의 선택이다. 기본 SGD와 Adam 모두 같은 mini-batch의 gradient로 update할 수 있다. PyTorch의 torch.optim.SGD라는 이름이 반드시 한 sample씩 처리한다는 뜻은 아니다."
+    },
+    {
+      "id": "learning/2026-11-05-adam-learning-rate#질문-adam은-learning-rate의-이동평균도-사용하는가",
+      "title": "Adam은 learning rate의 이동평균도 사용하는가?",
+      "url": "/notes/learning/2026-11-05-adam-learning-rate#질문-adam은-learning-rate의-이동평균도-사용하는가",
+      "topic": "PyTorch",
+      "sourceTitle": "Adam은 learning rate를 바꿀까: gradient와 실제 update 구분하기",
+      "context": "이전 gradient 정보를 반영하는 Momentum을 설명한 뒤, Adam은 learning rate의 이동평균까지 고려한다고 말했다.",
+      "intent": "Adam이 유지하는 과거 정보가 무엇인지 구별하려는 발언이다.",
+      "answer": "Adam이 유지하는 것은 gradient의 이동평균과 gradient 제곱의 이동평균이다. learning rate의 이동평균이 아니다. 두 통계로 parameter의 각 성분에 대한 update를 조절한다."
+    },
+    {
+      "id": "learning/2026-11-05-adam-learning-rate#질문-adam이-적응적이라면-설정한-lr도-자동으로-바뀌는가",
+      "title": "Adam이 적응적이라면 설정한 lr도 자동으로 바뀌는가?",
+      "url": "/notes/learning/2026-11-05-adam-learning-rate#질문-adam이-적응적이라면-설정한-lr도-자동으로-바뀌는가",
+      "topic": "PyTorch",
+      "sourceTitle": "Adam은 learning rate를 바꿀까: gradient와 실제 update 구분하기",
+      "context": "“Adam은 learning rate도 조절하나?”라고 직접 물었다.",
+      "intent": "optimizer의 적응적인 동작과 사용자가 설정한 기본 learning rate를 구별하려는 질문이다.",
+      "answer": "별도 scheduler나 수동 변경이 없다면 설정한 기본 lr은 유지된다. Adam은 다음 식의 비율을 통해 각 성분의 실제 update를 다르게 만든다."
+    },
+    {
+      "id": "learning/2026-11-05-adam-learning-rate#질문-그러면-gradient-자체를-바꾸는-것인가",
+      "title": "그러면 gradient 자체를 바꾸는 것인가?",
+      "url": "/notes/learning/2026-11-05-adam-learning-rate#질문-그러면-gradient-자체를-바꾸는-것인가",
+      "topic": "PyTorch",
+      "sourceTitle": "Adam은 learning rate를 바꿀까: gradient와 실제 update 구분하기",
+      "context": "앞선 답을 듣고 “lr은 고정이고 gradient만 조절되는가?”라고 다시 물었다.",
+      "intent": "backpropagation 결과와 optimizer가 계산하는 update를 같은 값으로 이해해도 되는지 확인하려는 질문이다.",
+      "answer": "backpropagation으로 얻은 gradient를 재료로 삼아 update를 계산한다고 설명하는 것이 정확하다. 기본 Adam의 step()이 backpropagation 자체를 다른 미분으로 바꾸는 것은 아니다."
+    },
     {
       "id": "learning/2026-11-03-autoencoder-reconstruction#질문-입력을-다시-출력한다면-왜-autoencoder를-학습하는가",
       "title": "입력을 다시 출력한다면 왜 Autoencoder를 학습하는가?",

@@ -2,6 +2,9 @@
 
 Generated from public Markdown. Read AGENTS.md for ingest/query/lint; CHANGELOG.md for changes. Course references support briefing and stay outside the learning graph. Course/lesson identify the curriculum placement; topics identify related subjects.
 
+- [Adam은 learning rate를 바꿀까: gradient와 실제 update 구분하기](content/learning/2026-11-05-adam-learning-rate.md) — journal · 2026-11-05 · Adam 선택 이유를 설명하다 생긴 혼동에서 출발해 mini-batch, gradient의 이동평균, 기본 lr과 parameter별 update를 구별한다.
+  Course: PyTorch → 딥러닝 기본기. Related topics: PyTorch
+  Sources: 부트캠프 Autoencoder 미션과 딥러닝 복습의 Adam 질문·피드백 (2026-11-05); https://docs.pytorch.org/docs/stable/generated/torch.optim.Adam.html; https://docs.pytorch.org/docs/stable/optim.html
 - [Autoencoder는 왜 입력을 복원할까: target과 sigmoid 출력의 의미](content/learning/2026-11-03-autoencoder-reconstruction.md) — journal · 2026-11-03 · 입력 복원이 필요한 이유에서 출발해 latent representation, target, Transformer와의 차이, 이미지 외 입력과 sigmoid 출력 범위를 구별한다.
   Course: 딥러닝 → Autoencoder 복습 (보충). Related topics: 딥러닝
   Sources: 부트캠프 딥러닝 관련 Autoencoder 학습 대화 (2026-10-26, 2026-11-03); https://www.deeplearningbook.org/contents/autoencoders.html; https://arxiv.org/html/1706.03762v7; https://docs.pytorch.org/docs/stable/generated/torch.nn.Sigmoid.html

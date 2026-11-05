@@ -1,5 +1,10 @@
 # Knowledge changes
 
+## 2026-11-05
+
+- Aside의 Adam 질문 4개를 mini-batch, gradient의 두 이동평균, 기본 lr과 성분별 update로 정리했다. 원래 화면·첨부가 필요한 실험 판단은 보류했다.
+- 공개 원고 기반 NotebookLM 퀴즈 7문항·카드 33장을 연결하고 기존 복습 ID·버전을 보존했다.
+
 ## 2026-11-04
 
 - Aside의 10월 26일·11월 3일 Autoencoder 질문 7개를 복원 목적, target, Transformer와의 차이, 비이미지 입력, sigmoid 출력 범위와 scaling으로 정리했다. 필수 화면 미확인 질문은 보류하고 설명용 예시와 실제 학습 증거를 구별했다.
