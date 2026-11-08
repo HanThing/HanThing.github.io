@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-05",
+  "generatedAt": "2026-11-09",
   "sets": [
     {
       "id": "loop-exit",
@@ -15599,6 +15599,346 @@
         "exportedAt": "2026-11-05",
         "sourceHashes": {
           "learning/2026-11-05-adam-learning-rate": "40f0376131f48bf070692a6c33b761afeb36843fa97f684f74b2acead3a762a5"
+        }
+      }
+    },
+    {
+      "id": "weekly7-autoencoder-20261109",
+      "title": "위클리 #7 · Autoencoder의 복사와 압축",
+      "version": "112072822bbb",
+      "noteIds": [
+        "weekly/2026-11-09-autoencoder-identity-mapping"
+      ],
+      "goals": [
+        {
+          "id": "identity",
+          "title": "단순 복사와 압축을 reconstruction loss로 구별할 수 없는 이유 설명하기",
+          "version": "1"
+        },
+        {
+          "id": "capacity",
+          "title": "capacity·variance와 bottleneck의 조건 구분하기",
+          "version": "1"
+        },
+        {
+          "id": "denoising",
+          "title": "denoising의 input·target과 parameter update 설명하기",
+          "version": "1"
+        }
+      ],
+      "questions": [
+        {
+          "id": "b90a2837-342d-4686-9ac7-3177d941963f:0",
+          "goalId": "identity",
+          "pool": "practice",
+          "question": "Autoencoder를 학습시킬 때 reconstruction loss가 0에 가까움에도 불구하고, 모델이 압축에 유용한 특징(latent representation)을 학습하지 못했을 가능성이 있는 이유는 무엇인가?",
+          "options": [
+            {
+              "text": "Reconstruction loss는 입력과 출력의 차이만 측정할 뿐, 정보가 얼마나 압축되었는지나 유용한 특징이 추출되었는지를 직접 보장하지 않기 때문이다.",
+              "rationale": "Reconstruction loss는 원본과 복원 결과 간의 출력 차이만을 최소화하므로, 모델에 제약이 부족하면 단순 복사 방식만으로도 loss를 낮출 수 있다.",
+              "isCorrect": true
+            },
+            {
+              "text": "Latent representation의 차원이 입력 차원보다 작아지면 reconstruction loss가 항상 0이 될 수 없기 때문이다.",
+              "rationale": "Bottleneck 차원이 작더라도 데이터 구조나 모델 조건에 따라 복원 오차가 0에 매우 가까워질 수 있다.",
+              "isCorrect": false
+            },
+            {
+              "text": "Reconstruction loss는 Decoder의 weight만 업데이트하고 Encoder의 parameter에는 영향을 주지 않기 때문이다.",
+              "rationale": "Reconstruction loss에서 시작된 backpropagation 과정은 Decoder뿐만 아니라 Encoder의 parameter까지 함께 업데이트한다.",
+              "isCorrect": false
+            },
+            {
+              "text": "Identity mapping이 학습되면 새로운 입력에 대한 reconstruction error가 항상 극단적으로 커지기 때문이다.",
+              "rationale": "Identity mapping은 입력을 그대로 내보내는 기능이므로 새로운 입력이 들어와도 복사하여 출력하여 오차가 작게 유지될 수 있다.",
+              "isCorrect": false
+            }
+          ],
+          "hint": "모델이 직접 최적화하는 손실 함수(loss)의 역할과 사람이 기대하는 압축 능력 간의 구분을 생각해보세요."
+        },
+        {
+          "id": "b90a2837-342d-4686-9ac7-3177d941963f:1",
+          "goalId": "identity",
+          "pool": "check",
+          "question": "Autoencoder에서 발생하는 identity mapping 현상에 대한 설명으로 가장 올바른 것은 무엇인가?",
+          "options": [
+            {
+              "text": "전체 모델인 $Decoder(Encoder(x))$의 동작 결과가 입력 $x$를 그대로 출력하는 상태를 의미한다.",
+              "rationale": "Identity mapping은 중간 변환 과정을 거치더라도 최종 입출력 관계가 입력값 그대로 전달되어 출력되는 동작 방식이다.",
+              "isCorrect": true
+            },
+            {
+              "text": "Encoder를 거친 latent representation $z$의 중간 값들이 입력 $x$의 원소들과 완전히 같아야만 성립한다.",
+              "rationale": "Encoder가 입력값을 다른 형태로 변환하더라도 Decoder가 그 변환을 다시 되돌려 입력을 복원하면 전체 모델은 identity mapping으로 동작한다.",
+              "isCorrect": false
+            },
+            {
+              "text": "Latent dimension이 입력 차원과 같을 때만 유일하게 발생하며, bottleneck을 줄이면 절대 발생할 수 없다.",
+              "rationale": "Bottleneck 차원이 작더라도 모델의 capacity가 지나치게 크면 단순 복사에 가까운 동작이 유도될 수 있다.",
+              "isCorrect": false
+            },
+            {
+              "text": "Validation data에서 높은 variance와 overfitting을 유발하여 복원 오차가 크게 증가하는 현상이다.",
+              "rationale": "Identity mapping은 새로운 입력도 그대로 전달할 수 있으므로 오차가 커지거나 높은 variance로 단정할 수 없다.",
+              "isCorrect": false
+            }
+          ],
+          "hint": "중간 layer에서의 변환 여부와 무관하게 전체 입력과 출력 관계가 어떻게 형성되는지 고려해보세요."
+        },
+        {
+          "id": "b90a2837-342d-4686-9ac7-3177d941963f:2",
+          "goalId": "identity",
+          "pool": "practice",
+          "question": "입력 데이터가 항상 $[a, 2a, 3a]$ 형태일 때, $z = [2, 4, 6]$으로 전달하는 방법 A와 $z = [2]$로 전달하는 방법 B 모두 reconstruction loss가 0이다. 이 예시가 보여주는 핵심 원리는 무엇인가?",
+          "options": [
+            {
+              "text": "Reconstruction loss만으로는 데이터의 관계를 활용한 압축 표현인지 단순 값 전달인지를 구별할 수 없으므로 적절한 제약이 필요하다.",
+              "rationale": "Loss 수치는 복원 차이만 검증하므로 데이터의 내재적 패턴을 활용해 압축하도록 유도하려면 bottleneck 등의 제약 조건이 추가되어야 한다.",
+              "isCorrect": true
+            },
+            {
+              "text": "Latent dimension을 1차원으로 줄이기만 하면 모델은 무조건 데이터 내의 수학적 규칙을 정확히 학습한다.",
+              "rationale": "Bottleneck 차원을 줄이는 것만으로 모델이 항상 사람이 원하는 유용한 특징이나 규칙을 배운다고 보장할 수는 없다.",
+              "isCorrect": false
+            },
+            {
+              "text": "두 방법 모두 reconstruction loss가 0이므로 실제 파일 저장 용량도 동일하게 줄어든다.",
+              "rationale": "Latent 값의 개수와 실제 파일 저장을 위한 bit 수 및 부가 정보 용량은 서로 구별되어야 한다.",
+              "isCorrect": false
+            },
+            {
+              "text": "방법 B처럼 차원을 줄이면 training loss가 항상 방법 A보다 더 빠르게 0으로 수렴한다.",
+              "rationale": "Latent 차원을 제한하면 담을 수 있는 정보가 줄어들어 초기에 reconstruction loss를 낮추기가 더 어려워질 수 있다.",
+              "isCorrect": false
+            }
+          ],
+          "hint": "두 방법 모두 loss가 0인 상황에서, 단순 복사와 패턴 활용을 구별하기 위해 필요한 조건이 무엇인지 생각해보세요."
+        },
+        {
+          "id": "b90a2837-342d-4686-9ac7-3177d941963f:4",
+          "goalId": "capacity",
+          "pool": "practice",
+          "question": "Latent representation의 차원(bottleneck 크기)과 특징 학습 간의 관계에 대한 설명으로 올바른 것은 무엇인가?",
+          "options": [
+            {
+              "text": "Latent 차원이 입력과 같아도 제약 조건을 통해 유용한 표현을 배울 수 있으며, 반대로 bottleneck이 작아도 유용한 특징을 반드시 배운다고 보장할 수는 없다.",
+              "rationale": "Bottleneck 크기 하나만으로 특징 학습의 성패가 결정되는 것이 아니며 Encoder-Decoder의 capacity, 데이터, 학습 제약도 함께 고려해야 한다.",
+              "isCorrect": true
+            },
+            {
+              "text": "Latent 차원을 입력 차원과 동일하게 설정하면 어떠한 제약을 가하더라도 identity mapping 학습을 막을 수 없다.",
+              "rationale": "Latent 차원이 입력과 같더라도 추가적인 regularization이나 제약 조건을 통해 의미 있는 표현을 배우도록 유도할 수 있다.",
+              "isCorrect": false
+            },
+            {
+              "text": "Bottleneck의 크기만 충분히 줄여주면 모델의 capacity나 데이터 특성과 상관없이 언제나 최적의 특징을 배운다.",
+              "rationale": "Bottleneck을 줄이는 것만으로 원하는 특징 학습이 자동으로 보장되지는 않으며 데이터와 모델의 capacity가 함께 맞물려야 한다.",
+              "isCorrect": false
+            },
+            {
+              "text": "Latent representation의 숫자 개수를 줄이는 것은 실제 파일의 bit 용량을 줄이는 것과 완전히 동일하다.",
+              "rationale": "숫자 개수를 줄이는 것과 실제 저장 공간(bit 수 및 메타데이터)을 줄이는 기술적 개념은 서로 구분된다.",
+              "isCorrect": false
+            }
+          ],
+          "hint": "Bottleneck의 차원 수라는 단일 조건이 유용한 특징 학습을 완전히 보장하거나 제한하는지 판단해보세요."
+        },
+        {
+          "id": "b90a2837-342d-4686-9ac7-3177d941963f:5",
+          "goalId": "capacity",
+          "pool": "check",
+          "question": "Autoencoder 설명에서 말하는 모델의 capacity에 대한 설명으로 가장 적절한 것은 무엇인가?",
+          "options": [
+            {
+              "text": "Capacity는 모델이 얼마나 다양한 함수를 표현할 수 있는지에 관한 능력이며, layer의 폭과 깊이, activation function 등이 복합적으로 작용한다.",
+              "rationale": "Capacity는 단일 파라미터 수가 아닌 모델 구조 전체가 표현할 수 있는 함수 표현 능력의 범위를 나타낸다.",
+              "isCorrect": true
+            },
+            {
+              "text": "Capacity는 단순하게 latent dimension의 크기 또는 전체 parameter 수 하나만을 지칭한다.",
+              "rationale": "Capacity는 하나의 수치나 latent 차원 크기에 1:1로 대응되는 개념이 아니며 구조적 요인들에 의해 결정된다.",
+              "isCorrect": false
+            },
+            {
+              "text": "Capacity가 큰 것은 모델에 무조건 해로우므로 학습 시 가능한 가장 작게 유지해야 한다.",
+              "rationale": "Capacity는 목적에 맞는지 봐야 하는 개념이며, 지나치게 작으면 데이터의 필요한 패턴조차 표현하지 못해 underfitting이 발생할 수 있다.",
+              "isCorrect": false
+            },
+            {
+              "text": "Capacity가 충분히 크면 별도의 제약 조건 없이도 모델이 스스로 압축에 유용한 특징만 선택하여 복원한다.",
+              "rationale": "Capacity가 충분하더라도 복원 오차만 줄이도록 두고 제약이 약하면 모델은 유용한 특징 대신 단순 복사 해법을 선택할 수 있다.",
+              "isCorrect": false
+            }
+          ],
+          "hint": "Capacity가 의미하는 바가 특정 변수의 수치인지, 모델의 전체적 표현 범위인지 구분해보세요."
+        },
+        {
+          "id": "b90a2837-342d-4686-9ac7-3177d941963f:6",
+          "goalId": "capacity",
+          "pool": "check",
+          "question": "Capacity와 Variance, 그리고 Identity mapping 간의 관계에 대한 설명으로 옳은 것은 무엇인가?",
+          "options": [
+            {
+              "text": "Identity mapping은 새로운 입력도 그대로 복사할 수 있으므로, identity mapping을 학습했다는 이유만으로 높은 variance나 overfitting으로 단정할 수 없다.",
+              "rationale": "Identity mapping은 입력값을 내보내는 성질 때문에 새로운 데이터에서도 복사를 수행하여 variance나 overfitting의 관점과 다를 수 있다.",
+              "isCorrect": true
+            },
+            {
+              "text": "Capacity와 Variance는 동일한 개념이며, capacity가 높으면 항상 overfitting과 높은 variance가 발생한다.",
+              "rationale": "Capacity는 표현 가능한 함수의 범위이며, 높은 capacity가 반드시 높은 variance로 이어지는 것은 아니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "Identity mapping을 배운 모델은 validation error가 항상 무한히 커지게 된다.",
+              "rationale": "Identity mapping을 배운 모델은 새로운 validation 입력에 대해서도 입력 그대로 복사하므로 loss가 무한히 커지는 현상과는 다르다.",
+              "isCorrect": false
+            },
+            {
+              "text": "Variance가 발생하는 유일한 원인은 latent representation의 차원이 입력 차원보다 크게 설정되었기 때문이다.",
+              "rationale": "Variance는 데이터, 제약 조건, capacity 등 여러 요소에 따라 결정되며 latent 차원 하나로 유일한 원인이 설명되지 않는다.",
+              "isCorrect": false
+            }
+          ],
+          "hint": "Identity mapping을 수행하는 모델이 새로운 inputs을 만났을 때 어떻게 동작하는지 떠올려보세요."
+        },
+        {
+          "id": "b90a2837-342d-4686-9ac7-3177d941963f:10",
+          "goalId": "denoising",
+          "pool": "practice",
+          "question": "Denoising Autoencoder에서 backpropagation을 통해 업데이트되는 대상과 과정에 대한 설명으로 올바른 것은 무엇인가?",
+          "options": [
+            {
+              "text": "깨끗한 target과 출력의 reconstruction loss로부터 경사(gradient)를 계산하여 Encoder와 Decoder의 weight 및 bias를 업데이트한다.",
+              "rationale": "학습을 통해 업데이트되는 것은 latent 값 자체가 아니라 Encoder와 Decoder 네트워크 내부의 weight와 bias 파라미터이다.",
+              "isCorrect": true
+            },
+            {
+              "text": "Forward pass를 통해 생성된 latent representation $z$ 자체가 독립적인 학습 대상 weight로서 경사하강법에 의해 직접 업데이트된다.",
+              "rationale": "Latent representation $z$는 입력을 Encoder에 통과시켜 얻는 중간 계산값일 뿐 별도의 학습 weight가 아니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "모델이 먼저 입력 노이즈의 위치를 판별하는 별도 단계를 거친 후, 노이즈 영역에 해당하는 파라미터만 선택적으로 업데이트한다.",
+              "rationale": "모델은 노이즈를 명시적으로 판별하는 별도 단계 없이 깨끗한 target과의 loss를 줄이도록 parameter가 통합적으로 업데이트된다.",
+              "isCorrect": false
+            },
+            {
+              "text": "Backpropagation 시 Decoder의 weight만 업데이트되며 Encoder의 weight는 학습 과정 동안 변경되지 않는다.",
+              "rationale": "Reconstruction loss의 gradient는 Decoder를 지나 Encoder까지 역전파되어 두 구성요소의 파라미터가 모두 업데이트된다.",
+              "isCorrect": false
+            }
+          ],
+          "hint": "Latent representation $z$가 직접 수정되는 파라미터인지, 아니면 네트워크의 가중치(weight)가 수정되는지 명확히 해보세요."
+        },
+        {
+          "id": "b90a2837-342d-4686-9ac7-3177d941963f:11",
+          "goalId": "denoising",
+          "pool": "check",
+          "question": "Denoising Autoencoder의 주된 학습 목적과 실제 저장 용량 간의 관계에 대한 설명으로 가장 적절한 것은 무엇인가?",
+          "options": [
+            {
+              "text": "Denoising은 단순 복사를 막고 손상에 강한 표현을 배우도록 하는 방법이며, 그 자체로 실제 저장 파일 용량을 절감해주는 것은 아니다.",
+              "rationale": "Denoising 기법은 노이즈 복사를 방지하고 강건한 특징을 유도하는 목적을 가지며, 물리적 저장 파일 크기 절감과는 별개의 개념이다.",
+              "isCorrect": true
+            },
+            {
+              "text": "모든 일반적인 Autoencoder는 압축률을 확보하기 위해 반드시 Denoising 기법을 필수적으로 적용해야 한다.",
+              "rationale": "Denoising은 손상 방지 및 강건한 표현 학습을 위한 선택적 방법일 뿐 모든 Autoencoder의 필수 구현 사항은 아니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "Denoising Autoencoder는 이미지 내의 튀는 픽셀 값을 무조건 주변 평균값으로 대체하는 필터링 알고리즘이다.",
+              "rationale": "단순 평균 필터링이 아니라, 깨끗한 target과 손상된 입력 사이의 관계를 파라미터 학습을 통해 익히는 신경망 방식이다.",
+              "isCorrect": false
+            },
+            {
+              "text": "Noise가 추가된 입력을 사용하면 복원 오차가 늘어나는 대신 모델의 저장 bit 수와 메타데이터 용량이 자동으로 감소한다.",
+              "rationale": "Noise 추가 학습 과정이 실제 저장 데이터의 bit 수나 메타데이터 파일 용량을 자동으로 줄여주지는 않는다.",
+              "isCorrect": false
+            }
+          ],
+          "hint": "Denoising으로 얻게 되는 복원 능력(손상 강건성)과 실제 파일의 용량을 줄이는 압축(bit-rate 절감)의 구분을 떠올려보세요."
+        }
+      ],
+      "cards": [
+        {
+          "id": "bab17dac-b838-487c-b484-ac732eee4202:1",
+          "goalId": "identity",
+          "front": "Autoencoder 구조에서 Latent representation ($z$)은 어디에서 정의되는가?",
+          "back": "입력($x$)이 Encoder를 통과한 후 Decoder로 전달되는 중간 표현 공간에서 정의된다."
+        },
+        {
+          "id": "bab17dac-b838-487c-b484-ac732eee4202:2",
+          "goalId": "identity",
+          "front": "Reconstruction loss가 0에 가까워도 유의미한 압축을 보장할 수 없는 이유는 무엇인가?",
+          "back": "Loss는 입력과 출력의 차이만 줄이도록 요구할 뿐, 중간 표현에 유용한 특징이 담겼는지는 직접 보장하지 않기 때문이다."
+        },
+        {
+          "id": "bab17dac-b838-487c-b484-ac732eee4202:3",
+          "goalId": "capacity",
+          "front": "Autoencoder에서 Capacity란 무엇을 의미하는가?",
+          "back": "Layer의 폭과 깊이, 활성화 함수, 연결 구조 등에 의해 결정되는 모델의 함수 표현 능력 범위를 의미한다."
+        },
+        {
+          "id": "bab17dac-b838-487c-b484-ac732eee4202:4",
+          "goalId": "capacity",
+          "front": "Capacity와 Variance의 개념적 차이는 무엇인가?",
+          "back": "Capacity는 모델이 표현할 수 있는 함수의 범위이며, Variance는 학습 데이터 변경에 따라 학습된 예측이 얼마나 달라지는지를 뜻한다."
+        },
+        {
+          "id": "bab17dac-b838-487c-b484-ac732eee4202:5",
+          "goalId": "capacity",
+          "front": "Autoencoder가 Identity mapping을 학습했을 때 이를 Variance가 높은 문제로 단정할 수 없는 이유는 무엇인가?",
+          "back": "Identity mapping은 새로운 입력 데이터도 그대로 복사하여 잘 출력하므로, 학습 데이터 변경에 예측이 흔들리는 Variance 문제와는 구별된다."
+        },
+        {
+          "id": "bab17dac-b838-487c-b484-ac732eee4202:6",
+          "goalId": "capacity",
+          "front": "Latent representation의 크기를 줄이는 Bottleneck 설정의 주요 목적은 무엇인가?",
+          "back": "제한된 공간을 통해 모델이 단순 복사 대신 데이터의 반복적 구조나 값 사이의 관계를 활용하도록 유도하는 것이다."
+        },
+        {
+          "id": "bab17dac-b838-487c-b484-ac732eee4202:7",
+          "goalId": "capacity",
+          "front": "Bottleneck 차원을 작게 축소하면 항상 유의미한 특징 학습이 보장되는가?",
+          "back": "보장되지 않는다. Bottleneck이 너무 작으면 필요한 정보까지 손실될 수 있으며, 차원 축소만으로 유용한 표현 습득이 확정되지는 않는다."
+        },
+        {
+          "id": "bab17dac-b838-487c-b484-ac732eee4202:8",
+          "goalId": "capacity",
+          "front": "Bottleneck 적용 후 Epoch를 늘려 Training loss를 낮추면 유용한 특징 학습이 보장되는가?",
+          "back": "보장되지 않는다. Epoch를 더 돌리거나 Training loss를 낮추는 것만으로 유용한 표현이나 새로운 데이터에서의 복원 성능이 담보되지 않는다."
+        },
+        {
+          "id": "bab17dac-b838-487c-b484-ac732eee4202:9",
+          "goalId": "denoising",
+          "front": "Denoising Autoencoder 학습 시 입력과 Target은 각각 어떻게 설정하는가?",
+          "back": "입력에는 Noise가 추가된 손상된 데이터($\\tilde{x}$)를 사용하고, Target에는 깨끗한 원본 데이터($x$)를 설정한다."
+        },
+        {
+          "id": "bab17dac-b838-487c-b484-ac732eee4202:10",
+          "goalId": "denoising",
+          "front": "Denoising Autoencoder에서 손상된 입력을 그대로 복사해 출력할 때 Loss가 발생하는 이유는 무엇인가?",
+          "back": "깨끗한 원본 Target과 손상된 입력의 값이 서로 다른 위치에서 차이가 남게 되어 Loss가 발생한다."
+        },
+        {
+          "id": "bab17dac-b838-487c-b484-ac732eee4202:13",
+          "goalId": "identity",
+          "front": "Latent 차원의 수치 개수를 줄이는 것과 실제 파일 용량을 줄이는 압축의 차이는 무엇인가?",
+          "back": "Latent 수치 개수 축소는 표현 공간의 차원을 줄이는 것이며, 실제 파일 압축은 저장 bit 수와 부가 정보 크기까지 함께 반영해야 한다."
+        }
+      ],
+      "provenance": {
+        "provider": "NotebookLM",
+        "notebookId": "a5bb378d-3196-461d-a406-3228e3e579fb",
+        "sourceIds": [
+          "196663de-bae8-4ae4-bbcc-de91a383010a"
+        ],
+        "quizArtifactId": "b90a2837-342d-4686-9ac7-3177d941963f",
+        "cardsArtifactId": "bab17dac-b838-487c-b484-ac732eee4202",
+        "exportedAt": "2026-11-09",
+        "sourceHashes": {
+          "weekly/2026-11-09-autoencoder-identity-mapping": "0ab07a14678c2faf6ac2dda8269408b2a6d82dd9c07776ac2b986279e9595346"
         }
       }
     }

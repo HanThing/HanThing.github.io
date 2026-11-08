@@ -2,6 +2,9 @@
 
 Generated from public Markdown. Read AGENTS.md for ingest/query/lint; CHANGELOG.md for changes. Course references support briefing and stay outside the learning graph. Course/lesson identify the curriculum placement; topics identify related subjects.
 
+- [위클리 페이퍼 #7 — Autoencoder가 잘 복원하는데도 문제가 되는 이유](content/weekly/2026-11-09-autoencoder-identity-mapping.md) — weekly · 2026-11-09 · identity mapping에서 출발해 reconstruction loss와 압축의 차이, capacity와 variance, bottleneck과 denoising의 역할을 내 말로 정리한다.
+  Course: 딥러닝 → Autoencoder 복습 (보충). Related topics: 딥러닝
+  Sources: 사용자가 제시한 위클리 페이퍼 7회차 공식 문항; 위클리 페이퍼 7회차 준비 대화의 사용자 답변·후속 질문과 AI의 설명·피드백 (2026-11-09 최종 정리); https://www.deeplearningbook.org/contents/autoencoders.html
 - [Adam은 learning rate를 바꿀까: gradient와 실제 update 구분하기](content/learning/2026-11-05-adam-learning-rate.md) — journal · 2026-11-05 · Adam 선택 이유를 설명하다 생긴 혼동에서 출발해 mini-batch, gradient의 이동평균, 기본 lr과 parameter별 update를 구별한다.
   Course: PyTorch → 딥러닝 기본기. Related topics: PyTorch
   Sources: 부트캠프 Autoencoder 미션과 딥러닝 복습의 Adam 질문·피드백 (2026-11-05); https://docs.pytorch.org/docs/stable/generated/torch.optim.Adam.html; https://docs.pytorch.org/docs/stable/optim.html

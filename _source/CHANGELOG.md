@@ -1,5 +1,10 @@
 # Knowledge changes
 
+## 2026-11-09
+
+- 위클리 페이퍼 #7을 실제 답변·질문·교정 과정으로 정리했다. Identity mapping, reconstruction과 압축의 차이, capacity와 variance, bottleneck·denoising의 조건 및 latent 값과 parameter update를 구분했다. 모델 학습·성능 비교와 새 공식 공지 확인은 수행하지 않았다.
+- 공개 원고 기반 NotebookLM 퀴즈 12문항·카드 14장을 전수 검토해 8문항·11장을 연결했다. 과도한 단정과 개념 구별이 부족한 항목을 제외하고 기존 복습 세트를 보존했다.
+
 ## 2026-11-05
 
 - Aside의 Adam 질문 4개를 mini-batch, gradient의 두 이동평균, 기본 lr과 성분별 update로 정리했다. 원래 화면·첨부가 필요한 실험 판단은 보류했다.

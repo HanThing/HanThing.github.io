@@ -155,6 +155,33 @@ window.HANTHING_CONTENT = {
   ],
   "notes": [
     {
+      "id": "weekly/2026-11-09-autoencoder-identity-mapping",
+      "title": "위클리 페이퍼 #7 — Autoencoder가 잘 복원하는데도 문제가 되는 이유",
+      "description": "identity mapping에서 출발해 reconstruction loss와 압축의 차이, capacity와 variance, bottleneck과 denoising의 역할을 내 말로 정리한다.",
+      "date": "2026-11-09",
+      "published": "2026-11-09",
+      "type": "weekly",
+      "topics": [
+        "딥러닝"
+      ],
+      "courseId": "deep-learning",
+      "lessonId": "autoencoder-review",
+      "url": "/notes/weekly/2026-11-09-autoencoder-identity-mapping",
+      "links": [
+        "learning/2026-11-03-autoencoder-reconstruction",
+        "weekly/2026-11-02-cnn-and-lstm"
+      ],
+      "relatedReasons": {
+        "learning/2026-11-03-autoencoder-reconstruction": "입력 복원의 목적과 target을 바탕으로 단순 복사를 막는 조건을 살펴본다.",
+        "weekly/2026-11-02-cnn-and-lstm": "이미지의 인접 pixel 관계와 반복되는 패턴을 다룬 앞선 학습에 연결한다."
+      },
+      "sources": [
+        "사용자가 제시한 위클리 페이퍼 7회차 공식 문항",
+        "위클리 페이퍼 7회차 준비 대화의 사용자 답변·후속 질문과 AI의 설명·피드백 (2026-11-09 최종 정리)",
+        "https://www.deeplearningbook.org/contents/autoencoders.html"
+      ]
+    },
+    {
       "id": "learning/2026-11-05-adam-learning-rate",
       "title": "Adam은 learning rate를 바꿀까: gradient와 실제 update 구분하기",
       "description": "Adam 선택 이유를 설명하다 생긴 혼동에서 출발해 mini-batch, gradient의 이동평균, 기본 lr과 parameter별 update를 구별한다.",
