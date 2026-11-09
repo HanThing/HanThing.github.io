@@ -15941,6 +15941,294 @@
           "weekly/2026-11-09-autoencoder-identity-mapping": "0ab07a14678c2faf6ac2dda8269408b2a6d82dd9c07776ac2b986279e9595346"
         }
       }
+    },
+    {
+      "id": "mse-20261109",
+      "title": "MSE 로그와 여러 줄 문자열",
+      "version": "01e89fa47e45",
+      "noteIds": [
+        "learning/2026-11-09-mse-log-plot"
+      ],
+      "goals": [
+        {
+          "id": "mse-log-parse",
+          "title": "로그 텍스트를 숫자 list로 변환하기",
+          "version": "1"
+        },
+        {
+          "id": "mse-log-display",
+          "title": "log scale과 여러 줄 문자열 구별하기",
+          "version": "1"
+        }
+      ],
+      "questions": [
+        {
+          "id": "11ee6363-01d7-4ed0-8081-e2758c89ee5c:0",
+          "goalId": "mse-log-parse",
+          "pool": "practice",
+          "question": "정규표현식 패턴 `r\"update\\s+(\\d+)\\s*\\|\\s*batch MSE\\s+([\\d.]+)\\s*\\|\\s*val MSE\\s+([\\d.]+)\"`을 사용하여 `update 0100 | batch MSE 0.060000 | val MSE 0.050000` 로그를 파싱할 때, 추출되는 세 값의 순서로 올바른 것은?",
+          "options": [
+            {
+              "text": "update 번호, batch MSE, val MSE",
+              "rationale": "패턴의 첫 번째 캡처 그룹 `(\\d+)`은 update 번호를, 두 번째 `([\\d.]+)`는 batch MSE를, 세 번째 `([\\d.]+)`는 val MSE를 순서대로 추출합니다.",
+              "isCorrect": true
+            },
+            {
+              "text": "update 번호, val MSE, batch MSE",
+              "rationale": "패턴 상에서 `batch MSE` 뒤의 그룹이 두 번째로 정의되어 있으므로 `val MSE`보다 먼저 추출됩니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "batch MSE, val MSE, update 번호",
+              "rationale": "첫 번째 캡처 그룹은 `update` 키워드 뒤에 위치하므로 update 번호가 가장 먼저 추출됩니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "epoch 번호, batch loss, val loss",
+              "rationale": "정규표현식 패턴 및 로그 텍스트에 정의된 명칭은 `epoch`나 `loss`가 아닌 `update`와 `MSE`입니다.",
+              "isCorrect": false
+            }
+          ],
+          "hint": "정규표현식 패턴 내에서 괄호 `()`가 사용된 위치와 순서를 왼쪽에서 오른쪽으로 확인해 보세요."
+        },
+        {
+          "id": "11ee6363-01d7-4ed0-8081-e2758c89ee5c:1",
+          "goalId": "mse-log-parse",
+          "pool": "check",
+          "question": "Python의 `re.findall(pattern, log_text)` 함수를 실행했을 때 패턴 내에 3개의 캡처 그룹이 포함되어 있다면, 반환되는 `matches` 리스트의 각 요소(element)는 어떤 데이터 구조를 가지는가?",
+          "options": [
+            {
+              "text": "3개의 문자열을 담은 튜플(`tuple`)",
+              "rationale": "`re.findall`은 패턴 내에 여러 캡처 그룹이 있을 경우 각 매칭 항목을 캡처된 문자열들의 튜플 형태로 리턴합니다.",
+              "isCorrect": true
+            },
+            {
+              "text": "숫자형 형변환이 완료된 딕셔너리(`dict`)",
+              "rationale": "정규표현식 파싱 결과는 타입 변환이 자동으로 이루어지지 않으며 딕셔너리가 아닌 튜플 형태의 요소로 구성됩니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "하나로 연결된 단일 문자열(`str`)",
+              "rationale": "캡처 그룹이 여러 개 존재하는 경우 전체가 하나로 묶인 단일 문자열이 아니라 개별 그룹이 분리된 튜플이 생성됩니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "3개의 float 실수가 담긴 리스트(`list`)",
+              "rationale": "파싱 직후의 추출 결과는 숫자형이 아닌 텍스트(문자열) 형태의 튜플입니다.",
+              "isCorrect": false
+            }
+          ],
+          "hint": "정규표현식의 캡처 그룹이 여러 개일 때 `re.findall`이 매칭 결과를 어떤 파이썬 데이터 구조로 묶어서 반환하는지 생각해 보세요."
+        },
+        {
+          "id": "11ee6363-01d7-4ed0-8081-e2758c89ee5c:2",
+          "goalId": "mse-log-parse",
+          "pool": "practice",
+          "question": "정규표현식으로 파싱한 텍스트 데이터를 `updates = [int(step) for step, batch, val in matches]`와 같이 `int` 또는 `float` 타입으로 변환하여 시각화에 사용하는 주요 이유는 무엇인가?",
+          "options": [
+            {
+              "text": "추출된 결과는 문자열 상태이므로 축 상에 올바른 수치적 위치와 범위를 표현하기 위해 형변환을 수행한다.",
+              "rationale": "파싱 직후 추출된 데이터는 문자열이므로 x축과 y축 상에서 수치 크기에 맞게 연속적인 위치로 표현하려면 정수나 실수형으로 변환해야 합니다.",
+              "isCorrect": true
+            },
+            {
+              "text": "Matplotlib 그래프 도구는 문자열 타입의 데이터가 입력되면 코드가 즉시 중단되기 때문이다.",
+              "rationale": "Matplotlib은 범주형 문자열 데이터도 입력받을 수 있으나 수치적 의미에 맞는 연속 축을 그리기 위해 수치형 변환을 진행합니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "파이썬 내장 함수 `int`와 `float` 호출 시 데이터가 log scale 값으로 자동으로 계산되기 때문이다.",
+              "rationale": "타입 변환은 데이터의 형식만 바꿀 뿐 로그 연산이나 축의 scale 계산을 수행하지 않습니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "정규표현식 매칭 과정에서 누락된 데이터 로그를 자동으로 보정하기 때문이다.",
+              "rationale": "형변환 과정은 텍스트의 타입을 바꿀 뿐 정규표현식의 누락된 매칭이나 패턴 오류를 보정해 주지는 않습니다.",
+              "isCorrect": false
+            }
+          ],
+          "hint": "파싱 직후 추출된 원본 데이터의 타입과, 수치 축(axis) 상에 올바르게 데이터를 배치하기 위해 필요한 조건을 생각해 보세요."
+        },
+        {
+          "id": "11ee6363-01d7-4ed0-8081-e2758c89ee5c:4",
+          "goalId": "mse-log-display",
+          "pool": "practice",
+          "question": "Matplotlib에서 `ax.set(yscale=\"log\")` 코드를 실행하여 y축을 log scale로 변경할 때, 파이썬 변수에 저장된 실제 MSE 값(예: `batch_mses`)에는 어떤 변화가 일어나는가?",
+          "options": [
+            {
+              "text": "변수 내의 실제 MSE 값은 그대로 유지되고 y축의 시각적 눈금 표시 방식만 변경된다.",
+              "rationale": "`set_yscale(\"log\")`는 시각적 축의 눈금 배치 방식만 변경하며 메모리에 저장된 데이터 변수의 원본 값은 수정하지 않습니다.",
+              "isCorrect": true
+            },
+            {
+              "text": "리스트 내부의 모든 MSE 데이터에 $\\log_{10}$ 연산이 직접 적용되어 값이 갱신된다.",
+              "rationale": "축 설정 함수 호출이 파이썬 메모리 상의 원본 리스트 수치를 직접 연산하여 바꾸지는 않습니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "MSE 수치 중 매우 작은 값들이 0으로 자동 반올림 처리되어 리스트에 재저장된다.",
+              "rationale": "log scale 표시는 데이터의 유효자릿수를 손상시키거나 0으로 변경하지 않습니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "linear scale로 되돌리기 위해 원본 리스트 데이터의 타입이 튜플로 전환된다.",
+              "rationale": "축 scale을 설정하는 시각화 옵션은 파이썬 객체의 데이터 구조 타입을 변환하지 않습니다.",
+              "isCorrect": false
+            }
+          ],
+          "hint": "축 표기 방식(scale)의 변경이 메모리에 담긴 데이터 변수의 실제 값에 영향을 주는지 생각해 보세요."
+        },
+        {
+          "id": "11ee6363-01d7-4ed0-8081-e2758c89ee5c:5",
+          "goalId": "mse-log-display",
+          "pool": "check",
+          "question": "MSE 시각화 시 y축에 log scale을 적용할 때 데이터 값과 관련하여 반드시 준수해야 하는 수학적 조건은 무엇인가?",
+          "options": [
+            {
+              "text": "MSE 값이 정확히 0이거나 음수이면 log scale 축에 정상적으로 표시할 수 없다.",
+              "rationale": "로그 함수는 양수 영역에서만 정의되므로, $0$이나 음수 값은 log scale 축 상에 올바른 점으로 나타낼 수 없습니다.",
+              "isCorrect": true
+            },
+            {
+              "text": "log scale에서는 모든 MSE 수치를 0과 1 사이로 정규화(normalization)해야만 한다.",
+              "rationale": "log scale 축은 1보다 큰 값도 올바르게 나타낼 수 있으므로 0과 1 사이로 정규화할 필요는 없습니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "MSE 데이터에 100을 초과하는 값이 포함되면 축 계산이 중단되므로 제외해야 한다.",
+              "rationale": "log scale은 여러 자릿수에 걸친 넓은 범위의 큰 수치도 효과적으로 시각화하는 축 방식입니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "log scale 그래프를 그리려면 원본 로그 텍스트의 MSE 수치를 임의의 양수로 조작해야 한다.",
+              "rationale": "그래프에 맞추기 위해 실제 측정된 MSE 수치를 임의로 수정하여 기록해서는 안 됩니다.",
+              "isCorrect": false
+            }
+          ],
+          "hint": "로그 함수 $\\log(x)$의 정의역 조건과 0의 로그값 표기 문제에 대해 생각해 보세요."
+        },
+        {
+          "id": "11ee6363-01d7-4ed0-8081-e2758c89ee5c:6",
+          "goalId": "mse-log-display",
+          "pool": "practice",
+          "question": "파이썬에서 여러 줄에 걸친 학습 로그 텍스트를 하나의 문자열 변수에 올바르게 할당하기 위한 문법적 방법은 무엇인가?",
+          "options": [
+            {
+              "text": "문자열의 시작과 끝을 같은 종류의 따옴표 3개(`\"\"\"` 또는 `'''`)로 감싼다.",
+              "rationale": "파이썬의 triple-quoted string 문법은 문자열 내부의 줄바꿈(newline)을 보존하며 여러 줄 텍스트를 할당할 수 있게 합니다.",
+              "isCorrect": true
+            },
+            {
+              "text": "단일 큰따옴표 하나(`\"`)로 텍스트 전체를 감싸고 각 줄 끝마다 쉼표를 추가한다.",
+              "rationale": "단일 따옴표 안에 줄바꿈을 넣으면 파이썬 분석기에서 구문 오류(`SyntaxError`)가 발생합니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "텍스트 줄마다 큰따옴표 하나로 묶고 전체를 대괄호(`[ ]`) 안에 넣는다.",
+              "rationale": "이 방식은 문자열 요소들의 리스트를 생성하는 문법이며 단일 여러 줄 문자열 변수 할당이 아닙니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "시작 부분에는 따옴표 3개(`\"\"\"`)를 사용하고 끝부분은 단일 따옴표 하나(`\"`)로 닫는다.",
+              "rationale": "triple-quoted string은 시작과 끝에 반드시 같은 종류 및 개수의 따옴표를 짝지어야 합니다.",
+              "isCorrect": false
+            }
+          ],
+          "hint": "Python의 lexical analysis 기준 문자열 내의 줄바꿈을 그대로 보존하는 triple-quoted string 문법을 떠올려 보세요."
+        },
+        {
+          "id": "11ee6363-01d7-4ed0-8081-e2758c89ee5c:7",
+          "goalId": "mse-log-display",
+          "pool": "check",
+          "question": "Batch MSE와 Validation MSE가 학습이 진행됨에 따라 함께 감소하는 선 그래프를 얻었을 때, 이 시각화 결과만으로 내릴 수 있는 판단의 한계로 올바르지 않은 것은?",
+          "options": [
+            {
+              "text": "두 선이 계속 감소하므로 과적합(overfitting)이 없으며, 보지 않은 모든 이미지에서도 완벽히 복원한다고 확정할 수 있다.",
+              "rationale": "MSE 손실 곡선이 감소한다고 해서 과적합이 완전히 없거나 모든 이미지에 대한 완벽한 복원을 보장하는 것은 아닙니다.",
+              "isCorrect": true
+            },
+            {
+              "text": "두 손실 값이 감소하더라도 실제 복원된 이미지의 시각적 품질과 평가 조건을 별도로 확인해야 한다.",
+              "rationale": "숫자상의 loss 감소와 실제 복원 이미지의 관찰 결과는 별개로 검증해야 하므로 정당한 한계점입니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "Mini-batch 구성에 따라 Batch MSE는 변동(fluctuation)이 생길 수 있음을 감안해야 한다.",
+              "rationale": "batch 구성 변화에 따라 개별 batch MSE는 흔들릴 수 있으므로 그래프 경향성을 해석할 때 고려해야 하는 한계입니다.",
+              "isCorrect": false
+            },
+            {
+              "text": "로그 파싱 및 그래프 출력 코드가 정상 실행되었다고 해서 모델의 복원 성능 개선이 입증된 것은 아니다.",
+              "rationale": "시각화 코드의 정상 실행과 모델 자체의 품질 향상은 독립된 문제이므로 올바른 한계점 설명입니다.",
+              "isCorrect": false
+            }
+          ],
+          "hint": "MSE 손실 수치 감소만으로 과적합 부재나 복원 성능의 완벽함을 즉시 보장할 수 있는지 검토해 보세요."
+        }
+      ],
+      "cards": [
+        {
+          "id": "b0c846d1-b706-4add-9877-653ba08fae79:0",
+          "goalId": "mse-log-parse",
+          "front": "MSE 학습 로그 텍스트에서 정규표현식 파싱을 통해 추출하는 세 가지 데이터 항목은 무엇인가?",
+          "back": "Update 단계(step), Batch MSE, Validation MSE"
+        },
+        {
+          "id": "b0c846d1-b706-4add-9877-653ba08fae79:1",
+          "goalId": "mse-log-parse",
+          "front": "Python의 re.findall 함수에 괄호로 감싼 그룹(group) 3개가 포함된 패턴을 전달하면 결과 리스트의 각 항목은 어떤 자료구조로 반환되는가?",
+          "back": "문자열 3개를 담은 튜플(tuple)"
+        },
+        {
+          "id": "b0c846d1-b706-4add-9877-653ba08fae79:2",
+          "goalId": "mse-log-parse",
+          "front": "로그 텍스트에서 추출한 update 번호와 MSE 값들을 그래프로 그리기 전에 각각 어떤 타입으로 변환해야 하는가?",
+          "back": "update 번호는 int(정수), MSE 값들은 float(실수)로 변환한다."
+        },
+        {
+          "id": "b0c846d1-b706-4add-9877-653ba08fae79:3",
+          "goalId": "mse-log-display",
+          "front": "Matplotlib에서 y축을 Log scale(yscale=\"log\")로 설정할 때, 기존 리스트에 저장된 MSE 값 자체는 어떻게 변경되는가?",
+          "back": "리스트에 저장된 실제 값은 변하지 않고 그대로 유지되며, 축의 시각적 표시 방식만 바뀐다."
+        },
+        {
+          "id": "b0c846d1-b706-4add-9877-653ba08fae79:4",
+          "goalId": "mse-log-display",
+          "front": "Matplotlib 축에 Log scale을 적용할 수 있기 위해 표시할 MSE 값들이 반드시 만족해야 하는 조건은 무엇인가?",
+          "back": "표시할 값이 반드시 양수(positive number)여야 한다."
+        },
+        {
+          "id": "b0c846d1-b706-4add-9877-653ba08fae79:5",
+          "goalId": "mse-log-display",
+          "front": "MSE가 정확히 0이 되어 Log scale 축에 정상 표시할 수 없을 때 올바른 해결 방법은 무엇인가?",
+          "back": "MSE 값을 임의의 양수로 변경하지 말고, Linear scale 등 목적에 맞는 축 표시를 선택해야 한다."
+        },
+        {
+          "id": "b0c846d1-b706-4add-9877-653ba08fae79:6",
+          "goalId": "mse-log-display",
+          "front": "Python에서 여러 줄로 이루어진 로그 텍스트를 줄바꿈을 유지하며 문자열 변수에 할당할 때 사용하는 문법은 무엇인가?",
+          "back": "시작과 끝을 같은 종류의 따옴표 세 개(\"\"\" 또는 ''')로 감싸는 삼중 따옴표 문자열(triple-quoted strings)을 사용한다."
+        },
+        {
+          "id": "b0c846d1-b706-4add-9877-653ba08fae79:7",
+          "goalId": "mse-log-display",
+          "front": "학습 로그 그래프에서 Batch MSE와 Validation MSE 두 곡선이 모두 감소할 때, 모델 성능과 관련해 단정할 수 없는 것은 무엇인가?",
+          "back": "두 선이 감소한다는 사실만으로 오버피팅이 없거나 보지 않은 모든 이미지에서 잘 복원한다고 확정할 수 없다."
+        }
+      ],
+      "provenance": {
+        "provider": "NotebookLM",
+        "notebookId": "7f1205c5-fb25-4ade-9a44-f2394082975d",
+        "sourceIds": [
+          "a4089e32-5b20-48e0-b94a-8b518a158e8b"
+        ],
+        "quizArtifactId": "11ee6363-01d7-4ed0-8081-e2758c89ee5c",
+        "cardsArtifactId": "b0c846d1-b706-4add-9877-653ba08fae79",
+        "exportedAt": "2026-11-09",
+        "sourceHashes": {
+          "learning/2026-11-09-mse-log-plot": "65b14637c3d917abe7c5803f18035aa1a186a5b64716444076e27fbd4f03b9a6"
+        }
+      }
     }
   ]
 }

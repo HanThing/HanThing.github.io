@@ -2,6 +2,9 @@
 
 Generated from public Markdown. Read AGENTS.md for ingest/query/lint; CHANGELOG.md for changes. Course references support briefing and stay outside the learning graph. Course/lesson identify the curriculum placement; topics identify related subjects.
 
+- [MSE 로그를 그래프로: log scale과 여러 줄 문자열](content/learning/2026-11-09-mse-log-plot.md) — journal · 2026-11-09 · 학습 로그를 update·batch MSE·validation MSE로 나누어 그리는 방법과 여러 줄 로그를 문자열에 넣을 때의 오류를 정리한다.
+  Course: PyTorch → 딥러닝 기본기. Related topics: PyTorch
+  Sources: 부트캠프 이미지 복원 미션의 MSE 로그 시각화 질문과 코드 수정 대화 (2026-11-09); https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_yscale.html; https://docs.python.org/3/reference/lexical_analysis.html#triple-quoted-strings; https://docs.python.org/3/library/re.html#re.findall
 - [위클리 페이퍼 #7 — Autoencoder가 잘 복원하는데도 문제가 되는 이유](content/weekly/2026-11-09-autoencoder-identity-mapping.md) — weekly · 2026-11-09 · identity mapping에서 출발해 reconstruction loss와 압축의 차이, capacity와 variance, bottleneck과 denoising의 역할을 내 말로 정리한다.
   Course: 딥러닝 → Autoencoder 복습 (보충). Related topics: 딥러닝
   Sources: 사용자가 제시한 위클리 페이퍼 7회차 공식 문항; 위클리 페이퍼 7회차 준비 대화의 사용자 답변·후속 질문과 AI의 설명·피드백 (2026-11-09 최종 정리); https://www.deeplearningbook.org/contents/autoencoders.html

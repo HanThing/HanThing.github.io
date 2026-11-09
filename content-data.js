@@ -155,6 +155,34 @@ window.HANTHING_CONTENT = {
   ],
   "notes": [
     {
+      "id": "learning/2026-11-09-mse-log-plot",
+      "title": "MSE 로그를 그래프로: log scale과 여러 줄 문자열",
+      "description": "학습 로그를 update·batch MSE·validation MSE로 나누어 그리는 방법과 여러 줄 로그를 문자열에 넣을 때의 오류를 정리한다.",
+      "date": "2026-11-09",
+      "published": "2026-11-09",
+      "type": "journal",
+      "topics": [
+        "PyTorch"
+      ],
+      "courseId": "pytorch",
+      "lessonId": "deep-learning-basics",
+      "url": "/notes/learning/2026-11-09-mse-log-plot",
+      "links": [
+        "learning/2026-11-03-autoencoder-reconstruction",
+        "learning/2026-11-05-adam-learning-rate"
+      ],
+      "relatedReasons": {
+        "learning/2026-11-03-autoencoder-reconstruction": "reconstruction의 target과 오차를 이해한 뒤 학습 로그를 읽는다.",
+        "learning/2026-11-05-adam-learning-rate": "optimizer의 update 규칙과 update마다 관찰하는 loss를 구별한다."
+      },
+      "sources": [
+        "부트캠프 이미지 복원 미션의 MSE 로그 시각화 질문과 코드 수정 대화 (2026-11-09)",
+        "https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_yscale.html",
+        "https://docs.python.org/3/reference/lexical_analysis.html#triple-quoted-strings",
+        "https://docs.python.org/3/library/re.html#re.findall"
+      ]
+    },
+    {
       "id": "weekly/2026-11-09-autoencoder-identity-mapping",
       "title": "위클리 페이퍼 #7 — Autoencoder가 잘 복원하는데도 문제가 되는 이유",
       "description": "identity mapping에서 출발해 reconstruction loss와 압축의 차이, capacity와 variance, bottleneck과 denoising의 역할을 내 말로 정리한다.",
@@ -2244,6 +2272,26 @@ window.HANTHING_CONTENT = {
     }
   ],
   "questions": [
+    {
+      "id": "learning/2026-11-09-mse-log-plot#질문-출력된-mse-로그를-어떻게-그래프로-그릴까",
+      "title": "출력된 MSE 로그를 어떻게 그래프로 그릴까?",
+      "url": "/notes/learning/2026-11-09-mse-log-plot#질문-출력된-mse-로그를-어떻게-그래프로-그릴까",
+      "topic": "PyTorch",
+      "sourceTitle": "MSE 로그를 그래프로: log scale과 여러 줄 문자열",
+      "context": "update별로 batch MSE와 validation MSE가 기록된 긴 텍스트가 있었다.",
+      "intent": "숫자를 한 줄씩 읽는 대신 학습이 진행되면서 오차가 어떻게 달라지는지 보고 싶은 질문이다.",
+      "answer": "각 로그에서 세 값을 꺼내 update를 x축, MSE를 y축으로 두고 두 선을 그린다. 숫자가 여러 자릿수 범위에 걸치면 y축의 log scale로 상대적인 변화를 살펴볼 수 있다."
+    },
+    {
+      "id": "learning/2026-11-09-mse-log-plot#질문-로그를-붙여-넣은-코드에서-무엇이-잘못되었을까",
+      "title": "로그를 붙여 넣은 코드에서 무엇이 잘못되었을까?",
+      "url": "/notes/learning/2026-11-09-mse-log-plot#질문-로그를-붙여-넣은-코드에서-무엇이-잘못되었을까",
+      "topic": "PyTorch",
+      "sourceTitle": "MSE 로그를 그래프로: log scale과 여러 줄 문자열",
+      "context": "다시 붙여 넣은 코드의 log_text는 여러 줄에 걸쳐 있었지만, 시작과 끝을 \" 하나씩으로 감쌌다.",
+      "intent": "앞서 받은 코드를 실제 로그에 적용하는 과정에서 문자열 작성 방식을 확인하려는 질문이다.",
+      "answer": "일반적인 짧은 문자열 literal 안에는 그대로 줄바꿈을 넣을 수 없다. 여러 줄을 그대로 넣으려면 시작과 끝을 같은 종류의 따옴표 세 개로 감싼다."
+    },
     {
       "id": "learning/2026-11-05-adam-learning-rate#질문-sgd는-한-개씩-adam은-batch로-update하는가",
       "title": "SGD는 한 개씩, Adam은 batch로 update하는가?",
