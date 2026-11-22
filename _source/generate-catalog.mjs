@@ -38,7 +38,9 @@ const courses = [
     { id: 'attention-review', title: 'Embedding과 Attention 복습', kind: 'supplemental' },
     { id: 'autoencoder-review', title: 'Autoencoder 복습', kind: 'supplemental' },
   ] },
-  { id: 'computer-vision', title: '컴퓨터 비전', lessons: [] },
+  { id: 'computer-vision', title: '컴퓨터 비전', lessons: [
+    { id: 'object-detection-review', title: 'Object Detection 복습', kind: 'supplemental' },
+  ] },
   { id: 'version-control', title: '버전관리 및 협업하기', lessons: [] },
   { id: 'beginner-project', title: 'AI 엔지니어 초급 프로젝트', lessons: [] },
   { id: 'nlp', title: '자연어 처리', lessons: [] },

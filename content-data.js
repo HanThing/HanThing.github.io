@@ -105,7 +105,13 @@ window.HANTHING_CONTENT = {
     {
       "id": "computer-vision",
       "title": "컴퓨터 비전",
-      "lessons": []
+      "lessons": [
+        {
+          "id": "object-detection-review",
+          "title": "Object Detection 복습",
+          "kind": "supplemental"
+        }
+      ]
     },
     {
       "id": "version-control",
@@ -154,6 +160,32 @@ window.HANTHING_CONTENT = {
     }
   ],
   "notes": [
+    {
+      "id": "weekly/2026-11-22-object-detection-nms",
+      "title": "위클리 페이퍼 #9 — 캔 하나에 bounding box가 세 개 나온 이유",
+      "description": "캔 하나에 겹쳐 나온 세 bounding box를 NMS로 정리하고, IoU threshold를 낮출 때 인접한 캔이 누락될 수 있는 이유를 살펴본다.",
+      "date": "2026-11-22",
+      "published": "2026-11-22",
+      "type": "weekly",
+      "topics": [
+        "컴퓨터 비전"
+      ],
+      "courseId": "computer-vision",
+      "lessonId": "object-detection-review",
+      "url": "/notes/weekly/2026-11-22-object-detection-nms",
+      "links": [
+        "weekly/2026-11-02-cnn-and-lstm"
+      ],
+      "relatedReasons": {
+        "weekly/2026-11-02-cnn-and-lstm": "이미지에서 CNN이 feature map을 만드는 과정을 복습한다. Fast R-CNN은 이 feature map을 region proposal마다 공유한다."
+      },
+      "sources": [
+        "코드잇 AI 엔지니어 16기 위클리 페이퍼 9회차 공식 문항 (2026-11-16 공지)",
+        "위클리 페이퍼 9회차 준비 대화의 사용자 답변과 AI 피드백 (2026-11-22)",
+        "https://arxiv.org/abs/1504.08083",
+        "https://docs.pytorch.org/vision/stable/generated/torchvision.ops.nms.html"
+      ]
+    },
     {
       "id": "learning/2026-11-09-mse-log-plot",
       "title": "MSE 로그를 그래프로: log scale과 여러 줄 문자열",
@@ -2272,6 +2304,16 @@ window.HANTHING_CONTENT = {
     }
   ],
   "questions": [
+    {
+      "id": "weekly/2026-11-22-object-detection-nms#질문-캔-하나에-겹쳐-나온-박스를-어떻게-정리할까",
+      "title": "캔 하나에 겹쳐 나온 박스를 어떻게 정리할까?",
+      "url": "/notes/weekly/2026-11-22-object-detection-nms#질문-캔-하나에-겹쳐-나온-박스를-어떻게-정리할까",
+      "topic": "컴퓨터 비전",
+      "sourceTitle": "위클리 페이퍼 #9 — 캔 하나에 bounding box가 세 개 나온 이유",
+      "context": "진열대의 캔 하나에 비슷한 위치와 크기의 박스 세 개가 표시됐다.",
+      "intent": "같은 객체에 대한 중복 예측이 어떻게 생기는지, 후처리에서 어떤 기준으로 박스를 걸러낼지 설명하는 문제로 읽었다.",
+      "answer": "한 객체를 여러 후보 박스가 비슷한 위치에서 찾으면 같은 클래스의 예측이 여러 개 나올 수 있다. 먼저 화면에 그린 박스가 NMS 전의 결과인지, NMS를 거친 결과인지 확인하겠다. NMS를 거친 결과라면 겹친 박스들의 IoU와 적용한 threshold를 비교한다. IoU가 threshold 이하라서 중복 박스가 남았다면, threshold를 낮춰 같은 캔을 가리키는 낮은 점수의 박스를 더 적극적으로 제거할 수 있다."
+    },
     {
       "id": "learning/2026-11-09-mse-log-plot#질문-출력된-mse-로그를-어떻게-그래프로-그릴까",
       "title": "출력된 MSE 로그를 어떻게 그래프로 그릴까?",

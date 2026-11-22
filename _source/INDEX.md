@@ -2,6 +2,9 @@
 
 Generated from public Markdown. Read AGENTS.md for ingest/query/lint; CHANGELOG.md for changes. Course references support briefing and stay outside the learning graph. Course/lesson identify the curriculum placement; topics identify related subjects.
 
+- [위클리 페이퍼 #9 — 캔 하나에 bounding box가 세 개 나온 이유](content/weekly/2026-11-22-object-detection-nms.md) — weekly · 2026-11-22 · 캔 하나에 겹쳐 나온 세 bounding box를 NMS로 정리하고, IoU threshold를 낮출 때 인접한 캔이 누락될 수 있는 이유를 살펴본다.
+  Course: 컴퓨터 비전 → Object Detection 복습 (보충). Related topics: 컴퓨터 비전
+  Sources: 코드잇 AI 엔지니어 16기 위클리 페이퍼 9회차 공식 문항 (2026-11-16 공지); 위클리 페이퍼 9회차 준비 대화의 사용자 답변과 AI 피드백 (2026-11-22); https://arxiv.org/abs/1504.08083; https://docs.pytorch.org/vision/stable/generated/torchvision.ops.nms.html
 - [MSE 로그를 그래프로: log scale과 여러 줄 문자열](content/learning/2026-11-09-mse-log-plot.md) — journal · 2026-11-09 · 학습 로그를 update·batch MSE·validation MSE로 나누어 그리는 방법과 여러 줄 로그를 문자열에 넣을 때의 오류를 정리한다.
   Course: PyTorch → 딥러닝 기본기. Related topics: PyTorch
   Sources: 부트캠프 이미지 복원 미션의 MSE 로그 시각화 질문과 코드 수정 대화 (2026-11-09); https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.set_yscale.html; https://docs.python.org/3/reference/lexical_analysis.html#triple-quoted-strings; https://docs.python.org/3/library/re.html#re.findall
